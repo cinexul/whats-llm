@@ -1,0 +1,251 @@
+:root {
+	--bg: #faf9f5;
+	--bg-sidebar: #f5f3ec;
+	--bg-hover: #eceadf;
+	--border: #e5e1d8;
+	--text: #191919;
+	--text-body: #3d3c36;
+	--text-muted: #56544b;
+	--text-faint: #9a9588;
+	--accent: #cc785c;
+	--accent-strong: #d97757;
+	--accent-bg: #faece7;
+	--accent-text: #712b13;
+	--code-bg: #191919;
+	--code-inline-bg: #efede4;
+	--font-sans: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+	--font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+	--font-mono: 'JetBrains Mono', 'Consolas', monospace;
+	/* 表示設定パネルで調節する文字サイズ倍率 */
+	--scale-nav: 1;
+	--scale-heading: 1;
+	--scale-body: 1;
+	/* マーカー(蛍光ペン)の色 */
+	--hl-yellow: #f3e088;
+	--hl-green: #cfe3b8;
+	--hl-pink: #f6cdd8;
+}
+
+:root[data-theme='dark'] {
+	--bg: #1f1e1b;
+	--bg-sidebar: #262521;
+	--bg-hover: #2f2e28;
+	--border: #3a382f;
+	--text: #edeae2;
+	--text-body: #cfccc1;
+	--text-muted: #b7b3a6;
+	--text-faint: #847f70;
+	--accent: #d97757;
+	--accent-strong: #e08b6d;
+	--accent-bg: #3b2a22;
+	--accent-text: #f0bba6;
+	--code-bg: #151513;
+	--code-inline-bg: #33312a;
+	--hl-yellow: #6b5e1f;
+	--hl-green: #44552f;
+	--hl-pink: #6a3a4a;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: 15px;
+	line-height: 1.85;
+}
+
+a {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* ===== 本文(記事)のタイポグラフィ =====
+   内部のサイズは em 指定とし、--scale-body / --scale-heading に追従させる */
+.prose {
+	color: var(--text-body);
+	font-size: calc(1rem * var(--scale-body));
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+	font-family: var(--font-serif);
+	font-weight: 600;
+	color: var(--text);
+	line-height: 1.5;
+}
+
+.prose h2 {
+	font-size: calc(1.45em * var(--scale-heading));
+	margin: 2.4em 0 0.8em;
+	padding-bottom: 0.35em;
+	border-bottom: 1px solid var(--border);
+}
+
+.prose h3 {
+	font-size: calc(1.15em * var(--scale-heading));
+	margin: 2em 0 0.6em;
+}
+
+.prose p {
+	margin: 0 0 1.1em;
+}
+
+.prose ul,
+.prose ol {
+	padding-left: 1.6em;
+	margin: 0 0 1.1em;
+}
+
+.prose li {
+	margin-bottom: 0.35em;
+}
+
+.prose strong {
+	color: var(--text);
+}
+
+.prose blockquote {
+	margin: 1.4em 0;
+	padding: 0.75em 1.1em;
+	background: var(--accent-bg);
+	border-left: 3px solid var(--accent);
+	border-radius: 0 6px 6px 0;
+}
+
+.prose blockquote p {
+	margin: 0;
+	color: var(--accent-text);
+	font-size: 0.92em;
+}
+
+.prose table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+	border-collapse: collapse;
+	margin: 1.4em 0;
+	font-size: 0.88em;
+	line-height: 1.7;
+}
+
+.prose th {
+	font-weight: 600;
+	text-align: left;
+	background: var(--bg-sidebar);
+	color: var(--text);
+	white-space: nowrap;
+}
+
+.prose th,
+.prose td {
+	border: 1px solid var(--border);
+	padding: 0.55em 0.8em;
+	vertical-align: top;
+}
+
+.prose code {
+	font-family: var(--font-mono);
+	font-size: 0.84em;
+	background: var(--code-inline-bg);
+	padding: 0.15em 0.4em;
+	border-radius: 4px;
+}
+
+.prose pre {
+	position: relative;
+	margin: 1.4em 0;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.prose pre.shiki {
+	background: var(--code-bg) !important;
+	padding: 1em 1.2em;
+	overflow-x: auto;
+	font-size: 0.84em;
+	line-height: 1.7;
+}
+
+.prose pre code {
+	background: transparent;
+	padding: 0;
+	font-size: 1em;
+}
+
+.prose hr {
+	border: none;
+	border-top: 1px solid var(--border);
+	margin: 2.5em 0;
+}
+
+/* マーカーとメモ */
+.prose mark.hl {
+	background: var(--hl-yellow);
+	color: inherit;
+	padding: 0 1px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.prose mark.hl-green {
+	background: var(--hl-green);
+}
+
+.prose mark.hl-pink {
+	background: var(--hl-pink);
+}
+
+.prose mark.hl.has-note {
+	border-bottom: 2px dotted var(--accent);
+}
+
+/* コードブロック内では文字色を背景に合わせて反転させない */
+.prose pre mark.hl {
+	color: #191919;
+}
+
+:root[data-theme='dark'] .prose pre mark.hl {
+	color: #edeae2;
+}
+
+/* コピー用ボタン: ラベルは JS 側で言語別に textContent を設定する */
+.copy-btn {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	border: 1px solid #44423c;
+	background: #2a2925;
+	color: #b7b3a6;
+	font-size: 11px;
+	font-family: var(--font-sans);
+	padding: 3px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+
+.copy-btn.copied {
+	color: #7fd1a0;
+	border-color: #3a6b4f;
+}
+
+.prose pre:hover .copy-btn {
+	opacity: 1;
+}
+
+.copy-btn:hover {
+	color: #edeae2;
+}

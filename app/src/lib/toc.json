@@ -1,0 +1,668 @@
+{
+  "zh": [
+    {
+      "title": "写在前面",
+      "chapters": [
+        {
+          "slug": "how-to-use-this-book",
+          "title": "0　写在前面：这本书想带你去哪里"
+        }
+      ]
+    },
+    {
+      "title": "第一部分　认识 AI 与大模型：建立正确的直觉",
+      "chapters": [
+        {
+          "slug": "ai-ml-llm-relationship",
+          "title": "1　从\"会聊天的 AI\"说起：AI、机器学习、大模型是什么关系"
+        },
+        {
+          "slug": "what-is-llm",
+          "title": "2　大模型到底是什么：参数、训练，以及\"它不是一个数据库\""
+        },
+        {
+          "slug": "token-and-context",
+          "title": "3　Token 与上下文窗口：AI 眼里的文字长什么样"
+        },
+        {
+          "slug": "next-token-prediction",
+          "title": "4　模型怎么\"接话\"：从一堆概率里挑下一个词"
+        },
+        {
+          "slug": "vectors-and-embedding",
+          "title": "5　向量与 embedding：怎么让机器\"感觉到\"词义的远近"
+        },
+        {
+          "slug": "attention-and-transformer",
+          "title": "6　注意力与 Transformer：它凭什么能抓住重点(直觉版,零公式)"
+        },
+        {
+          "slug": "training-finetuning-alignment",
+          "title": "7　它是怎么学会\"好好说话\"的：训练、微调、对齐"
+        },
+        {
+          "slug": "temperature-and-reasoning",
+          "title": "8　两个旋钮：温度与推理强度"
+        },
+        {
+          "slug": "hallucination-knowledge-memory",
+          "title": "9　幻觉、知识与记忆：为什么会说错、为什么记不住"
+        }
+      ]
+    },
+    {
+      "title": "第二部分　把大模型用起来：日常、学习与工作",
+      "chapters": [
+        {
+          "slug": "first-serious-conversation",
+          "title": "10　第一次认真对话：该把它当什么、不该当什么"
+        },
+        {
+          "slug": "prompt-structure",
+          "title": "11　提示词的结构：把\"我想要什么\"说清楚"
+        },
+        {
+          "slug": "long-text-and-summary",
+          "title": "12　长文处理与资料总结：喂资料的正确姿势"
+        },
+        {
+          "slug": "multi-turn-and-context",
+          "title": "13　多轮对话与上下文管理：别让它越聊越笨"
+        },
+        {
+          "slug": "ai-driven-workflow",
+          "title": "14　让 AI 持续推进任务：从一问一答到工作流"
+        },
+        {
+          "slug": "learning-and-research",
+          "title": "15　学习与研究场景：用 AI 读书、查证，又不被它带偏"
+        },
+        {
+          "slug": "work-scenarios",
+          "title": "16　工作场景：写作、整理、表格、邮件、翻译"
+        }
+      ]
+    },
+    {
+      "title": "第三部分　工具生态：模型、产品、API、Agent(看懂这张地图)",
+      "chapters": [
+        {
+          "slug": "model-product-api-agent",
+          "title": "17　模型 / 产品 / API / Agent 的区别"
+        },
+        {
+          "slug": "ai-products-overview",
+          "title": "18　主流 AI 产品横向看：怎么选、怎么搭配用"
+        },
+        {
+          "slug": "what-is-agent",
+          "title": "19　什么是 Agent：会\"动手\"的 AI"
+        },
+        {
+          "slug": "rag",
+          "title": "20　RAG：给 AI 外挂一个资料库"
+        },
+        {
+          "slug": "local-models-ollama",
+          "title": "21　本地模型与 Ollama / LM Studio：把模型装进自己的电脑"
+        },
+        {
+          "slug": "skills-and-mcp",
+          "title": "22　Skills 与 MCP：给 AI 接上工具和数据"
+        }
+      ]
+    },
+    {
+      "title": "第四部分　AI 编程实战：用 Claude Code 和 Codex 做自己的项目",
+      "chapters": [
+        {
+          "slug": "coding-agent-intro",
+          "title": "23　从“会写代码”到“会做事”：编程智能体是什么"
+        },
+        {
+          "slug": "claude-code-codex-workflow",
+          "title": "24　共通工作流入门：调查 → 计划 → 动手 → 验收"
+        },
+        {
+          "slug": "diff-test-rollback-review",
+          "title": "25　看懂 diff、跑测试、回滚、验收：人怎么把关"
+        },
+        {
+          "slug": "permissions-and-rollback",
+          "title": "26　让 AI 动手但不失控：许可机制与可回滚环境"
+        },
+        {
+          "slug": "plan-first-task-breakdown",
+          "title": "27　先看计划再动手：计划与任务拆分"
+        },
+        {
+          "slug": "claude-code-handson",
+          "title": "28　Claude Code 实操：安装、项目记忆（CLAUDE.md）与常用操作"
+        },
+        {
+          "slug": "codex-handson",
+          "title": "29　Codex 实操：安装与常用操作"
+        },
+        {
+          "slug": "failure-modes-and-rescue",
+          "title": "30　常见失败模式与急救"
+        }
+      ]
+    },
+    {
+      "title": "第五部分　动手做项目：把能力变成成果",
+      "chapters": [
+        {
+          "slug": "project-personal-website",
+          "title": "31　项目一：做一个自己的个人网站"
+        },
+        {
+          "slug": "project-doc-note-tool",
+          "title": "32　项目二：一个文档 / 笔记小工具"
+        },
+        {
+          "slug": "project-meeting-notes",
+          "title": "33　项目三：会议纪要助手"
+        },
+        {
+          "slug": "project-agent-console",
+          "title": "34　项目四：搭一个 Agent 控制台"
+        },
+        {
+          "slug": "project-connect-api",
+          "title": "35　项目五：给现有程序接上 AI(调用 API)"
+        },
+        {
+          "slug": "project-skills-mcp",
+          "title": "36　项目六：用 Skills / MCP 扩展 AI 的能力"
+        }
+      ]
+    },
+    {
+      "title": "第六部分　风险、边界与负责任地使用",
+      "chapters": [
+        {
+          "slug": "privacy-and-data-tiers",
+          "title": "37　隐私与数据分级：什么能喂、什么绝对不能"
+        },
+        {
+          "slug": "cost-quota-context",
+          "title": "38　费用、额度与上下文成本：别烧钱也别浪费"
+        },
+        {
+          "slug": "content-review-and-responsibility",
+          "title": "39　AI 生成内容的审核与责任：版权、事实、署名"
+        },
+        {
+          "slug": "safe-use-and-team-rules",
+          "title": "40　安全使用与团队规范"
+        }
+      ]
+    },
+    {
+      "title": "附录",
+      "chapters": [
+        {
+          "slug": "appendix-glossary",
+          "title": "附录 A　术语表(中日英三语)"
+        },
+        {
+          "slug": "appendix-prompts",
+          "title": "附录 B　常用提示词模板"
+        },
+        {
+          "slug": "appendix-deep-reference",
+          "title": "附录 C　Claude Code / Codex 深度功能参考"
+        },
+        {
+          "slug": "appendix-harness",
+          "title": "附录 D　Harness 方法论与上线前检查清单"
+        }
+      ]
+    }
+  ],
+  "ja": [
+    {
+      "title": "はじめに",
+      "chapters": [
+        {
+          "slug": "how-to-use-this-book",
+          "title": "0　はじめに：本書が連れて行く場所"
+        }
+      ]
+    },
+    {
+      "title": "第1部　AI と大規模言語モデルを知る：正しい直感をつかむ",
+      "chapters": [
+        {
+          "slug": "ai-ml-llm-relationship",
+          "title": "1　「おしゃべりAI」から：AI・機械学習・大規模言語モデルの関係"
+        },
+        {
+          "slug": "what-is-llm",
+          "title": "2　大規模言語モデルとは何か：パラメータ・学習、そして「データベースではない」"
+        },
+        {
+          "slug": "token-and-context",
+          "title": "3　トークンとコンテキストウィンドウ：AI から見た文字"
+        },
+        {
+          "slug": "next-token-prediction",
+          "title": "4　モデルはどう「続ける」のか：確率から次の語を選ぶ"
+        },
+        {
+          "slug": "vectors-and-embedding",
+          "title": "5　ベクトルと埋め込み：語の「意味の近さ」を機械に感じさせる"
+        },
+        {
+          "slug": "attention-and-transformer",
+          "title": "6　注意機構と Transformer：なぜ要点をつかめるのか（直感編・数式なし）"
+        },
+        {
+          "slug": "training-finetuning-alignment",
+          "title": "7　どうやって「ちゃんと話す」ようになるのか：学習・微調整・アライメント"
+        },
+        {
+          "slug": "temperature-and-reasoning",
+          "title": "8　二つのつまみ：温度と推論の強さ"
+        },
+        {
+          "slug": "hallucination-knowledge-memory",
+          "title": "9　ハルシネーション・知識・記憶：なぜ間違える、なぜ覚えていない"
+        }
+      ]
+    },
+    {
+      "title": "第2部　大規模言語モデルを使いこなす：日常・学習・仕事",
+      "chapters": [
+        {
+          "slug": "first-serious-conversation",
+          "title": "10　はじめての本格的な対話：何として使い、何として使わないか"
+        },
+        {
+          "slug": "prompt-structure",
+          "title": "11　プロンプトの組み立て：「ほしいもの」を明確に伝える"
+        },
+        {
+          "slug": "long-text-and-summary",
+          "title": "12　長文処理と資料の要約：資料の正しい渡し方"
+        },
+        {
+          "slug": "multi-turn-and-context",
+          "title": "13　マルチターン対話とコンテキスト管理：「話すほど鈍くなる」を防ぐ"
+        },
+        {
+          "slug": "ai-driven-workflow",
+          "title": "14　AI にタスクを進めさせる：一問一答からワークフローへ"
+        },
+        {
+          "slug": "learning-and-research",
+          "title": "15　学習・リサーチでの活用：AI で読み、裏取りし、流されない"
+        },
+        {
+          "slug": "work-scenarios",
+          "title": "16　仕事での活用：文章・整理・表・メール・翻訳"
+        }
+      ]
+    },
+    {
+      "title": "第3部　ツールの全体像：モデル・製品・API・エージェント",
+      "chapters": [
+        {
+          "slug": "model-product-api-agent",
+          "title": "17　モデル / 製品 / API / エージェントの違い"
+        },
+        {
+          "slug": "ai-products-overview",
+          "title": "18　主要 AI 製品を横並びで見る：選び方・組み合わせ方"
+        },
+        {
+          "slug": "what-is-agent",
+          "title": "19　エージェントとは：「手を動かす」AI"
+        },
+        {
+          "slug": "rag",
+          "title": "20　RAG：AI に資料庫を外付けする"
+        },
+        {
+          "slug": "local-models-ollama",
+          "title": "21　ローカルモデルと Ollama / LM Studio：モデルを自分の PC に入れる"
+        },
+        {
+          "slug": "skills-and-mcp",
+          "title": "22　Skills と MCP：AI にツールとデータをつなぐ"
+        }
+      ]
+    },
+    {
+      "title": "第4部　AIコーディング実践：Claude Code と Codex で自分のプロジェクトを作る",
+      "chapters": [
+        {
+          "slug": "coding-agent-intro",
+          "title": "23　「コードが書ける」から「仕事ができる」へ：コーディングエージェントとは"
+        },
+        {
+          "slug": "claude-code-codex-workflow",
+          "title": "24　共通ワークフロー入門：調査→計画→実行→検収"
+        },
+        {
+          "slug": "diff-test-rollback-review",
+          "title": "25　差分を読む・テストする・巻き戻す・検収する：人がどう確認するか"
+        },
+        {
+          "slug": "permissions-and-rollback",
+          "title": "26　手を動かさせても暴走させない：許可の仕組みと巻き戻せる環境"
+        },
+        {
+          "slug": "plan-first-task-breakdown",
+          "title": "27　まず計画、それから実装：計画とタスク分割"
+        },
+        {
+          "slug": "claude-code-handson",
+          "title": "28　Claude Code 実践：導入・プロジェクトの記憶（CLAUDE.md）・基本操作"
+        },
+        {
+          "slug": "codex-handson",
+          "title": "29　Codex 実践：導入と基本操作"
+        },
+        {
+          "slug": "failure-modes-and-rescue",
+          "title": "30　よくある失敗パターンと応急処置"
+        }
+      ]
+    },
+    {
+      "title": "第5部　手を動かしてプロジェクトを作る：力を成果に変える",
+      "chapters": [
+        {
+          "slug": "project-personal-website",
+          "title": "31　プロジェクト①：自分の個人サイトを作る"
+        },
+        {
+          "slug": "project-doc-note-tool",
+          "title": "32　プロジェクト②：ドキュメント/メモの小ツール"
+        },
+        {
+          "slug": "project-meeting-notes",
+          "title": "33　プロジェクト③：議事録アシスタント"
+        },
+        {
+          "slug": "project-agent-console",
+          "title": "34　プロジェクト④：エージェント・コンソールを作る"
+        },
+        {
+          "slug": "project-connect-api",
+          "title": "35　プロジェクト⑤：既存プログラムに AI をつなぐ（API 呼び出し）"
+        },
+        {
+          "slug": "project-skills-mcp",
+          "title": "36　プロジェクト⑥：Skills / MCP で AI の能力を広げる"
+        }
+      ]
+    },
+    {
+      "title": "第6部　リスク・境界・責任ある使い方",
+      "chapters": [
+        {
+          "slug": "privacy-and-data-tiers",
+          "title": "37　プライバシーとデータ分類：何を渡してよく、何は絶対ダメか"
+        },
+        {
+          "slug": "cost-quota-context",
+          "title": "38　料金・上限・コンテキストコスト：浪費も燃やしすぎも避ける"
+        },
+        {
+          "slug": "content-review-and-responsibility",
+          "title": "39　AI 生成物のレビューと責任：著作権・事実・クレジット"
+        },
+        {
+          "slug": "safe-use-and-team-rules",
+          "title": "40　安全な使い方とチームのルール"
+        }
+      ]
+    },
+    {
+      "title": "付録",
+      "chapters": [
+        {
+          "slug": "appendix-glossary",
+          "title": "付録 A　用語集（中日英）"
+        },
+        {
+          "slug": "appendix-prompts",
+          "title": "付録 B　よく使うプロンプト集"
+        },
+        {
+          "slug": "appendix-deep-reference",
+          "title": "付録 C　Claude Code / Codex 詳細機能リファレンス"
+        },
+        {
+          "slug": "appendix-harness",
+          "title": "付録 D　ハーネス方法論と公開前チェックリスト"
+        }
+      ]
+    }
+  ],
+  "en": [
+    {
+      "title": "Preface",
+      "chapters": [
+        {
+          "slug": "how-to-use-this-book",
+          "title": "0. Start here: where this book takes you"
+        }
+      ]
+    },
+    {
+      "title": "Part 1. Getting to know AI and large language models: building the right intuition",
+      "chapters": [
+        {
+          "slug": "ai-ml-llm-relationship",
+          "title": "1. Starting with the chatty AI: how AI, machine learning, and large models relate"
+        },
+        {
+          "slug": "what-is-llm",
+          "title": "2. What a large model really is: parameters, training, and why it is not a database"
+        },
+        {
+          "slug": "token-and-context",
+          "title": "3. Tokens and the context window: what text looks like to an AI"
+        },
+        {
+          "slug": "next-token-prediction",
+          "title": "4. How the model continues your sentence: picking the next word from a pile of probabilities"
+        },
+        {
+          "slug": "vectors-and-embedding",
+          "title": "5. Vectors and embeddings: how a machine senses which words are close in meaning"
+        },
+        {
+          "slug": "attention-and-transformer",
+          "title": "6. Attention and the Transformer: how it catches the point (intuition, no math)"
+        },
+        {
+          "slug": "training-finetuning-alignment",
+          "title": "7. How it learns to speak well: training, fine-tuning, and alignment"
+        },
+        {
+          "slug": "temperature-and-reasoning",
+          "title": "8. Two knobs: temperature and reasoning effort"
+        },
+        {
+          "slug": "hallucination-knowledge-memory",
+          "title": "9. Hallucination, knowledge, and memory: why it makes things up and why it forgets"
+        }
+      ]
+    },
+    {
+      "title": "Part 2. Putting large models to work: daily life, study, and the job",
+      "chapters": [
+        {
+          "slug": "first-serious-conversation",
+          "title": "10. Your first real conversation: what to treat it as, and what not to"
+        },
+        {
+          "slug": "prompt-structure",
+          "title": "11. The shape of a good prompt: saying what you want clearly"
+        },
+        {
+          "slug": "long-text-and-summary",
+          "title": "12. Long documents and summaries: how to feed it material the right way"
+        },
+        {
+          "slug": "multi-turn-and-context",
+          "title": "13. Multi-turn chats and context management: don't let it get dumber as you go"
+        },
+        {
+          "slug": "ai-driven-workflow",
+          "title": "14. Getting AI to carry a task forward: from Q&A to a workflow"
+        },
+        {
+          "slug": "learning-and-research",
+          "title": "15. Learning and research: read and fact-check with AI without being led astray"
+        },
+        {
+          "slug": "work-scenarios",
+          "title": "16. At work: writing, tidying up, tables, email, and translation"
+        }
+      ]
+    },
+    {
+      "title": "Part 3. The tool landscape: model, product, API, and agent",
+      "chapters": [
+        {
+          "slug": "model-product-api-agent",
+          "title": "17. Model vs. product vs. API vs. agent"
+        },
+        {
+          "slug": "ai-products-overview",
+          "title": "18. The main AI products side by side: how to choose and combine them"
+        },
+        {
+          "slug": "what-is-agent",
+          "title": "19. What an agent is: AI that takes action"
+        },
+        {
+          "slug": "rag",
+          "title": "20. RAG: bolting a reference library onto the AI"
+        },
+        {
+          "slug": "local-models-ollama",
+          "title": "21. Local models with Ollama and LM Studio: putting a model on your own computer"
+        },
+        {
+          "slug": "skills-and-mcp",
+          "title": "22. Skills and MCP: connecting tools and data to the AI"
+        }
+      ]
+    },
+    {
+      "title": "Part 4. Hands-on AI coding: build your own projects with Claude Code and Codex",
+      "chapters": [
+        {
+          "slug": "coding-agent-intro",
+          "title": "23. From writing code to getting things done: what a coding agent is"
+        },
+        {
+          "slug": "claude-code-codex-workflow",
+          "title": "24. The shared workflow: investigate, plan, do, sign off"
+        },
+        {
+          "slug": "diff-test-rollback-review",
+          "title": "25. Read the diff, run the tests, roll back, sign off: how a person stays in control"
+        },
+        {
+          "slug": "permissions-and-rollback",
+          "title": "26. Let it act without losing control: permissions and a reversible setup"
+        },
+        {
+          "slug": "plan-first-task-breakdown",
+          "title": "27. Plan first, then build: planning and breaking work into steps"
+        },
+        {
+          "slug": "claude-code-handson",
+          "title": "28. Claude Code hands-on: setup, project memory (CLAUDE.md), and everyday use"
+        },
+        {
+          "slug": "codex-handson",
+          "title": "29. Codex hands-on: setup and everyday use"
+        },
+        {
+          "slug": "failure-modes-and-rescue",
+          "title": "30. Common failure modes and first aid"
+        }
+      ]
+    },
+    {
+      "title": "Part 5. Build real projects: turn skills into results",
+      "chapters": [
+        {
+          "slug": "project-personal-website",
+          "title": "31. Project 1: build your own personal website"
+        },
+        {
+          "slug": "project-doc-note-tool",
+          "title": "32. Project 2: a small document and note tool"
+        },
+        {
+          "slug": "project-meeting-notes",
+          "title": "33. Project 3: a meeting-notes assistant"
+        },
+        {
+          "slug": "project-agent-console",
+          "title": "34. Project 4: build an agent console"
+        },
+        {
+          "slug": "project-connect-api",
+          "title": "35. Project 5: connect AI to an existing program (calling an API)"
+        },
+        {
+          "slug": "project-skills-mcp",
+          "title": "36. Project 6: extend the AI with Skills and MCP"
+        }
+      ]
+    },
+    {
+      "title": "Part 6. Risk, limits, and responsible use",
+      "chapters": [
+        {
+          "slug": "privacy-and-data-tiers",
+          "title": "37. Privacy and data tiers: what you can feed it, and what you never should"
+        },
+        {
+          "slug": "cost-quota-context",
+          "title": "38. Cost, quotas, and the price of context: don't burn money or waste it"
+        },
+        {
+          "slug": "content-review-and-responsibility",
+          "title": "39. Reviewing AI output and owning it: copyright, facts, and credit"
+        },
+        {
+          "slug": "safe-use-and-team-rules",
+          "title": "40. Safe use and team rules"
+        }
+      ]
+    },
+    {
+      "title": "Appendices",
+      "chapters": [
+        {
+          "slug": "appendix-glossary",
+          "title": "Appendix A. Glossary (Chinese / Japanese / English)"
+        },
+        {
+          "slug": "appendix-prompts",
+          "title": "Appendix B. A library of everyday prompts"
+        },
+        {
+          "slug": "appendix-deep-reference",
+          "title": "Appendix C. Claude Code / Codex feature reference"
+        },
+        {
+          "slug": "appendix-harness",
+          "title": "Appendix D. The harness method and a pre-release checklist"
+        }
+      ]
+    }
+  ]
+}
