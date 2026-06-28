@@ -236,7 +236,7 @@
       "chapters": [
         {
           "slug": "ai-ml-llm-relationship",
-          "title": "1　「おしゃべりAI」から：AI・機械学習・大規模言語モデルの関係"
+          "title": "1　「おしゃべりAI」の話から：AI・機械学習・大規模言語モデルの関係"
         },
         {
           "slug": "what-is-llm",
@@ -322,7 +322,7 @@
         },
         {
           "slug": "rag",
-          "title": "20　RAG：AI に資料庫を外付けする"
+          "title": "20　RAG：AI に資料データベースを外付けする"
         },
         {
           "slug": "local-models-ollama",
@@ -343,11 +343,11 @@
         },
         {
           "slug": "claude-code-codex-workflow",
-          "title": "24　共通ワークフロー入門：調査→計画→実行→検収"
+          "title": "24　共通ワークフロー入門：調査→計画→実行→最終確認"
         },
         {
           "slug": "diff-test-rollback-review",
-          "title": "25　差分を読む・テストする・巻き戻す・検収する：人がどう確認するか"
+          "title": "25　差分を読む・テストする・巻き戻す・最終確認する：人がどう手綱を握るか"
         },
         {
           "slug": "permissions-and-rollback",
@@ -409,7 +409,7 @@
         },
         {
           "slug": "cost-quota-context",
-          "title": "38　料金・上限・コンテキストコスト：浪費も燃やしすぎも避ける"
+          "title": "38　料金・上限・コンテキストコスト：使いすぎも無駄づかいも避ける"
         },
         {
           "slug": "content-review-and-responsibility",
