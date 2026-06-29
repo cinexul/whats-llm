@@ -1,6 +1,6 @@
 In Chapter 10 we set a mindset: treat it as a "well-read intern who also makes things up." This chapter solves that intern's biggest weak spot: **it can't read your mind.**
 
-Chapter 4 explained that its real job is to "continue": given your opening, it continues with the most plausible content. That brings an awkward moment you've definitely hit. **You say "polish this for me," and what it gives you often isn't the version you had in mind.** It's not that it's dumb, it's that you didn't spell things out; the part you left unsaid, **it can only guess**, and its guess is "what most people usually want when they say this," which isn't necessarily you.
+Chapter 4 explained that its real job is to "continue": given your opening, it continues with the most plausible content. That brings an awkward moment you've definitely hit. **You say "polish this for me," and what it gives you often isn't the version you had in mind.** It's not that it's dumb -- it's that you didn't spell things out; the part you left unsaid, **it can only guess**, and its guess is "what most people usually want when they say this," which isn't necessarily what you want.
 
 The good news: stating "what I want" clearly is **a craft you can learn**, and it isn't hard. This chapter gives you a simple framework that takes you from "rolling the dice" to "knowing what you'll get." This craft has a name: writing a **prompt**.
 
@@ -76,7 +76,7 @@ A few constraint dimensions most worth spelling out, vague vs specific:
 | **Keep / avoid** | (unsaid) | "Keep these three numbers" / "No jargon" |
 | **Format** | "Tidy this up" | "List it as 5 points with subheadings" / "Make a two-column table" |
 
-> **Key point:** Notice the counterintuitive bit: **spelling out constraints isn't "bossing it around," it's saving yourself work.** Every extra constraint you write is one fewer round of "no, redo it." Especially **length** and **format**, which most affect how the product looks yet are most often left out. A small habit: after writing the task, tack on "**give me XX characters, XX format**," and the hit rate jumps a level.
+> **Key point:** Notice the counterintuitive bit: **spelling out constraints isn't "bossing it around," it's saving yourself work.** Every extra constraint you write is one fewer round of "no, redo it." Especially **length** and **format**, which most affect how the product looks yet are most often left out. A small habit: after writing the task, tack on "**give me XX characters, XX format**," and the hit rate jumps up a notch.
 
 ## 4. An "example" beats a long explanation
 
@@ -101,7 +101,7 @@ It immediately gets that you want the "[Title] [Time] [One line]" mold and fills
 
 ## 5. Spelling out is not writing long: find the balance
 
-Don't swing to the other extreme. "Spelling out" means **stating all the key information**, not **piling up filler**. A long, stuffy prompt jammed with irrelevant background actually buries the point (think of that ever-fuller "desk" from Chapter 3).
+Don't swing to the other extreme. "Spelling out" means **stating all the key information**, not **piling up filler**. A long, rambling prompt jammed with irrelevant background actually buries the point (think of that ever-fuller "desk" from Chapter 3).
 
 To find this balance, remember three things:
 
@@ -144,7 +144,7 @@ In the next chapter we apply this craft to a high-frequency scenario: how to "fe
    - B. "Polish" has a concrete picture in your head (how long, what tone, for whom), but it never became text, so it can only guess
    - C. The sentence is too short, not enough tokens
    - D. It only understands a special command format
-   > **Answer: B.** It can't read your mind and can only continue based on what you wrote (Chapter 4). The default requirements behind "polish" went unsaid, so it guesses, and it guesses "what most people usually want," not necessarily you. A and D imagine it as a machine needing "spells / commands" (plain language is enough); C has nothing to do with character count.
+   > **Answer: B.** It can't read your mind and can only continue based on what you wrote (Chapter 4). The default requirements behind "polish" went unsaid, so it guesses, and it guesses "what most people usually want," not necessarily what you want. A and D imagine it as a machine needing "spells / commands" (plain language is enough); C has nothing to do with character count.
 
 2. **[Basic · Concept]** Which five blocks make up the "all-purpose framework" in this chapter?
    - A. Title, body, conclusion, signature, date
@@ -175,4 +175,4 @@ In the next chapter we apply this craft to a high-frequency scenario: how to "fe
    > **Answer: B.** It spells out the audience (older relative), length (150 characters), constraints (no jargon, casual, use analogies), and format (a single paragraph), the most critical "constraints" and "format" are all there. A, C, and D leave the requirements in your head, so it can only guess and is doomed to back-and-forth rework.
 
 6. **[Basic · Hands-on]** Take a vague instruction you'd normally fire off ("summarize this for me," "write a notice") and fill it out using "context, task, constraints, format, success criteria," especially adding **length, audience, tone, and the format you want**. Ask once with each version, before and after, and compare results.
-   > **What you should notice:** The filled-out version usually has a clearly higher hit rate and clearly less back-and-forth, and the difference isn't that the model got smarter, it's that you turned the requirements you'd taken for granted into text it can see. Compare once by hand and you've got the craft of "spelling out" in your grip. Next time you're stuck, look back first: length, audience, tone, format, did I say those four?
+   > **What you should notice:** The filled-out version usually has a clearly higher hit rate and clearly less back-and-forth, and the difference isn't that the model got smarter -- it's that you turned the requirements you'd taken for granted into text it can see. Compare them yourself once and you've got the craft of "spelling out" in your grip. Next time you're stuck, look back first: length, audience, tone, format, did I say those four?

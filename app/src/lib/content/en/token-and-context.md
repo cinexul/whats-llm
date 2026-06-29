@@ -20,7 +20,7 @@ A token is the **smallest unit** the model uses to process text, but it's neithe
 
 > **Quick-math sidebar: roughly how many tokens is a passage?**
 > Building a **sense of scale** is enough: a short piece of a few hundred words is usually a few hundred to a bit over a thousand tokens. If you want a finer rule of thumb: common English is roughly "4 characters ≈ 1 token," and Chinese is often "1 character ≈ 1 to 2 tokens."
-> But these are all **rough rules of thumb, not iron laws**: how many tokens you actually get depends on **which model's tokenizer** is used, and is also affected by punctuation, spaces, digits, and any code mixed in. People used to say "English uses fewer tokens than Chinese," but on newer tokenizers that gap has shrunk a lot, and it can't be taken as a law. **For precision, use the official token-counting tool for the product in question (check the official docs).**
+> But these are all **rough rules of thumb, not iron laws**: how many tokens you actually get depends on **which model's tokenizer** is used, and is also affected by punctuation, spaces, digits, and any code mixed in. People used to say "English uses fewer tokens than Chinese," but on newer tokenizers that gap has shrunk a lot, and it can't be taken as a law. **For precision, use the official token-counting tool for the product in question, and refer to the provider's official documentation.**
 
 ## 2. The context window: the model's "workbench"
 
@@ -42,7 +42,7 @@ Everything spread on the desk this conversation counts toward the context window
 
 > **Key point:** What's on the desk **isn't just the characters you typed.** The long text you pasted in and the lengthy replies it wrote are what really take up space. Many people stare at their own short line of a question, puzzled that "I barely said anything," forgetting that the 10-page PDF they just pasted in and its rambling 2,000-word answer already covered the desk.
 
-Different products and different models have desks of different sizes, and they keep getting bigger, so **this book won't give specific numbers** (writing them down would go stale fast; check the official docs). You only need to build the intuition that "the desktop is limited."
+Different products and different models have desks of different sizes, and they keep getting bigger, so **this book won't give specific numbers** (writing them down would go stale fast; refer to the provider's official documentation). You only need to build the intuition that "the desktop is limited."
 
 ## 3. The most counterintuitive point: the model actually "has no memory"
 
@@ -61,7 +61,7 @@ Round 3: [question A + answer a + question B + answer b + question C]  → answe
 
 So "it remembers what was said earlier" really means **the software lays the earlier text back out on the desk each time** for it to see. Once this transcript gets too long and overflows the desk, **the earliest content gets pushed off the desk**, and then it truly "forgets."
 
-> **Misconception vs. reality:** "I told it my name yesterday, so it should remember today, right?" In reality, start a new conversation and the desk is **completely empty**; it knows nothing about you. Unless a particular product specifically provides a "long-term memory" feature (**such features differ between products and keep changing, check the official docs**), the default is that **it has no yesterday**. Treat that as the default setting and you'll never again be surprised when "it acts like it doesn't know you."
+> **Misconception vs. reality:** "I told it my name yesterday, so it should remember today, right?" In reality, start a new conversation and the desk is **completely empty**; it knows nothing about you. Unless a particular product specifically provides a "long-term memory" feature (**such features differ between products and keep changing, so refer to the provider's official documentation**), the default is that **it has no yesterday**. Treat that as the default setting and you'll never again be surprised when "it acts like it doesn't know you."
 
 This also incidentally explains a safety point people often forget: because every sentence gets sent to the model, **whatever you paste in is effectively handed over.** We'll save that for chapter 37.
 
@@ -79,7 +79,7 @@ You might immediately push back: but I've clearly seen products that can "rememb
 
 In other words: "it remembered me" **isn't the model itself growing a memory; it's the product re-laying the relevant information back onto the desk for you each time.** Lift the lid and underneath it's still "a memoryless model + context re-fed each time."
 
-> **Key point:** From now on, when you see features like Claude Projects, ChatGPT Memory, and project-context files, don't feel they clash with this chapter. They're all thoughtful designs at the **product layer**, not memory in the model itself. Exactly how each one remembers, how long it keeps things, whether it's on or off by default, and whether you can delete it: **check the official docs** (most of these features are on by default and can be turned off in settings). Once you understand "no memory underneath, the upper layer re-feeds it," you can predict their behavior: what it "remembers" is always the part the product decided to put back on the desk; whatever wasn't put back, it still doesn't know.
+> **Key point:** From now on, when you see features like Claude Projects, ChatGPT Memory, and project-context files, don't feel they clash with this chapter. They're all thoughtful designs at the **product layer**, not memory in the model itself. Exactly how each one remembers, how long it keeps things, whether it's on or off by default, and whether you can delete it: **defer to the provider's official documentation** (most of these features are on by default and can be turned off in settings). Once you understand "no memory underneath, the upper layer re-feeds it," you can predict their behavior: what it "remembers" is always the part the product decided to put back on the desk; whatever wasn't put back, it still doesn't know.
 
 ## 4. Why does it "get dumber the longer you chat"?
 
@@ -89,7 +89,7 @@ Even before the limit is hit, **the longer a conversation runs, the more the qua
 | --- | --- | --- |
 | The point gets buried | Too much material on the desk; the truly important sheet is pressed underneath | A key requirement you set early on, it later "can't see" |
 | Contradictions pile up | Old discarded approaches and wrong info from trial and error are still spread on the desk | It gets dragged along by its own earlier mistakes, drifting further off |
-| Summarizing loses detail | As the desk fills up, old material gets "compressed into a sticky note," and the details are gone | Specific numbers and agreements stated early get blurred |
+| Summarizing loses detail | As the desk fills up, old material gets "boiled down to a sticky note," and the details are gone | Specific numbers and agreements stated early get blurred |
 
 > **How you'll actually run into it:** A typical scene: you and it polish a draft back and forth, and the first 10 rounds are great, but the further on it goes the more "stubborn" it gets, starting to ignore your new requirements and rehash phrasings it already rejected. This isn't it "getting tired." It's that the desk is packed with this long string of trial and error, and **the noise has drowned out the signal.**
 
@@ -149,7 +149,7 @@ In the next chapter we'll look at this: after the model cuts text into tokens an
    - B. It simply has no cross-conversation memory; each conversation starts from a blank desk
    - C. It remembers, but you have to pay to unlock it
    - D. It only remembers numbers, not names
-   > **Answer: B.** By default the model itself has no "yesterday"; start a new conversation and it knows nothing about you. **Note:** some products provide "memory / project memory" outside the model (like Claude Projects, ChatGPT Memory, project-context files); that's the **product layer** stuffing the information back into this conversation for you each time, not the model itself remembering (**check the official docs**). Take "the model itself has no memory" as the default, and you'll neither be surprised when "it forgets" nor confused by a product's memory feature.
+   > **Answer: B.** By default the model itself has no "yesterday"; start a new conversation and it knows nothing about you. **Note:** some products provide "memory / project memory" outside the model (like Claude Projects, ChatGPT Memory, project-context files); that's the **product layer** stuffing the information back into this conversation for you each time, not the model itself remembering (**refer to each provider's official documentation**). Take "the model itself has no memory" as the default, and you'll neither be surprised when "it forgets" nor confused by a product's memory feature.
 
 4. **[Advanced · Misconception]** "The chat box is empty, so this time didn't take up many tokens." What's wrong here?
    - A. Completely correct
@@ -165,5 +165,5 @@ In the next chapter we'll look at this: after the model cuts text into tokens an
    - D. Uninstall and reinstall
    > **Answer: B.** This is the classic symptom of a context window packed full, with early content pushed out. A new conversation = a clean desk, which is faster and more accurate than digging through a messy one (see chapter 13 for details).
 
-6. **[Basic · Hands-on]** Find a Chinese passage of about 1,000 characters, first estimate "roughly how many tokens," then paste it into any tool with a token counter to see the actual number (**check the official docs**). Observe: between Chinese and English, which "costs more tokens"?
-   > **What you should notice:** A passage of a few hundred words is usually a few hundred to a bit over a thousand tokens; the exact number depends on which model's tokenizer is used, and is also affected by punctuation, digits, and any code mixed in. **This is a rough rule of thumb, not a fixed ratio** ("English is definitely cheaper" no longer quite holds on newer tokenizers). For precision, use the official counting tool. Compare it once by hand and the intuition for "length, tokens, cost" takes shape.
+6. **[Basic · Hands-on]** Find a Chinese passage of about 1,000 characters, first estimate "roughly how many tokens," then paste it into any tool with a token counter to see the actual number (**refer to the provider's official documentation**). Observe: between Chinese and English, which "costs more tokens"?
+   > **What you should notice:** A passage of a few hundred words is usually a few hundred to a bit over a thousand tokens; the exact number depends on which model's tokenizer is used, and is also affected by punctuation, digits, and any code mixed in. **This is a rough rule of thumb, not a fixed ratio** ("English is definitely cheaper" no longer quite holds on newer tokenizers). For precision, use the official counting tool. Compare it yourself once and the intuition for "length, tokens, cost" takes shape.

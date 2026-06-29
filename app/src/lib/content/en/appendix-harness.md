@@ -1,6 +1,6 @@
-If Appendix C is "which buttons the tool has," this Appendix D is about "**how to string those buttons into a way of working you can trust.**" It comes from a method that frontline teams have polished over and over, called the **Harness**. The core is one sentence: **don't let the AI run free and improvise; put a harness on it, the frame of "understand first, then set the rules, propose a plan first, act, and verify at the end."** Whether you use Claude Code or Codex, this method works the same.
+If Appendix C is "which buttons the tool has," this Appendix D is about "**how to string those buttons into a way of working you can trust.**" It comes from a method that frontline teams have polished over and over, called the **Harness**. The core is one sentence: **don't let the AI run free and improvise; put a harness on it — the frame of "understand first, then set the rules, propose a plan first, act, and verify at the end."** Whether you use Claude Code or Codex, this method works the same.
 
-> **Key point:** the biggest risk when AI writes code isn't "it can't write it," it's that it **acts on its own and starts over from scratch.** It may ignore the existing approach in your project and force in its own style, throwing off the overall design. The Harness exists to prevent this: have it work **along with what you already have**, instead of tearing it down and rebuilding. This method is the other side of Chapters 26, 27, 28, and 29; read them together.
+> **Key point:** the biggest risk when AI writes code isn't that it "can't write it" — it's that it **acts on its own and starts over from scratch.** It may ignore the existing approach in your project and force in its own style, throwing off the overall design. The Harness exists to prevent this: have it work **along with what you already have**, instead of tearing it down and rebuilding. This method is the other side of Chapters 26, 27, 28, and 29; read them together.
 
 ## 1. What the Harness is: four moves
 
@@ -8,7 +8,7 @@ Treat the AI as a collaborator who's **very capable, but it's their first day an
 
 1. **Understand first:** get clear on the existing code and the existing rules.
 2. **Set the rules:** write down "how things are done in this project" in black and white.
-3. **Propose a plan first:** before acting, say which files will change and which existing things will be reused; you nod, then they do it.
+3. **Propose a plan first:** before acting, say which files will change and which existing things will be reused; you sign off, then they do it.
 4. **Verify:** when done, self-check against the rules, and you read the diff yourself too (Chapter 27).
 
 These four moves are the Harness. It doesn't depend on any one tool's particular buttons; it's a way of thinking.
@@ -25,11 +25,11 @@ Bringing those four moves down into an actual conversation gives you these five 
 | 4. Implement | Go along with what exists | "Approved. Implement strictly by the existing directory structure, naming, and style, reusing the shared modules you just found. **Don't introduce new abstractions of your own.**" |
 | 5. Verify | Self-check, and you check | "Self-check against the existing approaches you just referenced: any reinvented wheels, anything that breaks the overall design, anything that bypasses the shared modules?" Then **read the diff and run the tests yourself** (Chapter 27). |
 
-> **Key point:** the most important part of the whole flow is **the "plan gate" at step 3**: look at what it's going to do before it acts. Many tools build in a "plan mode" (Chapter 27, Appendix C) that can force this step for you; **check the official docs for the exact switch.** Building the habit of "see the plan first, then allow it through" matters more than remembering any command.
+> **Key point:** the most important part of the whole flow is **the "plan gate" at step 3**: look at what it's going to do before it acts. Many tools build in a "plan mode" (Chapter 27, Appendix C) that can force this step for you; **refer to the provider's official documentation for the exact switch.** Building the habit of "see the plan first, then allow it through" matters more than remembering any command.
 
 ## 3. The project-rules file: a starter you can copy
 
-The "rules" that step 2 produces are best landed as a **rules file** in the project, so the tool reads it automatically every time it starts work (Claude Code tends to use `CLAUDE.md`, Codex has its own equivalent; **check the official docs for the exact file name and location**, see Appendix C).
+The "rules" that step 2 produces are best landed as a **rules file** in the project, so the tool reads it automatically every time it starts work (Claude Code tends to use `CLAUDE.md`, Codex has its own equivalent; **the exact file name and location are best confirmed in the official documentation**, see Appendix C).
 
 > **Key point (product-layer memory, echoing Chapters 3 and 13):** the reason this file "makes it remember the project's rules" is **not that the model itself grew a memory**; it's that **the product re-injects it into the context every time it starts work** and feeds it to the model. So: **what's written in the file is what it "remembers"; what isn't, it "doesn't remember."** The more specific the rules, the steadier it is.
 
@@ -74,7 +74,7 @@ Here's a general starter; replace the `<...>` with your project's real details:
 | --- | --- |
 | Rules use proper nouns | "Write it cleaner" is useless; pinning down the **module names, file paths, and forbidden items** as proper nouns is what works. |
 | Keep explore, plan, and implement separate | Don't try to do everything in one sentence. Running **the investigation and the "plan approval" gate** as their own round is the biggest trick. |
-| Small steps, fast | Having it change a huge chunk at once is the easiest way to go off track. **Break it small, review every small step.** |
+| Small steps, fast | Having it change a huge chunk at once is the easiest way to go off track. **Break it into small pieces and review each step as you go.** |
 | Grow the rules | When you find it going off track, add the matching rule to the rules file, share it with the team, and keep updating. It **gets better the more you use it.** |
 | A human looks at the end, always | Even with a Harness it can go off track. **Be sure to review the diff yourself from the angle of "does this fit the existing approach"** (Chapter 27). |
 | Don't over-abstract | Overdoing "reuse" breeds unnecessary wrapping. **Stay at the same grain as the existing code** and you're fine. |

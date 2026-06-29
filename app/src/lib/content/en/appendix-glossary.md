@@ -21,11 +21,11 @@ A computing structure inspired by the neurons in the brain, built from many simp
 
 **Large Language Model (LLM)**（大语言模型 ・ 大規模言語モデル）  
 An AI model that learns "how words follow one another" from huge amounts of text. It's the core inside products like Claude and ChatGPT.  
-*Common misconception:* People often treat it as an "all-knowing computer brain"; in reality it's just a class of model good at handling language, and it will state wrong things with a perfectly straight face.  
+*Common misconception:* People often treat it as an "all-knowing computer brain"; in reality it's just a class of model good at handling language, and it will confidently get things wrong with a perfectly straight face.  
 
 **Model**（模型 ・ モデル）  
 The big pile of numbers (parameters) you get after training, plus the method for running them. It's not the ordinary kind of program where you "write out rules one by one."  
-*Common misconception:* People often think a model is a big database or a stack of if-statements; in reality it's parameters learned through training, and the answers are computed on the spot, not looked up.  
+*Common misconception:* People often think a model is a big database or a stack of if-statements; in reality it's parameters learned through training, and the answers are computed on the fly, not looked up.  
 
 **Generative AI**（生成式AI ・ 生成AI）  
 AI that can "produce" new content (text, images, code, audio, and so on), rather than only judging or classifying. Large models are the most common kind.  
@@ -70,7 +70,7 @@ Giving an already pre-trained model some extra "tutoring" with a smaller dataset
 A specialized kind of fine-tuning that uses many "instruction and good-answer" examples to teach the model to understand and carry out people's instructions, turning it from a "text-continuation machine" into an "assistant that follows directions."  
 
 **Alignment**（对齐 ・ アライメント）  
-Using various methods to tune a model's behavior toward "helpful, honest, and harmless," so its answers match people's intentions and values. An unaligned model tends to say wild things.  
+Using various methods to tune a model's behavior toward "helpful, honest, and harmless," so its answers match people's intentions and values. An unaligned model tends to go off the rails.  
 *Common misconception:* People often think a model is absolutely safe and reliable once aligned; in reality alignment can only lower the risk, and it also brings side effects like "being overly cautious and refusing to answer at the drop of a hat."  
 
 **Reinforcement Learning from Human Feedback (RLHF)**（人类反馈强化学习 ・ 人間のフィードバックによる強化学習（RLHF））  
@@ -81,12 +81,12 @@ The text, code, and other material used to train a model. The data's quality, sc
 *Common misconception:* People often think the model stored the training data verbatim; in reality it learns the patterns within it, and the original text isn't kept whole inside the model.  
 
 **Knowledge Cutoff**（知识截止 ・ 知識カットオフ）  
-The "deadline" of a model's training data. Things that happened, or new versions that came out, only after that point in time, the model itself doesn't know.  
+The "deadline" of a model's training data. The model itself doesn't know about anything that happened, or any new version that came out, only after that point in time.  
 *Common misconception:* People often think AI always knows the latest news; in reality, unless it goes online or is fed material, it knows nothing about events after the cutoff and may make things up.  
 
 **Foundation Model / Base Model**（基础模型 ・ 基盤モデル）  
 A "base layer" large model trained on huge amounts of general data. It has very broad abilities on its own and can be turned into all sorts of products through further fine-tuning and alignment.  
-*Common misconception:* People often confuse a foundation model with a finished chat product; in reality a foundation model hasn't been "trained in conversational manners" yet, and using it directly often means it won't behave.  
+*Common misconception:* People often confuse a foundation model with a finished chat product; in reality a foundation model hasn't been "trained in conversational manners" yet, and using it directly often means it won't follow instructions.  
 
 **Distillation**（蒸馏 ・ 蒸留）  
 Using a big, strong model as a "teacher" to train a smaller "student" model, so the small model approaches the big one's performance at lower cost.  
@@ -159,14 +159,14 @@ The ability, as the model reads a sentence, to decide "how much each word should
 The core form of the attention mechanism: each word in a sentence looks at the other words in the same sentence, weaving the context relationships in. It's the key component of the Transformer.  
 
 **Transformer**（Transformer ・ トランスフォーマー）  
-The underlying architecture of almost all mainstream large models today, with the attention mechanism at its core. Think of it as the "engine model" of large models; it's enough just to know it exists.  
+The underlying architecture of almost all mainstream large models today, with the attention mechanism at its core. Think of it as the "engine type" of large models; it's enough just to know it exists.  
 *Common misconception:* People often treat the Transformer as a specific product; in reality it's a technical architecture, and Claude, GPT, Gemini, and others are all built on top of it.  
 
 **Encoder / Decoder**（编码器/解码器 ・ エンコーダ・デコーダ）  
 The two kinds of components in a Transformer: the encoder handles "understanding the input," and the decoder handles "generating the output." Chat-style large models mainly use the decoder side.  
 
 **Knowledge (parametric)**（知识 ・ 知識）  
-The "common sense and facts" welded into the parameters during training, which the model produces off the top of its head without relying on the material you give this time. But events after its cutoff aren't in there.  
+The "common sense and facts" welded into the parameters during training, which the model reels off without relying on the material you give this time. But events after its cutoff aren't in there.  
 *Common misconception:* People often treat "the model knows" as "the model stored the original text and can look it up"; in reality it's a statistical impression learned during training, and it may garble or misremember.  
 
 **Memory (in-context)**（记忆 ・ 記憶（文脈上の記憶））  
@@ -301,7 +301,7 @@ OpenAI's product in the programming and coding-agent direction. Like Claude Code
 The name of Google's AI product and model family. It's also one of the mainstream large models, often compared alongside Claude and ChatGPT.  
 
 **Copilot**（Copilot ・ Copilot）  
-A general term for AI assistants embedded in editors and office software (such as code completion or a document assistant). Here we only cover the concept of it as a "sidekick co-pilot."  
+A general term for AI assistants embedded in editors and office software (such as code completion or a document assistant). Here we only cover the concept of it as a "co-pilot."  
 
 **Retrieval-Augmented Generation (RAG)**（检索增强生成 ・ 検索拡張生成（RAG））  
 First "retrieving" relevant content from your own library of material, then feeding it to the model so it answers "based on this material." Used to work around the knowledge cutoff, reduce hallucination, and make use of private material.  
@@ -405,7 +405,7 @@ A "project manual" placed in the project that the AI reads first every time it s
 *Common misconception:* People often think more is better; in reality writing too much takes up context and dilutes the key points, so write only the rules that "actually affect its work."  
 
 **Permission System**（许可机制 ・ 許可（パーミッション）の仕組み）  
-The mechanism by which a coding agent asks you first and acts only after you nod, before "changing files or running commands." Handing dangerous operations to a human to confirm is the key to it "acting without losing control."  
+The mechanism by which a coding agent asks you first and acts only after you approve, before "changing files or running commands." Handing dangerous operations to a human to confirm is the key to it "acting without losing control."  
 
 **Plan Mode**（计划模式 ・ プランモード）  
 A mode where the AI first lays out its plan for "how it intends to make the changes" and acts only after you approve. Looking at the plan before a big change saves the most rework.  
@@ -501,7 +501,7 @@ Unfair tendencies a model learns from its training data (such as stereotypes abo
 *Common misconception:* People often think the machine is "objective and neutral"; in reality it learns the biases in the data wholesale, its output isn't necessarily fair, and important cases need a human to gatekeep.  
 
 **Over-reliance / Automation Bias**（过度依赖 ・ 過度の依存）  
-Believing the AI's answers without a second thought, treating it as an authority. It will state wrong things confidently, and the more you cut corners the easier it is to stumble, so the key judgments still have to be made by a human.  
+Believing the AI's answers without a second thought, treating it as an authority. It will confidently get things wrong, and the more you cut corners the easier it is to stumble, so the key judgments still have to be made by a human.  
 *Common misconception:* People often think "the AI said so, it should be right"; in reality it has no ability to tell right from wrong, only to sound right, so important decisions can't be outsourced to it directly.  
 
 **Data Masking / Anonymization**（数据脱敏 ・ マスキング（匿名化））  

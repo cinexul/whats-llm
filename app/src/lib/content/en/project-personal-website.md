@@ -1,21 +1,21 @@
-Starting with this chapter, we switch up how we learn: no more new concepts, we **actually build something real**. Everything you picked up in the earlier parts (how to describe what you want to an AI, how to see what it did, how to check the work) all comes into play here.
+Starting with this chapter, we switch up how we learn: no more new concepts — instead we **actually build something real**. Everything you picked up in the earlier parts (how to describe what you want to an AI, how to see what it did, how to check the work) all comes into play here.
 
 For the first project, we'll make **your own personal website**: a web page you can open in a browser, with your name, a one-line intro about yourself, and a few links. How it looks is up to you.
 
 Why start here? Because it meets two "beginner-friendly" conditions. **The bar is as low as it gets**: a single web page is the simplest thing there is, and the hardest to break badly. **The results are visible**: you don't need to understand any code; just refresh the browser and you'll know right away whether it's right. That loop of "I say one thing, it changes one thing, I see the change immediately" is the most important rapport you can build with a coding agent. Building that rapport is worth more than memorizing any command.
 
-The rhythm of the whole chapter is six words: **preview, give feedback, change again**. We'll first run that loop with one small move that gives you a "five minutes to a win" feeling, then slowly pile on more.
+The rhythm of the whole chapter comes down to three steps: **preview, give feedback, change again**. We'll first run that loop with one small move that gives you a "five minutes to a win" feeling, then slowly pile on more.
 
 ## 1. Getting ready: what you need, the minimum starting point
 
-This chapter doesn't ask you to write a single line of code, but a few things need to be in place first. **How exactly to install them and which version to use, this book won't pin down; always check the official docs** (see Chapter 25). Here we'll only cover "what you need to gather."
+This chapter doesn't ask you to write a single line of code, but a few things need to be in place first. **This book won't pin down exactly how to install them or which version to use; always refer to the provider's official documentation** (see Chapter 25). Here we'll only cover "what you need to gather."
 
 **The minimum starting point you need:**
 
-- **A coding agent**: Claude Code, Codex, or the like. It will create files for you, write the page, and change things as you say. It comes in many forms (terminal, code editor, web tasks, cloud, and so on), and **some run on your own machine while others run in the cloud; the exact form varies and keeps changing, so check the official docs** (Chapter 24 covered this general workflow).
+- **A coding agent**: Claude Code, Codex, or the like. It will create files for you, write the page, and change things as you say. It comes in many forms (terminal, code editor, web tasks, cloud, and so on), and **some run on your own machine while others run in the cloud; the exact form varies and keeps changing, so refer to the official documentation** (Chapter 24 covered this general workflow).
 - **A browser**: whatever you already have on your computer works, for looking at the results.
 - **An empty folder**: a clean home for this project.
-- **A safety net you can fall back on**: **when it's working on your local machine**, put this folder under version control (Git) first (Chapter 27 walks you through it step by step). That way, if it messes up the page, one click takes you back to the last good state. If you're using a web or cloud form, the platform usually comes with its own isolation and rollback; check the official docs.
+- **A safety net you can fall back on**: **when it's working on your local machine**, put this folder under version control (Git) first (Chapter 27 walks you through it step by step). That way, if it messes up the page, one click takes you back to the last good state. If you're using a web or cloud form, the platform usually comes with its own isolation and rollback; check its official documentation.
 
 > **Key point:** Don't let the word "website" scare you. What we're making in this chapter isn't the kind of formal site where you buy a domain, rent a server, and let the whole world visit. It's **a web page file you can open in your own browser**. It lives on your computer, and if you break it, deleting it and starting over costs nothing. Setting the goal here is what gives you the nerve to experiment freely.
 
@@ -91,9 +91,9 @@ Each time you finish a block you're happy with, have it **save a checkpoint** (i
 
 - **Asking it to do too much at once.** "Build me the whole website with a blog and a photo album," and you get a heap of stuff piled on at once, where you can't review what's wrong and can't cleanly back any of it out. **Always break it down**: one block of content, refresh, satisfied, save, then the next.
 - **You refreshed but nothing changed, so you think it did nothing.** It's usually the browser cache, or you've got the wrong file open, not the one it just changed. **Force a refresh first**; if that doesn't work, go back and ask it "**which file should I open to look?**" Don't rush to conclude it did nothing.
-- **It added things you didn't ask for.** An invented intro, a fake link, a section out of nowhere; catch these when you check item by item, and one sentence has it delete them. **It wrote it doesn't mean you wanted it; your check is what counts.**
+- **It added things you didn't ask for.** An invented intro, a fake link, a section out of nowhere; catch these when you check item by item, and one sentence has it delete them. **Just because it wrote it doesn't mean you wanted it; your check is what counts.**
 - **It gets messier the more you change, and no matter what you say it won't go back to what you want.** Don't keep fixing on top of the mess. The cleanest move is: **go back to the last good checkpoint and say what you want again, more clearly** (the first-aid approach from Chapter 30). Chasing fixes sentence by sentence inside a mess usually makes it worse.
-- **Treating the real stuff as real too early.** Don't fill in your real email or real account passwords right off the bat; **passwords and private information in particular should never go into the page or the chat**, they get sent out (Chapter 37 covers this in detail). Use fake placeholders first, swap in the real ones at the end.
+- **Treating the real stuff as real too early.** Don't fill in your real email or real account passwords right off the bat; **passwords and private information in particular should never go into the page or the chat** — they get sent out (Chapter 37 covers this in detail). Use fake placeholders first, swap in the real ones at the end.
 
 ## 4. Taking it one step further
 
@@ -102,7 +102,7 @@ Once you've got the basics down, if you want to play more, try these (all still 
 - **Add a "dark mode" switch**: *"Add a small button that switches the whole page to a dark background when clicked."*
 - **Make it look good on a phone too**: *"When it opens on a phone, the content should still lay out neatly and not get crammed together."*
 - **Add the look of a simple comment or contact form** (do "how it looks" first; whether messages actually get through is a separate matter that involves more complex things, so take it as far as you can manage).
-- **Actually publish it online**: this step involves "deployment," and there are many ways to do it that differ from one provider to another. You can have the AI **first walk you through the options and what each one takes**, then decide whether to bother once you understand it (**the specific platform and steps are subject to the official docs**).
+- **Actually publish it online**: this step involves "deployment," and there are many ways to do it that differ from one provider to another. You can have the AI **first walk you through the options and what each one takes**, then decide whether to bother once you understand it (**for the specific platform and steps, defer to its official documentation**).
 
 > **Key point:** "Taking it one step further" still relies on that one loop the whole way through: **make a request, preview, give feedback, change again**. You'll find that going from a crude site to a polished one rests not on how much code you learned, but on you **stating what you want more and more clearly and looking at the results more and more carefully**. Those two things are what this book really wants to teach you.
 
@@ -155,7 +155,7 @@ In the next chapter, we'll put the same "AI plus files" approach to another real
    - B. It "filled in the blanks" with invented content (hallucination); catch it when you check item by item, and one sentence has it delete it
    - C. It's a bug, you can only delete the project
    - D. You must change it to be true to match what it wrote
-   > **Answer: B.** It will confidently embellish, and that's the hallucination that shows up just the same when building a page (Chapter 9). **It wrote it doesn't mean you wanted it**; your item-by-item check is the way to check the work, and when you find invented content, just have it delete it.
+   > **Answer: B.** It will confidently embellish, and that's the hallucination that shows up just the same when building a page (Chapter 9). **Just because it wrote it doesn't mean you wanted it**; your item-by-item check is the way to check the work, and when you find invented content, just have it delete it.
 
 6. **[Advanced · Hands-on]** Walk through Step 0 of this chapter yourself: have it make the simplest homepage, confirm you can open it in the browser and see the big heading, then change the heading to your name with one sentence and refresh to confirm. After you're done, answer: in this pass, **which sentence was the "feedback," and which action was the "preview"?**
-   > **What you should notice:** The "feedback" is the sentence you said, "change the heading to my name," and the "preview" is you going back to the browser to refresh and see the effect. You'll feel firsthand that **the whole way through you don't need to understand the code; you can direct it and check the work just by "saying it clearly and looking carefully."** This is the basic skill every later project uses over and over. How exactly to install the tools and open the preview is **subject to the official docs** (Chapter 25).
+   > **What you should notice:** The "feedback" is the sentence you said, "change the heading to my name," and the "preview" is you going back to the browser to refresh and see the effect. You'll feel firsthand that **the whole way through you don't need to understand the code; you can direct it and check the work just by "saying it clearly and looking carefully."** This is the basic skill every later project uses over and over. For exactly how to install the tools and open the preview, **defer to the official documentation** (Chapter 25).

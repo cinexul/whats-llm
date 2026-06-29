@@ -33,7 +33,7 @@ An analogy:
 | Low | A host **reading from a script** | Stable, reproducible, hard to derail | Even-keeled, few surprises |
 | High | An actor **improvising** | Creative, varied, never the same twice | May go off topic, may run wild |
 
-> **Key point:** This is the real reason "the same question gives a different answer every time." As long as temperature isn't pushed to the very bottom, there's **randomness** every time it picks a word from the probability table, so the result naturally changes. This is a **normal, by-design** feature, not a malfunction. So "it got it right last time" also **doesn't guarantee "it's right this time."** For important output, verify every time yourself.
+> **Key point:** This is the real reason "the same question gives a different answer every time." As long as temperature isn't pushed to the very bottom, there's **randomness** every time it picks a word from the probability table, so the result naturally changes. This is a **normal, by-design** feature, not a malfunction. So "it got it right last time" also **doesn't guarantee "it's right this time."** For important output, verify it yourself every time.
 
 When should you turn it which way? A plain rule of thumb:
 
@@ -66,9 +66,9 @@ When is it worth turning up reasoning effort?
 
 These two knobs are very important, but one thing has to be made clear, or you'll come up empty looking for them by the book:
 
-> **Their names, locations, and even whether they can be adjusted at all differ across products.** Some products **hide** parameters like temperature and only let you set them in the developer-facing API (Chapter 17); some turn "reasoning effort" into a clickable option in the interface, under all sorts of names ("deep thinking," "think longer," "extended thinking," and so on), and some decide for you automatically. **Exactly how to adjust them, where, and whether you even can, all check the official docs.** This book doesn't pin it down, because anything pinned down would soon be out of date.
+> **Their names, locations, and even whether they can be adjusted at all differ across products.** Some products **hide** parameters like temperature and only let you set them in the developer-facing API (Chapter 17); some turn "reasoning effort" into a clickable option in the interface, under all sorts of names ("deep thinking," "think longer," "extended thinking," and so on), and some decide for you automatically. **For exactly how to adjust them, where, and whether you even can, refer to the provider's official documentation.** This book doesn't pin it down, because anything pinned down would soon be out of date.
 
-What you really want to take away is the **underlying intuition**: no matter where a product hides the button or what name it gives it, behind it is nothing more than these two things, "**do I want it steadier or looser this time (temperature)**" and "**do I want it to blurt it out or think a few steps first this time (reasoning effort)**." Understand these two things and you can slot any related option in any product into place instantly.
+What you really want to take away is the **underlying intuition**: no matter where a product hides the button or what name it gives it, behind it is nothing more than these two things, "**do I want it steadier or looser this time (temperature)**" and "**do I want it to blurt it out or think a few steps first this time (reasoning effort)**." Understand these two things and you can place any related option in any product right away.
 
 ## 5. The misconceptions most worth clearing up
 

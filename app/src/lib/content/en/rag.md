@@ -1,4 +1,4 @@
-By now we've run into two of AI's "hard flaws" more than once: it will **state things wrong with a straight face** (hallucination, chapter 9), its knowledge has a **cutoff date** and it doesn't know what happened after that (chapter 9), and it **simply doesn't know your company's internal material**, those documents never went into its training, so of course it can't answer about them.
+By now we've run into two of AI's "hard flaws" more than once: it will **state things wrong with a straight face** (hallucination, chapter 9), its knowledge has a **cutoff date** and it doesn't know what happened after that (chapter 9), and it **simply doesn't know your company's internal material** — those documents never went into its training, so of course it can't answer about them.
 
 Is there a way, **without retraining the model**, to let it "use" this material it didn't originally know? There is. That's the star of this chapter: **RAG (retrieval-augmented generation)**. It's currently the most common, most practical way to "bolt a reference library onto AI." To understand it, you'll use the "coordinates of meaning" from chapter 5 and the "context desk" from chapter 3. This chapter is a neat coming-together of those two.
 
@@ -12,7 +12,7 @@ Before saying what RAG is, let's see clearly which three holes it fills, so you 
 | **Hallucination** | When it doesn't know, it **makes things up** (chapter 9) | Have it answer "**only from the material it found**," shrinking its room to invent |
 | **Can't use private material** | Your company's docs, your notes, it's never seen them | Put this material into a **library it can search**, and pull it out when answering |
 
-What these three have in common: **the problem isn't "the model isn't smart enough," it's "it doesn't have the right material at hand."** Given that, the most direct fix isn't to train a bigger model, it's, **at answer time, to hand it the right material.** This is exactly the line repeated at the end of chapter 9: **rather than betting it remembers right, put the right material in front of it.** RAG is the engineered version of that line.
+What these three have in common: **the problem isn't "the model isn't smart enough" — it's that "it doesn't have the right material at hand."** Given that, the most direct fix isn't to train a bigger model; it's, **at answer time, to hand it the right material.** This is exactly the line repeated at the end of chapter 9: **rather than betting it remembers right, put the right material in front of it.** RAG is the engineered version of that line.
 
 > **Key point:** When to think of RAG is easy to remember: **when you need AI to answer based on "material it didn't originally know" (too new, private, specialized), and you want it not to make things up**, reach for it. It doesn't make the model smarter; it gives the model **something to go on.**
 
@@ -36,11 +36,11 @@ Open-book (RAG):
 
 Back to "what it actually is": RAG = **retrieval (look up material first)** + **generation (then answer from it)**, and the "augmented" in the middle means exactly this, **use the material it found to augment the model's answer this time.** It's not some mysterious new model, just the "**look up first, answer after**" flow.
 
-> **Key point:** Hold on to the "open-book exam" metaphor; it captures RAG's upside and its limit at once. The upside is **being able to look up the right material before answering**, so it's more accurate, more current, and can use private material. The limit is, **an open-book exam still means "turning to the right page"; turn to the wrong one and you still answer wrong** (the fifth section covers this).
+> **Key point:** Hold on to the "open-book exam" metaphor; it captures RAG's upside and its limit at once. The upside is **being able to look up the right material before answering**, so it's more accurate, more current, and can use private material. The limit is that **an open-book exam still means "turning to the right page"; turn to the wrong one and you still answer wrong** (the fifth section covers this).
 
 ## 3. How it "looks up material": by the "coordinates of meaning," not by literal words
 
-"First look up the relevant passages in the library" is RAG's key step. It does **not** grind on literal keywords; it finds material using the "**coordinates of meaning**" from chapter 5, exactly where **embedding** (chapter 5) earns its keep.
+"First look up the relevant passages in the library" is RAG's key step. It does **not** go by literal keywords; it finds material using the "**coordinates of meaning**" from chapter 5, exactly where **embedding** (chapter 5) earns its keep.
 
 Recall chapter 5: **an embedding gives each piece of text a "coordinate of meaning (a vector)," and the closer the meaning, the closer the coordinate** (chapter 5). RAG's retrieval is built on this:
 
@@ -57,7 +57,7 @@ The benefit is obvious: you ask "how do I make my computer run faster," and a go
 A new term shows up here: **vector database**. What is it? Plainly, it's **a kind of database built specifically to store these "coordinates of meaning (vectors)" and to quickly find the few closest ones "by how near the coordinates are."**
 
 - Picture it as a **big bookshelf with seats arranged by "meaning"**: material with close meaning sits close together. You walk up with your question's coordinate, and it instantly hands you the few passages sitting nearby.
-- An ordinary database is good at "exact matching" (find records equal to some value); a vector database is good at "**similarity matching**" (find the several closest in meaning), exactly what RAG retrieval needs. Which vector database to use and how to set it up, **check the official docs**; this book covers only the "what it's for" layer of the principle.
+- An ordinary database is good at "exact matching" (find records equal to some value); a vector database is good at "**similarity matching**" (find the several closest in meaning), exactly what RAG retrieval needs. Which vector database to use and how to set it up is something you should **go by the provider's official documentation** for; this book covers only the "what it's for" layer of the principle.
 
 > **Key point:** RAG's "retrieval" doesn't gamble on keywords; it relies on embedding's "**coordinates of meaning**" (chapter 5): turn both the material and the question into coordinates, then use a **vector database** to scoop out the few most relevant passages by how near the coordinates are. In a word, **it compares meaning, not literal words.**
 
@@ -83,7 +83,7 @@ Connect it to the two iron rules learned earlier and it clicks fully:
 - **Connecting a knowledge base ≠ retraining the model.** Training (welding knowledge into the parameters, chapters 2 and 7) is a different matter, slow and expensive; RAG never touches the parameters at all. It takes the much lighter path of "**laying material on the desk temporarily each time.**"
 - This is actually a cousin of the "**product-layer memory**" from chapter 3, the same mechanism: **the model itself doesn't remember and doesn't learn; it relies on the needed information being fed back into the context each time** (chapter 3). What RAG feeds is "**the material it found**"; what product-layer memory feeds is "**your preferences**"; at bottom both are "feeding the context again."
 
-> **Key point:** Remember this sentence over any technical detail of RAG: **RAG only puts material into the context temporarily; it does not change the model itself.** The model forgets after this turn (it has no cross-conversation memory to begin with, chapters 3 and 9); to use it next time, you have to **look it up again and feed it again.** Once you get this layer, you'll stop asking "I fed it once, how come it doesn't know again?", because the material never went into its "body," it only **sat on the desk for a while.**
+> **Key point:** Remember this sentence over any technical detail of RAG: **RAG only puts material into the context temporarily; it does not change the model itself.** The model forgets after this turn (it has no cross-conversation memory to begin with, chapters 3 and 9); to use it next time, you have to **look it up again and feed it again.** Once you get this layer, you'll stop asking "I fed it once, how come it doesn't know again?" — because the material never went into its "body"; it only **sat on the desk for a while.**
 
 ## 5. What it can and can't solve (don't make it magic)
 
@@ -97,9 +97,9 @@ RAG is very useful, but it's **not a cure-all.** Drawing its boundary clearly is
 
 **What it can't guarantee for you:**
 
-- **Connecting a knowledge base ≠ it won't invent.** If it doesn't "honestly use only the material," or the material itself doesn't cover the question, it **can still make things up**. RAG lowers hallucination but **doesn't eliminate** it (the verification work from chapter 9, don't skip an ounce of it).
+- **Connecting a knowledge base ≠ it won't invent.** If it doesn't "honestly use only the material," or the material itself doesn't cover the question, it **can still make things up**. RAG lowers hallucination but **doesn't eliminate** it (the verification work from chapter 9 — don't skip a step of it).
 - **Wrong retrieval, wrong answer.** This is the open-book exam's fatal weakness: **turn to the wrong page, an old page, an irrelevant page, and it answers from the wrong one**, and because "there's material backing it up," it may be wrong **more confidently.** The quality of this retrieval step directly decides the answer's quality.
-- **If the material is itself wrong, it won't fix it for you.** RAG only "fetches material and answers from it"; it **doesn't judge whether the material is right.** Garbage in, garbage out, most likely.
+- **If the material itself is wrong, it won't fix it for you.** RAG only "fetches material and answers from it"; it **doesn't judge whether the material is right.** Garbage in, garbage out — most likely.
 
 ```text
 On this RAG chain, if any link breaks, the result breaks:
@@ -108,7 +108,7 @@ On this RAG chain, if any link breaks, the result breaks:
    one bad link and the final answer may go bad, so key facts still need you to verify (chapter 9)
 ```
 
-> **Key point:** Give RAG a fair place: it's a strong way to **reduce hallucination, get around the cutoff, use private material**, **but it's not "now it won't be wrong" insurance.** "Connect a knowledge base and it won't invent" is a dangerous misconception, **wrong retrieval, wrong material, or it not using the material honestly will all make it answer wrong, even more righteously so.** So the iron rule "verify key facts yourself" (chapter 9) still holds in front of RAG.
+> **Key point:** Give RAG a fair place: it's a strong way to **reduce hallucination, get around the cutoff, use private material**, **but it's not "now it won't be wrong" insurance.** "Connect a knowledge base and it won't invent" is a dangerous misconception, **wrong retrieval, wrong material, or it not using the material honestly will all make it answer wrong — and even more confidently.** So the iron rule "verify key facts yourself" (chapter 9) still holds in front of RAG.
 
 ## 6. Pulling it together: the full picture of one RAG Q&A
 
@@ -128,7 +128,7 @@ you ask
             the model itself never changes throughout ← RAG doesn't remake the model, it only feeds material temporarily
 ```
 
-You'll see RAG has no "magic" to it: it just strings together a few things you already understand, **chapter 5 (finding by meaning) + chapter 3 (feeding into the context) + chapter 9 (answering from material to reduce hallucination)**, into one **assembly line.** Once you see this line, you can see through the underlying pattern of all the "connect a knowledge base to AI" and "enterprise knowledge Q&A" products out there (the specific implementations vary, **check the official docs**).
+You'll see RAG has no "magic" to it: it just strings together a few things you already understand, **chapter 5 (finding by meaning) + chapter 3 (feeding into the context) + chapter 9 (answering from material to reduce hallucination)**, into one **assembly line.** Once you see this line, you can see through the underlying pattern of all the "connect a knowledge base to AI" and "enterprise knowledge Q&A" products out there (the specific implementations vary, so **refer to the official documentation**).
 
 ## 7. Common misconceptions, cleared up
 
@@ -149,7 +149,7 @@ You'll see RAG has no "magic" to it: it just strings together a few things you a
 - **The thing to be clearest on:** RAG **temporarily feeds the material it found into the context (chapter 3)** and **does not change the model itself**; the model forgets after answering, the same pattern as "product-layer memory" (chapters 3, 9).
 - **Boundary:** it **reduces** hallucination but doesn't eliminate it, **wrong retrieval, wrong material, or not using it honestly will all make it answer wrong, even more confidently**; key facts still need you to verify (chapter 9).
 
-By here, the "tool ecosystem" map of Part Three is about laid out: model/product/API/Agent (chapter 17), how to choose a product (chapter 18), the Agent that acts (chapter 19), and RAG that bolts material onto AI (this chapter). Next (chapter 21), we look at another way to keep the model in your own hands, **putting the model on your own computer.**
+By here, the "tool ecosystem" map of Part Three is just about laid out: model/product/API/Agent (chapter 17), how to choose a product (chapter 18), the Agent that acts (chapter 19), and RAG that bolts material onto AI (this chapter). Next (chapter 21), we look at another way to keep the model in your own hands — **putting the model on your own computer.**
 
 ---
 
@@ -183,7 +183,7 @@ By here, the "tool ecosystem" map of Part Three is about laid out: model/product
    - B. RAG can **reduce** hallucination but doesn't **eliminate** it: if it doesn't honestly use only the material, or the material doesn't cover it, it still invents; and **if retrieval turns to the wrong page, it answers from the wrong one, even more confidently**, key facts still need you to verify (chapter 9)
    - C. It only invents when there's no internet
    - D. After connecting a knowledge base its answers are 100% correct
-   > **Answer: B.** An open-book exam still means "turning to the right page": the library being wrong, not retrieving the right passages, the model not honestly using them, any broken link breaks the result (the verification work from chapter 9, don't skip it). A and D make RAG into "never-wrong insurance," exactly the dangerous misconception; C doesn't match the principle.
+   > **Answer: B.** An open-book exam still means "turning to the right page": if the library is wrong, if the right passages aren't retrieved, or if the model doesn't honestly use them, any broken link breaks the result (the verification work from chapter 9, don't skip it). A and D make RAG into "never-wrong insurance," exactly the dangerous misconception; C doesn't match the principle.
 
 5. **[Basic · Scenario]** You want AI to accurately answer "our company's latest internal expense-reimbursement rules," but it knows nothing about your company's rules and is prone to inventing if pushed. Which approach is most on point?
    - A. Keep asking repeatedly until the answers agree

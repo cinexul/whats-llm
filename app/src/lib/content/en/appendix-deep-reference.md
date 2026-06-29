@@ -2,7 +2,7 @@ Throughout the book we kept pushing "the exact command to type, the exact name o
 
 Why not memorize the commands? Because this is the same line the book keeps drawing:
 
-> **Key point (read this first):** Both tools change fast. **The names of commands, their parameters, the fields in config files, what the files are called, where they live, how events are named: all of this shifts from version to version.** So this appendix only covers the **relatively stable** things, like what the capabilities are, what each one is for, how to judge whether you need it, and what traps to watch for. For the **exact command, parameter, or config syntax, always check the official docs.** Treat this appendix as the map and the official docs as live traffic.
+> **Key point (read this first):** Both tools change fast. **The names of commands, their parameters, the fields in config files, what the files are called, where they live, how events are named: all of this shifts from version to version.** So this appendix only covers the **relatively stable** things, like what the capabilities are, what each one is for, how to judge whether you need it, and what traps to watch for. For the **exact command, parameter, or config syntax, always refer to the provider's official documentation.** Treat this appendix as the map and the official docs as live traffic.
 
 ## 1. First, remember where to look (the official docs)
 
@@ -19,14 +19,14 @@ A good map still needs current traffic. When you hit "how exactly do I write thi
 
 Before memorizing any command, clear up one common misunderstanding.
 
-A lot of tutorials say "Claude Code / Codex is just a command-line tool installed on your computer." That is **only one of its shapes**. In practice you might run into them in several places:
+A lot of tutorials say "Claude Code / Codex is just a command-line tool installed on your computer." That is **only one of its forms**. In practice you might run into them in several places:
 
 - **Terminal (command line):** running in the black box on your own computer.
 - **IDE plugin:** installed into an editor like VS Code or JetBrains, used while you write code.
-- **Web / cloud tasks:** you hand it work in a browser, it runs in a **remote cloud environment**, and gives you the result when it's done.
-- And new shapes that keep showing up with each version.
+- **Web / cloud tasks:** you hand it work in a browser; it runs in a **remote cloud environment** and gives you the result when it's done.
+- And new forms that keep showing up with each version.
 
-> **Key point (the book's third red line):** **Don't assume "it must be running on this computer of yours."** It **can run locally and it can run in the cloud**, and the exact shape changes as the product updates. This matters, because it directly decides "can it read your local files" and "has your code ever left this machine," which is a privacy and security question (see Chapter 37). **For the shape you're using, check the official docs.**
+> **Key point (the book's third red line):** **Don't assume "it must be running on this computer of yours."** It **can run locally and it can run in the cloud**, and the exact form changes as the product updates. This matters, because it directly decides "can it read your local files" and "has your code ever left this machine," which is a privacy and security question (see Chapter 37). **For the form you're actually using, defer to the official docs.**
 
 ## 3. In-session commands (slash commands and the like)
 
@@ -34,9 +34,9 @@ A lot of tutorials say "Claude Code / Codex is just a command-line tool installe
 
 **Mental model:** ordinary words are "the thing I want you to do"; a slash command is "I want to adjust the tool itself." The first is content, the second is a control switch.
 
-**How to know which ones exist and how to write them:** the most reliable way is to look at the tool's own command list in the session (many tools list it when you type `/` or "help"). For **which commands exist and what their parameters are, check the official docs and the tool's own prompts.**
+**How to know which ones exist and how to write them:** the most reliable way is to look at the tool's own command list in the session (many tools list it when you type `/` or "help"). For **which commands exist and what their parameters are, rely on the official docs and the tool's own prompts.**
 
-**Common trap:** mixing up "things you say to the AI" with "slash commands." If you want it to clear its memory, you type the dedicated command, not type out "please forget what came before"; the latter it won't necessarily actually clear.
+**Common trap:** mixing up "things you say to the AI" with "slash commands." If you want it to clear its memory, you type the dedicated command, not "please forget what came before"; the latter won't necessarily clear anything.
 
 ## 4. Permissions and the config file
 
@@ -52,13 +52,13 @@ A lot of tutorials say "Claude Code / Codex is just a command-line tool installe
 | Auto-allow part of it | "Read-only" actions like reading files or looking things up happen automatically, changes still need confirmation | Speeding up once you're comfortable |
 | Plan only, no action | It only proposes a plan, doesn't actually change anything | When you want to see clearly what it intends to do first |
 
-> **Key point:** **For how many modes there are, what each is called, and how to write the fields in the config file, always check the official docs.** The safe default for a beginner is "have it ask first before any action that makes a change."
+> **Key point:** **For how many modes there are, what each is called, and how to write the fields in the config file, always refer to the official docs.** The safe default for a beginner is "have it ask first before any action that makes a change."
 
-**Common trap:** setting permissions to "fully automatic" right away, for speed. By the time it has acted somewhere it shouldn't, you remember you set up no guard. **The more important the project, the more you keep that gate where a human confirms.**
+**Common trap:** setting permissions to "fully automatic" right away, for speed. By the time it has acted somewhere it shouldn't, you realize you never set up any guardrail. **The more important the project, the more you keep that gate where a human confirms.**
 
 ## 5. The project-rules file: give the tool a "manual for this project"
 
-**What it is:** you can put a **rules file** in the project that writes down "what tech this project uses, how the directories are split, which rules must be followed, what is forbidden." The tool reads it every time it starts work and follows it. Claude Code tends to use a file called `CLAUDE.md`; Codex has its own equivalent. **For the exact file name, location, and how it takes effect, check the official docs.**
+**What it is:** you can put a **rules file** in the project that writes down "what tech this project uses, how the directories are split, which rules must be followed, what is forbidden." The tool reads it every time it starts work and follows it. Claude Code tends to use a file called `CLAUDE.md`; Codex has its own equivalent. **For the exact file name, location, and how it takes effect, the official docs are the authority.**
 
 **This is "product-layer memory," not the model growing a memory.** This echoes the red line that runs through Chapters 3 and 13:
 
@@ -74,11 +74,11 @@ For a detailed "starter project-rules file" and how to build the whole workflow,
 
 ## 6. Plan mode and "reasoning effort"
 
-**Plan mode (plan mode and the like):** have it **propose a plan first, not act directly**; once you've looked it over and nodded, it implements. This is one of the habits the book values most (Chapter 27), and many tools build in this switch so you don't have to ask for it by hand every time.
+**Plan mode (plan mode and the like):** have it **propose a plan first, not act directly**; once you've looked it over and signed off, it implements. This is one of the habits the book values most (Chapter 27), and many tools build in this switch so you don't have to ask for it manually every time.
 
 **Reasoning effort / how hard it thinks:** some tools let you dial "have it think a while longer, or answer quickly." For hard problems and designs with trade-offs, set it higher; for small chores, lower, to save time and money.
 
-> **Key point:** **for what these two switches are exactly called and how to set them, check the official docs.** But the reasoning behind them is stable: **for important things, have it think it through, propose a plan, and only then act.**
+> **Key point:** **for what these two switches are exactly called and how to set them, refer to the official docs.** But the reasoning behind them is stable: **for important things, have it think it through, propose a plan, and only then act.**
 
 ## 7. Subagents
 
@@ -86,7 +86,7 @@ For a detailed "starter project-rules file" and how to build the whole workflow,
 
 **Mental model:** like splitting up work on a team. The main conversation is the "project manager," and subagents are "team members" with their own specialties; you send out the matching work, and they stay out of each other's way and stay focused.
 
-**Common trap:** building a pile of subagents right away. In reality, **for most everyday tasks one main conversation is enough.** Once you clearly feel "this kind of work keeps repeating and needs a fixed routine," then consider configuring a dedicated one. **For the exact config fields and how to define them, check the official docs.**
+**Common trap:** building a pile of subagents right away. In reality, **for most everyday tasks one main conversation is enough.** Once you clearly feel "this kind of work keeps repeating and needs a fixed routine," then consider configuring a dedicated one. **For the exact config fields and how to define them, the official docs are the authority.**
 
 ## 8. Hooks
 
@@ -94,13 +94,13 @@ For a detailed "starter project-rules file" and how to build the whole workflow,
 
 **Mental model:** like home automation, "the light turns on when the door opens." You define "when this event happens, automatically do that," and it watches the rest for you.
 
-**Common trap:** this is a more advanced feature, and for ordinary use you **can simply leave it alone at first.** Learn it when you need it. **For which events exist and how to configure them, check the official docs.**
+**Common trap:** this is a more advanced feature, and for ordinary use you **can simply leave it alone at first.** Learn it when you need it. **For which events exist and how to configure them, refer to the official docs.**
 
 ## 9. Skills
 
 **What it is:** packaging "a standard procedure for doing a kind of work, plus the materials it needs" into a reusable **skill package** that the tool calls when needed. This is the same thing Chapter 22 covers; the reminder here is just that it's the mechanism that **makes a capability reusable.**
 
-**Common trap:** don't use it for the sake of using it. First explain the work in plain words; only a **fixed routine that shows up again and again** is worth turning into a skill package. **For the packaging format and how to call it, check the official docs.**
+**Common trap:** don't use it for the sake of using it. First explain the work in plain words; only a **fixed routine that shows up again and again** is worth turning into a skill package. **For the packaging format and how to call it, the official docs are the authority.**
 
 ## 10. MCP: wiring the AI up to external tools and data
 
@@ -108,7 +108,7 @@ For a detailed "starter project-rules file" and how to build the whole workflow,
 
 **Mental model:** giving the AI "peripherals." The model on its own only chats; wire up MCP and it can go look up, fetch, and use those external resources.
 
-> **Key point (security):** connecting external data = bringing **external content** into the conversation. **That external content may hide "fake instructions" (prompt injection, Chapters 22 and 40).** Only connect sources you trust, and don't give it too much power. **For the exact add command and config syntax, check the official docs.**
+> **Key point (security):** connecting external data = bringing **external content** into the conversation. **That external content may hide "fake instructions" (prompt injection, Chapters 22 and 40).** Only connect sources you trust, and don't give it too much power. **For the exact add command and config syntax, refer to the official docs.**
 
 ## 11. Installing, getting it running, and troubleshooting
 
@@ -118,9 +118,9 @@ For a detailed "starter project-rules file" and how to build the whole workflow,
 
 - **Won't install / won't run:** usually the runtime environment (version, dependencies) or the network. Copying the raw error text to the AI and having it read it for you is often fastest.
 - **Login / authentication fails:** an account, plan, or key problem; check each item against the official "quick start."
-- **It can't read your files:** first confirm which shape you're using (local or cloud, see section 2 of this appendix). A cloud shape simply can't read the files on your own machine.
+- **It can't read your files:** first confirm which form you're using (local or cloud, see section 2 of this appendix). A cloud-based form simply can't read the files on your own machine.
 
-> **Key point:** **for the exact install command, system requirements, and login method, check the official docs**, and these change with versions most easily. Glancing at the official "quick start" before installing is the easiest move.
+> **Key point:** **for the exact install command, system requirements, and login method, refer to the official docs**, and these are what change most easily from version to version. Glancing at the official "quick start" before installing is the easiest move.
 
 ## 12. Git / GitHub / PR operations
 
@@ -128,7 +128,7 @@ For a detailed "starter project-rules file" and how to build the whole workflow,
 
 **Mental model:** it can help you **record and undo** changes, which is why you dare to let it edit; if you don't like the result, roll back (Chapters 25 and 26).
 
-**Common trap:** letting it "commit / push while it's at it" without your having read the diff. **What gets committed, where it gets pushed, whether to open a PR, should be your call**; especially for outward-facing, hard-to-undo actions like "push / merge," be sure to confirm yourself. **For the exact commands, check the official docs.**
+**Common trap:** letting it "commit / push while it's at it" without your having read the diff. **What gets committed, where it gets pushed, whether to open a PR, should be your call**; especially for outward-facing, hard-to-undo actions like "push / merge," be sure to confirm yourself. **For the exact commands, refer to the official docs.**
 
 ## Summary
 

@@ -1,17 +1,17 @@
-"Which AI is the best?" This is probably the question ordinary people most love to ask, and the one most likely to lead you astray. Search around and you'll find endless "hands-on comparison" and "who crushes whom" posts, praising one today and trashing it tomorrow, leaving you dizzier than before.
+"Which AI is the best?" This is probably the question non-technical readers most love to ask, and the one most likely to lead you astray. Search around and you'll find endless "hands-on comparison" and "who crushes whom" posts, praising one today and trashing it tomorrow, leaving you dizzier than before.
 
 This chapter isn't going to hand you a "who's number one" ranking. **That kind of ranking starts going out of date the day it's written**, because these products update so fast. What we'll give you is a way of thinking that **doesn't go out of date**: roughly where the mainstream AI products sit, how to look at their differences, and most importantly, **how to choose by your own task, and how to check for yourself what a product "can actually do right now."** Learning this is worth more than memorizing any single review.
 
-Picking up the "four-layer map" from the last chapter (chapter 17), here we focus on the thing in that outermost layer that ordinary people deal with every day: the **product**.
+Picking up the "four-layer map" from the last chapter (chapter 17), here we focus on the thing in that outermost layer that non-technical readers deal with every day: the **product**.
 
 ## 1. First, get this clear: you're not choosing a "model," you're choosing a "product experience"
 
-The last chapter said it: the **model** is the thinking core, the **product** is the interface layer that wraps the model for people (chapter 17). The ChatGPT, Claude, and Gemini that ordinary people open and chat with are almost all **products**.
+The last chapter said it: the **model** is the thinking core, the **product** is the interface layer that wraps the model for people (chapter 17). The ChatGPT, Claude, and Gemini that non-technical readers open and chat with are almost all **products**.
 
 You have to think this through first, because it directly decides how you should choose:
 
 - When you open an app and chat, whether the experience is good **depends on far more than how strong the model behind it is**. It also depends on: whether the interface is smooth, whether you can upload files, whether it can go online, whether it syncs between phone and computer, whether it remembers your preferences, whether the price fits, whether it works with the tools you already use... These are **all things at the "product" layer**, with no direct link to "how large the model's parameters are."
-- So the question "which AI is good" is really asking **"which product experience fits my hand better,"** not "which model scores highest on some ranking."
+- So the question "which AI is good" is really asking **"which product experience suits me better,"** not "which model scores highest on some ranking."
 
 ```text
 What you think you're comparing:  whose model is "smarter"
@@ -23,7 +23,7 @@ What you're actually using:        the whole product experience
                 └─ does it work with my existing tools
 ```
 
-> **Key point:** Swap "choosing a model" for "choosing a product that fits your hand," and your whole judgment clears up. A model can be a little weaker on some score, but if its product **fits your hand better and happens to be built into the software you use every day**, it may well be the better choice for you. An ordinary person isn't running benchmarks in a lab; they're living their life. **Fits your hand beats strongest on paper.**
+> **Key point:** Swap "choosing a model" for "choosing a product that suits you," and your whole judgment clears up. A model can be a little weaker on some score, but if its product **suits you better and happens to be built into the software you use every day**, it may well be the better choice for you. A non-technical reader isn't running benchmarks in a lab; they're living their life. **The right fit beats strongest on paper.**
 
 ## 2. Roughly where the mainstream products sit (only the stable ownership; check the official docs for abilities)
 
@@ -46,19 +46,19 @@ Instead of agonizing over "which is strongest," turn it around and start from **
 
 **Question one: what am I mainly using it for?**
 
-Different tasks define "fits your hand" differently:
+Different tasks define "the right fit" differently:
 
 | Your main task | What to focus on, not "who's strongest," but... |
 | --- | --- |
 | Everyday Q&A, writing a bit, looking things up | Smooth interface, comfortable responses, fitting price. Basic products handle this |
-| Working with long documents, reading big chunks of material | Whether you can easily upload files, and how much it can hold at once (context, chapter 3). Check the official docs |
+| Working with long documents, reading big chunks of material | Whether you can easily upload files, and how much it can hold at once (context, chapter 3) — confirm this against the official docs |
 | Needing the latest information | Whether it can go online to look (note: can go online ≠ won't be wrong; verify what it finds, chapters 9 and 15) |
 | Writing code, building projects | That's a different class, "coding agents" (Part Four), with different selection logic |
-| Making images, voice, spreadsheets, etc. | Whether the specific product offers that ability. Check the official docs |
+| Making images, voice, spreadsheets, etc. | Whether the specific product offers that ability — check the provider's official docs |
 
 **Question two: what tools am I already using?**
 
-This gets overlooked, but it's especially practical. If you use a particular office suite, browser, or ecosystem every day, then **an AI product that plugs into it seamlessly is often a plus for your real experience**: fewer switches, less copy-paste. A lot of the time "fits your hand" hides in "does it match the habits I already have."
+This gets overlooked, but it's especially practical. If you use a particular office suite, browser, or ecosystem every day, then **an AI product that plugs into it seamlessly is often a plus for your real experience**: fewer switches, less copy-paste. A lot of the time, "the right fit" hides in "does it match the habits I already have."
 
 **Question three: do I use it occasionally, or plug it into my own system?**
 
@@ -68,7 +68,7 @@ This goes back to the chapter 17 test:
 - **Want your own program to call it automatically** -> that's an **API** (chapters 17 and 35), not a matter of buying a subscription.
 - **Want it to run tasks on its own** -> that's an **Agent** (next chapter, chapter 19).
 
-> **Key point:** The heart of "choosing by task" is to swap "which is strongest," a question with **no answer**, for "**which fits my hand for this thing**," a question that **has** an answer. The first leads to endless argument; the second, you already know in your gut.
+> **Key point:** The heart of "choosing by task" is to swap "which is strongest," a question with **no answer**, for "**which suits me best for this**," a question that **has** an answer. The first leads to endless argument; the second, you already know in your gut.
 
 ## 4. The most important lesson: how to check for yourself "what it can do right now"
 
@@ -105,26 +105,26 @@ Many people, after **one unpleasant experience**, sentence a product to death: "
 
 Not quite. Model strength **is part of the product experience**, just **not all of it**, and it shouldn't be the only standard.
 
-The sensible stance: treat "is the model strong enough" as **one consideration among many**, weighed alongside interface, integration, price, upload, going online, memory, and so on. For the vast majority of ordinary tasks, **the models in mainstream products are all "good enough,"** and at that point **whether it fits your hand** is what's decisive. Only when your task genuinely leans on model ability (complex reasoning, hard specialist problems) does "which model is stronger" move up the list, and even then, **who's stronger right now still depends on official information and your own hands-on test.** Don't trust a conclusion from a year ago.
+The sensible stance: treat "is the model strong enough" as **one consideration among many**, weighed alongside interface, integration, price, upload, going online, memory, and so on. For the vast majority of ordinary tasks, **the models in mainstream products are all "good enough,"** and at that point **whether it suits you** is what's decisive. Only when your task genuinely leans on model ability (complex reasoning, hard specialist problems) does "which model is stronger" move up the list, and even then, **who's stronger right now still depends on official information and your own hands-on test.** Don't trust a conclusion from a year ago.
 
-> **Key point:** One sentence to close the selection mindset: **for things where good enough is good enough, pick what fits your hand; for things that lean hard on ability, then compare models seriously, and test on the spot, don't worship old rankings.** 95% of an ordinary person's situations fall in the first half.
+> **Key point:** One sentence to close the selection mindset: **for things where good enough is good enough, pick what suits you; for things that lean hard on ability, compare models seriously and test for yourself — and don't worship old rankings.** 95% of a non-technical reader's situations fall in the first half.
 
 ## 7. Common misconceptions, cleared up
 
 | Common misconception | Reality |
 | --- | --- |
-| Choosing AI means choosing "the strongest model" | An ordinary person chooses a **product experience that fits their hand**: interface, integration, price, upload/online/memory all count; model strength is just one of them |
+| Choosing AI means choosing "the strongest model" | A non-technical reader chooses a **product experience that suits them**: interface, integration, price, upload/online/memory all count; model strength is just one of them |
 | Online "feature comparison charts" and "who's number one" rankings can be taken as settled | They're snapshots at one point in time, and update extremely fast. Treat as leads; for specifics, check the official docs |
 | If it seemed dumb once, the product is no good | One experience is just one data point: versions update, answers carry randomness, it may be a usage or fit problem |
 | A product's "can/can't do X" is fixed and can be memorized | The capability list is volatile; what it can't do today it may do next month. Check the official docs |
 | To confirm a feature, reviews are fastest | Reviews lag, and the needs may not match yours; the most reliable is checking the official source, with trying it yourself as a backup |
-| Model strength doesn't matter at all | It's part of the experience and one of the considerations; tasks that lean hard on ability still need a serious comparison (and a test on the spot) |
+| Model strength doesn't matter at all | It's part of the experience and one of the considerations; tasks that lean hard on ability still need a serious comparison (and a hands-on test) |
 
 ## Summary
 
-- An ordinary person choosing AI is choosing a **product experience** (interface, integration, upload, online, price, memory...), not simply "the strongest model" (echoing the "product vs model" layer in chapter 17).
+- A non-technical reader choosing AI is choosing a **product experience** (interface, integration, upload, online, price, memory...), not simply "the strongest model" (echoing the "product vs model" layer in chapter 17).
 - Among the mainstream products, the only thing worth remembering steadily is the **ownership** (ChatGPT-OpenAI-GPT, Claude-Anthropic, Gemini-Google). **Specific abilities, always check the official docs**, don't memorize a feature list.
-- **Choose by task**, asking yourself three things: what am I mainly doing, what tools am I already using, do I use it occasionally or plug it into a system. Swap "which is strongest" for "which fits my hand."
+- **Choose by task**, asking yourself three things: what am I mainly doing, what tools am I already using, do I use it occasionally or plug it into a system. Swap "which is strongest" for "which suits me."
 - The only weapon against going out of date: **learn to check current abilities yourself.** Official docs first, trying it yourself as backup, reviews only as a lead.
 - **Don't judge by a single experience:** updates are fast, there's randomness, it may be a usage or task problem. To compare, use real tasks, try several times, and ideally line up two or three products side by side.
 
@@ -136,9 +136,9 @@ Next chapter, we turn the lens to the outermost, most interesting layer of the c
 
 > Six questions, covering concept, misconception, scenario, and hands-on. The answer and explanation are in the quoted block under each question. Think first, then compare.
 
-1. **[Basic · Concept]** When an ordinary person picks an AI for everyday use, what are they essentially picking?
+1. **[Basic · Concept]** When a non-technical reader picks an AI for everyday use, what are they essentially picking?
    - A. The model with the most parameters and the "smartest" one
-   - B. The one whose overall **product experience** fits their hand best (interface, integration, upload, price all count; model strength is just one)
+   - B. The one whose overall **product experience** suits them best (interface, integration, upload, price all count; model strength is just one)
    - C. The cheapest one
    - D. The most famous one
    > **Answer: B.** What you open and use is a "product" (chapter 17), and its quality depends on a whole set: interface, upload/online ability, price, whether it works with your existing tools. Model strength is only one of them. Choosing A is exactly the most common "choosing AI = choosing the strongest model" trap; C and D treat one single factor as the whole thing.
@@ -169,7 +169,7 @@ Next chapter, we turn the lens to the outermost, most interesting layer of the c
    - B. Which AI plugs smoothly into the **software you already use** (fewer switches, less copy-paste), and whether it can upload files easily
    - C. Which AI has the prettiest icon
    - D. Which AI's company is biggest
-   > **Answer: B.** "Fits your hand" often hides in "does it work with my existing tools." Seamless integration and easy file upload often matter more to the real experience than "stronger model on paper" (check the official docs for actual integration abilities). This is the textbook "choose by task + by existing tools" case. A, C, D don't start from your real task.
+   > **Answer: B.** "The right fit" often hides in "does it work with my existing tools." Seamless integration and easy file upload often matter more to the real experience than "stronger model on paper" (check the official docs for actual integration abilities). This is the textbook "choose by task + by existing tools" case. A, C, D don't start from your real task.
 
 6. **[Intermediate · Hands-on/Observation]** Take a task that matters to you (editing a draft, organizing some material). Run the **same problem** through two or three different AI products and compare the results. Then think: why is this "comparing side by side yourself" more trustworthy than reading a "who's number one" ranking?
-   > **What you should notice:** Different products' performance on **your specific thing** may not line up with the ranking. Some score high on a ranking but, on your task, fall short of another that fits your hand better. The reason is this chapter's theme: you use the **whole product experience** and face **your own task**, while a ranking is someone else's conclusion, under someone else's standard, at one point in time. Compare once yourself and you'll trust the answerable question "which fits my hand," instead of agonizing over the unanswerable "which is strongest." (Note: results carry randomness, don't go by one lucky roll; for specific abilities still check the official docs.)
+   > **What you should notice:** Different products' performance on **your specific thing** may not line up with the ranking. Some score high on a ranking but, on your task, fall short of another that suits you better. The reason is this chapter's theme: you use the **whole product experience** and face **your own task**, while a ranking is someone else's conclusion, under someone else's standard, at one point in time. Compare once yourself and you'll trust the answerable question "which suits me," instead of agonizing over the unanswerable "which is strongest." (Note: results carry randomness, don't go by one lucky roll; for specific abilities still check the official docs.)

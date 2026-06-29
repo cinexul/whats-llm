@@ -2,7 +2,7 @@ In Chapter 4 we saw how the model strings words together by "guessing the next w
 
 The answer hides in an idea that sounds very mathematical but is actually easy to grasp: **give every word and every sentence a set of "coordinates." Things close in meaning get coordinates that sit close together; things far apart in meaning get coordinates that sit far apart.** Those "coordinates" are the two stars of this chapter: the **vector** and the **embedding**.
 
-This is the most "abstract" chapter in Part One, but it holds up a big chunk of what comes later: why "saying it a different way" changes the result (Chapter 11), and how search and RAG (Chapter 20) manage to find material "by meaning." We'll go step by step with good metaphors, and nobody gets left behind.
+This is the most "abstract" chapter in Part One, but it holds up a big chunk of what comes later: why "saying it a different way" changes the result (Chapter 11), and how search and RAG (Chapter 20) manage to find material "by meaning." We'll go step by step with good metaphors, and you won't get lost.
 
 ## 1. The core idea: turning "meaning" into "coordinates"
 
@@ -13,7 +13,7 @@ Start with an analogy you already know: **cities on a map can be pinned down wit
 
 With just these two numbers, the computer doesn't need to "know" anything about the cities. It only has to **work out the distance between two sets of numbers** to know who's near whom.
 
-**What vectors and embeddings do is take this "use coordinates to express nearness" trick and move it over to word meaning.** The only difference is that this time the coordinates express not nearness in **geographic position** but nearness in **meaning**:
+**What vectors and embeddings do is take this trick of using coordinates to express nearness and move it over to word meaning.** The only difference is that this time the coordinates express not nearness in **geographic position** but nearness in **meaning**:
 
 ```text
 Map:       use (longitude, latitude) for "geographic position"  →  distance = how geographically near
@@ -33,7 +33,7 @@ Because that "guess the next word" machine from the earlier chapters runs on **n
 
 - Want to know whether two words are close in meaning? → **Compute the distance between their two coordinates** (near = close in meaning).
 - Want to "rank a pile of material by relevance"? → Turn it all into coordinates and **line it up by how near each one is to the question's coordinates**.
-- The model needs to judge "should this word follow that word"? → Again, it relies on the mathematical relationship between coordinates.
+- Need the model to judge whether one word should follow another? → Again, it relies on the mathematical relationship between coordinates.
 
 ```text
 No coordinates:  the computer faces "cat" and "dog" → two symbols it doesn't recognize, nothing to go on
@@ -89,7 +89,7 @@ Here's an analogy: an embedding is like a **"flavor coordinate"** measured for e
 
 After all this talk of coordinates, here's where it lands: the most important use of embeddings is **"search by meaning,"** which is also the core part of RAG (giving the AI an attached library) in Chapter 20.
 
-Traditional "keyword search" has an old flaw: **it only matches the literal words.** Search for "how do I make my computer run faster," and a great article titled "Methods for improving computer performance" might get missed because **not a single keyword matches**, even though the meaning is identical.
+Traditional "keyword search" has an old flaw: **it only matches words literally.** Search for "how do I make my computer run faster," and a great article titled "Methods for improving computer performance" might get missed because **not a single keyword matches**, even though the meaning is identical.
 
 Embeddings solve this nicely. The idea is "**give every piece of material coordinates first, then find things by how near the coordinates are**":
 
@@ -105,7 +105,7 @@ So when you search "make my computer run faster," that "improving computer perfo
 
 This is the first step of **RAG (retrieval-augmented generation, Chapter 20)**: first use embeddings to find, **by meaning**, the few passages from your pile of material most relevant to the question, then drop them into the context (that "table" from Chapter 3) and hand them to the model so it can answer **based on this material**. That way you can use private material the model doesn't have on its own, and you cut down on it making things up out of thin air (the hallucination of Chapter 9).
 
-> **How you'll actually run into this:** When you hear a product say "it can search by understanding your meaning" or "it can find the relevant passages in the hundreds of pages you uploaded," it's usually embeddings doing the work behind the scenes, turning both the documents and your question into coordinates and matching by nearness. How a given product actually does it, and how well it works, you should check the official docs; but the principle of "make coordinates first, then find by meaning" carries across.
+> **How you'll actually run into this:** When you hear a product say "it can search by understanding your meaning" or "it can find the relevant passages in the hundreds of pages you uploaded," it's usually embeddings doing the work behind the scenes, turning both the documents and your question into coordinates and matching by nearness. How a given product actually does it, and how well it works, is best confirmed against its official documentation; but the principle of making coordinates first and then finding by meaning carries across.
 
 ## 6. Back to an old question: why does "saying it differently" change the result?
 

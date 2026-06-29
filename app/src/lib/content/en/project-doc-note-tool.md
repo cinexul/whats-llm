@@ -2,7 +2,7 @@ Everyone's computer has a "junk drawer": a folder stuffed with scattered files. 
 
 This chapter's project is to clean up that drawer. We'll make a **document and note tool**, which isn't really a fancy piece of software but a way to use a coding agent's help to **batch-tidy, convert, and summarize** a pile of scattered files into the shape you want. For example: sorting dozens of files by content, renaming them consistently, pulling their key points into one master table, batch-converting one format into another.
 
-Why use this to get hands-on? Because it lets you feel firsthand something very plain and also very powerful: **AI plus files equals the most effortless automation**. Repetitive work that used to take you a whole afternoon of doing one at a time, you hand to it, spell out the rules, and it does the whole batch tirelessly. Chapter 14 covered "keeping the AI pushing a task forward," and this chapter is one of the most down-to-earth places it lands.
+Why use this to get hands-on? Because it lets you feel firsthand something very plain and also very powerful: **AI plus files equals the most effortless automation**. Repetitive work that used to take you a whole afternoon of doing one file at a time, you can hand off: spell out the rules, and it does the whole batch tirelessly. Chapter 14 covered "keeping the AI pushing a task forward," and this chapter is one of the most down-to-earth places it lands.
 
 But this chapter has a **safety red line the other projects don't have**, so let's put it right up front and keep it taut the whole way through.
 
@@ -12,7 +12,7 @@ But this chapter has a **safety red line the other projects don't have**, so let
 
 **The minimum starting point you need:**
 
-- **A coding agent**: Claude Code, Codex, or the like. It can read the files in your folder and tidy and rewrite them as you say. It comes in many forms (terminal, IDE, web tasks, cloud, and so on), and **some run locally while others run in the cloud; the exact form varies and keeps changing, so check the official docs** (Chapter 24 covered the general workflow).
+- **A coding agent**: Claude Code, Codex, or the like. It can read the files in your folder and tidy and rewrite them as you say. It comes in many forms (terminal, IDE, web tasks, cloud, and so on), and **some run locally while others run in the cloud; the exact form varies and keeps changing, so refer to the provider's official documentation** (Chapter 24 covered the general workflow).
 - **The folder you want to tidy**: that "junk drawer" of yours.
 - **A backup of the originals** (**most important**): before you let it touch anything, **copy the whole folder as is** to somewhere else, for example renaming it "`originals_backup_do_not_touch`." This is your lifesaving copy, and you don't go near it the whole time.
 - **A safety net you can fall back on**: besides that manual backup above, **when it's working on your local machine**, it's best to also put the working folder under version control (Git) (Chapter 27) for an extra layer of insurance.
@@ -90,7 +90,7 @@ Sorting is just the appetizer. Where "AI plus files" really saves effort is in *
 - **Giving rules that are too vague.** "Just tidy up the messy files," but what counts as messy and what to tidy it into, it can only guess, and you can't blame it for guessing wrong. **The more specific the rules (what word goes where, what to do in gray areas), the more accurately it works.**
 - **Having it "overwrite in place" instead of "save to a new file."** If you have it change the originals directly when converting or summarizing, one mistake destroys the originals. **Try to land the results in a new file or new folder** and keep the originals.
 - **Accepting the summary as is without checking.** When it pulls information, it may copy wrong, miss something, or even invent. **Spot-check at least a few rows of the summary table back against the originals**, and don't use its "filled-in" content as if it were real data.
-- **Dumping files with private information on it all at once.** If a file has things like an ID number, a password, or customer privacy in it, **those get sent out** (Chapter 37). Before processing sensitive files, think clearly about what can be handed over and what has to be scrubbed first or simply not handed over.
+- **Dumping files full of private information on it all at once.** If a file has things like an ID number, a password, or customer privacy in it, **those get sent out** (Chapter 37). Before processing sensitive files, think clearly about what can be handed over and what has to be scrubbed first or simply not handed over.
 
 ## 4. Taking it one step further
 
@@ -99,9 +99,9 @@ Once tidying, summarizing, and converting run smoothly, you can try more "automa
 - **Rename consistently**: *"Rename these files consistently in a 'date_topic' format; show me a demo with 3 first."*
 - **Batch-extract key points into a directory**: *"Generate a directory file for this whole folder, listing each file's title and a one-line summary."*
 - **Find duplicates and outdated files**: *"Help me find files that are almost duplicates in content, give me a list, **don't delete yet**, let me decide myself."* (Anything involving "deleting," all the more reason to have it list first and let you call the shots, never letting it delete automatically.)
-- **Turn this set of rules into a small repeatable process for the future**: you can have it write the tidying logic into a set of instructions, to follow next time new files come in. Whether to make it into a more formal automation, take it as far as you can manage, and **the specifics of how to implement it are subject to the official docs**.
+- **Turn this set of rules into a small repeatable process for the future**: you can have it write the tidying logic into a set of instructions, to follow next time new files come in. Whether to make it into a more formal automation, take it as far as you can manage, and **for the specifics of how to implement it, refer to the official documentation**.
 
-> **Key point:** "Taking it one step further" has one unchanging safety principle running through it: **for any operation that "deletes" or "overwrites," have it list first, stop, and wait for your nod, never letting it run automatically.** Tidying you can hand off freely, but the decision to "do something irreversible" **stays in your hands always** (this echoes the spirit of the "permission mechanism" in Chapter 26: let it work, but actions with consequences need your approval).
+> **Key point:** "Taking it one step further" has one unchanging safety principle running through it: **for any operation that "deletes" or "overwrites," have it list first, stop, and wait for your sign-off, never letting it run automatically.** Tidying you can hand off freely, but the decision to "do something irreversible" **stays in your hands always** (this echoes the spirit of the "permission mechanism" in Chapter 26: let it work, but actions with consequences need your approval).
 
 ## Summary
 
@@ -152,7 +152,7 @@ In the next chapter, we'll push "having AI help you process text" one step furth
    - B. Have it list them for you first, **don't delete yet**, and let you decide one by one
    - C. Have it overwrite the duplicates into one
    - D. Don't bother, let it handle them however
-   > **Answer: B.** For any irreversible operation that "deletes" or "overwrites," have it list first, stop, and wait for your nod (echoing the "permission mechanism" in Chapter 26). Tidying you can hand off, but the decision to "do something irreversible" stays in your hands always.
+   > **Answer: B.** For any irreversible operation that "deletes" or "overwrites," have it list first, stop, and wait for your sign-off (echoing the "permission mechanism" in Chapter 26). Tidying you can hand off, but the decision to "do something irreversible" stays in your hands always.
 
 6. **[Basic · Hands-on]** Before letting an AI tidy one of your real folders, first **manually copy the whole folder as is**, rename it "originals_backup_do_not_touch," and put it somewhere else. After you're done, answer: if it later makes a mess of the working folder, what do you rely on to get things back?
-   > **What you should notice:** You rely on this manual backup, the plainest lifesaving move that even people who don't know Git can use. Add to it putting the working folder under Git (so you can see clearly what it changed and roll back anytime), and that's "two layers of insurance." Batch operations deal with real files, so layer both together and you'll be at ease. How exactly to use the tools is **subject to the official docs** (Chapters 25 and 27).
+   > **What you should notice:** You rely on this manual backup, the plainest lifesaving move that even people who don't know Git can use. Add to it putting the working folder under Git (so you can see clearly what it changed and roll back anytime), and that's "two layers of insurance." Batch operations deal with real files, so layer both together and you'll be at ease. For exactly how to use the tools, **refer to the official documentation** (Chapters 25 and 27).

@@ -478,7 +478,7 @@
         },
         {
           "slug": "attention-and-transformer",
-          "title": "6. Attention and the Transformer: how it catches the point (intuition, no math)"
+          "title": "6. Attention and the Transformer: how it picks out what matters (intuition, no math)"
         },
         {
           "slug": "training-finetuning-alignment",

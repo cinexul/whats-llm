@@ -2,7 +2,7 @@ Up to now, the AI you know is essentially a "thing that answers questions": you 
 
 This chapter is about the **Agent**, and it's a **difference in kind**: it doesn't just "tell you how to do it," it **does it itself**, reading files, running commands, going online, calling other programs, pushing forward step by step toward a goal. It's the outermost layer of the "four-layer map" from chapter 17. This chapter explains it fully, and lays the groundwork for the "coding agents" you'll learn in Part Four (chapters 23 and 24).
 
-Remember one sentence; the whole chapter is explaining it: **an Agent's entire capability and entire risk come from the same thing, it can "really take action."**
+Remember one sentence; the whole chapter is explaining it: **an Agent's entire capability and entire risk come from the same thing — it can "really take action."**
 
 ## 1. From "AI that answers" to "AI that acts"
 
@@ -17,7 +17,7 @@ First, see the dividing line between these two kinds of AI clearly.
 
 Continuing the chef metaphor from the last chapter (chapter 17): chat-style AI is like a chef who can only "recite a recipe out loud." He tells you how to cook, but you still hold the pan. An Agent is a chef who **actually cooks**: you say "let's have a home-style dinner tonight," and he checks the fridge, plans the menu, shops for what's missing, cooks each dish, and even cleans the stove.
 
-> **Key point:** Don't picture an Agent as "a smarter chatbot." The key difference is **not "smarter," it's "acts."** One only answers, the other actually operates your things (edits files, runs commands, places orders online...). This is a jump in capability level, not the same thing turned up a notch.
+> **Key point:** Don't picture an Agent as "a smarter chatbot." The key difference is **not "smarter" — it's "acts."** One only answers, the other actually operates your things (edits files, runs commands, places orders online...). This is a jump in capability level, not the same thing turned up a notch.
 
 So where does its ability to "act" come from? The answer is the setup from the last part: **tools**.
 
@@ -37,7 +37,7 @@ An Agent with tools attached:
         -> ...back and forth, until it judges the goal is met
 ```
 
-- Tools can be all sorts of things: read and write files, run commands, search online, query a database, call some external service... (which tools a given Agent has, and how they're set up, **check the official docs**. Wiring tools into AI gets its own treatment in chapter 22 and Part Six.)
+- Tools can be all sorts of things: read and write files, run commands, search online, query a database, call some external service... (which tools a given Agent has, and how they're set up, **defer to the provider's official documentation**. Wiring tools into AI gets its own treatment in chapter 22 and Part Six.)
 - Note the division of labor here: **"which tool to use, and for what" is the model's decision; "actually carrying it out" is the outside program's job.** The model thinks and issues instructions, the program acts. Put them together and you get an "AI that acts."
 
 > **Key point:** "Agent = model + tools + a goal." The model is still the same core that only generates text, but **when the text it generates can turn into an instruction to "do something" and actually get carried out**, it goes from "only talks" to "acts." Tool use is the pair of "hands" wired between the model and the real world.
@@ -79,9 +79,9 @@ Even if a chat-style AI answers wrong, the harm is limited: it only **said** som
 | It can decide the next step itself | no need to watch it step by step | its judgment can **be wrong**, and it keeps going anyway |
 | It can go online, call external services | brings in real-time info and outside abilities | might also trigger **outward actions you didn't want** |
 
-Put plainly: **"it can do things for you" and "it can cause trouble for you" are two sides of one capability.** You gave it "hands," and it can use those hands to help you or to mess up, and when it messes up, it often **won't stop to ask you**, it'll keep going on its own judgment.
+Put plainly: **"it can do things for you" and "it can cause trouble for you" are two sides of one capability.** You gave it "hands," and it can use those hands to help you or to mess up, and when it messes up, it often **won't stop to ask you** — it'll keep going on its own judgment.
 
-> **Key point:** The chapter 17 sentence lands here: **an Agent's capability and risk are one.** So an Agent must never be used "hands-off." It has to come with two things: **(1) a permission/confirmation mechanism** (key actions need to ask you first and wait for your nod), and **(2) a rollback-able environment** (if something goes wrong, you can undo it). These aren't there to bother you; they're **the precondition for using an "AI that acts" safely.** How to set permissions and how to roll back get full treatment in Parts Four and Six (chapters 26, 27, 40); the book also stresses repeatedly: **when it acts on your local things, always start with Git and branch first** (chapter 24), so you can back out at any time.
+> **Key point:** The chapter 17 sentence lands here: **an Agent's capability and risk are one.** So an Agent must never be used "hands-off." It has to come with two things: **(1) a permission/confirmation mechanism** (key actions need to ask you first and wait for your sign-off), and **(2) a rollback-able environment** (if something goes wrong, you can undo it). These aren't there to bother you; they're **the precondition for using an "AI that acts" safely.** How to set permissions and how to roll back get full treatment in Parts Four and Six (chapters 26, 27, 40); the book also stresses repeatedly: **when it acts on your local things, always start with Git and branch first** (chapter 24), so you can back out at any time.
 
 This also explains why the book gives "using it safely" so much weight: the more you want to enjoy the upside of an Agent that "acts," the more you have to keep "it acting" within a controllable range.
 
@@ -107,7 +107,7 @@ you→goal   order   call          generate the next block of text
 
 | Common misconception | Reality |
 | --- | --- |
-| An Agent is just "a smarter chatbot" | The key difference is not "smarter," it's that it **acts**: a chat AI only talks, an Agent really operates your things and runs the loop itself |
+| An Agent is just "a smarter chatbot" | The key difference is not "smarter" — it's that it **acts**: a chat AI only talks, an Agent really operates your things and runs the loop itself |
 | An Agent can "act" out of thin air | It relies on **tool use**: the model issues a "use this tool" request, an outside program actually carries it out and feeds the result back. Model thinks, program acts |
 | Give it a goal and just let it run hands-off | An Agent really operates things and may not stop to ask you. It must come with **permission/confirmation + a rollback-able environment** to be safe (chapters 26, 27, 40) |
 | It's capable, so it's more trustworthy | Capability and risk are the **same coin**: it can do things for you = it can cause trouble for you. The more capable, the more you must manage "it acting" |
@@ -135,7 +135,7 @@ Next chapter we change direction and look at another common way to "give AI an a
    - B. Whether it only "talks" (gives you answers), or actually "takes action" (edits files, runs commands, goes online, calls tools) and pushes forward toward a goal on its own
    - C. Which one answers faster
    - D. Which one has a nicer interface
-   > **Answer: B.** An Agent's crux is not "smarter," it's "acts": it can really operate your things and run multiple-step loops on its own. A, C, D are irrelevant or secondary factors; treating "more parameters/smarter" as the definition of an Agent is the most common trap.
+   > **Answer: B.** An Agent's crux is not "smarter" — it's "acts": it can really operate your things and run multiple-step loops on its own. A, C, D are irrelevant or secondary factors; treating "more parameters/smarter" as the definition of an Agent is the most common trap.
 
 2. **[Basic · Concept]** What mechanism lets an Agent "act" on real files and the network?
    - A. The model grew its own hands
@@ -166,4 +166,4 @@ Next chapter we change direction and look at another common way to "give AI an a
    > **Answer: B.** An Agent really acts, and **the wrong edit or delete is a real wrong edit or delete.** So "rollback-able (backup/Git) + confirm key actions first" is the basic safety stance for using an Agent (chapters 26, 27, 40). A and D are "hands-off," exactly the dangerous usage this chapter keeps warning about; C solves nothing.
 
 6. **[Intermediate · Hands-on/Observation]** Find an AI tool you can access that has "acting" ability (one that can search online, read files you upload, or call tools). Give it a small task that **needs several steps**, and watch whether it "checks first, then acts, then adjusts based on the result." Then do the same thing with an AI that **only chats**, and feel the difference.
-   > **What you should notice:** The one with tools shows the "investigate -> act -> check -> adjust" loop, it goes looking, executes, changes its approach based on results along the way, **moving several steps forward**. The chat-only one can only give you a block of "you should do this" text; the actual doing is still up to you. Compare them once by hand and you've got the chapter's core: an Agent's difference is **not smarter, it's that it really acts** (and don't forget: acts = needs managing, let it ask you first on key actions).
+   > **What you should notice:** The one with tools shows the "investigate -> act -> check -> adjust" loop, it goes looking, executes, changes its approach based on results along the way, **moving several steps forward**. The chat-only one can only give you a block of "you should do this" text; the actual doing is still up to you. Compare them once by hand and you've got the chapter's core: an Agent's difference is **not that it's smarter — it's that it really acts** (and don't forget: acts = needs managing, let it ask you first on key actions).

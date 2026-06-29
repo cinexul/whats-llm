@@ -88,7 +88,7 @@ A **large language model** (LLM for short) is a kind of deep learning, **built s
 Note where it sits:
 
 - It's **just one branch of deep learning**. Within deep learning, some is used to recognize images (that's "computer vision"), some to synthesize speech, and **this LLM branch is focused on text**. Can chat ≠ can recognize images; they're **different branches** on the deep learning tree (although many products now bundle several abilities together, see chapter 18).
-- Where the "large" is large, how it actually works inside, why it makes mistakes: those are what a whole part, **chapters 2 through 9**, will unfold. Here you only need to nail down its **place on the map**: **it's in the innermost circle, a very small and very specific subtype of AI.**
+- Where the "large" is large, how it actually works inside, why it makes mistakes: those are what a whole part, **chapters 2 through 9**, will lay out. Here you only need to nail down its **place on the map**: **it's in the innermost circle, a very small and very specific subtype of AI.**
 
 > **Key point:** Put the large language model back in its place, and you'll immediately become "desensitized" to a lot of exaggerated claims. "AI has woken up," "AI can do anything." These sound like they're about the boundless "AI" of the outermost circle, but what you're actually using is just the innermost circle, **a "language model focused on continuing text."** It's strong, but its abilities have edges and origins.
 
@@ -137,7 +137,7 @@ In the next chapter, we'll climb into that little innermost doll and look at **w
 > Six questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the blockquote under each question. Think first, then check.
 
 1. **[Basic · Concept]** Which sentence most accurately describes how these four words relate?
-   - A. AI, machine learning, deep learning, and large language models are four things side by side, pick-one-of-them
+   - A. AI, machine learning, deep learning, and large language models are four things side by side, where you pick one of them
    - B. Large language models contain deep learning, deep learning contains machine learning, and machine learning contains AI
    - C. LLM ⊂ deep learning ⊂ machine learning ⊂ artificial intelligence, nested layer by layer, getting bigger from inside out
    - D. They're actually four names for the same thing
@@ -172,4 +172,4 @@ In the next chapter, we'll climb into that little innermost doll and look at **w
    > **Answer: C.** Both are AI (both in that outermost big circle), but they belong to different branches: one focused on images, one on text, and what they're good at doesn't carry over. This is exactly how to use this chapter's "matryoshka diagram": **first group it into the big circle, then pin down precisely which branch it is.** A and D arbitrarily exclude one kind from AI, while B ignores that they're different branches.
 
 6. **[Basic · Hands-on]** Look around at the "AI" you use in a day: your phone's face unlock, the album's object recognition, your keyboard's predictions, the map's route planning, spam-text blocking, the chat AI you use often. Pick three or four, and try to say roughly **which circle of the matryoshka diagram each one falls into**, and "does it belong to the 'can chat' branch?"
-   > **What you should notice:** They **all** fall into the outermost "artificial intelligence" circle, but the vast majority are **not** the innermost "large language model." Face unlock and object recognition mostly belong to "computer vision"; route planning and spam blocking use other methods; only the chat AI is truly in that innermost "large language model" circle. Once you've placed the AI around you by hand, you'll never again mistake "can chat" for "can do everything," and you'll have built a correct sense of proportion for the whole AI world.
+   > **What you should notice:** They **all** fall into the outermost "artificial intelligence" circle, but the vast majority are **not** the innermost "large language model." Face unlock and object recognition mostly belong to "computer vision"; route planning and spam blocking use other methods; only the chat AI is truly in that innermost "large language model" circle. Once you've placed the AI around you yourself, you'll never again mistake "can chat" for "can do everything," and you'll have built a correct sense of proportion for the whole AI world.

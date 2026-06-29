@@ -61,7 +61,7 @@ How to fill it in:
 - `<option A/B>`: the few approaches you're weighing.
 - `<what you care about>`: your criteria. This is what it scores against.
 
-Tip: the AI doesn't know your full situation. Its "advice" only helps you see the upsides and downsides clearly. Don't treat it as a guide to your fate.
+Tip: the AI doesn't know your full situation. Its "advice" only helps you see the upsides and downsides clearly. Don't treat it as the final word.
 
 ### A face-to-face Q&A helper (ask until it's clear)
 
@@ -162,12 +162,12 @@ How to fill it in:
 
 Tip: the "write not provided if it's missing, don't invent" rule matters a lot. It keeps it from handing you a table that "looks complete but is half made up."
 
-### Boil a long piece down to reporting points
+### Boil a long piece down to briefing points
 
 When to use: you've finished a long piece of material and need to report to a manager or coworker, in person or in writing, so you need the key points.
 
 ```text
-Please organize the content below into a set of reporting points, for <the audience, for example: a manager who doesn't know the details>.
+Please organize the content below into a set of briefing points, for <the audience, for example: a manager who doesn't know the details>.
 Write it based on the material itself; don't add information that isn't there. Where you're unsure, mark it "to be confirmed" rather than making it up.
 Output structure:
 1. A one-sentence conclusion (lead with the most important thing);
@@ -246,7 +246,7 @@ Tip: "write not assigned if it wasn't specified" helps you see at a glance which
 
 ## 3. Study: reading along, self-testing, fact-checking, taking notes, exam prep
 
-> These templates share one ground rule: **have the AI answer based on the material you give it, not make things up; if it's unsure, have it say so.** That's because large models will "state wrong things with total confidence" (explained in detail in Chapter 9), and in study situations this rule especially matters.
+> These templates share one ground rule: **have the AI answer based on the material you give it, not make things up; if it's unsure, have it say so.** That's because large models will confidently get things wrong while sounding completely sure of themselves (explained in detail in Chapter 9), and in study situations this rule especially matters.
 
 ### Be my reading partner
 
@@ -603,7 +603,7 @@ Tip: which tools it can call, and whether it can run commands, differ by version
 
 ### Before giving it the task, ask for a plan
 
-When to use: you want to hand it a specific task, but you want it to lay out an approach first, and you give the nod before it starts.
+When to use: you want to hand it a specific task, but you want it to lay out an approach first, and you approve it before it starts.
 
 ```text
 I have a task to hand you, but please give me an approach first and **don't change any code right away**.
@@ -634,7 +634,7 @@ Start implementing per the confirmed plan. Please follow these:
 How to fill it in:
 - Use directly; no blanks.
 
-Tip: how to view the specific changes, and how to undo them, **check the official docs**. But whatever tool you use, the principle doesn't change: **the changes have to be ones you can understand, and if you can't understand them, don't adopt them.**
+Tip: how to view the specific changes, and how to undo them, varies by tool, so **check the official docs**. But whatever tool you use, the principle doesn't change: **the changes have to be ones you can understand, and if you can't understand them, don't adopt them.**
 
 ### Run the tests, confirm nothing broke
 
@@ -784,7 +784,7 @@ Please write a project progress update for me, to send to <the audience, for exa
 Write it based on the situation I provide; don't add progress I didn't mention.
 The content comes from: <what's done, what's next, and whether there's anything you need the other person's support or sign-off on>.
 Requirements:
-- Lead with the conclusion and the key points, so the other person gets it in ten-odd seconds;
+- Lead with the conclusion and the key points, so the other person gets it in ten seconds or so;
 - Split it into three small blocks: "done / in progress / need your support";
 - Tone <for example: professional, concise, no spinning good or bad>.
 Keep it under <word count> words.

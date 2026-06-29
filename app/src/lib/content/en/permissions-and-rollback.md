@@ -1,4 +1,4 @@
-〔Wherever this chapter touches a specific product's default behavior, permission granularity, commands, or interface, those change with each version, so always **check the official docs**. This chapter only covers the **shared, stable** ideas, and that part won't go out of date.〕
+〔Wherever this chapter touches a specific product's default behavior, permission granularity, commands, or interface, those change with each version, so always **refer to the provider's official documentation**. This chapter only covers the **shared, stable** ideas, and that part won't go out of date.〕
 
 In Chapter 23 we recognized a slightly scary combination: **it makes mistakes + it takes action.** In Chapter 25 we learned "how to sign off afterward." This chapter solves the other half of the problem: **before and during, how do you let it "act without losing control"?**
 
@@ -6,7 +6,7 @@ The answer is two things that work together, and this chapter covers each thorou
 
 ## 1. The core loop: request -> see the proposal -> permit -> verify
 
-Mentoring an agent that takes action is really just one small loop, repeated over and over. Carve it into your head and you'll never again feel "it's running loose in my computer and I can't control it":
+Mentoring an agent that takes action is really just one small loop, repeated over and over. Carve it into your mind and you'll never again feel "it's running loose in my computer and I can't control it":
 
 ```text
    you give the goal
@@ -21,7 +21,7 @@ Mentoring an agent that takes action is really just one small loop, repeated ove
 - **3. Permit:** you nod (agree this once / agree to this whole category) and it acts; you can also refuse, or have it try a different approach.
 - **4. Verify:** when it's done, you use the Chapter 25 set (read the diff, run tests, three sign-off questions) to confirm the result. Then on to the next step, **and the loop restarts.**
 
-> **Key point:** This "request -> see the proposal -> permit -> verify" loop is the Chapter 24 "investigate -> plan -> act -> sign off" in miniature on **each specific operation.** Its soul is keeping "the key decision points" **in human hands**: the AI is responsible for doing the work fast and in volume, **the human is responsible for nodding or calling a halt at the forks.** Once you understand this loop, your sense of control over it is established; it's not off the leash, every action with consequences has to pass your gate (which step it stops at, and how finely, differs by tool, so **check the official docs**).
+> **Key point:** This "request -> see the proposal -> permit -> verify" loop is the Chapter 24 "investigate -> plan -> act -> sign off" in miniature on **each specific operation.** Its soul is keeping "the key decision points" **in human hands**: the AI is responsible for doing the work fast and in volume, **the human is responsible for nodding or calling a halt at the forks.** Once you understand this loop, your sense of control over it is established; it's not off the leash — every action with consequences has to pass your gate (which step it stops at, and how finely, differs by tool, so refer to the official docs).
 
 ## 2. What the "permission mechanism" is: it's keeping the gate for you
 
@@ -31,7 +31,7 @@ A comparison: the permission mechanism is like the worker you hire when renovati
 
 How does it actually work? Roughly: when it's about to do an operation **with consequences**, it'll **pause, lay out "what I'm about to do" for you to see, and wait for your response.** The choices you'll commonly see are just a few kinds: **agree this once / agree to this category from now on / disagree / have it try a different approach.**
 
-> **Common misconception / Reality:** First-time users often get impatient at "why does it keep stopping to ask me," thinking it's **dumb or unreliable.** **Quite the opposite: it stopping to ask is exactly the "permission mechanism" protecting you, a good thing, not a flaw.** What you should actually watch out for is a setting that "asks nothing and just barrels straight through to the end." Read "it's asking me" as "the seatbelt is working" and you'll stop finding it annoying.
+> **Common misconception / Reality:** First-time users often get impatient at "why does it keep stopping to ask me," thinking it's **dumb or unreliable.** **Quite the opposite: it stopping to ask is exactly the permission mechanism protecting you — a good thing, not a flaw.** What you should actually watch out for is a setting that "asks nothing and just barrels straight through to the end." Read "it's asking me" as "the seatbelt is working," and you'll stop finding it annoying.
 
 One important "trade-off" to add here: **permissions can be tightened or loosened.** Most tools let you set some category of "safe small operations" to "stop asking from now on" (like just reading files), so it can work smoothly; they also let you keep "dangerous operations" permanently stuck at "must ask every time." **How you tune it, and how loose you go, is your power and your responsibility**, and the next section is the bottom line on that power.
 
@@ -44,13 +44,13 @@ What counts as "water you can't gather up"? Remember these few kinds of **irreve
 | Danger category | Why it's dangerous | Everyday analogy |
 | --- | --- | --- |
 | **Delete / overwrite** | A deleted file or overwritten content might never be found again | Shredding the file outright, not dropping it in the recycle bin |
-| **Sending outward** | Once it's out (sending an email, sending a message, submitting to a public place), **you can't take it back**, and it might carry out something that shouldn't go out | An email is unreachable the moment you hit "send" |
+| **Sending outward** | Once it's out (sending an email, sending a message, submitting to a public place), **you can't take it back**, and it might take something out that shouldn't leave | An email can't be called back the moment you hit "send" |
 | **Spending money / calling a paid service** | Real money out, or billing triggered, which you may not get refunded afterward | Running your card for you |
 | **Changing a live / production environment** | What's affected is a system **being used by real people right now**, and a mistake is an incident | Not editing on a draft, but editing during a live broadcast |
 
 For these kinds, the principle is one sentence, and it's not negotiable:
 
-> **Key point:** **Delete, overwrite, send outward, spend money: these "irreversible or high-cost" operations must be set to "require human confirmation," never auto-approved.** For the sake of smoothness you can set "no big deal" things like "reading a file" to "stop asking me"; but **the harder something is to take back, the more firmly you keep it on the "I have to nod in person every time" setting.** One sentence: **"Dangerous operations are always left for a human to nod through."** This isn't a nicety, it's the bottom line. Which operations are blocked by default, and how strictly, differs by tool, so **check the official docs**; but the principle "dangerous operations need human confirmation" doesn't change anywhere.
+> **Key point:** **Delete, overwrite, send outward, spend money: these "irreversible or high-cost" operations must be set to "require human confirmation," never auto-approved.** For the sake of smoothness you can set "no big deal" things like "reading a file" to "stop asking me"; but **the harder something is to take back, the more firmly you keep it on the "I have to nod in person every time" setting.** One sentence: **"Dangerous operations are always left for a human to nod through."** This isn't a nicety — it's the bottom line. Which operations are blocked by default, and how strictly, differs by tool, so refer to the official docs; but the principle "dangerous operations need human confirmation" doesn't change anywhere.
 
 Why stress "never automatic"? Because the iron rule of Chapter 23 is most lethal here: **it will be confidently wrong.** A "confidently wrong" delete command, if auto-approved, means the water has already spilled by the time you notice. **Having it stop and ask you that once is the last brake left for "it might be making a mistake right now."**
 
@@ -62,8 +62,8 @@ The reasoning is plain: **precisely because it makes mistakes, you have all the 
 
 How do you set up this "can undo" environment? Again, two forms (echoing Chapter 25):
 
-- **When it acts on your local project:** be sure to **manage the project with version control (Git) first and cut a "new branch" before letting it act.** "Cutting a new branch" = **opening a separate scratch area for it**, letting it mess around on the scratch copy without touching your official version; if it wrecks something, throw away the scratch and go back to a clean state. **This step has to be done before letting it act**; remember it only afterward and that safety net never opened.
-- **When it acts in a web / cloud form:** it usually works in **the platform's own isolated environment**, and the platform generally provides a matching **undo / discard / reset.** For how to undo and to what point, **check the official docs.**
+- **When it acts on your local project:** be sure to **manage the project with version control (Git) first and cut a "new branch" before letting it act.** "Cutting a new branch" = **opening a separate scratch area for it**, letting it mess around on the scratch copy without touching your official version; if it wrecks something, throw away the scratch and go back to a clean state. **This step has to be done before letting it act**; remember it only afterward and that safety net never opens.
+- **When it acts in a web / cloud form:** it usually works in **the platform's own isolated environment**, and the platform generally provides a matching **undo / discard / reset.** For how to undo and to what point, refer to the official docs.
 
 > **Key point:** Treat the "rollback-friendly environment" as a **precondition for acting**, not homework you make up after something goes wrong. Locally, cut a Git branch first; in the cloud, use the platform's isolation. **Different forms, same purpose: let it work in a "scratch area where a spill costs you nothing."** With that scratch area, you dare to boldly hand off the work; without it, every "let it act" is gambling on your official version.
 
@@ -90,7 +90,7 @@ lay out the undo medicine: in an environment you can undo (locally cut a Git bra
 
 - **The permission mechanism** is the "brake before acting": before it acts, it intercepts operations with consequences and shows them to you, and **the dangerous kinds must have your personal nod.**
 - **The rollback-friendly environment** is the "undo after acting": if a mistake slips through, **one move back to a clean state** and the loss is zero.
-- **Neither can be missing:** with a brake but no undo medicine, the time the brake fails you crash; with undo medicine but no brake, you'll wear yourself out endlessly "undoing and retrying." Get both and you can enjoy its speed without living on edge.
+- **Neither can be missing:** with a brake but no undo medicine, the one time the brake fails, you crash; with undo medicine but no brake, you'll wear yourself out endlessly "undoing and retrying." Get both and you can enjoy its speed without living on edge.
 
 Remember this final summary: **letting the AI act without losing control comes down to "dangerous operations are always left for a human to nod through" + "always act in an environment you can undo."**
 
@@ -99,21 +99,21 @@ Remember this final summary: **letting the AI act without losing control comes d
 | Misconception | Reality |
 | --- | --- |
 | It keeps stopping to ask me, so it's dumb / unreliable | That's **the permission mechanism protecting you**, a good thing; what to worry about is "asks nothing, barrels straight to the end" |
-| Since it takes action, just make it fully automatic and don't ask me, that's easiest | Dangerous operations (delete / overwrite / send outward / spend money) **must never be auto-approved**, they need human confirmation; it will be confidently wrong |
-| Things like delete or send an email, just let it do them on the fly | These are "spilled water you can't gather up," the red line that must stay at "human confirmation every time" |
+| Since it takes action, just make it fully automatic and don't ask me, that's easiest | Dangerous operations (delete / overwrite / send outward / spend money) **must never be auto-approved** — they need human confirmation, because it will be confidently wrong |
+| Things like delete or send an email, just let it knock them out while it's at it | These are "spilled water you can't gather up," the red line that must stay at "human confirmation every time" |
 | Rollback is something you go study only after a mishap | A rollback-friendly environment is a **precondition for acting**: cut a Git branch locally first, use platform isolation in the cloud, set it up before acting |
 | Having a permission mechanism is enough, no need to worry about rollback | Neither insurance can be missing: permission is the brake before, rollback is the undo medicine after; some mistakes always slip past the brake |
-| Every tool's default behavior is the same | What's blocked by default, how strictly, and permission granularity all differ, so **check the official docs**; what doesn't change is the principle "dangerous operations need a human to nod" |
+| Every tool's default behavior is the same | What's blocked by default, how strictly, and permission granularity all differ, so refer to the official docs; what doesn't change is the principle "dangerous operations need a human to nod" |
 
 ## Summary
 
 - Mentoring an agent that takes action comes down to one loop: **request -> see the proposal -> permit -> verify.** The AI does the work, **the human nods or calls a halt at the key points** (echoing Chapter 24's "investigate -> plan -> act -> sign off").
 - **The permission mechanism** = the rule of asking you before acting, like a renovation worker "asking before knocking down a wall." Its stopping to ask **is protecting you**, not a flaw.
 - **Dangerous operations are always left for a human to nod through:** delete, overwrite, send outward, spend money, these **irreversible / high-cost** operations **must be set to "require human confirmation," never auto-approved**, because it will be confidently wrong.
-- **A rollback-friendly environment** is a **precondition for acting**: **cut a Git branch locally first** (open a separate scratch area for it), **use the platform's built-in isolation web/cloud** (check the official docs), letting it work where "a spill costs you nothing."
-- Get both insurances in place, **the brake before (permissions) + the undo medicine after (rollback)**, and you can "let the AI act without losing control." Defaults and granularity differ by tool, so **check the official docs**; the principle doesn't change.
+- **A rollback-friendly environment** is a **precondition for acting**: **cut a Git branch locally first** (open a separate scratch area for it), **use the platform's built-in isolation in the web/cloud form** (refer to the official docs), letting it work where "a spill costs you nothing."
+- Get both insurances in place, **the brake before (permissions) + the undo medicine after (rollback)**, and you can "let the AI act without losing control." Defaults and granularity differ by tool, so refer to the official docs; the principle doesn't change.
 
-In the next chapter (Chapter 27) we solve the other half of "before": before a big change, how to make it **lay out a plan and get your approval before writing**, and break the task **small, signing off in small steps**, the step that saves the most rework.
+In the next chapter (Chapter 27) we solve the other half of "before": before a big change, how to make it **lay out a plan and get your approval before writing**, and break the task **into small pieces, signing off in small steps** — the step that saves the most rework.
 
 ---
 
@@ -154,7 +154,7 @@ In the next chapter (Chapter 27) we solve the other half of "before": before a b
    - B. Manage the project with Git first and cut a new branch, opening a separate "scratch area" for it, ensuring a one-move rollback if it wrecks things
    - C. Compliment it first so it's more careful
    - D. Turn off all permissions and let it work freely
-   > **Answer: B.** A rollback-friendly environment is a **precondition for acting**, not catch-up homework. Cutting a new branch = letting it mess around in the scratch area without touching the official version, throw away the scratch if it wrecks things. D is exactly backward; before a big change you should tighten permissions and lay out the undo medicine. For a cloud form, use the platform's built-in isolation, **check the official docs.**
+   > **Answer: B.** A rollback-friendly environment is a **precondition for acting**, not catch-up homework. Cutting a new branch = letting it mess around in the scratch area without touching the official version, throw away the scratch if it wrecks things. D is exactly backward; before a big change you should tighten permissions and lay out the undo medicine. For a cloud form, use the platform's built-in isolation, and refer to the official docs.
 
-6. **[Advanced · Hands-on / Observation]** Imagine (no need to actually do it) you want it to help you "clean up a batch of old files." Before letting it act, which operations would you set to "must confirm in person"? Why? And think: if it deleted something it shouldn't have, what do you rely on to recover the loss?
-   > **What you should notice:** "Delete" is a textbook irreversible operation and must stay at "human confirmation," never auto-approved. The confidence to recover comes from a **rollback-friendly environment**: cutting a Git branch first locally lets you roll back to the clean state before the deletion, and in the cloud it relies on the platform's built-in undo / reset (**check the official docs**). Two insurances, permission intercepting before and rollback catching after; get both in place and "letting it act" doesn't equal "leaving it to fate."
+6. **[Advanced · Hands-on / Observation]** Imagine (no need to actually do it) you want it to help you "clean up a batch of old files." Before letting it act, which operations would you set to "must confirm in person"? Why? And think: if it deleted something it shouldn't have, what do you rely on to undo the damage?
+   > **What you should notice:** "Delete" is a textbook irreversible operation and must stay at "human confirmation," never auto-approved. The confidence to recover comes from a **rollback-friendly environment**: cutting a Git branch first locally lets you roll back to the clean state before the deletion, and in the cloud it relies on the platform's built-in undo / reset (refer to the official docs). Two insurances, permission intercepting before and rollback catching after; get both in place and "letting it act" doesn't equal "leaving it to fate."

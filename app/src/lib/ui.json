@@ -195,7 +195,7 @@
     "coverTitleHtml": "What's<br />LLM",
     "coverLead": "From a gut-level sense of what a large language model actually is, through the tool landscape, hands-on AI coding, and using it responsibly, one step at a time. No AI or programming background needed. Just start from Part 1.",
     "allChaptersLabel": "{n} chapters",
-    "coverNote": "This book reflects what was current when it was written. For any product's features, prices, or limits, check the official docs.",
+    "coverNote": "This book reflects what was current when it was written. For any product's features, prices, or limits, refer to the official documentation.",
     "search": "Search",
     "searchPlaceholder": "Search the text and chapter titles...",
     "searchEmpty": "Search the full text",

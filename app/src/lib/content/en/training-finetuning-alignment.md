@@ -24,7 +24,7 @@ But here's the key, and most counterintuitive, point:
 
 > **Key point:** A model fresh out of pre-training has learned "**how to carry on a piece of text convincingly**," **not** "how to answer your question." Ask it "what's the capital of France?" and it may well not answer "Paris" directly but instead carry on with "…and what's the capital of Germany? what's the capital of Italy?", because on the web pages it has read, sentences like this are **often** followed by more questions of the same kind. It's **continuing the text**, not **responding**. That's why a base model used straight for chat tends to be "disobedient."
 
-Now it's clear why the next two steps are needed: with a feel for language alone, it only "carries on," it **doesn't "do what you say."**
+Now it's clear why the next two steps are needed: with a feel for language alone, it only "carries on" — it **doesn't "do what you say."**
 
 ## 3. Fine-tuning: from "knows how to add words" to "knows how to do as told"
 
@@ -32,15 +32,15 @@ The second step, **fine-tuning**: on top of the base model, train further on a b
 
 These examples look like this: show it lots of pairs of "**a person made a request → a good response**", such as "please summarize this passage into three points → (a nicely done three-point summary)", "help me write an apology email → (a tactful email)". After seeing enough examples like this, it shifts from "carry on whatever it sees" to "**receive an instruction, give the matching response**."
 
-An analogy: pre-training brought in a widely read person, but he only talks on to himself; fine-tuning is teaching him hand over hand, "when someone speaks to you, you **respond**, and in the way they asked for."
+An analogy: pre-training brought in a widely read person, but he only rambles on to himself; fine-tuning is teaching him hand over hand, "when someone speaks to you, you **respond**, and in the way they asked for."
 
-> **How you'll actually run into this:** The reason you can talk with it like talking to a person, the reason you can have it "list this in a table," "keep it under two hundred words," or "play the interviewer," these "obedient, format-respecting" skills mostly come from fine-tuning. Every chat product you use day to day is built on a model that has been through this step (and the next one), not the "bare model" from section 2 that can only carry on text.
+> **How you'll actually run into this:** The reason you can talk with it like talking to a person, the reason you can have it "list this in a table," "keep it under two hundred words," or "play the interviewer" — these "obedient, format-respecting" skills mostly come from fine-tuning. Every chat product you use day to day is built on a model that has been through this step (and the next one), not the "bare model" from section 2 that can only carry on text.
 
 ## 4. Alignment: teaching it "helpful, honest, harmless"
 
 Doing as told still isn't enough. The third step, **alignment**: tune its behavior toward the three directions of "**helpful, honest, harmless**," so its answers fit human intent and bottom-line values better.
 
-A common method is to have **people** give feedback: for the same question, the model gives several different answers, and people rank them, which is better, which should be killed; then these "human preferences" are used to train it further, so it's more inclined to give the kind of answer people like and trust (this mainstream method is called "reinforcement learning from human feedback," RLHF in English, and knowing the name exists is enough).
+A common method is to have **people** give feedback: for the same question, the model gives several different answers, and people rank them — which is better, which should be thrown out; then these "human preferences" are used to train it further, so it's more inclined to give the kind of answer people like and trust (this mainstream method is called "reinforcement learning from human feedback," RLHF in English, and knowing the name exists is enough).
 
 Why is this step a must? Because a model that has only learned a feel for language and then learned to do as told, but **hasn't been through alignment**, will "talk nonsense":
 
@@ -50,7 +50,7 @@ Why is this step a must? Because a model that has only learned a feel for langua
 
 Alignment is setting rules for this "well-read, obedient, but tactless" assistant: what it can't say, when it should admit "I don't know," and how to say things without offending people.
 
-> **Key point:** "An unaligned model talks nonsense" traces back to Chapter 4: its nature is to chase "**looking real, looking right**," not "being real, being right." Alignment can largely hold down this tendency, making it more honest and safer; but it **only lowers the risk, it doesn't remove it**. So even with an aligned model, you still have to double-check important facts yourself (Chapter 9 covers this in detail).
+> **Key point:** "An unaligned model talks nonsense" traces back to Chapter 4: its nature is to chase "**looking real, looking right**," not "being real, being right." Alignment can largely hold down this tendency, making it more honest and safer; but it **only lowers the risk — it doesn't remove it**. So even with an aligned model, you still have to double-check important facts yourself (Chapter 9 covers this in detail).
 
 ### A side effect of alignment: those "little quirks" that annoy you
 
@@ -62,7 +62,7 @@ Here's something often misunderstood, spelled out for you. While alignment keeps
 | Over-politeness, going in circles, refusing to give a straight answer | Trained to "rather be roundabout than offend" |
 | Clearly able to answer, yet dodging with "I'm just an AI" | Trained to "if unsure, don't answer, don't cause trouble" |
 
-Knowing these **aren't it being dumb or malfunctioning, but caution deliberately tuned in**, you won't be puzzled, and you can treat the cause: spell out the boundaries in your prompt ("this is for general-audience explanation, please give the conclusion directly, no need for disclaimers") and it'll often loosen up (Chapter 11 covers how to phrase it). How far each company tunes this "tact" varies and keeps changing, so check the official docs.
+Knowing these **aren't it being dumb or malfunctioning, but caution deliberately tuned in**, you won't be puzzled, and you can treat the cause: spell out the boundaries in your prompt ("this is for general-audience explanation, please give the conclusion directly, no need for disclaimers") and it'll often loosen up (Chapter 11 covers how to phrase it). How far each company tunes this "tact" varies and keeps changing, so refer to the provider's official documentation.
 
 ## 5. The misconception most worth clearing up: does it have its own stance?
 
@@ -80,12 +80,12 @@ Every "attitude" it shows (gentle, cautious, evasive, holding to some bottom lin
 
 > **Key point:** Understanding its "attitude" as **trained behavior** rather than **its own conviction** has two benefits: first, you won't be led around by its tone into thinking it's speaking for someone or really has a stance; second, it explains why its "personality" changes across products and versions, because that was **tuned** by each company in the first place, not something inherent to "itself." It has no "self."
 
-## 6. Common misconceptions, set straight
+## 6. Common misconceptions, cleared up
 
 | Common misconception | Reality |
 | --- | --- |
 | The model was made by people writing out rules one by one | It's **trained**: read huge amounts of text for a feel for language, then tune behavior with examples and human feedback; nobody writes out line by line how it should answer |
-| After pre-training it can be used as a chat assistant directly | That's just a base model that can "carry on text," it **doesn't respond**; it still needs fine-tuning (learning to do as told) and alignment (learning tact) |
+| After pre-training it can be used as a chat assistant directly | That's just a base model that can "carry on text" — it **doesn't respond**; it still needs fine-tuning (learning to do as told) and alignment (learning tact) |
 | Fine-tuning "stores" new knowledge into the model as fact | Fine-tuning mainly tunes **behavior and style** (obedient, format-respecting); to have it use your private material, RAG (Chapter 20) is the better fit |
 | After alignment it's absolutely safe and reliable | Alignment only **lowers** the risk, doesn't remove it; and it brings side effects like over-politeness, overuse of disclaimers, and a habit of dodging |
 | It has its own stance / consciousness / values | That's **behavior tuned by training**, not what it "wants." Underneath it's still a system picking words by probability, with no conviction and no "self" |
@@ -93,12 +93,12 @@ Every "attitude" it shows (gentle, cautious, evasive, holding to some bottom lin
 ## Summary
 
 - Turning a bare model into a usable assistant takes three steps: **pre-training** (read huge amounts of text for a feel for language) → **fine-tuning** (learn to do as told and respect format using examples) → **alignment** (learn helpful, honest, harmless using human feedback).
-- The **base model** after pre-training only "carries on text," it doesn't "respond." Used straight for chat it's disobedient, which is exactly why the latter two steps exist.
+- The **base model** after pre-training only "carries on text" — it doesn't "respond." Used straight for chat it's disobedient, which is exactly why the latter two steps exist.
 - **Alignment** makes it safer and more honest, but only lowers the risk, doesn't remove it; it also brings **side effects** like over-politeness, overuse of disclaimers, and a habit of dodging.
 - The thing most worth clearing up: its "attitude / stance" is **behavior tuned by training**, not consciousness or conviction. Its "personality" changes across versions precisely because it was tuned.
 - Even after alignment, important facts still need your own double-check (Chapter 9); to feed it private material, use RAG rather than counting on fine-tuning (Chapter 20).
 
-In the next chapter we move from "how it was taught" to "what you can adjust when you use it," the two knobs most worth knowing: temperature and reasoning effort.
+In the next chapter we move from "how it was taught" to "what you can adjust when you use it" — the two knobs most worth knowing: temperature and reasoning effort.
 
 ---
 
@@ -118,7 +118,7 @@ In the next chapter we move from "how it was taught" to "what you can adjust whe
    - B. It mainly "carries text on" (continuation), and won't necessarily respond to your instructions directly
    - C. It stored the full text of the web pages it read, available for lookup
    - D. It has already learned politeness and disclaimers
-   > **Answer: B.** Pre-training teaches "how to carry on text convincingly," so when you ask it a question it may carry on with a string of similar questions rather than answer. A and D are filled in only by the later two steps (fine-tuning, alignment); C is a common misconception, since it learns patterns, not stored originals (there's no lookup-able archive of original documents in the parameters).
+   > **Answer: B.** Pre-training teaches "how to carry on text convincingly," so when you ask it a question it may carry on with a string of similar questions rather than answer. A and D are filled in only by the later two steps (fine-tuning, alignment); C is a common misconception, since it learns patterns, not stored originals (there's no searchable archive of original documents in the parameters).
 
 3. **[Advanced · Misconception]** It politely declined a request of yours, and someone says "see, it has its own values and stance." What's wrong with this judgment?
    - A. Nothing, this shows it has consciousness
@@ -142,4 +142,4 @@ In the next chapter we move from "how it was taught" to "what you can adjust whe
    > **Answer: B.** Its caution is a default tuned by alignment; spell out the scenario and boundaries and it'll often loosen up and give the conclusion directly. A is emotional and ineffective; C overreacts (this is tunable behavior, not a defect); D ignores that output carries randomness, so resending doesn't fix it (Chapter 8).
 
 6. **[Basic · Hands-on]** Take the same slightly sensitive or boundary-blurry question and ask it two ways: **as a single bare sentence**, and **with the "purpose, audience, and degree you want" spelled out**, then compare the two answers. Observe: after you add context, does its "level of caution" and "whether it gives the conclusion directly" change?
-   > **What you should notice:** In most cases, once you spell out the purpose and boundaries, it'll be noticeably more direct with fewer disclaimers, which confirms that its "attitude" is **behavior tuned by training and also influenceable by your prompt**, not an inherent stance of its own. How far each company tunes this tact varies and keeps changing, so check the official docs. Compare it once yourself and you'll get that "how you say it" matters far more than "whether it's dumb."
+   > **What you should notice:** In most cases, once you spell out the purpose and boundaries, it'll be noticeably more direct with fewer disclaimers, which confirms that its "attitude" is **behavior tuned by training and also influenceable by your prompt**, not an inherent stance of its own. How far each company tunes this tact varies and keeps changing, so refer to the provider's official documentation. Compare it once yourself and you'll get that "how you say it" matters far more than "whether it's dumb."

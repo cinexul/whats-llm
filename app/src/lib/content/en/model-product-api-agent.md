@@ -6,7 +6,7 @@ This chapter hands you a **map**. You'll find that nearly every AI name out ther
 
 We'll use one metaphor for the whole chapter: **a very capable chef**.
 
-| Layer | What it is | Chef metaphor | Examples (**check the official docs for actual capabilities**) |
+| Layer | What it is | Chef metaphor | Examples (**actual capabilities per the provider's official docs**) |
 | --- | --- | --- | --- |
 | 1. Model | The core that truly "thinks" | The chef's own mind and skill | Claude, GPT, Gemini and other "model families" |
 | 2. Product | The model packaged into something a person can use directly | A restaurant: menu, waiters, tables | Claude (app/web), ChatGPT, Gemini (app) |
@@ -19,14 +19,14 @@ We'll use one metaphor for the whole chapter: **a very capable chef**.
 
 The **model** is the thing Part One described: the large language model that learned "how to continue a sentence" from a huge pile of text (chapters 1 and 2). It's the core that actually "computes," but **it is not itself a piece of software you can just open and use**.
 
-- You can't "download a GPT and start chatting," the same way you can't hold a chef's "skill" in your hand by itself. The skill has to live in a person, in a kitchen, to turn into a dish.
-- Each company usually has **one model family**, split into bigger and smaller tiers (stronger but slower and pricier / faster and cheaper), with names that often carry version numbers. **The specific versions and their abilities update often, so this book won't pin them down. Check the official docs.**
+- You can't "download a GPT and start chatting," any more than you can hold a chef's skill in your hand by itself. The skill has to live in a person, in a kitchen, to turn into a dish.
+- Each company usually has **one model family**, split into bigger and smaller tiers (stronger but slower and pricier / faster and cheaper), with names that often carry version numbers. **The specific versions and their abilities update often, so this book won't pin them down; refer to the provider's official documentation.**
 
 > **Common misconception / Reality:** "Claude and ChatGPT are the same kind of thing, just pick one." Strictly speaking, **Claude is both a model family and, often, the name used for its product; ChatGPT is a product, and its core model is called GPT**. So "Claude vs ChatGPT" is really comparing "core + shell" against "shell," which is a bit of a mismatch. It's fine to talk this way day to day, but keep that relationship clear in your head.
 
 ## 3. Layer 2, the product: the layer wrapped for people
 
-A chef (the model) alone still doesn't put food on your table. You need a **restaurant**: menu, waiters, tables, a register. The **product** is that wrapping. It puts a chat interface, login, history, file upload, and so on around the model, so an ordinary person can **open it and use it right away**.
+A chef (the model) alone still doesn't put food on your table. You need a **restaurant**: menu, waiters, tables, a register. The **product** is that wrapping. It puts a chat interface, login, history, file upload, and so on around the model, so a non-technical reader can **open it and use it right away**.
 
 - ChatGPT, the Claude app and web version, the Gemini app: these are all products. Behind each one is its own model.
 - The same core can be wrapped very differently: a web version, a phone app, a browser extension, something built into an office tool... **Being friendly to people** is the whole point of the product layer.
@@ -97,7 +97,7 @@ Next time you run into an AI name or a request, three questions will locate it:
 | A model can be "downloaded and chatted with directly" | A model is a core. It needs a product wrapper or an API to be used (local models are a different case; see chapter 21) |
 | Plugging in AI = buying a subscription | Letting a **program** use AI means going through an API; a subscription is for **people** using a product |
 | An Agent is just a souped-up chatbot | An Agent's essence is "can take action + runs the loop on its own," and the risk rises with it |
-| Choosing AI means choosing the strongest model | What an ordinary person chooses is "whether the product experience fits their hand"; strength is only one factor (chapter 18) |
+| Choosing AI means choosing the strongest model | What a non-technical reader chooses is whether the product experience suits them; strength is only one factor (chapter 18) |
 
 ## Summary
 
@@ -148,7 +148,7 @@ Next chapter, we'll use this map to look at where the mainstream AI products sit
    - B. Write your own program to call the API
    - C. Set up a model locally
    - D. Hire an engineer
-   > **Answer: A.** For personal, low-frequency, conversational needs, off-the-shelf products are made for you. API / local model / Agent are the steps you take down only when "a product can't meet the need." Don't reach for the heavy options up front.
+   > **Answer: A.** For personal, low-frequency, conversational needs, off-the-shelf products are made for you. API, a local model, or an Agent are the steps you move on to only when a product can't meet the need. Don't reach for the heavy options up front.
 
 6. **[Intermediate · Hands-on/Observation]** Pick an AI tool you use, and try to name which layer it sits in: roughly what **model** is behind it? Are you using a **product** interface or an **API**? Can it **take action** (go online, read files, call tools), giving it an **Agent** flavor?
    > **What you should notice:** Most people use a "product" day to day. Once it can go online, read files you upload, and call tools, it starts taking on an Agent nature. Being able to slot your tool into place means this map has settled into your head.

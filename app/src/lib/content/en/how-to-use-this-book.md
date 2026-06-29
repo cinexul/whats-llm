@@ -1,6 +1,6 @@
 Welcome to this book. Before we start, please take three minutes to read this page. It tells you **where this book wants to take you, how to read it, and one mindset that will save you a lot of detours**.
 
-This book is for **ordinary people who know basic computer operations but have no background in AI or programming**. If you can send and receive email and use a browser and office software, you can read it just fine. **You don't need to know how to code.** When we reach the chapters where you "build a project hands-on," we'll guide you to direct the AI in plain language, not make you memorize commands.
+This book is for **ordinary people who know their way around a computer but have no background in AI or programming**. If you can send and receive email and use a browser and office software, you can read it just fine. **You don't need to know how to code.** When we reach the chapters where you "build a project hands-on," we'll guide you to direct the AI in plain language, not make you memorize commands.
 
 ## 1. Where this book wants to take you
 
@@ -8,7 +8,7 @@ By the time you finish, you'll have four things, going from simple to deep:
 
 | | What you'll learn | Where |
 | --- | --- | --- |
-| 1. Understand it | What a large language model really is, why it can hold a conversation, why it says wrong things. No more being intimidated by a pile of jargon | Part One |
+| 1. Understand it | What a large language model really is, why it can hold a conversation, why it gets things wrong. No more being intimidated by a pile of jargon | Part One |
 | 2. Use it | Putting AI to work in daily life, study, and your job: asking the right way, feeding it the right material, not getting led astray | Part Two |
 | 3. See clearly | Model / product / API / Agent, RAG, local models. One map to make sense of the whole tool ecosystem | Part Three |
 | 4. Build | Using **Claude Code and Codex**, the two mainstream tools, to build your own projects | Parts Four and Five |

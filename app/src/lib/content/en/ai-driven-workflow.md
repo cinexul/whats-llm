@@ -1,6 +1,6 @@
 So far, your relationship with the AI is probably like this: you ask one thing, it answers; not happy, you add a line, it revises. This is "one question, one answer," good enough for small tasks.
 
-But real work often can't be said in one sentence. "Turn this messy meeting record into notes for my boss", there are several steps hidden in there: first understand what the record says, then figure out which points the boss cares about, then write it, and finally check yourself for anything missed. If you have to hand-hold every step with "now do the next step," you've really just turned yourself into its "conveyor belt."
+But real work often can't be said in one sentence. "Turn this messy meeting record into notes for my boss" — there are several steps hidden in there: first understand what the record says, then figure out which points the boss cares about, then write it, and finally check yourself for anything missed. If you have to hand-hold every step with "now do the next step," you've really just turned yourself into its "conveyor belt."
 
 This chapter is about how to get AI to **move forward several steps on its own toward a goal**, instead of taking one step and stopping to wait for you to feed it. This sounds mystical but has a method. It's also the underlying idea behind those Part Four (AI coding) tools that "edit code and run tests on their own": **turn a big task into a flow it can push forward by itself.**
 
@@ -16,9 +16,9 @@ First see clearly where one-question-one-answer gets stuck.
 
 The root of the problem: the model itself **only continues with the next sentence** (the "continuing" mechanism from Chapter 4). It has no built-in "project manager" awareness, won't keep "what steps this big thing still needs" in mind on its own.
 
-So "having it push forward" isn't an innate ability; it's **you lending it the "project manager's brain" with a set of phrasing.** A metaphor: you're not nagging a worker, you're briefing a **capable new assistant** on a full workflow, having him run it on his own, and stopping to ask you where he should check in.
+So "having it push forward" isn't an innate ability; it's **you lending it the "project manager's brain" with a set of phrasing.** A metaphor: you're not nagging a worker — you're briefing a **capable new assistant** on a full workflow, having him run it on his own and stop to ask you where he should check in.
 
-> **Key point:** "Having the AI move forward on its own" sounds like it got smarter, but really **you thought through the task structure** and handed that structure to it. The smart one isn't it, it's the flow you gave it.
+> **Key point:** "Having the AI move forward on its own" sounds like it got smarter, but really **you thought through the task structure** and handed that structure to it. The smart one isn't it — it's the flow you gave it.
 
 ## 2. One all-purpose loop: investigate, plan, execute, check
 
@@ -42,13 +42,13 @@ One by one:
 - **(3) Execute**: once you approve the plan, have it do the work by the plan. "Good, start with steps 1 and 2 as you listed."
 - **(4) Check**: when done, have it **self-check against the original requirements.** "Look back, are all three points the boss wanted covered? Any contradictions?" If it doesn't pass, go back to some earlier step with the problem in hand.
 
-> **Key point:** The essence of these four steps is to **pry apart "plan" and "execute."** One-question-one-answer flips over so easily because it **thinks and does at the same time, charging straight to the end**, and you only find the error afterward, too late. Have it lay the plan out for you first, and at the cheapest stage (before any work is done) you can stop the drift.
+> **Key point:** The essence of these four steps is to **pry apart "plan" and "execute."** One-question-one-answer goes off the rails so easily because it **thinks and does at the same time, charging straight to the end**, and you only find the error afterward, too late. Have it lay the plan out for you first, and at the cheapest stage (before any work is done) you can stop the drift.
 
 This echoes a principle that keeps coming up: **have it state clearly how it will do it, then have it do it.** Chapter 27 (look at the plan before acting) covers this "plan mode" in coding in more detail; here you just build the intuition.
 
 ## 3. Let it "go on its own," but keep your hand on the brake
 
-When you let AI run several steps in a row, the most unsettling thing is: **what if it goes the wrong way and gets further and further off?** That worry is right. "Auto-forward" and "out of control" are separated by one thin sheet of paper, and that sheet is **thinking ahead about where it should stop and ask you.**
+When you let AI run several steps in a row, the most unsettling thing is: **what if it goes the wrong way and gets further and further off?** That worry is right. A thin line separates "auto-forward" from "out of control," and that line is **thinking ahead about where it should stop and ask you.**
 
 Sort the steps in a task into two kinds:
 
@@ -69,11 +69,11 @@ Rules:
 - Self-check after writing, then hand it to me, don't send it to anyone for me.
 ```
 
-This is your "brake." It doesn't restrict its work, it **fences off a safe range**: inside the range it runs free, at the edge it must stop.
+This is your "brake." It doesn't restrict its work — it **fences off a safe range**: inside the range it runs free, at the edge it must stop.
 
-> **Key point:** The opposite of "auto-forward" isn't "ask about everything," it's "**definitely stop where you should stop.**" What you do isn't watch its every step, it's **think ahead about which steps are irreversible and have consequences** and mark those as "must stop." This matters especially in AI coding, having it edit code on its own is fine, but irreversible actions like "delete files, commit, deploy" must have a checkpoint (Chapters 26 and 27).
+> **Key point:** The opposite of "auto-forward" isn't "ask about everything," it's "**definitely stop where you should stop.**" What you do isn't watch its every step — it's **think ahead about which steps are irreversible and have consequences** and mark those as "must stop." This matters especially in AI coding: having it edit code on its own is fine, but irreversible actions like "delete files, commit, deploy" must have a checkpoint (Chapters 26 and 27).
 
-By the way: some products and coding tools provide a mechanism of "ask your permission before each dangerous action," and the behavior differs by vendor, **check the official docs**. But the underlying principle is shared: **set irreversible actions to require your nod.**
+By the way: some products and coding tools provide a mechanism of "ask your permission before each dangerous action," and the behavior differs by vendor, so **refer to the provider's official documentation**. But the underlying principle is shared: **set irreversible actions to require your sign-off.**
 
 ## 4. Why you still can't be a hands-off boss
 
@@ -83,9 +83,9 @@ You might think: I gave it the flow and set the brake, so can I let go entirely?
 - It will **carry errors down the flow.** If step (1) understood things wrong, the next three steps may build ever more "neatly" on a wrong premise, looking quite presentable while the root is crooked.
 - It **doesn't know what you truly care about**, unless you say so. It can write the notes beautifully yet beautifully leave out the one point that matters most to you.
 
-So the right posture is: **it runs the flow, you manage direction and acceptance.** It's responsible for pushing the tedious steps forward, you're responsible for glancing at a few key checkpoints to see "is the direction right, was anything important missed." This is the same as the "**outsource the tedium, keep the judgment for yourself**" said repeatedly in the later work scenarios (Chapter 16).
+So the right posture is: **it runs the flow, you manage direction and acceptance.** It's responsible for pushing the tedious steps forward; you're responsible for glancing at a few key checkpoints to see "is the direction right, was anything important missed." This is the same as the "**outsource the tedium, keep the judgment for yourself**" said repeatedly in the later work scenarios (Chapter 16).
 
-> **Key point:** Think of it as a new assistant who is **quick at the work but doesn't know your mind and occasionally errs with confidence.** You're willing to let someone like that run the flow on their own, but you'd never skip a look "before it goes out." "Auto-forward" saves your physical effort, **it doesn't save your judgment.**
+> **Key point:** Think of it as a new assistant who is **quick at the work but doesn't know your mind and occasionally errs with confidence.** You're willing to let someone like that run the flow on their own, but you'd never skip a look "before it goes out." "Auto-forward" saves your physical effort — **it doesn't save your judgment.**
 
 ## 5. A complete example: turning a meeting record into notes
 
@@ -133,7 +133,7 @@ See it? You said only a few sentences total, but each one landed on a **checkpoi
 - The all-purpose skeleton is the loop **investigate, plan, execute, check**, and the essence is to **pry apart "plan" and "execute"**: see the plan, then act.
 - Let it go on its own, but **keep your hand on the brake**, think ahead about which steps are irreversible / consequential and set them as "must stop and ask you."
 - **You can't be a hands-off boss**: its self-check is not fully trustworthy, it carries errors down, it doesn't know what you truly care about. It runs the flow, you manage direction and acceptance.
-- This approach is the underlying logic of Part Four's AI coding (Chapters 23 to 30): let it work on its own, but set irreversible actions to require your nod.
+- This approach is the underlying logic of Part Four's AI coding (Chapters 23 to 30): let it work on its own, but set irreversible actions to require your sign-off.
 
 In the next chapter, we turn to a scenario that's both especially well-suited and especially dangerous: using AI to learn and look things up.
 
@@ -148,7 +148,7 @@ In the next chapter, we turn to a scenario that's both especially well-suited an
    - B. Pry apart "plan" and "execute" so you can stop the drift before any work is done
    - C. Make the AI need no human involvement
    - D. Add conversation turns to spend more tokens
-   > **Answer: B.** One-question-one-answer flips over most easily because it thinks and does at once, charging to the end, and you only find the error afterward. Have it lay the plan out for you first and you can correct course at the cheapest stage, "before any work is done." A mistakes the means for the end; C is the opposite, this flow stresses that the human manages direction and acceptance; D is a misconception.
+   > **Answer: B.** One-question-one-answer goes off the rails most easily because it thinks and does at once, charging to the end, and you only find the error afterward. Have it lay the plan out for you first and you can correct course at the cheapest stage, "before any work is done." A mistakes the means for the end; C is the opposite — this flow stresses that the human manages direction and acceptance; D is a misconception.
 
 2. **[Basic · Concept]** Why won't the model "on its own initiative" push a big task all the way through?
    - A. Because it's lazy
@@ -169,14 +169,14 @@ In the next chapter, we turn to a scenario that's both especially well-suited an
    - B. Re-verify the key information (numbers, names, conclusions) yourself, you can't rely solely on it saying "checked"
    - C. Have it check ten more times and it'll definitely be right
    - D. If it says no problem it's definitely no problem, it's more careful than people
-   > **Answer: B.** Its "check" is still "continuing," not a real objective pair of eyes verifying, so its self-endorsement can't be taken as a guarantee (an extension of the hallucination in Chapter 9). A and D overtrust it; C mistakenly thinks "repeated checking" can conjure objectivity out of nothing, the same brain that fabricates may miss the same spot all ten times.
+   > **Answer: B.** Its "check" is still "continuing," not a real objective pair of eyes verifying, so its self-endorsement can't be taken as a guarantee (an extension of the hallucination in Chapter 9). A and D overtrust it; C mistakenly thinks "repeated checking" can conjure objectivity out of nothing — the same brain that fabricates may miss the same spot all ten times.
 
 5. **[Basic · Scenario]** You have the AI organize a batch of customer data by workflow. Which step **most** should be set as "must stop and ask you"?
    - A. Sorting the data by date
    - B. Standardizing the table's font and format
    - C. Directly deleting a few customer records it deems "redundant"
    - D. Reorganizing the content from a table into a paragraph of text
-   > **Answer: C.** Deletion is an **irreversible** action with major consequences, exactly where a checkpoint and your nod are required. A, B, and D are all low-risk organizing it can run on its own within range. The test for "must stop" vs "run free" is: is this step **reversible? Does it have consequences?**
+   > **Answer: C.** Deletion is an **irreversible** action with major consequences, exactly where a checkpoint and your sign-off are required. A, B, and D are all low-risk organizing it can run on its own within range. The test for "must stop" vs "run free" is: is this step **reversible? Does it have consequences?**
 
 6. **[Basic · Hands-on]** Pick a small task on hand that takes several steps to finish (such as turning a pile of messy notes into an outline) and write the AI an instruction the way this chapter shows: ask it to push forward by "investigate -> plan -> execute -> check," and explicitly require **stop and wait for you after listing the plan**, **don't guess when unsure, ask you**, and **self-check after finishing, don't send directly**. Then actually run it once and observe which step it stops at.
-   > **What you should notice:** When you write "stop and show the plan first," "ask when unsure," and "self-check when done" into the instruction, it does stop at these checkpoints instead of charging to the end, which shows that "auto-forward" and "stop when you should" are **things you design by instruction**, not its nature. Run it once by hand and you'll get a real feel for "my hand on the brake, it runs free," and lay the groundwork for having AI edit code in Part Four.
+   > **What you should notice:** When you write "stop and show the plan first," "ask when unsure," and "self-check when done" into the instruction, it does stop at these checkpoints instead of charging to the end, which shows that "auto-forward" and "stop when you should" are **things you design by instruction**, not its nature. Run it once yourself and you'll get a real feel for "my hand on the brake, it runs free," and lay the groundwork for having AI edit code in Part Four.

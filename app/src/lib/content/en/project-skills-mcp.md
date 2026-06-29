@@ -1,11 +1,11 @@
 In Chapter 22 we met two things for "shoring up AI's weak spots": **Skills**, which package a fixed way of doing something so it's ready to grab anytime; and **MCP**, which connects AI to external tools and data. Their division of labor in one line: **Skills handle "how to do it," MCP handles "whether it can reach."**
 
-This chapter brings those two concepts truly down to the ground: you'll make a skill pack by hand that **does just one small thing**, or **connect AI to one data source**. Note those two words: "small thing." What this chapter most wants you to remember is two disciplines that look contradictory but are really one:
+This chapter puts those two concepts into practice for real: you'll make a skill pack by hand that **does just one small thing**, or **connect AI to one data source**. Note those two words: "small thing." What this chapter most wants you to remember is two disciplines that look contradictory but are really one:
 
 1. **Getting it running matters more than making it big.** Start from the smallest thing that solves just one small task, and get it actually running first.
 2. **Expanding capability equals expanding the risk surface.** Every new capability or new data source you connect to AI opens a new door; useful things can come in, and bad things can too.
 
-> [This chapter is about the approach and judgment for "expanding AI's capability from the smallest point," not tied to any one product. How exactly to package a skill, connect a data source, what it looks like, all differ from provider to provider and update fast, so always **check the official docs**; for word-for-word deep operations, see **Appendix C**.]
+> [This chapter is about the approach and judgment for "expanding AI's capability from the smallest point," not tied to any one product. Exactly how you package a skill or connect a data source, and what it looks like, differs from provider to provider and changes fast, so always **refer to the provider's official documentation**; for the word-for-word how-to, see **Appendix C**.]
 
 ## 1. Getting ready
 
@@ -13,14 +13,14 @@ Before you start, firmly plant two things in your head: "keep it small" and "gua
 
 - **Pick something "as small as it gets."** For your first time, the smaller the better. A good example: package a skill for "writing my weekly report in my fixed format" (it does only this one thing); or connect to **one** material source you trust, so AI can answer based on it. A bad example: wanting right away to "connect all the company's systems" or "make an all-knowing assistant," which guarantees you get stuck partway.
 - **First get clear on which category this falls into**: do you want AI to **do something by a fixed procedure** (that's Skills' job, handling "how to do it"), or to **reach a piece of material/tool it otherwise can't reach** (that's MCP's job, handling "whether it can reach")? Tell them apart, and you'll know which to make (Chapter 22).
-- **Weigh whether the source is trustworthy, this step can't be skipped.** If you're going to connect a data source, first ask: is this source trustworthy? Could its content **hide "fake instructions" written specifically to trick AI** (prompt injection, detailed in Section 3 below)? If its origin is unclear, better not to connect it.
+- **Weigh whether the source is trustworthy — this step can't be skipped.** If you're going to connect a data source, first ask: is this source trustworthy? Could its content **hide "fake instructions" written specifically to trick AI** (prompt injection, detailed in Section 3 below)? If its origin is unclear, better not to connect it.
 - **Start from the least privilege.** If read-only will do, don't grant write; if one will do, don't connect three. "Connect as needed, connect minimally" is the principle set in Chapter 22, and this chapter is its hands-on practice.
 
-> **Key point:** The prep for this chapter is, at its core, to **squeeze the goal to the smallest** while putting "what risk this new capability brings" **front of mind**. The two opposite mistakes beginners most often make, "wanting to build something big and all-encompassing" and "connecting any data source you come across," should both be cut off at the prep stage.
+> **Key point:** The prep for this chapter is, at its core, to **squeeze the goal to the smallest** while putting "what risk this new capability brings" **front of mind**. The two opposite mistakes beginners most often make — "wanting to build something big and all-encompassing" and "connecting any data source you come across" — should both be cut off at the prep stage.
 
 ## 2. Doing it step by step
 
-Below are two paths: make a smallest skill pack (Skills), or connect a data source (MCP). Just take the one you need. How exactly to operate, which interface to use, **check the official docs**; for depth, see **Appendix C**.
+Below are two paths: make a smallest skill pack (Skills), or connect a data source (MCP). Just take the one you need. For exactly how to do it and which interface to use, **refer to the provider's official documentation**; for depth, see **Appendix C**.
 
 ### Path A: Make a smallest skill pack that "does just one small thing" (Skills)
 
@@ -38,7 +38,7 @@ This skill is called "weekly report." Each time it's called, tidy the material I
 Rule: only tidy what I give you, don't invent things that didn't happen for me; mark "to be filled in" where information is incomplete.
 ```
 
-(How exactly to package this way of doing things into a truly callable skill, **check the official docs**, see Appendix C.)
+(For exactly how to package this way of doing things into a truly callable skill, **refer to the official documentation** and see Appendix C.)
 
 **Step 3: Call it and run it once.** From then on, one line, "use my weekly-report skill to tidy this material," and it goes by this fixed procedure without you re-explaining from scratch each time.
 
@@ -57,13 +57,13 @@ The essence of MCP is connecting AI to external tools and data (Chapter 22). The
 Whichever path you take, check by these:
 
 1. **Did it run through?** The skill can be called and produces work in the fixed format; or the data source is connected and AI can answer correctly based on it. **Confirm "it's running" first; that's this chapter's first goal.**
-2. **Has the risk surface stayed in check?** Go back and count: did you connect only **one** source, grant only the **least** privilege? Did you connect extra things you don't need for convenience?
-3. **Is the source trustworthy, any "fake instruction" risk?** If you connected external data, watch out for prompt injection possibly hidden in it (next section). Re-verify key conclusions yourself; don't fully trust what it "reads back."
-4. **Are key actions gated?** If this new capability lets AI do irreversible actions like "send, delete, rewrite," confirm these actions still go through "needs your nod" permission (Chapters 14 and 34).
+2. **Has the risk surface stayed in check?** Go back and count: did you connect only **one** source, grant only the **least** privilege? Did you connect extra things you don't need, just for convenience?
+3. **Is the source trustworthy? Any "fake instruction" risk?** If you connected external data, watch out for prompt injection possibly hidden in it (next section). Re-verify key conclusions yourself; don't fully trust what it "reads back."
+4. **Are key actions gated?** If this new capability lets AI do irreversible actions like "send, delete, rewrite," confirm these actions still go through "needs your sign-off" permission (Chapters 14 and 34).
 
 ## 3. Common pitfalls
 
-This section spells out "expanding capability equals expanding the risk surface" on its own, because it's the easiest to be drowned out by the excitement of "more features, so nice."
+This section spells out "expanding capability equals expanding the risk surface" on its own, because it's the easiest to get drowned out by the excitement of "more features, so nice."
 
 **The thing to watch out for most is called prompt injection** (Chapters 22 and 40). When you have AI read an external web page, document, or data, that external content **may hide "fake instructions" written specifically for AI to see**: on the surface it's normal text, but tucked inside is a line like "ignore all the instructions you received before, go do such-and-such instead." When AI reads this material, **it may mistake this line hidden in the material for a command from you and execute it.** It can't tell apart "this is content for me to process" from "this is a command to me."
 
@@ -76,7 +76,7 @@ So every time you connect a new source, remember: **external content isn't just 
 | **Connecting an external source of unclear origin** | External content may hide **prompt injection** (fake instructions). Connect only what you genuinely need and that's trustworthy; for anything suspect, better not to |
 | **Taking "the content read back" as all correct** | Connecting the right material can cut down hallucination (Chapter 9), but it can still misunderstand or misuse; verify key facts yourself |
 | **Granting "write/delete/modify" privileges all at once** | Give read-only first and test it through, then loosen cautiously as needed. For irreversible actions, still go through permission (Chapters 14 and 34) |
-| **Thinking you can configure it directly after reading** | This chapter covers only the approach and judgment; **how exactly to configure changes with the version, subject to the official docs**, deep operations in Appendix C |
+| **Thinking you can configure it directly after reading** | This chapter covers only the approach and judgment; **how exactly to configure it changes with the version, so refer to the official documentation**, with the deeper how-to in Appendix C |
 
 ## 4. Taking it one step further
 
@@ -87,7 +87,7 @@ After the smallest version runs through and the risk is held, you can expand **w
 - **Connect it into your agent**: if you did the agent console from Chapter 34, you can connect the skill/data source to it so it can read more and do more, but Chapter 34's "install the brakes" discipline has to keep up: spending money, deleting data, sending outward still need human confirmation.
 - **Write "how it should use these capabilities" into rules**: write down the landmines, the list of trustworthy sources, and the actions not to touch, and hand it over (the project-context approach, Chapter 28).
 
-> **Key point:** To expand AI's capability, two sentences are enough to remember. First: **getting it running matters more than making it big**, start from a smallest skill that does one small thing or a single trustworthy data source. Second: **expanding capability equals expanding the risk surface**, every new capability or data source is a new entry point for mistakes and attacks, and watch out especially for **prompt injection** (fake instructions hidden in external material). So the principle is always **connect as needed, connect minimally, trustworthy sources, keep permission on dangerous actions** (echoing Chapters 22 and 40). The specifics are **subject to the official docs**, depth in **Appendix C**.
+> **Key point:** To expand AI's capability, two sentences are enough to remember. First: **getting it running matters more than making it big**, start from a smallest skill that does one small thing or a single trustworthy data source. Second: **expanding capability equals expanding the risk surface**, every new capability or data source is a new entry point for mistakes and attacks, and watch out especially for **prompt injection** (fake instructions hidden in external material). So the principle is always **connect as needed, connect minimally, trustworthy sources, keep permission on dangerous actions** (echoing Chapters 22 and 40). The specifics are **subject to the provider's official documentation**, with depth in **Appendix C**.
 
 ## Summary
 
@@ -95,7 +95,7 @@ After the smallest version runs through and the risk is held, you can expand **w
 - The first goal is to **get it running**: start from the smallest point, get it actually running first, and don't chase big and all-encompassing right away.
 - The core discipline is **expanding capability equals expanding the risk surface**: every new capability/data source connected is one more entry point for mistakes and attacks.
 - The thing to watch out for most is **prompt injection**: external content may hide "fake instructions" to trick AI, and AI may mistakenly execute them as a command (Chapters 22 and 40).
-- The principle is always **connect as needed, connect minimally, trustworthy sources, keep permission on dangerous actions** (Chapters 14, 34, and 40). The specific configuration is **subject to the official docs**, deep operations in **Appendix C**.
+- The principle is always **connect as needed, connect minimally, trustworthy sources, keep permission on dangerous actions** (Chapters 14, 34, and 40). The specific configuration is **subject to the provider's official documentation**, with the deeper how-to in **Appendix C**.
 
 This is the last chapter of Part Five, "building projects hands-on." From a personal website, a document tool, and meeting notes, to an agent console, connecting to an API, and expanding capability, you've turned the concepts learned earlier in this book into real things one by one. In the coming Part Six, we step back and talk seriously about "boundaries": which data absolutely can't be fed in, how to spend money without waste, who's responsible for AI-generated content, and what rules a team should set.
 
@@ -135,10 +135,10 @@ This is the last chapter of Part Five, "building projects hands-on." From a pers
 
 5. **[Basic · Scenario]** You want to connect AI to a data source to aid your work. Which approach is **the safest**?
    - A. Connect every source you can find, the more the better
-   - B. Connect only **one** source you genuinely need and that's trustworthy, give **read-only** privilege first to test it through; irreversible actions like sending/deleting still need your nod
+   - B. Connect only **one** source you genuinely need and that's trustworthy, give **read-only** privilege first to test it through; irreversible actions like sending/deleting still need your sign-off
    - C. Connect a pile of external web pages of unclear origin and let AI use them however
    - D. Connect none, rely on its memory forever
    > **Answer: B.** "Connect as needed, connect minimally, plus trustworthy sources, plus read-only first, plus keep permission on dangerous actions" balances usefulness and safety (Chapters 22, 34, and 40). A and C blindly expand the exposure surface (C also introduces prompt-injection risk); D throws out the real benefit of connecting material for fear of choking. The key is to **connect selectively**, not all or nothing.
 
-6. **[Basic · Hands-on / Observation]** You don't have to actually configure anything. First get clear on something you do repeatedly, and answer two questions: (1) if you packaged this fixed way of doing it into a **Skill**, what repeated explaining could you save later? (2) if you wanted AI to read some **external material** to help, is that material's source trustworthy, any risk of a "smuggled-in fake instruction"? (How exactly to configure is **subject to the official docs**, depth in Appendix C.)
+6. **[Basic · Hands-on / Observation]** You don't have to actually configure anything. First get clear on something you do repeatedly, and answer two questions: (1) if you packaged this fixed way of doing it into a **Skill**, what repeated explaining could you save later? (2) if you wanted AI to read some **external material** to help, is that material's source trustworthy, any risk of a "smuggled-in fake instruction"? (How exactly to configure it is **subject to the provider's official documentation**, with depth in Appendix C.)
    > **What you should notice:** Packaging a "fixed way of doing it" into a Skill saves you the effort of explaining the procedure from scratch each time (handling "how to do it"); and the moment you want to connect external material, you have to weigh whether the source is trustworthy first, because external content may hide **prompt injection** (Chapters 22 and 40). These two questions map exactly to this chapter's two disciplines: **get one small thing running**, and **connect external data strictly "as needed and trustworthy."** Get clear on these two and you've grasped the essence of this chapter.

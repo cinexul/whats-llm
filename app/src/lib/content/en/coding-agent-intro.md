@@ -8,9 +8,9 @@ Let me say the awkward part up front: **this chapter does not require you to wri
 
 ## 1. It's a kind of Agent: it "does things," not just "writes code"
 
-A lot of people's first impression of "programming AI" stops at "it can write code." You ask "how do I write a sorting function," it hands you a chunk of code, you copy it away. That impression belongs to the **web chat** layer (Chapter 17 covered the model / product / Agent layers).
+A lot of people's first impression of "programming AI" stops at "it can write code." You ask "how do I write a sorting function," it hands you a chunk of code, and you copy it away. That impression belongs to the **web chat** layer (Chapter 17 covered the model / product / Agent layers).
 
-A coding agent is **one level up** from that. It isn't "able to write code," it's "**able to use the act of writing code to get things done**." Where's the difference?
+A coding agent is **one level up** from that. It isn't "able to write code" — it's "**able to use the act of writing code to get things done**." Where's the difference?
 
 | | "Writes code" (chat layer) | "Does things" (agent layer) |
 | --- | --- | --- |
@@ -27,9 +27,9 @@ This is exactly the Chapter 19 definition of an Agent landing in the specific ar
 
 You might ask: so where do I use it? Is it a website? An app?
 
-The answer is: **there is no single answer, and it keeps changing.** You'll usually run into them in a **terminal (command line), a code editor (IDE), a web task, or a cloud environment**; **some run on your own machine, some run in the cloud, the exact form varies and gets updated, so check the official docs / the product's official form.**
+The answer is: **there is no single answer, and it keeps changing.** You'll usually run into them in a **terminal (command line), a code editor (IDE), a web task, or a cloud environment**; **some run on your own machine, some run in the cloud, and the exact form varies and gets updated, so refer to each product's official documentation.**
 
-Why won't this book just tell you "use that website" or "install that program"? Because the form of this kind of tool **changes especially fast**: today the mainstream is the command line, tomorrow an IDE plugin might feel smoother, the day after a web version or a cloud-backend version shows up. **Pin the book to one specific form and it's out of date in six months.** So this book only covers the part that **won't go out of date**: how it does the work, and how you direct it. The specifics of "where to open it, which button to click, which command to type" are spelled out in Chapter 25 and Appendix C, but in the end always **check the official docs**.
+Why won't this book just tell you "use that website" or "install that program"? Because the form of this kind of tool **changes especially fast**: today the mainstream is the command line, tomorrow an IDE plugin might feel smoother, the day after a web version or a cloud-backend version shows up. **Pin the book to one specific form and it's out of date in six months.** So this book only covers the part that **won't go out of date**: how it does the work, and how you direct it. The specifics of "where to open it, which button to click, which command to type" are spelled out in Chapter 25 and Appendix C, but in the end always **defer to the official documentation**.
 
 > **Key point:** Two things are **stable** and safe to remember: Claude Code comes from Anthropic, and its core is Claude; Codex comes from OpenAI. This "who makes it / what's inside it" attribution won't shuffle around. But **what they actually look like, how to install them, and what they can do** belong to the "will change" category. When you hit those details, trust the official docs.
 
@@ -42,9 +42,9 @@ This is the comparison the whole book keeps coming back to, and it fits best rig
 Break that picture apart, and each piece matches a real trait it has:
 
 - **Quick on their feet:** the grunt work you hand over gets done fast and in volume. That's its biggest value, so don't waste it.
-- **Doesn't know your "ways":** your project's rules, naming habits, the spots no one's allowed to touch, none of it. **If you don't say it, they don't know it.** (There are ways to make them "remember these rules"; see Chapter 28.)
+- **Doesn't know your "ways":** your project's rules, your naming habits, the spots no one's allowed to touch — none of it. **If you don't say it, they don't know it.** (There are ways to make them "remember these rules"; see Chapter 28.)
 - **Will be confidently wrong:** they might, with a perfectly straight face, use a way of writing code that **doesn't exist at all**. That's the "hallucination" from Chapter 9, and it happens when writing code too; because code looks so "professional," it's even easier to fool a non-expert.
-- **Doesn't know the latest things:** their knowledge has a "cutoff date" (Chapter 9). Very new tech they may not have heard of, or they remember an older version, unless you tell them the latest information.
+- **Doesn't know the latest things:** their knowledge has a "cutoff date" (Chapter 9). Very new tech they may not have heard of, or they remember an older version of it — unless you give them the latest information.
 
 So, faced with a new coworker like this, what does a reliable "person who's showing them the ropes" do? **They don't let go entirely, and they don't do everything for them.** They assign work, watch the key checkpoints, and sign off. That is exactly your position:
 
@@ -54,13 +54,13 @@ So, faced with a new coworker like this, what does a reliable "person who's show
 
 This is the one thing **most worth remembering** in this chapter, and in all of Part Four, so it gets its own section.
 
-It finished does **not** mean it's correct. It says "done" does **not** mean it actually worked. The reason was laid out earlier: **it will make mistakes (it will hallucinate) + it can take action (it really did change your stuff).** Put those two together and you get a dangerous combination: **it might, with full confidence, break your project and then tell you "completed."**
+Just because it finished does **not** mean it's correct. Just because it says "done" does **not** mean it actually worked. The reason was laid out earlier: **it will make mistakes (it will hallucinate) + it can take action (it really did change your stuff).** Put those two together and you get a dangerous combination: **it might, with full confidence, break your project and then tell you "completed."**
 
 So no matter how strong this tool is, or how strong it gets, one boundary won't move:
 
 > **Key point:** **Your name is on it, and you're responsible.** Before what it produces gets merged into your project, handed to your client, or attached to your name, **reviewing and signing off is your job** (Chapter 39 covers "responsibility for AI-generated content" specifically). Carve one sentence into your head: **"Don't let through what you don't understand and haven't verified."** You don't need to understand every line, but you do need to be able to judge "did this actually work or not."
 
-This isn't meant to discourage you, quite the opposite: **precisely because responsibility clearly sits with the human, you can hand off the grunt work without worry.** Hold the "sign-off" gate, and all that fast, high-volume work in front of it is pure gain.
+This isn't meant to discourage you — quite the opposite: **precisely because responsibility clearly sits with the human, you can hand off the grunt work without worry.** Hold the "sign-off" gate, and all that fast, high-volume work in front of it is pure gain.
 
 ## 5. What this chapter sets up for what follows
 
@@ -68,7 +68,7 @@ String the four points above together and you already have a "map." The next few
 
 - It **takes action and makes mistakes** -> so you have to learn to **check its work afterward**: see what it changed (diff), whether it broke anything else (tests), and don't merge what you can't follow. That's **Chapter 25**, the chapter most worth actually practicing.
 - It **really will change your stuff** -> so you have to let it work in an **environment you can undo**, and **dangerous operations have to ask you first**. That's the "permission mechanism and rollback-friendly environment" of **Chapter 26**.
-- Big things **can't be rushed in one go** -> so you have to make it **lay out a plan and get your nod before acting**, and break big tasks **into small ones, signing off in small steps**. That's **Chapter 27**.
+- Big things **can't be rushed in one go** -> so you have to make it **lay out a plan and get your sign-off before acting**, and break big tasks **into small ones, signing off in small steps**. That's **Chapter 27**.
 
 Notice something? All three of these are putting this chapter's core attitude into practice: **it's a capable coworker who makes mistakes; assign the work, but keep the gatekeeping yourself.** The next three chapters teach you "how to gatekeep," move by move.
 
@@ -131,7 +131,7 @@ In the next chapter (Chapter 24) we'll walk through this shared "investigate -> 
    - B. Treat it as a new coworker on day one and sign off: what exactly did it change, did it break anything else, can I explain what this bit does
    - C. Pay it a compliment and call it done
    - D. Have it do the next, bigger feature
-   > **Answer: B.** "Finished isn't correct." It's like a capable coworker who just started, and signing off is the job of the person showing them the ropes (the three specific moves are in Chapter 25). Picking A treats it as a "turnkey contractor," which is exactly the most common way to crash.
+   > **Answer: B.** "Finished isn't correct." It's like a capable coworker who just started, and signing off is the job of the person showing them the ropes (the three specific moves are in Chapter 25). Picking A treats it as a "turnkey contractor," which is exactly the most common way things go off the rails.
 
 6. **[Advanced · Hands-on / Observation]** No need to actually install anything: find a "does things vs only gives advice" contrast near you, for example "a navigation app that drives you through each turn" versus "a stranger who points you in a direction." Think about it: which is a coding agent more like? And where does it differ from a chat AI that "just hands you a block of code to copy"?
-   > **What you should notice:** A coding agent is like the navigation that "drives you through each turn": it executes itself and takes several steps in a row. A chat AI is like the stranger who "points a direction": it gives you information, but you walk the road yourself. The difference is "who takes action, and who takes several steps in a row." And precisely because it acts on its own and might point the wrong way, the "sign-off" gate has to stay with you (Chapters 25, 26). The form, installation, and commands of specific tools: **check the official docs**.
+   > **What you should notice:** A coding agent is like the navigation that "drives you through each turn": it executes itself and takes several steps in a row. A chat AI is like the stranger who "points a direction": it gives you information, but you walk the road yourself. The difference is "who takes action, and who takes several steps in a row." And precisely because it acts on its own and might point the wrong way, the "sign-off" gate has to stay with you (Chapters 25, 26). For the form, installation, and commands of specific tools, **defer to the official documentation**.
