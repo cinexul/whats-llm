@@ -31,7 +31,7 @@ Whichever path you take, **don't skip Part One**. It's the foundation of the who
 - **The "Quiz" at the end of each chapter:** Six questions, in four types: concept, misconception, scenario, and hands-on. The answers and explanations are right below each question. Don't just check right or wrong. The point is in the explanations: why an answer is wrong, and who tends to make that mistake.
 - **Glossary (Appendix A):** A three-language reference (Chinese, Japanese, English). Look up any word you don't know.
 - **Prompt templates (Appendix B):** Fill-in-the-blank templates for everyday, work, study, coding, and other situations.
-- **Bilingual (Chinese / Japanese):** This book has a Chinese edition and a Japanese edition. Click "**中文 / 日本語**" at the top of the reader to switch with one tap; the content matches one to one. In the main text, key terms get the English in parentheses **on first use** (for example, context window), so you can look up English material later.
+- **Trilingual (Chinese / Japanese / English):** This book comes in Chinese, Japanese, and English editions. Click "**中文 / 日本語 / English**" at the top of the reader to switch with one tap; the content matches one to one.
 - The reader also supports **jumping through the table of contents on the left, full-text search, and highlighting text and writing notes**. Where you've read and what you've marked are saved automatically.
 
 ## 4. One mindset that runs through the whole book
@@ -48,7 +48,7 @@ If this book can get you to remember only two sentences, let them be these:
 - This is a **large language model basics + AI tools in practice** handbook for ordinary people, and **no programming background is needed**.
 - Four goals: **understand it, use it, see the tool ecosystem clearly, and build projects with Claude Code and Codex**, while keeping risk in check at the end.
 - Two reading paths: if you just want to use it, take Parts One, Two, and Six; if you want to build, keep going through Parts Three, Four, and Five.
-- Make good use of each chapter's **quiz**, the **glossary**, the **prompt templates**, and the **Chinese / Japanese switch** at the top.
+- Make good use of each chapter's **quiz**, the **glossary**, the **prompt templates**, and the **Chinese / Japanese / English switch** at the top.
 - Keep two sentences in mind throughout: **AI can be confidently wrong (check important things yourself)**, and **by default it has no memory ("remembering" is usually the product layer feeding context back in)**.
 
 Ready? We start with Chapter 1, "Starting from the AI that can chat."

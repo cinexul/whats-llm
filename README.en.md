@@ -6,7 +6,7 @@ An offline desktop e-book reader for ***What's LLM*** — a plain-language guide
 large language models, and to building your own projects with AI coding tools,
 written for people with **no programming background**.
 
-The book is **bilingual (中文 / 日本語)** with one-click in-app language switching.
+The book is **trilingual (中文 / 日本語 / English)** with one-click in-app language switching.
 Every chapter ends with an **interactive, self-scoring quiz**, and key terms carry
 an English gloss.
 
@@ -24,7 +24,7 @@ npm run dev        # open http://localhost:1420
 ## Layout
 
 - `app/` — the SvelteKit + Tauri application
-- `app/src/lib/content/{zh,ja}/` — the book chapters, in Chinese and Japanese
+- `app/src/lib/content/{zh,ja,en}/` — the book chapters, in Chinese, Japanese, and English
 
 ## Tech
 
