@@ -1,0 +1,38 @@
+name: content maintenance
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 7 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  review-dates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Report chapters due for editorial review
+        working-directory: app
+        run: node scripts/content-maintenance.mjs check --as-of "$(date -u +%F)" --fail-overdue
+
+  source-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check source reachability (unconfirmed access needs human review)
+        working-directory: app
+        run: node scripts/check-content-links.mjs --timeout-ms 10000 --output content-link-report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: content-link-report
+          path: app/content-link-report.json

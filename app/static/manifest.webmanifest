@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "LLM Learning Book · 大模型学习手册",
+  "short_name": "LLM Book",
+  "description": "A practical learning book about LLMs in Chinese, English and Japanese.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#faf9f5",
+  "theme_color": "#faf9f5",
+  "icons": [
+    { "src": "icons/book-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/book-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/book-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

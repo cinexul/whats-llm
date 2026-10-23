@@ -1,0 +1,19 @@
+[package]
+name = "study-core"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.77.2"
+description = "Spaced-repetition (FSRS) scheduling, review log, and stats over an embedded SQLite store. Shared by the app and any future tool."
+
+[lib]
+name = "study_core"
+
+[dependencies]
+# 埋め込み SQLite。bundled で C ソースごとバイナリへ静的リンクする(利用者は何もインストール不要)。
+# 0.40 系は libsqlite3-sys 0.38 を引き、その build.rs が未安定の cfg_select! を使うため stable で不可。
+# API は同一なので、stable でビルドできる版に固定する。
+rusqlite = { version = "0.32", features = ["bundled"] }
+# FSRS(Anki と同じ open-spaced-repetition のクレート)。スケジューラ + オプティマイザ。
+fsrs = "6"
+# Tauri 境界(JS へ JSON で返す)用に Card/Review を直接シリアライズできるようにする。
+serde = { version = "1", features = ["derive"] }

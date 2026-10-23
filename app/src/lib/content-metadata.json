@@ -1,0 +1,3453 @@
+{
+  "schemaVersion": 1,
+  "sourceLanguage": "zh",
+  "sources": {
+    "source-6cf325833129": {
+      "url": "https://github.com/ftramer/LM_Memorization",
+      "titles": {
+        "zh": "作者代码与论文入口",
+        "ja": "著者のコードと論文へのリンク",
+        "en": "authors’ code and paper link"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/what-is-llm.md"
+    },
+    "source-c3dcc5ea3957": {
+      "url": "https://github.com/openai/openai-cookbook/blob/main/examples/agents_sdk/session_memory.ipynb",
+      "titles": {
+        "zh": "OpenAI Cookbook：会话记忆",
+        "ja": "OpenAI Cookbook：セッションメモリ",
+        "en": "OpenAI Cookbook: session memory"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/token-and-context.md"
+    },
+    "source-fe55e323ea27": {
+      "url": "https://github.com/openai/openai-python/blob/main/src/openai/types/responses/response_create_params.py",
+      "titles": {
+        "zh": "OpenAI Responses API 参数",
+        "ja": "OpenAI Responses API のパラメータ",
+        "en": "OpenAI Responses API parameters"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/token-and-context.md"
+    },
+    "source-b6bef96e5a3a": {
+      "url": "https://github.com/openai/tiktoken",
+      "titles": {
+        "zh": "OpenAI tiktoken",
+        "ja": "OpenAI tiktoken",
+        "en": "OpenAI tiktoken"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/token-and-context.md"
+    },
+    "source-1287fdeaf971": {
+      "url": "https://github.com/jxmorris12/vec2text",
+      "titles": {
+        "zh": "作者的 vec2text 实现与论文入口",
+        "ja": "著者の vec2text 実装と論文へのリンク",
+        "en": "authors’ vec2text implementation and paper link"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/vectors-and-embedding.md"
+    },
+    "source-023b0ad574d7": {
+      "url": "https://github.com/openai/openai-python/blob/main/src/openai/types/shared_params/reasoning.py",
+      "titles": {
+        "zh": "reasoning 参数及模型支持差异",
+        "ja": "推論パラメータとモデルごとの対応",
+        "en": "reasoning parameters and model-specific support"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/temperature-and-reasoning.md"
+    },
+    "source-1b1a5891d6a3": {
+      "url": "https://github.com/openai/openai-cookbook/blob/main/examples/Reproducible_outputs_with_the_seed_parameter.ipynb",
+      "titles": {
+        "zh": "官方 Cookbook：seed 与可复现性的限制",
+        "ja": "公式Cookbookのseedと再現性の制約",
+        "en": "official Cookbook on seed and reproducibility limits"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/temperature-and-reasoning.md"
+    },
+    "source-5f9377b76eb1": {
+      "url": "https://github.com/openai/openai-agents-python/blob/841dfdd938bfd4ca052475eb76d6245a356868e0/README.md",
+      "titles": {
+        "zh": "OpenAI Agents SDK",
+        "ja": "OpenAI Agents SDK",
+        "en": "OpenAI Agents SDK"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/model-product-api-agent.md"
+    },
+    "source-212d350ee709": {
+      "url": "https://github.com/openai/codex/blob/86e17e98c7f901277aeeb4649cf1b01462b082f2/README.md",
+      "titles": {
+        "zh": "Codex",
+        "ja": "Codex",
+        "en": "Codex"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/model-product-api-agent.md"
+    },
+    "source-198b7456a891": {
+      "url": "https://github.com/anthropics/claude-code/blob/5ed799e5cc56bea9efff57398ca43e31d82784ff/README.md",
+      "titles": {
+        "zh": "Claude Code",
+        "ja": "Claude Code",
+        "en": "Claude Code"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/ai-products-overview.md"
+    },
+    "source-eb82437d25b2": {
+      "url": "https://github.com/google-gemini/gemini-cli/blob/09d81bf116b6f0ef084731dc996aa9d56438bb70/README.md",
+      "titles": {
+        "zh": "Gemini CLI",
+        "ja": "Gemini CLI",
+        "en": "Gemini CLI"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/ai-products-overview.md"
+    },
+    "source-a0755e01ea65": {
+      "url": "https://github.com/anthropics/anthropic-quickstarts/blob/9ec32b91df50b0d4906cae64b13c6298055ff40d/computer-use-demo/README.md",
+      "titles": {
+        "zh": "Anthropic computer use",
+        "ja": "Anthropic computer use",
+        "en": "Anthropic computer use"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/what-is-agent.md"
+    },
+    "source-e1597d243763": {
+      "url": "https://github.com/Azure-Samples/azure-search-openai-demo/blob/558ffd397eddcfe4da5c85ebc285796b367eb9b2/README.md",
+      "titles": {
+        "zh": "Azure RAG example",
+        "ja": "Azure の RAG 実装例",
+        "en": "Azure RAG example"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/rag.md"
+    },
+    "source-0e0d8057a3f3": {
+      "url": "https://github.com/Azure-Samples/azure-search-openai-demo/blob/558ffd397eddcfe4da5c85ebc285796b367eb9b2/app/backend/approaches/approach.py",
+      "titles": {
+        "zh": "Retrieval implementation",
+        "ja": "検索処理の実装",
+        "en": "Retrieval implementation"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/rag.md"
+    },
+    "source-360c9a75b4af": {
+      "url": "https://github.com/ollama/ollama/blob/efabf6bc450454dc856c1f799aac7ea865e3a4cf/docs/faq.mdx",
+      "titles": {
+        "zh": "Ollama FAQ",
+        "ja": "Ollama FAQ",
+        "en": "Ollama FAQ"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/local-models-ollama.md"
+    },
+    "source-8620d3a6bf70": {
+      "url": "https://github.com/ollama/ollama/blob/efabf6bc450454dc856c1f799aac7ea865e3a4cf/docs/context-length.mdx",
+      "titles": {
+        "zh": "Ollama context",
+        "ja": "Ollama のコンテキスト長",
+        "en": "Ollama context"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/local-models-ollama.md"
+    },
+    "source-e353a4b7ef05": {
+      "url": "https://github.com/lmstudio-ai/docs/blob/8c7159be3ffe364af10aa8ae6f5a7570e9402089/0_app/0_root/offline.mdx",
+      "titles": {
+        "zh": "LM Studio offline",
+        "ja": "LM Studio のオフライン利用",
+        "en": "LM Studio offline"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/local-models-ollama.md"
+    },
+    "source-09d475a8b917": {
+      "url": "https://github.com/agentskills/agentskills/blob/main/README.md",
+      "titles": {
+        "zh": "Agent Skills 概览",
+        "ja": "Agent Skills 概要",
+        "en": "Agent Skills overview"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/skills-and-mcp.md"
+    },
+    "source-1aabd3b529fa": {
+      "url": "https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx",
+      "titles": {
+        "zh": "格式规范",
+        "ja": "形式仕様",
+        "en": "format specification"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/skills-and-mcp.md",
+      "snapshot": "https://github.com/agentskills/agentskills/blob/69ef37e9424c0a7ea9dd2293b559e43ec8176379/docs/specification.mdx"
+    },
+    "source-1f9a6ffe7d31": {
+      "url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+      "titles": {
+        "zh": "MCP 官方仓库",
+        "ja": "MCP 公式リポジトリ",
+        "en": "official MCP repository"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/skills-and-mcp.md"
+    },
+    "source-4f20dd09b4aa": {
+      "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema/2026-07-28/schema.ts",
+      "titles": {
+        "zh": "2026-07-28 schema",
+        "ja": "2026-07-28 のスキーマ",
+        "en": "2026-07-28 schema"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/skills-and-mcp.md",
+      "snapshot": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/80041ab0a139a8f4fb3adbc99f7ae9113ea59671/schema/2026-07-28/schema.ts"
+    },
+    "source-2c009f25bdb2": {
+      "url": "https://git-scm.com/docs/git-branch",
+      "titles": {
+        "zh": "分支",
+        "ja": "ブランチ",
+        "en": "branches"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-b60b47425db1": {
+      "url": "https://git-scm.com/docs/git-worktree",
+      "titles": {
+        "zh": "工作树",
+        "ja": "ワークツリー",
+        "en": "worktrees"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-bba5c4ab2f7d": {
+      "url": "https://git-scm.com/docs/git-revert",
+      "titles": {
+        "zh": "撤销提交",
+        "ja": "revert",
+        "en": "revert"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-b29b55358cc0": {
+      "url": "https://git-scm.com/docs/gitignore",
+      "titles": {
+        "zh": "忽略文件",
+        "ja": "無視対象のファイル",
+        "en": "ignored files"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-c5c7c9c120ea": {
+      "url": "https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json",
+      "titles": {
+        "zh": "OpenAI Codex 配置定义",
+        "ja": "OpenAI Codex の設定定義",
+        "en": "OpenAI Codex configuration schema"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/permissions-and-rollback.md"
+    },
+    "source-156a79e0909e": {
+      "url": "https://github.com/anthropic-experimental/sandbox-runtime",
+      "titles": {
+        "zh": "Anthropic Sandbox Runtime",
+        "ja": "Anthropic Sandbox Runtime",
+        "en": "Anthropic Sandbox Runtime"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/permissions-and-rollback.md"
+    },
+    "source-f2727733ec27": {
+      "url": "https://github.com/anthropics/claude-code/blob/main/README.md",
+      "titles": {
+        "zh": "Claude Code 官方 README",
+        "ja": "Claude Code 公式 README",
+        "en": "official Claude Code README"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/claude-code-handson.md",
+      "snapshot": "https://github.com/anthropics/claude-code/blob/5ed799e5cc56bea9efff57398ca43e31d82784ff/README.md"
+    },
+    "source-79752d666a23": {
+      "url": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+      "titles": {
+        "zh": "官方更新日志",
+        "ja": "公式変更履歴",
+        "en": "official changelog"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/claude-code-handson.md",
+      "snapshot": "https://github.com/anthropics/claude-code/blob/5ed799e5cc56bea9efff57398ca43e31d82784ff/CHANGELOG.md"
+    },
+    "source-0526bc130098": {
+      "url": "https://code.claude.com/docs/en/setup",
+      "titles": {
+        "zh": "官方安装文档",
+        "ja": "公式セットアップ文書",
+        "en": "Official setup documentation"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-7c26178a4fa1": {
+      "url": "https://code.claude.com/docs/en/costs",
+      "titles": {
+        "zh": "费用文档",
+        "ja": "費用の文書",
+        "en": "cost documentation"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-9660fd15b487": {
+      "url": "https://github.com/openai/codex/blob/main/README.md",
+      "titles": {
+        "zh": "Codex 官方 README",
+        "ja": "Codex 公式 README",
+        "en": "official Codex README"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/codex-handson.md",
+      "snapshot": "https://github.com/openai/codex/blob/86e17e98c7f901277aeeb4649cf1b01462b082f2/README.md"
+    },
+    "source-887cbc0985df": {
+      "url": "https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs",
+      "titles": {
+        "zh": "官方 CLI 命令源码",
+        "ja": "CLI コマンドの公式ソース",
+        "en": "official CLI command source"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/codex-handson.md"
+    },
+    "source-09d0d7f23446": {
+      "url": "https://help.openai.com/en/articles/11369540-codex-in-chatgpt",
+      "titles": {
+        "zh": "Codex 套餐帮助",
+        "ja": "Codex のプラン案内",
+        "en": "Codex plan help page"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-17b97719ede9": {
+      "url": "https://github.com/ollama/ollama/blob/main/docs/faq.mdx",
+      "titles": {
+        "zh": "Ollama FAQ",
+        "ja": "Ollama FAQ",
+        "en": "Ollama FAQ"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/privacy-and-data-tiers.md"
+    },
+    "source-b47c45fea9f3": {
+      "url": "https://github.com/openai/openai-agents-python/blob/main/docs/tracing.md",
+      "titles": {
+        "zh": "OpenAI Agents SDK 追踪文档",
+        "ja": "OpenAI Agents SDK のトレース文書",
+        "en": "OpenAI Agents SDK tracing documentation"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/privacy-and-data-tiers.md"
+    },
+    "source-3e6ab04e9fc3": {
+      "url": "https://openai.com/api/pricing/",
+      "titles": {
+        "zh": "OpenAI API 价格",
+        "ja": "OpenAI API 価格",
+        "en": "OpenAI API pricing"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-50846cd1ff36": {
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "titles": {
+        "zh": "Claude API 价格",
+        "ja": "Claude API 価格",
+        "en": "Claude API pricing"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-480520944c65": {
+      "url": "https://github.com/openai/openai-agents-python/blob/main/docs/guardrails.md",
+      "titles": {
+        "zh": "OpenAI Agents SDK 护栏文档",
+        "ja": "OpenAI Agents SDK のガードレール文書",
+        "en": "OpenAI Agents SDK guardrails"
+      },
+      "checkedAt": "2026-10-22",
+      "evidence": "https://github.com/cinexul/whats-llm/blob/400656a98dc41f779fade95d38b0a1d7ebfbff06/app/src/lib/content/zh/safe-use-and-team-rules.md"
+    },
+    "source-08ab6db324ee": {
+      "url": "https://developers.openai.com/codex",
+      "titles": {
+        "zh": "Codex",
+        "ja": "Codex",
+        "en": "Codex"
+      },
+      "checkedAt": null,
+      "evidence": null
+    },
+    "source-c23f3e7cbb0e": {
+      "url": "https://code.claude.com/docs/en/overview",
+      "titles": {
+        "zh": "Claude Code",
+        "ja": "Claude Code",
+        "en": "Claude Code"
+      },
+      "checkedAt": null,
+      "evidence": null
+    }
+  },
+  "chapters": {
+    "how-to-use-this-book": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "5f140d0555bee1994d1946288b68f6baf69f6c214869f17e57d24b41eeb7f4ea",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "233c86197f3e77b4626c0ac68e39103b8952e3b49624abe37e6ea35109c50e8e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "5f140d0555bee1994d1946288b68f6baf69f6c214869f17e57d24b41eeb7f4ea",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "365d7bbc43c3967f4b40faa92a5b0f4e6f4bfeac4fc865b43b971c54d90d2fde",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "5f140d0555bee1994d1946288b68f6baf69f6c214869f17e57d24b41eeb7f4ea",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "ai-ml-llm-relationship": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "3b54dc52d9db41ca51781c4ee748d938ea6399054f531f799a9fcd239336feb8",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "c28020b2181ab45dc3760c396fc8dba9cf057e260f1d65203b723ed11bd66162",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "3b54dc52d9db41ca51781c4ee748d938ea6399054f531f799a9fcd239336feb8",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "76b88a67232bfdacf65d622f272afc973eacb83206f18037481364ddf2cb4ac4",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "3b54dc52d9db41ca51781c4ee748d938ea6399054f531f799a9fcd239336feb8",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "what-is-llm": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "1a675c1c8bb4bfce400c0cafa07363c25cc998e0c3ab7aae11ac457382e7642c",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-6cf325833129"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "02cd28d228d5aaee25cce92e47fe0fe1aa454a5849982063860386d955bfc466",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-6cf325833129"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "1a675c1c8bb4bfce400c0cafa07363c25cc998e0c3ab7aae11ac457382e7642c",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "aae264c93265548833ae5397f2a9ac16e9d2271d7ad8422df343c754872bba5a",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-6cf325833129"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "1a675c1c8bb4bfce400c0cafa07363c25cc998e0c3ab7aae11ac457382e7642c",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "token-and-context": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "278e4060fbf5a76bab1cab6f918fc36996468496bbb86645b74ac0525f928478",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-c3dcc5ea3957",
+            "source-fe55e323ea27",
+            "source-b6bef96e5a3a"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "7cdc5a03277cc8582341ecdd181db304b9d9235c1e761b9a3ef860a5472ce77d",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-c3dcc5ea3957",
+            "source-fe55e323ea27",
+            "source-b6bef96e5a3a"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "278e4060fbf5a76bab1cab6f918fc36996468496bbb86645b74ac0525f928478",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "d686cdad2cf9f71bdb3fdfcdc6a7d58f91a1a4eceeae5070a25d4d7144fba1a9",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-c3dcc5ea3957",
+            "source-fe55e323ea27",
+            "source-b6bef96e5a3a"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "278e4060fbf5a76bab1cab6f918fc36996468496bbb86645b74ac0525f928478",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "next-token-prediction": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "f19045eb2a9650cb4712abb38c5bf613169e9eadf28812e7b9f4150db1de918e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "ea910aaeb5a22ec3ac4884d88ad53ec39e4e83098e357a1991ee7e376b4a3f54",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "f19045eb2a9650cb4712abb38c5bf613169e9eadf28812e7b9f4150db1de918e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "d4f04437ec79f6e369c4d2cacf6cc95bf398b9a472ae946299a34e9b03b98159",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "f19045eb2a9650cb4712abb38c5bf613169e9eadf28812e7b9f4150db1de918e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "vectors-and-embedding": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "761584ae06bf6fe09574f11104817111b987cacd02269847ffce0e1e02d7f068",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-1287fdeaf971"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "bc2e8b986240bc6947b8815046bb03579fb9f0274c8d87606209a3ad2a4e55c5",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-1287fdeaf971"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "761584ae06bf6fe09574f11104817111b987cacd02269847ffce0e1e02d7f068",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "aafd3fb94d3a7ae5b3b91764cfe01de63eec3f466d214ee84d186b7356906e6e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-1287fdeaf971"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "761584ae06bf6fe09574f11104817111b987cacd02269847ffce0e1e02d7f068",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "attention-and-transformer": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "f11e5b9cac30668cbbc50698a9184d9bd053f77c0db3da42c6beda2ec965f43e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "8ae21221736fb7a9879e31a97a61e42d3a15bda2eda7b66e135b2c1bb2bf23d4",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "f11e5b9cac30668cbbc50698a9184d9bd053f77c0db3da42c6beda2ec965f43e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "e9e01be8b272ab1e1752dbd55c1f89aea75c47eb77b2b50f1300490ecbe01a8b",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "f11e5b9cac30668cbbc50698a9184d9bd053f77c0db3da42c6beda2ec965f43e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "training-finetuning-alignment": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "dc6b0e6e2f7d2a75fdd29cc0f44d84349bda04294782a70a0f13f9e2e80363af",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "e3e928d351bc746b3337a8fdaba5a4e594f56a6f4a35651368f1436f7b931a80",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "dc6b0e6e2f7d2a75fdd29cc0f44d84349bda04294782a70a0f13f9e2e80363af",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "06c2547bad02b5641f82b48d58332b09f47b1071070027f6fcc7902294ff3eef",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "dc6b0e6e2f7d2a75fdd29cc0f44d84349bda04294782a70a0f13f9e2e80363af",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "temperature-and-reasoning": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "00f8c66019ff5036f27da4d860969da5b3a6b8d17fffed7e5addb76d31fe6c7c",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-fe55e323ea27",
+            "source-023b0ad574d7",
+            "source-1b1a5891d6a3"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "8714a694a2f51aa03aaa55ee8660f093eb2861ba3cc304a8b7bfe4cd90472919",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-fe55e323ea27",
+            "source-023b0ad574d7",
+            "source-1b1a5891d6a3"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "00f8c66019ff5036f27da4d860969da5b3a6b8d17fffed7e5addb76d31fe6c7c",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "9e43466603324e09a1249173d0a3660976796da8530f89de316bb5457d1740e3",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-fe55e323ea27",
+            "source-023b0ad574d7",
+            "source-1b1a5891d6a3"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "00f8c66019ff5036f27da4d860969da5b3a6b8d17fffed7e5addb76d31fe6c7c",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "hallucination-knowledge-memory": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "9c775b9a5df475cd14672bb0a6d63304783f106a8481e987d5f7b0330051cdf4",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "137e7d27603fbac1805c74cae307b0aecae6ce96e08df36f6603b8f18fe3fabe",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "9c775b9a5df475cd14672bb0a6d63304783f106a8481e987d5f7b0330051cdf4",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "5676a7dadf26ff0f7ad8f9ea4b8a6f689e69a8ee05892f8824aea4c423f122a2",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "9c775b9a5df475cd14672bb0a6d63304783f106a8481e987d5f7b0330051cdf4",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "first-serious-conversation": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "5418f50b5feff30761d0d11a995ede276e7e34e1379041d819a3be9d36b6f5ae",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "75ba032917a44a455ba9f43082879343f3925a595e944cc93c1d0e57ed5a916c",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "5418f50b5feff30761d0d11a995ede276e7e34e1379041d819a3be9d36b6f5ae",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "4a74d59b280bfcf3c4d8fec83183bf2f230190ac0cca1de52edaeb5b168ad504",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "5418f50b5feff30761d0d11a995ede276e7e34e1379041d819a3be9d36b6f5ae",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "prompt-structure": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "c83d5f92c4fcefd5054cfdcde8b57b76135ab780cbf3d1978248ad69c2f1bdea",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "941cd855a8a8297f3c80f9774e818ab4725a36cb7d55de7b565700efe5ac10cf",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "c83d5f92c4fcefd5054cfdcde8b57b76135ab780cbf3d1978248ad69c2f1bdea",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "bc8a048ad24aebb2c367f84bbf812321fd4ee2780b68597573f8f0ba5dcf9041",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "c83d5f92c4fcefd5054cfdcde8b57b76135ab780cbf3d1978248ad69c2f1bdea",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "long-text-and-summary": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "98c15eee6f842488f237ffffceb3d8f2009e0046e92c0c886cf71c9dadbd97ad",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "f3cbd7f504b8602578cb303091e63e8faa7e94e6fd02b45f1dd3e77e3d988f96",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "98c15eee6f842488f237ffffceb3d8f2009e0046e92c0c886cf71c9dadbd97ad",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "68fc45102038bd831a56b7435086bbc7dbfd443f0224c35038b588d10c3d6848",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "98c15eee6f842488f237ffffceb3d8f2009e0046e92c0c886cf71c9dadbd97ad",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "multi-turn-and-context": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "50bfa3d8fd742519436f289bcfcebe00f1c720787bb9332d61e85fb55bc8098e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "546b3d035fe009e48d0d40709be3ab5df2b55188c7ae0feccd97f818155e301a",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "50bfa3d8fd742519436f289bcfcebe00f1c720787bb9332d61e85fb55bc8098e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "79d319237579c7f4a6d229fa4ced24d6c477db3e67fa0f3f7848c43f578c2cf4",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "50bfa3d8fd742519436f289bcfcebe00f1c720787bb9332d61e85fb55bc8098e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "ai-driven-workflow": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "a521424e11b463f871a9d9301c9e83453adaf9bc28ef589ee8cc375ac6a0e2d6",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "b2a5678dc5d571e5d775f8645b8118949d607249b3608de479cdde7726f98941",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a521424e11b463f871a9d9301c9e83453adaf9bc28ef589ee8cc375ac6a0e2d6",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "44cd666a93c0a7f5814dd48dae840516be0db6af0c834e445ad3d6a52bc4b681",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a521424e11b463f871a9d9301c9e83453adaf9bc28ef589ee8cc375ac6a0e2d6",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "learning-and-research": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "a07a364d3d805b88b9fb8015595012b406934509ca439c07c73cc59eddc8c9df",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "f7732d4f34c276472561a837787259b2dc5d4ec58149492961b026abb1d7da0d",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a07a364d3d805b88b9fb8015595012b406934509ca439c07c73cc59eddc8c9df",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "a49664a9db69bb5c369fc45d6cd0bb2b66c4db7444621f9617bb2fa62c0c57a7",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a07a364d3d805b88b9fb8015595012b406934509ca439c07c73cc59eddc8c9df",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "work-scenarios": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "fd3c61527202241b97b5a591d814638d5acc318a53cf7f07c265f9869c62ea7a",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "67268dd3da1b1ab9f3c0211296c9d625680e5b0a97d742b5608c16cce5160e50",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "fd3c61527202241b97b5a591d814638d5acc318a53cf7f07c265f9869c62ea7a",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "16bf7e6a37ec0d4e0f81bc3fa67c1d944c44ccba2ef8cbf43ec8b4f74d79c1c0",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "fd3c61527202241b97b5a591d814638d5acc318a53cf7f07c265f9869c62ea7a",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "model-product-api-agent": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "b00beefb935f05b56ee459d74a9445504beb59202d4d67db4abd8ca5a96fd85e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-5f9377b76eb1",
+            "source-212d350ee709"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "e663e1cb10d2e31f3aab9208b50cab85a8119b8db8de76b4380888c457581af4",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-5f9377b76eb1",
+            "source-212d350ee709"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "b00beefb935f05b56ee459d74a9445504beb59202d4d67db4abd8ca5a96fd85e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "d9626e71797458b33114c19de8abc0ae24603bfc05b688866e1c4c1b41af76ca",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-5f9377b76eb1",
+            "source-212d350ee709"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "b00beefb935f05b56ee459d74a9445504beb59202d4d67db4abd8ca5a96fd85e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "ai-products-overview": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "fd78f1c3788c0ab6f41e2088f6170e671cb683730dc99df3e3338b3988ba99f8",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-212d350ee709",
+            "source-198b7456a891",
+            "source-eb82437d25b2"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "04b9d42267072cb85bbc1e7476e260421d3cbdbabe4754ee0177e460ab6301a0",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-212d350ee709",
+            "source-198b7456a891",
+            "source-eb82437d25b2"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "fd78f1c3788c0ab6f41e2088f6170e671cb683730dc99df3e3338b3988ba99f8",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "aa26bba001f0a00a5251e43e053943338c39d497814550bbfdebc9402451448e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-212d350ee709",
+            "source-198b7456a891",
+            "source-eb82437d25b2"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "fd78f1c3788c0ab6f41e2088f6170e671cb683730dc99df3e3338b3988ba99f8",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "what-is-agent": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "eada193dd5a1eafeb6ed1ff7b189929f489964d39df5ef4ab6e5e6d6ea34c354",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-5f9377b76eb1",
+            "source-a0755e01ea65"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "ab5335309a78735785c0adff9a7f880605d7dc12a9170c2c6680213029bb120d",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-5f9377b76eb1",
+            "source-a0755e01ea65"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "eada193dd5a1eafeb6ed1ff7b189929f489964d39df5ef4ab6e5e6d6ea34c354",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "3d20e4e8d82ecccabf569456ab1802c60a80fcddb4dc094f2531181ce45297e9",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-5f9377b76eb1",
+            "source-a0755e01ea65"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "eada193dd5a1eafeb6ed1ff7b189929f489964d39df5ef4ab6e5e6d6ea34c354",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "rag": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "88ff1cb661fcfa39a177ce781610cc9d70bdae0b8fd0b6fe3b4383cdfe9bed83",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-e1597d243763",
+            "source-0e0d8057a3f3"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "a61c3d0f6c3bf097e9e93079e4a89f2c595470999fe084162423f26aabd6d760",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-e1597d243763",
+            "source-0e0d8057a3f3"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "88ff1cb661fcfa39a177ce781610cc9d70bdae0b8fd0b6fe3b4383cdfe9bed83",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "0aa3613efd55b10a162c9f17226ae982c2a3d9d8dc5857d13fd4ff38e1c2d61f",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-e1597d243763",
+            "source-0e0d8057a3f3"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "88ff1cb661fcfa39a177ce781610cc9d70bdae0b8fd0b6fe3b4383cdfe9bed83",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "local-models-ollama": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "a835978f369b38a23480b89a6c7ef5a465a0b87e2abc963f75e46827a4e66d7a",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-360c9a75b4af",
+            "source-8620d3a6bf70",
+            "source-e353a4b7ef05"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "4554b9dfd4211c754147316d62759fdaf3d6bf769b77543795b21bf6575e692e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-360c9a75b4af",
+            "source-8620d3a6bf70",
+            "source-e353a4b7ef05"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a835978f369b38a23480b89a6c7ef5a465a0b87e2abc963f75e46827a4e66d7a",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "33cedf734ada24940bba985a8be45deebbb7d34adc4b9513356b30bfb298864a",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-360c9a75b4af",
+            "source-8620d3a6bf70",
+            "source-e353a4b7ef05"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a835978f369b38a23480b89a6c7ef5a465a0b87e2abc963f75e46827a4e66d7a",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "skills-and-mcp": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "1ff42c99533b2c555c51d8f6b4a9d919eff5bdc77d070b99038975fd41b5f24b",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-09d475a8b917",
+            "source-1aabd3b529fa",
+            "source-1f9a6ffe7d31",
+            "source-4f20dd09b4aa"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "4164dd5923d9f48d9cf9895f355fa4cf0c9e92793df304f83cd065a03f4ccb82",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-09d475a8b917",
+            "source-1aabd3b529fa",
+            "source-1f9a6ffe7d31",
+            "source-4f20dd09b4aa"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "1ff42c99533b2c555c51d8f6b4a9d919eff5bdc77d070b99038975fd41b5f24b",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "19429aa1638b619d7442fefcab41ba9f41576a8a39071822d6c239ef3d4c0f81",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-09d475a8b917",
+            "source-1aabd3b529fa",
+            "source-1f9a6ffe7d31",
+            "source-4f20dd09b4aa"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "1ff42c99533b2c555c51d8f6b4a9d919eff5bdc77d070b99038975fd41b5f24b",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "coding-agent-intro": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "cb9ca4a21870fd07ab579031b70a7a80490adb803526b4a307cfbfc9a99dac6e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "f8d7b9f2cfcb48288e8d363971002aabe1f596546b70fd371e61687707f4581c",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "cb9ca4a21870fd07ab579031b70a7a80490adb803526b4a307cfbfc9a99dac6e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "8960770babd1f00d3c9bf4f0586776a592580306cd09184bc471bc964586e91b",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "cb9ca4a21870fd07ab579031b70a7a80490adb803526b4a307cfbfc9a99dac6e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "claude-code-codex-workflow": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "345680e21625eae53915622e6c29c128281c469af89338d1170b61711c85df25",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "31610accc428d0a2f67596e903cf22915f2046f9f9bb77106bf0379730feeb43",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "345680e21625eae53915622e6c29c128281c469af89338d1170b61711c85df25",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "bd9d7c25b37291fe6dda4997fe22f622058befbc589519f61a47328c66a24eb9",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "345680e21625eae53915622e6c29c128281c469af89338d1170b61711c85df25",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "diff-test-rollback-review": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "1495125a06f60d121b103ed24b1c8c36ad422a3e9bcf4d59fdbbe85f72f969d4",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-2c009f25bdb2",
+            "source-b60b47425db1",
+            "source-bba5c4ab2f7d",
+            "source-b29b55358cc0"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "6e315c84b7c4f41747ce4ce7fe7dcc025d1360d557737ca87de21eedc7581634",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-2c009f25bdb2",
+            "source-b60b47425db1",
+            "source-bba5c4ab2f7d",
+            "source-b29b55358cc0"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "1495125a06f60d121b103ed24b1c8c36ad422a3e9bcf4d59fdbbe85f72f969d4",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "a10018aaa218cb73ce896a2a8eac78a5fb31c5ba6753beecd1cf0cd2577b414e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-2c009f25bdb2",
+            "source-b60b47425db1",
+            "source-bba5c4ab2f7d",
+            "source-b29b55358cc0"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "1495125a06f60d121b103ed24b1c8c36ad422a3e9bcf4d59fdbbe85f72f969d4",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "permissions-and-rollback": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "4f2cb2068946aacc9c6a9a922ea0949022fcd434fa754d88ac0f9339c9083228",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-c5c7c9c120ea",
+            "source-156a79e0909e",
+            "source-2c009f25bdb2",
+            "source-b60b47425db1",
+            "source-bba5c4ab2f7d",
+            "source-b29b55358cc0"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "c45ecfdca43958105b362456d24c0f8ccb4b3ac080a05006ec2934855257cac5",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-c5c7c9c120ea",
+            "source-156a79e0909e",
+            "source-2c009f25bdb2",
+            "source-b60b47425db1",
+            "source-bba5c4ab2f7d",
+            "source-b29b55358cc0"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "4f2cb2068946aacc9c6a9a922ea0949022fcd434fa754d88ac0f9339c9083228",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "d3801b27560575936764e0d6913a1dffe5512889d2a60f5783d985af748f3074",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-c5c7c9c120ea",
+            "source-156a79e0909e",
+            "source-2c009f25bdb2",
+            "source-b60b47425db1",
+            "source-bba5c4ab2f7d",
+            "source-b29b55358cc0"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "4f2cb2068946aacc9c6a9a922ea0949022fcd434fa754d88ac0f9339c9083228",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "plan-first-task-breakdown": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "378ad5a67540dfdfdfa3a3c2aa171d8cbfcae3c706a178bc4414c2f1f7f8a330",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "d4dcda76eee963e8ddaebfebea1e2cf9ad7a1a7af5d44c012cdb6dea3fc546b3",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "378ad5a67540dfdfdfa3a3c2aa171d8cbfcae3c706a178bc4414c2f1f7f8a330",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "69c25087da18f0a81248c8a707f733aaf140296bfbc00d1658e83feee486c6a7",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "378ad5a67540dfdfdfa3a3c2aa171d8cbfcae3c706a178bc4414c2f1f7f8a330",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "claude-code-handson": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "7b02ee36208506d5cacbe10144283ad65031a67594c15019b7bd2dcee750d119",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-f2727733ec27",
+            "source-79752d666a23",
+            "source-0526bc130098",
+            "source-7c26178a4fa1"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "ebe6ce7d0fd2a8da8384aa53b5c65d6a76ece7a4c358c7aa579ab80861400377",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-f2727733ec27",
+            "source-79752d666a23",
+            "source-0526bc130098",
+            "source-7c26178a4fa1"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "7b02ee36208506d5cacbe10144283ad65031a67594c15019b7bd2dcee750d119",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "bac13cd3a16badce80f243c42e237f86bcfdd1e5de000bd3b9508536b9f8d5e2",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-f2727733ec27",
+            "source-79752d666a23",
+            "source-0526bc130098",
+            "source-7c26178a4fa1"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "7b02ee36208506d5cacbe10144283ad65031a67594c15019b7bd2dcee750d119",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "codex-handson": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "c5b84f35f6e59457c1564e22b8ba832cd499655e5fc768f539b1dcd37cf5194e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-887cbc0985df",
+            "source-c5c7c9c120ea",
+            "source-09d0d7f23446"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "19293be6fc4ee3bc380e84f5337e3d204e4c135f437d542fbbfd45ed90418d91",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-887cbc0985df",
+            "source-c5c7c9c120ea",
+            "source-09d0d7f23446"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "c5b84f35f6e59457c1564e22b8ba832cd499655e5fc768f539b1dcd37cf5194e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "968c74a9a6edb97a19af8cac350c1f9660824641743467040cd193bca1fc39ce",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-887cbc0985df",
+            "source-c5c7c9c120ea",
+            "source-09d0d7f23446"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "c5b84f35f6e59457c1564e22b8ba832cd499655e5fc768f539b1dcd37cf5194e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "failure-modes-and-rescue": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "30e9627f8e34bb1a9a54b218efef1675433090fc3db61fae04f748769ca56359",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "0a9cceabccfb21f1c18b0b6da2a084d24cc07eb88716db691958c225465554b4",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "30e9627f8e34bb1a9a54b218efef1675433090fc3db61fae04f748769ca56359",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "ceba50171d92a55deaf76b65a0ff74ec7d0abff1b106ed3d62295467ecb9f5a7",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "30e9627f8e34bb1a9a54b218efef1675433090fc3db61fae04f748769ca56359",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "project-personal-website": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "0d13fbdcad6aa679a38be371ca7fb94bcecbdc6a4c1cee61a4cf56f87e809976",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "74a5e588bb2fdd3299b0fa0c021e56dfc21d7bc6872a463718091e982f0a9442",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "0d13fbdcad6aa679a38be371ca7fb94bcecbdc6a4c1cee61a4cf56f87e809976",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "a5724e6f5c7dcc3f21c9e6237b92e601b52a672dcb7f2edc9d798820fac6c5ac",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "0d13fbdcad6aa679a38be371ca7fb94bcecbdc6a4c1cee61a4cf56f87e809976",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "project-doc-note-tool": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "14d7cf9e04f72ffc8ecbf4c7d7ca081249cdba58879fdd5a9b5a4ae698ccd417",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "788f4a027c33a739fed3fa3d35f5b2d55d6096be98dac058dc904e8f49eb05db",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "14d7cf9e04f72ffc8ecbf4c7d7ca081249cdba58879fdd5a9b5a4ae698ccd417",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "f011e156e5dae81a287fc340be5839ac811246741b044666df94dce29ed2d30e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "14d7cf9e04f72ffc8ecbf4c7d7ca081249cdba58879fdd5a9b5a4ae698ccd417",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "project-meeting-notes": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "7a6f7d388c070d1acf97bf92376bc5bd8f1fdb8033015f2278c1ecfadb91fa4e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "40b2970df264c44ef94f5ff665a18ef3e7876ba25958f0f66b4b36d409cfec6b",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "7a6f7d388c070d1acf97bf92376bc5bd8f1fdb8033015f2278c1ecfadb91fa4e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "8ee5e62ca8a9381abf1d51c28086ca5301cc9885a0da84e45fe61e2703f4b538",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "7a6f7d388c070d1acf97bf92376bc5bd8f1fdb8033015f2278c1ecfadb91fa4e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "project-agent-console": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "be4cafce0a8284623b08bba47351a7aa1945ea84d5a028179b9b0dc0952ad016",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "26a5c3f80540ac6902737890820304fc74d423b7251e65633f66ba6d4e6597c2",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "be4cafce0a8284623b08bba47351a7aa1945ea84d5a028179b9b0dc0952ad016",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "122486b4b93f024451a7678c677f997d20a118595b41e137461e1d23cbe9bfaf",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "be4cafce0a8284623b08bba47351a7aa1945ea84d5a028179b9b0dc0952ad016",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "project-connect-api": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "7103b32b8cd414f146833f469bf07ded241a50ae9c51abe3eec407c173acdb5e",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "653838e938551e81d83199165fea6df5134cf3f308ff50c0c9a8d3325563c732",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "7103b32b8cd414f146833f469bf07ded241a50ae9c51abe3eec407c173acdb5e",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "8acac638b6ad3f5e89813ad16e54d112b247ab647a3e9aaca53bb9daa9647325",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "7103b32b8cd414f146833f469bf07ded241a50ae9c51abe3eec407c173acdb5e",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "project-skills-mcp": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "14b36cfbbdae96ad415347c2fa6c92a999c31957e7d8986221b96cd414a78856",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "9b193fd9f05dc270a1643c3113e623e261c4be2db8dd398475a2f8fcb4c317a1",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "14b36cfbbdae96ad415347c2fa6c92a999c31957e7d8986221b96cd414a78856",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "8d55dd0e7730a66a6638e90b168866258dc004d06d9eb914b2ba4fac1caa80bf",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "14b36cfbbdae96ad415347c2fa6c92a999c31957e7d8986221b96cd414a78856",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "privacy-and-data-tiers": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "e17c7923e8fe08c5d89f34a57968fd5bbb4ba04f9681fe076cd550f8956fad43",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-17b97719ede9",
+            "source-b47c45fea9f3",
+            "source-156a79e0909e"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "83757df53b286be85b31f0b7fa2f48dc7ef4c9a7636464055b090e80896ea365",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-17b97719ede9",
+            "source-b47c45fea9f3",
+            "source-156a79e0909e"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "e17c7923e8fe08c5d89f34a57968fd5bbb4ba04f9681fe076cd550f8956fad43",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "ec49527976ee1f42540b72d27748c54e838b1d27a40b18e99537de25fda7c841",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-17b97719ede9",
+            "source-b47c45fea9f3",
+            "source-156a79e0909e"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "e17c7923e8fe08c5d89f34a57968fd5bbb4ba04f9681fe076cd550f8956fad43",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "cost-quota-context": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "19aaedfc9a4aed5734e3f0d648c9ac849bd656c0c2adc69bad1ff1df990e6d9b",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-79752d666a23",
+            "source-3e6ab04e9fc3",
+            "source-50846cd1ff36"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "78bee1f3504a3d8e1bb1036efff1988fe2556c2921768ae394172ea95565c407",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-79752d666a23",
+            "source-3e6ab04e9fc3",
+            "source-50846cd1ff36"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "19aaedfc9a4aed5734e3f0d648c9ac849bd656c0c2adc69bad1ff1df990e6d9b",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "35e4ef475933bad78939cb5b5c2c201f440c3ff22487d9cad3d14c6b34164a61",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-79752d666a23",
+            "source-3e6ab04e9fc3",
+            "source-50846cd1ff36"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "19aaedfc9a4aed5734e3f0d648c9ac849bd656c0c2adc69bad1ff1df990e6d9b",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "content-review-and-responsibility": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "a661c4217e0a10b86cfb028601fa61e04afccaa3146c0b5a3ad118071e222815",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "3a8cbedaa72efa08578c07b85c9eda5c09c7ab77e8f57cbeb5fd89b4b0ea7d42",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a661c4217e0a10b86cfb028601fa61e04afccaa3146c0b5a3ad118071e222815",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "a00c305ac19f3a0e58b121169f969bf20f6e7f89e466bdb20fad6bc2e66bf04f",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a661c4217e0a10b86cfb028601fa61e04afccaa3146c0b5a3ad118071e222815",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "safe-use-and-team-rules": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "a32b81ad6eb718b2b6a8ef3d96c36d377dc552254420d21f080ae21d81783283",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-156a79e0909e",
+            "source-480520944c65",
+            "source-b47c45fea9f3",
+            "source-c5c7c9c120ea"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "cb581ad2ef15fd501b58cf8603e26702fc3eb389846a359f335e02b3f763ef47",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-156a79e0909e",
+            "source-480520944c65",
+            "source-b47c45fea9f3",
+            "source-c5c7c9c120ea"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a32b81ad6eb718b2b6a8ef3d96c36d377dc552254420d21f080ae21d81783283",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "1f0ff47d17a4cbc7aa6d3828af1483df3faf1f03e94909112bb3769a38da933f",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-156a79e0909e",
+            "source-480520944c65",
+            "source-b47c45fea9f3",
+            "source-c5c7c9c120ea"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "a32b81ad6eb718b2b6a8ef3d96c36d377dc552254420d21f080ae21d81783283",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "appendix-glossary": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "9ce090b9dc28c22a39bc8f858c4252beed36aa474bf3f39265cee559986a77d9",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "928059ca0ab750b8a3e7828c49610fb62c4edb466a4d9040f3518314d81d2ea0",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "9ce090b9dc28c22a39bc8f858c4252beed36aa474bf3f39265cee559986a77d9",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "99d9419416c90221ea47c5deb82c49deb4eb13bd15307dba672f343ad81ac4f9",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "9ce090b9dc28c22a39bc8f858c4252beed36aa474bf3f39265cee559986a77d9",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "appendix-prompts": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "bc5726746badf753a5fdb920668f452034eaceaf3e3f5a7a3313b35eb4687675",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "1b2026259c05c67054b5a5323072f921021b0b10d26c1bee1a102418e2727c61",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "bc5726746badf753a5fdb920668f452034eaceaf3e3f5a7a3313b35eb4687675",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "33ba4566a5b8851df73ef989284d57dbf2ec5eb416f7b4062fb1490005648bcb",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "bc5726746badf753a5fdb920668f452034eaceaf3e3f5a7a3313b35eb4687675",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "appendix-deep-reference": {
+      "kind": "product-guide",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "314eadef172550a347f4c1d9bd552f9a4a7eafa502dc819c8a9f8330ad414c9c",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-887cbc0985df",
+            "source-c5c7c9c120ea",
+            "source-f2727733ec27",
+            "source-79752d666a23",
+            "source-1aabd3b529fa",
+            "source-1f9a6ffe7d31",
+            "source-08ab6db324ee",
+            "source-c23f3e7cbb0e"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "47e95b36a10ece54dcd23cb8b9f6d1ff175f56e85d4fe2a67b49b91ca4872aaf",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-887cbc0985df",
+            "source-c5c7c9c120ea",
+            "source-f2727733ec27",
+            "source-79752d666a23",
+            "source-1aabd3b529fa",
+            "source-1f9a6ffe7d31",
+            "source-08ab6db324ee",
+            "source-c23f3e7cbb0e"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "314eadef172550a347f4c1d9bd552f9a4a7eafa502dc819c8a9f8330ad414c9c",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "8b9d28f21892451c9a543fed96d0c4e2d5fc61027e5d790d67fd7d771212a7c9",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [
+            "source-9660fd15b487",
+            "source-887cbc0985df",
+            "source-c5c7c9c120ea",
+            "source-f2727733ec27",
+            "source-79752d666a23",
+            "source-1aabd3b529fa",
+            "source-1f9a6ffe7d31",
+            "source-08ab6db324ee",
+            "source-c23f3e7cbb0e"
+          ],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "314eadef172550a347f4c1d9bd552f9a4a7eafa502dc819c8a9f8330ad414c9c",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    },
+    "appendix-harness": {
+      "kind": "concept",
+      "editions": {
+        "zh": {
+          "revision": 1,
+          "contentHash": "18d1d482a45ec0565a776439972d2bdf6f427b4365f1594ae2deb6cb2e0bfd9d",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "依据 2026-10-22 全书编辑修订记录登记版本与翻译基线；不表示逐一重新核验了全部外部来源。"
+            }
+          ]
+        },
+        "ja": {
+          "revision": 1,
+          "contentHash": "397c8e66dca9d552eddb7032291afeaf941b188ebd09503e9ccb082fda1ee7ab",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "2026-10-22 の全書編集記録に基づき、版と翻訳の基準を登録。外部資料すべてを改めて検証したことを意味しません。"
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "18d1d482a45ec0565a776439972d2bdf6f427b4365f1594ae2deb6cb2e0bfd9d",
+            "alignedAt": "2026-10-22"
+          }
+        },
+        "en": {
+          "revision": 1,
+          "contentHash": "b84a682cbfa86feca6033fb8e06f3980374526656fb0eb5f81a9516c76b18c22",
+          "reviewedAt": "2026-10-22",
+          "reviewScope": "edition",
+          "reviewEvidence": "docs/content-review-2026-10-22.md",
+          "sources": [],
+          "changes": [
+            {
+              "revision": 1,
+              "date": "2026-10-22",
+              "summary": "Record the edition and translation baseline from the 2026-10-22 editorial review; this does not assert a fresh check of every external source."
+            }
+          ],
+          "translatedFrom": {
+            "lang": "zh",
+            "revision": 1,
+            "contentHash": "18d1d482a45ec0565a776439972d2bdf6f427b4365f1594ae2deb6cb2e0bfd9d",
+            "alignedAt": "2026-10-22"
+          }
+        }
+      }
+    }
+  }
+}
