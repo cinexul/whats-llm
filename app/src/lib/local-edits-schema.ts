@@ -10,9 +10,9 @@ export const MAX_LOCAL_EDIT_TIMESTAMP = 8_640_000_000_000_000;
 export interface LocalChapterEdit {
 	lang: Lang;
 	slug: string;
-	/** null is a reset tombstone, retained so an older backup cannot restore a deleted edit. */
+	/** null是重置留下的删除标记，用于阻止旧备份恢复已删除的编辑。 */
 	markdown: string | null;
-	/** The official body captured on first save, or first save after a reset. */
+	/** 首次保存或重置后首次保存时记录的官方正文。 */
 	original: string;
 	updatedAt: number;
 }
@@ -35,7 +35,7 @@ function invalid(message: string): never {
 	throw new LocalEditError('invalid-data', `Invalid local chapter edits: ${message}`);
 }
 
-/** Validate the entire snapshot without filtering out, coercing, or mutating user data. */
+/** 校验整个快照，不删除记录、不强制转换类型，也不修改用户数据。 */
 export function validateLocalEdits(value: unknown): asserts value is LocalChapterEdit[] {
 	if (!Array.isArray(value)) invalid('expected an array');
 	if (value.length > MAX_LOCAL_EDITS_RECORDS) throw new LocalEditError('too-large', 'Too many local chapter edits');

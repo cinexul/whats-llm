@@ -21,6 +21,8 @@ Local content and imported Markdown pass through DOMPurify before rendering. Scr
 
 ## Verification
 
+The automated coverage below records the 2026-10-22 implementation. For current checkout commands, see the [project README](../README.en.md).
+
 Verified locally on 2026-10-22: Svelte check reports no errors or warnings; all 359 unit tests, 56 production-build browser tests, and 3 production PWA tests pass. The PWA checks include editing, reloading, and viewing the diff offline. Independent review also repeated the three concurrency cases six times (18 passes) and forced stale legacy-cache reads while confirming both saved chapters remained in IndexedDB. Content metadata and all 720 quiz registrations validate unchanged.
 
 Storage tests cover independent editions, malformed snapshots, size limits, failure retention, revision conflicts, restore markers, and baseline behavior. Backup tests cover both versions, merge ties, reset precedence, native/browser rollback, and store refresh. Renderer and diff tests cover entity decoding, legacy anchors, HTML sanitization, exact reconstruction, and bounded work for large changes.

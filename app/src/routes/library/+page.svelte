@@ -40,7 +40,7 @@
 	async function saveRecovery() {
 		busy = true; error = '';
 		try {
-			// Refresh the safety copy if learning changed after the preview was opened.
+			// 预览打开后若学习数据有变，重新生成安全副本。
 			if (candidate) recovery = await exportBackup();
 			if (recovery) { downloadBackup(recovery, 'whats-llm-before-import'); savedRecovery = true; status = t.saved; }
 		} catch (e) { failure(e); } finally { busy = false; }
@@ -53,8 +53,8 @@
 			recovery = result.backup; conflicts = result.conflicts; ties = result.ties; candidate = null; complete = true; status = t.complete;
 		} catch (e) {
 			if (e instanceof ImportError) recovery = e.recovery;
-			// A failed rollback can leave partial data. Keep the captured safety copy,
-			// and close the preview so downloading recovery never re-exports that state.
+			// 回滚失败可能只恢复部分数据；保留此前的安全副本，
+			// 并关闭预览，避免下载恢复副本时重新导出不完整的数据。
 			candidate = null; savedRecovery = false; failure(e);
 		} finally { busy = false; }
 	}

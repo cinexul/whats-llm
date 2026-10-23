@@ -69,7 +69,7 @@ function unique(values: string[], path: string) {
 	if (new Set(values).size !== values.length) fail(`${path}: duplicate ID`);
 }
 
-/** Reject the entire file before writing anything. No partial filtering of user data. */
+/** 发现无效数据时，在写入前拒绝整个文件，不能只删除无效记录后导入。 */
 export function validateBackup(value: unknown): asserts value is LearningBackup {
 	const b = object(value, 'root');
 	fields(b, ['format', 'version', 'exportedAt', 'annotations', 'chapterEdits', 'study', 'readingChapter', 'readingPositions', 'learningPaths', 'preferences'], 'root');
@@ -170,7 +170,7 @@ export function backupCounts(b: LearningBackup) {
 		chapterEdits: (b.chapterEdits ?? []).filter((edit) => edit.markdown !== null).length };
 }
 
-/** Export files must fit the same size limit accepted by the importer. */
+/** 导出文件必须满足导入器接受的同一大小限制。 */
 export function serializeBackup(backup: LearningBackup): string {
 	validateBackup(backup);
 	const text = JSON.stringify(backup, null, 2);

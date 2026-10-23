@@ -1,4 +1,4 @@
-// Last chapter and paragraph positions stay local and are included in portable backups.
+// 最近阅读的章节和段落位置保存在本地，并包含在导出备份中。
 import { writable } from 'svelte/store';
 import { allChapters, type Lang } from './manifest';
 
@@ -58,7 +58,7 @@ export function rememberChapter(lang: Lang, slug: string) {
 	if (!validChapter(lang, slug)) return;
 	readingChapter.update((current) => {
 		const next = { ...current, [lang]: slug };
-		try { localStorage.setItem(KEY, JSON.stringify(next)); } catch { /* Reading still works without storage. */ }
+		try { localStorage.setItem(KEY, JSON.stringify(next)); } catch { /* 存储不可用时仍可阅读。 */ }
 		return next;
 	});
 }
@@ -70,13 +70,13 @@ export function getReadingPosition(lang: Lang, slug: string): ReadingPosition | 
 export function saveReadingPosition(lang: Lang, slug: string, position: ReadingPosition) {
 	if (!validChapter(lang, slug) || !isPosition(position)) return;
 	positions = { ...positions, [lang]: { ...positions[lang], [slug]: position } };
-	try { localStorage.setItem(POSITIONS_KEY, JSON.stringify(positions)); } catch { /* Keep the current session usable. */ }
+	try { localStorage.setItem(POSITIONS_KEY, JSON.stringify(positions)); } catch { /* 保持当前会话可用。 */ }
 }
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
 const READING_INSET = 16;
 
-/** Text-based anchors survive preceding content insertions and font/viewport changes. */
+/** 基于文本的锚点可适应前文插入以及字体或视口变化。 */
 export function anchorReadingBlocks(root: HTMLElement) {
 	const duplicates = new Map<string, number>();
 	for (const block of Array.from(root.children)) {

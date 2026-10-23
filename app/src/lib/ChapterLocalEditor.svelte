@@ -39,7 +39,7 @@
 		if (saving || opening || opened) return;
 		opening = true;
 		try {
-			// Capture a fresh revision once per editor session, never overwrite an open draft.
+			// 每次打开编辑器时获取一次最新修订号，绝不覆盖已打开的草稿。
 			const latest = await getLocalEditRecord(lang, slug);
 			if (disposed) return;
 			expectedRevision = latest?.updatedAt ?? null;
@@ -111,7 +111,7 @@
 		previewError = false;
 		void renderMarkdown(source).then((result) => {
 			if (cancelled) return;
-			// Preview has no section navigation; avoid duplicate IDs with the reading body.
+			// 预览不提供小节导航；移除ID，避免与阅读正文的ID重复。
 			const template = document.createElement('template');
 			template.innerHTML = result.html;
 			for (const element of template.content.querySelectorAll('[id]')) element.removeAttribute('id');
@@ -256,8 +256,8 @@
 	dialog.compact textarea { min-height: calc(var(--editor-height, 100dvh) * .45); }
 	dialog.compact .eyebrow { display: none; }
 	dialog.compact header { padding-top: .6rem; }
-	/* With a keyboard or short landscape viewport, keep the whole editor scrollable
-	   instead of letting its fixed header/footer squeeze the text area to zero. */
+	/* 弹出键盘或横屏视口较矮时，让整个编辑器可滚动，
+	   避免固定的页头和页脚将文本区挤到零高度。 */
 	@media (max-height: 520px) {
 		dialog[open] { display: block; overflow-y: auto; }
 		.editor-body { overflow: visible; }

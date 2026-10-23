@@ -11,8 +11,8 @@ export interface QuizOption {
 }
 
 export interface QuizQuestion {
-	id: string | null; // Stable within a chapter; independent of display order and language.
-	revision: number; // Editorial content revision, including wording-only changes.
+	id: string | null; // 在同一章节内保持稳定，不受显示顺序和语言影响。
+	revision: number; // 内容修订号，仅修改措辞时也需更新。
 	n: number; // 設問番号
 	tag: string; // 種別タグ(例: 基础·概念题)
 	promptHtml: string; // 設問文
@@ -29,7 +29,7 @@ export interface Quiz {
 const md = new Marked({ gfm: true });
 const inline = (s: string): string => md.parseInline(s.trim()) as string;
 
-// Legacy djb2 hash. Keep this unchanged so existing study records remain readable.
+// 旧版djb2哈希；保持不变，确保已有学习记录仍可读取。
 export function questionHash(promptHtml: string): string {
 	let h = 5381;
 	for (let i = 0; i < promptHtml.length; i++) {
@@ -46,19 +46,20 @@ interface QuestionRegistration {
 }
 const registry = registrations as Record<string, Record<string, Record<string, QuestionRegistration>>>;
 
-/** Options and correctness define the assessment; a wording edit does not reset mastery. */
+/** 选项与正确答案共同确定测评内容；仅修改题干措辞不重置掌握程度。 */
 export function assessmentFingerprint(q: QuizQuestion): string {
 	return questionHash(JSON.stringify([q.options, q.correct]));
 }
 
-/** Maintenance checks require an acknowledged revision when any quiz content changes. */
+/** 测验内容有任何变更，都要在维护检查中确认修订号。 */
 export function contentFingerprint(q: QuizQuestion): string {
 	return questionHash(JSON.stringify([q.tag, q.promptHtml, q.options, q.correct, q.explanationHtml]));
 }
 
-/** The storage API still accepts qhash strings in both SQLite and localStorage.
- * Legacy assessment IDs are immutable. Changed choices or keys get a fresh identity
- * automatically, even if an editor forgets to increment the content revision.
+/**
+ * SQLite和localStorage的存储API仍接受qhash字符串。
+ * 旧测评ID不能更改。选项或答案变化时自动生成新标识，
+ * 即使编辑者忘记提高内容修订号也一样。
  */
 export function questionIdentity(q: QuizQuestion, lang: Lang, slug: string): string {
 	const assessment = assessmentFingerprint(q);

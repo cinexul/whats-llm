@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Download EmbeddingGemma-300m (4-bit ONNX) for offline semantic search.
+# 下载EmbeddingGemma-300m（4位ONNX），用于离线语义搜索。
 #
-# Files land flat in src-tauri/resources/model/. Run once before building the
-# index (cargo run -p build-index --release) or the app.
+# 文件直接存放在src-tauri/resources/model/。构建索引
+# （cargo run -p build-index --release）或应用之前，先运行一次本脚本。
 #
-# Source repo: https://huggingface.co/onnx-community/embeddinggemma-300m-ONNX
-# Behind the Great Firewall? Use a mirror:  HF_ENDPOINT=https://hf-mirror.com ./scripts/fetch-model.sh
+# 来源仓库：https://huggingface.co/onnx-community/embeddinggemma-300m-ONNX
+# 网络访问受限时可使用镜像：HF_ENDPOINT=https://hf-mirror.com ./scripts/fetch-model.sh
 set -euo pipefail
 
 ENDPOINT="${HF_ENDPOINT:-https://huggingface.co}"

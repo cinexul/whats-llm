@@ -30,7 +30,7 @@
 	});
 
 	$effect(() => {
-		// A confirmation never carries over when switching to a different path.
+		// 切换到其他学习路径后，不沿用此前的确认状态。
 		if (resetFor && selected?.id !== resetFor) resetFor = null;
 	});
 

@@ -32,9 +32,9 @@ function contentEncode(): Plugin {
 	};
 }
 
-// Bind the generated SPA shell to the same version embedded in $service-worker.
-// Stamping the actual response avoids mixing a newer deployment's index.html with
-// an older active worker's retained hashed assets.
+// 让生成的SPA基础页面与$service-worker中的版本保持一致。
+// 在实际响应中写入版本标记，避免把新部署的index.html与
+// 仍在运行的旧worker保留的带哈希名称的资源混用。
 function offlineAdapter() {
 	const staticAdapter = adapter({ fallback: 'index.html' });
 	return {
@@ -58,10 +58,10 @@ export default defineConfig({
 	plugins: [
 		contentEncode(),
 		sveltekit({
-			// Register explicitly so desktop Tauri and development never get a service worker.
+			// 由代码主动注册，确保Tauri桌面端和开发环境不会注册service worker。
 			serviceWorker: { register: false },
 			compilerOptions: {
-				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
+				// 除依赖库外，项目强制使用runes模式；Svelte 6中可移除此设置。
 				runes: ({ filename }) => filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 			// SPA 構成: 全ページをクライアント側で描画し、本文を HTML として書き出さない

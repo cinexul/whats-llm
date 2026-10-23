@@ -12,7 +12,7 @@ an English gloss.
 
 ## Run it
 
-Use Node.js 24.15+ (see `app/package.json` for compatible versions) and npm. Rust core tests use the stable toolchain.
+Use Node.js 24.x, at least 24.15.0 (see `app/package.json` for other compatible versions), and npm. Rust core tests use the stable toolchain.
 
 ```bash
 cd app
@@ -26,13 +26,34 @@ npm run dev        # open http://localhost:1420
 
 ## Layout
 
-- `app/` — the SvelteKit + Tauri application
+- `app/src/routes/` and `app/src/lib/*.svelte` — Svelte pages and components
+- `app/src/lib/` — TypeScript application logic, localized copy, and content metadata
 - `app/src/lib/content/{zh,ja,en}/` — the book chapters, in Chinese, Japanese, and English
+- `app/src-tauri/` — the Tauri desktop shell and Rust search/study cores
+- `app/scripts/` — content checks, static preview, and optional model download tools
+- `docs/` — usage guides, maintenance instructions, and dated validation records; start with the [documentation index](docs/README.md)
+- `.github/workflows/` — GitHub checks and release configuration, explained below
+
+Lockfiles and build configuration support reproducible installation. Local outputs such as `node_modules/`, `build/`, `.svelte-kit/`, and Rust `target/` are ignored by Git.
 
 ## Tech
 
-Tauri 2 (Rust shell) + SvelteKit (static SPA); Markdown rendered with `marked` +
+Svelte 5 + SvelteKit (static SPA) + TypeScript, with a Tauri 2 / Rust desktop shell; Markdown rendered with `marked` +
 `shiki`. Desktop builds bundle the book and fonts; web readers can explicitly download the complete book for offline use.
+
+GitHub Languages counts source bytes, not framework usage or compiled output. TypeScript holds application logic and trilingual teaching data; Svelte provides pages and components. See [Linguist’s rules](https://github.com/github-linguist/linguist/blob/main/docs/how-linguist-works.md).
+
+## GitHub automation
+
+A workflow is a list of tasks GitHub runs on specified events. It is not required to launch the app:
+
+| File | Trigger | Purpose |
+| --- | --- | --- |
+| [`check.yml`](.github/workflows/check.yml) | Pushes to `main` and pull requests | Type, content, and quiz-registry checks; production build and Rust core tests. Does not publish the app. |
+| [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | Mondays at 07:17 UTC, or manually | Reports overdue editorial reviews and saves source-link diagnostics. Does not edit chapters or renew review dates. |
+| [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually supplying a version | Builds a Windows NSIS installer and creates a GitHub Release **draft** for manual review and publication. |
+
+Ordinary `main` pushes do not trigger a release; no workflow currently deploys the website. Failed source-link checks need human review.
 
 ## Reading and practice
 
@@ -44,7 +65,7 @@ Tauri 2 (Rust shell) + SvelteKit (static SPA); Markdown rendered with `marked` +
 - **Mistake practice:** review by topic or chapter while preserving history; stable question identity is separate from assessment revisions.
 - **Content maintenance:** chapter revision, review and source information, with checks for unacknowledged changes and translation alignment.
 
-Find these features on the home page and above the contents. See the [feature and validation record](docs/learning-book.md), [PWA deployment guide](docs/pwa.md), and [content maintenance guide](docs/content-maintenance.md).
+Find these features on the home page and above the contents. Browse the [documentation index](docs/README.md), [PWA deployment guide](docs/pwa.md), and [content maintenance guide](docs/content-maintenance.md). The [feature and validation record](docs/learning-book.md) preserves screenshots and results for that revision.
 
 ## Content revision: 2026-10-22
 
@@ -58,14 +79,10 @@ From `app/`:
 npm run check
 npm run content:check
 npm run check:quiz
-npm test
 npm run build
-npx playwright install chromium
-npm run test:e2e
-npm run test:e2e:pwa  # uses the production build above to test download, offline use and updates
 ```
 
-Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to use an existing Chromium installation. The Rust core tests need neither a desktop WebView nor an embedding model:
+These commands validate types, content registrations, and the build; they do not replace interactive acceptance checks. The Rust core tests need neither a desktop WebView nor an embedding model. In a separate terminal, start from the repository root:
 
 ```bash
 cd app/src-tauri

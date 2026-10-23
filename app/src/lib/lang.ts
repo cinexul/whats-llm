@@ -1,4 +1,4 @@
-// Display language, persisted locally when storage is available.
+// 界面显示语言；存储可用时保存到本地。
 // SSR / window の無い環境でも壊れないようガードする。
 import { writable } from 'svelte/store';
 import type { Lang } from './manifest';
@@ -17,5 +17,5 @@ export const lang = writable<Lang>(load());
 
 export function setLang(next: Lang) {
 	lang.set(next);
-	try { localStorage.setItem(KEY, next); } catch { /* Keep language switching available for this session. */ }
+	try { localStorage.setItem(KEY, next); } catch { /* 本次会话仍可切换语言。 */ }
 }

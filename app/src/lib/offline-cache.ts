@@ -1,4 +1,4 @@
-/** Versioned, all-or-nothing storage for the complete static book. */
+/** 按版本保存完整静态书籍，整本保存成功后才可使用。 */
 export type OfflineError = 'network' | 'storage' | 'incomplete' | 'deployment';
 export type OfflineSnapshot = {
 	version: string;
@@ -27,7 +27,7 @@ export class OfflineBook {
 	private downloading?: Promise<OfflineSnapshot>;
 
 	constructor(private options: Options) {
-		// Different books hosted on the same origin must never clean up each other's caches.
+		// 同源部署的不同书籍绝不能清理彼此的缓存。
 		this.prefix = `whats-llm-book:${new URL(options.scope).pathname}:`;
 		this.name = `${this.prefix}${options.version}`;
 		this.shell = new URL('index.html', options.scope).href;
@@ -89,8 +89,8 @@ export class OfflineBook {
 					throw new Error('Asset unavailable; do not save an incomplete book');
 				}
 				if (asset === this.shell) {
-					// Read the version from this response itself: a separate version.json check
-					// can race a deployment between checking and fetching the mutable shell.
+					// 从响应本身读取版本。若单独检查version.json，
+					// 检查后到获取基础页面之间可能正好发生部署，导致版本不一致。
 					const html = await response.clone().text();
 					const stamp = html.match(/<meta name="offline-book-build" content="([^"]*)">/)?.[1];
 					if (stamp !== encodeURIComponent(this.options.version)) {
@@ -103,12 +103,12 @@ export class OfflineBook {
 				this.snapshot.completed++;
 				emit();
 			};
-			// Reject a newer deployment before spending bandwidth on the older worker's assets.
+			// 先拒绝新部署的响应，避免浪费带宽下载旧worker的资源。
 			await save(this.shell);
 			const remaining = this.assets.filter((asset) => asset !== this.shell);
 			let next = 0;
 			let failure: unknown;
-			// Bound memory and connection use; settle all writers before removing a failed staging cache.
+			// 限制内存和连接占用；等待所有写入结束后，才删除失败的暂存缓存。
 			await Promise.all(Array.from({ length: Math.min(8, remaining.length) }, async () => {
 				while (!failure && next < remaining.length) {
 					try { await save(remaining[next++]); }
@@ -116,14 +116,14 @@ export class OfflineBook {
 				}
 			}));
 			if (failure) throw failure;
-			// This is the commit point. Fetch never serves a staging cache as a complete book.
+			// 此处提交；fetch不会将暂存缓存当作完整书籍返回。
 			await cache.put(this.marker, new Response(JSON.stringify({
 				version: this.options.version, total: this.assets.length, savedAt: Date.now()
 			}), { headers: { 'content-type': 'application/json' } }));
 			if (!(await this.complete(cache, true))) throw new Error('Incomplete cache');
 			this.snapshot = { ...this.snapshot, phase: 'ready', ready: true };
 		} catch (error) {
-			try { await this.options.storage.delete(this.name); } catch { /* Report storage failure below. */ }
+			try { await this.options.storage.delete(this.name); } catch { /* 在下方报告存储失败。 */ }
 			const name = error && typeof error === 'object' && 'name' in error ? error.name : '';
 			this.snapshot = {
 				...this.snapshot, phase: 'error', ready: false,
@@ -134,7 +134,7 @@ export class OfflineBook {
 		return { ...this.snapshot };
 	}
 
-	/** Keep one previous complete version for open tabs and interrupted/automatic updates. */
+	/** 保留一个旧的完整版本，供已打开的标签页使用，并应对更新中断或自动更新。 */
 	async cleanup(): Promise<void> {
 		if (!(await this.status()).ready) return;
 		const old: { name: string; savedAt: number }[] = [];
@@ -145,8 +145,8 @@ export class OfflineBook {
 			if (marker) {
 				try { old.push({ name, savedAt: (await marker.json()).savedAt ?? 0 }); } catch { await this.options.storage.delete(name); }
 			}
-			// An unmarked cache may belong to another worker's in-flight download.
-			// That worker alone removes its staging cache on failure/retry.
+			// 未标记完成的缓存可能属于另一个worker正在进行的下载。
+			// 仅由该worker在失败或重试时删除自己的暂存缓存。
 		}
 		old.reverse().sort((a, b) => b.savedAt - a.savedAt);
 		await Promise.all(old.slice(1).map(({ name }) => this.options.storage.delete(name)));
@@ -160,7 +160,7 @@ export class OfflineBook {
 				const cached = await current.match(navigation ? this.shell : request);
 				if (cached) return cached;
 			}
-		} catch { /* A storage restriction must not break ordinary online reading. */ }
+		} catch { /* 存储限制不能影响正常的在线阅读。 */ }
 		try {
 			const response = await this.options.fetch(request);
 			if (response.ok) return response;
@@ -174,7 +174,7 @@ export class OfflineBook {
 	}
 
 	private async previousResponse(request: Request, navigation: boolean): Promise<Response | undefined> {
-		// Only this application's completed caches, never arbitrary same-origin/third-party resources.
+		// 只使用本应用已完成的缓存，不读取其他同源或第三方资源。
 		for (const name of (await this.options.storage.keys()).reverse()) {
 			if (!name.startsWith(this.prefix) || name === this.name) continue;
 			const cache = await this.options.storage.open(name);

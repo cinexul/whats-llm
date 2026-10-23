@@ -1,11 +1,11 @@
-//! EmbeddingGemma-300m (4-bit ONNX) inference via fastembed.
+//! 通过fastembed运行EmbeddingGemma-300m（4位ONNX）推理。
 //!
-//! The same code path runs at build time (to precompute passage vectors) and at
-//! runtime in the Tauri app (to embed the query), so the two sets of vectors are
-//! always comparable. Model files are loaded from a local directory — nothing is
-//! downloaded at runtime, which keeps the app fully offline.
+//! 构建时预先计算正文片段向量，Tauri应用运行时计算查询向量，
+//! 两者使用同一套代码，确保向量可以直接比较。
+//! 模型文件从本地目录加载，运行时不下载任何文件，
+//! 使应用保持完全离线。
 //!
-//! Expected files in `model_dir` (from `onnx-community/embeddinggemma-300m-ONNX`):
+//! `model_dir`需包含以下文件（来自`onnx-community/embeddinggemma-300m-ONNX`）：
 //!   model_q4.onnx, model_q4.onnx_data,
 //!   tokenizer.json, config.json, special_tokens_map.json, tokenizer_config.json
 
@@ -19,19 +19,19 @@ use fastembed::{
 
 use crate::index::normalize;
 
-/// EmbeddingGemma output dimension (full Matryoshka width).
+/// EmbeddingGemma输出维度（完整的Matryoshka维度）。
 pub const DIM: usize = 768;
 
-// EmbeddingGemma uses task-specific prompts; retrieval query vs document differ.
+// EmbeddingGemma按任务使用不同提示词；检索查询与文档的提示词不同。
 const QUERY_PREFIX: &str = "task: search result | query: ";
 const DOC_PREFIX: &str = "title: none | text: ";
 
-// 4-bit ONNX model and its external weight file.
+// 4位ONNX模型及其外部权重文件。
 const MODEL_FILE: &str = "model_q4.onnx";
 const MODEL_DATA_FILE: &str = "model_q4.onnx_data";
-// The name the ONNX graph uses to reference its external weights.
+// ONNX计算图引用外部权重时使用的名称。
 const EXTERNAL_INITIALIZER: &str = "model_q4.onnx_data";
-// The ONNX graph exposes a pooled+projected sentence vector under this output.
+// ONNX计算图通过此输出提供经池化和投影后的句子向量。
 const OUTPUT_NAME: &str = "sentence_embedding";
 
 const MAX_LENGTH: usize = 1024;
@@ -41,7 +41,7 @@ pub struct Embedder {
 }
 
 impl Embedder {
-    /// Load the model from a directory of bundled files.
+    /// 从随应用打包的文件目录加载模型。
     pub fn load(model_dir: &Path) -> Result<Self> {
         let read = |name: &str| -> Result<Vec<u8>> {
             std::fs::read(model_dir.join(name))
@@ -72,7 +72,7 @@ impl Embedder {
         Ok(Self { model })
     }
 
-    /// Embed passages (documents) and return L2-normalized vectors.
+    /// 为正文片段（文档）生成嵌入，返回经L2归一化的向量。
     pub fn embed_documents(&mut self, texts: &[String]) -> Result<Vec<Vec<f32>>> {
         let prefixed: Vec<String> = texts.iter().map(|t| format!("{DOC_PREFIX}{t}")).collect();
         let mut vectors = self.model.embed(prefixed, None)?;
@@ -82,7 +82,7 @@ impl Embedder {
         Ok(vectors)
     }
 
-    /// Embed a single query and return its L2-normalized vector.
+    /// 为单条查询生成嵌入，返回经L2归一化的向量。
     pub fn embed_query(&mut self, query: &str) -> Result<Vec<f32>> {
         let mut vectors = self.model.embed(vec![format!("{QUERY_PREFIX}{query}")], None)?;
         let mut v = vectors

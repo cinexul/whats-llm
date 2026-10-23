@@ -1,23 +1,23 @@
 use serde::{Deserialize, Serialize};
 
-/// One indexed unit: a chunk of a chapter that lives under a single H2 section.
+/// 一个索引条目：位于同一H2小节内的章节片段。
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct Passage {
-    /// Chapter slug (matches the file name and the route /chapter/<slug>).
+    /// 章节slug，与文件名及路由/chapter/<slug>对应。
     pub slug: String,
-    /// Chapter title, taken from toc.json (shown in results).
+    /// 章节标题，取自toc.json，用于展示搜索结果。
     pub title: String,
-    /// The H2 section heading this chunk falls under ("" for the chapter intro).
+    /// 片段所属的H2小节标题（章节开篇为""）。
     pub heading: String,
-    /// Anchor id of that heading, generated the same way as markdown.ts so the
-    /// frontend can deep-link to /chapter/<slug>#<anchor> ("" when none).
+    /// 标题锚点ID，生成方式与markdown.ts一致，供前端
+    /// 直接跳转到/chapter/<slug>#<anchor>（无锚点时为""）。
     pub anchor: String,
-    /// Plain text of the chunk, used both for embedding and for the result snippet.
+    /// 片段的纯文本，同时用于生成嵌入和展示搜索摘要。
     pub text: String,
 }
 
-/// A per-language index: passage metadata plus a row-major matrix of
-/// L2-normalized embedding vectors (`passages.len() * dim` floats).
+/// 单种语言的索引：片段元数据，以及按行存储的
+/// L2归一化嵌入向量矩阵（`passages.len() * dim`个浮点数）。
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SearchIndex {
     pub dim: usize,
@@ -25,7 +25,7 @@ pub struct SearchIndex {
     pub vectors: Vec<f32>,
 }
 
-/// A ranked search result handed back to the UI.
+/// 返回给UI的已排序搜索结果。
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SearchHit {
     pub slug: String,

@@ -31,8 +31,8 @@
 	const current = $derived(queue[idx]);
 	const finished = $derived(!loading && queue.length > 0 && idx >= queue.length);
 
-	// Freeze the queue for a session. A language/filter change invalidates every
-	// pending read and save callback before it can mutate the newly visible session.
+	// 本次复习队列保持固定。切换语言或筛选条件时，使所有待执行的
+	// 读取和保存回调失效，防止它们修改新显示的复习会话。
 	$effect(() => {
 		const l = $lang;
 		const selection = mode === 'mistakes' ? new Set(chapters.filter((ch) => !chapter || ch.slug === chapter).map((ch) => ch.slug)) : undefined;

@@ -1,5 +1,5 @@
-//! Portable snapshots include retired cards and complete review/read metadata.
-//! Import validates first, then merges every table in one SQLite transaction.
+//! 可导入导出的快照，包含已停用卡片及完整的复习和阅读元数据。
+//! 导入时先校验，再在同一个SQLite事务中合并所有表。
 use std::collections::{BTreeMap, HashMap, HashSet};
 use rusqlite::{params, Connection};
 use crate::{Card, Store, StudyError, StudyResult, CARD_COLS, get_card, row_to_card, upsert_card};
@@ -85,10 +85,10 @@ impl Store {
         let tx = self.conn.unchecked_transaction()?;
         for c in &incoming.cards {
             let old = get_card(&tx, &c.id)?;
-            // Equal timestamps retain this device's value, matching the browser merge.
+            // 时间戳相同时保留本设备的值，与浏览器的合并规则一致。
             if old.as_ref().map_or(true, |old| c.last_review.unwrap_or(0) > old.last_review.unwrap_or(0)) { upsert_card(&tx, c)?; }
         }
-        // Keep event multiplicity, but importing the same snapshot twice adds no events.
+        // 保留重复事件的实际数量，但重复导入同一快照不会增加事件。
         let mut seen = HashMap::<String, i64>::new();
         for r in &incoming.reviews {
             let key = format!("{:?}", (r.card_id.as_str(), r.ts, r.rating, r.elapsed_ms, r.scheduled_days, r.stability, r.difficulty));
@@ -124,7 +124,7 @@ mod tests {
     #[test]
     fn complete_roundtrip_and_repeat_import_are_lossless() {
         let source = Store::open_in_memory().unwrap(); seed(&source, "retired-question", 1000); seed(&source, "current-question", 2000);
-        // Identical events are possible; preserve multiplicity on every round trip.
+        // 完全相同的事件也可能真实发生；每次导出再导入都要保留其数量。
         source.conn.execute("INSERT INTO reviews (card_id, ts, rating, elapsed_ms, scheduled_days, stability, difficulty) SELECT card_id, ts, rating, elapsed_ms, scheduled_days, stability, difficulty FROM reviews LIMIT 1", []).unwrap();
         let exported = source.export_snapshot().unwrap();
         let target = Store::open_in_memory().unwrap();

@@ -1,9 +1,9 @@
-//! Offline index builder.
+//! 离线索引构建工具。
 //!
-//! Reads every chapter (zh / ja / en), splits it into passages, embeds them with
-//! EmbeddingGemma, and writes one `<lang>.idx` per language. Run this once after
-//! fetching the model (scripts/fetch-model.sh); the app loads the result at
-//! runtime. Re-run it whenever the book text changes.
+//! 读取所有章节（zh / ja / en），分割为文本片段后用EmbeddingGemma
+//! 生成嵌入向量，并为每种语言写入一个`<lang>.idx`。下载模型后
+//! （scripts/fetch-model.sh）运行一次；应用在运行时加载生成的索引。
+//! 每次修改书籍正文后都需重新运行。
 //!
 //!   cargo run -p build-index --release
 
@@ -66,7 +66,7 @@ fn build_language(
         let path = lang_dir.join(format!("{slug}.md"));
         let md = match fs::read_to_string(&path) {
             Ok(s) => s,
-            Err(_) => continue, // draft chapter with no body yet
+            Err(_) => continue, // 尚无正文的草稿章节
         };
         passages.extend(chunk_chapter(slug, title, &md));
     }
@@ -103,7 +103,7 @@ fn build_language(
     Ok(())
 }
 
-/// Flatten toc.json into an ordered list of (slug, title) for one language.
+/// 将toc.json中指定语言的目录转换为有序的(slug, title)列表。
 fn chapters_for(toc: &serde_json::Value, lang: &str) -> Vec<(String, String)> {
     let mut out = Vec::new();
     let Some(parts) = toc.get(lang).and_then(|v| v.as_array()) else {

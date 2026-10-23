@@ -1,20 +1,20 @@
-//! Split a chapter's Markdown into plain-text passages for embedding.
+//! 将章节Markdown分割为纯文本片段，用于生成嵌入向量。
 //!
-//! Passages never span an H2 boundary, so each one carries the heading it sits
-//! under (and that heading's anchor id). The anchor is generated the same way as
-//! `markdown.ts` in the frontend, so results can deep-link to the exact section.
+//! 片段不跨越H2标题边界，每个片段都记录所属标题及其锚点ID。
+//! 锚点的生成方式与前端`markdown.ts`保持一致，
+//! 使搜索结果能够直接跳转到对应小节。
 
 use std::collections::HashSet;
 
 use crate::types::Passage;
 
-/// Flush a passage once the buffer reaches roughly this many characters.
+/// 缓冲区达到大约此字符数时，输出一个片段。
 const TARGET_CHARS: usize = 480;
-/// Buffers shorter than this are folded into the previous passage rather than
-/// kept as their own (avoids tiny, low-signal chunks).
+/// 短于此长度的缓冲内容并入前一个片段，不单独保留，
+/// 避免产生过短、信息量不足的片段。
 const MIN_CHARS: usize = 60;
 
-/// Turn one chapter into a list of passages.
+/// 将一个章节转换为片段列表。
 pub fn chunk_chapter(slug: &str, title: &str, markdown: &str) -> Vec<Passage> {
     let body = cut_at_quiz(markdown);
     let body = strip_code_fences(body);
@@ -26,9 +26,9 @@ pub fn chunk_chapter(slug: &str, title: &str, markdown: &str) -> Vec<Passage> {
         if let Some((level, text)) = heading(trimmed) {
             chunker.end_paragraph();
             match level {
-                1 => {} // chapter title: skip
+                1 => {} // 跳过章节标题
                 2 => chunker.set_heading(&text),
-                _ => chunker.add_line(&text), // H3+ reads as body within the section
+                _ => chunker.add_line(&text), // H3及以下标题按当前小节的正文处理
             }
         } else if trimmed.is_empty() {
             chunker.end_paragraph();
@@ -64,7 +64,7 @@ impl<'a> Chunker<'a> {
         }
     }
 
-    /// Append a body line to the current paragraph.
+    /// 向当前段落追加一行正文。
     fn add_line(&mut self, line: &str) {
         let s = inline_plain(line);
         let s = s.trim();
@@ -77,8 +77,8 @@ impl<'a> Chunker<'a> {
         self.para.push_str(s);
     }
 
-    /// A blank line (or a heading/EOF) ends the current paragraph; once enough
-    /// text has accumulated, the buffer becomes a passage.
+    /// 空行、标题或文件结束表示当前段落结束；文本足够时，
+    /// 将缓冲内容输出为片段。
     fn end_paragraph(&mut self) {
         let p = self.para.trim();
         if !p.is_empty() {
@@ -93,9 +93,9 @@ impl<'a> Chunker<'a> {
         }
     }
 
-    /// Finalize the buffered text into a passage. A short tail is folded into the
-    /// previous passage of the same section to avoid tiny fragments; if there is
-    /// no such passage it is still kept (never drop indexable content).
+    /// 将缓冲内容输出为片段。过短的尾部并入同一小节的前一个片段，
+    /// 避免片段过短；若同一小节没有前一个片段，则单独保留，
+    /// 不丢弃任何可索引的内容。
     fn flush(&mut self) {
         let text = self.buf.trim().to_string();
         self.buf.clear();
@@ -120,7 +120,7 @@ impl<'a> Chunker<'a> {
         });
     }
 
-    /// Start a new H2 section: the buffered text belonged to the previous one.
+    /// 开始新的H2小节；当前缓冲内容属于前一个小节。
     fn set_heading(&mut self, raw: &str) {
         self.flush();
         self.heading = inline_plain(raw).trim().to_string();
@@ -134,7 +134,7 @@ impl<'a> Chunker<'a> {
     }
 }
 
-/// Drop everything from the end-of-chapter quiz onward (zh / ja / en headings).
+/// 移除章末测验及其后续内容（识别zh / ja / en标题）。
 fn cut_at_quiz(md: &str) -> &str {
     let mut offset = 0usize;
     for line in md.split_inclusive('\n') {
@@ -150,7 +150,7 @@ fn cut_at_quiz(md: &str) -> &str {
     md
 }
 
-/// Remove fenced code blocks (```...```), keeping a blank line in their place.
+/// 移除围栏代码块（```...```），在原处保留一个空行。
 fn strip_code_fences(md: &str) -> String {
     let mut out = String::new();
     let mut in_fence = false;
@@ -168,8 +168,8 @@ fn strip_code_fences(md: &str) -> String {
     out
 }
 
-/// If a line is an ATX heading (`#`..`######` followed by a space), return its
-/// level and the heading text.
+/// 若该行是ATX标题（`#`..`######`后接空格），返回
+/// 标题级别和标题文字。
 fn heading(line: &str) -> Option<(usize, String)> {
     if !line.starts_with('#') {
         return None;
@@ -179,20 +179,20 @@ fn heading(line: &str) -> Option<(usize, String)> {
         return None;
     }
     let rest = &line[level..];
-    // Require a space after the hashes, otherwise it's not a heading (e.g. "#tag").
+    // 井号后必须有空格，否则不算标题（例如"#tag"）。
     if !rest.starts_with([' ', '\t']) {
         return None;
     }
     Some((level, rest.trim().to_string()))
 }
 
-/// Strip light inline Markdown so the text reads cleanly for embedding/snippets.
+/// 去除简单的行内Markdown标记，供嵌入计算和搜索摘要使用。
 fn inline_plain(s: &str) -> String {
     let mut s = strip_leading_marker(s).to_string();
     s = strip_links(&s);
     s = s.replace("**", "").replace('*', "").replace('`', "");
     s = s.replace("\\|", " ").replace('|', " ");
-    // collapse runs of spaces created by the replacements
+    // 合并替换操作产生的连续空格
     let mut out = String::with_capacity(s.len());
     let mut prev_space = false;
     for ch in s.chars() {
@@ -209,7 +209,7 @@ fn inline_plain(s: &str) -> String {
     out.trim().to_string()
 }
 
-/// Drop a leading blockquote / list marker from a body line.
+/// 移除正文行开头的引用或列表标记。
 fn strip_leading_marker(s: &str) -> &str {
     let t = s.trim_start();
     if let Some(rest) = t.strip_prefix('>') {
@@ -220,7 +220,7 @@ fn strip_leading_marker(s: &str) -> &str {
             return rest.trim_start();
         }
     }
-    // ordered list: leading digits followed by '.' or ')'
+    // 有序列表：行首数字后接'.'或')'
     let digits = t.chars().take_while(|c| c.is_ascii_digit()).count();
     if digits > 0 {
         let after = &t[digits..];
@@ -231,7 +231,7 @@ fn strip_leading_marker(s: &str) -> &str {
     t
 }
 
-/// Replace `[text](url)` with just `text`.
+/// 将`[text](url)`替换为`text`。
 fn strip_links(s: &str) -> String {
     let mut out = String::with_capacity(s.len());
     let bytes = s.as_bytes();
@@ -257,10 +257,10 @@ fn strip_links(s: &str) -> String {
     out
 }
 
-/// Generate a heading anchor id. Mirrors the algorithm in `markdown.ts`:
-/// runs of whitespace and ``/\?#&"'<>`` collapse to a single `-`, leading and
-/// trailing `-` are trimmed, empty becomes `section`, and collisions get a
-/// trailing `-` appended.
+/// 生成标题锚点ID，与`markdown.ts`的算法一致：
+/// 连续的空白字符和``/\?#&"'<>``合并为一个`-`，
+/// 去掉首尾的`-`，空值改为`section`；若发生重名，
+/// 则在末尾追加`-`。
 fn heading_anchor(text: &str, used: &mut HashSet<String>) -> String {
     let mut s = String::new();
     let mut prev_dash = false;
@@ -297,11 +297,11 @@ mod tests {
         let mut used = HashSet::new();
         assert_eq!(heading_anchor("小结", &mut used), "小结");
         assert_eq!(heading_anchor("Tokens and the window", &mut used), "Tokens-and-the-window");
-        // collisions get a trailing dash
+        // 重名时在末尾追加连字符
         let mut used = HashSet::new();
         assert_eq!(heading_anchor("小结", &mut used), "小结");
         assert_eq!(heading_anchor("小结", &mut used), "小结-");
-        // empty falls back to "section"
+        // 空值回退为"section"
         let mut used = HashSet::new();
         assert_eq!(heading_anchor("###", &mut used), "section");
     }
@@ -326,12 +326,12 @@ mod tests {
 ";
         let passages = chunk_chapter("c1", "第1章 标题", md);
         assert!(!passages.is_empty());
-        // nothing from the quiz section leaks in
+        // 测验小节的内容不应混入片段
         assert!(passages.iter().all(|p| !p.text.contains("小测验题目")));
         assert!(passages.iter().all(|p| p.heading != "小测验"));
-        // the summary section is captured with its anchor
+        // 小结及其锚点应一并收录
         assert!(passages.iter().any(|p| p.heading == "小结" && p.anchor == "小结"));
-        // intro passage sits under no heading
+        // 开篇片段不属于任何小节标题
         assert!(passages.iter().any(|p| p.heading.is_empty() && p.text.contains("引言")));
     }
 

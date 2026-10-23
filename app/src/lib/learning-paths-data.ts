@@ -29,7 +29,7 @@ interface PathDefinition {
 	steps: { id: string; slugs: string[]; copy: Localized<StepCopy> }[];
 }
 
-// Identity and reading order are shared by translations. Titles come from the book manifest.
+// 各语言版本共用标识和阅读顺序；标题取自书籍目录清单。
 export const learningPathDefinitions: PathDefinition[] = [
 	{
 		id: 'orientation',

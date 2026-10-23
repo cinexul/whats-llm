@@ -8,7 +8,7 @@
 
 ## 実行
 
-Node.js 24.15以降を推奨します（対応範囲は `app/package.json` を参照）。npmも必要です。Rustコアのテストにはstableツールチェーンを使います。
+Node.js 24.x の 24.15.0 以上を推奨します（他の対応バージョンは `app/package.json` を参照）。npmも必要です。Rustコアのテストにはstableツールチェーンを使います。
 
 ```bash
 cd app
@@ -22,12 +22,33 @@ npm run dev        # http://localhost:1420 を開く
 
 ## 構成
 
-- `app/` —— SvelteKit + Tauri アプリケーション
+- `app/src/routes/`、`app/src/lib/*.svelte` —— Svelte のページとコンポーネント
+- `app/src/lib/` —— TypeScript のアプリロジック、3言語の文言、内容メタデータ
 - `app/src/lib/content/{zh,ja,en}/` —— 各章の本文（中国語・日本語・英語）
+- `app/src-tauri/` —— Tauri のデスクトップシェル、Rust の検索・学習コア
+- `app/scripts/` —— 内容検査、静的プレビュー、任意のモデルダウンロード用ツール
+- `docs/` —— 利用・保守ガイドと日付付きの検証記録。[文書一覧](docs/README.md)から参照できます
+- `.github/workflows/` —— GitHub の自動検査とリリース設定。役割は下記を参照
+
+ロックファイルとビルド設定により、インストールを再現できます。`node_modules/`、`build/`、`.svelte-kit/`、Rust の `target/` などのローカル生成物は Git の対象外です。
 
 ## 技術スタック
 
-Tauri 2（Rust シェル）+ SvelteKit（静的 SPA）。Markdown は `marked` + `shiki` で描画。デスクトップ版は本文とフォントを同梱し、Web 版は書籍全体をダウンロードしてからオフラインで読めます。
+Svelte 5 + SvelteKit（静的 SPA）+ TypeScript を使い、デスクトップシェルには Tauri 2 / Rust を使用します。Markdown は `marked` + `shiki` で描画。デスクトップ版は本文とフォントを同梱し、Web 版は書籍全体をダウンロードしてからオフラインで読めます。
+
+GitHub の Languages はソースのバイト数を示し、UI フレームワークの使用率やコンパイル結果の割合ではありません。TypeScript はアプリロジックや3言語の学習データ、Svelte はページやコンポーネントを担います。[Linguist の集計方法](https://github.com/github-linguist/linguist/blob/main/docs/how-linguist-works.md)を参照してください。
+
+## GitHub の自動処理
+
+Workflow は、指定されたイベントで GitHub が実行する処理の設定です。アプリの起動には使いません。
+
+| ファイル | 実行のタイミング | 役割 |
+| --- | --- | --- |
+| [`check.yml`](.github/workflows/check.yml) | `main` へのプッシュ、Pull Request | 型・本文・クイズ登録の検査、本番ビルド、Rust コアのテスト。アプリは公開しません。 |
+| [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 毎週月曜 07:17 UTC、または手動 | 章の再確認期限を通知し、出典リンクの接続結果を保存。本文や確認日を自動更新しません。 |
+| [`release.yml`](.github/workflows/release.yml) | `v*` タグのプッシュ、またはバージョンを指定した手動実行 | Windows NSIS インストーラーをビルドし、手動確認・公開用の GitHub Release **ドラフト**を作成。 |
+
+通常の `main` へのプッシュではリリース処理は動きません。Web サイトをデプロイする workflow はありません。出典リンクの検査失敗は人による確認が必要です。
 
 ## 読書と実践
 
@@ -39,7 +60,7 @@ Tauri 2（Rust シェル）+ SvelteKit（静的 SPA）。Markdown は `marked` +
 - **間違えた問題の復習**：テーマや章で絞り込み、履歴を保持。問題の識別子と採点内容の改訂を分けて管理します。
 - **内容の保守**：各章の改訂・確認・出典情報を表示し、本文の変更と翻訳の対応状況を検査します。
 
-ホーム画面と目次上部から利用できます。[機能・検証記録](docs/learning-book.md)、[PWA の配信ガイド](docs/pwa.md)、[内容の保守ガイド](docs/content-maintenance.md)も参照してください。
+ホーム画面と目次上部から利用できます。[文書一覧](docs/README.md)、[PWA の配信ガイド](docs/pwa.md)、[内容の保守ガイド](docs/content-maintenance.md)を参照してください。[機能・検証記録](docs/learning-book.md)には、当時の画面と検証結果を残しています。
 
 ## 内容改訂：2026-10-22
 
@@ -53,14 +74,10 @@ Tauri 2（Rust シェル）+ SvelteKit（静的 SPA）。Markdown は `marked` +
 npm run check
 npm run content:check
 npm run check:quiz
-npm test
 npm run build
-npx playwright install chromium
-npm run test:e2e
-npm run test:e2e:pwa  # 上の本番ビルドでダウンロード・オフライン利用・更新を検証
 ```
 
-既存のChromiumを使う場合は `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` で指定できます。RustコアのテストにはデスクトップのWebViewや埋め込みモデルは不要です。
+上記は型・内容登録・ビルドの検査であり、画面操作の受け入れ確認を代替しません。RustコアのテストにはデスクトップのWebViewや埋め込みモデルは不要です。別のターミナルで、リポジトリのルートから実行します。
 
 ```bash
 cd app/src-tauri

@@ -118,7 +118,7 @@
 			const saved = JSON.parse(localStorage.getItem('font-scales') ?? '{}');
 			const scale = (key: string) => Number.isFinite(saved?.[key]) ? Math.min(1.5, Math.max(.8, saved[key])) : 1;
 			scales = { nav: scale('nav'), heading: scale('heading'), body: scale('body') };
-		} catch { /* Continue with current preferences if storage is unavailable. */ }
+		} catch { /* 存储不可用时继续使用当前偏好设置。 */ }
 	}
 
 	$effect(() => {
@@ -130,7 +130,7 @@
 			try {
 				const value = localStorage.getItem('lang');
 				if (value === 'zh' || value === 'en' || value === 'ja') void switchLang(value);
-			} catch { /* Current language remains usable. */ }
+			} catch { /* 当前语言仍可使用。 */ }
 		};
 		window.addEventListener('learning-data-imported', imported);
 		return () => window.removeEventListener('learning-data-imported', imported);
@@ -140,7 +140,7 @@
 	$effect(() => {
 		if (!browser || !loaded) return;
 		document.documentElement.dataset.theme = theme;
-		try { localStorage.setItem('theme', theme); } catch { /* Session preference still applies. */ }
+		try { localStorage.setItem('theme', theme); } catch { /* 本次会话的偏好设置仍然生效。 */ }
 	});
 
 	$effect(() => {
@@ -149,7 +149,7 @@
 		root.setProperty('--scale-nav', String(scales.nav));
 		root.setProperty('--scale-heading', String(scales.heading));
 		root.setProperty('--scale-body', String(scales.body));
-		try { localStorage.setItem('font-scales', JSON.stringify(scales)); } catch { /* Session preference still applies. */ }
+		try { localStorage.setItem('font-scales', JSON.stringify(scales)); } catch { /* 本次会话的偏好设置仍然生效。 */ }
 	});
 
 	// 章を移動したら本文のスクロール位置を先頭へ戻す(ページ内アンカーへの移動は除く)

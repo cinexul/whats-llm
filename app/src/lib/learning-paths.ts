@@ -14,7 +14,7 @@ type ProgressStorage = Pick<Storage, 'getItem' | 'setItem'>;
 
 const checkpointIds = new Map(learningPathDefinitions.map((path) => [path.id, new Set(path.steps.map((step) => step.id))]));
 
-/** Accept only known path/checkpoint identities; recover valid entries without inventing completion. */
+/** 只接受已知的路径和检查点标识；恢复有效条目，不补填完成状态。 */
 export function normalizeLearningPathProgress(value: unknown): { progress: LearningPathProgress; repaired: boolean } {
 	const progress: LearningPathProgress = {};
 	if (!value || typeof value !== 'object' || Array.isArray(value)) return { progress, repaired: true };
@@ -46,7 +46,7 @@ function browserStorage(): ProgressStorage | null {
 	catch { return null; }
 }
 
-/** Exposed for deterministic persistence tests and for refreshing after a backup import. */
+/** 供固定条件下的存储测试调用，也用于备份导入后的刷新。 */
 export function createLearningPathStore(storage: ProgressStorage | null = browserStorage()) {
 	function read(): LearningPathState {
 		if (!storage) return { progress: {}, storageIssue: 'read' };
@@ -66,7 +66,7 @@ export function createLearningPathStore(storage: ProgressStorage | null = browse
 			if (!storage) throw new Error('Storage unavailable');
 			storage.setItem(LEARNING_PATHS_KEY, JSON.stringify(progress));
 		} catch { storageIssue = 'write'; }
-		// Keep current-session work visible, but explicitly report persistence failures.
+		// 保留当前会话的操作结果，明确报告保存失败。
 		state.set({ progress, storageIssue });
 	}
 	return {

@@ -1,8 +1,8 @@
-//! Index storage (bincode) and cosine top-k ranking.
+//! 索引存储（bincode）和余弦相似度top-k排序。
 //!
-//! Vectors are stored already L2-normalized, so cosine similarity is just a dot
-//! product. The corpus is small (a few thousand passages per language), so a
-//! brute-force scan is sub-millisecond and there is no need for an ANN index.
+//! 向量存储前已进行L2归一化，因此向量点积就是余弦相似度。
+//! 语料规模较小（每种语言几千个片段），全量扫描耗时不到一毫秒，
+//! 无需使用ANN（近似最近邻）索引。
 
 use std::fs;
 use std::io;
@@ -10,7 +10,7 @@ use std::path::Path;
 
 use crate::types::{SearchHit, SearchIndex};
 
-/// L2-normalize a vector in place. A zero vector is left untouched.
+/// 对向量原地进行L2归一化；零向量保持不变。
 pub fn normalize(v: &mut [f32]) {
     let norm = v.iter().map(|x| x * x).sum::<f32>().sqrt();
     if norm > 0.0 {
@@ -20,7 +20,7 @@ pub fn normalize(v: &mut [f32]) {
     }
 }
 
-/// Serialize an index to disk (atomically: write to a temp file, then rename).
+/// 将索引序列化到磁盘（先写临时文件再重命名，以保证原子替换）。
 pub fn save_index(index: &SearchIndex, path: &Path) -> io::Result<()> {
     if let Some(dir) = path.parent() {
         fs::create_dir_all(dir)?;
@@ -32,12 +32,12 @@ pub fn save_index(index: &SearchIndex, path: &Path) -> io::Result<()> {
     fs::rename(&tmp, path)
 }
 
-/// Load an index from a file.
+/// 从文件加载索引。
 pub fn load_index(path: &Path) -> io::Result<SearchIndex> {
     load_index_bytes(&fs::read(path)?)
 }
 
-/// Load an index from raw bytes (e.g. a bundled resource read into memory).
+/// 从原始字节加载索引（例如已读入内存的打包资源）。
 pub fn load_index_bytes(bytes: &[u8]) -> io::Result<SearchIndex> {
     bincode::deserialize(bytes).map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))
 }
@@ -50,8 +50,8 @@ fn snippet(text: &str, max_chars: usize) -> String {
     s
 }
 
-/// Rank all passages against an already-normalized query vector and return the
-/// top `k` as [`SearchHit`]s (highest cosine first).
+/// 用已归一化的查询向量对所有片段排序，返回前`k`个
+/// [`SearchHit`]，按余弦相似度从高到低排列。
 pub fn cosine_topk(index: &SearchIndex, query: &[f32], k: usize) -> Vec<SearchHit> {
     if index.dim == 0 || query.len() != index.dim || index.passages.is_empty() || k == 0 {
         return Vec::new();
@@ -108,7 +108,7 @@ mod tests {
 
     #[test]
     fn topk_orders_by_cosine_and_roundtrips() {
-        // Two orthogonal-ish directions; query points at the first.
+        // 两个近似正交的方向；查询向量指向第一个方向。
         let mut a = vec![1.0, 0.0];
         let mut b = vec![0.2, 1.0];
         normalize(&mut a);
@@ -129,7 +129,7 @@ mod tests {
         assert_eq!(hits[0].slug, "a");
         assert!(hits[0].score >= hits[1].score);
 
-        // bincode round-trip preserves the index.
+        // bincode序列化再反序列化后，索引应保持不变。
         let bytes = bincode::serialize(&index).unwrap();
         let back = load_index_bytes(&bytes).unwrap();
         assert_eq!(back.dim, 2);

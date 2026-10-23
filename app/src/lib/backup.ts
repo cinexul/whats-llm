@@ -18,7 +18,7 @@ function readJSON<T>(key: string, fallback: T): T {
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value));
 const same = (a: unknown, b: unknown): boolean => JSON.stringify(a) === JSON.stringify(b);
 
-/** Include archived cards and all history; the visible study store intentionally filters them. */
+/** 包含已归档卡片和全部历史；用于界面显示的学习store会过滤这些数据。 */
 async function collectBackup(): Promise<CurrentLearningBackup> {
 	await ensureLoaded();
 	await flushAnnotationWrites();
@@ -38,7 +38,7 @@ async function collectBackup(): Promise<CurrentLearningBackup> {
 				catch (error) { if (backup === null) throw error; json = backup; }
 			}
 			notes = JSON.parse(json);
-			// Match annotation loading: a valid local recovery copy may predate the native file.
+			// 与批注加载规则一致：有效的本地恢复副本可能早于桌面端文件。
 			if (pending === null && Array.isArray(notes) && notes.length === 0 && backup !== null) notes = JSON.parse(backup);
 		}
 	} else {
@@ -71,7 +71,7 @@ export async function exportBackup(): Promise<CurrentLearningBackup> {
 }
 
 export interface MergeResult { data: CurrentLearningBackup; conflicts: number; ties: number }
-/** A timestamp tie keeps the local value. Checkpoints/read chapters form a union. */
+/** 时间戳相同则保留本地值；检查点和已读章节取并集。 */
 export function mergeBackups(existing: LearningBackup, incoming: LearningBackup): MergeResult {
 	validateBackup(existing); validateBackup(incoming);
 	const data: CurrentLearningBackup = { ...clone(existing), version: BACKUP_VERSION, chapterEdits: clone(existing.chapterEdits ?? []) }; let conflicts = 0; let ties = 0;
@@ -92,12 +92,12 @@ export function mergeBackups(existing: LearningBackup, incoming: LearningBackup)
 		const key = `${edit.lang}:${edit.slug}`; const old = edits.get(key);
 		edits.set(key, old ? newer(old, edit, old.updatedAt, edit.updatedAt) : clone(edit));
 	}
-	// Reset tombstones participate in the same merge so an old backup cannot revive an edit.
+	// 重置删除标记参与同样的合并，防止旧备份恢复已删除的编辑。
 	data.chapterEdits = [...edits.values()].sort((a, b) => `${a.lang}:${a.slug}`.localeCompare(`${b.lang}:${b.slug}`));
 	const cards = new Map(data.study.cards.map((c) => [c.id, c]));
 	for (const c of incoming.study.cards) { const old = cards.get(c.id); cards.set(c.id, old ? newer(old, c, old.lastReview ?? 0, c.lastReview ?? 0) : clone(c)); }
 	data.study.cards = [...cards.values()].sort((a, b) => a.id.localeCompare(b.id));
-	// Multiset union preserves real repeated events with identical timestamps, while repeat imports add none.
+	// 保留时间戳相同的真实重复事件，但重复导入不增加数量。
 	const reviewKey = (r: PortableReview) => JSON.stringify([r.cardId, r.ts, r.rating, r.elapsedMs, r.scheduledDays, r.stability ?? null, r.difficulty ?? null]);
 	const reviewCounts = new Map<string, number>();
 	for (const r of data.study.reviews) { const k = reviewKey(r); reviewCounts.set(k, (reviewCounts.get(k) ?? 0) + 1); }
@@ -118,17 +118,17 @@ export function mergeBackups(existing: LearningBackup, incoming: LearningBackup)
 				positions[slug] = positions[slug] ? newer(positions[slug], position, positions[slug].updatedAt, position.updatedAt) : clone(position);
 			}
 		}
-		// Prefer the chapter whose saved position is newer; absent timestamps keep this device's chapter.
+		// 优先采用阅读位置保存时间较新的章节；缺少时间戳时保留本设备的章节。
 		const next = incoming.readingChapter[lang]; const old = existing.readingChapter[lang];
 		if (next && (!old || (incoming.readingPositions[lang]?.[next]?.updatedAt ?? 0) > (existing.readingPositions[lang]?.[old]?.updatedAt ?? 0))) data.readingChapter[lang] = next;
 	}
 	for (const [path, checkpoints] of Object.entries(incoming.learningPaths)) data.learningPaths[path] = [...new Set([...(data.learningPaths[path] ?? []), ...checkpoints])].sort();
 	data.preferences = { ...incoming.preferences, ...data.preferences };
-	serializeBackup(data); // Also enforces limits after combining two independently valid files.
+	serializeBackup(data); // 两个各自有效的文件合并后，也需再次检查限制。
 	return { data, conflicts, ties };
 }
 
-/** Throws on write failures, and rolls earlier keys back before reporting the failure. */
+/** 写入失败时，先恢复此前修改的键，再抛出异常。 */
 export function writeStorageAtomically(storage: Storage, entries: [string, string | null][]): () => void {
 	const previous = entries.map(([key]) => [key, storage.getItem(key)] as const);
 	const written: number[] = [];
@@ -174,7 +174,7 @@ export async function importBackup(incoming: LearningBackup): Promise<{ backup: 
 	} finally { importing = false; }
 }
 
-/** The caller holds the shared chapter-edit lock through snapshot, commit, rollback, and refresh. */
+/** 从读取快照到提交、回滚和刷新，调用方始终持有共享的章节编辑锁。 */
 async function importBackupLocked(incoming: LearningBackup) {
 	let before: LearningBackup | undefined;
 	try {
@@ -192,14 +192,14 @@ async function importBackupLocked(incoming: LearningBackup) {
 			entries.push(['study-v1', JSON.stringify({ cards: Object.fromEntries(data.study.cards.map((c) => [c.id, c])), reviews: data.study.reviews, read })]);
 			entries.push(['study-metadata-v1', JSON.stringify({ read: data.study.read, kv: data.study.kv })]);
 		} else entries.push(['annotations-pending', null]);
-		// Capture before writing: later IndexedDB/native failures restore these exact values.
+		// 写入前先保存当前值；后续IndexedDB或桌面端写入失败时，用这些值恢复。
 		const rollback = writeStorageAtomically(localStorage, entries);
 		let editsWritten = false; let notesWritten = false;
 		try {
 			await writeLocalEditsSnapshot(data.chapterEdits); editsWritten = true;
 			if (nativeInvoke) {
 				await nativeInvoke('save_annotations', { data: JSON.stringify(data.annotations) }); notesWritten = true;
-				// Last fallible persistence step. SQLite merges all tables in one transaction.
+				// 最后一个可能失败的保存步骤；SQLite在同一事务中合并所有表。
 				await nativeInvoke('study_import_snapshot', { snapshot: data.study });
 			}
 		} catch (error) {
@@ -208,7 +208,7 @@ async function importBackupLocked(incoming: LearningBackup) {
 				try { await nativeInvoke('save_annotations', { data: JSON.stringify(before.annotations) }); }
 				catch (restoreError) {
 					failures.push(restoreError);
-					// Pending recovery takes precedence on the next startup, even for an empty list.
+					// 下次启动时优先使用待恢复数据，即使列表为空也如此。
 					try { localStorage.setItem('annotations-pending', JSON.stringify(before.annotations)); } catch (pendingError) { failures.push(pendingError); }
 				}
 			}
@@ -216,10 +216,10 @@ async function importBackupLocked(incoming: LearningBackup) {
 				try { await writeLocalEditsSnapshot(before.chapterEdits ?? []); } catch (restoreError) { failures.push(restoreError); }
 			}
 			try { rollback(); } catch (restoreError) { failures.push(restoreError); }
-			// Preserve pending native recovery even if rollback restored the previous marker.
+			// 即使回滚恢复了旧标记，也保留待处理的桌面端恢复数据。
 			if (failures.length > 1) {
 				if (nativeInvoke && notesWritten) {
-					try { localStorage.setItem('annotations-pending', JSON.stringify(before.annotations)); } catch { /* Recovery snapshot is returned in ImportError. */ }
+					try { localStorage.setItem('annotations-pending', JSON.stringify(before.annotations)); } catch { /* 恢复快照通过ImportError返回。 */ }
 				}
 				throw new AggregateError(failures, 'Import failed; recovery is required. Keep the pre-import download.');
 			}
@@ -227,7 +227,7 @@ async function importBackupLocked(incoming: LearningBackup) {
 		}
 		annotations.set(data.annotations);
 		await loadLocalEdits();
-		// A refresh failure must not misreport an already committed import as a failed write.
+		// 刷新失败不能把已提交的导入误报成写入失败。
 		await Promise.allSettled(LANGS.map((lang) => reload(lang)));
 		window.dispatchEvent(new Event('learning-data-imported'));
 		return { backup: before, conflicts, ties };

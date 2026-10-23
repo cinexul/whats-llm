@@ -9,7 +9,7 @@ For any prompt, explanation, tag, option, or answer change:
 1. Edit the source question, retaining its ID when the learning objective is the same.
 2. Increment the question's `revision` marker. Review the corresponding translations and update their markers when their content changes.
 3. From `app`, run `node scripts/check-quiz-registry.mjs --write`. It refuses to acknowledge a changed question without a higher revision and preserves compatibility fields. New IDs receive new assessment identities.
-4. Run `node scripts/check-quiz-registry.mjs`, `npm test`, and the content-maintenance checks. If the chapter metadata reports drift, update it using the content-maintenance workflow too.
+4. Run `node scripts/check-quiz-registry.mjs`, `npm run check`, and the content-maintenance checks. If the chapter metadata reports drift, update it using the content-maintenance workflow too.
 
 Prompt/explanation-only edits retain the existing study identity even after the content revision increases. Changes to options (including order/text) or the correct answer automatically produce a new assessment identity based on the stable ID and the options/answer fingerprint. This happens even if an editor forgets to bump a revision; the maintenance check additionally rejects unacknowledged changes. Old cards and review logs remain stored and exportable, but obsolete assessments leave active mastery/due/mistake lists. Returning to an exactly identical former assessment also returns to that assessment's history.
 

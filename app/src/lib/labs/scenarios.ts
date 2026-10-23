@@ -1,4 +1,4 @@
-/** Deterministic teaching fixtures. These numbers are assigned units, never tokenizer output. */
+/** 结果固定的教学示例。这些数值使用自定单位，不是分词器输出。 */
 export const CONTEXT_CAPACITY = 1600;
 export const INSTRUCTION_TOKENS = 160;
 export const CONTEXT_ITEMS = [
@@ -23,7 +23,7 @@ export function contextBudget(selected: readonly string[], compacted: readonly s
 	};
 }
 
-/** A fictional shop and a fixed question date keep the exercise reproducible. */
+/** 使用虚构店铺和固定提问日期，确保重复练习时结果一致。 */
 export const EVIDENCE_DATE = '2026-10-01';
 export const EVIDENCE = [
 	{ id: 'policy', relevant: true, days: 30, from: '2026-09-01', until: null },

@@ -12,9 +12,9 @@ export const load: PageLoad = async ({ params, depends, url }) => {
 	// 言語切替時に再読み込みさせるための依存(レイアウト側で invalidate する)
 	depends('app:lang');
 	depends('app:chapter-edits');
-	// Library links identify the edited language, including when opened in a new tab.
+	// 资料库链接标明编辑所用语言，在新标签页打开时也能正确识别。
 	const edition = url.searchParams.get('edition');
-	// Load also runs during hover prefetch: it must not change language preferences.
+	// 鼠标悬停时的预加载也会执行load，不得改变语言偏好。
 	const currentLang = edition === 'zh' || edition === 'ja' || edition === 'en' ? edition : get(lang);
 	const meta = findChapter(currentLang, params.slug);
 

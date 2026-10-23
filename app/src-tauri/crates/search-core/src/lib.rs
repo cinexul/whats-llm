@@ -1,10 +1,10 @@
-//! Reusable semantic-search core for What's LLM.
+//! What's LLM的可复用语义搜索核心。
 //!
-//! Pure logic (chunking, index format, cosine ranking) has no heavy
-//! dependencies, so it builds and unit-tests quickly. Embedding-model inference
-//! (EmbeddingGemma via fastembed / ONNX Runtime) sits behind the `embed`
-//! feature, letting the Tauri app, the offline index builder, and any future
-//! server backend share one implementation.
+//! 纯逻辑部分（文本分块、索引格式、余弦排序）不依赖大型库，
+//! 因此构建和单元测试都很快。嵌入模型推理通过`embed`功能开关启用，
+//! 使用fastembed / ONNX Runtime运行EmbeddingGemma，
+//! 让Tauri应用、离线索引构建工具以及未来的服务端
+//! 共用同一套实现。
 
 mod chunk;
 mod index;

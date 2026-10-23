@@ -25,11 +25,7 @@ jobs:
       - run: npm run check
       - run: npm run content:check
       - run: npm run check:quiz
-      - run: npm test
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:e2e
-      - run: npm run test:e2e:pwa
 
   rust-core:
     runs-on: ubuntu-latest

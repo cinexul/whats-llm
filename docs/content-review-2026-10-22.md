@@ -48,6 +48,8 @@ Existing study data is retained. Rewriting a question's prompt changes its exist
 
 ## Maintenance and validation
 
+The commands and test coverage below describe the 2026-10-22 revision. For commands available in the current checkout, see the [project README](../README.en.md).
+
 From `app/`, run `npm ci`, `npm run check`, `npm test`, and `npm run build`. The content suite checks all 135 sources against the table of contents, question/answer structure, alignment between translations, and a non-dominant answer distribution. When a question changes, revise its options and every letter reference in the explanation in all three editions.
 
 Run browser regressions with `npm run test:e2e` after `npx playwright install chromium`. Existing Chromium can be selected with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`. The tests cover reading and language switching, answer persistence, language-scoped highlights, keyboard navigation in search, and retirement of obsolete cards without deleting history.

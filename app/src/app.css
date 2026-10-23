@@ -250,7 +250,7 @@ a:hover {
 	color: #edeae2;
 }
 
-/* Shared keyboard and touch affordances. Keep long source URLs inside the page. */
+/* 通用的键盘和触摸交互样式；让较长的来源URL保持在页面范围内。 */
 :where(a, button, input, textarea, summary):focus-visible {
 	outline: 2px solid var(--accent-strong);
 	outline-offset: 3px;

@@ -12,9 +12,9 @@
 		"strict": true,
 		"moduleResolution": "bundler"
 	}
-	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
-	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
+	// 路径别名的配置见https://svelte.dev/docs/kit/configuration#alias
+	// $lib除外，其配置见https://svelte.dev/docs/kit/configuration#files
 	//
-	// To make changes to top-level options such as include and exclude, we recommend extending
-	// the generated config; see https://svelte.dev/docs/kit/configuration#typescript
+	// 如需修改include、exclude等顶层选项，建议扩展自动生成的配置；
+	// 详见https://svelte.dev/docs/kit/configuration#typescript
 }

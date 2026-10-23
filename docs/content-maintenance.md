@@ -18,7 +18,6 @@ From `app/`, with the repository's supported Node version:
 
 ```bash
 node scripts/content-maintenance.mjs check
-npx vitest run src/lib/content-metadata.test.ts
 ```
 
 The first command checks the table of contents, all three file inventories, required metadata, revisions and histories, hashes, translation alignment, source references, dates, and local evidence-file existence. It needs no package installation, network, or system clock. Missing chapters, missing translations, edits without acknowledgement, and stale translations fail the command.
@@ -30,7 +29,7 @@ node scripts/content-maintenance.mjs check --as-of 2027-01-20
 node scripts/content-maintenance.mjs check --as-of 2027-01-20 --fail-overdue
 ```
 
-The first command reports due reviews without making age alone a failure; the second is suitable for a scheduled editorial check. Do not put a moving date requirement into ordinary pull-request checks. Recommended CI integration is `node scripts/content-maintenance.mjs check` after installation, before tests/build. The focused unit tests also run in the normal `npm test` suite.
+The first command reports due reviews without making age alone a failure; the second is suitable for a scheduled editorial check. Do not put a moving date requirement into ordinary pull-request checks. CI runs `node scripts/content-maintenance.mjs check` after installation and before the production build.
 
 ## Updating a chapter
 
@@ -62,7 +61,7 @@ node scripts/content-maintenance.mjs review \
 
 The CLI refuses to align a translation if the Chinese file has unacknowledged edits. It does not copy source text, translate automatically, infer that unchanged text is correct, or refresh other editions. It also never changes individual external-source verification dates. The acknowledgements attest to work the maintainer has done; a hash only detects changes and cannot establish translation quality.
 
-6. Run the deterministic check, unit suite, Svelte check and production build. Review all affected languages in the reader. Commit source edits, review evidence and metadata together. Do not resolve a failed drift check by copying new hashes into the JSON: use the explicit review workflow so translations and the revision history remain honest.
+6. Run the deterministic check, Svelte check and production build. Review all affected languages in the reader. Commit source edits, review evidence and metadata together. Do not resolve a failed drift check by copying new hashes into the JSON: use the explicit review workflow so translations and the revision history remain honest.
 
 For a new chapter, register it in all three tables of contents and add all three files and metadata records. There is deliberately no bulk “mark everything current” command. A new translation should identify the source revision actually compared, rather than borrowing another chapter's alignment.
 

@@ -18,8 +18,8 @@ export interface StudyCard {
 	qhash: string;
 	stability: number | null;
 	difficulty: number | null;
-	state: number; // 0 new / 2 review / 3 relearning
-	due: number | null; // epoch ms
+	state: number; // 0 new（新卡）/ 2 review（复习）/ 3 relearning（重新学习）
+	due: number | null; // Unix时间戳，单位为毫秒
 	lastReview: number | null;
 	reps: number;
 	lapses: number;
@@ -28,7 +28,7 @@ export interface StudyCard {
 export interface Review {
 	cardId: string;
 	ts: number;
-	rating: number; // 1 Again / 3 Good
+	rating: number; // 1 Again（重来）/ 3 Good（良好）
 	elapsedMs: number | null;
 	scheduledDays: number | null;
 }
@@ -258,8 +258,8 @@ export async function ensureLoaded(lang: Lang): Promise<void> {
 	await loading;
 }
 
-// Retire revised/deleted questions from active counts, retaining their stored history.
-// Load through the same encoded source and parser used by the reader and review page.
+// 修订或删除的问题不再计入当前统计，但保留其历史记录。
+// 使用与阅读页和复习页相同的编码内容源和解析器。
 async function currentCards(lang: Lang, cards: StudyCard[]): Promise<StudyCard[]> {
 	if (cards.length === 0) return cards;
 	const [{ loadChapterSource }, { splitQuiz, questionIdentity }] = await Promise.all([
@@ -286,7 +286,7 @@ export async function reload(lang: Lang): Promise<boolean> {
 		readStore.update((m) => ({ ...m, [lang]: new Set(reads) }));
 		return true;
 	} catch {
-		// Keep existing data and allow a later caller to retry transient failures.
+		// 保留已有数据，让后续调用方能重试暂时性失败。
 		return false;
 	}
 }
@@ -304,7 +304,7 @@ export async function recordAnswer(
 	try {
 		const card = await backend.recordAnswer(lang, slug, qn, qhash, correct, elapsedMs);
 		if (generation !== progressGeneration) return null;
-		// An older in-flight snapshot must not hide the answer that just saved.
+		// 较早发起的快照加载不能覆盖刚保存的答案状态。
 		loadRequests.set(lang, (loadRequests.get(lang) ?? 0) + 1);
 		cardsStore.update((m) => {
 			const list = (m[lang] ?? []).filter((c) => c.id !== card.id);
@@ -365,8 +365,9 @@ export function dueCount(cards: StudyCard[], now = Date.now()): number {
 	return cards.reduce((n, c) => n + (isDue(c, now) ? 1 : 0), 0);
 }
 
-/** Practice the latest unsuccessful attempt, including cards scheduled for later.
- * The active-card input excludes obsolete assessments; history stays untouched.
+/**
+ * 练习最近一次答错的问题，包括尚未到复习时间的卡片。
+ * 当前卡片列表已排除失效测评，历史记录不变。
  */
 export function mistakeCards(cards: StudyCard[], reviews: Review[], slugs?: Set<string>): StudyCard[] {
 	const latest = new Map<string, Review>();
@@ -381,7 +382,7 @@ export function mistakeCards(cards: StudyCard[], reviews: Review[], slugs?: Set<
 	});
 }
 
-/** Observed accuracy over saved answers, not an estimate of future retention. */
+/** 已保存答案的实际正确率，不是对未来记忆保持率的预测。 */
 export function historicalAccuracy(reviews: Review[]): number | null {
 	return reviews.length
 		? Math.round((100 * reviews.filter((review) => review.rating >= 3).length) / reviews.length)

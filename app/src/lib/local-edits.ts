@@ -9,7 +9,7 @@ export { LOCAL_EDITS_KEY, LOCAL_EDITS_SIGNAL_KEY, LocalEditError, validateLocalE
 export type { LocalChapterEdit, LocalEditErrorCode } from './local-edits-schema';
 
 export const localEdits = writable<LocalChapterEdit[]>([]);
-/** Stable LocalEditError code for translated UI; diagnostic detail is on the thrown error. */
+/** 为多语言UI提供固定的LocalEditError错误码；详细原因在抛出的异常中。 */
 export const localEditsError = writable<string | null>(null);
 
 const DATABASE = 'whats-llm-chapter-edits';
@@ -17,9 +17,9 @@ const CHAPTERS = 'chapters';
 const SNAPSHOT = 'snapshot';
 
 /**
- * One origin-wide lock covers each read/check/write transaction, including backup
- * imports. Callbacks must not call save/reset or acquire this same lock again.
- * Preserve callback errors so backup import can retain its own error contract.
+ * 用同源下共用的一把锁保护整个读取、校验和写入过程，包括备份导入。
+ * 回调不能调用保存、重置，也不能再次获取这把锁。
+ * 原样保留回调抛出的错误，不改变备份导入的错误处理约定。
  */
 export async function withLocalEditLock<T>(operation: () => T | Promise<T>): Promise<T> {
 	if (typeof navigator === 'undefined' || typeof navigator.locks?.request !== 'function') {
@@ -38,12 +38,12 @@ function report(error: unknown): never {
 
 function setError(code: string | null): void {
 	try { localEditsError.set(code); }
-	catch { /* A failing UI subscriber must not change the persistence result. */ }
+	catch { /* UI订阅者报错不能改变保存结果。 */ }
 }
 
 function publish(records: LocalChapterEdit[]): void {
 	try { localEdits.set(records); }
-	catch { /* The snapshot has already committed; a subscriber cannot undo it. */ }
+	catch { /* 快照已提交，订阅者无法撤销。 */ }
 	setError(null);
 }
 
@@ -67,7 +67,7 @@ function openDatabase(): Promise<IDBDatabase> {
 	});
 }
 
-/** Requests may succeed before their transaction aborts. Only completion is a commit. */
+/** 单个请求成功后，其所属事务仍可能中止；只有事务完成才算提交。 */
 async function snapshotTransaction<T>(
 	operation: (store: IDBObjectStore, result: (value: T) => void, abort: (error: unknown) => void) => void
 ): Promise<T> {
@@ -102,9 +102,9 @@ function readLegacyEdits(): LocalChapterEdit[] {
 }
 
 /**
- * IndexedDB is authoritative across windows. The first read migrates legacy
- * localStorage inside the same transaction that checks whether a snapshot exists.
- * Even an empty snapshot ends migration; legacy data is never consulted again.
+ * 各窗口统一以IndexedDB为准。首次读取在同一事务中检查快照，
+ * 需要时迁移旧localStorage数据。
+ * 即使快照为空，也不再迁移或读取旧数据。
  */
 export async function readLocalEdits(): Promise<LocalChapterEdit[]> {
 	try {
@@ -125,18 +125,18 @@ export async function readLocalEdits(): Promise<LocalChapterEdit[]> {
 	} catch (error) { return report(error); }
 }
 
-/** Load explicitly on mount/import/storage events. Failure retains the last valid store. */
+/** 在挂载、导入或存储事件中主动加载；失败时保留上次有效的store状态。 */
 export async function loadLocalEdits(): Promise<void> {
 	try { publish(await readLocalEdits()); }
-	catch { /* readLocalEdits has reported the error. Never replace damaged storage with an empty snapshot. */ }
+	catch { /* readLocalEdits已报告错误，绝不能用空快照覆盖损坏的存储。 */ }
 }
 
-/** Includes reset tombstones: use updatedAt ?? null as the token when opening an editor. */
+/** 包含重置删除标记；打开编辑器时以updatedAt ?? null作为版本标记。 */
 export async function getLocalEditRecord(lang: Lang, slug: string): Promise<LocalChapterEdit | undefined> {
 	return (await readLocalEdits()).find((record) => record.lang === lang && record.slug === slug);
 }
 
-/** Only active edits apply to reading. The caller can catch a failure and show the official body. */
+/** 仅将未重置的编辑用于阅读；调用方可捕获错误，改用官方正文。 */
 export async function getLocalEdit(lang: Lang, slug: string): Promise<LocalChapterEdit | undefined> {
 	const record = await getLocalEditRecord(lang, slug);
 	return record?.markdown !== null ? record : undefined;
@@ -157,8 +157,8 @@ function nextTimestamp(current: LocalChapterEdit | undefined): number {
 }
 
 /**
- * The caller holds withLocalEditLock for the entire mutation/import/rollback.
- * Validate and commit atomically before publishing or notifying other windows.
+ * 调用方在整个修改、导入和回滚期间持有withLocalEditLock。
+ * 先校验并原子提交，再更新状态或通知其他窗口。
  */
 export async function writeLocalEditsSnapshot(records: LocalChapterEdit[]): Promise<void> {
 	let snapshot: LocalChapterEdit[];
@@ -170,22 +170,21 @@ export async function writeLocalEditsSnapshot(records: LocalChapterEdit[]): Prom
 			result(undefined);
 		});
 	} catch (error) { return report(error); }
-	// Nothing below may reject a successful commit, including blocked localStorage.
+	// 下方操作即使失败（包括localStorage被禁用），也不能让已成功的提交报错。
 	publish(snapshot);
 	try {
 		const signal = globalThis.crypto?.randomUUID?.() ?? `${Date.now()}:${Math.random()}`;
 		localStorage.setItem(LOCAL_EDITS_SIGNAL_KEY, signal);
-	} catch { /* Notification is best effort; IndexedDB remains authoritative. */ }
+	} catch { /* 尽力发送通知；仍以IndexedDB为准。 */ }
 }
 
 /**
- * expectedUpdatedAt is the raw record's revision captured when the editor opened;
- * null means no record exists, including no tombstone. Fresh storage is checked
- * inside the exclusive Web Lock immediately before writing, so other tabs and
- * backup imports cannot overwrite a competing change. Revisions increase monotonically
- * even if the clock moves backward. The first original is retained across saves;
- * a first save after reset captures the current official body as a new baseline.
- * Failures throw without publishing the attempted edit, so callers retain drafts.
+ * expectedUpdatedAt是打开编辑器时读取的记录修订号；
+ * null表示记录和删除标记均不存在。写入前在独占Web Lock内
+ * 检查最新数据，防止其他标签页或备份导入覆盖并发修改。
+ * 即使时钟回拨，修订号也仍要增大。每次保存都保留最初的原文；
+ * 重置后首次保存则记录当前官方正文，作为新的原文。
+ * 失败时抛出异常，不发布本次编辑，让调用方保留草稿。
  */
 export async function saveLocalEdit(
 	lang: Lang, slug: string, markdown: string, original: string, expectedUpdatedAt: number | null
@@ -205,7 +204,7 @@ export async function saveLocalEdit(
 	} catch (error) { report(error); }
 }
 
-/** A reset keeps its original and a new revision for backup merging and stale-draft detection. */
+/** 重置时保留原文并生成新修订号，用于合并备份和识别过期草稿。 */
 export async function resetLocalEdit(lang: Lang, slug: string, expectedUpdatedAt: number | null): Promise<void> {
 	try {
 		await withLocalEditLock(async () => {

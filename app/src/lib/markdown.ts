@@ -69,8 +69,8 @@ export async function renderMarkdown(src: string): Promise<RenderedChapter> {
 
 	let html = marked.parse(src) as string;
 
-	// Preserve the encoded spelling of legacy anchors before DOM parsing decodes
-	// entities. This also keeps saved links and semantic search indices valid.
+	// 在DOM解析并解码实体前，保留旧锚点的编码形式，
+	// 确保已保存的链接和语义搜索索引仍然有效。
 	const generatedIds = new Set<string>();
 	html = html.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, inner: string) => {
 		const id = headingId(inner.replace(/<[^>]+>/g, '').trim());
@@ -78,10 +78,10 @@ export async function renderMarkdown(src: string): Promise<RenderedChapter> {
 		return `<h2 id="${id}">${inner}</h2>`;
 	});
 
-	// Local edits and imported backups are untrusted. The HTML profile excludes
-	// SVG/MathML, and DOMPurify removes executable tags, handlers, and unsafe URLs.
-	// Styles and classes must match values emitted by the trusted Shiki theme,
-	// read from its syntax tree rather than source text or user-supplied HTML.
+	// 本地编辑和导入备份均不可信。HTML配置排除SVG/MathML，
+	// DOMPurify则移除可执行标签、事件处理器和不安全的URL。
+	// 样式和类名必须匹配可信Shiki主题生成的值；这些值取自其语法树，
+	// 不能从源文本或用户提供的HTML中提取。
 	const purifier = createDOMPurify(window);
 	purifier.addHook('uponSanitizeAttribute', (_node, attribute) => {
 		if (attribute.attrName === 'style' && !highlightStyles.has(attribute.attrValue)) {
@@ -104,7 +104,7 @@ export async function renderMarkdown(src: string): Promise<RenderedChapter> {
 			const id = element.id.slice('user-content-'.length);
 			if (generatedIds.has(id)) legacyIds.set(element, id);
 		}
-		// Raw HTML cannot create global names or collide with application anchors.
+		// 原始HTML不能创建全局名称，也不能与应用锚点冲突。
 		element.removeAttribute('id');
 		element.removeAttribute('name');
 	}
@@ -113,7 +113,7 @@ export async function renderMarkdown(src: string): Promise<RenderedChapter> {
 	const used = new Set(['quiz', 'local-editor-title', 'local-markdown']);
 	const form = document.createElement('form');
 	for (const heading of fragment.querySelectorAll('h2')) {
-		// DOM textContent decodes entities exactly once, including inline code.
+		// DOM textContent对实体只解码一次，行内代码也一样。
 		const text = heading.textContent?.trim() ?? '';
 		let id = headingId(legacyIds.get(heading) ?? text);
 		while (used.has(id) || id in document || id in form) id += '-';

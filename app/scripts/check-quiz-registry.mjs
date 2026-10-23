@@ -1,5 +1,5 @@
 // node scripts/check-quiz-registry.mjs [--write]
-// --write acknowledges edited content only after its explicit revision is bumped.
+// --write仅在提高修订号后，才确认内容变更。
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { splitQuiz, contentFingerprint } from '../src/lib/quiz.ts';
@@ -37,7 +37,7 @@ for (const lang of ['zh', 'ja', 'en']) {
 			}
 			registry[lang] ??= {};
 			registry[lang][slug] ??= {};
-			// Never rewrite legacyHash or legacyAssessment. They preserve old cards.
+			// 禁止改写legacyHash和legacyAssessment；它们用于保留旧卡片。
 			registry[lang][slug][q.id] = { ...prior, revision: q.revision, content };
 		}
 	}

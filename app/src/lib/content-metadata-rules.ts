@@ -6,7 +6,7 @@ export type ChapterKind = keyof typeof REVIEW_INTERVALS;
 export interface ContentSource {
 	url: string;
 	titles: Record<Lang, string>;
-	/** An existing, documented source check; null means no individual check is recorded. */
+	/** 已完成并有记录的来源检查；null表示没有单独检查记录。 */
 	checkedAt: string | null;
 	evidence: string | null;
 	snapshot?: string;
@@ -80,7 +80,7 @@ export function translationStatus(data: ContentMetadata, slug: string, lang: Lan
 		? 'aligned' : 'stale';
 }
 
-/** No clock, filesystem or network: callers supply the exact content inventory and hashes. */
+/** 不读取时钟、文件系统或网络；由调用方提供准确的内容清单和哈希值。 */
 export function validateContentMetadata(
 	data: ContentMetadata, inventory: ContentInventory, hashes: Record<string, string>
 ): MetadataProblem[] {
@@ -156,7 +156,7 @@ export interface ReviewAcknowledgement {
 	reviewed: boolean; translationReviewed: boolean;
 }
 
-/** Explicitly acknowledges one edition only; source updates deliberately leave translations stale. */
+/** 只确认一个语言版本；更新原文后，译文仍保持过期状态。 */
 export function acknowledgeEdition(
 	data: ContentMetadata, hashes: Record<string, string>, request: ReviewAcknowledgement
 ): ContentMetadata {

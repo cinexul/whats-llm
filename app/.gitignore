@@ -1,6 +1,6 @@
 node_modules
 
-# Output
+# 构建输出
 .output
 .vercel
 .netlify
@@ -9,12 +9,13 @@ node_modules
 /build
 /test-results
 /playwright-report
+/content-link-report.json
 
-# OS
+# 操作系统文件
 .DS_Store
 Thumbs.db
 
-# Env
+# 环境变量文件
 .env
 .env.*
 !.env.example
@@ -27,14 +28,14 @@ vite.config.ts.timestamp-*
 # Tauri
 /src-tauri/target/
 
-# Semantic search: bundled embedding model (run scripts/fetch-model.sh) and
-# generated indices (run `cargo run -p build-index --release`). Both are large
-# and reproducible, so they stay out of git; SOURCE.md in each dir is kept.
+# 语义搜索：随应用打包的嵌入模型（运行scripts/fetch-model.sh）以及
+# 生成的索引（运行`cargo run -p build-index --release`）。两者体积较大，
+# 且可重新生成，因此不纳入git；保留各目录中的SOURCE.md。
 /src-tauri/resources/model/*.onnx
 /src-tauri/resources/model/*.onnx_data
 /src-tauri/resources/model/*.json
 /src-tauri/resources/search-index/*.idx
 /src-tauri/.fastembed_cache/
 
-# Claude Code local config
+# Claude Code本地配置
 .claude/

@@ -16,7 +16,7 @@ export interface Annotation {
 	color: HighlightColor;
 	note: string;
 	createdAt: string;
-	updatedAt?: string; // Last note/color edit; legacy annotations fall back to createdAt.
+	updatedAt?: string; // 最近一次修改笔记或颜色的时间；旧批注使用createdAt。
 }
 
 const CONTEXT_LEN = 30;
@@ -57,7 +57,7 @@ function parseAnnotations(json: string | null): Annotation[] | null {
 		const value: unknown = JSON.parse(json ?? 'null');
 		if (!Array.isArray(value)) return null;
 		const valid = value.filter(isAnnotation);
-		// An empty array is a valid deletion; a nonempty array of corrupt records is not.
+		// 空数组表示有效的删除；由损坏记录组成的非空数组则不算有效数据。
 		return value.length === 0 || valid.length > 0 ? valid : null;
 	} catch {
 		return null;
@@ -75,11 +75,11 @@ function localAnnotations(key: string): Annotation[] | null {
 export function ensureLoaded(): Promise<void> {
 	if (!loadedPromise) {
 		loadedPromise = (async () => {
-			if (saveVersion > 0) return; // Keep edits made before the first asynchronous load.
+			if (saveVersion > 0) return; // 保留首次异步加载完成前已做出的编辑。
 			let list: Annotation[] | null = null;
 			if (isTauri()) {
-				// A pending snapshot survived an interrupted or failed native write.
-				// It takes precedence even when empty, so deleted notes stay deleted.
+				// 待恢复快照来自中断或失败的桌面端文件写入。
+				// 即使快照为空也优先使用，确保已删除的笔记不会恢复。
 				const pending = localAnnotations(PENDING_KEY);
 				if (pending !== null) {
 					annotations.set(pending);
@@ -107,7 +107,7 @@ async function persist() {
 	const version = ++saveVersion;
 	if (native) {
 		try {
-			// Keep the snapshot itself so recovery also works if the backup write fails.
+			// 保留快照本身，确保备份写入失败时仍可恢复。
 			localStorage.setItem(PENDING_KEY, json);
 		} catch {
 			/* localStorage が使えない場合でもファイル保存は試みる */
@@ -125,7 +125,7 @@ async function persist() {
 			try {
 				const { invoke } = await import('@tauri-apps/api/core');
 				await invoke('save_annotations', { data: json });
-				// An older queued write must not clear recovery for a newer edit.
+				// 队列中较早的写入不能清除较新编辑的恢复数据。
 				if (
 					version === saveVersion &&
 					localStorage.getItem(PENDING_KEY) === json &&
@@ -139,8 +139,8 @@ async function persist() {
 	}
 }
 
-// Once edited in this session, the store is the latest snapshot even if persistence failed.
-// An empty array is intentional (all notes deleted), not a reason to reload stale storage.
+// 本次会话编辑后，即使保存失败，也以store中的最新快照为准。
+// 空数组表示主动删除了全部笔记，不能因此重新加载旧存储。
 export function editedAnnotationSnapshot(): Annotation[] | null {
 	return saveVersion > 0 ? get(annotations) : null;
 }

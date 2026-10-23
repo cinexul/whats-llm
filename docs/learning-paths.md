@@ -28,12 +28,12 @@ New paths or checkpoint replacements require explicit identity decisions. Reword
 
 ## Verification
 
-Run from `app`:
+Run from `app/`:
 
 ```sh
-npm run test -- src/lib/learning-paths.test.ts
 npm run check
-PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npx playwright test e2e/learning-paths.spec.ts
+npm run build
+npm run preview
 ```
 
-The unit suite checks real chapter references, translation identity, timing claims, manual completion, next-step choice, persistence, reset isolation, corrupt data, storage failures, and import reloads. Browser coverage checks keyboard completion, reloads, language switching, explicit reset confirmation, corrupt data notices, import notifications, failed writes, and all three paths at 320px with 150% type in each language.
+In the production preview, verify keyboard completion, persistence after reload, language switching, and explicit reset confirmation. Check all three paths at 320px with 150% type in each language. Visiting a chapter must not award completion, and resetting one path must leave the others unchanged. These manual checks complement type/build validation; they do not exercise every storage-failure case.

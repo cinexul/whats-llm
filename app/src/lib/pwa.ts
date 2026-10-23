@@ -56,7 +56,7 @@ async function refresh() {
 	patch({ current, update });
 }
 
-/** Call once from the root layout; repeated panel mounts safely reuse registration. */
+/** 在根布局调用一次；面板重复挂载时复用注册结果。 */
 export function startPwa(): Promise<void> {
 	if (typeof window === 'undefined') return Promise.resolve();
 	if (start) return start.then(() => refresh()).catch(() => patch({ error: 'connection' }));

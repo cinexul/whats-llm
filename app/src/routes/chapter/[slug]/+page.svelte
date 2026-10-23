@@ -125,8 +125,8 @@
 		applyHighlights(proseEl, list);
 	});
 
-	// Each listener captures its chapter identity. Cleanup flushes the last snapshot,
-	// never reads a DOM tree that may already belong to the next chapter.
+	// 每个监听器记录所属章节标识；清理时写入最后一次快照，
+	// 不得读取可能已经属于下一章的DOM树。
 	$effect(() => {
 		const slug = data.slug;
 		const lang = data.lang as Lang;
@@ -160,17 +160,17 @@
 		main.addEventListener('scroll', capture, { passive: true });
 		window.addEventListener('pagehide', persistOnHide);
 		document.addEventListener('visibilitychange', persistOnHide);
-		// Wait for font metrics and SvelteKit's navigation scroll reset to settle.
+		// 等待字体尺寸确定，并等待SvelteKit完成导航后的滚动重置。
 		void document.fonts.ready.then(() => {
 			if (disposed) return;
 			raf = requestAnimationFrame(() => {
 				raf = requestAnimationFrame(() => {
 					if (disposed) return;
 					let hash = '';
-					try { hash = decodeURIComponent(window.location.hash.slice(1)); } catch { /* malformed link */ }
+					try { hash = decodeURIComponent(window.location.hash.slice(1)); } catch { /* 链接格式错误 */ }
 					const target = hash ? document.getElementById(hash) : null;
 					const saved = getReadingPosition(lang, slug);
-					// A reader may already be selecting text while fonts finish loading.
+					// 字体加载完成时，读者可能已在选择文本。
 					if (!captureSelection(root)) {
 						if (target) target.scrollIntoView({ block: 'start', behavior: 'instant' });
 						else if (!hash && saved) restoreReadingPosition(main, root, saved);
@@ -197,15 +197,15 @@
 		const close = () => {
 			pending = null;
 			clearTimeout(selectionTimer);
-			// A deferred scroll event can arrive after selectionchange. Reposition
-			// once scrolling settles instead of permanently cancelling the selection.
+			// 延迟的scroll事件可能晚于selectionchange到达；滚动停止后
+			// 重新定位，避免取消选区后不再恢复。
 			if (!window.getSelection()?.isCollapsed) scheduleSelection();
 		};
 		document.addEventListener('scroll', close, true);
 		return () => document.removeEventListener('scroll', close, true);
 	});
 
-	// Touch selection handles and keyboard selection do not reliably emit mouseup.
+	// 触摸选区的拖动手柄和键盘选择不一定触发mouseup。
 	$effect(() => {
 		document.addEventListener('selectionchange', scheduleSelection);
 		return () => {
@@ -224,7 +224,7 @@
 		return positionOverlay(editorEl, editing.x, editing.y, true);
 	});
 
-	// Use the measured panel size and visual viewport, including an on-screen keyboard.
+	// 按面板实测尺寸和当前可见区域定位，并考虑屏幕键盘占用的空间。
 	function positionOverlay(element: HTMLElement, x: number, y: number, note = false) {
 		const viewport = window.visualViewport;
 		const place = () => {
@@ -281,7 +281,7 @@
 	}
 
 	function preserveSelection(event: PointerEvent) {
-		// Keep the selected text while a mouse or finger presses a marker action.
+		// 鼠标或手指按下标记操作按钮时，保留已选中的文本。
 		event.preventDefault();
 		clearTimeout(selectionTimer);
 	}

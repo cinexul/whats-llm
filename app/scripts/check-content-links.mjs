@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Optional network diagnostics. Does not change review dates or assert factual correctness. */
+/** 可选的网络诊断，不修改审阅日期，也不判断内容是否符合事实。 */
 import { readFile, writeFile } from 'node:fs/promises';
 import { parseArgs } from 'node:util';
 import { isHttpsUrl } from '../src/lib/content-metadata-rules.ts';

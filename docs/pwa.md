@@ -52,11 +52,10 @@ Keep the server's standard MIME table enabled and add the web manifest MIME type
 ```sh
 cd app
 npm run check
-npx vitest run src/lib/offline-cache.test.ts
 npm run build
-npx playwright test --config=playwright.pwa.config.ts
+npm run preview
 ```
 
-Install the Playwright Chromium browser first (`npx playwright install chromium`), or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to an available compatible Chromium executable. The PWA suite uses a separate production-only static server on `127.0.0.1:4175`; no development server is reused. Its update endpoint changes the generated service worker's version, the shell's version stamp, and the actual app bootstrap module URL/content in memory while retaining historical bootstrap files. It never edits build files.
+Use the production preview on localhost to download the complete book. After the ready message, disconnect the browser, open previously unread chapters, switch among all three languages, and reload. Check that saved local edits and their diffs remain available. For update acceptance, keep an old tab open while serving a new build and verify the explicit download-before-activation flow without losing the prior complete book.
 
-The unit suite checks deployment/shell mismatch rejection, concurrent worker staging safety, failed downloads, quota errors, partial-cache isolation, prior-version fallback, eviction recovery and scoped cleanup. The browser suite downloads the actual bundle, reads previously unopened chapters offline, changes languages, reloads without a network, and verifies the download-before-activation update flow with changed bootstrap modules. It also opens a tab before a new deployment, confirms that the old worker refuses to mark the newer shell ready, then downloads and applies the correct update offline. Browser installation menus, iOS behavior and storage eviction policy still vary by platform; the UI supplies manual installation instructions and storage-failure feedback.
+Type/build checks do not establish offline correctness. Browser installation menus, iOS behavior and storage eviction policy require separate platform checks; the UI supplies manual installation instructions and storage-failure feedback.

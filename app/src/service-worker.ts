@@ -20,10 +20,10 @@ async function report(snapshot: OfflineSnapshot) {
 	}
 }
 
-// No skipWaiting or large install download: readers explicitly download and apply updates.
+// 不调用skipWaiting，也不在安装时大量下载；由读者主动下载并应用更新。
 worker.addEventListener('activate', (event) => {
 	event.waitUntil((async () => {
-		try { await book.cleanup(); } catch { /* Storage support is reported by BOOK_STATUS. */ }
+		try { await book.cleanup(); } catch { /* 存储支持情况通过BOOK_STATUS报告。 */ }
 		await worker.clients.claim();
 	})());
 });
@@ -35,7 +35,7 @@ worker.addEventListener('message', (event) => {
 			let snapshot = event.data.type === 'BOOK_DOWNLOAD'
 				? await book.download((state) => { void report(state); })
 				: await book.status();
-			// Cleanup runs on activation only. A waiting worker must preserve the active book.
+			// 仅在激活时清理；等待中的worker必须保留当前使用的书籍缓存。
 			if (event.data.type === 'BOOK_ACTIVATE') {
 				if (snapshot.ready) await worker.skipWaiting();
 				else snapshot = { ...snapshot, phase: 'error', error: 'incomplete' };

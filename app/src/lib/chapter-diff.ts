@@ -13,8 +13,8 @@ export interface ChapterDiff {
 	fallback: boolean;
 }
 
-// Bound tokenization as well as the diff search so imported chapters cannot
-// monopolize the UI. The fallback still retains both complete original texts.
+// 限制文本分词和差异搜索的开销，避免导入章节长时间占用界面线程。
+// 回退方案仍保留两份完整原文。
 const MAX_INPUT_CHARACTERS = 500_000;
 const MAX_EDIT_LENGTH = 1_000;
 const DIFF_TIMEOUT_MS = 50;

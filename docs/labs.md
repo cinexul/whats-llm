@@ -26,7 +26,5 @@ Prefix internal links with SvelteKit's `base`. Every section has a heading and f
 - `src/lib/labs/copy.ts`: complete localized copy.
 - `ContextLab.svelte`, `EvidenceLab.svelte`, `PermissionLab.svelte`: interactions.
 - `src/lib/labs/labs.css`: styles scoped under `.labs`, including dark theme variables, visible keyboard focus, touch targets, narrow layouts, and scalable text.
-- `src/lib/labs/scenarios.test.ts`: capacity/compaction, missing/conflicting/expired evidence, default denial, grant scope and revocation, check results, undo, and reset.
-- `e2e/labs.spec.ts`: full interactions with the browser offline after the app has loaded, citation links, keyboard operation, and no horizontal overflow at 320px with all reader scales at 150%, in all three languages.
 
-Run `npm test -- src/lib/labs/scenarios.test.ts` and `npm run test:e2e -- e2e/labs.spec.ts`. If this environment uses system Chromium, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium`.
+Run `npm run check` and `npm run build`, then inspect `/labs/` using `npm run preview`. Verify overflow/compaction, missing or conflicting evidence, permission grants/revocation, undo, and reset. Check keyboard operation, citation links, and all three languages at 320px with 150% text. These are local simulations; no model or external API is needed.

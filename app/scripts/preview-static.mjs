@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Preview the adapter's actual output, including the version-stamped offline shell.
+// 预览适配器的实际构建结果，包括带版本标记的离线基础页面。
 import { createServer } from 'node:http';
 import { readFile, realpath, stat } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -38,7 +38,7 @@ export async function createPreviewServer(directory = buildDirectory) {
 			let file = resolve(root, `.${pathname}`);
 			if (file !== root && !inside(file)) { end(400, 'Invalid path'); return; }
 			let exists = false;
-			try { exists = (await stat(file)).isFile(); } catch { /* Resolve app navigation below. */ }
+			try { exists = (await stat(file)).isFile(); } catch { /* 下方继续解析应用内导航路径。 */ }
 			if (!exists) {
 				const reserved = /^\/(?:_app|icons)(?:\/|$)/.test(pathname);
 				if (reserved || extname(pathname)) { end(404, 'Not found'); return; }
