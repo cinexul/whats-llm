@@ -14,6 +14,7 @@ This directory contains usage guides, maintenance contracts, and dated project r
 | --- | --- |
 | [Local chapter edits](local-chapter-edits.md) | 本地正文编辑、差异对比和冲突恢复 · Editing, diffs, and recovery · 本文編集・差分・復旧 |
 | [Portable learning backups](portable-learning-data.md) | 备份格式、导入合并和恢复规则 · Backup format and merge rules · バックアップ形式・統合ルール |
+| [Windows portable ZIP](windows-portable.md) | 免安装版的启动、更新与数据范围 · Portable startup, updates, and data scope · ポータブル版の起動・更新・保存先 |
 | [Offline book and installation](pwa.md) | 离线下载、安装、更新和静态部署 · Offline use and hosting · オフライン利用・配信 |
 | [Goal-oriented learning paths](learning-paths.md) | 学习路线、检查点身份与保存 · Paths and checkpoint persistence · 学習コース・進捗保存 |
 | [Local interactive lessons](labs.md) | 实验规则、入口与测试 · Simulation rules and tests · ラボのルール・テスト |

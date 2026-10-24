@@ -51,7 +51,7 @@ A workflow is a list of tasks GitHub runs on specified events. It is not require
 | --- | --- | --- |
 | [`check.yml`](.github/workflows/check.yml) | Pushes to `main` and pull requests | Type, content, and quiz-registry checks; production build and Rust core tests. Does not publish the app. |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | Mondays at 07:17 UTC, or manually | Reports overdue editorial reviews and saves source-link diagnostics. Does not edit chapters or renew review dates. |
-| [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually supplying a version | Builds a Windows NSIS installer and creates a GitHub Release **draft** for manual review and publication. |
+| [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually supplying a version | Builds a Windows x64 portable ZIP, tests extracted startup, and uploads an Actions artifact and GitHub Release **draft** for manual review and publication. |
 
 Ordinary `main` pushes do not trigger a release; no workflow currently deploys the website. Failed source-link checks need human review.
 
@@ -89,7 +89,7 @@ cd app/src-tauri
 cargo test --locked -p search-core -p study-core
 ```
 
-Browser mode stores study data in localStorage; desktop mode uses SQLite/FSRS. Both use IndexedDB for local chapter edits. The configured desktop package target is Windows NSIS and requires the appropriate Tauri prerequisites. Semantic-search weights and indices are not committed; without them, search falls back to full-text matching. Web tests do not validate a desktop installer.
+Browser mode stores study data in localStorage; desktop mode uses SQLite/FSRS. Both use IndexedDB for local chapter edits. GitHub releases build a [Windows x64 portable ZIP](docs/windows-portable.md) containing the executable, DLLs, and `data/` folder; Microsoft Edge WebView2 Runtime is required. Local `tauri build` can still create the configured NSIS installer. Semantic-search weights and indices are not committed; without them, search falls back to full-text matching. Web tests do not validate a desktop application.
 
 ## Mobile reading
 
