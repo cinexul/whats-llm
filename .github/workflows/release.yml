@@ -75,6 +75,16 @@ jobs:
           # Native dependencies (including ONNX Runtime when dynamically linked).
           Get-ChildItem -LiteralPath $release -Filter '*.dll' -File |
             Copy-Item -Destination $folder
+          # Use the redistributable CRT, never DLLs copied from Windows/System32.
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          $runtimeFiles = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -find 'VC\Redist\MSVC\**\x64\Microsoft.VC*.CRT\msvcp140.dll'
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to locate the Visual C++ runtime.' }
+          $runtime = $runtimeFiles | Get-Item |
+            Sort-Object { [version] $_.VersionInfo.FileVersion } -Descending |
+            Select-Object -First 1
+          if ($null -eq $runtime) { throw 'No x64 Visual C++ redistributable CRT was found.' }
+          Get-ChildItem -LiteralPath $runtime.DirectoryName -Filter '*.dll' -File |
+            Copy-Item -Destination $folder
           Copy-Item -LiteralPath docs/windows-portable.md -Destination "$folder/README.md"
           'Keep this folder next to whats-llm.exe. The learning database is saved here.' |
             Set-Content -LiteralPath "$folder/data/README.txt" -Encoding utf8
@@ -102,6 +112,11 @@ jobs:
           $db = Join-Path $folder 'data/whatsllm.db'
           if (-not (Test-Path -LiteralPath "$folder/data" -PathType Container)) {
             throw 'Portable data directory is missing from the ZIP.'
+          }
+          foreach ($dll in @('msvcp140.dll', 'msvcp140_1.dll', 'vcruntime140.dll', 'vcruntime140_1.dll')) {
+            if (-not (Test-Path -LiteralPath (Join-Path $folder $dll) -PathType Leaf)) {
+              throw "Visual C++ runtime DLL is missing from the ZIP: $dll"
+            }
           }
           if (Test-Path -LiteralPath $db) { throw 'ZIP must not contain learning data.' }
           # Exclude the build directory from DLL lookup and isolate the WebView profile.
@@ -150,6 +165,8 @@ jobs:
             if ($draft -ne 'true') {
               throw 'This release is already published. Use a new tag to create a draft.'
             }
+            gh release edit $env:RELEASE_TAG --target $env:GITHUB_SHA
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to update the draft source commit.' }
           } else {
             $notes = Join-Path $env:RUNNER_TEMP 'portable-release-notes.md'
             @'
