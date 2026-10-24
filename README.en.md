@@ -51,7 +51,7 @@ A workflow is a list of tasks GitHub runs on specified events. It is not require
 | --- | --- | --- |
 | [`check.yml`](.github/workflows/check.yml) | Pushes to `main` and pull requests | Type, content, and quiz-registry checks; production build and Rust core tests. Does not publish the app. |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | Mondays at 07:17 UTC, or manually | Reports overdue editorial reviews and saves source-link diagnostics. Does not edit chapters or renew review dates. |
-| [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually supplying a version | Builds a Windows x64 portable ZIP, tests extracted startup, and uploads an Actions artifact and GitHub Release **draft** for manual review and publication. |
+| [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually supplying a version | Builds a Windows x64 portable ZIP; the manual `installer` option also builds and tests an NSIS installer. Uploads Actions artifacts and a GitHub Release **draft** for manual review and publication. |
 
 Ordinary `main` pushes do not trigger a release; no workflow currently deploys the website. Failed source-link checks need human review.
 

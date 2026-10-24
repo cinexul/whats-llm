@@ -86,6 +86,7 @@ Run from `app/` with a Node version supported by `package.json` (CI uses Node 24
 - `npm run preview` — preview the build (http://localhost:4173)
 - `npm run tauri -- dev` / `npm run tauri -- build` — run the desktop app / build its configured Windows NSIS installer with platform prerequisites
 - GitHub `release.yml` uses `tauri build --no-bundle`, packages the Windows x64 executable plus DLLs and `data/` as a ZIP, and tests extracted startup before uploading an Actions artifact and a Release draft. See [Windows portable distribution](../docs/windows-portable.md); WebView-backed data still requires an explicit backup when moving computers.
+- The manual `installer` input also runs `.github/scripts/windows-installer.ps1` to bundle the same runtime DLLs into NSIS, then verifies silent installation and installed startup with the app-data SQLite path. It does not include the portable `data/` marker.
 - `npm run check`, `npm run content:check`, `npm run check:quiz` — type, content, and quiz-registry checks
 - Build and preview to verify reading, editing, backup, and offline interactions; static checks alone do not verify these flows
 

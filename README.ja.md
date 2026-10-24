@@ -46,7 +46,7 @@ Workflow は、指定されたイベントで GitHub が実行する処理の設
 | --- | --- | --- |
 | [`check.yml`](.github/workflows/check.yml) | `main` へのプッシュ、Pull Request | 型・本文・クイズ登録の検査、本番ビルド、Rust コアのテスト。アプリは公開しません。 |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 毎週月曜 07:17 UTC、または手動 | 章の再確認期限を通知し、出典リンクの接続結果を保存。本文や確認日を自動更新しません。 |
-| [`release.yml`](.github/workflows/release.yml) | `v*` タグのプッシュ、またはバージョンを指定した手動実行 | Windows x64のポータブルZIPをビルドし、展開後の起動を確認してActionsの成果物とGitHub Releaseの**ドラフト**に保存。確認後に手動で公開。 |
+| [`release.yml`](.github/workflows/release.yml) | `v*` タグのプッシュ、またはバージョンを指定した手動実行 | Windows x64のポータブルZIPを作成。手動実行で `installer` を有効にすると、NSISインストーラーの作成と動作確認も行う。成果物はActionsとGitHub Releaseの**ドラフト**に保存し、確認後に手動で公開。 |
 
 通常の `main` へのプッシュではリリース処理は動きません。Web サイトをデプロイする workflow はありません。出典リンクの検査失敗は人による確認が必要です。
 

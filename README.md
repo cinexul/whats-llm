@@ -46,7 +46,7 @@ Workflow 是 GitHub 在指定事件发生时执行的任务清单，不是应用
 | --- | --- | --- |
 | [`check.yml`](.github/workflows/check.yml) | 推送到 `main` 或提交 Pull Request | 类型、内容和测验登记检查、生产构建及 Rust 核心测试；不发布应用 |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 每周一 07:17 UTC，或手动运行 | 提醒到期的章节审核，检查来源链接并保存报告；不自动改正文或审核日期 |
-| [`release.yml`](.github/workflows/release.yml) | 推送 `v*` 标签，或手动填写版本号运行 | 构建 Windows x64 免安装 ZIP，解压启动检查后上传 Actions 产物及 GitHub Release **草稿**，待人工确认和发布 |
+| [`release.yml`](.github/workflows/release.yml) | 推送 `v*` 标签，或手动填写版本号运行 | 默认构建 Windows x64 免安装 ZIP；手动勾选 `installer` 可同时生成并验证 NSIS 安装包。产物上传 Actions 及 GitHub Release **草稿**，待人工确认和发布 |
 
 普通 `main` 推送不会触发发布流程；当前没有网站部署 workflow。来源链接检查失败需要人工确认。
 

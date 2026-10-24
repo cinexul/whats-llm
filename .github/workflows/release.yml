@@ -9,6 +9,10 @@ on:
       tag:
         description: '版本号 tag,例如 v0.1.0'
         required: true
+      installer:
+        description: '同时生成 Windows 安装包 (.exe)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -164,13 +168,35 @@ jobs:
           if-no-files-found: error
           compression-level: 0
 
-      - name: Upload portable ZIP to release draft
+      - name: Build and test Windows installer
+        if: inputs.installer
+        id: installer
+        timeout-minutes: 10
+        shell: pwsh
+        env:
+          PORTABLE_NAME: ${{ steps.portable.outputs.name }}
+        run: ./.github/scripts/windows-installer.ps1
+
+      - name: Upload installer build artifact
+        if: inputs.installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Whats-LLM-windows-x64-installer
+          path: |
+            ${{ steps.installer.outputs.exe }}
+            ${{ steps.installer.outputs.checksum }}
+          if-no-files-found: error
+          compression-level: 0
+
+      - name: Upload Windows packages to release draft
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           PORTABLE_ZIP: ${{ steps.portable.outputs.zip }}
           PORTABLE_CHECKSUM: ${{ steps.portable.outputs.checksum }}
+          INSTALLER_EXE: ${{ steps.installer.outputs.exe }}
+          INSTALLER_CHECKSUM: ${{ steps.installer.outputs.checksum }}
         run: |
           $ErrorActionPreference = 'Stop'
           $draft = gh release view $env:RELEASE_TAG --json isDraft --jq '.isDraft' 2>$null
@@ -183,14 +209,22 @@ jobs:
           } else {
             $notes = Join-Path $env:RUNNER_TEMP 'portable-release-notes.md'
             @'
-          Windows x64 免安装版：下载 ZIP，完整解压后运行 whats-llm.exe，无需安装本应用。
+          Windows x64 桌面版：ZIP 为免安装版，完整解压后运行 whats-llm.exe。
           请保留 data/ 文件夹和 DLL；更新时先导出学习备份，再替换程序文件。
           学习数据库保存在 data/，批注保存在程序旁；界面设置和本地正文修改仍由本机 WebView 保存，跨电脑请使用应用内的备份导出/导入。
           需要 Microsoft Edge WebView2 Runtime。未内置语义检索模型，使用关键词搜索。
           附带 SHA-256 校验文件。此版本保持草稿，等待人工确认后发布。
           '@ | Set-Content -LiteralPath $notes -Encoding utf8
-            gh release create $env:RELEASE_TAG --draft --target $env:GITHUB_SHA --title "What's LLM $env:RELEASE_TAG (Windows portable)" --notes-file $notes
+            if ($env:INSTALLER_EXE) {
+              '本次还提供 -setup.exe 安装包：双击安装。运行库已包含；缺少 WebView2 时安装程序会下载其引导程序。安装版的学习数据库保存在用户应用数据目录。' |
+                Add-Content -LiteralPath $notes -Encoding utf8
+            }
+            gh release create $env:RELEASE_TAG --draft --target $env:GITHUB_SHA --title "What's LLM $env:RELEASE_TAG (Windows)" --notes-file $notes
             if ($LASTEXITCODE -ne 0) { throw 'Failed to create release draft.' }
           }
           gh release upload $env:RELEASE_TAG $env:PORTABLE_ZIP $env:PORTABLE_CHECKSUM --clobber
           if ($LASTEXITCODE -ne 0) { throw 'Failed to upload portable ZIP.' }
+          if ($env:INSTALLER_EXE) {
+            gh release upload $env:RELEASE_TAG $env:INSTALLER_EXE $env:INSTALLER_CHECKSUM --clobber
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to upload Windows installer.' }
+          }
