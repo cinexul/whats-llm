@@ -55,6 +55,16 @@ jobs:
           }
           git check-ref-format "refs/tags/$env:RELEASE_TAG"
           if ($LASTEXITCODE -ne 0) { throw 'Invalid release tag.' }
+          $tagRefs = @(git ls-remote --tags origin "refs/tags/$env:RELEASE_TAG" "refs/tags/$env:RELEASE_TAG^{}")
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to check the remote tag.' }
+          if ($tagRefs.Count -gt 0) {
+            $peeled = $tagRefs | Where-Object { $_.EndsWith('^{}') } | Select-Object -First 1
+            $reference = if ($peeled) { $peeled } else { $tagRefs[0] }
+            $tagSha = ($reference -split '\s+')[0]
+            if ($tagSha -ne $env:GITHUB_SHA) {
+              throw 'This tag points to a different commit. Build its tag ref or use a new tag.'
+            }
+          }
 
       - name: Build Windows executable without installer
         working-directory: app
