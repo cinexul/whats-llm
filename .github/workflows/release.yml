@@ -70,6 +70,15 @@ jobs:
             }
           }
 
+      - name: Validate tag matches app version
+        shell: pwsh
+        run: |
+          $config = Get-Content app/src-tauri/tauri.conf.json -Raw | ConvertFrom-Json
+          $expected = "v$($config.version)"
+          if ($env:RELEASE_TAG -ne $expected) {
+            throw "Tag $env:RELEASE_TAG does not match tauri.conf.json version $expected."
+          }
+
       - name: Build Windows executable without installer
         working-directory: app
         run: npm run tauri -- build --no-bundle --ci --target x86_64-pc-windows-msvc -- --locked
