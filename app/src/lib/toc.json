@@ -10,35 +10,35 @@
       ]
     },
     {
-      "title": "第一部分　认识 AI 与大模型：建立正确的直觉",
+      "title": "第一部分　认识AI与大模型：建立正确的直觉",
       "chapters": [
         {
           "slug": "ai-ml-llm-relationship",
-          "title": "1　从\"会聊天的 AI\"说起：AI、机器学习、大模型是什么关系"
+          "title": "1　从“会聊天的AI”说起：AI、机器学习、大模型是什么关系"
         },
         {
           "slug": "what-is-llm",
-          "title": "2　大模型到底是什么：参数、训练，以及\"它不是一个数据库\""
+          "title": "2　大模型到底是什么：参数、训练，以及“它不是一个数据库”"
         },
         {
           "slug": "token-and-context",
-          "title": "3　Token 与上下文窗口：AI 眼里的文字长什么样"
+          "title": "3　Token与上下文窗口：AI眼里的文字长什么样"
         },
         {
           "slug": "next-token-prediction",
-          "title": "4　模型怎么\"接话\"：从一堆概率里挑下一个词"
+          "title": "4　模型怎么“接话”：从一堆概率里挑下一个词"
         },
         {
           "slug": "vectors-and-embedding",
-          "title": "5　向量与 embedding：怎么让机器\"感觉到\"词义的远近"
+          "title": "5　向量与embedding：怎么让机器“感觉到”词义的远近"
         },
         {
           "slug": "attention-and-transformer",
-          "title": "6　注意力与 Transformer：它凭什么能抓住重点(直觉版,零公式)"
+          "title": "6　注意力与Transformer：它凭什么能抓住重点（直觉版，零公式）"
         },
         {
           "slug": "training-finetuning-alignment",
-          "title": "7　它是怎么学会\"好好说话\"的：训练、微调、对齐"
+          "title": "7　它是怎么学会“好好说话”的：训练、微调、对齐"
         },
         {
           "slug": "temperature-and-reasoning",
@@ -59,7 +59,7 @@
         },
         {
           "slug": "prompt-structure",
-          "title": "11　提示词的结构：把\"我想要什么\"说清楚"
+          "title": "11　提示词的结构：把“我想要什么”说清楚"
         },
         {
           "slug": "long-text-and-summary",
@@ -71,11 +71,11 @@
         },
         {
           "slug": "ai-driven-workflow",
-          "title": "14　让 AI 持续推进任务：从一问一答到工作流"
+          "title": "14　让AI持续推进任务：从一问一答到工作流"
         },
         {
           "slug": "learning-and-research",
-          "title": "15　学习与研究场景：用 AI 读书、查证，又不被它带偏"
+          "title": "15　学习与研究场景：用AI读书、查证，又不被它带偏"
         },
         {
           "slug": "work-scenarios",
@@ -84,36 +84,36 @@
       ]
     },
     {
-      "title": "第三部分　工具生态：模型、产品、API、Agent(看懂这张地图)",
+      "title": "第三部分　工具生态：模型、产品、API、Agent（看懂这张地图）",
       "chapters": [
         {
           "slug": "model-product-api-agent",
-          "title": "17　模型 / 产品 / API / Agent 的区别"
+          "title": "17　模型 / 产品 / API / Agent的区别"
         },
         {
           "slug": "ai-products-overview",
-          "title": "18　主流 AI 产品横向看：怎么选、怎么搭配用"
+          "title": "18　主流AI产品横向看：怎么选、怎么搭配用"
         },
         {
           "slug": "what-is-agent",
-          "title": "19　什么是 Agent：会\"动手\"的 AI"
+          "title": "19　什么是Agent：会“动手”的AI"
         },
         {
           "slug": "rag",
-          "title": "20　RAG：给 AI 外挂一个资料库"
+          "title": "20　RAG：给AI外挂一个资料库"
         },
         {
           "slug": "local-models-ollama",
-          "title": "21　本地模型与 Ollama / LM Studio：把模型装进自己的电脑"
+          "title": "21　本地模型与Ollama / LM Studio：把模型装进自己的电脑"
         },
         {
           "slug": "skills-and-mcp",
-          "title": "22　Skills 与 MCP：给 AI 接上工具和数据"
+          "title": "22　Skills与MCP：给AI接上工具和数据"
         }
       ]
     },
     {
-      "title": "第四部分　AI 编程实战：用 Claude Code 和 Codex 做自己的项目",
+      "title": "第四部分　AI编程实战：用Claude Code和Codex做自己的项目",
       "chapters": [
         {
           "slug": "coding-agent-intro",
@@ -125,11 +125,11 @@
         },
         {
           "slug": "diff-test-rollback-review",
-          "title": "25　看懂 diff、跑测试、回滚、验收：人怎么把关"
+          "title": "25　看懂diff、跑测试、回滚、验收：人怎么把关"
         },
         {
           "slug": "permissions-and-rollback",
-          "title": "26　让 AI 动手但不失控：许可机制与可回滚环境"
+          "title": "26　让AI动手但不失控：许可机制与可回滚环境"
         },
         {
           "slug": "plan-first-task-breakdown",
@@ -137,11 +137,11 @@
         },
         {
           "slug": "claude-code-handson",
-          "title": "28　Claude Code 实操：安装、项目记忆（CLAUDE.md）与常用操作"
+          "title": "28　Claude Code实操：安装、项目记忆（CLAUDE.md）与常用操作"
         },
         {
           "slug": "codex-handson",
-          "title": "29　Codex 实操：安装与常用操作"
+          "title": "29　Codex实操：安装与常用操作"
         },
         {
           "slug": "failure-modes-and-rescue",
@@ -166,15 +166,15 @@
         },
         {
           "slug": "project-agent-console",
-          "title": "34　项目四：搭一个 Agent 控制台"
+          "title": "34　项目四：搭一个Agent控制台"
         },
         {
           "slug": "project-connect-api",
-          "title": "35　项目五：给现有程序接上 AI(调用 API)"
+          "title": "35　项目五：给现有程序接上AI（调用API）"
         },
         {
           "slug": "project-skills-mcp",
-          "title": "36　项目六：用 Skills / MCP 扩展 AI 的能力"
+          "title": "36　项目六：用Skills / MCP扩展AI的能力"
         }
       ]
     },
@@ -191,7 +191,7 @@
         },
         {
           "slug": "content-review-and-responsibility",
-          "title": "39　AI 生成内容的审核与责任：版权、事实、署名"
+          "title": "39　AI生成内容的审核与责任：版权、事实、署名"
         },
         {
           "slug": "safe-use-and-team-rules",
@@ -204,19 +204,19 @@
       "chapters": [
         {
           "slug": "appendix-glossary",
-          "title": "附录 A　术语表(中日英三语)"
+          "title": "附录A　术语表（中日英三语）"
         },
         {
           "slug": "appendix-prompts",
-          "title": "附录 B　常用提示词模板"
+          "title": "附录B　常用提示词模板"
         },
         {
           "slug": "appendix-deep-reference",
-          "title": "附录 C　Claude Code / Codex 深度功能参考"
+          "title": "附录C　Claude Code / Codex深度功能参考"
         },
         {
           "slug": "appendix-harness",
-          "title": "附录 D　Harness 方法论与上线前检查清单"
+          "title": "附录D　Harness方法论与上线前检查清单"
         }
       ]
     }
@@ -232,7 +232,7 @@
       ]
     },
     {
-      "title": "第1部　AI と大規模言語モデルを知る：正しい直感をつかむ",
+      "title": "第1部　AIと大規模言語モデルを知る：正しい直感をつかむ",
       "chapters": [
         {
           "slug": "ai-ml-llm-relationship",
@@ -244,7 +244,7 @@
         },
         {
           "slug": "token-and-context",
-          "title": "3　トークンとコンテキストウィンドウ：AI から見た文字"
+          "title": "3　トークンとコンテキストウィンドウ：AIから見た文字"
         },
         {
           "slug": "next-token-prediction",
@@ -256,7 +256,7 @@
         },
         {
           "slug": "attention-and-transformer",
-          "title": "6　注意機構と Transformer：なぜ要点をつかめるのか（直感編・数式なし）"
+          "title": "6　注意機構とTransformer：なぜ要点をつかめるのか（直感編・数式なし）"
         },
         {
           "slug": "training-finetuning-alignment",
@@ -293,11 +293,11 @@
         },
         {
           "slug": "ai-driven-workflow",
-          "title": "14　AI にタスクを進めさせる：一問一答からワークフローへ"
+          "title": "14　AIにタスクを進めさせる：一問一答からワークフローへ"
         },
         {
           "slug": "learning-and-research",
-          "title": "15　学習・リサーチでの活用：AI で読み、裏取りし、流されない"
+          "title": "15　学習・リサーチでの活用：AIで読み、裏取りし、流されない"
         },
         {
           "slug": "work-scenarios",
@@ -314,7 +314,7 @@
         },
         {
           "slug": "ai-products-overview",
-          "title": "18　主要 AI 製品を横並びで見る：選び方・組み合わせ方"
+          "title": "18　主要AI製品を横並びで見る：選び方・組み合わせ方"
         },
         {
           "slug": "what-is-agent",
@@ -322,20 +322,20 @@
         },
         {
           "slug": "rag",
-          "title": "20　RAG：AI に資料データベースを外付けする"
+          "title": "20　RAG：AIに資料データベースを外付けする"
         },
         {
           "slug": "local-models-ollama",
-          "title": "21　ローカルモデルと Ollama / LM Studio：モデルを自分の PC に入れる"
+          "title": "21　ローカルモデルとOllama / LM Studio：モデルを自分のPCに入れる"
         },
         {
           "slug": "skills-and-mcp",
-          "title": "22　Skills と MCP：AI にツールとデータをつなぐ"
+          "title": "22　SkillsとMCP：AIにツールとデータをつなぐ"
         }
       ]
     },
     {
-      "title": "第4部　AIコーディング実践：Claude Code と Codex で自分のプロジェクトを作る",
+      "title": "第4部　AIコーディング実践：Claude CodeとCodexで自分のプロジェクトを作る",
       "chapters": [
         {
           "slug": "coding-agent-intro",
@@ -359,11 +359,11 @@
         },
         {
           "slug": "claude-code-handson",
-          "title": "28　Claude Code 実践：導入・プロジェクトの記憶（CLAUDE.md）・基本操作"
+          "title": "28　Claude Code実践：導入・プロジェクトの記憶（CLAUDE.md）・基本操作"
         },
         {
           "slug": "codex-handson",
-          "title": "29　Codex 実践：導入と基本操作"
+          "title": "29　Codex実践：導入と基本操作"
         },
         {
           "slug": "failure-modes-and-rescue",
@@ -392,11 +392,11 @@
         },
         {
           "slug": "project-connect-api",
-          "title": "35　プロジェクト⑤：既存プログラムに AI をつなぐ（API 呼び出し）"
+          "title": "35　プロジェクト⑤：既存プログラムにAIをつなぐ（API呼び出し）"
         },
         {
           "slug": "project-skills-mcp",
-          "title": "36　プロジェクト⑥：Skills / MCP で AI の能力を広げる"
+          "title": "36　プロジェクト⑥：Skills / MCPでAIの能力を広げる"
         }
       ]
     },
@@ -413,7 +413,7 @@
         },
         {
           "slug": "content-review-and-responsibility",
-          "title": "39　AI 生成物のレビューと責任：著作権・事実・クレジット"
+          "title": "39　AI生成物のレビューと責任：著作権・事実・クレジット"
         },
         {
           "slug": "safe-use-and-team-rules",
@@ -426,19 +426,19 @@
       "chapters": [
         {
           "slug": "appendix-glossary",
-          "title": "付録 A　用語集（中日英）"
+          "title": "付録A　用語集（中日英）"
         },
         {
           "slug": "appendix-prompts",
-          "title": "付録 B　よく使うプロンプト集"
+          "title": "付録B　よく使うプロンプト集"
         },
         {
           "slug": "appendix-deep-reference",
-          "title": "付録 C　Claude Code / Codex 詳細機能リファレンス"
+          "title": "付録C　Claude Code / Codex詳細機能リファレンス"
         },
         {
           "slug": "appendix-harness",
-          "title": "付録 D　ハーネス方法論と公開前チェックリスト"
+          "title": "付録D　ハーネス方法論と公開前チェックリスト"
         }
       ]
     }

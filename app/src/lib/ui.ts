@@ -1,4 +1,4 @@
-// 言語に依存する UI 文言。文字列データは ui.json に分離してある(本文ではなく画面ラベルのみ)。
+// 言語に依存するUI文言。文字列データはui.jsonに分離してある(本文ではなく画面ラベルのみ)。
 import type { Lang } from './manifest';
 import uiData from './ui.json';
 
@@ -18,7 +18,7 @@ export interface UiStrings {
 	coverLabel: string; // トップページのラベル
 	coverTitleHtml: string; // トップページの大見出し(改行込み)
 	coverLead: string; // トップページのリード文
-	allChaptersLabel: string; // 「全N章」相当(テンプレート、{n} を章数で置換)
+	allChaptersLabel: string; // 「全N章」相当(テンプレート、{n}を章数で置換)
 	coverNote: string; // トップ下部の注記(公式ドキュメント案内)
 	search: string;
 	searchPlaceholder: string;
@@ -66,7 +66,7 @@ export interface UiStrings {
 	// 間隔反復 (spaced repetition) + 学習進度
 	srsDueRibbon: string; // 期限が来た章のクイズに付く案内
 	srsRecorded: string; // 「学習進度に記録した」旨
-	reviewInDays: string; // 「{n} 日後に復習」テンプレート({n} を日数で置換)
+	reviewInDays: string; // 「{n}日後に復習」テンプレート({n}を日数で置換)
 	masteryNew: string;
 	masteryLearning: string;
 	masteryReviewing: string;
@@ -85,13 +85,13 @@ export interface UiStrings {
 	reviewCta: string; // 「復習する」ボタン
 	reviewDue: string; // 期限到来(バッジ)
 	reviewDueToday: string;
-	reviewOverdue: string; // 「{n} 日超過」テンプレート
+	reviewOverdue: string; // 「{n}日超過」テンプレート
 	allChaptersTitle: string;
 	notQuizzed: string; // 未受験の章
 	resetSrs: string; // クイズ進捗のリセット
-	// Insight ダッシュボード + 復習(クイズ抽出)セッション
+	// Insightダッシュボード + 復習(クイズ抽出)セッション
 	statRetention: string;
-	duePrompt: string; // {n} を到期数で置換
+	duePrompt: string; // {n}を到期数で置換
 	heatmapTitle: string;
 	heatLess: string;
 	heatMore: string;
@@ -102,7 +102,7 @@ export interface UiStrings {
 	reviewLoading: string;
 	reviewEmptyTitle: string;
 	reviewDoneTitle: string;
-	reviewDoneBody: string; // {c}=正解数 {n}=総数
+	reviewDoneBody: string; // {c}=正解数{n}=総数
 	reviewNext: string;
 	reviewFinish: string;
 	resetAll: string;

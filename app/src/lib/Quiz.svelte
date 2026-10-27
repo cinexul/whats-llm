@@ -40,7 +40,7 @@
 		if (selected[n]) return; // 一度選んだら確定
 		selected = { ...selected, [n]: letter };
 		practiceQ[n] = !!recordedQ[n];
-		// 設問ごとに 1 度だけ間隔反復へ記録(「もう一度」での解き直しは再記録しない)
+		// 設問ごとに1度だけ間隔反復へ記録(「もう一度」での解き直しは再記録しない)
 		const q = mc.find((x) => x.n === n);
 		if (q && !recordedQ[n]) {
 			void saveAnswer(q, letter);

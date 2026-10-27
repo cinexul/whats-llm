@@ -1,6 +1,6 @@
 // マーカー(蛍光ペン)とメモの管理。
-// 保存先: Tauri 上では exe と同じフォルダの annotations.json、
-// ブラウザプレビューでは localStorage(開発用フォールバック)。
+// 保存先: Tauri上ではexeと同じフォルダのannotations.json、
+// ブラウザプレビューではlocalStorage(開発用フォールバック)。
 import { writable, get } from 'svelte/store';
 import type { Lang } from './manifest';
 
@@ -92,8 +92,8 @@ export function ensureLoaded(): Promise<void> {
 					// ファイルが壊れている・読めない場合は下のバックアップに任せる
 				}
 			}
-			// ファイルが無い・空・読めないときは localStorage のバックアップを採用する。
-			// (exe のフォルダに書き込めない環境では localStorage 側が本体になるため)
+			// ファイルが無い・空・読めないときはlocalStorageのバックアップを採用する。
+			// (exeのフォルダに書き込めない環境ではlocalStorage側が本体になるため)
 			if (!list?.length) list = localAnnotations(LS_KEY) ?? list;
 			if (saveVersion === 0) annotations.set(list ?? []);
 		})();
@@ -110,10 +110,10 @@ async function persist() {
 			// 保留快照本身，确保备份写入失败时仍可恢复。
 			localStorage.setItem(PENDING_KEY, json);
 		} catch {
-			/* localStorage が使えない場合でもファイル保存は試みる */
+			/* localStorageが使えない場合でもファイル保存は試みる */
 		}
 	}
-	// ファイルへの書き込みを待たず、localStorage に最新状態をバックアップする。
+	// ファイルへの書き込みを待たず、localStorageに最新状態をバックアップする。
 	try {
 		localStorage.setItem(LS_KEY, json);
 	} catch {
@@ -132,7 +132,7 @@ async function persist() {
 					localStorage.getItem(LS_KEY) === json
 				) localStorage.removeItem(PENDING_KEY);
 			} catch {
-				// ファイルに書けない場所では localStorage のみ。次の保存は続行する。
+				// ファイルに書けない場所ではlocalStorageのみ。次の保存は続行する。
 			}
 		});
 		await pendingSave;
@@ -184,7 +184,7 @@ function collectTextNodes(root: HTMLElement): { nodes: TextPos[]; full: string }
 	return { nodes, full: root.textContent ?? '' };
 }
 
-// exact の出現位置の中から、前後の文脈が最も一致するものを選ぶ
+// exactの出現位置の中から、前後の文脈が最も一致するものを選ぶ
 function locate(full: string, a: Annotation): number {
 	let best = -1;
 	let bestScore = -1;

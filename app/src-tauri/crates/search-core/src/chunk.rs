@@ -322,7 +322,7 @@ mod tests {
 1. **[概念题]** 这是一道不应被索引的小测验题目。
 - A. 选项一
 - B. 选项二
-> **答案 A。** 解释。
+> **答案A。** 解释。
 ";
         let passages = chunk_chapter("c1", "第1章 标题", md);
         assert!(!passages.is_empty());

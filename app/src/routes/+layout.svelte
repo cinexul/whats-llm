@@ -43,7 +43,7 @@
 		return () => window.removeEventListener('storage', changed);
 	});
 
-	// 現在の言語に対応する目次・UI 文言
+	// 現在の言語に対応する目次・UI文言
 	const t = $derived(ui[$lang]);
 
 	// 間隔反復: 現在語のカードを読み込み、復習待ち数・章ごとの状態を導く
@@ -75,7 +75,7 @@
 					await goto(nextURL, { keepFocus: true });
 					return;
 				}
-				// 同じ slug が両言語にある場合は本文だけ再読み込みする
+				// 同じslugが両言語にある場合は本文だけ再読み込みする
 				await invalidate('app:lang');
 			} else {
 				// 無ければ新言語の最初の章へ
@@ -245,8 +245,8 @@
 		}
 	}
 
-	// 外部リンクは WebView 内で遷移させず、OS の既定ブラウザで開く。
-	// (Tauri のウィンドウで外部サイトへ遷移すると「戻る」手段がなくなるため)
+	// 外部リンクはWebView内で遷移させず、OSの既定ブラウザで開く。
+	// (Tauriのウィンドウで外部サイトへ遷移すると「戻る」手段がなくなるため)
 	function onLinkClick(e: MouseEvent) {
 		const a = (e.target as HTMLElement).closest?.('a[href]');
 		if (!a) return;

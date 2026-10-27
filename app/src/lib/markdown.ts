@@ -1,5 +1,5 @@
-// Markdown を HTML へ変換する。コードブロックは Shiki でハイライトし、
-// h2 見出しには id を振って「このページ」用の目次を抽出する。
+// MarkdownをHTMLへ変換する。コードブロックはShikiでハイライトし、
+// h2見出しにはidを振って「このページ」用の目次を抽出する。
 import { Marked } from 'marked';
 import createDOMPurify from 'dompurify';
 import { createHighlighter, type Highlighter, type ShikiTransformer } from 'shiki';

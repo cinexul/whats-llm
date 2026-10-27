@@ -1,12 +1,12 @@
 # What's LLM
 
-> 语言 / Language： [简体中文](README.md) · [日本語](README.ja.md) · **English**
+> 语言 / Language：[简体中文](README.md) · [日本語](README.ja.md) · **English**
 
 A trilingual reading and practice app for ***What's LLM***, available on the web, as a mobile PWA, and as an offline desktop reader — a plain-language guide to
 large language models, and to building your own projects with AI coding tools,
 written for people with **no programming background**.
 
-The book is **trilingual (中文 / 日本語 / English)** with one-click in-app language switching.
+The book is **trilingual（中文 / 日本語 / English）**with one-click in-app language switching.
 The 40 instructional chapters include **interactive, self-scoring quizzes**, and key terms carry
 an English gloss.
 

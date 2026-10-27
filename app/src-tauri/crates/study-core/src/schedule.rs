@@ -1,15 +1,15 @@
-//! FSRS によるスケジューリング。選択式クイズの正誤を FSRS の評価へ写像し、
+//! FSRSによるスケジューリング。選択式クイズの正誤をFSRSの評価へ写像し、
 //! カードの記憶状態(stability / difficulty)と次回復習日を更新する。
-//! ここは DB 非依存の純粋計算に保ち、単体でテストできるようにする。
+//! ここはDB非依存の純粋計算に保ち、単体でテストできるようにする。
 use fsrs::{ItemState, MemoryState, NextStates, DEFAULT_PARAMETERS, FSRS};
 
 use crate::{Card, StudyResult, STATE_RELEARNING, STATE_REVIEW};
 
-/// 目標保持率(この確率で思い出せる頃に次回を組む)。Anki 既定と同じ 0.9。
+/// 目標保持率(この確率で思い出せる頃に次回を組む)。Anki既定と同じ0.9。
 pub const DEFAULT_RETENTION: f32 = 0.9;
 const DAY_MS: i64 = 86_400_000;
 
-/// FSRS の 4 段階評価。選択式では対=Good / 誤=Again の 2 値だけ使う。
+/// FSRSの4段階評価。選択式では対=Good / 誤=Againの2値だけ使う。
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Rating {
     Again = 1,
@@ -18,7 +18,7 @@ pub enum Rating {
     Easy = 4,
 }
 
-/// 1 回の採点結果。
+/// 1回の採点結果。
 pub struct Scheduled {
     pub card: Card,
     pub rating: Rating,
@@ -31,7 +31,7 @@ pub struct Scheduler {
 }
 
 impl Scheduler {
-    /// パラメータ(None で FSRS-6 既定)と保持率からスケジューラを作る。
+    /// パラメータ(NoneでFSRS-6既定)と保持率からスケジューラを作る。
     /// あとで利用者自身の復習ログから学習したパラメータを差し込めるよう、引数で受ける。
     pub fn new(params: Option<&[f32]>, retention: f32) -> StudyResult<Self> {
         let fsrs = FSRS::new(params.unwrap_or(&DEFAULT_PARAMETERS))?;
@@ -52,8 +52,8 @@ impl Scheduler {
         }
     }
 
-    /// 1 回の作答でカードを更新した結果を返す(純粋計算)。
-    /// `card` が new(stability/difficulty が None)なら初回として扱う。
+    /// 1回の作答でカードを更新した結果を返す(純粋計算)。
+    /// `card` がnew(stability/difficultyがNone)なら初回として扱う。
     pub fn apply(&self, card: &Card, rating: Rating, now_ms: i64) -> StudyResult<Scheduled> {
         let memory = match (card.stability, card.difficulty) {
             (Some(s), Some(d)) => Some(MemoryState {
@@ -75,7 +75,7 @@ impl Scheduler {
             Rating::Easy => next.easy,
         };
 
-        // FSRS の interval は日数(浮動)。最低 1 日に丸める。
+        // FSRSのintervalは日数(浮動)。最低1日に丸める。
         let interval_days = (item.interval.round() as i64).max(1);
         let is_lapse = matches!(rating, Rating::Again) && card.reps > 0;
 

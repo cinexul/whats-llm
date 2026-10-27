@@ -1,4 +1,4 @@
-本附录是一份 Claude Code 与 Codex 的操作参考。第28、29章提供第一次使用的练习；这里帮助你选择下一项能力，并定位问题。示例核查于 **2026-10-22**；如果实际界面不同，用已安装版本的帮助输出核对。
+本附录是一份Claude Code与Codex的操作参考。第28、29章提供第一次使用的练习；这里帮助你选择下一项能力，并定位问题。示例核查于**2026-10-22**；如果实际界面不同，用已安装版本的帮助输出核对。
 
 ## 一、先确认程序和账号
 
@@ -14,27 +14,27 @@ codex --version
 codex --help
 ```
 
-进入任一工具的交互会话后，用 `/status` 查看状态，用 `/` 发现可用命令。Shell 命令和会话内斜杠命令不同：在 Bash 直接输入 `/status`，不会查看智能体状态。
+进入任一工具的交互会话后，用`/status`查看状态，用`/`发现可用命令。Shell命令和会话内斜杠命令不同：在Bash直接输入`/status`，不会查看智能体状态。
 
-报错时记录版本、平台、执行位置和当前账号。检查订阅登录、API 凭据、组织配置有没有把请求指向意料之外的计费账号；诊断记录里不要包含真实密钥。
+报错时记录版本、平台、执行位置和当前账号。检查订阅登录、API凭据、组织配置有没有把请求指向意料之外的计费账号；诊断记录里不要包含真实密钥。
 
 ## 二、按问题选择入口
 
-| 需要做什么 | Claude Code 入口 | Codex 入口 | 核对重点 |
+| 需要做什么 | Claude Code入口 | Codex入口 | 核对重点 |
 | --- | --- | --- | --- |
 | 查看会话 | `/status` | `/status` | 账号、设置、执行上下文 |
-| 查找命令 | `/help` 或 `/` | `/` 和 `codex --help` | 当前版本实际提供什么 |
+| 查找命令 | `/help`或`/` | `/`和`codex --help` | 当前版本实际提供什么 |
 | 查看权限 | `/permissions` | `/permissions` | 允许的范围及限制 |
-| 起草项目指引 | `/init` 后审阅 `CLAUDE.md` | `/init` 后审阅 `AGENTS.md` | 路径、命令、规则是否准确 |
-| 检查改动 | `/diff` 或 `git diff` | `/diff` 或 `git diff` | 已跟踪文件改动和意外文件 |
-| 检查保留的信息 | 可用时使用 `/memory` | 当前版本的记忆控制及项目文件 | 过时或冲突的笔记 |
-| 缩短长对话 | 当前版本的压缩或新会话功能 | `/compact` 或新会话 | 摘要是否保留要求和证据 |
+| 起草项目指引 | `/init`后审阅`CLAUDE.md` | `/init`后审阅`AGENTS.md` | 路径、命令、规则是否准确 |
+| 检查改动 | `/diff`或`git diff` | `/diff`或`git diff` | 已跟踪文件改动和意外文件 |
+| 检查保留的信息 | 可用时使用`/memory` | 当前版本的记忆控制及项目文件 | 过时或冲突的笔记 |
+| 缩短长对话 | 当前版本的压缩或新会话功能 | `/compact`或新会话 | 摘要是否保留要求和证据 |
 
 此表用于导航，不承诺两个工具界面完全一致。编辑器和受管理的云端环境也可能提供不同入口。
 
 ## 三、项目指引、记忆、技能与配置
 
-**项目指引**记录稳定的工作约定，**记忆**保留观察，**技能**封装可复用流程。配置则控制应用本身，例如启用哪些工具、连接参数、模型和权限。Markdown 文件里的一句话，不能替代操作系统的强制限制。
+**项目指引**记录稳定的工作约定，**记忆**保留观察，**技能**封装可复用流程。配置则控制应用本身，例如启用哪些工具、连接参数、模型和权限。Markdown文件里的一句话，不能替代操作系统的强制限制。
 
 好的项目指引应短到能审阅，又具体到能执行：
 
@@ -70,17 +70,17 @@ codex --help
 
 并行修改要分配文件责任，或使用隔离工作树。不同对话不会自动隔离文件系统。协调者必须整合修改、验证组合后的结果，并遵守原任务范围。更多工作者可能增加用量和协调成本；多个智能体意见一致，也不等于独立证据。
 
-## 七、Hooks 与无人值守执行
+## 七、Hooks与无人值守执行
 
-Hooks 在指定生命周期事件发生时运行配置的动作；无人值守模式不要求有人逐一回答提示。它们适合重复检查和自动化，也可能执行脚本、访问服务或修改文件。
+Hooks在指定生命周期事件发生时运行配置的动作；无人值守模式不要求有人逐一回答提示。它们适合重复检查和自动化，也可能执行脚本、访问服务或修改文件。
 
-启用前读实际命令，明确工作目录、凭据、超时和预期输出，避免日志泄露密钥。还要决定失败后怎么办，以及重复执行如何避免重复的外部操作。Hook 是可执行行为，不只是说明文字。
+启用前读实际命令，明确工作目录、凭据、超时和预期输出，避免日志泄露密钥。还要决定失败后怎么办，以及重复执行如何避免重复的外部操作。Hook是可执行行为，不只是说明文字。
 
-## 八、Skills、插件和 MCP
+## 八、Skills、插件和MCP
 
 从看得懂的技能开始：`SKILL.md`、清晰描述、简短指令，以及确实需要的支持文件。用虚构数据验证。各客户端的安装位置和可选元数据可能不同。
 
-MCP 要检查发布者、本地启动命令或远程 URL、账号范围和暴露的能力。先验证一次已知的读取操作，再增加写操作。插件可能同时打包多个技能和服务器，要看实际启用了什么。插件或 MCP 连接本身不会自动授权发消息或发布改动。
+MCP要检查发布者、本地启动命令或远程URL、账号范围和暴露的能力。先验证一次已知的读取操作，再增加写操作。插件可能同时打包多个技能和服务器，要看实际启用了什么。插件或MCP连接本身不会自动授权发消息或发布改动。
 
 ## 九、上下文、压缩与交接
 
@@ -92,12 +92,12 @@ MCP 要检查发布者、本地启动命令或远程 URL、账号范围和暴露
 
 | 现象 | 第一个有用的检查 |
 | --- | --- |
-| 找不到命令 | 安装结果、程序位置、是否需要重开 Shell、`PATH` |
+| 找不到命令 | 安装结果、程序位置、是否需要重开Shell、`PATH` |
 | 登录或访问失败 | 当前账号、凭据来源、组织政策、服务状态 |
 | 额度或速率限制 | 用量页面、重置时间、模型／模式、是否存在并行请求 |
 | 云端缺依赖 | 环境初始化、包管理器、锁文件、系统依赖 |
 | 权限不足 | 精确路径或操作，以及当前沙箱／审批规则 |
-| MCP 工具缺失或失败 | 服务器连接、认证、暴露的能力、服务器日志 |
+| MCP工具缺失或失败 | 服务器连接、认证、暴露的能力、服务器日志 |
 | 意外修改 | Git diff、指引作用域、共享工作目录、任务边界 |
 | 声称成功但功能失败 | 实际复现，并核对真实命令结果 |
 
@@ -105,10 +105,10 @@ MCP 要检查发布者、本地启动命令或远程 URL、账号范围和暴露
 
 ## 十一、审查与集成
 
-用 `git status --short` 查看完整文件状态列表。`git diff --stat` 和 `git diff` 显示未暂存的改动；`git diff --cached --stat` 和 `git diff --cached` 显示已暂存、准备下次提交的改动。未跟踪文件要另外查看，这些 diff 命令不显示其内容。验证相关行为，记录不能运行的检查，再在任务授权和仓库流程范围内提交、开 PR、推送或部署。
+用`git status --short`查看完整文件状态列表。`git diff --stat`和`git diff`显示未暂存的改动；`git diff --cached --stat`和`git diff --cached`显示已暂存、准备下次提交的改动。未跟踪文件要另外查看，这些diff命令不显示其内容。验证相关行为，记录不能运行的检查，再在任务授权和仓库流程范围内提交、开PR、推送或部署。
 
 审查说明应包含具体问题、修改后的行为和验证证据。智能体生成的审查是另一份有用分析，但不能代替测试，也不能取代流程明确要求的人类决策。
 
 ## 来源与版本说明
 
-核查日期：**2026-10-22**。[Codex README](https://github.com/openai/codex/blob/main/README.md)、[CLI 命令源码](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs)、[配置 schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json)；[Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md)及[更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)，所见首项版本 **2.1.308**；[Agent Skills 规范](https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx)；[MCP 规范仓库](https://github.com/modelcontextprotocol/modelcontextprotocol)。产品文档入口为 [Codex](https://developers.openai.com/codex) 和 [Claude Code](https://code.claude.com/docs/en/overview)。命令与政策设置因安装版本和组织而异。
+核查日期：**2026-10-22**。[Codex README](https://github.com/openai/codex/blob/main/README.md)、[CLI命令源码](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs)、[配置schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json)；[Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md)及[更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)，所见首项版本**2.1.308**；[Agent Skills规范](https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx)；[MCP规范仓库](https://github.com/modelcontextprotocol/modelcontextprotocol)。产品文档入口为 [Codex](https://developers.openai.com/codex) 和 [Claude Code](https://code.claude.com/docs/en/overview)。命令与政策设置因安装版本和组织而异。

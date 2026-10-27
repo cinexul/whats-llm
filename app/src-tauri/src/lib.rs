@@ -7,8 +7,8 @@ use std::sync::Mutex;
 use search_core::{cosine_topk, load_index, Embedder, SearchHit, SearchIndex};
 use tauri::{path::BaseDirectory, Manager, State};
 
-// マーカー・メモの保存先: 実行ファイルと同じフォルダの annotations.json
-// (インストール不要の単体配布でも、exe の隣に注釈データを持ち運べるようにする)
+// マーカー・メモの保存先: 実行ファイルと同じフォルダのannotations.json
+// (インストール不要の単体配布でも、exeの隣に注釈データを持ち運べるようにする)
 fn annotations_path() -> Result<PathBuf, String> {
   let exe = std::env::current_exe().map_err(|e| e.to_string())?;
   let dir = exe
@@ -26,8 +26,8 @@ fn load_annotations() -> Result<String, String> {
   fs::read_to_string(&path).map_err(|e| e.to_string())
 }
 
-// 一時ファイルへ書き切ってから rename で置き換える。
-// 書き込み途中のクラッシュ・電源断で既存の annotations.json を壊さないため
+// 一時ファイルへ書き切ってからrenameで置き換える。
+// 書き込み途中のクラッシュ・電源断で既存のannotations.jsonを壊さないため
 #[tauri::command]
 fn save_annotations(data: String) -> Result<(), String> {
   let path = annotations_path()?;
@@ -36,18 +36,18 @@ fn save_annotations(data: String) -> Result<(), String> {
   fs::rename(&tmp, &path).map_err(|e| e.to_string())
 }
 
-// 外部リンクを OS の既定ブラウザで開く。
-// WebView 内で外部サイトへ遷移するとアプリ画面に戻れなくなるため、
+// 外部リンクをOSの既定ブラウザで開く。
+// WebView内で外部サイトへ遷移するとアプリ画面に戻れなくなるため、
 // フロント側(+layout.svelte)がリンクのクリックを横取りしてこのコマンドを呼ぶ
 #[tauri::command]
 fn open_external(url: String) -> Result<(), String> {
-  // https のみ・安全な文字だけを許可する(シェル経由の起動に余計な文字を渡さない)
+  // httpsのみ・安全な文字だけを許可する(シェル経由の起動に余計な文字を渡さない)
   let safe = url.starts_with("https://")
     && url
       .chars()
       .all(|c| c.is_ascii_alphanumeric() || "-._~:/?#=&%+".contains(c));
   if !safe {
-    return Err(String::from("この URL は開けません"));
+    return Err(String::from("このURLは開けません"));
   }
   #[cfg(target_os = "windows")]
   let result = Command::new("explorer").arg(&url).spawn();
@@ -58,12 +58,12 @@ fn open_external(url: String) -> Result<(), String> {
   result.map(|_| ()).map_err(|e| e.to_string())
 }
 
-// ===== セマンティック検索(章内 RAG) =====
-// EmbeddingGemma を ONNX で動かし、事前計算した章の索引とコサイン類似度で
-// 「意味の近い節」を返す。モデルと索引は resources/ に同梱する(完全オフライン)。
+// ===== セマンティック検索(章内RAG) =====
+// EmbeddingGemmaをONNXで動かし、事前計算した章の索引とコサイン類似度で
+// 「意味の近い節」を返す。モデルと索引はresources/ に同梱する(完全オフライン)。
 
 // モデルと索引は初回検索時に一度だけ読み込み、以後は使い回す。
-// embed には可変参照が要るので Mutex で包む。
+// embedには可変参照が要るのでMutexで包む。
 #[derive(Default)]
 struct SearchState {
   engine: Mutex<Option<Engine>>,
@@ -74,7 +74,7 @@ struct Engine {
   indices: HashMap<String, SearchIndex>,
 }
 
-// resources/model のモデルと resources/search-index/<lang>.idx を読み込む
+// resources/modelのモデルとresources/search-index/<lang>.idxを読み込む
 fn init_engine(app: &tauri::AppHandle) -> Result<Engine, String> {
   let res = app
     .path()
@@ -116,14 +116,14 @@ fn semantic_search(
   Ok(cosine_topk(index, &query_vec, k.clamp(1, 50)))
 }
 
-// ===== 学習(間隔反復 + 進捗): 埋め込み SQLite + FSRS =====
-// 重い処理・スキーマ・FSRS は study-core 側でテスト済み。ここは Mutex で包んで呼ぶだけ。
+// ===== 学習(間隔反復 + 進捗): 埋め込みSQLite + FSRS =====
+// 重い処理・スキーマ・FSRSはstudy-core側でテスト済み。ここはMutexで包んで呼ぶだけ。
 
 struct StudyState(Mutex<Option<study_core::Store>>);
 
-// 学習 DB の場所:
-//  - 便携(無安装)版: exe の隣に `data/` フォルダがあればそこへ(フォルダごと持ち運べる)
-//  - 安装版: OS のアプリデータ領域(常に書き込め、外には出ない)
+// 学習DBの場所:
+//  - 便携(無安装)版: exeの隣に `data/` フォルダがあればそこへ(フォルダごと持ち運べる)
+//  - 安装版: OSのアプリデータ領域(常に書き込め、外には出ない)
 fn study_db_path(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
   if let Ok(exe) = std::env::current_exe() {
     if let Some(dir) = exe.parent() {
@@ -258,7 +258,7 @@ pub fn run() {
             .build(),
         )?;
       }
-      // 学習 DB を開く。失敗してもアプリ自体は動かす(コマンド呼び出し時にエラーを返す)。
+      // 学習DBを開く。失敗してもアプリ自体は動かす(コマンド呼び出し時にエラーを返す)。
       let store = study_db_path(app.handle())
         .and_then(|p| study_core::Store::open(&p).map_err(|e| e.to_string()));
       match store {

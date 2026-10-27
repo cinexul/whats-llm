@@ -1,13 +1,13 @@
 // 章末の「小测验 / 小テスト」を構造化データへ変換する。
-// 本文 Markdown から小テスト節を切り出し、設問・選択肢・正解・解説に分解して、
-// インタラクティブな採点 UI (Quiz.svelte) で描画できるようにする。
+// 本文Markdownから小テスト節を切り出し、設問・選択肢・正解・解説に分解して、
+// インタラクティブな採点UI (Quiz.svelte) で描画できるようにする。
 import { Marked } from 'marked';
 import type { Lang } from './manifest';
 import registrations from './question-registry.json' with { type: 'json' };
 
 export interface QuizOption {
 	letter: string; // A / B / C / D ...
-	html: string; // 選択肢テキスト(インライン Markdown 済み)
+	html: string; // 選択肢テキスト(インラインMarkdown済み)
 }
 
 export interface QuizQuestion {
@@ -17,7 +17,7 @@ export interface QuizQuestion {
 	tag: string; // 種別タグ(例: 基础·概念题)
 	promptHtml: string; // 設問文
 	options: QuizOption[]; // 選択式でなければ空
-	correct: string | null; // 正解のレター。観察問題など正解が無い場合 null
+	correct: string | null; // 正解のレター。観察問題など正解が無い場合null
 	explanationHtml: string; // 解説(正解マーカーは取り除いた残り)
 }
 
@@ -137,7 +137,7 @@ function parseQuiz(s: string): Quiz {
 		const rawAnswer = answerLines.join(' ').trim();
 		const correctMatch = rawAnswer.match(CORRECT);
 		const correct = options.length > 0 && correctMatch ? correctMatch[1].toUpperCase() : null;
-		// 先頭の「**答案 B。**」「**该观察到：**」等のマーカーを解説本文から取り除く
+		// 先頭の「**答案B。**」「**该观察到：**」等のマーカーを解説本文から取り除く
 		const explanation = rawAnswer.replace(/^\*\*[^*]+\*\*[\s　：:。]*/, '').trim();
 
 		questions.push({

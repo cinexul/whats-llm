@@ -1,5 +1,5 @@
 // 界面显示语言；存储可用时保存到本地。
-// SSR / window の無い環境でも壊れないようガードする。
+// SSR / windowの無い環境でも壊れないようガードする。
 import { writable } from 'svelte/store';
 import type { Lang } from './manifest';
 

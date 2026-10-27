@@ -9,7 +9,7 @@ import { getLocalEditRecord, LocalEditError, type LocalChapterEdit } from '$lib/
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params, depends, url }) => {
-	// 言語切替時に再読み込みさせるための依存(レイアウト側で invalidate する)
+	// 言語切替時に再読み込みさせるための依存(レイアウト側でinvalidateする)
 	depends('app:lang');
 	depends('app:chapter-edits');
 	// 资料库链接标明编辑所用语言，在新标签页打开时也能正确识别。
@@ -18,7 +18,7 @@ export const load: PageLoad = async ({ params, depends, url }) => {
 	const currentLang = edition === 'zh' || edition === 'ja' || edition === 'en' ? edition : get(lang);
 	const meta = findChapter(currentLang, params.slug);
 
-	// 章自体が見つからない場合のみ 404。draft 章は本文が無くてもプレースホルダを返す。
+	// 章自体が見つからない場合のみ404。draft章は本文が無くてもプレースホルダを返す。
 	if (!meta) error(404, '章が見つかりません');
 
 	const src = await loadChapterSource(currentLang, params.slug);

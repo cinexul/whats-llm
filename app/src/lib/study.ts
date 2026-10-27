@@ -1,15 +1,15 @@
 // 学習データ(設問カード=間隔反復 / 読了 / 復習ログ)のフロント側入口。
-// 実体は 2 系統:
-//  - Tauri: invoke 経由で Rust(study-core)の埋め込み SQLite + FSRS を叩く(本番・正)。
+// 実体は2系統:
+//  - Tauri: invoke経由でRust(study-core)の埋め込みSQLite + FSRSを叩く(本番・正)。
 //  - ブラウザ(npm run dev): localStorage + 簡易スケジューラ(プレビュー用フォールバック)。
-// どちらも同じ非同期 API を出し、UI は実装差を意識しない。
+// どちらも同じ非同期APIを出し、UIは実装差を意識しない。
 import { writable } from 'svelte/store';
 import type { Lang } from './manifest';
 
 export const DAY = 86_400_000;
 const LANGS: Lang[] = ['zh', 'ja', 'en'];
 
-/** 1 設問のカード。Rust の Card と同形(serde camelCase)。 */
+/** 1設問のカード。RustのCardと同形(serde camelCase)。 */
 export interface StudyCard {
 	id: string; // lang:slug:qhash
 	lang: string;
@@ -54,7 +54,7 @@ interface Backend {
 	resetProgress(): Promise<void>;
 }
 
-// ---- Tauri 実装 ----
+// ---- Tauri実装 ----
 const tauri: Backend = {
 	async recordAnswer(lang, slug, qn, qhash, correct, elapsedMs) {
 		const { invoke } = await import('@tauri-apps/api/core');
@@ -90,7 +90,7 @@ const tauri: Backend = {
 	}
 };
 
-// ---- ブラウザ(localStorage)実装。dev プレビュー用なので簡易スケジューラ ----
+// ---- ブラウザ(localStorage)実装。devプレビュー用なので簡易スケジューラ ----
 const LS = 'study-v1';
 interface LocalData {
 	cards: Record<string, StudyCard>;
@@ -115,7 +115,7 @@ function saveLocal(d: LocalData) {
 	if (typeof localStorage !== 'undefined') localStorage.setItem(LS, JSON.stringify(d));
 }
 
-// 簡易 SM-2 風スケジューラ(ブラウザ・フォールバック専用。本番は Rust の FSRS)。
+// 簡易SM-2風スケジューラ(ブラウザ・フォールバック専用。本番はRustのFSRS)。
 function localGrade(
 	prev: StudyCard | undefined,
 	base: Pick<StudyCard, 'id' | 'lang' | 'slug' | 'qn' | 'qhash'>,
@@ -214,8 +214,8 @@ const loadRequests = new Map<Lang, number>();
 let progressGeneration = 0;
 let migratePromise: Promise<void> | null = null;
 
-// 旧 localStorage(read-chapters)の読了を一度だけ新ストアへ取り込む。
-// 旧 quiz-srs(章単位 SM-2)は設問粒度へ写せないので移行しない。
+// 旧localStorage(read-chapters)の読了を一度だけ新ストアへ取り込む。
+// 旧quiz-srs(章単位SM-2)は設問粒度へ写せないので移行しない。
 async function migrateLegacy() {
 	if (typeof localStorage === 'undefined') return;
 	if (localStorage.getItem('study-migrated')) return;
@@ -291,7 +291,7 @@ export async function reload(lang: Lang): Promise<boolean> {
 	}
 }
 
-/** 1 設問への作答を記録し、ストアの該当カードを差し替える。 */
+/** 1設問への作答を記録し、ストアの該当カードを差し替える。 */
 export async function recordAnswer(
 	lang: Lang,
 	slug: string,
@@ -394,7 +394,7 @@ const MASTERY_ORDER: Mastery[] = ['new', 'learning', 'reviewing', 'mastered'];
 export interface ChapterSummary {
 	answered: number;
 	due: number;
-	mastery: Mastery | null; // その章の最弱カードの定着度(未着手なら null)
+	mastery: Mastery | null; // その章の最弱カードの定着度(未着手ならnull)
 }
 
 export function chapterSummary(cards: StudyCard[], slug: string, now = Date.now()): ChapterSummary {

@@ -13,7 +13,7 @@ const modules: Record<Lang, Record<string, () => Promise<unknown>>> = {
 export interface SearchHit {
 	slug: string;
 	title: string;
-	snippet: string; // 一致箇所の前後を抜き出した断片(<mark> を含む HTML)
+	snippet: string; // 一致箇所の前後を抜き出した断片(<mark> を含むHTML)
 	inTitle: boolean;
 }
 
@@ -23,7 +23,7 @@ interface IndexEntry {
 	plain: string;
 }
 
-// Markdown の記号を落として読みやすいプレーンテキストにする
+// Markdownの記号を落として読みやすいプレーンテキストにする
 function toPlain(md: string): string {
 	return md
 		.replace(/```[\s\S]*?```/g, ' ') // コードブロック

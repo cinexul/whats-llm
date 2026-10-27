@@ -23,12 +23,12 @@
 	} from '$lib/annotations';
 
 	let { data } = $props();
-	// この章の言語に対応する UI 文言
+	// この章の言語に対応するUI文言
 	const t = $derived(ui[data.lang as Lang]);
 	let article: HTMLElement | undefined = $state();
-	// 本文コンテナは Svelte ではなく自前で管理する。
-	// ({@html} + {#key} の DOM をマーカー処理が直接書き換えると、
-	//  高速な章移動時に Svelte の DOM 参照が壊れて本文が消えるため)
+	// 本文コンテナはSvelteではなく自前で管理する。
+	// ({@html} + {#key} のDOMをマーカー処理が直接書き換えると、
+	//  高速な章移動時にSvelteのDOM参照が壊れて本文が消えるため)
 	let proseEl: HTMLElement | undefined = $state();
 	let endSentinel: HTMLElement | undefined = $state();
 	let mobileTocOpen = $state(false);
@@ -60,7 +60,7 @@
 		if (!data.draft && data.html != null) rememberChapter(data.lang as Lang, data.slug);
 	});
 
-	// 章または言語が変わったら開いている注釈 UI を閉じる
+	// 章または言語が変わったら開いている注釈UIを閉じる
 	$effect(() => {
 		data.slug;
 		data.lang;
@@ -70,7 +70,7 @@
 		clearTimeout(selectionTimer);
 	});
 
-	// 本文 HTML を流し込み、コピー用ボタンを付与する(本文が変わるたび)
+	// 本文HTMLを流し込み、コピー用ボタンを付与する(本文が変わるたび)
 	$effect(() => {
 		const html = data.html;
 		if (!proseEl) return;
@@ -94,7 +94,7 @@
 					await navigator.clipboard.writeText(text);
 					ok = true;
 				} catch {
-					// クリップボード API が使えない環境(WebView の権限制限など)向けの代替手段
+					// クリップボードAPIが使えない環境(WebViewの権限制限など)向けの代替手段
 					const ta = document.createElement('textarea');
 					ta.value = text;
 					ta.style.position = 'fixed';
@@ -192,7 +192,7 @@
 		};
 	});
 
-	// スクロールしたら位置がずれるため、注釈 UI は閉じる
+	// スクロールしたら位置がずれるため、注釈UIは閉じる
 	$effect(() => {
 		const close = () => {
 			pending = null;
@@ -466,7 +466,7 @@
 
 	article {
 		/* 本文は読みやすい幅を保ったまま、目次を除いた空間の中央に置く。
-		   (auto マージンを本文の左右と目次の左に等配分 → 目次はウィンドウ右端へ) */
+		   (autoマージンを本文の左右と目次の左に等配分 → 目次はウィンドウ右端へ) */
 		flex: 0 1 768px;
 		min-width: 0;
 		margin: 0 auto;

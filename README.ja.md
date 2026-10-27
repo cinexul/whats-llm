@@ -1,14 +1,14 @@
 # What's LLM
 
-> 言語 / Language： [简体中文](README.md) · **日本語** · [English](README.en.md)
+> 言語 / Language：[简体中文](README.md) · **日本語** · [English](README.en.md)
 
-**プログラミング未経験の読者**に向けた、やさしい解説書『What's LLM』の3言語対応読書・実践アプリです。Web、モバイル PWA、オフラインのデスクトップ版に対応します。大規模言語モデルの仕組みを理解し、AI コーディングツールで自分のプロジェクトを作れるようになることを目指します。
+**プログラミング未経験の読者**に向けた、やさしい解説書『What's LLM』の3言語対応読書・実践アプリです。Web、モバイルPWA、オフラインのデスクトップ版に対応します。大規模言語モデルの仕組みを理解し、AIコーディングツールで自分のプロジェクトを作れるようになることを目指します。
 
 本書は**中国語・日本語・英語の3言語**に対応し、アプリ内でワンクリック切り替えができます。40の学習章には**その場で解けて自動採点される小テスト**があり、重要な用語には英語が併記されています。
 
 ## 実行
 
-Node.js 24.x の 24.15.0 以上を推奨します（他の対応バージョンは `app/package.json` を参照）。npmも必要です。Rustコアのテストにはstableツールチェーンを使います。
+Node.js 24.xの24.15.0以上を推奨します（他の対応バージョンは`app/package.json`を参照）。npmも必要です。Rustコアのテストにはstableツールチェーンを使います。
 
 ```bash
 cd app
@@ -16,51 +16,51 @@ npm ci
 npm run dev        # http://localhost:1420 を開く
 ```
 
-- 静的ビルド：`npm run build`（出力は `app/build/`）
-- 本番ビルドのプレビュー：ビルド後に `npm run preview`（`http://127.0.0.1:4173`。オフライン機能も確認可能）
-- デスクトップアプリ：`npm run tauri -- build`（Rust とシステムの WebView ライブラリが必要）
+- 静的ビルド：`npm run build`（出力は`app/build/`）
+- 本番ビルドのプレビュー：ビルド後に`npm run preview`（`http://127.0.0.1:4173`。オフライン機能も確認可能）
+- デスクトップアプリ：`npm run tauri -- build`（RustとシステムのWebViewライブラリが必要）
 
 ## 構成
 
-- `app/src/routes/`、`app/src/lib/*.svelte` —— Svelte のページとコンポーネント
-- `app/src/lib/` —— TypeScript のアプリロジック、3言語の文言、内容メタデータ
+- `app/src/routes/`、`app/src/lib/*.svelte` —— Svelteのページとコンポーネント
+- `app/src/lib/` —— TypeScriptのアプリロジック、3言語の文言、内容メタデータ
 - `app/src/lib/content/{zh,ja,en}/` —— 各章の本文（中国語・日本語・英語）
-- `app/src-tauri/` —— Tauri のデスクトップシェル、Rust の検索・学習コア
+- `app/src-tauri/` —— Tauriのデスクトップシェル、Rustの検索・学習コア
 - `app/scripts/` —— 内容検査、静的プレビュー、任意のモデルダウンロード用ツール
 - `docs/` —— 利用・保守ガイドと日付付きの検証記録。[文書一覧](docs/README.md)から参照できます
-- `.github/workflows/` —— GitHub の自動検査とリリース設定。役割は下記を参照
+- `.github/workflows/` —— GitHubの自動検査とリリース設定。役割は下記を参照
 
-ロックファイルとビルド設定により、インストールを再現できます。`node_modules/`、`build/`、`.svelte-kit/`、Rust の `target/` などのローカル生成物は Git の対象外です。
+ロックファイルとビルド設定により、インストールを再現できます。`node_modules/`、`build/`、`.svelte-kit/`、Rustの`target/`などのローカル生成物はGitの対象外です。
 
 ## 技術スタック
 
-Svelte 5 + SvelteKit（静的 SPA）+ TypeScript を使い、デスクトップシェルには Tauri 2 / Rust を使用します。Markdown は `marked` + `shiki` で描画。デスクトップ版は本文とフォントを同梱し、Web 版は書籍全体をダウンロードしてからオフラインで読めます。
+Svelte 5 + SvelteKit（静的SPA）+ TypeScriptを使い、デスクトップシェルにはTauri 2 / Rustを使用します。Markdownは`marked` + `shiki`で描画。デスクトップ版は本文とフォントを同梱し、Web版は書籍全体をダウンロードしてからオフラインで読めます。
 
-GitHub の Languages はソースのバイト数を示し、UI フレームワークの使用率やコンパイル結果の割合ではありません。TypeScript はアプリロジックや3言語の学習データ、Svelte はページやコンポーネントを担います。[Linguist の集計方法](https://github.com/github-linguist/linguist/blob/main/docs/how-linguist-works.md)を参照してください。
+GitHubのLanguagesはソースのバイト数を示し、UIフレームワークの使用率やコンパイル結果の割合ではありません。TypeScriptはアプリロジックや3言語の学習データ、Svelteはページやコンポーネントを担います。[Linguistの集計方法](https://github.com/github-linguist/linguist/blob/main/docs/how-linguist-works.md)を参照してください。
 
-## GitHub の自動処理
+## GitHubの自動処理
 
-Workflow は、指定されたイベントで GitHub が実行する処理の設定です。アプリの起動には使いません。
+Workflowは、指定されたイベントでGitHubが実行する処理の設定です。アプリの起動には使いません。
 
 | ファイル | 実行のタイミング | 役割 |
 | --- | --- | --- |
-| [`check.yml`](.github/workflows/check.yml) | `main` へのプッシュ、Pull Request | 型・本文・クイズ登録の検査、本番ビルド、Rust コアのテスト。アプリは公開しません。 |
-| [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 毎週月曜 07:17 UTC、または手動 | 章の再確認期限を通知し、出典リンクの接続結果を保存。本文や確認日を自動更新しません。 |
-| [`release.yml`](.github/workflows/release.yml) | `v*` タグのプッシュ、またはバージョンを指定した手動実行 | Windows x64のポータブルZIPを作成。手動実行で `installer` を有効にすると、NSISインストーラーの作成と動作確認も行う。成果物はActionsとGitHub Releaseの**ドラフト**に保存し、確認後に手動で公開。 |
+| [`check.yml`](.github/workflows/check.yml) | `main`へのプッシュ、Pull Request | 型・本文・クイズ登録の検査、本番ビルド、Rustコアのテスト。アプリは公開しません。 |
+| [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 毎週月曜07:17 UTC、または手動 | 章の再確認期限を通知し、出典リンクの接続結果を保存。本文や確認日を自動更新しません。 |
+| [`release.yml`](.github/workflows/release.yml) | `v*`タグのプッシュ、またはバージョンを指定した手動実行 | Windows x64のポータブルZIPを作成。手動実行で`installer`を有効にすると、NSISインストーラーの作成と動作確認も行う。成果物はActionsとGitHub Releaseの**ドラフト**に保存し、確認後に手動で公開。 |
 
-通常の `main` へのプッシュではリリース処理は動きません。Web サイトをデプロイする workflow はありません。出典リンクの検査失敗は人による確認が必要です。
+通常の`main`へのプッシュではリリース処理は動きません。Webサイトをデプロイするworkflowはありません。出典リンクの検査失敗は人による確認が必要です。
 
 ## 読書と実践
 
-- **学習コース**：概念入門、出典付きの業務レポート、初めての Web 制作。成果物と自己チェックを示し、進捗を保存します。
-- **体験ラボ**：コンテキストの予算と圧縮、RAG の根拠、Agent の権限。API 不要のローカル学習用シミュレーションです。
-- **マイライブラリ**：オフライン保存、PWA のインストール・更新、学習データの書き出しと検証・プレビュー付きの統合取り込み。
-- **本文の編集と差分**：章の本文を編集し、Markdown のプレビューと追加・削除の差分を確認。目次の印と「編集した章」の一覧から変更箇所を探せます。バックアップには編集内容と比較用の原文も含まれます。[利用ガイド](docs/local-chapter-edits.md)を参照してください。
+- **学習コース**：概念入門、出典付きの業務レポート、初めてのWeb制作。成果物と自己チェックを示し、進捗を保存します。
+- **体験ラボ**：コンテキストの予算と圧縮、RAGの根拠、Agentの権限。API不要のローカル学習用シミュレーションです。
+- **マイライブラリ**：オフライン保存、PWAのインストール・更新、学習データの書き出しと検証・プレビュー付きの統合取り込み。
+- **本文の編集と差分**：章の本文を編集し、Markdownのプレビューと追加・削除の差分を確認。目次の印と「編集した章」の一覧から変更箇所を探せます。バックアップには編集内容と比較用の原文も含まれます。[利用ガイド](docs/local-chapter-edits.md)を参照してください。
 - **段落から再開**：言語ごとに読書位置を保存し、文字サイズや画面幅の変化に対応します。節を指定したリンクを優先します。
 - **間違えた問題の復習**：テーマや章で絞り込み、履歴を保持。問題の識別子と採点内容の改訂を分けて管理します。
 - **内容の保守**：各章の改訂・確認・出典情報を表示し、本文の変更と翻訳の対応状況を検査します。
 
-ホーム画面と目次上部から利用できます。[文書一覧](docs/README.md)、[PWA の配信ガイド](docs/pwa.md)、[内容の保守ガイド](docs/content-maintenance.md)を参照してください。[機能・検証記録](docs/learning-book.md)には、当時の画面と検証結果を残しています。
+ホーム画面と目次上部から利用できます。[文書一覧](docs/README.md)、[PWAの配信ガイド](docs/pwa.md)、[内容の保守ガイド](docs/content-maintenance.md)を参照してください。[機能・検証記録](docs/learning-book.md)には、当時の画面と検証結果を残しています。
 
 ## 内容改訂：2026-10-22
 
@@ -68,7 +68,7 @@ Workflow は、指定されたイベントで GitHub が実行する処理の設
 
 ## 検証
 
-`app/` で実行します。
+`app/`で実行します。
 
 ```bash
 npm run check
@@ -84,8 +84,8 @@ cd app/src-tauri
 cargo test --locked -p search-core -p study-core
 ```
 
-ブラウザ版は学習記録をlocalStorageに保存し、デスクトップ版はSQLite/FSRSを使います。本文のローカル編集は、どちらもIndexedDBに保存します。GitHubの公開用ビルドでは、実行ファイル・DLL・`data/` フォルダーを含む [Windows x64のポータブルZIP](docs/windows-portable.md) を作成します。実行にはMicrosoft Edge WebView2 Runtimeが必要です。ローカルの `tauri build` では、設定に従ってNSISインストーラーも作成できます。意味検索のモデルと索引はリポジトリに含まれず、未設定時は全文検索に切り替わります。Webのテストだけでデスクトップアプリを検証したことにはなりません。
+ブラウザ版は学習記録をlocalStorageに保存し、デスクトップ版はSQLite/FSRSを使います。本文のローカル編集は、どちらもIndexedDBに保存します。GitHubの公開用ビルドでは、実行ファイル・DLL・`data/`フォルダーを含む [Windows x64のポータブルZIP](docs/windows-portable.md) を作成します。実行にはMicrosoft Edge WebView2 Runtimeが必要です。ローカルの`tauri build`では、設定に従ってNSISインストーラーも作成できます。意味検索のモデルと索引はリポジトリに含まれず、未設定時は全文検索に切り替わります。Webのテストだけでデスクトップアプリを検証したことにはなりません。
 
 ## モバイル読書
 
-紙の本を思わせるレスポンシブな読書画面です。目次ドロワー、下部ナビゲーション、段落からの再開、タッチ操作のメモ、3言語の読書設定に対応します。本番ビルドを HTTPS で配信した後、マイライブラリからオフライン用データを保存し、ブラウザからホーム画面に追加できます。開発サーバーではオフラインキャッシュを使いません。[実際の画面と検証記録](docs/mobile-reader.md)をご覧ください。
+紙の本を思わせるレスポンシブな読書画面です。目次ドロワー、下部ナビゲーション、段落からの再開、タッチ操作のメモ、3言語の読書設定に対応します。本番ビルドをHTTPSで配信した後、マイライブラリからオフライン用データを保存し、ブラウザからホーム画面に追加できます。開発サーバーではオフラインキャッシュを使いません。[実際の画面と検証記録](docs/mobile-reader.md)をご覧ください。

@@ -2,7 +2,7 @@
 
 项目入口：[简体中文](../README.md) · [English](../README.en.md) · [日本語](../README.ja.md)
 
-`docs/` 存放使用指南、维护约定和有日期的项目记录。应用实际加载的三语书稿在 [`app/src/lib/content/`](../app/src/lib/content/)，不在这里。
+`docs/`存放使用指南、维护约定和有日期的项目记录。应用实际加载的三语书稿在 [`app/src/lib/content/`](../app/src/lib/content/)，不在这里。
 
 This directory contains usage guides, maintenance contracts, and dated project records. The three editions loaded by the app live in [`app/src/lib/content/`](../app/src/lib/content/).
 
@@ -29,14 +29,14 @@ This directory contains usage guides, maintenance contracts, and dated project r
 | [从阅读到实践](learning-book.md) | 学习功能的整合说明、当时的截图与验证 · Feature integration, screenshots, and validation at that revision · 学習機能の統合・当時の画面と検証 |
 | [手机阅读版](mobile-reader.md) | 第一轮手机界面改版记录 · Initial mobile redesign record · 初回モバイル改修の記録 |
 
-历史记录中的测试数量和功能描述对应当时版本，不代表当前检查结果。当前操作以使用指南和源码为准；需要当前验证结果时，运行项目 README 中的命令。`local-chapter-edits.md` 也保留了该功能交付时的验证记录。
+历史记录中的测试数量和功能描述对应当时版本，不代表当前检查结果。当前操作以使用指南和源码为准；需要当前验证结果时，运行项目README中的命令。`local-chapter-edits.md`也保留了该功能交付时的验证记录。
 
 Historical test counts and feature descriptions apply to the recorded revision. Use the guides and source for current behavior, and run the project README commands for fresh validation. The editing guide also retains its delivery-time validation record.
 
-過去のテスト件数や機能説明は記録時点のものです。現在の操作はガイドとソースを参照し、最新の検証にはプロジェクト README のコマンドを使ってください。本文編集ガイドにも実装時の検証記録を残しています。
+過去のテスト件数や機能説明は記録時点のものです。現在の操作はガイドとソースを参照し、最新の検証にはプロジェクトREADMEのコマンドを使ってください。本文編集ガイドにも実装時の検証記録を残しています。
 
-`learning/`、`local-edits/`、`mobile/` 中的图片都被上述文档引用，是界面示例，不是构建产物。新增指南时在此登记；只有被其他说明完整取代且无引用的过程记录才适合移除。作为 `reviewEvidence` 使用的文件须继续保留。
+`learning/`、`local-edits/`、`mobile/`中的图片都被上述文档引用，是界面示例，不是构建产物。新增指南时在此登记；只有被其他说明完整取代且无引用的过程记录才适合移除。作为`reviewEvidence`使用的文件须继续保留。
 
 Images in `learning/`, `local-edits/`, and `mobile/` are referenced screenshots, not build output. Add new guides to this index. Remove process records only when fully superseded and unreferenced; keep files used as `reviewEvidence`.
 
-`learning/`、`local-edits/`、`mobile/` の画像は文書から参照する画面例です。新しいガイドはこの一覧に追加してください。完全に置き換えられ、参照もない作業記録は削除できますが、`reviewEvidence` に使うファイルは保持します。
+`learning/`、`local-edits/`、`mobile/`の画像は文書から参照する画面例です。新しいガイドはこの一覧に追加してください。完全に置き換えられ、参照もない作業記録は削除できますが、`reviewEvidence`に使うファイルは保持します。

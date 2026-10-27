@@ -71,7 +71,7 @@ a:hover {
 }
 
 /* ===== 本文(記事)のタイポグラフィ =====
-   内部のサイズは em 指定とし、--scale-body / --scale-heading に追従させる */
+   内部のサイズはem指定とし、--scale-body / --scale-headingに追従させる */
 .prose {
 	color: var(--text-body);
 	font-size: calc(1rem * var(--scale-body));
@@ -220,7 +220,7 @@ a:hover {
 	color: #edeae2;
 }
 
-/* コピー用ボタン: ラベルは JS 側で言語別に textContent を設定する */
+/* コピー用ボタン: ラベルはJS側で言語別にtextContentを設定する */
 .copy-btn {
 	position: absolute;
 	top: 8px;

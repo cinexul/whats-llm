@@ -53,7 +53,7 @@
 	const accuracy = $derived(historicalAccuracy(reviews));
 	const mistakes = $derived(mistakeCards(cards, reviews));
 
-	// 復習ヒートマップ(直近 119 日)
+	// 復習ヒートマップ(直近119日)
 	const HEAT_DAYS = 119;
 	const heat = $derived.by(() => {
 		const counts = new Map<string, number>();
@@ -78,7 +78,7 @@
 		return 4;
 	}
 
-	// 今後 14 日の復習予定量
+	// 今後14日の復習予定量
 	const FC_DAYS = 14;
 	const forecast = $derived.by(() => {
 		const startDay = new Date(now);

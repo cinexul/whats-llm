@@ -1,9 +1,9 @@
-//! 学習データの中核。埋め込み SQLite に「設問カード / 復習ログ / 読了 / 設定」を持ち、
-//! FSRS でスケジュールする。Tauri シェルからは薄いコマンド経由で呼ぶだけにする
-//! (重い tauri/onnx ツリーから切り離し、この crate 単体で `cargo test` できるようにするため)。
+//! 学習データの中核。埋め込みSQLiteに「設問カード / 復習ログ / 読了 / 設定」を持ち、
+//! FSRSでスケジュールする。Tauriシェルからは薄いコマンド経由で呼ぶだけにする
+//! (重いtauri/onnxツリーから切り離し、このcrate単体で `cargo test` できるようにするため)。
 //!
-//! このファイルはまず永続化層(スキーマ + 開閉 + 移行 + 基本 CRUD)を固める。
-//! FSRS スケジューリングは次段で `schedule` モジュールとして足す。
+//! このファイルはまず永続化層(スキーマ + 開閉 + 移行 + 基本CRUD)を固める。
+//! FSRSスケジューリングは次段で `schedule` モジュールとして足す。
 
 use std::path::Path;
 
@@ -14,13 +14,13 @@ mod snapshot;
 pub use snapshot::{StudySnapshot, SnapshotReview, SnapshotRead};
 pub use schedule::{Rating, Scheduled, Scheduler, DEFAULT_RETENTION};
 
-/// カードの学習段階。定着度はおもに stability/interval から導くので、ここは補助的。
+/// カードの学習段階。定着度はおもにstability/intervalから導くので、ここは補助的。
 pub const STATE_NEW: i64 = 0;
 pub const STATE_LEARNING: i64 = 1;
 pub const STATE_REVIEW: i64 = 2;
 pub const STATE_RELEARNING: i64 = 3;
 
-/// この crate のエラー。SQLite と FSRS の両方を畳む。
+/// このcrateのエラー。SQLiteとFSRSの両方を畳む。
 #[derive(Debug)]
 pub enum StudyError {
     Sqlite(rusqlite::Error),
@@ -58,14 +58,14 @@ pub type StudyResult<T> = std::result::Result<T, StudyError>;
 const SCHEMA_VERSION: i64 = 1;
 
 const SCHEMA_V1: &str = r#"
--- 設問カード(粒度は「1 設問 = 1 カード」)。id = lang:slug:qhash。
+-- 設問カード(粒度は「1設問 = 1カード」)。id = lang:slug:qhash。
 CREATE TABLE IF NOT EXISTS cards (
   id           TEXT PRIMARY KEY,
   lang         TEXT NOT NULL,
   slug         TEXT NOT NULL,
   qn           INTEGER NOT NULL,            -- 章内の設問番号(表示・並び用)
-  qhash        TEXT NOT NULL,               -- 安定した評価 ID (旧データは設問文のハッシュ)
-  stability    REAL,                        -- FSRS 記憶状態
+  qhash        TEXT NOT NULL,               -- 安定した評価ID (旧データは設問文のハッシュ)
+  stability    REAL,                        -- FSRS記憶状態
   difficulty   REAL,
   state        INTEGER NOT NULL DEFAULT 0,  -- 0 new / 1 learning / 2 review / 3 relearning
   due          INTEGER,                     -- 次回復習(epoch ms)
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS cards (
 );
 CREATE INDEX IF NOT EXISTS idx_cards_due ON cards(lang, due);
 
--- 1 回ごとの作答イベント(状態はここから再生できる = 成長/分析/パラメータ学習の素)。
+-- 1回ごとの作答イベント(状態はここから再生できる = 成長/分析/パラメータ学習の素)。
 CREATE TABLE IF NOT EXISTS reviews (
   id             INTEGER PRIMARY KEY AUTOINCREMENT,
   card_id        TEXT NOT NULL REFERENCES cards(id) ON DELETE CASCADE,
@@ -97,14 +97,14 @@ CREATE TABLE IF NOT EXISTS read_progress (
   PRIMARY KEY (lang, slug)
 );
 
--- 雑多な設定(theme / lang / font-scales 等)。
+-- 雑多な設定(theme / lang / font-scales等)。
 CREATE TABLE IF NOT EXISTS kv (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
 "#;
 
-/// 設問カード 1 件。`Option` の列は「まだ一度も解いていない(new)」を表す。
+/// 設問カード1件。`Option` の列は「まだ一度も解いていない(new)」を表す。
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Card {
@@ -125,13 +125,13 @@ pub struct Card {
 /// ファイルを開いて(無ければ作成)スキーマを最新へ移行する。
 pub fn open(path: &Path) -> Result<Connection> {
     let conn = Connection::open(path)?;
-    // WAL = 書き込み中の読みを止めない・クラッシュ耐性。synchronous=NORMAL は WAL での実用既定。
+    // WAL = 書き込み中の読みを止めない・クラッシュ耐性。synchronous=NORMALはWALでの実用既定。
     conn.execute_batch("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA synchronous=NORMAL;")?;
     migrate(&conn)?;
     Ok(conn)
 }
 
-/// テスト・一時用途のオンメモリ DB。
+/// テスト・一時用途のオンメモリDB。
 pub fn open_in_memory() -> Result<Connection> {
     let conn = Connection::open_in_memory()?;
     conn.execute_batch("PRAGMA foreign_keys=ON;")?;
@@ -149,12 +149,12 @@ fn migrate(conn: &Connection) -> Result<()> {
     Ok(())
 }
 
-/// 設問カードの ID。`lang:slug:qhash`。qhash は安定した評価 ID (旧データは設問文のハッシュ)。
+/// 設問カードのID。`lang:slug:qhash`。qhashは安定した評価ID (旧データは設問文のハッシュ)。
 pub fn card_id(lang: &str, slug: &str, qhash: &str) -> String {
     format!("{lang}:{slug}:{qhash}")
 }
 
-/// カードを 1 件 upsert(無ければ作成、あれば FSRS 状態を更新)。
+/// カードを1件upsert(無ければ作成、あればFSRS状態を更新)。
 pub fn upsert_card(conn: &Connection, c: &Card) -> Result<()> {
     conn.execute(
         r#"
@@ -212,7 +212,7 @@ pub fn due_cards(conn: &Connection, lang: &str, now: i64) -> Result<Vec<Card>> {
     rows.collect()
 }
 
-/// その言語の全カード(slug, qn 順)。進捗ページ・Insight 用。
+/// その言語の全カード(slug, qn順)。進捗ページ・Insight用。
 pub fn all_cards(conn: &Connection, lang: &str) -> Result<Vec<Card>> {
     let mut stmt = conn.prepare(&format!(
         "SELECT {CARD_COLS} FROM cards WHERE lang = ?1 ORDER BY slug, qn"
@@ -221,7 +221,7 @@ pub fn all_cards(conn: &Connection, lang: &str) -> Result<Vec<Card>> {
     rows.collect()
 }
 
-/// 復習イベント 1 件(分析用に最小限の列だけ)。
+/// 復習イベント1件(分析用に最小限の列だけ)。
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Review {
@@ -293,7 +293,7 @@ pub struct CardMeta {
     pub qhash: String,
 }
 
-/// 1 設問への作答を記録する: カードを取得(無ければ新規)→ FSRS で更新 → 保存 → 復習ログに追記。
+/// 1設問への作答を記録する: カードを取得(無ければ新規)→ FSRSで更新 → 保存 → 復習ログに追記。
 /// 採点後のカードを返す。
 pub fn record_answer(
     conn: &Connection,
@@ -338,8 +338,8 @@ pub fn record_answer(
     Ok(scheduled.card)
 }
 
-/// アプリ(Tauri シェル)向けの不透明ハンドル。rusqlite 型を外へ出さず、
-/// スケジューラも内側に 1 つだけ持つ。コマンドはこれを `Mutex` で包んで呼ぶだけ。
+/// アプリ(Tauriシェル)向けの不透明ハンドル。rusqlite型を外へ出さず、
+/// スケジューラも内側に1つだけ持つ。コマンドはこれを `Mutex` で包んで呼ぶだけ。
 pub struct Store {
     conn: Connection,
     scheduler: Scheduler,
@@ -440,7 +440,7 @@ mod tests {
         upsert_card(&conn, &c).unwrap();
         assert_eq!(get_card(&conn, &c.id).unwrap().as_ref(), Some(&c));
 
-        // 再 upsert で状態が更新される(行は増えない)
+        // 再upsertで状態が更新される(行は増えない)
         c.reps = 3;
         c.stability = Some(9.9);
         upsert_card(&conn, &c).unwrap();
@@ -468,7 +468,7 @@ mod tests {
             upsert_card(&conn, &c).unwrap();
         }
         let due = due_cards(&conn, "zh", now).unwrap();
-        // now 以下の 2 件だけ、かつ早い順
+        // now以下の2件だけ、かつ早い順
         assert_eq!(due.len(), 2);
         assert!(due[0].due.unwrap() <= due[1].due.unwrap());
     }
@@ -496,13 +496,13 @@ mod tests {
             qhash: "q2".into(),
         };
 
-        // 初回正解 → カード生成、未来に due、復習 1 件
+        // 初回正解 → カード生成、未来にdue、復習1件
         let card = record_answer(&conn, &sched, meta(), true, Some(4200), now).unwrap();
         assert!(card.due.unwrap() > now);
         assert_eq!(card.reps, 1);
         assert!(card.stability.unwrap() > 0.0);
 
-        // 同じ設問にもう一度(誤答) → 行は増えず、復習は 2 件、ラプス計上
+        // 同じ設問にもう一度(誤答) → 行は増えず、復習は2件、ラプス計上
         let card2 = record_answer(&conn, &sched, meta(), false, None, card.due.unwrap()).unwrap();
         assert_eq!(card2.reps, 2);
         assert_eq!(card2.lapses, 1);
@@ -557,7 +557,7 @@ mod tests {
                     qn,
                     qhash: format!("{slug}-{qn}"),
                 },
-                qn != 2, // rag/2 だけ誤答
+                qn != 2, // rag/2だけ誤答
                 None,
                 now,
             )
@@ -566,12 +566,12 @@ mod tests {
 
         let cards = all_cards(&conn, "en").unwrap();
         assert_eq!(cards.len(), 3);
-        // slug, qn 順に並ぶ
+        // slug, qn順に並ぶ
         assert_eq!((cards[0].slug.as_str(), cards[0].qn), ("rag", 1));
 
         let reviews = all_reviews(&conn, "en").unwrap();
         assert_eq!(reviews.len(), 3);
-        // 誤答は 1 件(rating Again=1)
+        // 誤答は1件(rating Again=1)
         assert_eq!(reviews.iter().filter(|r| r.rating == 1).count(), 1);
         // 他言語は空
         assert!(all_cards(&conn, "zh").unwrap().is_empty());
