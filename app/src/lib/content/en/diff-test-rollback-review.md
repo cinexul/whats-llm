@@ -59,9 +59,9 @@ One addition: not every project has tests ready. If there aren't any, at least d
 
 ## 3. Rollback: know what can be restored
 
-**Rollback means returning selected changes to a known earlier state.** It is useful because mistakes happen, but it is not a promise that one click will erase every consequence.
+**Rollback means returning selected changes to a known earlier state.** It helps you back out of a mistake, but it can't erase every consequence, and restoring often takes more than one step.
 
-**For a local project, Git records versions you deliberately save.** Before a substantial change, inspect the current status and preserve existing work in an appropriate commit or backup. Do not commit secrets just to create a checkpoint. Git is not a camera that automatically saves every edit.
+**For a local project, Git records versions you deliberately save.** Before a substantial change, inspect the current status and preserve existing work in an appropriate commit or backup. Do not commit secrets just to create a checkpoint. Git is not a camera that automatically saves every edit. If you've never used Git, the basic commands for installing it, saving a starting point, and viewing or undoing changes are in "Git: the bare minimum to get started" in Chapter 26.
 
 A **branch** is a named line of development. Creating one does not create a separate directory or isolate the running process. To work with separate files, use a **separate checkout or Git worktree** when useful. A worktree shares repository history while providing its own working directory; it still does not replace a sandbox.
 
@@ -140,39 +140,39 @@ Recovery guidance checked on 2026-10-22 against Git's official documentation: [b
 > 6 questions, covering concept, misconception, scenario, and hands-on. Think first, then read the answer in the quoted block.
 
 1. **[Basic · Concept]** In a diff, what does "a green line with a `+` in front" mean? <!-- quiz: q01 revision: 1 -->
-   - A. A removed line
-   - B. A newly added line
-   - C. An errored line
-   - D. A comment line
-   > **Answer: B.** A diff is "the before-and-after comparison": **green = added (`+`), red = removed (`-`)**, and the colorless ones are unchanged, there for context. Picking A flips added and removed, the thing beginners mix up most; remember "the plus sign means added" and you won't go wrong.
+   - A. A removed line: it was there before the change and is gone after it
+   - B. An error line the tool highlights so you know to check it closely
+   - C. A newly added line: it wasn't there before and appears after the change
+   - D. An unchanged line, shown only so you can see the code around the change
+   > **Answer: C.** A diff is "the before-and-after comparison": green = added (`+`), red = removed (`-`), and lines with no color or symbol are unchanged, there for context (D). Picking A flips added and removed, the thing beginners mix up most; remember "the plus sign means added" and you won't go wrong. B mistakes the color for an error marker; a diff doesn't judge right or wrong.
 
 2. **[Basic · Concept]** What is "running tests" mainly meant to confirm? <!-- quiz: q02 revision: 1 -->
-   - A. Whether the code looks good
-   - B. Whether this change broke a feature that was working fine
-   - C. Whether the AI has a good attitude
-   - D. Whether the project can launch and make money
-   > **Answer: B.** Tests are like a factory quality-check line, made to automatically check "are existing features still working." They catch the "push down here, pops up there" cases that aren't in the diff in front of you and that the change alone won't reveal. Check which relevant cases ran and investigate failures; passing tests do not cover every possible case.
+   - A. Whether this change broke a feature that used to work fine
+   - B. Whether the new code follows the style rules and reads well
+   - C. Whether the AI made its changes exactly as the approved plan said
+   - D. Whether every possible case is guaranteed correct after the change
+   > **Answer: A.** Tests are like a factory quality-check line, made to automatically check "are existing features still working." They catch the "push down here, pops up there" cases that aren't in the diff in front of you. Whether the code follows the style (B) or matches the plan (C) is for the diff and the three sign-off questions. Passing tests only show the covered cases passed, not that every case is correct (D).
 
 3. **[Basic · Misconception]** "It said 'fixed,' so it must be fixed, merge it directly." What's wrong? <!-- quiz: q03 revision: 1 -->
-   - A. Nothing, if it says fixed it's fixed
-   - B. "It thinks it's fine" and "it holds up to tests" are two things; it might be confidently wrong, so verify with the diff and tests
-   - C. It never says "fixed"
-   - D. You have to pay before merging
-   > **Answer: B.** It isn't lying to you — it'll be "confidently wrong" (the hallucination of Chapter 9). Relevant tests provide evidence for covered behavior, but passing does not prove every case is correct. Blindly trusting its tone is exactly the most common way beginners crash.
+   - A. Nothing; it can check its own code, so if it says fixed, it's fixed
+   - B. It skipped a spot check; opening one or two places is enough
+   - C. It skipped the full test run; if every test passes, every case is right
+   - D. It may be confidently wrong; verify with the diff and relevant checks
+   > **Answer: D.** It isn't lying to you; it can be "confidently wrong" (the hallucination of Chapter 9). Its own judgment doesn't replace verification (A); a quick look at one or two places won't catch problems elsewhere (B); relevant tests provide evidence for the behavior they cover, but passing does not prove every case is correct (C).
 
 4. **[Advanced · Misconception]** "Reading a diff means being able to follow every line of code, which a non-expert like me just can't do." Where is this worry unnecessary? <!-- quiz: q04 revision: 1 -->
-   - A. It's not unnecessary; if you can't follow the code you can't read the diff
-   - B. Reading a diff is about "what was touched, how much, right place or not," like spotting "I ordered a salad, why did braised pork show up," which a non-expert can absolutely judge
-   - C. Only programmers can open a diff
-   - D. A non-expert reading a diff will break the project
-   > **Answer: B.** Signing off doesn't mean reading every line of syntax. "Did it touch the right place, is the scope normal" doesn't need a programming background. Mistaking "reading a diff" for "following all the code" makes you needlessly give up this most useful guarding tool.
+   - A. It isn't; if you can't follow the code, you can't make any sense of the diff
+   - B. A diff is mostly about where and how much it changed, and if that's right
+   - C. You can skip the diff; if the tests pass, that does the same job
+   - D. Counting how many files changed is enough; the contents don't matter
+   > **Answer: B.** Signing off doesn't mean reading every line of syntax. "Did it touch the right place, is the scope normal" is like spotting "I ordered a salad, why did braised pork show up," which a non-expert can absolutely judge. Tests can't catch "changed the wrong place," so they can't replace the diff (C); counting files is too coarse to tell whether it touched the part you asked for (D).
 
 5. **[Basic · Scenario]** You want a way to restore a local code change if it goes wrong. What should you arrange beforehand? <!-- quiz: q05 revision: 1 -->
-   - A. Only take a screenshot
-   - B. Preserve the starting state in Git or an appropriate backup, check coverage, and use a separate checkout or worktree if separate working files are needed
-   - C. Assume creating a branch backs up the whole computer
-   - D. Assume reverting code also undoes database changes and emails
-   > **Answer: B.** Git restores recorded content; a branch alone creates neither a backup of all files nor another directory. Protect unrecorded data separately, preserve unrelated work, and plan for external effects. Cloud checkpoints have their own scope and retention limits.
+   - A. Save a starting point with a Git commit or suitable backup, and check coverage
+   - B. Just create a new branch, which automatically backs up the whole project folder
+   - C. Take a screenshot, and if things break, change everything back by hand from it
+   - D. Nothing; reverting the code will also restore the database and the emails
+   > **Answer: A.** Git restores recorded content (basic commands are in "Git: the bare minimum to get started" in Chapter 26); a branch alone creates neither a backup of all files nor another directory (B). A screenshot can't capture every change (C), and external effects like databases and emails need their own recovery plans (D). Use a separate checkout or worktree if you need separate working files; cloud checkpoints also have their own scope and retention limits.
 
 6. **[Advanced · Hands-on / Observation]** Find a ready-made code change (or this chapter's diff example), don't try to follow the code, just practice the "three sign-off questions": **what did it change? could it break anything else? can I say in one sentence what this bit does?** When you can't answer the third, what do you plan to do? <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** The three sign-off questions aren't mysterious; a non-expert can do them. When you can't answer the third, the right move is **to go back and ask it** "what does this bit do, why change it this way," and have it explain until you can restate it in one sentence, **not** to let it through just because its tone is sure. Building the muscle memory of "don't merge what you can't follow" is worth more than knowing any command. For the commands and interface of specific tools, **refer to the official documentation.**

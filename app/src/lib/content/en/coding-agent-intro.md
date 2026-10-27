@@ -29,7 +29,7 @@ You might ask: so where do I use it? Is it a website? An app?
 
 The answer is: **there is no single answer, and it keeps changing.** You'll usually run into them in a **terminal (command line), a code editor (IDE), a web task, or a cloud environment**; **some run on your own machine, some run in the cloud, and the exact form varies and gets updated, so refer to each product's official documentation.**
 
-Why won't this book just tell you "use that website" or "install that program"? Because the form of this kind of tool **changes especially fast**: today the mainstream is the command line, tomorrow an IDE plugin might feel smoother, the day after a web version or a cloud-backend version shows up. **Pin the book to one specific form and it's out of date in six months.** So this book only covers the part that **won't go out of date**: how it does the work, and how you direct it. The specifics of "where to open it, which button to click, which command to type" are spelled out in Chapter 25 and Appendix C, but in the end always **defer to the official documentation**.
+Why won't this book just tell you "use that website" or "install that program"? Because the form of this kind of tool **changes especially fast**: today the mainstream is the command line, tomorrow an IDE plugin might feel smoother, the day after a web version or a cloud-backend version shows up. **Pin the book to one specific form and it's out of date in six months.** So this book only covers the part that **won't go out of date**: how it does the work, and how you direct it. The specifics of "where to open it, which button to click, which command to type" are spelled out in Chapters 28 and 29 and Appendix C, but in the end always **defer to the official documentation**.
 
 > **Key point:** Two things are **stable** and safe to remember: Claude Code comes from Anthropic, and its core is Claude; Codex comes from OpenAI. This "who makes it / what's inside it" attribution won't shuffle around. But **what they actually look like, how to install them, and what they can do** belong to the "will change" category. When you hit those details, trust the official docs.
 
@@ -85,7 +85,7 @@ Notice something? All three of these are putting this chapter's core attitude in
 ## Summary
 
 - **A coding agent (Claude Code / Codex) is the Chapter 19 "Agent that takes action" in the area of programming**: not "writes code," but "uses writing code to get something done," reading the project, editing files, running commands, taking several steps in a row.
-- Its **form varies and keeps changing** (terminal / IDE / web / cloud, both local and cloud). This book only covers the mental model that won't date; for how to install it and what to type, **check the official docs** (Chapter 25, Appendix C).
+- Its **form varies and keeps changing** (terminal / IDE / web / cloud, both local and cloud). This book only covers the mental model that won't date; for how to install it and what to type, **check the official docs** (Chapters 28 and 29, Appendix C).
 - Core attitude: treat it as a **very capable new coworker on day one**: quick, willing, but unaware of your rules and liable to be confidently wrong.
 - **Final responsibility always stays with the human:** "Don't let through what you don't understand and haven't verified." Precisely because the gatekeeping is yours, you can hand off the grunt work without worry.
 - This chapter is the map; the next three fill in detail: **signing off (read the diff / run tests, Chapter 25), permissions and rollback (Chapter 26), plan first then act (Chapter 27)**, all of it putting "assign the work, keep the gatekeeping yourself" into practice.
@@ -99,39 +99,39 @@ In the next chapter (Chapter 24) we'll walk through this shared "investigate -> 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Think first, then read the answer in the quoted block.
 
 1. **[Basic · Concept]** Lining up "coding agent" with the "Agent" from Chapter 19, which sentence is most accurate? <!-- quiz: q01 revision: 1 -->
-   - A. A coding agent is a kind of Agent, an AI that takes action, except the place it acts is your code project
-   - B. A coding agent has nothing to do with an Agent; they're two different things
-   - C. A coding agent doesn't take action, it only gives suggestions
-   - D. An Agent is one feature button inside a coding agent
-   > **Answer: A.** The Chapter 19 Agent is an AI that breaks goals into steps, calls tools, and runs several steps on its own; a coding agent is that same ability aimed at "changing a code project." People who pick B or D haven't built the "it's a kind of Agent" relationship; people who pick C are still stuck on the old impression that "chat AI only gives text."
+   - A. It's a kind of Agent; the place where it takes action is your code project
+   - B. It's an upgraded chat AI; the main difference is that it writes code more accurately
+   - C. It's separate from an Agent: an Agent acts, while it only suggests code
+   - D. An Agent is a small built-in feature of it, used only for looking things up
+   > **Answer: A.** The Chapter 19 Agent is an AI that breaks goals into steps, calls tools, and runs several steps on its own; a coding agent is that same ability aimed at "changing a code project." B sees only the "writing code" part and misses that it reads the project, edits files, and runs commands itself. C is still stuck on the old impression that "chat AI only gives text," and D gets the relationship backward.
 
 2. **[Basic · Concept]** For a coding agent, what's the difference between "writing code" and "doing things"? <!-- quiz: q02 revision: 1 -->
-   - A. No difference, same thing
-   - B. "Writing code" gives you a block of text you use yourself; "doing things" is it reading the project, editing files, and running commands to get the goal done
-   - C. "Doing things" means it makes coffee
-   - D. "Writing code" is more advanced
-   > **Answer: B.** This is exactly the line between the chat layer and the agent layer: the former spits out text and you execute; the latter executes itself and takes several steps in a row. Treating it as "a smarter search box" is mistaking it for the "only writes code" layer.
+   - A. No real difference; "doing things" is just a phrase vendors use for marketing
+   - B. One hands you code to use; the other reads, edits files, and runs commands itself
+   - C. "Doing things" means it can write a longer, more complete program in one go
+   - D. The difference is speed: the one that "does things" simply answers faster
+   > **Answer: B.** This is exactly the line between the chat layer and the agent layer: the former spits out text and you execute; the latter executes itself and takes several steps in a row. C and D read the difference as "writes more" or "answers faster," but the key is who takes action. A overlooks that it really does change your files.
 
 3. **[Basic · Misconception]** "It's AI, the code it writes should be correct, use it straight away." What's wrong with that? <!-- quiz: q03 revision: 1 -->
-   - A. You have to pay before using it
-   - B. The code it writes never runs
-   - C. Nothing, what AI writes is correct
-   - D. It will confidently get it wrong (hallucination happens here too); "finished" isn't "correct," and what you can't follow or haven't verified shouldn't be let through
-   > **Answer: D.** Hallucination (Chapter 9) happens when writing code too, and because code looks "professional" it fools non-experts more easily. That's why later chapters teach "read the diff, run tests." Option B goes to the other extreme; it often does run, the problem is that "runs" isn't "correct."
+   - A. AI code is usually right; it just needs a tidy-up for consistent style
+   - B. AI code usually doesn't run, so you should rewrite whatever you get back
+   - C. Only the free version makes mistakes; code from a paid plan can be used as-is
+   - D. It can be confidently wrong; "finished" isn't "correct," so verify it first
+   > **Answer: D.** Hallucination (Chapter 9) happens when writing code too, and because code looks "professional" it fools non-experts more easily. That's why later chapters teach "read the diff, run tests." A understates the problem. B goes to the other extreme; it often does run, the problem is that "runs" isn't "correct." C assumes paying prevents mistakes, but every version can get things wrong.
 
 4. **[Advanced · Misconception]** "Claude Code / Codex is one fixed website (or one piece of software), the form is set in stone." Why does thinking this way cause trouble? <!-- quiz: q04 revision: 1 -->
-   - A. No trouble, the form is fixed
-   - B. They only exist in cloud form
-   - C. Their form varies (terminal / IDE / web / cloud), local and cloud both exist, and it's being updated; pinning it to one form goes out of date fast. Check the official docs for specifics
-   - D. They have no interface at all
-   > **Answer: C.** Form is in the "will change" category, so this book only covers the mental model that won't date and leaves "where to use it, how to install it" to the official docs. But two things are stable: Claude Code comes from Anthropic (core: Claude), Codex comes from OpenAI; that attribution is safe to remember.
+   - A. It doesn't; the mainstream form won't change much over the next few years
+   - B. It does, because they actually only run inside a web page in the cloud
+   - C. The form varies and keeps updating; pin it down and you're soon out of date
+   - D. It does, because they only work at a command line, with no visual interface at all
+   > **Answer: C.** Form is in the "will change" category: depending on the product you might use it in a terminal, an editor, the web, or the cloud. So this book only covers the mental model that won't date and leaves "where to use it, how to install it" to the official docs. B and D just pin it to a different single form. Two things are stable, though: Claude Code comes from Anthropic (core: Claude), Codex comes from OpenAI.
 
 5. **[Basic · Scenario]** Your first time using it, it says "feature added" in no time flat. As the "person showing it the ropes," what should you do next? <!-- quiz: q05 revision: 1 -->
-   - A. Pay it a compliment and call it done
-   - B. Treat it as a new coworker on day one and sign off: what exactly did it change, did it break anything else, can I explain what this bit does
-   - C. Have it do the next, bigger feature
-   - D. Just trust it and merge it live
-   > **Answer: B.** "Finished isn't correct." It's like a capable coworker who just started, and signing off is the job of the person showing them the ropes (the three specific moves are in Chapter 25). Picking D treats it as a "turnkey contractor," which is exactly the most common way things go off the rails.
+   - A. Have it check its own work again, and merge if it says everything is fine
+   - B. Sign off: what it changed, whether it broke anything, can you explain it
+   - C. Have it build the next feature first, then check everything at the end
+   - D. Ship it first to see how it goes, and have it fix whatever problems come up
+   > **Answer: B.** "Finished isn't correct." It's like a capable coworker who just started, and signing off is the job of the person showing them the ropes (the three specific moves are in Chapter 25). A lets it grade its own work, which isn't a sign-off. C lets problems pile up and makes them harder to trace. D treats it as a "turnkey contractor," which is exactly the most common way things go off the rails.
 
 6. **[Advanced · Hands-on / Observation]** No need to actually install anything: find a "does things vs only gives advice" contrast near you, for example "a navigation app that drives you through each turn" versus "a stranger who points you in a direction." Think about it: which is a coding agent more like? And where does it differ from a chat AI that "just hands you a block of code to copy"? <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** A coding agent is like the navigation that "drives you through each turn": it executes itself and takes several steps in a row. A chat AI is like the stranger who "points a direction": it gives you information, but you walk the road yourself. The difference is "who takes action, and who takes several steps in a row." And precisely because it acts on its own and might point the wrong way, the "sign-off" gate has to stay with you (Chapters 25, 26). For the form, installation, and commands of specific tools, **defer to the official documentation**.

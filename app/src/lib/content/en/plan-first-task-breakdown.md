@@ -51,7 +51,7 @@ Why? Because **the "size" of a change directly decides whether you "can or can't
 
 **Having it "do a whole big feature in one go" is the most common way beginners crash.** Think about it: it changes twenty or thirty files and hundreds of lines at once, the diff so long you can't possibly finish reading it (the Chapter 25 sign-off set completely fails), and if something goes wrong the mistake is mixed into one huge blob of changes, so you **can't find where it is and can't cleanly roll back** (Chapter 26). The bigger the change, the bigger your blind spot.
 
-The right move is to break a big thing into a string of small things, **do one little piece, sign off on one little piece, commit once, then do the next**:
+The right move is to break a big thing into a string of small things, **do one little piece, sign off on one little piece, commit once, then do the next** ("commit" means saving a version with Git; see "Git: the bare minimum to get started" in Chapter 26):
 
 ```text
 wrong move:  one "do the whole feature" ─→ it wildly changes a huge blob ─→ diff too long to read, mistakes hard to find, hard to roll back
@@ -125,39 +125,39 @@ With that, the four "shared" approaches of Part Four are complete: **it's a capa
 > 6 questions, covering concept, misconception, scenario, and hands-on. Think first, then read the answer in the quoted block.
 
 1. **[Basic · Concept]** What's the main benefit of "having it lay out a plan and approving before acting"? <!-- quiz: q01 revision: 1 -->
-   - A. It saves tokens
-   - B. It makes it write faster
-   - C. It moves "the mistake it might make" forward to before acting, a correction takes one sentence, avoiding throwing out a big pile after the change
-   - D. It makes the conversation feel more formal
-   > **Answer: C.** This is the highest-return step: catching the off-track before acting costs one sentence; catching it after acting costs throwing out a pile of changes and redoing (echoing Chapters 14, 24). D, B, A all miss the point, which is "intercept the mistake before acting."
+   - A. It saves a lot of tokens, since a plan is much shorter than code
+   - B. It makes it write faster, since its thinking is sorted out in advance
+   - C. You catch a misunderstanding before it acts and fix it in one line
+   - D. Once the plan is approved, you no longer need to check the result
+   > **Answer: C.** This is the highest-return step: catching the off-track before acting costs one sentence; catching it after acting costs throwing out a pile of changes and redoing them (echoing Chapters 14, 24). A and B might happen along the way, but they aren't the point. D is a common misconception: the plan is the gate before acting, and you still read the diff and run tests afterward.
 
 2. **[Basic · Concept]** About the "plan first, execute later" feature, which statement is right? <!-- quiz: q02 revision: 1 -->
-   - A. It's a fixed command you must memorize
-   - B. Only one product has it, no one else does
-   - C. Many tools build it in (name and toggle per the official docs); even without it, you can say to the AI in one sentence "don't act yet, just give me a plan" to do it manually
-   - D. It makes the AI never act
-   > **Answer: C.** Its essence is splitting "make a plan" and "actually act" into two stages with a human-approval gate in between. Names differ by maker (**refer to the official documentation**), but you can ask manually in plain words anytime; this is **something you say to the AI, not a product command.**
+   - A. It's one fixed command, written exactly the same way in every tool
+   - B. Only products with a "plan mode" button can work this way at all
+   - C. Many tools build it in; without it, one sentence asks for a plan first
+   - D. Once it's on, the AI only makes plans and never carries out the task
+   > **Answer: C.** Its essence is splitting "make a plan" and "actually act" into two stages with a human-approval gate in between. Names and toggles differ by tool (see the official documentation), so A is wrong; you can ask for it in plain words without any button, so B is wrong; once you approve, it goes ahead and acts, so D is wrong.
 
 3. **[Basic · Misconception]** "Having it plan first is a waste of time, better to just let it work and fix mistakes as they come." What's wrong? <!-- quiz: q03 revision: 1 -->
-   - A. "Fix mistakes as they come" is the most wasteful: catching the off-track after acting means redoing from scratch, especially when the change is too big to sign off line by line, and the mistake hides where you can't see it
-   - B. The plan it makes is always wrong
-   - C. The plan is free, only the work costs money
-   - D. Nothing, working directly is fastest
-   > **Answer: A.** Spending half a minute on the "blueprint" first beats tearing it out and relaying afterward by a mile. With a big change, the Chapter 25 sign-off set fails and the mistake hides in your blind spot. "Plan first, execute later" isn't dawdling — it's the shortcut.
+   - A. Fixing after the fact costs most; catch it late and you must redo it all
+   - B. Nothing; today's AI rarely misunderstands, so going straight is fastest
+   - C. It's about money: planning is free, and only the actual work is billed
+   - D. Plans are more accurate than code, so after reading one you can skip checks
+   > **Answer: A.** Spending half a minute on the "blueprint" first beats tearing it out and relaying afterward by a mile. With a big change, the Chapter 25 sign-off set fails and the mistake hides in your blind spot. B underestimates how often it misunderstands; C misses the point, since planning and acting both use your allowance; D treats "reading the plan" as a substitute for signing off.
 
-4. **[Advanced · Misconception]** "Having it do a whole big feature in one go is easiest." Why is it often more work? <!-- quiz: q04 revision: 1 -->
-   - A. No, the bigger the cheaper
-   - B. A single big change's diff is too long to read, mistakes hard to locate, and hard to roll back cleanly; breaking it small and signing off piece by piece is what's truly fast
-   - C. It can only change one file at a time
-   - D. Big tasks cost extra
-   > **Answer: B.** The bigger the change the bigger the blind spot (the Chapter 25, 26 gatekeeping all fails). Right move: do a little piece -> verify a little piece -> commit -> next piece. Small steps almost never backtrack and are fastest overall (echoing Chapter 14). This is also the number-one rookie crash scene noted in Chapter 23.
+4. **[Advanced · Misconception]** Someone says: "Breaking a task small just means sending the request as a few sentences in a row; no need to stop in between, just read the whole diff at the end." What does this miss? <!-- quiz: q04 revision: 1 -->
+   - A. It isn't small enough; real splitting means changing one line per step
+   - B. Checking and committing each step, so a mistake can be undone on its own
+   - C. Nothing; sending it as several sentences already lowers the risk by itself
+   - D. Only tools with a plan mode can split a task into small steps at all
+   > **Answer: B.** The value of small pieces is that each one can be followed, verified, and rolled back on its own. Without stopping in between, the final diff is still one huge blob with the mistakes mixed in, so C is wrong. Breaking it small doesn't mean one line at a time (A), and any tool can be asked in one sentence to go step by step (D).
 
 5. **[Basic · Scenario]** It gives you a plan, and the first line reads "I understand you want me to redo the entire payment system." But you only wanted it to "change a button color." What should you do? <!-- quiz: q05 revision: 1 -->
-   - A. Forget it, let it do it the way it understood
-   - B. Delete the project and start over
-   - C. Let it work on it for a bit and see
-   - D. Correct it right away: it got it backward, it hasn't written a line of code yet, one sentence pulls it back on track
-   > **Answer: D.** The opening line "what it thinks you want it to do" is the most worth reading: misunderstood, everything after is wrong. It hasn't acted yet, so the cost of correcting is nearly zero, which is exactly where "see the plan first" saves the most. A and C amount to letting it run off and wildly change a huge blob with its misunderstanding intact.
+   - A. Let it work from its own understanding, then see whether the result is right
+   - B. Approve the plan, but remind it to change only the parts about the button
+   - C. Wait until it finishes the first step, then judge whether it understood
+   - D. Hold off approving, say you only want the color changed, and get a new plan
+   > **Answer: D.** The opening line "what it thinks you want it to do" is the most worth reading: misunderstood, everything after is wrong. It hasn't acted yet, so the cost of correcting is nearly zero, which is exactly where "see the plan first" saves the most. A and C let it start changing things with its misunderstanding intact; B still approves a plan built on the wrong understanding, so following it will still blow up the scope.
 
 6. **[Advanced · Hands-on / Observation]** Take a "fairly big" task you'd want to hand it (say "add a message board to my little website"), set the tech aside, and try breaking it into **3 small steps** yourself, thinking about how you'd sign off after each small step. Then think: why does this reassure you more than "one sentence to do it all"? <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** Once broken small, you can finish reading the diff of each small step, answer the three sign-off questions (Chapter 25), roll back individually if something breaks (Chapter 26), and cut losses at the first step if the direction's wrong. "One sentence to do it all" pushes you into "a diff too long to read + a bug you can't find + a mess too hard to roll back." **Small steps at a slow jog turn out to be fastest**, and this judgment is tool-agnostic; for the specific "plan feature" name and toggle, **refer to the official documentation.**

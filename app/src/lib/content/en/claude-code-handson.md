@@ -1,24 +1,30 @@
 Claude Code is Anthropic’s coding agent. It can explore a repository, edit files, run tools, and assist with Git workflows. You can use it through a terminal and supported editor or other product interfaces. This chapter uses the terminal to make the first session concrete.
 
-The installation and command examples were checked on **2026-10-22**. Record your installed version: instructions from an old tutorial can describe an installation method or interface that has since changed.
+The installation methods, account requirements, and command examples were checked on **2026-10-27**. Record your installed version: instructions from an old tutorial can describe an installation method or interface that has since changed.
 
 ## 1. Install and open a small project
 
-The official repository recommends the native installer. On macOS or Linux:
+Check your account first. As of October 2026, the official documentation says Claude Code requires a Pro, Max, Team, or Enterprise plan or a Console (API) account; the free claude.ai plan does not include it. It can also be used through third-party cloud providers such as Amazon Bedrock.
+
+If you're not comfortable in a terminal, there is also an official desktop app (macOS, Windows, Linux) that lets you use Claude Code without the command line; the download links are in the official setup documentation. This chapter uses the terminal as the example.
+
+The officially recommended method is the native installer, which then updates itself in the background. On macOS or Linux (including WSL on Windows):
 
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-This downloads and executes an installer; use the official address and review your organization’s installation rules. If you already use Homebrew, `brew install --cask claude-code` is another listed method. On Windows, the repository lists:
+In Windows PowerShell (there is an equivalent CMD command in the official docs):
 
 ```powershell
-winget install Anthropic.ClaudeCode
+irm https://claude.ai/install.ps1 | iex
 ```
 
-Choose one method. **The current official README marks npm installation as deprecated**; an old `npm install -g @anthropic-ai/claude-code` tutorial is no longer the preferred starting point.
+Both commands download and execute an installer script; make sure the address is the official one and follow your organization's installation rules. On Windows, the docs also recommend installing Git for Windows (see Chapter 26) so Claude Code can run Bash commands; without it, Claude Code still works and uses PowerShell instead.
 
-Then check the executable and enter an existing practice project:
+You can also use a package manager: `brew install --cask claude-code` with Homebrew, or `winget install Anthropic.ClaudeCode` with WinGet. These two don't update automatically by default, so run `brew upgrade claude-code` or `winget upgrade Anthropic.ClaudeCode` from time to time. Choose one method. The README in the official GitHub repository marks npm installation as deprecated, so an old tutorial's `npm install -g @anthropic-ai/claude-code` is no longer the preferred starting point.
+
+After installing, open a new terminal window, check that the command works, and enter a practice project. The `git` commands below need Git installed; if the project isn't under Git yet, save a starting point first as described in "Git: the bare minimum to get started" in Chapter 26:
 
 ```bash
 claude --version
@@ -29,7 +35,7 @@ git switch -c practice/claude-first-task
 claude
 ```
 
-Replace the path with your project’s actual folder. Start with a clean working tree or save existing work separately. Follow the login flow, then use `/status` to inspect the session and active account. Eligible subscriptions and API-backed configurations are different ways to use the tool; installing the CLI does not itself make API usage free.
+Replace the path with your project's actual folder. `git status` confirms there are no unsaved changes (or save existing work separately first), and `git switch -c` creates a practice branch. The first time you run `claude`, follow the browser prompts to log in, then use `/status` to inspect the session and active account. Subscription sign-in and API-backed configurations are different ways to use the tool; installing the CLI does not itself make API usage free.
 
 ## 2. Ask for investigation, then one change
 
@@ -105,46 +111,46 @@ Do not assume a consumer subscription pays for an API key, or that all long sess
 
 ## Sources and version notes
 
-Checked **2026-10-22**: [official Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md) for native/Homebrew/WinGet installation and npm deprecation; [official changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md), whose first entry was **2.1.308**, for the commands, memory controls, subscription usage, and evolving permission behavior described here. That is an observed repository version, not a claim about your installed release. [Official setup documentation](https://code.claude.com/docs/en/setup) and [cost documentation](https://code.claude.com/docs/en/costs) are the follow-up references for your platform and account.
+Checked **2026-10-27**: the [official setup documentation](https://code.claude.com/docs/en/setup) for the native installer (including Windows PowerShell), the fact that Homebrew and WinGet installs don't auto-update, the account requirements (the free claude.ai plan doesn't include Claude Code), and the desktop app; the [official Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md) for npm deprecation; the [commands reference](https://code.claude.com/docs/en/commands) for the in-session commands in this chapter. When checked on 2026-10-22, the [official changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)'s first entry was **2.1.308**, covering memory controls, subscription usage, and evolving permission behavior. These are observed documentation and repository versions, not a claim about your installed release. For costs, see the [cost documentation](https://code.claude.com/docs/en/costs).
 
 ---
 
 ## Quiz
 
-1. **[Basic · Concept]** Which installation advice matches the checked official README? <!-- quiz: q01 revision: 1 -->
-   - A. npm is the only supported starting point
-   - B. No installation is needed for any interface
-   - C. Use a listed native or package-manager method; npm installation is deprecated
-   - D. Install every available distribution simultaneously
-   > **Answer: C.** The repository recommends the native installer and lists alternatives such as Homebrew and WinGet. Choose one method and check the installed version.
+1. **[Basic · Concept]** Which installation advice matches the checked official documentation? <!-- quiz: q01 revision: 1 -->
+   - A. npm is the official first choice; install Node.js first, just to be safe
+   - B. After installing with Homebrew or WinGet, it keeps itself updated
+   - C. Pick one listed method, like the native installer; npm is deprecated
+   - D. A free claude.ai account can use it as soon as it's installed
+   > **Answer: C.** The official docs recommend the native installer and also list Homebrew and WinGet; the README marks npm installation as deprecated (A). Homebrew and WinGet installs don't auto-update by default, so you run the upgrade command yourself (B). Claude Code requires a Pro, Max, Team, Enterprise, or Console account; the free plan doesn't include it (D).
 
 2. **[Basic · Concept]** What belongs in `CLAUDE.md`? <!-- quiz: q02 revision: 1 -->
-   - A. Verified project conventions and useful commands
-   - B. API keys
-   - C. Every log from every previous session
-   - D. An assumption that permission checks no longer apply
-   > **Answer: A.** Keep project guidance concise, accurate, and useful. Secrets and unlimited authorization do not belong there.
+   - A. Verified project conventions, handy commands, and limits
+   - B. API keys, so it can call the services directly every time
+   - C. Full transcripts of every earlier conversation, for recall
+   - D. A blanket "you never need to ask me for permission again"
+   > **Answer: A.** Keep project guidance concise, accurate, and useful. Keys never belong in project files (B); a full history is too long and buries what matters (C); project guidance can't replace permission controls or grant unlimited authorization (D).
 
 3. **[Advanced · Misconception]** Auto memory contains an old test command. What should you do? <!-- quiz: q03 revision: 1 -->
-   - A. Treat memory as more reliable than the current repository
-   - B. Retrain the base model immediately
-   - C. Delete the project
-   - D. Verify the current command and correct the retained note
-   > **Answer: D.** Memory is stored context and can become stale. It is neither a source of guaranteed truth nor a change to model weights.
+   - A. Trust the memory, since it was summarized from earlier work
+   - B. Take it as a sign the weights changed and wait for a new version
+   - C. Turn off all memory features and remember commands yourself
+   - D. Verify the current command, then correct the saved note
+   > **Answer: D.** Memory is context notes saved by the product, and they can go stale. They aren't a more reliable source than the current repository (A), nor a change to model weights (B). You can inspect and correct notes, so one outdated entry is no reason to switch everything off (C).
 
 4. **[Basic · Scenario]** Before starting a long task, which check helps avoid billing surprises? <!-- quiz: q04 revision: 1 -->
-   - A. Only checking whether the CLI installed successfully
-   - B. Checking the active account, allowances, and enabled paid extras
-   - C. Assuming a subscription includes every API call
-   - D. Asking the model to guess your bill
-   > **Answer: B.** Subscription allowances, API billing, and optional extras are separate concerns. The active account and usage screen provide the relevant evidence.
+   - A. Confirm the install worked and the version number shows up
+   - B. Check the account in use, its allowance, and paid extras
+   - C. Assume a subscription already covers every single API call
+   - D. Keep the request short, which guarantees you stay within limits
+   > **Answer: B.** Subscription allowances, API billing, and optional extras are separate concerns; the active account and usage screen provide the relevant evidence. A successful install (A) says nothing about cost; a subscription doesn't pay for an API key (C); a short request can't guarantee usage, since tool output and background work in a long task also count (D).
 
 5. **[Advanced · Scenario]** Two subagents will edit a repository. What is a useful precaution? <!-- quiz: q05 revision: 1 -->
-   - A. Assume separate chats guarantee isolated files
-   - B. Let both rewrite the same files without coordination
-   - C. Assign distinct ownership or isolated worktrees and an integration owner
-   - D. Give each unrestricted external-service credentials
-   > **Answer: C.** Parallel workers can share files unless isolation is explicitly provided. Scope, permissions, and integration still need coordination.
+   - A. Separate chats are isolated by nature, so they won't collide
+   - B. Let both edit the same files at once, then keep the better one
+   - C. Give each its own files or worktree and name an integrator
+   - D. Give them broader permissions so they collaborate more smoothly
+   > **Answer: C.** Without explicit isolation, parallel workers can share files: separate chats don't mean separate directories (A), and editing the same files at once means overwriting each other (B). Delegation doesn't expand the permissions of the original task (D); scope, permissions, and integration still need coordinating.
 
 6. **[Basic · Hands-on]** Write five lines of project guidance, distinguishing one verified command, one convention, and one data-handling constraint. Then compare them with any saved memory. <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** Project instructions state the intended rules. Memory may contain useful observations, but both need review when the repository changes.

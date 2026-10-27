@@ -1,24 +1,30 @@
 Claude Code是Anthropic的编程智能体，可以探索仓库、修改文件、运行工具，并协助Git工作流。你可以通过终端、支持的编辑器或其他产品入口使用它。本章以终端为例，完成一次具体的入门练习。
 
-安装与命令示例核查于**2026-10-22**。请记录实际安装版本：老教程可能仍在介绍已经变化的安装方式或界面。
+安装方式、账号要求和命令示例核查于**2026-10-27**。请记录实际安装版本：老教程可能仍在介绍已经变化的安装方式或界面。
 
 ## 一、安装并打开一个小项目
 
-官方仓库推荐原生安装器。macOS或Linux的命令是：
+先确认账号。截至2026年10月，官方文档写明：Claude Code需要Pro、Max、Team、Enterprise套餐或Console（API）账号，免费的claude.ai套餐不包含它；也可以通过Amazon Bedrock等第三方云平台使用。
+
+不习惯终端的话，官方还提供桌面应用（macOS、Windows、Linux），不用命令行也能使用Claude Code，下载入口见官方安装文档。本章以终端为例。
+
+官方推荐原生安装器，装好后会在后台自动更新。macOS、Linux（以及Windows的WSL）：
 
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-这条命令会下载并执行安装脚本，请确认使用官方地址，并遵循组织的安装规定。已有Homebrew的读者，也可以选`brew install --cask claude-code`。Windows用户可以使用官方仓库列出的方式：
+Windows的PowerShell（CMD也有对应命令，见官方文档）：
 
 ```powershell
-winget install Anthropic.ClaudeCode
+irm https://claude.ai/install.ps1 | iex
 ```
 
-选一种方式即可。**当前官方README已把npm安装标为弃用**；旧教程中的`npm install -g @anthropic-ai/claude-code`不再是首选起点。
+这两条命令都会下载并执行安装脚本，请确认地址来自官方，并遵循组织的安装规定。在Windows上，官方建议再装Git for Windows（见第26章），Claude Code可以借助它运行Bash命令；不装也能用，它会改用PowerShell。
 
-然后确认命令可用，进入已有练习项目：
+也可以用包管理器：Homebrew的`brew install --cask claude-code`，或WinGet的`winget install Anthropic.ClaudeCode`。这两种方式默认不会自动更新，要定期运行`brew upgrade claude-code`或`winget upgrade Anthropic.ClaudeCode`。选一种方式即可。官方GitHub仓库的README已把npm安装标为弃用，旧教程里的`npm install -g @anthropic-ai/claude-code`不再是首选起点。
+
+装好后打开一个新的终端窗口，确认命令可用，再进入练习项目。下面的`git`命令需要先装好Git；项目还没交给Git管理的话，先按第26章“Git最小起步”存一个起点：
 
 ```bash
 claude --version
@@ -29,7 +35,7 @@ git switch -c practice/claude-first-task
 claude
 ```
 
-把路径换成真实目录。先保证工作区干净，或另行保存已有工作。按登录流程操作，再用`/status`查看会话和当前账号。符合条件的订阅登录与API配置是不同使用路径；装好CLI不会自动使API调用免费。
+把路径换成真实目录。`git status`用来确认没有未保存的修改（或先另行保存已有工作），`git switch -c`新建一个练习分支。第一次运行`claude`时按浏览器提示登录，之后用`/status`查看会话和当前账号。订阅登录与API配置是不同的使用路径；装好CLI不会自动使API调用免费。
 
 ## 二、先调查，再完成一个修改
 
@@ -104,46 +110,46 @@ claude
 
 ## 来源与版本说明
 
-核查日期：**2026-10-22**。[Claude Code官方README](https://github.com/anthropics/claude-code/blob/main/README.md) 支持原生、Homebrew、WinGet安装及npm弃用说明；[官方更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) 当时首项为**2.1.308**，支持本文涉及的命令、记忆控制、订阅用量及权限行为演进。这里记录仓库所见版本，不等于你的安装版本。平台与账号细节可继续查阅[官方安装文档](https://code.claude.com/docs/en/setup)和[费用文档](https://code.claude.com/docs/en/costs)。
+核查日期：**2026-10-27**。[官方安装文档](https://code.claude.com/docs/en/setup)支持原生安装器（含Windows PowerShell）、Homebrew与WinGet不自动更新、账号要求（免费claude.ai套餐不含Claude Code）和桌面应用入口；[Claude Code官方README](https://github.com/anthropics/claude-code/blob/main/README.md)支持npm安装已弃用；[命令参考](https://code.claude.com/docs/en/commands)支持本章列出的会话内命令。2026-10-22核查时，[官方更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)首项为**2.1.308**，支持记忆控制、订阅用量及权限行为的演进。这里记录的是文档和仓库所见版本，不等于你的安装版本。费用细节见[费用文档](https://code.claude.com/docs/en/costs)。
 
 ---
 
 ## 小测验
 
-1. **[基础·概念题]** 哪条安装建议符合核查到的官方README？ <!-- quiz: q01 revision: 1 -->
-   - A. npm是唯一入门方式
-   - B. 所有使用入口都不需要安装
-   - C. 选择列出的原生安装器或包管理器方式，npm安装已弃用
-   - D. 同时安装所有发行方式
-   > **答案C。** 官方推荐原生安装器，也列出Homebrew、WinGet等方式。选一种，并检查安装版本。
+1. **[基础·概念题]** 哪条安装建议符合核查到的官方文档？ <!-- quiz: q01 revision: 1 -->
+   - A. npm是官方首选，先装好Node.js再装最稳妥
+   - B. 用Homebrew或WinGet装好后，它会自己更新
+   - C. 选一种官方列出的方式，如原生安装器；npm已弃用
+   - D. 免费的claude.ai账号装好后，就能直接使用
+   > **答案C。** 官方推荐原生安装器，也列出Homebrew、WinGet等方式；README已把npm安装标为弃用（A）。Homebrew和WinGet默认不自动更新，要自己运行升级命令（B）。Claude Code需要Pro、Max、Team、Enterprise或Console账号，免费套餐不包含（D）。
 
 2. **[基础·概念题]** 什么适合写进`CLAUDE.md`？ <!-- quiz: q02 revision: 1 -->
-   - A. 核实过的项目约定和常用命令
-   - B. API密钥
-   - C. 所有历史会话的完整日志
-   - D. 以后不再受权限检查约束的假设
-   > **答案A。** 项目指引应简洁、准确、有用，不应存放密钥或无限授权。
+   - A. 核实过的项目约定、常用命令和限制
+   - B. API密钥，方便它每次直接调用服务
+   - C. 之前所有对话的完整记录，方便回忆
+   - D. 一句“以后不用再问我权限”的总授权
+   > **答案A。** 项目指引应简洁、准确、有用。密钥不能写进项目文件（B）；完整历史太长，反而淹没重点（C）；项目指引也不能代替权限控制或给出无限授权（D）。
 
 3. **[进阶·误区题]** 自动记忆保存了一个过时的测试命令，应怎样处理？ <!-- quiz: q03 revision: 1 -->
-   - A. 相信记忆，忽略当前仓库
-   - B. 立刻重新训练基础模型
-   - C. 删除项目
-   - D. 核实当前命令，并纠正保留的笔记
-   > **答案D。** 记忆是存储的上下文，会过时。它不是绝对可靠的事实来源，也不是模型权重变化。
+   - A. 以记忆为准，它是从以前的工作里总结出来的
+   - B. 说明模型权重改了，只能等新版本来修复
+   - C. 关掉全部记忆功能，以后都自己记命令
+   - D. 核实当前的命令，再纠正那条保存的笔记
+   > **答案D。** 记忆是产品保存的上下文笔记，会过时。它不是比当前仓库更可靠的事实来源（A），也不是模型权重的变化（B）。笔记可以查看和纠正，不必因为一条过时内容就关掉全部功能（C）。
 
 4. **[基础·情景题]** 开始长任务前，什么检查有助于避免费用意外？ <!-- quiz: q04 revision: 1 -->
-   - A. 只检查安装是否成功
-   - B. 检查当前账号、额度和已启用的付费附加项
-   - C. 假定订阅包含每一次API调用
-   - D. 让模型猜账单
-   > **答案B。** 订阅额度、API计费和可选附加项需要分开确认。实际账号和用量页面提供相关证据。
+   - A. 确认安装成功，能正常显示版本号就行
+   - B. 查看当前账号、套餐额度和已开启的付费项
+   - C. 只要是订阅用户，API调用就都已包含在内
+   - D. 把任务描述写短一点，费用就一定不会超
+   > **答案B。** 订阅额度、API计费和可选附加项要分开确认，当前账号和用量页面提供相关证据。安装成功（A）和费用无关；订阅不会自动替API密钥买单（C）；提示写短并不能保证用量，长任务里工具输出和后台工作也会消耗（D）。
 
 5. **[进阶·情景题]** 两个子智能体准备修改仓库，什么措施有用？ <!-- quiz: q05 revision: 1 -->
-   - A. 假定不同对话天然隔离文件
-   - B. 让它们无协调地重写同一批文件
-   - C. 分配不同文件责任或隔离工作树，并指定整合者
-   - D. 给它们不受限制的外部服务凭据
-   > **答案C。** 没有明确隔离时，并行工作者可能共享文件。范围、权限和整合仍需协调。
+   - A. 两个对话天然隔离，各改各的不会冲突
+   - B. 让它们同时改同一批文件，最后挑好的那版
+   - C. 分好各自负责的文件或工作树，指定整合者
+   - D. 给它们更大的权限，这样协作起来会更加顺畅
+   > **答案C。** 没有明确隔离时，并行工作者可能共享文件，不同对话不等于不同目录（A），同改一批文件会互相覆盖（B）。委派任务也不会扩大原任务的权限（D）；范围、权限和整合仍需协调。
 
 6. **[基础·操作题]** 写五条项目指引，其中区分一个核实过的命令、一项约定和一条数据处理限制；再与已有记忆对照。 <!-- quiz: q06 revision: 1 -->
    > **该观察到：** 项目指引表达应遵循的规则；记忆可能保存有用观察。但仓库变化时，两者都需要复查。

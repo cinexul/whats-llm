@@ -1,6 +1,6 @@
 Codex是OpenAI的编程智能体：它可以查看项目、修改文件、运行命令，也能协助审查改动。本章把第24章的“调查、计划、执行、检查”变成一次能实际完成的练习。
 
-以下示例于**2026-10-22**对照官方来源核查。你安装的版本和组织设置可能不同；先记录版本，再查看当前可用的命令。
+安装方式和套餐信息于**2026-10-27**、其余示例于**2026-10-22**对照官方来源核查。你安装的版本和组织设置可能不同；先记录版本，再查看当前可用的命令。
 
 ## 一、先选工作在哪里运行
 
@@ -13,21 +13,30 @@ Codex是OpenAI的编程智能体：它可以查看项目、修改文件、运行
 
 本地CLI**不等于** 模型离线运行：客户端仍可能把任务上下文发送到服务端。云端任务也不会自动拥有你电脑上的依赖、未提交文件和登录凭据。
 
-第一次用一个已有的小Git项目练习。先确认工作区干净；已有的未完成修改要另行保存，新建分支本身不是未提交文件的备份。
+第一次用一个已有的小Git项目练习（Git的安装和基本用法见第26章“Git最小起步”）。先确认工作区干净；已有的未完成修改要另行保存，新建分支本身不是未提交文件的备份。
 
 ## 二、安装、登录、查看会话
 
-如果已经装好Node.js和npm，官方仓库列出了这种安装方法：
+截至2026年10月，官方文档把独立安装器放在第一位，不需要先装Node.js。macOS或Linux：
 
 ```bash
-npm install -g @openai/codex
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+
+Windows的PowerShell：
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
+```
+
+这两条命令都会下载并执行安装脚本，请确认地址来自官方，并遵循组织的安装规定。已经在用Homebrew的话，也可以选`brew install --cask codex`；已经装好Node.js和npm的话，还可以用`npm install -g @openai/codex`。官方README另外提供各平台的二进制文件。选一种安装方式即可，装好后确认：
+
+```bash
 codex --version
 codex --help
 ```
 
-Mac上已经使用Homebrew的读者也可以选`brew install --cask codex`。选一种安装方式即可；官方README还提供原生安装器和各平台的二进制文件。
-
-进入已有项目，把示例路径换成自己的目录：
+进入已有项目，把示例路径换成自己的目录。下面的`git`命令需要先装好Git；项目还没交给Git管理的话，先按第26章存一个起点：
 
 ```bash
 cd /path/to/your/project
@@ -36,7 +45,7 @@ git switch -c practice/codex-first-task
 codex
 ```
 
-登录时，符合条件的账号可以选择**Sign in with ChatGPT**。官方README列出Plus、Pro、Business、Edu、Enterprise；实际能用什么、额度多少，以你的账号为准。API密钥是**另一条认证与计费路径**，不是所有Codex用户都必须准备的东西。不要把密钥贴进聊天框。
+第一次运行`codex`时，可以选择**Sign in with ChatGPT**。截至2026年10月，官方定价页写明ChatGPT的Free、Go、Plus、Pro、Business、Edu、Enterprise套餐都包含Codex，但各档额度差别很大，免费档的定位是试用和快速小任务；官方README推荐用Plus、Pro、Business、Edu或Enterprise套餐登录。实际能用什么、额度多少，以你的账号为准。API密钥是**另一条认证与计费路径**，不是所有Codex用户都必须准备的东西。不要把密钥贴进聊天框。
 
 进入交互式CLI后，`/status`显示会话配置和token用量，`/permissions`用于查看或选择允许的操作，`/diff`查看改动。输入`/`可以发现当前版本的命令。终端里的`codex --help`和会话里的`/`菜单不是同一个入口。
 
@@ -100,46 +109,46 @@ Codex支持用`AGENTS.md`保存项目指引，`/init`可以辅助创建。使用
 
 ## 来源与版本说明
 
-核查日期：**2026-10-22**。[Codex官方README](https://github.com/openai/codex/blob/main/README.md) 支持安装、产品形态与登录方式；[官方CLI命令源码](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs) 支持`/status`、`/permissions`、`/diff`、`/init`；[配置schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json) 支持审批和沙箱设置。这里记录的是仓库`main`分支的状态，不保证每个已安装版本都有所有命令。具体账号额度请查看 [Codex套餐帮助](https://help.openai.com/en/articles/11369540-codex-in-chatgpt) 和账号用量页面。
+核查日期：**2026-10-27**（安装与套餐）、**2026-10-22**（其余）。[Codex官方README](https://github.com/openai/codex/blob/main/README.md) 支持独立安装器、Homebrew、npm、二进制文件、产品形态与登录方式；[Codex CLI文档](https://learn.chatgpt.com/docs/codex/cli)支持独立安装器为首选；[Codex定价页](https://learn.chatgpt.com/docs/pricing)支持各ChatGPT套餐与API密钥的区别；[官方CLI命令源码](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs) 支持`/status`、`/permissions`、`/diff`、`/init`；[配置schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json) 支持审批和沙箱设置。这里记录的是仓库`main`分支的状态，不保证每个已安装版本都有所有命令。具体账号额度请查看定价页和账号用量页面。
 
 ---
 
 ## 小测验
 
 1. **[基础·概念题]** 下面哪句准确描述了Codex？ <!-- quiz: q01 revision: 1 -->
-   - A. 只能通过网页使用
-   - B. 它是OpenAI的编程智能体，有多种使用入口
-   - C. 只要使用CLI，模型就是离线运行
-   - D. 每个用户都必须提供API密钥
-   > **答案B。**CLI、编辑器扩展、应用和网页／云端入口可能使用不同执行环境。本地执行不等于模型离线推理。
+   - A. 它只能在网页里使用，没办法装到本地电脑
+   - B. OpenAI的编程智能体，有多种使用入口
+   - C. 用CLI时，模型就在你自己的电脑上离线运行
+   - D. 不管哪种套餐，都必须先准备一把API密钥
+   > **答案B。** CLI、编辑器扩展、桌面应用和网页／云端入口都有，可能使用不同的执行环境，所以A不对。本地运行CLI不等于模型离线推理，客户端仍会把任务上下文发给服务端（C）。用ChatGPT账号登录就能用，API密钥是另一条路径（D）。
 
 2. **[基础·情景题]** 你已有符合条件的ChatGPT套餐。购买API额度前，应该先做什么？ <!-- quiz: q02 revision: 1 -->
-   - A. 认定订阅绝不包含Codex
-   - B. 把密码贴进对话
-   - C. 检查ChatGPT登录方式和账号实际可用的额度
-   - D. 默认所有API使用都已包含
-   > **答案C。**ChatGPT登录和API认证是不同路径。先查当前账号及额度，再决定是否使用另行计费的API。
+   - A. 认定订阅不含Codex，直接买API额度最省事
+   - B. 认定订阅已经包含所有API调用，不用再查
+   - C. 先用ChatGPT登录，查清账号实际可用额度
+   - D. 先改用npm安装，只有它支持ChatGPT登录
+   > **答案C。** ChatGPT登录和API认证是不同路径。先查当前账号及额度，再决定是否使用另行计费的API。A、B都是没查就下结论；登录方式也和安装方式无关，独立安装器、Homebrew、npm装的都能用ChatGPT登录（D）。
 
 3. **[基础·概念题]** `AGENTS.md`提供什么？ <!-- quiz: q03 revision: 1 -->
-   - A. 可加载到上下文里的项目指引
-   - B. 无限用量
-   - C. 文件系统权限控制的替代品
-   - D. 对模型权重的永久修改
-   > **答案A。** 它让项目规矩显式可读，但不是计费机制，也不是安全边界。
+   - A. 会被加载进上下文的项目指引
+   - B. 一份限制文件访问的安全配置
+   - C. 写进去的规则会被训练进模型
+   - D. 让Codex百分百遵守每条规则
+   > **答案A。** 它让项目规矩显式可读，并在工作时被加载进上下文。真正限制文件访问的是沙箱和权限设置（B）；它不会改动模型权重（C）；加载进上下文的规则也不能保证每条都被遵守（D）。
 
 4. **[进阶·误区题]** “命令危险时，Codex必然先问我。”这句话漏了什么？ <!-- quiz: q04 revision: 1 -->
-   - A. 没漏，这有绝对保证
-   - B. 只看模型名称就够了
-   - C. Git会自动阻止外部操作
+   - A. 没漏什么，危险命令一定会先弹窗确认
+   - B. 漏了Git：Git会自动挡住所有外部操作
+   - C. 漏了模型：换更强的模型它就会先问你
    - D. 实际行为取决于沙箱、审批策略和已有权限
-   > **答案D。** 操作可能已经被允许、需要审批，也可能直接被阻止。要检查实际配置，不能依赖“每次必问”的假设。
+   > **答案D。** 操作可能已经被允许、需要审批，也可能直接被阻止，所以“每次必问”靠不住（A）。Git管的是记录过的文件，挡不住外部操作（B）；换模型也不会改变审批配置（C）。要检查实际配置，并且别打开跳过审批的选项（第26章）。
 
 5. **[基础·情景题]** 云端任务因为缺依赖而失败，下一步应该？ <!-- quiz: q05 revision: 1 -->
-   - A. 认定它能直接使用本机装好的包
-   - B. 查看环境初始化，在该环境安装项目文档规定的依赖
-   - C. 取消所有网络和文件限制
-   - D. 随机修改项目代码
-   > **答案B。** 云端环境是独立的。应根据仓库规定的包管理器和依赖文件修复初始化。
+   - A. 先在自己电脑上装好，云端会自动用上
+   - B. 查看环境初始化，在那个环境装好依赖
+   - C. 关掉网络和文件限制，让它自己去装好
+   - D. 让它改代码，绕开缺少的那个依赖包就行
+   > **答案B。** 云端环境是独立的，用不上你电脑里装的包（A）。应根据仓库规定的包管理器和依赖文件修复初始化。为此放开所有限制会扩大风险（C），绕开依赖则可能改坏功能（D）。
 
 6. **[基础·操作题]** 在小项目里请求一处README澄清，查看diff，并记录账号路径、权限和验证结果。 <!-- quiz: q06 revision: 1 -->
    > **该观察到：** 一次成功练习应有边界明确的改动和可见证据。你也应说清任务在哪里执行、使用谁的额度或账单。
