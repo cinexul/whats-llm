@@ -27,7 +27,7 @@ It hands you back a "polished" piece of text, but what exactly should it become?
 **Way two (spelled out):**
 
 ```text
-"Rewrite the notice below to about 100 characters, casual and warm in tone, for parents.
+"Rewrite the notice below to about 100 words, casual and warm in tone, for parents.
  Open with a greeting, and keep the two key details 'Friday 3 p.m.' and 'third-floor
  conference room.'
 
@@ -46,7 +46,7 @@ You don't need to memorize "spells," and there's no mysterious sentence pattern.
 | --- | --- | --- |
 | **Context** | What's going on? For whom? | "This is a notice for parents of elementary schoolers" |
 | **Task** | What exactly do you want it to do? | "Rewrite this notice" |
-| **Constraints** | What limits and requirements are there? | "About 100 characters, casual, warm, keep the time and place" |
+| **Constraints** | What limits and requirements are there? | "About 100 words, casual, warm, keep the time and place" |
 | **Format** | What kind of finished product do you want? | "Give me the whole rewritten text directly" / "List it as 3 points" / "Make a table" |
 | **Success criteria** | What counts as done well? | "Parents can understand it at a glance, reads naturally" |
 
@@ -69,14 +69,14 @@ A few constraint dimensions most worth spelling out, vague vs specific:
 
 | Dimension | Vague (it has to guess) | Specific (it follows) |
 | --- | --- | --- |
-| **Length** | "Shorter" | "Keep it under 200 characters" / "No more than 3 sentences" |
+| **Length** | "Shorter" | "Keep it under 200 words" / "No more than 3 sentences" |
 | **Audience** | "Make it easier to understand" | "Write it for an older relative with no technical background" |
 | **Tone** | "More formal" | "Written, restrained, no exclamation marks" |
 | **Angle / focus** | "Summarize this" | "Summarize only the parts about the 'refund policy'" |
 | **Keep / avoid** | (unsaid) | "Keep these three numbers" / "No jargon" |
 | **Format** | "Tidy this up" | "List it as 5 points with subheadings" / "Make a two-column table" |
 
-> **Key point:** Notice the counterintuitive bit: **spelling out constraints isn't "bossing it around," it's saving yourself work.** Every extra constraint you write is one fewer round of "no, redo it." Especially **length** and **format**, which most affect how the product looks yet are most often left out. A small habit: after writing the task, tack on "**give me XX characters, XX format**," and the hit rate jumps up a notch.
+> **Key point:** Notice the counterintuitive bit: **spelling out constraints isn't "bossing it around," it's saving yourself work.** Every extra constraint you write is one fewer round of "no, redo it." Especially **length** and **format**, which most affect how the product looks yet are most often left out. A small habit: after writing the task, tack on "**give me XX words, XX format**," and the hit rate jumps up a notch.
 
 ## 4. An "example" beats a long explanation
 
@@ -101,7 +101,7 @@ It immediately gets that you want the "[Title] [Time] [One line]" mold and fills
 
 ## 5. Spelling out is not writing long: find the balance
 
-Don't swing to the other extreme. "Spelling out" means **stating all the key information**, not **piling up filler**. A long, rambling prompt jammed with irrelevant background actually buries the point (think of that ever-fuller "desk" from Chapter 3).
+Don't swing to the other extreme. "Spelling out" means **stating all the key information**, not **piling up filler**. A long, rambling prompt jammed with irrelevant background actually buries the point (as Chapter 3 explained, irrelevant content can distract the model).
 
 To find this balance, remember three things:
 
@@ -127,7 +127,7 @@ To find this balance, remember three things:
 - Its biggest weak spot is **it can't read your mind**: what you don't spell out, it can only guess as "what most people usually want" (Chapter 4).
 - "Polish this for me" doesn't work because "how long, for whom, what tone, what format" never **became words**; write them out and the hit rate jumps.
 - The all-purpose framework, five blocks: **context, task, constraints, format, success criteria.** You don't have to write them all every time, but run through them in your head and you won't miss what matters.
-- The most often forgotten and most critical are **constraints** (length / audience / tone / focus) and **format**; after writing the task, tack on "give me XX characters, XX format."
+- The most often forgotten and most critical are **constraints** (length / audience / tone / focus) and **format**; after writing the task, tack on "give me XX words, XX format."
 - For style requirements, **give an example** to imitate, better than piling on adjectives; pair it with "regenerate" and an occasional re-roll (Chapter 4).
 - "Spelling out" is not "writing long": the standard is **all the key information, little filler**; for complex tasks, **say it step by step** (leading into Chapter 14).
 
@@ -140,39 +140,39 @@ In the next chapter we apply this craft to a high-frequency scenario: how to "fe
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
 1. **[Basic · Concept]** Why does "polish this for me" often not work? <!-- quiz: q01 revision: 1 -->
-   - A. It only understands a special command format
-   - B. The sentence is too short, not enough tokens
-   - C. The model doesn't recognize the word "polish"
-   - D. "Polish" has a concrete picture in your head (how long, what tone, for whom), but it never became text, so it can only guess
-   > **Answer: D.** It can't read your mind and can only continue based on what you wrote (Chapter 4). The default requirements behind "polish" went unsaid, so it guesses, and it guesses "what most people usually want," not necessarily what you want. C and A imagine it as a machine needing "spells / commands" (plain language is enough); B has nothing to do with character count.
+   - A. "Polish" is too casual; it only responds to formal, precise commands
+   - B. Your unstated length, tone, and audience leave it guessing
+   - C. The sentence is too short, so the model can't give it enough attention
+   - D. Polishing is a subjective judgment, which models are simply bad at
+   > **Answer: B.** It can only continue from what you actually wrote (Chapter 4). The unstated requirements behind "polish" get filled in with a guess at what most people usually want, which may not be what you want. A assumes it needs special commands; plain language works fine. C blames the length, but a short sentence can still be clear. D is wrong: polishing is one of its strengths. What's missing is your requirements.
 
 2. **[Basic · Concept]** Which five blocks make up the "all-purpose framework" in this chapter? <!-- quiz: q02 revision: 1 -->
    - A. Context, task, constraints, format, success criteria
-   - B. Title, body, conclusion, signature, date
-   - C. Subject, predicate, object, attribute, adverbial
-   - D. Who, when, where, why, how
-   > **Answer: A.** Context, task, constraints, format, success criteria. You don't have to write them all every time, but running through them in your head avoids missing what matters (especially the most-forgotten "constraints" and "format"). B is article structure, C is grammar, D is the news five Ws, none of them is this chapter's framework.
+   - B. Role, tone, length, layout, reference examples
+   - C. Goal, work steps, tools needed, deadline, owner
+   - D. Question, material, requirements, examples, regenerate
+   > **Answer: A.** Context, task, constraints, format, success criteria. You don't have to write them all every time, but running through them in your head keeps you from missing what matters, especially the often-forgotten "constraints" and "format." In B, tone and length are really part of "constraints," and examples are a separate trick from section 4. D mixes a few tips in with the framework. C is more like a project plan.
 
 3. **[Advanced · Misconception]** Someone says: "The more specific a prompt, the more it limits the AI's play, so you should be vague and let it run free." What's the problem here? <!-- quiz: q03 revision: 1 -->
-   - A. Specific prompts crash it
-   - B. For everyday tasks the more specific the constraints the less rework; "free play" only suits open tasks like brainstorming
-   - C. Completely correct, the vaguer the better
-   - D. Vague prompts use fewer tokens, so they're better
-   > **Answer: B.** Sort out the scenario: everyday tasks (rewriting, summarizing, drafting) want "right, and the version I wanted," and spelling out constraints saves rework; only open tasks (finding ideas, brainstorming) suit giving a rough direction and letting it run. Whoever makes this mistake misapplies the "open task" approach to all tasks. A is nonsense; D, the few tokens saved are nowhere near the waste of repeated rework.
+   - A. The idea is right; just regenerate a few times to make up for vagueness
+   - B. Specific constraints matter only for long texts; short asks can be vague
+   - C. The real problem is that specific prompts use more tokens and cost more
+   - D. For everyday tasks like rewriting and summarizing, specifics cut rework
+   > **Answer: D.** Everyday tasks want "right, and the version I wanted," so spelling out constraints saves rework. Only open tasks like brainstorming suit a rough direction and free rein. A relies on luck; regenerating helps after you've been clear. B is wrong: short asks still need length, audience, and format. C's few saved tokens are nothing next to the cost of repeated rework.
 
-4. **[Advanced · Misconception]** You want a certain layout style, you keep describing it in words, and it never feels right. Which judgment is correct? <!-- quiz: q04 revision: 1 -->
-   - A. Style is just something AI fundamentally can't do
-   - B. You have to write the prompt longer and more detailed
-   - C. Style requirements are the hardest to pin down in words; paste an example you're happy with for it to imitate, and it often clicks right away
-   - D. It means this model is no good, switch
-   > **Answer: C.** "Copy from a sample" is easier than "follow a description." When stuck on style, stop piling on adjectives and give one or two samples to imitate. D and A blame the model (it's really an expression problem); B points the wrong way, not longer, but switch to "give an example."
+4. **[Advanced · Misconception]** You want a certain layout style, you keep describing it in words, and it never feels right. Which approach is most likely to work? <!-- quiz: q04 revision: 1 -->
+   - A. Add more and finer adjectives until the description is precise enough
+   - B. Switch to a stronger model, since style depends on the model's ability
+   - C. Paste in a sample you're happy with and have it follow that sample
+   - D. Rewrite the whole prompt in another language the model handles better
+   > **Answer: C.** Copying a sample is easier than following a description, and style is the hardest thing to pin down in words, so one or two samples are the quickest fix. A keeps piling on adjectives, which is exactly why you're stuck. B and D blame the model or the language, when it's really a matter of how the request is expressed.
 
 5. **[Basic · Scenario]** You want the AI to rewrite a technical explanation for an older relative with no technical background. Which prompt is most likely to nail it in one pass? <!-- quiz: q05 revision: 1 -->
-   - A. "Make this better."
-   - B. "Fix this for me."
-   - C. "Rewrite this explanation as a single paragraph of about 150 characters, with no jargon, casual like chatting with an older relative, and use everyday examples for any concept they wouldn't get. Original: ..."
-   - D. "Polish, thanks."
-   > **Answer: C.** It spells out the audience (older relative), length (150 characters), constraints (no jargon, casual, use analogies), and format (a single paragraph), the most critical "constraints" and "format" are all there. B, A, and D leave the requirements in your head, so it can only guess and is doomed to back-and-forth rework.
+   - A. "Rewrite this technical explanation in a rigorous, expert tone, keep every term, and make it sound authoritative. Original: ..."
+   - B. "Make it one paragraph of about 150 words for an older relative, no jargon, with everyday comparisons for hard parts. Original: ..."
+   - C. "This explanation isn't great. Please really improve it and make it easier to read, smoother, and better organized. Original: ..."
+   - D. "You are a senior technical expert. Think carefully, then rewrite the explanation below and make it absolutely perfect. Original: ..."
+   > **Answer: B.** It spells out the audience (an older relative), length (about 150 words), constraints (no jargon, everyday comparisons), and format (one paragraph), so the critical "constraints" and "format" are both there. A gets the tone and audience backwards. C just says "polish" at greater length and still doesn't say how long or for whom. D leans on a role and "absolutely perfect" but gives none of the key constraints or format.
 
 6. **[Basic · Hands-on]** Take a vague instruction you'd normally fire off ("summarize this for me," "write a notice") and fill it out using "context, task, constraints, format, success criteria," especially adding **length, audience, tone, and the format you want**. Ask once with each version, before and after, and compare results. <!-- quiz: q06 revision: 1 -->
-   > **What you should notice:** The filled-out version usually has a clearly higher hit rate and clearly less back-and-forth, and the difference isn't that the model got smarter -- it's that you turned the requirements you'd taken for granted into text it can see. Compare them yourself once and you've got the craft of "spelling out" in your grip. Next time you're stuck, look back first: length, audience, tone, format, did I say those four?
+   > **What you should notice:** The filled-out version usually has a clearly higher hit rate and clearly less back-and-forth. The difference isn't that the model got smarter; it's that you turned the requirements you'd taken for granted into text it can see. Compare them yourself once and you've got the craft of spelling things out. Next time you're stuck, look back first: length, audience, tone, format, did I say those four?

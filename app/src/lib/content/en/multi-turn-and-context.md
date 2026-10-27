@@ -1,20 +1,12 @@
-You've probably had this experience: you talk through something with it, and the first few turns are fast and sharp, but the further you go the more "stubborn" it gets. It starts forgetting requirements you set earlier, contradicts itself, gets long-winded, even goes in circles. You can't help wondering: is it "tired"? Has it gotten dumber?
+You've probably had this experience: you talk through something with it, and the first few turns are fast and sharp, but the further you go the more "stubborn" it gets. It forgets requirements you set earlier, contradicts itself, gets long-winded, even goes in circles. Plenty of people grumble that it gets "dumber the longer you talk" and wonder whether it's tired.
 
-It's not tired, and it hasn't gotten dumber. This chapter turns Chapter 3's "**dumber the longer you talk**" into practice: why this happens, **when to decisively open a new conversation**, and how to get it to "remember" your **long-term preferences**. Learning to manage conversations is like installing a "stay sharp" switch on your AI — the most unglamorous yet most valuable basic skill for using it well.
+It doesn't get tired. Chapter 3 explained why long conversations can lose track of the point; this chapter is purely practical: how to organize conversations, **when to decisively open a new one**, and how to use product features to "remember" your **long-term preferences**. These habits look minor, but they're among the most valuable basics for using it well.
 
-## 1. Why it gets "dumber the longer you talk," back to that desk
+## 1. Why it seems to get "dumber the longer you talk": a quick recap
 
-Let me explain the cause fully with that "desk" from Chapter 3 first, so you know how to treat it.
+Chapter 3 laid out the causes with the "desk" metaphor and a table, so here are just the conclusions. On each turn, the model sees the context the product prepared for that request: the full history, or a version that has been selected, truncated, or summarized. The longer the conversation, the more likely the desk is to pick up **content unrelated to the current task, old drafts you rejected, and summaries that lost detail**.
 
-Remember? Each response depends on the context the product prepares for that request (Chapter 3). **The product may include the full history, or select, truncate, or summarize earlier content**; it does not always resend an unchanged transcript. Longer conversations can leave more clutter in context, while selection and summaries may lose details. Three problems can follow:
-
-| Symptom | Desk metaphor | What you see |
-| --- | --- | --- |
-| **Key points buried** | Material piles up on the desk, your original key requirement crushed at the bottom | It "can't see" the rules you set earlier and starts drifting |
-| **Contradictions piling up** | Old plans from trial and error, drafts you rejected, still spread on the desk | It gets dragged along by its own earlier mistakes, rehashing scrapped drafts, contradicting itself |
-| **Details compressed** | When the desk is nearly full, old content gets "squeezed into sticky notes," details lost | Specific numbers and agreements stated earlier get blurred or mixed up |
-
-> **Key point:** "Dumber the longer you talk" isn't its ability declining — it's that **the desk is stuffed with a long string of conversation and trial-and-error, and noise drowns out signal.** Understand this and the fix is obvious: **rather than keep digging through a messy desk, switch to a clean one.** That's the two core habits below.
+A full desk isn't bad in itself; useful content can help it answer more accurately. The trouble is that irrelevant and conflicting material can distract it, and the requirements you set at the start can get buried. So the fix is simple: rather than keep digging through a messy desk, switch to a clean one. The two habits below do exactly that.
 
 ## 2. Core habit one: one topic, one conversation
 
@@ -23,35 +15,33 @@ The most effortless rule: **one real thing, one dedicated conversation; once it'
 Many people are used to chatting in **one conversation** from morning to night: first a recipe, then switching to revising a resume, then having it explain a concept, then back to revising the resume. That's like piling totally unrelated material on one desk:
 
 ```text
-One conversation for everything:
-   [recipe] -> [revise resume] -> [explain relativity] -> [back to the resume]
-            -> [flight booking advice] ...
-   The desk gets messier -> it's distracted by unrelated content, the resume's
+❌ One conversation for everything:
+   [recipe] → [revise resume] → [explain relativity] → [back to the resume]
+            → [flight booking advice] ...
+   The desk gets messier → it's distracted by unrelated content, the resume's
    requirements long buried at the bottom
 
-One topic, one conversation:
+✅ One topic, one conversation:
    Conversation A: focus on the resume
    Conversation B: ask about recipes
    Conversation C: explain relativity
    Every desk is clean, and it stays "focused" each time
 ```
 
-> **How you'll actually run into this:** You'll find that **once topics get mixed, it cross-contaminates easily** — you just had it revise the resume "more formally," then you chat about something else, come back, and it may have forgotten "formal" or oddly picked up the tone of the chit-chat. Split unrelated things into separate conversations, one thing's material per desk, and its performance is far steadier. It also saves money: the cleaner the desk the faster and cheaper (Chapters 3 and 38).
+> **How you'll actually run into this:** Once topics get mixed, things bleed into each other. You just had it revise the resume "more formally," then you chat about something else, come back, and it may have forgotten "formal" or oddly picked up the tone of the chit-chat. Split unrelated things into separate conversations, one thing's material per desk, and its performance is far steadier. Shorter conversations are usually faster and use less of your quota too, though the actual cost depends on the product's caching and plan rules (Chapters 3 and 38).
 
 ## 3. Core habit two: spot these signals, open a new conversation
 
-So, while working through the same thing, **when should you decisively drop this conversation and reopen?** Remember these "time to switch desks" signals, and the moment you see any one, don't keep fighting:
+So, while working through the same thing, **when should you decisively drop this conversation and reopen?** If you see any one of these signals, don't keep fighting:
 
-| Signal | What it looks like | Why it's "desk is full" |
+| Signal | What it looks like | What's probably happening on the desk |
 | --- | --- | --- |
 | **It starts contradicting itself** | This turn doesn't line up with earlier ones; it's at odds with itself | Contradictory old content piled on the desk leads it astray |
-| **Repeatedly forgets requirements** | Rules you set (tone, length, format) it keeps ignoring, reminders don't help | Key requirements buried under new content at the desk's bottom |
+| **Repeatedly forgets requirements** | Rules you set (tone, length, format) it keeps ignoring, reminders don't help | Key requirements are buried under newer content |
 | **More and more long-winded / circular** | Answers getting longer, rambling, rehashing long-rejected plans | A long string of trial-and-error noise drowns the signal |
-| **Clear "amnesia"** | Specific info stated earlier it mixes up or drops | Old content pushed out of the window or compressed away |
+| **Clear "amnesia"** | Specific info stated earlier it mixes up or drops | Old content may have been trimmed, summarized, or buried |
 
-When you see these, **don't slug it out in the original conversation** (more reminders and corrections usually just add more paper to a full desk). The right move is:
-
-> **Open a new conversation and lay out "the information still needed" again, cleanly.**
+When you see these, **don't slug it out in the original conversation**: more reminders and corrections usually just add more paper to a full desk. The right move is to open a new conversation and lay out the information still needed again, cleanly.
 
 ```text
 The standard move when it's time to switch desks:
@@ -63,70 +53,76 @@ The standard move when it's time to switch desks:
      leave the scrapped drafts behind
 ```
 
-> **Key point:** The mistake beginners make most is treating "it got dumber" as "it broke," then frantically correcting it over and over in the **same** messy conversation — which only makes it messier. Remember: **limited context can cause this; it is not necessarily a bug** (Chapter 3). Switching to a clean desk is far faster and more accurate than fixing a messy one. The test is simple: when you feel "the cost of explaining is already higher than the cost of reopening," reopen.
+> **Key point:** The mistake beginners make most is correcting it over and over in the same messy conversation, which only makes things messier. The rule is simple: **try a fresh conversation first.** If the problem goes away in a clean new conversation, the long conversation was most likely the cause. If the same problem shows up again in the new conversation, that's when you check your settings (custom instructions, an old preference saved in memory) or report a bug to the product. There's an easy test for when to reopen, too: once explaining things again costs more than starting over, start over.
 
-## 4. How to get it to "remember" your long-term preferences, be sure to tell apart two layers
+## 4. How to get it to "remember" your long-term preferences
 
-By here you might ask: if I start fresh from a clean desk every time, what about the **long-term preferences I have to state every time** ("answer in Chinese," "more professional tone," "I work in education")? Do I have to repeat them in every new conversation?
+If you start fresh from a clean desk every time, what about the **long-term preferences you'd otherwise state every time** ("answer in English," "more professional tone," "I work in education")? Do you have to repeat them in every new conversation?
 
-This brings up the point this chapter most needs to make clear. Let me nail down that ironclad rule from Chapters 3 and 9 once more here.
+First, the rule that runs through this book: the model itself has no memory across conversations. In a new conversation it can only know what's put into the context this time, meaning what you say plus whatever the product brings in for you (Chapter 3).
 
-The model **itself** has no memory across conversations: unless the product supplies history, memory, or custom instructions in the current context, it does not automatically know your long-term preferences. You or the product must supply the relevant background.
+The product brings information in through product-layer features outside the model. As of October 2026, Claude, ChatGPT, and similar products offer roughly these kinds:
 
-But you've probably also seen products that can "remember" you, and this is exactly where the key distinction lies:
-
-> The model **itself** really has no memory across conversations; but **many products add a "memory" ability at the "product layer" outside the model**: things like **long-term memory, project memory, account-level preferences, a company knowledge base** (ones you'll run into include Claude's Projects, ChatGPT's Memory, project context files in coding tools, "personalization / custom instructions" settings in your account). But this **is not the model itself growing a memory; it's the product layer automatically stuffing this information back into this conversation's context each time** — back to that "desk" from Chapter 3: **when it "remembers," that's essentially the product spreading what should be remembered back onto the desk for you each time.** So seeing these features is no contradiction. Exactly how each one remembers, how long, whether it's on or off by default, and whether you can view or delete it — refer to the provider's official documentation.
-
-Telling these two layers apart beats memorizing any one product's buttons:
-
-| | The model itself | The product layer's "memory / preferences" |
+| Kind of feature | What it roughly does | What it suits |
 | --- | --- | --- |
-| Remembers your long-term preferences | **Does not store them itself**; needs them supplied in the current context | Saves your preferences for you |
-| How it does it | (n/a) | **Each conversation, automatically stuffs these preferences back into this context** (that desk from Chapter 3) |
-| The boundary of what it can "remember" | (n/a) | Always only **the part the product decides to put back on the desk**; what's not put back, it still doesn't know |
+| **Custom instructions / personal preferences** | You write a standing note once, and the product adds it to your conversations | Long-term preferences like language, tone, your role |
+| **Projects** | Keep a set of material and instructions together for every conversation in the project | One ongoing piece of work; separate things go in separate projects |
+| **Memory** | The product saves key points from your chats and puts them back in later conversations | Some products **extract memories from chats automatically**, and that may be on by default |
 
-Once you understand the mechanism, the usage follows: **preferences you want it to remember long-term, fill them into the product's "memory / project / custom instructions" feature**, so the product automatically spreads them back onto the desk for you each time you open a new conversation, and you don't have to repeat them. But know this in your gut:
+Names, scope, and defaults differ by product, so check the official documentation for details. When you use them, keep a few things in mind:
 
-> **Key point:** What it can "remember" is **always only the part the product stuffs back into context for you**; something you think it should remember but the product didn't put back this time, it just doesn't know. This also explains why it sometimes "inexplicably forgets" a preference you set: most likely that piece of information wasn't put back on the desk this time — **possibly because of settings, retrieval, or context selection; a fault cannot be ruled out just from forgetting.** Two more things to keep in mind: (1) the exact behavior of these features differs by vendor and keeps changing, so refer to the provider's official documentation; (2) since preferences get "re-fed into every conversation," **don't store sensitive information as a preference** (privacy in Chapter 37).
+- For preferences you want to stick, writing them into custom instructions or a project's instructions is more reliable than hoping it "remembers on its own."
+- For things you don't want remembered, use a temporary chat (some products call it incognito), or turn memory off before you start.
+- Every so often, look in the settings at what memories it has saved and delete anything outdated or wrong. In some products, deleting a chat doesn't delete the memories extracted from it, so remove those separately.
+- Don't save passwords, ID numbers, trade secrets, and the like as preferences (Chapter 37).
 
-## 5. A practical flow that ties it together
+> **Key point:** What it "remembers" is only what the product put back into the context this time. If a preference you set occasionally doesn't take, follow the same rule as in section 3: try a fresh conversation first; if it still doesn't work there, check your settings or report it to the product.
 
-Put this chapter and the last two together and you have a handy daily flow:
+## 5. A workflow that ties it together
+
+Put this chapter together with the previous two and you get a handy everyday workflow:
 
 ```text
-1) One real task -> open one dedicated conversation (habit one)
-2) State the requirements clearly in the first sentence (Chapter 11: context, task,
+1) One real task → open a dedicated conversation (habit one)
+2) State the requirements clearly in the first message (Chapter 11: context, task,
    constraints, format)
 3) Long material? Feed it in chunks, have it answer from the material only (Chapter 12)
-4) Back-and-forth polishing; the moment it contradicts itself / repeatedly forgets
-   requirements / gets long-winded -> open a new conversation and start over (habit two)
-5) Long-term preferences you need every time -> hand them to the product's "memory /
-   custom instructions" to remember (section 4; refer to the official docs)
+4) Refine back and forth; once it contradicts itself / keeps forgetting requirements /
+   gets long-winded → open a new conversation and restart (habit two)
+5) Long-term preferences needed every time → hand them to the product's custom
+   instructions, projects, or memory (section 4)
 ```
 
-> **How you'll actually run into this:** The most typical scene: you and it polish a draft back and forth, the first 10 turns getting better and better, and from turn 15 it starts ignoring new requirements and rehashing the wording you long rejected. Don't rush to blame it: open a new conversation, paste over "the version you're happiest with right now," and add "based on this version, only change XX," and it instantly sobers up. This move — **carry the good intermediate results to a clean desk and leave the scrapped drafts in the old conversation** — you'll use over and over.
+> **How you'll actually run into this:** Say you've been refining a draft with it back and forth, and eventually it starts ignoring new requirements and rehashing approaches you rejected long ago. Don't slug it out in the original conversation. Open a new one, paste in "the version you're happiest with so far," and add "building on this version, change only XX." Carrying good intermediate results to a clean desk and leaving scrapped drafts in the old conversation is a move you'll use again and again.
 
 ## 6. Common misconceptions, corrected
 
 | Common misconception | Reality |
 | --- | --- |
-| Getting "dumber the longer you talk" means it broke / got dumber | It's the **normal behavior** of limited context: key points buried, contradictions piling up, details compressed (Chapter 3) |
-| When it drifts, reminding it repeatedly in the original conversation will correct it | Adding more paper to a full desk usually makes it messier; you should **open a new conversation** and start clean |
-| Chatting about everything in one conversation is most convenient | Once topics mix it cross-contaminates; **one topic, one conversation**, one thing's material per desk |
-| Setting "memory / preferences" means the model itself remembers me | It's the **product layer** stuffing preferences back into context each time, not the model itself remembering; refer to the official docs |
-| It "forgot" a preference I set, so the product is broken | Most likely that information wasn't put back on the desk this time — settings, retrieval, or context selection may explain it, but check for faults too |
-| Long-term preferences can only be repeated manually each time | Save them in the product's "memory / project / custom instructions" feature and it re-feeds them for you each time (refer to the official docs) |
+| Getting "dumber the longer you talk" means it's tired or broken | Usually irrelevant or conflicting content in a long conversation is distracting it (Chapter 3); try a fresh conversation first, and if the problem persists there, check settings or report it |
+| If it drifts, repeated reminders in the original conversation will fix it | Adding paper to a full desk often makes it messier; **open a new conversation** and start clean |
+| Chatting about everything in one conversation is most convenient | Mixed topics bleed into each other; **one topic, one conversation**, one thing per desk |
+| Setting up "memory / preferences" means the model itself remembers me | The product layer puts saved information back into the context; the model itself doesn't remember |
+| Memory only saves what I explicitly ask it to remember | Some products extract memories from chats automatically, possibly on by default; use temporary chats for what you don't want remembered, and review and delete saved memories |
+| Long-term preferences can only be repeated by hand each time | Write them into custom instructions, a project, or memory, and the product will add them to your conversations (check the official documentation) |
 
 ## Summary
 
-- The root of "dumber the longer you talk": the longer the conversation, the fuller the desk — **key points buried, contradictions piling up, details compressed** (Chapter 3), not evidence that the model is tired; other faults may also need investigation.
-- Habit one: **one topic, one conversation**, don't pile unrelated things on one desk, or it cross-contaminates.
-- Habit two: when you see it **contradict itself, repeatedly forget requirements, get long-winded, clearly lose memory**, decisively **open a new conversation** and lay out the still-needed information again cleanly (using the Chapter 11 craft); carry the good intermediate results over, leave the scrapped drafts.
-- The judgment rule: when **the cost of explaining > the cost of reopening**, reopen; agonizing in a messy conversation usually just makes it messier.
-- Long-term preferences: the model **itself has no memory across conversations**; to have it "remember," use the **product layer's** "memory / project / custom instructions" — that's the product **stuffing preferences back into this context** each time, not the model itself remembering (refer to the official docs).
-- Two reminders: product memory means "what's not put back, it doesn't know" (also check settings and retrieval); **don't store sensitive information as a preference** (Chapter 37).
+- Getting "dumber the longer you talk" is usually irrelevant or conflicting content in a long conversation distracting it, with your earlier requirements buried (Chapter 3). It doesn't get tired.
+- Habit one: **one topic, one conversation**; don't pile unrelated things on one desk, or they'll bleed into each other.
+- Habit two: when you see it **contradicting itself, repeatedly forgetting requirements, getting long-winded, or showing clear amnesia**, decisively **open a new conversation** and lay out what's still needed cleanly, using the Chapter 11 craft; bring the good intermediate results, leave the scrapped drafts.
+- When something odd happens, try a fresh conversation first; if it reproduces there, check settings or report a bug. Once explaining costs more than reopening, reopen.
+- Long-term preferences: the model **itself has no memory across conversations**; to have it "remember," use the product layer's custom instructions, projects, or memory, which put information back into the context (check the official documentation).
+- Memory may be extracted automatically and on by default: use temporary chats or turn memory off for what you don't want remembered, review and delete saved memories now and then, and **don't save sensitive information as a preference** (Chapter 37).
 
-That wraps up Part Two's "conversation basics." In the next chapter we go a step further: how to take it from "one question, one answer" to **continuously pushing a task forward**, which is the AI workflow (Chapter 14).
+That completes the "conversation basics" of Part 2. In the next chapter we go a step further: how to move it from "one question, one answer" to **pushing a task forward continuously**, which is the AI workflow (Chapter 14).
+
+## Sources and verification
+
+- [Claude Help Center: memory](https://support.claude.com/en/articles/11817273) explains that memory is on by default for individual plans including Free, that Claude saves memory as you chat, that each project has its own memory, that incognito chats are kept out of memory, and that deleting a conversation doesn't remove memories generated from it.
+- [OpenAI Help Center: Memory FAQ](https://help.openai.com/en/articles/8590148-memory-faq) covers ChatGPT's saved memories and chat-history reference, that Temporary Chats neither use nor create memories, and how to turn memory off and delete it.
+
+Sources checked 2026-10-27. Product features change quickly; go by the latest version of each provider's official documentation.
 
 ---
 
@@ -135,39 +131,39 @@ That wraps up Part Two's "conversation basics." In the next chapter we go a step
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
 1. **[Basic · Concept]** What's the most accurate explanation for a conversation getting "dumber the longer you talk"? <!-- quiz: q01 revision: 1 -->
-   - A. It's caused by the network slowing down
-   - B. The model gets tired and its ability declines after talking a while
-   - C. It's deliberately giving you a half-hearted answer
-   - D. The longer the conversation, the fuller the desk (context), causing key points to be buried, contradictions to pile up, details to be compressed
-   > **Answer: D.** This is the normal behavior of limited context (Chapter 3), not evidence that the model is tired; other faults may also need investigation. The product prepares context for each request, possibly retaining, selecting, or summarizing earlier turns; clutter and lost details can affect the answer. B anthropomorphizes it (it doesn't "get tired"); C overthinks it (it has no intentions); A misses the question.
+   - A. The model tires after working so long, so answer quality slowly declines
+   - B. Irrelevant, conflicting content builds up in a long chat and distracts it
+   - C. The longer you chat, the more errors it learns into its parameters
+   - D. Longer chats slow the network, so it can't read everything in time
+   > **Answer: B.** As Chapter 3 explained, a full desk isn't bad in itself; the problem is that irrelevant or conflicting content distracts it, and requirements you set early can get buried or lose detail in a summary. A anthropomorphizes it; the model doesn't get "tired." C confuses context with training; ordinary chatting doesn't change the model's parameters. D blames the network, which misses the point.
 
-2. **[Basic · Concept]** Which is a typical signal that "it's time to open a new conversation"? <!-- quiz: q02 revision: 1 -->
-   - A. It answered very well the first time
-   - B. It starts contradicting itself, repeatedly ignoring requirements you set, getting long-winded and circular
-   - C. You just opened the chat box
-   - D. It answers very concisely
-   > **Answer: B.** Contradicting itself, repeatedly forgetting requirements, and getting more and more long-winded are all signals that "the desk is full and noise drowns the signal" — see them and switch to a clean desk. A, C, and D are exactly when it's in good shape or just starting, with no need to reopen.
+2. **[Basic · Concept]** Which of these is a typical signal that it's time to open a new conversation? <!-- quiz: q02 revision: 1 -->
+   - A. This answer is shorter than the last one and the tone is more concise
+   - B. You've already asked five or six related questions in this conversation
+   - C. It contradicts itself, ignores your rules, and rehashes old drafts
+   - D. It quoted, word for word, something you said several turns earlier
+   > **Answer: C.** Contradicting itself, repeatedly ignoring requirements, and rehashing rejected drafts mean the noise on the desk is drowning out the signal, so it's time for a clean desk. A is just a change in style and not necessarily a problem. B: the number of turns isn't a signal in itself, and related follow-ups often work better in the same conversation. D shows it still has the earlier content, which is good.
 
-3. **[Advanced · Misconception]** "When it starts drifting and forgetting my requirements, I just remind and correct it over and over in this conversation, and I can always pull it back." What's the problem? <!-- quiz: q03 revision: 1 -->
-   - A. You should turn the temperature up and try again
-   - B. Its drifting means the model is broken and should be sent for repair
-   - C. Correcting it over and over on an already-full desk is usually "adding more paper to a full desk," making it messier; more effective is to **open a new conversation** and start clean
-   - D. No problem, just remind it a few more times
-   > **Answer: C.** The root of drifting is the desk being too full (Chapter 3), and adding more content to the original conversation only fills it more. The right move is to open a new conversation and lay out the still-needed information again. People who make this mistake take "context is full" for "it didn't understand, so just say it again." B treats normal behavior as a fault; A is completely unrelated (higher temperature only makes it more unmoored, Chapter 8).
+3. **[Advanced · Misconception]** "When it drifts and forgets my requirements, I'll just keep reminding and correcting it in this conversation, and eventually it'll come back." What's the problem? <!-- quiz: q03 revision: 1 -->
+   - A. Correcting a messy chat often makes it worse; a fresh conversation works better
+   - B. That's right; bold the requirements and repeat them, and it will comply in the end
+   - C. Drifting means the model is broken, so reset all its memory in settings at once
+   - D. Lower the temperature first, so its answers in the same chat become more stable
+   > **Answer: A.** The drift comes from irrelevant and conflicting content piled on the desk, and adding more to the same conversation only makes it messier; open a new conversation and lay out what's still needed cleanly. C jumps ahead: the right order is to try a fresh conversation first, and only if the problem reproduces there, check settings or report it. B assumes emphasis is enough, but volume isn't the issue. D has little to do with this; temperature controls randomness (Chapter 8).
 
-4. **[Advanced · Misconception]** "I set up 'memory' in a product and it can remember my preferences, which means the model itself has memory across conversations." What's off? <!-- quiz: q04 revision: 1 -->
-   - A. It means your preferences were permanently written into the model's parameters
-   - B. Completely correct, the model itself remembers you
-   - C. That's the **product layer** automatically stuffing preferences back into this conversation's context each time, not the model itself growing a memory; what it can remember is only the part the product puts back
-   - D. It means this model is more advanced than others
-   > **Answer: C.** The key is telling apart two layers: the model itself has no memory across conversations, and "memory / preferences" is the product layer re-feeding information into context each time (that desk from Chapter 3). So what it "remembers" is always the part the product decides to put back; what's not put back, it doesn't know (which may explain occasional “forgotten” preferences, though settings or faults may also need investigation). For the exact behavior, refer to the official docs. A is a deeper misconception: product-layer memory doesn't alter the model's parameters.
+4. **[Advanced · Misconception]** "I turned on 'memory' in some product and it remembers my preferences, so the model itself must have memory across conversations." What's wrong? <!-- quiz: q04 revision: 1 -->
+   - A. Your preferences were written into the model's parameters, so any product knows them
+   - B. Memory saves only what you explicitly ask it to remember and nothing else
+   - C. That's basically right, but this memory only really works on paid plans
+   - D. The product layer puts saved information back; the model itself has no memory
+   > **Answer: D.** The model itself has no memory across conversations; "memory" is the product layer putting saved information back into the context of later conversations (Chapter 3). A mixes up a product feature with training. B is wrong: some products extract memories from chats automatically, possibly on by default, which is why you should review and delete them. C also mistakes a product feature for a model ability; check each provider's official documentation for plans and defaults.
 
-5. **[Basic · Scenario]** You and the AI are polishing a draft back and forth, it goes well early on, then later it starts ignoring new requirements and rehashing wording you rejected. What's the best move? <!-- quiz: q05 revision: 1 -->
-   - A. Open a new conversation, paste over "the version you're happiest with right now," add "based on this version only change XX," and don't carry the scrapped drafts
-   - B. Turn off the computer and chat again after a while
-   - C. Delete the whole conversation and rewrite the draft from scratch
-   - D. Repeat the requirements five more times in the original conversation
-   > **Answer: A.** This is the chapter's signature move: carry the good intermediate results to a clean desk, leave the scrapped drafts in the old conversation. D is "adding more paper to a full desk" (makes it messier); C is too wasteful (you lose the good version too); B is useless (it doesn't "rest and recover," the problem is the desk being too full, not it being tired).
+5. **[Basic · Scenario]** You've been refining a draft with the AI. It went well at first, but now it ignores new requirements and rehashes approaches you rejected. What's the best move? <!-- quiz: q05 revision: 1 -->
+   - A. List every requirement again in the same chat and demand it follow them strictly
+   - B. Turn on memory so it remembers the requirements, then keep editing in that chat
+   - C. Open a new chat, paste your best version, say what to change, leave old drafts
+   - D. Delete the whole conversation, switch models, and rewrite the draft from scratch
+   > **Answer: C.** This is the chapter's signature move: carry the good intermediate result to a clean desk and leave the scrapped drafts in the old conversation. A is still adding paper to a full desk. B doesn't fix the distraction in the current conversation, and one-off requirements like these don't belong in long-term memory anyway. D is wasteful and throws away the good version too.
 
-6. **[Basic · Hands-on]** If the product you usually use offers "memory / custom instructions / project" features, go fill in a long-term preference you state every time (such as "answer in Chinese, professional tone, I work in education") (**for the exact location and behavior, refer to the official docs**). Then open two or three brand-new conversations and observe whether it "knows" this preference from the start. At the same time, think about: which information **shouldn't** be stored this way long-term? <!-- quiz: q06 revision: 1 -->
-   > **What you should notice:** Once filled in, new conversations often follow this preference from the start, but this isn't "the model remembering you" — it's **the product spreading this preference back into this conversation's context for you each time** (that desk from Chapter 3). So what it can "remember" is always only the part the product puts back. Also be careful: since preferences get re-fed into every conversation, **sensitive information (passwords, ID numbers, trade secrets) should never be stored as a preference** (Chapter 37). Features differ by vendor and keep changing, so refer to the official docs.
+6. **[Basic · Hands-on]** If a product you use offers custom instructions, projects, or memory, enter one long-term preference you always have to state (such as "answer in English, professional tone, I work in education"); check the official documentation for where and how. Then open two or three brand-new conversations and see whether it "knows" this preference from the start. Also open the memory management page to see whether it has saved anything else automatically, and think about which information **shouldn't** be stored long-term this way. <!-- quiz: q06 revision: 1 -->
+   > **What you should notice:** Once it's set, new conversations usually follow the preference from the start. That isn't the model remembering you; the product put the preference back into this conversation's context (Chapter 3). On the memory page you may also find things it saved on its own that you never asked it to remember; delete what you don't want. And since this information gets carried into conversation after conversation, **sensitive information (passwords, ID numbers, trade secrets) should never be saved as a preference** (Chapter 37). Features differ by product and keep changing, so check the official documentation.

@@ -31,10 +31,10 @@ You have it translate a document with technical terms, and it very likely render
 **What to do**: **fix the terms first, write them into the instruction.**
 
 ```text
-Please translate the following English text into Simplified Chinese.
+Please translate the following English document into Spanish.
 Use these agreed translations consistently throughout:
-- "context window" -> "上下文窗口" (the Chinese term for context window)
-- the surname "Smith" -> "史密斯" (a Chinese transliteration of the name)
+- "context window" → "ventana de contexto"
+- the name "Smith" → keep as "Smith" (don't translate or adapt it)
 After translating, check: do any of these terms appear with a different rendering anywhere?
 ```
 
@@ -87,7 +87,7 @@ Why does this work?
 
 - **Revising an outline is far cheaper than revising a draft.** A wrong point you spot immediately and fix in a sentence; once it's written into a long flowing piece, the error hides between the lines, slow and tiring to find.
 - **You hold the helm on direction.** The points are the skeleton; once you sign off on the skeleton, the flesh it grows on top won't drift off to another topic.
-- **It also answers more accurately.** Doing one thing at a time (structure first, then content) is steadier in quality than "thinking and writing at once, charging to the end" — the same principle as Chapter 14's "see the plan before executing."
+- **It also answers more accurately.** Doing one thing at a time (structure first, then content) is steadier in quality than "thinking and writing at once, charging to the end" — the same principle as Chapter 14's "see the plan before acting."
 
 > **Key point:** "List points first, then write" works for almost all writing and organizing work: emails, reports, proposals, summaries. It splits a one-shot "bet it all" into two steps, "agree on the skeleton first, then fill in content," letting you set the direction right at the **cheapest stage** (before it's written). Build this habit and your output gets visibly steadier.
 
@@ -117,7 +117,7 @@ A few last running reminders, all to hold the line of "judgment and responsibili
 
 - The master switch for using AI at work: **tell apart the "outsource" and "backstop" columns** — the left is labor and expression, the right is judgment and responsibility. It does the work for you, but it can't be responsible for you.
 - The three most common pitfalls: **inconsistent translation terminology** (fix the terms first), **table numbers / units quietly changed** (it's not a calculator, check yourself), and **email tone wrong for the occasion** (feed it the relationship and occasion, read it yourself before sending).
-- The habit most worth building: **have it list points first, you set the direction, then write** — revising an outline is cheaper than revising a draft, and the output steadies instantly (same as Chapter 14's "plan first, then execute").
+- The habit most worth building: **have it list points first, you set the direction, then write** — revising an outline is cheaper than revising a draft, and the output steadies instantly (same as Chapter 14's "plan first, then act").
 - Running backstop: check each number, read it yourself before sending out, don't paste sensitive information carelessly (Chapter 37), don't let it make the call, and remember its "facts" still need verifying against the original source (Chapter 9).
 
 That brings Part Two, "Putting large models to use," to a close. You can now use AI steadily in daily life, learning, and work. In the next part, we switch perspective and look at the "tool map" behind the names Claude, ChatGPT, API, and Agent.
@@ -129,39 +129,39 @@ That brings Part Two, "Putting large models to use," to a close. You can now use
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
 1. **[Basic · Concept]** By this chapter's "two-column method," which of these belongs in the "must backstop yourself" column? <!-- quiz: q01 revision: 1 -->
-   - A. Rephrasing a passage more formally
-   - B. Expanding a few points into a smooth paragraph
-   - C. Generating a summary for a long article
-   - D. Deciding whether this finished email should be sent, and whether the recipient is appropriate
-   > **Answer: D.** "Whether to send, to whom, whether it's appropriate" is judgment and responsibility — only you can decide. B, A, and C are all "labor and expression," safe to outsource. The test for the split is: is this thing **doing the work**, or **making the call and taking responsibility**?
+   - A. Rewriting a passage in a more formal, written style
+   - B. Deciding whether this email should go out, and to whom
+   - C. Expanding a few scattered points into a smooth paragraph
+   - D. Condensing a long report into a one-page summary
+   > **Answer: B.** Whether to send and to whom is judgment and responsibility, which only you can decide. A, C, and D are "labor and expression," safe to outsource (though you still look over the draft). The test for the split: is this doing the work, or making the call and taking responsibility?
 
 2. **[Basic · Concept]** Why are numbers and units especially prone to problems when AI organizes a table? <!-- quiz: q02 revision: 1 -->
-   - A. Because the table is too big for it to store
-   - B. Because it hates numbers
-   - C. Because unit conversion is too hard
-   - D. Because generating text does not guarantee that the original numbers, units, and dates are preserved
-   > **Answer: D.** Its real job is to "continue with the most plausible next passage" (Chapter 4), and it doesn't guarantee numbers stay untouched, so it writes numbers wrong and quietly swaps units. A, B, and C aren't the real reason. Remember one line: **it's not a calculator.**
+   - A. It generates text, numbers included, and doesn't guarantee they stay put
+   - B. When a table overflows the context, the numbers get rounded automatically
+   - C. Models are more used to metric, so they tend to convert miles to kilometers
+   - D. It recalculates every number each time, and errors creep in along the way
+   > **Answer: A.** Its job is to produce the most fitting continuation (Chapter 4); unlike a calculator, it doesn't guarantee that values stay unchanged, so it may write a number wrong or quietly swap a unit. B ties context to rounding, but there's no such mechanism. C overgeneralizes; a swapped unit is just one way things go wrong. D pictures it as a calculator, when most of the time it isn't "calculating" at all.
 
 3. **[Advanced · Misconception]** "This table AI organized for me is beautifully laid out and looks professional, the data should be fine." What's dangerous about this thought? <!-- quiz: q03 revision: 1 -->
-   - A. The danger is the layout isn't beautiful enough
-   - B. No danger, good layout means good data
-   - C. Good layout and correct data are two different things; pretty actually makes you let your guard down, more likely to miss a number that got changed wrong
-   - D. The danger is it used a table instead of text
-   > **Answer: C.** "Good-looking" is format; whether the numbers are right is another matter. A beautiful table with one wrong number burns you worse than an ugly one, because pretty drops your guard. Whoever makes this mistake is often fooled by the professional appearance and skips checking against the original data.
+   - A. A polished layout means it worked harder, which makes number errors likelier
+   - B. Just have it add "data verified" at the end, and you can use it directly
+   - C. The only risk is layout; it may break when exported to spreadsheet software
+   - D. Layout and correct numbers are separate; polish lowers your guard
+   > **Answer: D.** "Looks good" is formatting; "are the numbers right" is another matter. A polished table with one wrong number is worse than an ugly one, because the polish disarms you. A invents a causal link that doesn't exist. B has it declare the data verified, which isn't the same as verifying it. C worries about formatting, but the real risk is in the data.
 
 4. **[Advanced · Misconception]** You have AI translate a technical document, and it renders the same term two different ways back and forth. What's the most fundamental reason? <!-- quiz: q04 revision: 1 -->
-   - A. It translates section by section, with no stable glossary in mind keeping "this term must be called this throughout"
-   - B. It deliberately creates variation to make the translation livelier
-   - C. It doesn't recognize the term
-   - D. It cut corners
-   > **Answer: A.** This is a direct consequence of its "continue section by section" nature: it won't automatically maintain whole-document consistency of terms. The fix is to fix the terms first, write them into the instruction, and have it self-check after translating. D and B anthropomorphize it; C is also wrong — it "recognizes" the term, it just didn't lock the rendering in place.
+   - A. It varies the wording on purpose to make the translation livelier
+   - B. It doesn't know the term, so it guesses a new rendering each time
+   - C. It translates bit by bit, with no fixed glossary held in mind
+   - D. The text overflowed the window, so another model did the second half
+   > **Answer: C.** This follows directly from its section-by-section nature: it doesn't automatically keep terms consistent across the whole text. The fix is to fix the terms first, write them into the instruction, and have it check after translating. A anthropomorphizes it. B is wrong: it "knows" the term but hasn't fixed a rendering. D is an imagined mechanism.
 
 5. **[Basic · Scenario]** You need to write a reply to an important client who just complained about your service, and it really was your side's mistake. When drafting with AI, what should you most do? <!-- quiz: q05 revision: 1 -->
-   - A. Just say "write me a reply email to a client" and send it once it's done
-   - B. Spell out the relationship and occasion (important client, our fault, need a sincere apology and a remedy), and read the tone yourself before sending
-   - C. Have it write as official as possible, the longer the more sincere
-   - D. Have it decide for you whether to compensate the client
-   > **Answer: B.** Tone depends on background only you know (relationship, responsibility, sensitivity), so feed it the occasion, and before anything goes out you must read it to check. A doesn't give the occasion, so the tone is most likely off; C mistakes "long and official" for sincerity; D hands the judgment / responsibility of "whether to compensate" to it — that's yours to call.
+   - A. Have it make the reply as formal and long as possible to show sincerity
+   - B. Explain the relationship and situation, and read it before sending
+   - C. First have it decide whether to compensate, then draft by its conclusion
+   - D. Have it follow a generic customer-service apology template and send it
+   > **Answer: B.** Tone depends on background only you know (the relationship, who's at fault, how sensitive it is), so feed it the situation and read the draft yourself before sending. A mistakes "long and official" for sincerity. C hands the compensation decision to it, which is yours to make. D's generic template will most likely miss the tone and the nuance.
 
 6. **[Basic · Hands-on]** Pick something you write often (weekly report, notice, external email all work) and do it with the "two-step method": step one, have AI **list which blocks of points to cover, no writing yet**, and you scan it and add, cut, adjust; step two, have it **write it up by the settled points.** Compare: how does this differ from "having it produce a finished product right away" in terms of "how much you change"? <!-- quiz: q06 revision: 1 -->
-   > **What you should notice:** When listing points first, if the direction's wrong you can correct it in one sentence (revising an outline is cheap); once the skeleton is settled and then written up, the draft that comes out is already pointed right and you hardly need big changes. A "one step to the finish" product, by contrast, hides errors throughout the whole piece, slow and tiring to find. Try the comparison yourself and you'll see why "list points first, then write" works for almost all writing work — it's the same principle as Chapter 14's "see the plan before executing."
+   > **What you should notice:** When listing points first, if the direction's wrong you can correct it in one sentence (revising an outline is cheap); once the skeleton is settled and then written up, the draft that comes out is already pointed right and you hardly need big changes. A "one step to the finish" product, by contrast, hides errors throughout the whole piece, slow and tiring to find. Try the comparison yourself and you'll see why "list points first, then write" works for almost all writing work; it's the same principle as Chapter 14's "see the plan before acting."
