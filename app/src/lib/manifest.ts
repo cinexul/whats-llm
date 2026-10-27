@@ -13,7 +13,7 @@ export interface Part {
 	chapters: Chapter[];
 }
 
-// 対応言語。zh = 中文版《What's LLM》, ja = 日本語版《What's LLM》
+// 対応言語。zh = 中文版、ja = 日本語版、en = 英語版
 export type Lang = 'zh' | 'ja' | 'en';
 
 export const languages: { code: Lang; label: string }[] = [

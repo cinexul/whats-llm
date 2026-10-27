@@ -3,6 +3,7 @@
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
 	import { lang } from '$lib/lang';
+	import { ui } from '$lib/ui';
 	import { LEARNING_PATHS_KEY, learningPaths, learningPathStore, pathProgress, type LearningPathId } from '$lib/learning-paths';
 	import { learningPathUi } from '$lib/learning-paths-ui';
 
@@ -30,7 +31,7 @@
 	});
 
 	$effect(() => {
-		// 切换到其他学习路径后，不沿用此前的确认状态。
+		// 切换到其他学习路线后，不沿用此前的确认状态。
 		if (resetFor && selected?.id !== resetFor) resetFor = null;
 	});
 
@@ -56,11 +57,11 @@
 	}
 </script>
 
-<svelte:head><title>{t.title} · What's LLM</title><meta name="description" content={t.intro} /></svelte:head>
+<svelte:head><title>{t.title} | {ui[$lang].appTitle}</title><meta name="description" content={t.intro} /></svelte:head>
 
 <div class="learning-page">
 	<header class="page-heading">
-		<p class="eyebrow">What's LLM</p>
+		<p class="eyebrow">{ui[$lang].appTitle}</p>
 		<h1>{t.title}</h1>
 		<p>{t.intro}</p>
 	</header>

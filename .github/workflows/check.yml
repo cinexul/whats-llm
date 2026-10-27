@@ -35,5 +35,5 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: app/src-tauri
-      - run: cargo test --locked -p search-core -p study-core
+      - run: cargo test --locked -p study-core
         working-directory: app/src-tauri

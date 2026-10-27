@@ -18,7 +18,7 @@ try {
 } finally { Pop-Location }
 
 $config = Get-Content app/src-tauri/tauri.conf.json -Raw | ConvertFrom-Json
-$name = "Whats.LLM_$($config.version)_x64-setup.exe"
+$name = "LLM.Learning.Book_$($config.version)_x64-setup.exe"
 $source = @(Get-ChildItem 'app/src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis' -Filter '*-setup.exe' -File)
 if ($source.Count -ne 1) { throw 'Expected exactly one NSIS installer.' }
 $dist = Join-Path $env:RUNNER_TEMP 'installer-dist'

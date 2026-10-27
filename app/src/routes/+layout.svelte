@@ -28,7 +28,6 @@
 		dueCount
 	} from '$lib/study';
 	import { fullTextSearch, ensureIndex, type SearchHit } from '$lib/search';
-	import { semanticSearch, type SemanticHit } from '$lib/semantic';
 
 	let { children } = $props();
 	onMount(() => {
@@ -112,9 +111,33 @@
 		loaded = true;
 	});
 
+	// 没手动选过主题时跟随系统的深浅色设置
+	function savedTheme() {
+		try {
+			const value = localStorage.getItem('theme');
+			return value === 'dark' || value === 'light' ? value : null;
+		} catch { return null; }
+	}
+
+	function systemTheme() {
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	}
+
+	function chooseTheme(next: 'light' | 'dark') {
+		theme = next;
+		try { localStorage.setItem('theme', next); } catch { /* 本次会话的偏好设置仍然生效。 */ }
+	}
+
+	$effect(() => {
+		const media = window.matchMedia('(prefers-color-scheme: dark)');
+		const follow = () => { if (!savedTheme()) theme = systemTheme(); };
+		media.addEventListener('change', follow);
+		return () => media.removeEventListener('change', follow);
+	});
+
 	function loadPreferences() {
 		try {
-			theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+			theme = savedTheme() ?? systemTheme();
 			const saved = JSON.parse(localStorage.getItem('font-scales') ?? '{}');
 			const scale = (key: string) => Number.isFinite(saved?.[key]) ? Math.min(1.5, Math.max(.8, saved[key])) : 1;
 			scales = { nav: scale('nav'), heading: scale('heading'), body: scale('body') };
@@ -140,7 +163,6 @@
 	$effect(() => {
 		if (!browser || !loaded) return;
 		document.documentElement.dataset.theme = theme;
-		try { localStorage.setItem('theme', theme); } catch { /* 本次会话的偏好设置仍然生效。 */ }
 	});
 
 	$effect(() => {
@@ -170,10 +192,8 @@
 	}
 
 	let hits: SearchHit[] = $state([]);
-	let semHits: SemanticHit[] = $state([]);
 
-	// 入力に応じて全文検索(キーワード一致)と意味検索を実行する。
-	// 全文索引は初回検索時に構築。意味検索はモデル推論が走るので軽くデバウンスする。
+	// 入力に応じて全文検索(キーワード一致)を実行する。全文索引は初回検索時に構築。
 	// 言語が変わったら、その言語で検索し直す。
 	$effect(() => {
 		const q = query;
@@ -182,14 +202,8 @@
 		fullTextSearch(l, q).then((r) => {
 			if (alive) hits = r;
 		});
-		const timer = setTimeout(() => {
-			semanticSearch(l, q).then((r) => {
-				if (alive) semHits = r;
-			});
-		}, 200);
 		return () => {
 			alive = false;
-			clearTimeout(timer);
 		};
 	});
 
@@ -201,7 +215,6 @@
 		settingsOpen = false;
 		query = '';
 		hits = [];
-		semHits = [];
 		void ensureIndex($lang); // 本文索引を先読みしておく
 		setTimeout(() => searchInput?.focus(), 0);
 	}
@@ -287,7 +300,7 @@
 	<link rel="manifest" href="{base}/manifest.webmanifest" />
 	<link rel="apple-touch-icon" href="{base}/icons/apple-touch-icon.png" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-title" content="What's LLM" />
+	<meta name="apple-mobile-web-app-title" content="LLM Book" />
 	<meta name="theme-color" content={theme === 'dark' ? '#1f1e1b' : '#faf9f5'} />
 </svelte:head>
 
@@ -296,7 +309,7 @@
 <div class="shell" inert={searchOpen}>
 	<header class="topbar">
 		<a class="brand" href="{base}/">
-			<span class="brand-logo"><img src={logo} alt="What's LLM" /></span>
+			<span class="brand-logo"><img src={logo} alt="" /></span>
 			{t.appTitle}
 		</a>
 		<div class="topbar-right">
@@ -360,8 +373,8 @@
 		</div>
 		<p class="set-label">{t.theme}</p>
 		<div class="seg">
-			<button class:active={theme === 'light'} onclick={() => (theme = 'light')}>{t.themeLight}</button>
-			<button class:active={theme === 'dark'} onclick={() => (theme = 'dark')}>{t.themeDark}</button>
+			<button class:active={theme === 'light'} onclick={() => chooseTheme('light')}>{t.themeLight}</button>
+			<button class:active={theme === 'dark'} onclick={() => chooseTheme('dark')}>{t.themeDark}</button>
 		</div>
 
 		<p class="set-label">{t.fontSize}</p>
@@ -406,31 +419,12 @@
 				aria-label={t.search}
 				onkeydown={(e) => {
 					if (e.key !== 'Enter') return;
-					if (semHits.length > 0) go(semHits[0].slug, semHits[0].anchor);
-					else if (hits.length > 0) go(hits[0].slug);
+					if (hits.length > 0) go(hits[0].slug);
 				}}
 			/>
 			<button class="icon-btn" onclick={closeSearch} aria-label={t.close}><Icon name="close" /></button>
 			</div>
 			<div class="search-results">
-				{#if semHits.length > 0}
-					<p class="search-section-label">{t.searchSemantic}</p>
-					<ul class="search-hits">
-						{#each semHits as hit (hit.slug + '#' + hit.anchor)}
-							<li>
-								<button onclick={() => go(hit.slug, hit.anchor)}>
-									<span class="hit-title"
-										>{hit.title}{#if hit.heading}<span class="hit-heading">
-												· {hit.heading}</span
-											>{/if}</span
-									>
-									<span class="hit-snippet">{hit.snippet}</span>
-								</button>
-							</li>
-						{/each}
-					</ul>
-					<p class="search-section-label">{t.searchFulltext}</p>
-				{/if}
 				<ul class="search-hits">
 					{#each hits as hit (hit.slug)}
 						<li>
@@ -778,23 +772,10 @@
 		overflow-y: auto;
 	}
 
-	.search-section-label {
-		font-size: 0.72rem;
-		letter-spacing: 0.04em;
-		color: var(--text-faint);
-		margin: 0;
-		padding: 0.6rem 0.8rem 0.2rem;
-	}
-
 	.search-hits {
 		list-style: none;
 		margin: 0;
 		padding: 0.4rem;
-	}
-
-	.hit-heading {
-		color: var(--text-faint);
-		font-weight: 400;
 	}
 
 	.search-hits button {

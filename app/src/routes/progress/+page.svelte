@@ -52,6 +52,8 @@
 	const streakN = $derived(streakFromReviews(reviews, now));
 	const accuracy = $derived(historicalAccuracy(reviews));
 	const mistakes = $derived(mistakeCards(cards, reviews));
+	// 还没答过题时，热力图和复习预测都是空的，换成一句引导
+	const nextChapter = $derived((chapters.find((c) => !read.has(c.slug)) ?? chapters[0])?.slug);
 
 	// 復習ヒートマップ(直近119日)
 	const HEAT_DAYS = 119;
@@ -158,6 +160,12 @@
 		</a>
 	{/if}
 
+	{#if answeredQ === 0}
+		<a class="review-cta" href="{base}/chapter/{nextChapter}/">
+			<span>{t.progressEmpty}</span>
+			<span class="review-cta-go">{t.startReading} →</span>
+		</a>
+	{:else}
 	<section>
 		<h2>{t.heatmapTitle}</h2>
 		<div class="heatmap" role="img" aria-label={t.heatmapTitle}>
@@ -187,6 +195,7 @@
 			{/each}
 		</div>
 	</section>
+	{/if}
 
 	<section class="all">
 		<h2>{t.allChaptersTitle}</h2>

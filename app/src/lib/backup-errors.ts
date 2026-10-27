@@ -22,7 +22,7 @@ const messages: Record<Lang, Record<BackupErrorCode, string>> = {
 		'invalid-data': '此备份包含无效或不受支持的数据。请选择由本应用导出的、未经修改的备份。',
 		'unsupported-version': '此备份使用了当前不支持的版本，请先更新应用再导入。',
 		'unsupported-chapter': '此备份的阅读位置或续读章节不受当前书籍支持，请先更新应用再导入。',
-		'unsupported-path': '此备份的学习路径或检查点不受当前书籍支持，请先更新应用再导入。',
+		'unsupported-path': '此备份的学习路线或检查点不受当前书籍支持，请先更新应用再导入。',
 		'unsupported-lock': '当前环境无法协调多个标签页的写入，尚未开始导入。请使用新版浏览器通过HTTPS或localhost打开应用；桌面应用请更新系统WebView。',
 		'too-large': '备份过大。请选择小于32 MB的文件，合并后的数据也不能超过此限制。',
 		'local-data': '无法完整读取本机学习数据，尚未开始导入。请检查已保存的数据及可用存储空间后重试。',

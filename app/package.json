@@ -1,7 +1,8 @@
 {
-	"name": "claude-code--",
+	"name": "whats-llm",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.1.0",
+	"license": "MIT",
 	"type": "module",
 	"scripts": {
 		"tauri": "tauri",
@@ -25,7 +26,7 @@
 		"@tauri-apps/cli": "^2.11.3",
 		"@types/node": "^24.19.2",
 		"marked": "^18.0.5",
-		"mdsvex": "^0.12.7",
+		"marked-cjk-friendly": "^0.1.2",
 		"shiki": "^4.2.0",
 		"svelte": "^5.56.1",
 		"svelte-check": "^4.6.0",

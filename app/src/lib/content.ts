@@ -1,22 +1,20 @@
-// 章本文(deflate+Base64で埋め込み)の読み込み口。
-// 章ページと「復習(クイズ抽出)」の両方から使えるよう、globをここへ集約する。
-import { inflateB64 } from './decode';
+// 各章正文的读取入口，章节页、复习和全文搜索共用。
 import type { Lang } from './manifest';
 
 const modules: Record<Lang, Record<string, () => Promise<unknown>>> = {
-	zh: import.meta.glob('/src/lib/content/zh/*.md', { query: '?enc', import: 'default' }),
-	ja: import.meta.glob('/src/lib/content/ja/*.md', { query: '?enc', import: 'default' }),
-	en: import.meta.glob('/src/lib/content/en/*.md', { query: '?enc', import: 'default' })
+	zh: import.meta.glob('/src/lib/content/zh/*.md', { query: '?raw', import: 'default' }),
+	ja: import.meta.glob('/src/lib/content/ja/*.md', { query: '?raw', import: 'default' }),
+	en: import.meta.glob('/src/lib/content/en/*.md', { query: '?raw', import: 'default' })
 };
 
-/** その言語にこの章の本文(=非draft)があるか。 */
+/** 该语言是否有这一章的正文（draft章没有）。 */
 export function hasChapterSource(lang: Lang, slug: string): boolean {
 	return !!modules[lang][`/src/lib/content/${lang}/${slug}.md`];
 }
 
-/** 章本文を復元して返す。draft(本文なし)の場合はnull。 */
+/** 返回章节正文；draft章返回null。 */
 export async function loadChapterSource(lang: Lang, slug: string): Promise<string | null> {
 	const loader = modules[lang][`/src/lib/content/${lang}/${slug}.md`];
 	if (!loader) return null;
-	return inflateB64((await loader()) as string);
+	return (await loader()) as string;
 }

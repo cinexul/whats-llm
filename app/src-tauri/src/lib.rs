@@ -1,11 +1,9 @@
-use std::collections::HashMap;
 use std::fs;
 use std::path::PathBuf;
 use std::process::Command;
 use std::sync::Mutex;
 
-use search_core::{cosine_topk, load_index, Embedder, SearchHit, SearchIndex};
-use tauri::{path::BaseDirectory, Manager, State};
+use tauri::{Manager, State};
 
 // マーカー・メモの保存先: 実行ファイルと同じフォルダのannotations.json
 // (インストール不要の単体配布でも、exeの隣に注釈データを持ち運べるようにする)
@@ -56,64 +54,6 @@ fn open_external(url: String) -> Result<(), String> {
   #[cfg(all(unix, not(target_os = "macos")))]
   let result = Command::new("xdg-open").arg(&url).spawn();
   result.map(|_| ()).map_err(|e| e.to_string())
-}
-
-// ===== セマンティック検索(章内RAG) =====
-// EmbeddingGemmaをONNXで動かし、事前計算した章の索引とコサイン類似度で
-// 「意味の近い節」を返す。モデルと索引はresources/ に同梱する(完全オフライン)。
-
-// モデルと索引は初回検索時に一度だけ読み込み、以後は使い回す。
-// embedには可変参照が要るのでMutexで包む。
-#[derive(Default)]
-struct SearchState {
-  engine: Mutex<Option<Engine>>,
-}
-
-struct Engine {
-  embedder: Embedder,
-  indices: HashMap<String, SearchIndex>,
-}
-
-// resources/modelのモデルとresources/search-index/<lang>.idxを読み込む
-fn init_engine(app: &tauri::AppHandle) -> Result<Engine, String> {
-  let res = app
-    .path()
-    .resolve("resources", BaseDirectory::Resource)
-    .map_err(|e| e.to_string())?;
-  let embedder = Embedder::load(&res.join("model")).map_err(|e| e.to_string())?;
-  let index_dir = res.join("search-index");
-  let mut indices = HashMap::new();
-  for lang in ["zh", "ja", "en"] {
-    if let Ok(index) = load_index(&index_dir.join(format!("{lang}.idx"))) {
-      indices.insert(lang.to_string(), index);
-    }
-  }
-  Ok(Engine { embedder, indices })
-}
-
-#[tauri::command]
-fn semantic_search(
-  app: tauri::AppHandle,
-  state: State<SearchState>,
-  query: String,
-  lang: String,
-  k: usize,
-) -> Result<Vec<SearchHit>, String> {
-  let q = query.trim();
-  if q.is_empty() {
-    return Ok(Vec::new());
-  }
-  let mut guard = state.engine.lock().map_err(|e| e.to_string())?;
-  if guard.is_none() {
-    *guard = Some(init_engine(&app)?);
-  }
-  let engine = guard.as_mut().unwrap();
-  if !engine.indices.contains_key(&lang) {
-    return Ok(Vec::new()); // 索引未生成の言語
-  }
-  let query_vec = engine.embedder.embed_query(q).map_err(|e| e.to_string())?;
-  let index = &engine.indices[&lang];
-  Ok(cosine_topk(index, &query_vec, k.clamp(1, 50)))
 }
 
 // ===== 学習(間隔反復 + 進捗): 埋め込みSQLite + FSRS =====
@@ -232,12 +172,10 @@ fn study_import_snapshot(state: State<StudyState>, snapshot: study_core::StudySn
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
-    .manage(SearchState::default())
     .invoke_handler(tauri::generate_handler![
       load_annotations,
       save_annotations,
       open_external,
-      semantic_search,
       study_record_answer,
       study_due,
       study_all_cards,

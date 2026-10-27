@@ -1,33 +1,18 @@
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig, type Plugin } from 'vite';
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { deflateSync } from 'node:zlib';
+import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-// 章本文(.md)をdeflate + Base64で埋め込むプラグイン。
-// ビルド成果物(=配布するexe)の中に本文の平文を残さないための簡易的な難読化で、
-// 表示時にメモリ上で復元する。完全な秘匿ではない点に注意。
-function contentEncode(): Plugin {
-	let root = process.cwd();
+// fontsource同时提供woff2和woff。现代浏览器和WebView只用woff2，
+// 去掉woff引用，构建产物、离线书包和桌面程序都能小一半左右。
+function woff2Only(): Plugin {
 	return {
-		name: 'content-encode',
+		name: 'woff2-only',
 		enforce: 'pre',
-		configResolved(config) {
-			root = config.root;
-		},
-		load(id) {
-			if (!id.includes('?enc')) return null;
-			let file = id.split('?')[0];
-			if (!file.endsWith('.md')) return null;
-			// idがディスク上の絶対パスならそのまま、プロジェクト基準(/src/...)ならrootと結合する。
-			// (ツールチェーンによってglobのidが絶対パス/ルート相対のどちらにもなり得るため)
-			if (!existsSync(file) && file.startsWith('/') && !/^[A-Za-z]:/.test(file)) {
-				file = path.join(root, file);
-			}
-			const raw = readFileSync(file, 'utf8');
-			const b64 = deflateSync(Buffer.from(raw, 'utf8')).toString('base64');
-			return `export default ${JSON.stringify(b64)};`;
+		transform(code, id) {
+			if (!/[\\/]@fontsource[\\/].+\.css(\?|$)/.test(id)) return null;
+			return code.replace(/,\s*url\([^)]*\.woff\) format\('woff'\)/g, '');
 		}
 	};
 }
@@ -56,7 +41,7 @@ export default defineConfig({
 		strictPort: true
 	},
 	plugins: [
-		contentEncode(),
+		woff2Only(),
 		sveltekit({
 			// 由代码主动注册，确保Tauri桌面端和开发环境不会注册service worker。
 			serviceWorker: { register: false },

@@ -1,6 +1,7 @@
 // MarkdownをHTMLへ変換する。コードブロックはShikiでハイライトし、
 // h2見出しにはidを振って「このページ」用の目次を抽出する。
 import { Marked } from 'marked';
+import markedCjkFriendly from 'marked-cjk-friendly';
 import createDOMPurify from 'dompurify';
 import { createHighlighter, type Highlighter, type ShikiTransformer } from 'shiki';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
@@ -65,7 +66,7 @@ export async function renderMarkdown(src: string): Promise<RenderedChapter> {
 				Object.assign(token, { type: 'html', block: true, text: html + '\n' });
 			}
 		}
-	});
+	}).use(markedCjkFriendly());
 
 	let html = marked.parse(src) as string;
 

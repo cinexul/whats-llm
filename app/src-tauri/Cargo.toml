@@ -1,13 +1,13 @@
 [workspace]
-members = ["crates/search-core", "crates/build-index", "crates/study-core"]
+members = ["crates/study-core"]
 
 [package]
 name = "whats-llm"
 version = "0.1.0"
-description = "What's LLM — an offline trilingual (zh/ja/en) e-book reader"
+description = "LLM Learning Book — an offline trilingual (zh/ja/en) e-book reader"
 authors = []
-license = ""
-repository = ""
+license = "MIT"
+repository = "https://github.com/cinexul/whats-llm"
 edition = "2021"
 rust-version = "1.77.2"
 
@@ -26,5 +26,4 @@ serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
 tauri = { version = "2.9.5", features = [] }
 tauri-plugin-log = "2"
-search-core = { path = "crates/search-core", features = ["embed"] }
 study-core = { path = "crates/study-core" }

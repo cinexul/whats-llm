@@ -2,6 +2,7 @@
 // 本文Markdownから小テスト節を切り出し、設問・選択肢・正解・解説に分解して、
 // インタラクティブな採点UI (Quiz.svelte) で描画できるようにする。
 import { Marked } from 'marked';
+import markedCjkFriendly from 'marked-cjk-friendly';
 import type { Lang } from './manifest';
 import registrations from './question-registry.json' with { type: 'json' };
 
@@ -26,7 +27,7 @@ export interface Quiz {
 	questions: QuizQuestion[];
 }
 
-const md = new Marked({ gfm: true });
+const md = new Marked({ gfm: true }).use(markedCjkFriendly());
 const inline = (s: string): string => md.parseInline(s.trim()) as string;
 
 // 旧版djb2哈希；保持不变，确保已有学习记录仍可读取。

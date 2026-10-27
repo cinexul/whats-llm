@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { lang } from '$lib/lang';
+	import { ui } from '$lib/ui';
 	import { labsCopy } from '$lib/labs/copy';
 	import ContextLab from '$lib/labs/ContextLab.svelte';
 	import EvidenceLab from '$lib/labs/EvidenceLab.svelte';
@@ -9,7 +10,7 @@
 	const t = $derived(labsCopy[$lang]);
 </script>
 
-<svelte:head><title>{t.title} | What's LLM</title><meta name="description" content={t.intro} /></svelte:head>
+<svelte:head><title>{t.title} | {ui[$lang].appTitle}</title><meta name="description" content={t.intro} /></svelte:head>
 
 <div class="labs">
 	<header class="labs-header"><p class="lab-kicker">{t.kicker}</p><h1>{t.title}</h1><p class="labs-intro">{t.intro}</p></header>

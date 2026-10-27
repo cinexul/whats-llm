@@ -1,14 +1,8 @@
-// 全文検索。各章の本文(deflate+Base64)を初回検索時に一括復元し、
+// 全文検索。初回検索時に各章の本文を読み込み、
 // プレーンテキスト化した索引を作って、章タイトルと本文の両方を検索する。
 // 索引は言語別に作る(中文検索で日本語の章を返さないため)。
 import { allChapters, type Lang } from './manifest';
-import { inflateB64 } from './decode';
-
-const modules: Record<Lang, Record<string, () => Promise<unknown>>> = {
-	zh: import.meta.glob('/src/lib/content/zh/*.md', { query: '?enc', import: 'default' }),
-	ja: import.meta.glob('/src/lib/content/ja/*.md', { query: '?enc', import: 'default' }),
-	en: import.meta.glob('/src/lib/content/en/*.md', { query: '?enc', import: 'default' })
-};
+import { loadChapterSource } from './content';
 
 export interface SearchHit {
 	slug: string;
@@ -47,14 +41,11 @@ export function ensureIndex(lang: Lang): Promise<IndexEntry[]> {
 	if (!indexPromises[lang]) {
 		indexPromises[lang] = Promise.all(
 			allChapters(lang).map(async (ch) => {
-				const loader = modules[lang][`/src/lib/content/${lang}/${ch.slug}.md`];
 				let plain = '';
-				if (loader) {
-					try {
-						plain = toPlain(await inflateB64((await loader()) as string));
-					} catch {
-						plain = '';
-					}
+				try {
+					plain = toPlain((await loadChapterSource(lang, ch.slug)) ?? '');
+				} catch {
+					plain = '';
 				}
 				return { slug: ch.slug, title: ch.title, plain };
 			})

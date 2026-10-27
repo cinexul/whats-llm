@@ -29,6 +29,9 @@
 	let saveStatus = $state<'idle' | 'saving' | 'saved' | 'error'>('idle');
 	let sessionGeneration = 0;
 	const current = $derived(queue[idx]);
+	// 一道题都没答过时，引导读者先去读章节、做测验
+	const hasCards = $derived($cardsStore[$lang].length > 0);
+	const firstChapter = $derived(allChapters($lang).find((ch) => !ch.draft)?.slug);
 	const finished = $derived(!loading && queue.length > 0 && idx >= queue.length);
 
 	// 本次复习队列保持固定。切换语言或筛选条件时，使所有待执行的
@@ -134,6 +137,12 @@
 		<p class="msg">{t.reviewLoading}</p>
 	{:else if loadError}
 		<p class="msg" role="alert">{copy.loadFailed}</p>
+	{:else if queue.length === 0 && mode === 'due' && !hasCards}
+		<div class="empty">
+			<p class="empty-title">{t.reviewNewTitle}</p>
+			<p class="empty-body">{t.reviewNewBody}</p>
+			<a class="btn" href="{base}/chapter/{firstChapter}/">{t.startReading} →</a>
+		</div>
 	{:else if queue.length === 0}
 		<div class="empty">
 			<p class="empty-title">{mode === 'mistakes' ? copy.noMistakes : t.reviewEmptyTitle}</p>

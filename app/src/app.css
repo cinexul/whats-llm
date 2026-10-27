@@ -26,6 +26,12 @@
 	--hl-pink: #f6cdd8;
 }
 
+/* 中文用系统自带的中文字体：日文字体缺很多简体字，字形也是日式的 */
+:root:lang(zh) {
+	--font-sans: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Noto Sans CJK SC', 'Source Han Sans SC', 'WenQuanYi Micro Hei', sans-serif;
+	--font-serif: 'Songti SC', 'STSong', 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'Microsoft YaHei', serif;
+}
+
 :root[data-theme='dark'] {
 	--bg: #1f1e1b;
 	--bg-sidebar: #262521;

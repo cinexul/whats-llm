@@ -28,14 +28,12 @@ vite.config.ts.timestamp-*
 # Tauri
 /src-tauri/target/
 
-# 语义搜索：随应用打包的嵌入模型（运行scripts/fetch-model.sh）以及
-# 生成的索引（运行`cargo run -p build-index --release`）。两者体积较大，
-# 且可重新生成，因此不纳入git；保留各目录中的SOURCE.md。
-/src-tauri/resources/model/*.onnx
-/src-tauri/resources/model/*.onnx_data
-/src-tauri/resources/model/*.json
-/src-tauri/resources/search-index/*.idx
-/src-tauri/.fastembed_cache/
+# 测试只留在本地，不进仓库
+*.test.ts
+/e2e/
+/e2e-pwa/
+/vitest.config.ts
+/playwright*.config.ts
 
 # Claude Code本地配置
 .claude/

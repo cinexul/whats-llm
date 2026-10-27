@@ -39,8 +39,8 @@ const en = {
 export const learningPathUi: Record<Lang, typeof en> = {
 	en,
 	zh: {
-		title: '学习路径', intro: '选一个想完成的成果。按提示阅读，动手练习，再自己核对成果。',
-		preview: '带着目标来学习', previewIntro: '三条精简路线，连接阅读、小练习和可检验的成果。', viewPath: '查看路径', allPaths: '全部学习路径',
+		title: '学习路线', intro: '选一个想完成的成果。按提示阅读，动手练习，再自己核对成果。',
+		preview: '带着目标来学习', previewIntro: '三条精简路线，连接阅读、小练习和可检验的成果。', viewPath: '查看路径', allPaths: '全部学习路线',
 		prerequisites: '开始前准备', result: '你将完成', progress: '个检查点已完成', start: '从第一步开始', continue: '继续下一步',
 		finished: '这条路径已完成。保存你的成果，下次任务继续使用这些核查标准。', empty: '还没有检查点。从第一步开始，产出成果并检查后，再勾选完成。',
 		shared: '检查点保存在此设备上，中日英三种语言共用。打开章节不会自动完成步骤。练习成果请保存在你自己的文件中。',
@@ -50,8 +50,8 @@ export const learningPathUi: Record<Lang, typeof en> = {
 		invalidIssue: '部分已保存检查点无法读取或无法识别。有效记录已保留，没有自动完成其他步骤。', saved: '检查点已保存到此设备。', unmarked: '检查点已标为未完成。', back: '返回路径列表'
 	},
 	ja: {
-		title: '学習パス', intro: 'つくりたい成果を選び、指定の章を読み、練習して、自分で結果を確かめます。',
-		preview: '成果を目指して学ぶ', previewIntro: '読書、小さな練習、確認できる成果をつなぐ3つの道筋です。', viewPath: 'パスを見る', allPaths: 'すべての学習パス',
+		title: '学習コース', intro: 'つくりたい成果を選び、指定の章を読み、練習して、自分で結果を確かめます。',
+		preview: '成果を目指して学ぶ', previewIntro: '読書、小さな練習、確認できる成果をつなぐ3つの道筋です。', viewPath: 'パスを見る', allPaths: 'すべての学習コース',
 		prerequisites: '始める前に', result: 'つくるもの', progress: 'チェックポイント完了', start: '最初のステップから始める', continue: '次のステップへ進む',
 		finished: 'このパスは完了です。成果を保存し、次のタスクでも確認項目を使いましょう。', empty: 'チェックポイントはまだありません。最初のステップで成果をつくり、確認してから完了にします。',
 		shared: 'チェックポイントはこの端末に保存され、中国語・日本語・英語で共通です。章を開いただけでは完了になりません。練習の成果は自分のファイルに保存してください。',
