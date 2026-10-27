@@ -1,4 +1,4 @@
-# What’s LLM application
+# LLM Learning Book app
 
 The SvelteKit reader and Tauri desktop shell live here. See the [project README](../README.en.md) for setup, platform prerequisites, and content maintenance.
 
@@ -9,7 +9,7 @@ npm ci
 npm run dev
 ```
 
-Run `npm run check`, `npm run content:check`, `npm run check:quiz`, and `npm run build` to validate changes. Rust core tests run from `src-tauri/` with `cargo test --locked -p search-core -p study-core`.
+Run `npm run check`, `npm run content:check`, `npm run check:quiz`, and `npm run build` to validate changes. Rust tests run from `src-tauri/` with `cargo test --locked -p study-core`.
 
 Chapter sources are in `src/lib/content/{zh,ja,en}/`. Preserve the quiz heading, stable question IDs, revision markers, A–D choice labels, and localized answer markers; the content and quiz commands validate the three editions together.
 
