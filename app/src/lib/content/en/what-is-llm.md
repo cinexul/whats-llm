@@ -9,10 +9,10 @@ It's called a "large" model, and that's not just talk. The "large" shows up in t
 | Where it's large | In plain terms | A sense of scale (**illustrative only; refer to the provider's official documentation**) |
 | --- | --- | --- |
 | Amount of training data | The volume of text it has "read" | Massive: roughly a big sweep through the books, web pages, and articles you can find on the internet |
-| Number of parameters | The count of "adjustable knobs" inside it | Easily billions, even hundreds of billions |
+| Number of parameters | The count of "adjustable knobs" inside it | Billions to hundreds of billions is common; as of October 2026, some open-weight models (whose parameter files you can download) have about a trillion in total |
 
 - **It reads a lot:** During "training," it was fed a staggering amount of text. Books, web pages, forums, code. Pretty much a big pass over everything humans have publicly written down.
-- **It has many knobs:** Inside it are billions to hundreds of billions of **parameters**. Together these numbers decide "given a sentence, how it continues."
+- **It has many knobs:** Inside it are billions of **parameters**, and in some models up to around a trillion. Together these numbers decide "given a sentence, how it continues."
 
 > **Note:** Exactly "how many" parameters and "how much" data differ from model to model and keep changing, so **this book won't pin down these numbers (writing them down would go stale fast; refer to the provider's official documentation)**. You only need to build one intuition: **both are large to a degree an ordinary person can hardly imagine.** The next section focuses on that more central and harder word: parameters.
 
@@ -45,7 +45,7 @@ Hearing "this model has hundreds of billions of parameters, that one only tens o
 
 - **Data quality** matters just as much: feed it dirty, messy text, and no number of knobs will learn good skills. It's like feeding an enormous mixing board nothing but noise. No number of knobs will tune out good sound.
 - **Training method** also sets the ceiling: at the same scale, training cleverly can beat training clumsily.
-- More **active parameters** generally require more computation under comparable conditions, but actual speed and cost also depend on architecture, hardware, and serving. A mixture-of-experts model, for example, uses only part of its total parameters for each token; total parameter count alone cannot predict the bill.
+- **A large total doesn't mean every parameter is used every time.** Some models use a "mixture of experts" design: the inside is split into many groups of "expert" parameters, and each small piece of text it generates calls on only a few of them. The part that actually takes part in each step is called the **active parameters**, and it can be just a few percent of the total. So speed and cost depend on the active parameters, the hardware, and how the model is served; you can't guess them from the total alone.
 
 > **Key point:** Don't rank models simply by "how many parameters." Parameter count, data quality, and training method together decide whether a model is good to use; and for you, the user, **which product feels good to use often matters more than who has more parameters** (chapters 17 and 18 cover how to choose).
 
@@ -63,7 +63,7 @@ An analogy makes it clearer:
 | --- | --- | --- |
 | What is stored | Original records | Learned patterns and facts in parameters, sometimes including memorized passages |
 | What it does when answering | **Retrieve**: find that record, read it out | **Compute on the spot**: generate it word by word from the patterns |
-| Ask the same question twice | Reads the exact same thing each time | The wording may differ slightly each time (it's generated fresh) |
+| Ask the same question twice | Reads the exact same thing each time | The wording often differs, because picking the next word usually involves a bit of random sampling (chapter 4) |
 | When there's no matching content | Honestly says "no such record" | May admit uncertainty or produce a plausible but **false** passage |
 
 This one point directly explains two seemingly contradictory traits of large language models:
@@ -116,40 +116,40 @@ Carlini et al., *Extracting Training Data from Large Language Models* (2021): [a
 
 > Six questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the blockquote under each question. Think first, then check.
 
-1. **[Basic · Concept]** What's the most fitting way to understand "parameters" in a large language model? <!-- quiz: q01 revision: 1 -->
-   - A. The original-text records it stores, one by one
-   - B. The current positions of the model's billions of "adjustable knobs," with language patterns dialed into them
-   - C. The text you type in each time you ask a question
-   - D. The model's startup password
-   > **Answer: B.** Parameters are the learned numerical “knobs,” not a list of database records or your current prompt. They encode general patterns and can also encode memorized passages.
+1. **[Basic · Concept]** What's the best way to understand a large language model's "parameters"? <!-- quiz: q01 revision: 1 -->
+   - A. Stored records of the original training text, from which it picks a fitting sentence
+   - B. The settings you give the model with each question, such as tone, length, and format
+   - C. The cap on how much text the model can handle at once; a bigger number means longer reads
+   - D. The current values of a huge number of adjustable numbers, where learned patterns live
+   > **Answer: D.** Parameters are numeric "knobs" set by training; they are the model's body. They mainly encode general patterns and can also encode some memorized passages. A treats parameters as an archive of original text, which is exactly the "database" picture this chapter corrects. B describes a prompt or product settings, which you supply with each question; those aren't parameters. C describes the context window (chapter 3), a different thing.
 
-2. **[Basic · Concept]** What is "training" a large language model roughly doing? <!-- quiz: q02 revision: 1 -->
-   - A. Copying all the books one by one onto a hard drive for storage
-   - B. Giving it massive text, repeatedly having it guess "the next word," nudging the knobs (parameters) when it's wrong, until it speaks smoothly
-   - C. Writing it several million if-else rules
-   - D. Having it search the internet in real time
-   > **Answer: B.** Training = repeatedly "turning the knobs" with massive amounts of text. A is the "database/copy" mistaken picture; C is the old "people write rules" path of traditional programs (compared back in chapter 1); D confuses "training" with "searching online." Once training is done, the knobs are fixed, and later questions don't change them.
+2. **[Basic · Concept]** Roughly what does "training" a large language model involve? <!-- quiz: q02 revision: 1 -->
+   - A. Having it guess the next word over and over on huge amounts of text, nudging parameters when wrong
+   - B. Copying every book into the model one by one, then building a searchable index for each book
+   - C. Engineers writing answer rules for every kind of question, which the model carries out one by one
+   - D. Letting the model learn while it chats with users, so the more it chats, the more its parameters change
+   > **Answer: A.** Training means "turning the knobs" again and again on huge amounts of text until its continuations sound right. B is the mistaken "database/copy" picture; C is the old "people write rules" approach of traditional programs (compared in chapter 1). D is the most believable trap: normally the parameters are fixed after training, and your everyday chats don't change them. Whether a service uses chat records for future training is a separate question that depends on its terms (chapter 37).
 
-3. **[Advanced · Misconception]** "A large language model is just a giant database; when you ask, it retrieves the answer from inside." Where does this go wrong? <!-- quiz: q03 revision: 1 -->
-   - A. Nothing's wrong; it just is a database
-   - B. It generates from learned parameters and context; some passages may be memorized, but there is no complete, reliable lookup of training documents
-   - C. It's a database, but with too little capacity
-   - D. It retrieves from someone else's computer
-   > **Answer: B.** This is the chapter's core correction. A database "finds a record and reads it out, or says there's none"; a large language model "produces a passage on the spot from patterns, and even when unsure it can make a convincing one." People who treat it as a database are most likely to take its hard facts on faith (see hallucination in chapter 9). C and D are both still stuck on the false premise of "it's a database."
+3. **[Advanced · Misconception]** "A large language model is just a huge database: you ask, and it retrieves the answer from inside." What's wrong with this? <!-- quiz: q03 revision: 1 -->
+   - A. It's basically right; the database is just so big that it sometimes opens the wrong spot
+   - B. It stores no original text at all, so it can never repeat anything it read word for word
+   - C. It generates on the spot from learned patterns; it may memorize bits but can't reliably look up text
+   - D. It actually searches the web live every time, which is why the answer changes each time
+   > **Answer: C.** This is the chapter's core correction. A database "finds the record and reads it out, or says there's none"; an LLM "generates on the spot from learned patterns," and when unsure it can still produce a plausible wrong answer (chapter 9). A is still stuck in the database premise. B overcorrects: models can memorize some training text word for word. D mixes up generation and web search; some products do search, but that's an extra tool, not how the model itself works.
 
 4. **[Advanced · Misconception]** "Model A has 500 billion parameters, model B only 70 billion, so A must be smarter than B and the one to use." Where is this reasoning shaky? <!-- quiz: q04 revision: 1 -->
-   - A. Completely correct; more parameters just means stronger
-   - B. Data quality, training, architecture, and the task matter too; parameter count alone cannot determine quality, speed, or cost
-   - C. Parameters have nothing to do with smartness at all
-   - D. B is definitely stronger than A
-   > **Answer: B.** "Parameters are everything" is a classic trap: no number of knobs will tune out good sound if all you feed it is noise. Besides, for the user, "which product feels good to use and offers better value" is often more practical than "who has more parameters" (chapters 17 and 18). C swings to the other extreme (saying "nothing to do with it at all" is also wrong; scale does have an effect); D is just as arbitrary.
+   - A. Nothing is shaky; a model with more parameters is stronger on every kind of task
+   - B. Data, training methods, and the task all matter; parameter count is only one factor
+   - C. Parameter count has nothing to do with ability; models with fewer are always better
+   - D. More parameters means it read more books, so the facts A gives are always more accurate
+   > **Answer: B.** "Parameters are everything" is a classic misconception: no number of knobs makes good sound from pure noise, and for users, which product is handier and better value often matters more (chapters 17 and 18). A is the very misconception in the question. C swings to the other extreme: scale does matter, it just doesn't decide quality alone. D confuses parameter count with the amount of training data, and reading more doesn't guarantee accurate facts anyway.
 
-5. **[Basic · Scenario]** You ask the AI for the title, author, and year of a certain academic paper. It answers in neat formatting and with total confidence, but you check and find the paper doesn't exist at all. What's the most accurate explanation? <!-- quiz: q05 revision: 1 -->
-   - A. The record for this in its database is corrupted
-   - B. It generated a plausible but false citation; fluent formatting does not establish that a real source was retrieved or verified
-   - C. It's deliberately lying to you
-   - D. There was a network problem
-   > **Answer: B.** A fluent answer does not establish that a source was retrieved or checked. Models can generate false details, even while also being capable of memorization. Verify important facts and citations against reliable sources (Chapter 15).
+5. **[Basic · Scenario]** You ask an AI for a paper's title, authors, and year. It answers in neat format, sounding certain, but when you check, the paper doesn't exist at all. What's the most accurate explanation? <!-- quiz: q05 revision: 1 -->
+   - A. That record in its internal database is corrupted; asking another way will find the right entry
+   - B. It's deliberately making things up to fool you; a more honest AI would never do this
+   - C. The paper surely exists and you just didn't search widely enough, so you should trust it
+   - D. It generated a plausible citation; neat formatting doesn't mean it checked a real source
+   > **Answer: D.** A neat, fluent answer is not evidence that it looked up or verified a source; a model can "assemble" a nonexistent paper from the format of papers it has seen. Check important citations against reliable sources (chapter 15). A still treats it as a database. B pictures it as a person lying on purpose, but switching products doesn't rule out the same error. C over-trusts the model; if you can't find the paper, that's a reason for more caution, not less.
 
 6. **[Basic · Hands-on]** Ask the same open-ended question (for example, “introduce Hangzhou in three sentences”) in three new conversations using the same model and settings. Record which wording and factual claims change, then verify one claim using a reliable source. <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** Wording may vary because of sampling and other system behavior, or may remain identical. Neither outcome proves or rules out memorization, retrieval, or factual correctness. This experiment illustrates output variability; checking the source is what tests the factual claim.

@@ -1,4 +1,4 @@
-Over the last nine chapters we got a good feel for what the model is and how it works: it takes your words and continues them one token at a time (Chapter 4), it chases "sounds real" rather than "is real" so it will confidently make things up (the hallucination in Chapter 9), and the model itself has no memory across conversations (Chapter 3). All of that is about the inner workings.
+Over the last nine chapters we got a good feel for what the model is and how it works: it takes your words and continues them one token at a time (Chapter 4), it doesn't check facts as it generates, so it sometimes makes things up with confidence (hallucination, Chapter 9), and the model itself has no memory across conversations (Chapter 3). All of that is about the inner workings.
 
 But when you actually open the chat box, fingers hovering over the keyboard, the first real question is a different one. **What exactly should I treat this thing as?** An all-knowing expert? A search engine? An assistant that does your work for you? Get this wrong and you either don't dare use it (wasting it) or use it too freely (and get burned without realizing it).
 

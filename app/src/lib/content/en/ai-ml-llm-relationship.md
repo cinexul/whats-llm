@@ -85,6 +85,8 @@ Finally we reach the innermost little doll, and the star of this book.
 
 A **large language model** (LLM for short) is a kind of deep learning, **built specifically to handle language (text)**. From massive amounts of text it learned "how words follow one another," so it can write articles, answer questions, translate, and write code. The cores of Claude, ChatGPT, and Gemini are all this kind of model.
 
+A note on wording: in everyday talk, "large model" (in Chinese, 大模型) can also mean a large vision model that works with images, or a multimodal model that handles text, images, and sound together. In this book, unless we say otherwise, it means a large language model.
+
 Note where it sits:
 
 - It's **one branch of deep learning, centered on language**. Computer vision focuses on images, and other methods handle speech. These categories can overlap: many modern models are **multimodal**, meaning they combine text with images, audio, or other inputs. Being good at chatting does not by itself establish which other abilities a particular model has; check the model and product (chapter 18).
@@ -137,39 +139,39 @@ In the next chapter, we'll climb into that little innermost doll and look at **w
 > Six questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the blockquote under each question. Think first, then check.
 
 1. **[Basic · Concept]** Which sentence most accurately describes how these four words relate? <!-- quiz: q01 revision: 1 -->
-   - A. They're actually four names for the same thing
-   - B. AI, machine learning, deep learning, and large language models are four things side by side, where you pick one of them
-   - C. LLM ⊂ deep learning ⊂ machine learning ⊂ artificial intelligence, nested layer by layer, getting bigger from inside out
-   - D. Large language models contain deep learning, deep learning contains machine learning, and machine learning contains AI
-   > **Answer: C.** This is a set of "nested doll" containments: the large language model is innermost and most specific, artificial intelligence is outermost and broadest. B mistakes "nesting" for "side by side" (like lining up four different-sized dolls in a row); D gets the containment direction **backwards** (the big circle contains the small one, not the other way around); A ignores that they range from small to large.
+   - A. They are four separate, unrelated technologies; you pick one when you need it
+   - B. LLMs contain deep learning, deep learning contains machine learning, which contains AI
+   - C. LLMs are part of deep learning, which is part of machine learning, which is part of AI
+   - D. AI and machine learning are the same thing; deep learning and LLMs are two types under it
+   > **Answer: C.** This is a set of "nested doll" containments: the large language model is innermost and most specific, AI is outermost and broadest. B lists the words in the right order but gets the direction backwards: the big circle contains the small one. A mistakes nesting for side by side. D equates AI with machine learning, but AI also includes the older approach of hand-written rules; it also puts deep learning and LLMs on the same level, when LLMs are one branch of deep learning.
 
 2. **[Basic · Concept]** What's the most fundamental difference between "machine learning" and a traditional program? <!-- quiz: q02 revision: 1 -->
-   - A. Machine learning runs faster
-   - B. A traditional program relies on people writing rules by hand; machine learning lets the machine find patterns in data itself
-   - C. Machine learning doesn't need a computer
-   - D. Machine learning is always more accurate than a traditional program
-   > **Answer: B.** This is the most important turn in the whole diagram: from "people write rules" to "feed data, machine finds patterns itself." A, C, and D all miss the essence. Faster or more accurate depends on the case, and "doesn't need a computer" is just backwards. Remember: it learns **patterns from data**; successful predictions alone do not establish human-like understanding.
+   - A. Traditional programs follow rules people write; machine learning finds patterns in data
+   - B. Machine learning needs no people at all; once built, it keeps getting smarter on its own
+   - C. Machine learning stores lots of data first, then searches it for a match when it is used
+   - D. Traditional programs just follow orders; machine learning truly understands like a person
+   > **Answer: A.** This is the most important turn in the whole diagram: from "people write rules" to "feed data and let the machine work out the patterns." B is wrong: people prepare the data and design the training, and a typical model's parameters are fixed after training, so it doesn't get smarter just by being used (chapter 2). C confuses learning patterns with storing and looking up data (chapter 2 corrects this in detail). D goes too far: learning useful patterns does not prove human-like understanding.
 
 3. **[Advanced · Misconception]** "The AI that beat the world champion at Go must also be great at chatting and able to do anything." Where does this idea go wrong? <!-- quiz: q03 revision: 1 -->
-   - A. Nothing's wrong; a strong AI can naturally do anything
-   - B. The Go AI is actually dumber
-   - C. They run on the same program
-   - D. A system trained to play Go and a chat model can use different methods; being strong at Go does **not automatically make it good at chatting or every other task**
-   > **Answer: D.** "AI" is a broad category. A system trained to win at Go and a system trained to generate language can have different designs and abilities. Some methods and capabilities can be shared, but **success at one task does not prove success at another**. That is the mistake behind "it won at Go, so it can do anything."
+   - A. The Go system just isn't big enough yet; a bigger model would be able to do anything
+   - B. Winning at Go shows it already has general intelligence; nobody taught it to talk yet
+   - C. A Go AI isn't really AI; it's only a program running on rules that people wrote by hand
+   - D. The two can be trained in different ways; being strong at Go doesn't mean it can chat
+   > **Answer: D.** "AI" is a broad category. A system trained to win at Go and a model trained to generate language can differ completely in design and ability; they may share some methods, but success at one task does not prove success at another. A ("big enough means it can do anything") and B ("good at Go means general intelligence") are both common overreaches. C is also wrong: top Go programs were trained with machine learning, not built from hand-written rules.
 
 4. **[Basic · Misconception]** "The ChatGPT I use just is 'that large language model' itself." Where is this not quite accurate? <!-- quiz: q04 revision: 1 -->
-   - A. ChatGPT is a **product** (a chat interface for people); its core is the large language model, with a "packaging for people" layer in between
-   - B. ChatGPT doesn't use a large language model at all
-   - C. Large language models came first, so it's irrelevant
-   - D. Completely accurate
-   > **Answer: A.** What you open and chat with is the **product** (like the "restaurant"); the core that actually holds the conversation (like "the chef's craft") is the large language model. Saying them interchangeably is fine in daily life, but keep the two layers clear in your mind (chapter 17 covers the difference between model, product, API, and Agent). B erases the relationship; C doesn't answer the question.
+   - A. It's accurate; ChatGPT and GPT are just two names for exactly the same thing
+   - B. ChatGPT is a product with an LLM at its core, wrapped in a layer of product features
+   - C. ChatGPT doesn't use an LLM; it runs on a large set of question-answer rules people wrote
+   - D. The LLM is only a plug-in inside ChatGPT that gets called when a question is hard
+   > **Answer: B.** What you open and chat with is the product (like the "restaurant"); the core that actually continues the conversation (like "the chef's craft") is the large language model. Mixing the two up in daily talk is fine, but keep the layers clear in your mind (chapter 17 covers model, product, API, and Agent). A is the very misconception in the question. C has it backwards: the core is an LLM. D flips the roles: the LLM is the core, not an occasional plug-in.
 
 5. **[Basic · Scenario]** A friend points at their phone's photo album and asks, "It can automatically find which photos have cats in them. Is this AI too? Is it the same as the AI I chat with?" How should you answer most accurately? <!-- quiz: q05 revision: 1 -->
-   - A. "Both are AI, and they're the same thing."
-   - B. "It's not AI, just an ordinary feature."
-   - C. "Only the chat one counts as AI; the image one doesn't."
-   - D. "Both are AI. Finding cats in photos is a computer-vision task, while chatting uses a language model. A multimodal model can combine these abilities, but we should check what each system actually supports."
-   > **Answer: D.** Both belong to AI. Their tasks differ, even though modern systems may combine image and language capabilities. Use the diagram to identify the techniques involved, then check each system's actual abilities. B and C arbitrarily exclude one kind from AI; A assumes two different features must use the same system.
+   - A. Both are AI, and the phone's cat finder and the chatbot must use the very same model
+   - B. Finding cats isn't AI; it's an ordinary feature that just matches colors and shapes
+   - C. Both are AI, but finding cats is mostly computer vision, while chatting uses an LLM
+   - D. Only things that can chat count as AI; recognizing pictures is just image processing
+   > **Answer: C.** Both belong to AI; the tasks differ. Finding cats in photos is a computer-vision task, while chatting uses a language model. Some multimodal models combine images and language, so what a particular product uses depends on what it actually supports. A jumps from "both are AI" to "must be the same model"; B and D arbitrarily exclude one kind from AI.
 
 6. **[Basic · Hands-on]** Look around at the "AI" you use in a day: your phone's face unlock, the album's object recognition, your keyboard's predictions, the map's route planning, spam-text blocking, the chat AI you use often. Pick three or four, and try to say roughly **which circle of the matryoshka diagram each one falls into**, and "does it belong to the 'can chat' branch?" <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** Many of these features use AI, but they do not all use LLMs. Face unlock and object recognition commonly use computer vision; route planning can use conventional search algorithms; spam filters and keyboard suggestions can use several methods, including language models. A product name alone does not reveal its implementation. The useful habit is to ask what the system does and which techniques it uses, rather than assume "AI" means "can do everything."

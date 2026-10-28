@@ -83,7 +83,7 @@ In other words:
 This helps explain one of its most frustrating failure modes: **it confidently talks nonsense (hallucination):**
 
 - When evidence is missing or its learned knowledge is unreliable, the model **may generate a plausible but false answer**. It can also say "I'm not sure," especially after training that rewards honesty. The problem is that neither confident wording nor a statement of uncertainty is a dependable accuracy test by itself.
-- The more a spot is one where it should be fluent (formatting, tone, phrasing), the more **flawlessly** it can make things up. So **the more confident and fluent an answer, the less you can take it for granted.** Smoothness only means "resembles," not "is right."
+- Surface features like formatting, tone, and phrasing almost always come out polished, even when the content is wrong. So a confident tone is only loosely related to being right: confident answers are often correct, but they can also be wrong in a very convincing way. Fluency shows that something looks like a good answer, not that it is one; judge it by the evidence.
 
 > **Common misconception:** "The answer is so coherent that it must have been checked." A model may reason, plan, and use tools, but smooth prose alone does not show that those steps were successful—or that sources were checked at all. **Judge factual claims by their evidence, not their presentation** (chapter 9).
 
@@ -116,40 +116,40 @@ In the next chapter (Chapter 5), we look at its "inner workings" from another an
 
 > Six questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the blockquote under each question. Think first, then check.
 
-1. **[Basic · Concept]** Which sentence best sums up the core mechanism by which a large language model generates text? <!-- quiz: q01 revision: 1 -->
-   - A. It thinks up the complete answer first, then outputs it all at once
-   - B. It retrieves ready-made sentences from a database
-   - C. Based on what came before, it repeatedly predicts "the most likely next token," relaying one after another to roll out a whole passage
-   - D. It translates your question into a command and executes it
-   > **Answer: C.** The text-generation loop predicts and selects tokens in sequence. A incorrectly says the whole answer is output at once; B mistakes generation for retrieving a stored sentence; D does not describe text generation. Models may also plan or generate intermediate reasoning—the token-by-token mechanism does not rule that out.
+1. **[Basic · Concept]** In one sentence, which best sums up the core mechanism by which a large language model generates text? <!-- quiz: q01 revision: 1 -->
+   - A. It first writes out the whole answer internally, then outputs it all in one go
+   - B. It predicts next-token probabilities from what came before, picks one, and repeats
+   - C. It finds the best-matching sentence among huge numbers it saved in training and copies it
+   - D. It translates your question into program commands, then runs them to get an answer
+   > **Answer: B.** The core loop is: compute probabilities for the next token from what came before, pick one, append it, and compute the next. A is wrong about "in one go": text is generated token by token, though a model can outline or reason first, which doesn't conflict with token-by-token generation. C mistakes generation for retrieving stored sentences (corrected in chapter 2). D doesn't describe how text is generated.
 
-2. **[Basic · Concept]** What role does the "probability distribution (that candidate-word list)" play during generation? <!-- quiz: q02 revision: 1 -->
-   - A. It decides network speed
-   - B. At each step, the model scores each candidate token by probability, then picks one to continue with
-   - C. It's the model's startup screen
-   - D. It records the probabilities of your chat history
-   > **Answer: B.** At each step, the "next word" in the model's eyes is a probability-weighted list, and it picks one to continue. C, D, and A are all unrelated to the mechanism. To add: numbers like "Tokyo 92%" in this chapter are **made up for illustration**, and you don't normally see the real probabilities.
+2. **[Basic · Concept]** What role does the "probability distribution" (that list of candidate words) play during generation? <!-- quiz: q02 revision: 1 -->
+   - A. It gives the chance each claim is true, and the most probable one is always a fact
+   - B. It's a fixed word-frequency table; the same preceding text always gets the top pick
+   - C. It records the odds of your past chat habits, to guess which answer you'd like
+   - D. At each step it scores the candidate tokens, then one is chosen by some strategy
+   > **Answer: D.** At every step, the model's "next word" is a list with probabilities, and one is chosen and appended; numbers like "Tokyo 92%" in this chapter are made up for illustration, and you don't normally see the real ones. A is the most tempting trap: a probability says how common and natural a continuation is, not how true the sentence is (section 4 of this chapter). B is wrong: probabilities are computed fresh from the current text, and many systems sample rather than always taking the top pick. C confuses it with a product's memory feature.
 
-3. **[Advanced · Misconception]** "It answered so clearly and logically, it must have understood my question and checked the facts before speaking." Where does this idea go wrong? <!-- quiz: q03 revision: 1 -->
-   - A. Nothing's wrong; it understands first, then answers
-   - B. It understood, but couldn't be bothered to check
-   - C. It checks first, then understands
-   - D. It generates text token by token, and a coherent answer does **not by itself show that the claims were checked or are correct**
-   > **Answer: D.** The mistake is treating clear presentation as proof of verification. A model may reason or use tools, but those steps can fail and may not have occurred. Check the evidence behind important claims. B invents a human motive; C simply asserts an unsupported order of operations.
+3. **[Advanced · Misconception]** "It answered so clearly and logically, it must have understood my question and checked everything first." Where does this go wrong? <!-- quiz: q03 revision: 1 -->
+   - A. Clear structure shows it's good at organizing text, not that the content was checked
+   - B. It's right: if an answer is tightly structured, every point in it has been verified
+   - C. It truly understood the question; it just never checks any facts, in any situation
+   - D. Clear structure is actually a sign of fabrication; the neater it is, the likelier it's wrong
+   > **Answer: A.** The mistake is treating clear expression as proof of verification. A model can reason, and some products can call tools like search, but those steps can fail or may not have happened at all. B is the very misconception in the question. C is too absolute: you can't judge "understanding" from one answer, and products with tools really can check things. D swings to the other extreme: structure and correctness aren't inversely related, and well-organized answers are often right. You still judge by the evidence.
 
 4. **[Advanced · Misconception]** "When it confidently says something wrong (hallucination), the program must have a bug." What's wrong here? <!-- quiz: q04 revision: 1 -->
-   - A. Right, it's a bug
-   - B. You asked something too hard and broke it
-   - C. The network dropped
-   - D. Hallucinations can happen even when the software works as designed; insufficient evidence or unreliable learned patterns can still produce a plausible but false answer
-   > **Answer: D.** A fabricated answer does not necessarily indicate a software malfunction. Better training, retrieval, tools, and uncertainty handling can reduce this risk, but a fluent answer alone never proves correctness. Verify important facts (chapters 9 and 15). B and C do not explain the described failure.
+   - A. It's right; once the company fixes this bug, it will never get things wrong again
+   - B. Your question was too hard and broke the model; ask simpler ones and it won't err
+   - C. It happens even when working normally; without evidence it can produce a plausible error
+   - D. It's because it's offline; once it's connected to the web, these errors stop for good
+   > **Answer: C.** A made-up answer doesn't necessarily mean a software fault: with missing evidence or unreliable learned knowledge, the generation loop can still continue with fluent errors. Better training, retrieval, and tools lower the risk but don't remove it. A treats hallucination as a bug you can fix once. B blames the asker, but simple questions can get wrong answers too. D is half right: web search can supply evidence, but what it finds can be wrong, or the model can misread it (chapters 9 and 15).
 
-5. **[Basic · Scenario]** Of the following two tasks, which is more likely to trigger "making things up" and more in need of your verification? <!-- quiz: q05 revision: 1 -->
-   - A. Having it produce, out of thin air, the ISBN of an obscure book or the exact source of a certain paper
-   - B. Having it summarize an article you just pasted in into three points
-   - C. B is more dangerous
-   - D. The two are equally safe
-   > **Answer: A.** A supplied article gives the model a source and lets you compare the summary with it. An obscure ISBN or citation without a source may be absent from its learned knowledge, making fabrication more likely. Neither task is error-free: check important summary details too, and verify identifiers and citations against the original source.
+5. **[Basic · Scenario]** Which of these tasks is most likely to make it "make up" details, so that you most need to check each one? <!-- quiz: q05 revision: 1 -->
+   - A. Summarize an article you just pasted into three key points
+   - B. Give an obscure book's ISBN and publication year from memory
+   - C. Rewrite a paragraph you wrote so it sounds more conversational
+   - D. Sort a list of names you supplied alphabetically by surname
+   > **Answer: B.** Specific details like an obscure book's number and year may not be in what it learned at all, and with no material to rely on, it can easily produce a convincing-looking answer; check it against the original source. A, C, and D all give it material that you can compare against, so the risk is lower, but not zero: a summary can omit or distort details, and sorting can slip too, so look over results that matter.
 
 6. **[Basic · Hands-on]** Find an AI with a "regenerate" button, and for **the same open-ended question** (like "give my cat three names") click "regenerate" a few times in a row; then try a question with **a single correct answer** (like "what's 3 plus 5") a few times too. Compare: for which kind of question do the repeated answers **vary a lot**, and for which are they **nearly unchanged**? <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** Open-ended naming tasks often vary more because many continuations are plausible. A simple arithmetic answer may stay the same, although its wording can vary. Results depend on the model and settings; you may also get repeated names. This exercise illustrates possible sampling variation, not a guarantee that every regeneration changes the answer or improves it.

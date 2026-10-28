@@ -44,7 +44,7 @@ With coordinates: "cat"→a string of numbers, "dog"→a string of numbers → c
 
 ## 3. The most famous intuition: you can do "arithmetic" on meaning
 
-This is the part of embeddings that makes people sit up, and it has become almost the signature example.
+This is the example people reach for most often when explaining embeddings.
 
 Since words have become coordinates (vectors), and coordinates can be added and subtracted, the amazing thing is that **doing arithmetic on coordinates of meaning gives results that also follow the logic of meaning**. The classic one:
 
@@ -54,9 +54,9 @@ Since words have become coordinates (vectors), and coordinates can be added and 
 
 Read out loud: **take king, subtract "male," add "female," and the coordinates you land on fall right next to "queen."**
 
-Why does this happen? Because during training, the model noticed from a huge amount of text that "king" and "man," and "queen" and "woman," get used in very similar ways; and that the difference between "king" and "queen" is the same kind of difference as the one between "man" and "woman" (both come down to "gender"). So this "gender relationship" gets **encoded as a fixed "direction" in the coordinate space**. Walk along that direction and you "switch the gender."
+Why does this happen? Because during training, the model noticed from a huge amount of text that "king" and "man," and "queen" and "woman," get used in very similar ways; and that the difference between "king" and "queen" is the same kind of difference as the one between "man" and "woman" (both come down to "gender"). So this "gender relationship" gets **encoded as a roughly consistent "direction" in the coordinate space**. Walk along that direction and you more or less "switch the gender."
 
-There are plenty of others like it:
+There are other examples like it (they too hold only roughly):
 
 | Arithmetic on coordinates | Result lands roughly at | The relationship it captures |
 | --- | --- | --- |
@@ -64,7 +64,9 @@ There are plenty of others like it:
 | walk → walked, run → ran | the same "direction" | the "turn into past tense" relationship |
 | big → bigger, small → smaller | the same "direction" | the "more intense" relationship |
 
-> **Key point:** Don't let "arithmetic" scare you. What it's really saying is plain: **the "meaning relationships" between words (gender, capital, tense, and so on) become computable "directions and distances" in coordinate space.** That shows an embedding packs in not isolated words but **the systematic web of meaning relationships between words**. (Here "≈" means "lands roughly nearby," not an exact equals sign. It's a statistical approximation, with some error.)
+> **Key point:** Don't let "arithmetic" scare you. What it's really saying is plain: **the "meaning relationships" between words (gender, capital, tense, and so on) can show up as rough "directions and distances" in coordinate space.** In other words, an embedding holds not only isolated words but some of the relationships between them. Here "≈" means "lands roughly nearby," not an equals sign.
+
+This example also has a source and limits. It comes from research around 2013 on **static word vectors** ("static" meaning each word has one fixed coordinate regardless of context; word2vec became popular at that time). Even then, the arithmetic worked only for some examples: the paper that first reported it answered just under 40% of its grammatical analogy questions correctly, and swapping in other words often breaks it. In today's large language models, a word's representation changes with context, so simple addition like this is even less to be expected. Take it as an intuition that relationships can become directions, not as a rule.
 
 ## 4. A search representation is not an archive or a privacy guarantee
 
@@ -80,8 +82,6 @@ Made into an embedding: [0.12, -0.83, 0.05, 0.41, ……]  ← a few hundred num
 Can an ordinary decoder restore the text exactly? There is no general guarantee; inversion attacks may nevertheless recover text.
 What can it do?     Compute how near it is in meaning to other sentences.
 ```
-
-The “flavor coordinate” analogy helps explain similarity: two dishes with nearby measurements may taste alike. Its limit matters too: measurements can reveal ingredients. Likewise, text vectors can disclose information about their sources; the analogy is not a security guarantee.
 
 > **Practical rule:** Keep the **source text and its citation separately** when you need reliable quotations in RAG. The vector helps find relevant material. Apply appropriate access controls to both the source and its vectors; converting sensitive text to embeddings does not by itself make it safe to publish.
 
@@ -124,7 +124,7 @@ Changing the wording can change tokenization, internal representations, and how 
 | An embedding is a complete, recoverable text archive | It is a learned representation, with no general lossless decoding guarantee; some text may still be reconstructed by inversion attacks |
 | A vector hides the text securely | Embeddings are not encryption or guaranteed anonymization. Protect sensitive vectors as well as source documents |
 | Two numbers (like longitude and latitude) are enough to represent meaning | Meaning is too complex; it takes **hundreds or thousands of numbers** to tell things apart, far more than two or three dimensions |
-| "king − man + woman ≈ queen" is a coincidence | That's training encoding the **meaning relationships between words** as a "direction" in the coordinates; "≈" is an approximation, with error |
+| "king − man + woman ≈ queen" shows you can add and subtract meanings as precisely as math | It's a famous example from 2013-era static word vectors that holds roughly for only some words; modern LLM representations can't be added up this simply |
 | Semantic search requires identical wording | Embeddings can find related wording; keyword search and hybrid methods are also useful, and retrieval quality still needs evaluation |
 | Saying it differently changes the result, so the AI is buggy | Wording, context, model processing, and sampling can all affect the answer. A changed answer alone does not diagnose a bug |
 
@@ -132,7 +132,7 @@ Changing the wording can change tokenization, internal representations, and how 
 
 - **The core idea:** give a word or sentence a "**coordinate of meaning**." That string of numbers is the **vector**; the process or result of making it is the **embedding**; **the coordinates can help estimate similarity in meaning**.
 - **Why we need it:** a computer can only do arithmetic and doesn't recognize words. Once things become coordinates, the machine can **"sense" nearness in meaning by computing distance**. That's its bridge to handling meaning.
-- **The signature intuition:** "king − man + woman ≈ queen." The **meaning relationships** between words become **computable directions** in coordinate space; "≈" is an approximation, with error.
+- **The signature intuition:** "king − man + woman ≈ queen" shows that some **meaning relationships** between words can appear as rough directions in coordinate space. It comes from 2013-era static word vectors and holds only for some examples; it isn't a rule.
 - **The core correction:** embeddings support similarity search; they do not replace reliable source storage or provide a privacy guarantee. Reconstruction is possible under some conditions, so protect sensitive vectors.
 - **A major use:** semantic search and RAG (Chapter 20). Embeddings are one retrieval option; keyword search and hybrid methods can also retrieve useful evidence.
 - **Back-reference:** rephrasing can change the result, but output differences alone do not measure semantic distance. Compare prompt clarity and verify the answer (Chapters 4 and 11).
@@ -141,7 +141,8 @@ With this chapter closed, the core of Part One on "the model's inner workings" i
 
 ## Sources and verification
 
-Morris et al., *Text Embeddings Reveal (Almost) As Much As Text* (2023): [authors’ vec2text implementation and paper link](https://github.com/jxmorris12/vec2text). It demonstrates text reconstruction under studied conditions, not guaranteed recovery of every embedding. Source checked 2026-10-22.
+- Morris et al., *Text Embeddings Reveal (Almost) As Much As Text* (2023): [authors’ vec2text implementation and paper link](https://github.com/jxmorris12/vec2text). It demonstrates text reconstruction under studied conditions, not guaranteed recovery of every embedding. Source checked 2026-10-22.
+- Mikolov, Yih, and Zweig, *Linguistic Regularities in Continuous Space Word Representations* (NAACL 2013): [paper page](https://aclanthology.org/N13-1090/). The abstract gives the example of "King − Man + Woman" landing close to "Queen," and reports answering just under 40% of the grammatical analogy questions correctly. Source checked 2026-10-27.
 
 ---
 
@@ -150,39 +151,39 @@ Morris et al., *Text Embeddings Reveal (Almost) As Much As Text* (2023): [author
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
 1. **[Basic · Concept]** What's the most fitting way to understand making a word into an embedding? <!-- quiz: q01 revision: 1 -->
-   - A. Translating the word into English
-   - B. Giving the word a numerical representation that can help compare similarity in meaning
-   - C. Storing the word in a database to be retrieved later
-   - D. Encrypting the word
-   > **Answer: B.** An embedding is a numerical representation that helps compare text. Similarity is approximate and depends on the model and comparison method. A is translation, C describes storing a record rather than constructing an embedding, and D is incorrect because an embedding is not encryption.
+   - A. Giving a word or sentence numeric coordinates to estimate how close meanings are
+   - B. Translating the word into a machine-only language, with meaning kept one-to-one
+   - C. Encrypting the word into a string of numbers so nobody who gets it can read the text
+   - D. Giving each word a fixed serial number, where closer numbers mean closer meanings
+   > **Answer: A.** An embedding is a numeric representation that helps compare how close pieces of text are in meaning; the similarity is approximate and depends on the model and comparison method. B treats it as translation, but an embedding doesn't guarantee a one-to-one match of meaning. C treats it as encryption, which section 4 of this chapter corrects. D is the most believable: a serial number is just a label, and neighboring numbers have no link in meaning, whereas an embedding is a long string of numbers compared by overall distance.
 
 2. **[Basic · Concept]** Why turn a word into a string of numbers (a vector) instead of having the computer handle the text directly? <!-- quiz: q02 revision: 1 -->
-   - A. Numbers look more sophisticated
-   - B. A computer can only do arithmetic and doesn't recognize words; once things are coordinates, the machine can judge nearness in meaning by "computing distance"
-   - C. It saves disk space
-   - D. Text slows the model down
-   > **Answer: B.** This is the bridge that translates "meaning" into the only language a machine understands (numbers). With coordinates, "which two words are similar in meaning" becomes computable (following Chapters 1 and 2: it's all number-crunching underneath). A, C, and D all miss the point: it isn't about looking nice or saving space, it's about **making semantics computable**.
+   - A. Numbers take up less space than text, so converting saves a lot of storage
+   - B. Once it's numbers, the model truly understands the word and won't misread it
+   - C. Computers only do math; as coordinates, closeness can be measured by distance
+   - D. The numbers put words in a fixed order, to make alphabetical lookups easier
+   > **Answer: C.** Once words are coordinates, "which two words are similar in meaning" becomes something you can compute (as in chapters 1 and 2, it's all number-crunching underneath). A isn't the goal; a string of hundreds or thousands of numbers often takes more space than the text. B goes too far: coordinates help estimate similarity, which isn't "truly understanding," and errors still happen. D confuses vectors with sort order.
 
 3. **[Advanced · Misconception]** “After I turn sensitive text into an embedding, it is safe to publish because nobody can reconstruct the text.” What is wrong? <!-- quiz: q03 revision: 1 -->
-   - A. Nothing: any embedding is secure encryption
-   - B. Embeddings are not encryption; inversion attacks can recover information or text under some conditions, so the vectors still need protection
-   - C. Every vector can always be decoded exactly with any model
-   - D. What's stored in the vector is the English translation
-   > **Answer: B.** No general lossless decoder does not mean guaranteed secrecy. Research demonstrates reconstruction for some models and conditions. A confuses embeddings with encryption; C overstates recovery; D does not describe what an embedding is. Keep sources separately for reliable retrieval and protect sensitive vectors.
+   - A. Nothing; a vector is just numbers, and no one can read any information from it
+   - B. It's wrong because any vector can be turned back into text with one click of a tool
+   - C. It's fine as long as you make the vectors with an obscure model nobody knows
+   - D. A vector isn't encryption; in some conditions text can be recovered, so protect it
+   > **Answer: D.** The lack of a universal lossless decoder doesn't guarantee secrecy; research has reconstructed text from vectors for some models and conditions. A is the very misconception to correct. B overstates the risk: recovery depends on the model, the text, and what an attacker knows, so not every vector can be reversed with one click. C is security through obscurity and is no substitute for access control.
 
 4. **[Advanced · Concept]** What does the famous example "king − man + woman ≈ queen" best illustrate about embeddings? <!-- quiz: q04 revision: 1 -->
-   - A. The model can do grade-school arithmetic
-   - B. The "meaning relationships" between words (like gender) become computable "directions" in coordinate space; relationships can be added and subtracted on the coordinates
-   - C. King and queen are synonyms
-   - D. The embedding stored the original text of these four words
-   > **Answer: B.** It shows an embedding packs in not isolated words but **a systematic web of meaning relationships**. "Switch the gender" gets encoded as a fixed direction in the coordinates, which is why this arithmetic works. A mistakes it for ordinary arithmetic (it's computing "coordinates of meaning," not a numbers problem); C and D both miss the point. Note that "≈" is an approximation, with error.
+   - A. Word meanings add and subtract as precisely as arithmetic, for any words at all
+   - B. Some relationships between words can show up as rough directions in the coordinates
+   - C. King and queen share the same coordinates in the model and are fully interchangeable
+   - D. The model stores the original text of "queen" right next to the word "king"
+   > **Answer: B.** The example shows that a relationship like "switch the gender" can appear as a rough direction in the coordinates. A turns it into a rule: the example comes from 2013-era static word vectors, where it held only for some examples, and modern LLM representations can't be added up this simply. C is wrong: "≈" means landing nearby; the two words don't share coordinates. D treats vectors as a place to store original text.
 
 5. **[Basic · Scenario]** In a tool that supports "search by meaning," you search "how do I make my computer run faster," and it puts an article titled "Methods for improving computer performance" at the very top, even though the phrase "run faster" never appears in it. What's the most reasonable explanation? <!-- quiz: q05 revision: 1 -->
-   - A. The tool is buggy; no keywords matched
-   - B. It uses embeddings to compare **meaning**, not **literal words**: the two texts' "coordinates of meaning" are very near, so it got pulled out despite the different wording
-   - C. That article secretly stuffed in keywords
-   - D. Pure coincidence
-   > **Answer: B.** An embedding-based search can rank passages by vector similarity even when key phrases differ. This is a plausible explanation, not proof of the tool's internals: synonym-aware keyword or hybrid search can also find related wording. The retrieved article still needs to be checked for relevance.
+   - A. It's a bug; an article that doesn't match the keywords shouldn't show up at all
+   - B. That article must have secretly added "run faster" as a hidden keyword somewhere
+   - C. Ranking by meaning can put a related article first even with different wording
+   - D. Being ranked first proves it's the most relevant, so you can use it without reading
+   > **Answer: C.** Embedding search ranks passages by vector similarity, so an article close in meaning can rank high even when the key phrases differ. That's a reasonable explanation, though it doesn't prove how the tool works inside: keyword search with synonyms, or hybrid search, could find it too. A mistakes "search by meaning" for literal matching only. B has no basis. D swings to over-trust: high similarity is just a signal, and you still need to check whether the article is really relevant and correct.
 
 6. **[Basic · Hands-on]** Ask the same model to edit the same public paragraph using three phrasings: “make this easier to read,” “polish this text,” and “fix awkward sentences.” Record which edits satisfy the intended task. What does this comparison establish, and what can it not establish about embeddings? <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** Wording may change, but this experiment alone cannot measure embedding distance or isolate why the answers differ: sampling, instructions, and the model’s full processing also matter. Use it to compare how clearly each prompt states the task. To test semantic similarity directly, use one embedding model on all examples and compare its similarity scores; do not compare vectors from different models.

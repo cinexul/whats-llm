@@ -35,7 +35,7 @@ Whichever path you take, **don't skip Part One**. It's the foundation of the who
 
 ## 3. How to use the extras
 
-- **The "Quiz" at the end of each chapter:** Six questions, in four types: concept, misconception, scenario, and hands-on. The reader reveals answers and explanations after you choose an option; open-ended questions have a reference you can expand. Don't just check right or wrong. The point is in the explanations: why an answer is wrong, and who tends to make that mistake.
+- **The "Quiz" at the end of each chapter:** Usually six questions, mostly concept, misconception, and scenario questions, often ending with a hands-on or observation exercise (a few chapters add other types, such as a calculation). For multiple-choice questions, the reader shows the answer and explanation after you pick an option; hands-on and observation exercises have no single right answer, so you can expand a list of points to look for. Don't just check right or wrong. The useful part is the explanation: why an answer is wrong, and when people tend to fall for it.
 - **Glossary (Appendix A):** A three-language reference (Chinese, Japanese, English). Look up any word you don't know.
 - **Prompt templates (Appendix B):** Fill-in-the-blank templates for everyday, work, study, coding, and other situations.
 - **Trilingual (Chinese / Japanese / English):** This book comes in Chinese, Japanese, and English editions. Click "**中文 / 日本語 / English**" at the top of the reader to switch with one tap; the content matches one to one.
