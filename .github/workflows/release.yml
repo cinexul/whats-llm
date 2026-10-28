@@ -223,8 +223,16 @@ jobs:
             if ($draft -ne 'true') {
               throw 'This release is already published. Use a new tag to create a draft.'
             }
-            gh release edit $env:RELEASE_TAG --target $env:GITHUB_SHA --title $title --notes-file $notes
+            gh release edit $env:RELEASE_TAG --target $env:GITHUB_SHA --title $title --notes-file $notes --prerelease=false
             if ($LASTEXITCODE -ne 0) { throw 'Failed to update the release draft.' }
+            # 删掉草稿里以前留下的其他文件，免得新旧版本混在一起
+            $keep = @($env:PORTABLE_ZIP, $env:PORTABLE_CHECKSUM, $env:INSTALLER_EXE, $env:INSTALLER_CHECKSUM) | ForEach-Object { Split-Path -Leaf $_ }
+            $assets = @(gh release view $env:RELEASE_TAG --json assets --jq '.assets[].name')
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to list draft assets.' }
+            foreach ($asset in $assets | Where-Object { $_ -and $keep -notcontains $_ }) {
+              gh release delete-asset $env:RELEASE_TAG $asset --yes
+              if ($LASTEXITCODE -ne 0) { throw "Failed to remove old asset $asset." }
+            }
           } else {
             gh release create $env:RELEASE_TAG --draft --target $env:GITHUB_SHA --title $title --notes-file $notes
             if ($LASTEXITCODE -ne 0) { throw 'Failed to create release draft.' }
