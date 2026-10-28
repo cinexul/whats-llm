@@ -100,40 +100,40 @@ Checked on 2026-10-22; memory features and key-reading rules rechecked on 2026-1
 
 > Six questions. Think first, then check the answer and explanation.
 
-1. **[Basic · Concept]** Where can information go in an AI workflow? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Where can information go in an AI workflow? <!-- quiz: q01 revision: 2 -->
    - A. Depending on setup: the model, tools, logs, and storage
    - B. Only to the chat window, and it vanishes when you close it
    - C. Only into the model's training data, and nowhere else
    - D. To every connected service, which receives everything
    > **Answer: A.** Follow the actual data route. Model context may include selected files and tool results, and logs, traces, memories, and backups can keep copies, so B and C are too optimistic; but not every connected party receives everything either (D).
 
-2. **[Basic · Concept]** Where should a real API key go when configuring an approved integration? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Where should a real API key go when configuring an approved integration? <!-- quiz: q02 revision: 2 -->
    - A. In the prompt, so the AI can finish the setup
    - B. In the code file, so it is handy whenever you need it
    - C. In a screenshot, since an image is not text
    - D. In designated secure settings or a secret manager
    > **Answer: D.** Use placeholders when discussing configuration, and let secure storage restrict who and what can use the key. A prompt (A) or a screenshot (C) sends the key out, and putting it in code (B) lets it leak along with files or repositories.
 
-3. **[Advanced · Misconception]** A service says it does not train on your content. What still needs checking? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** A service says it does not train on your content. What still needs checking? <!-- quiz: q03 revision: 2 -->
    - A. Nothing; no training means nothing is stored at all
    - B. Retention, access, deletion, and connected tools
    - C. Nothing, if it is a paid plan; paid terms are all safe
    - D. Only the model name; newer models care more about privacy
    > **Answer: B.** No training is a specific promise, not a promise of zero storage or unrestricted suitability for sensitive data, and memory features need their own check. Whether a plan is paid (C) or which model it uses (D) does not answer the retention, access, and deletion questions.
 
-4. **[Advanced · Scenario]** You use a local model with a cloud search tool and remote tracing enabled. Is the whole workflow necessarily offline? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Scenario]** You use a local model with a cloud search tool and remote tracing enabled. Is the whole workflow necessarily offline? <!-- quiz: q04 revision: 2 -->
    - A. Yes; if the model is local, the whole workflow is offline
    - B. Yes, as long as you open a new chat each time
    - C. No; search requests and traces leave the device
    - D. No; a local model cannot run offline in the first place
    > **Answer: C.** A model running locally can work offline, but the surrounding application and tools determine the complete data route. A new chat (B) does not change where tools send data, and a local model itself can run offline (D).
 
-5. **[Basic · Scenario]** You only need help polishing an email's wording. What is a good default for its customer's name and account number? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You only need help polishing an email's wording. What is a good default for its customer's name and account number? <!-- quiz: q05 revision: 2 -->
    - A. Include both; more detail makes the polishing more accurate
    - B. Replace or remove them and use an approved service
    - C. Send a screenshot instead, so they are not text data
    - D. Remove only the name; the account number is anonymous
    > **Answer: B.** Minimize the input. A screenshot is still data (C), and other details can identify a person, so removing only the name is no guarantee of anonymity (D). Approved workflows may process necessary personal information with appropriate safeguards.
 
-6. **[Hands-on · Observation]** Without entering private information, inspect an AI app you use. Identify its model route, connected tools, training setting, memory feature, and retention or deletion policy. <!-- quiz: q06 revision: 1 -->
+6. **[Hands-on · Observation]** Without entering private information, inspect an AI app you use. Identify its model route, connected tools, training setting, memory feature, and retention or deletion policy. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** These answers may live in different settings or documents, and memory may be on by default. Include any logs, shared workspaces, and backups you control. If a live credential was exposed, revocation or rotation is needed; deleting the conversation is not a substitute.

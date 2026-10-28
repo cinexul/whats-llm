@@ -120,40 +120,40 @@ That brings Part Four, "AI coding in practice," to a close: you now have the gen
 
 > Six questions, covering four types: concept, misconception, scenario, and hands-on. Think for yourself first, then read the answer in the quoted block.
 
-1. **[Basic · Concept]** What's this chapter's basic attitude toward "crashing"? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What's this chapter's basic attitude toward "crashing"? <!-- quiz: q01 revision: 2 -->
    - A. Most crashes come from badly written prompts; write them well to avoid them
    - B. Crashes are the norm; the goal is to recognize them and rescue yourself
    - C. A crash means the tool is no good, and you should switch to another one
    - D. Once you're experienced enough, you'll hardly ever crash at all anymore
    > **Answer: B.** Crashes come from a coding agent's nature of "will make mistakes + will act" (Chapters 23 and 24). Better prompts reduce some of them (A), but neither switching tools (C) nor experience (D) makes them go away. The mature way to use it is **knowing how to rescue**: recognizing the eight scenes and using the five-step first aid.
 
-2. **[Basic · Concept]** What's the correct order of the five-step first-aid checklist? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What's the correct order of the five-step first-aid checklist? <!-- quiz: q02 revision: 2 -->
    - A. Roll back → interrupt → new conversation → state the situation → diagnose
    - B. Interrupt → new conversation → roll back → diagnose → state the situation
    - C. Interrupt → state the situation → roll back → new conversation → diagnose
    - D. State the situation → diagnose → interrupt → roll back → new conversation
    > **Answer: C.** The order matters: **stop the loss first (interrupt), then take stock (state the situation), get back to a clean place (roll back), swap in a clean desk (new conversation), and finally think through why (diagnose).** Without interrupting first (A, D), it keeps changing things while you take stock; skip taking stock and roll back directly (B) and you easily retreat to the wrong spot.
 
-3. **[Advanced · Misconception]** "It went off course, I'll just cling to it and correct the original plan line by line." Why does this often get worse the more you correct? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** "It went off course, I'll just cling to it and correct the original plan line by line." Why does this often get worse the more you correct? <!-- quiz: q03 revision: 2 -->
    - A. It grows more careful with each correction, so it gets there eventually
    - B. The problem is that it corrects too slowly; a stronger model would fix it
    - C. As long as you explain in more detail each time, you can pull it back
    - D. Failed attempts fill the context, and it's carried along by old mistakes
    > **Answer: D.** This is the sixth scene, "stubbornly fixing a failing approach," rooted in that stuffed-full "desk" from Chapter 13. More detailed explanations (C) or a different model (B) leave the old mistakes sitting in the context. **Getting back to a clean state and starting a new conversation carrying the lesson** is almost always faster than stubbornly fixing in the mess: this is also steps ③ and ④ of the first-aid checklist.
 
-4. **[Advanced · Misconception]** "Rolling back equals failure, equals admitting defeat." Where's the mistake in this thought? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "Rolling back equals failure, equals admitting defeat." Where's the mistake in this thought? <!-- quiz: q04 revision: 2 -->
    - A. There's no mistake; rolling back means everything before was wasted
    - B. Rolling back is a safety net, often the fastest way back on track
    - C. Rolling back deletes the whole project, so it's only a last resort
    - D. Rolling back is for beginners; once skilled, you should fix it in place
    > **Answer: B.** "Save a starting point and check out a Git branch before acting" (Chapter 26) is laying the groundwork for exactly this moment. Rolling back only undoes the changes that went off course; the work you committed earlier is still there (A, C). The most common beginner mistake is precisely **flat refusing to roll back and gritting it out on a wreck** (D), ending up worse and worse.
 
-5. **[Basic · Scenario]** You're watching it work and suddenly notice it's about to delete a file you think is very important. What should you do most at this moment? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You're watching it work and suddenly notice it's about to delete a file you think is very important. What should you do most at this moment? <!-- quiz: q05 revision: 2 -->
    - A. Hold off approving, see what it's trying to do, and ask if it's unclear
    - B. Approve it; you can always get the file back with Git later anyway
    - C. Let it delete first, then read the diff afterward to judge if it was right
    - D. Close the whole tool and start this task over again from the beginning
    > **Answer: A.** This hits both "clicking approve without looking at the diff" (scene 3) and step ① of first aid, "interrupt first." **See clearly before permission, and if you can't read it don't let it through** (Chapters 25 and 26). B and C assume a deleted file can always be recovered, but a file that was never committed has no copy in Git; closing the tool outright (D) throws away the chance to find out what's going on.
 
-6. **[Basic · Hands-on / Observation]** You don't have to actually install the tool: look back at the eight crash scenes in this chapter and **match yourself against them**: in your past use of AI (even just chatting), which two or three did you step into most? Then copy down the corresponding "fixes" and stick them somewhere you'll see them later. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on / Observation]** You don't have to actually install the tool: look back at the eight crash scenes in this chapter and **match yourself against them**: in your past use of AI (even just chatting), which two or three did you step into most? Then copy down the corresponding "fixes" and stick them somewhere you'll see them later. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Most people will find they keep tripping over the same one or two (a very common pair is "never switching the conversation" and "trusting hallucinations"). The eight scenes really only break three principles: **not saying it clearly, not holding the two gates, not managing context / data well**; watching your own high-frequency items and plugging them at the source is more useful than memorizing all eight. For the basic rollback commands, see "Git: the bare minimum to get started" in Chapter 26; for how a specific tool operates, **refer to the official documentation** (see Appendix C).

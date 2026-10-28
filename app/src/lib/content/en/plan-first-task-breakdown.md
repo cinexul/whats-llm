@@ -124,35 +124,35 @@ With that, the four "shared" approaches of Part Four are complete: **it's a capa
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Think first, then read the answer in the quoted block.
 
-1. **[Basic · Concept]** What's the main benefit of "having it lay out a plan and approving before acting"? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What's the main benefit of "having it lay out a plan and approving before acting"? <!-- quiz: q01 revision: 2 -->
    - A. It saves a lot of tokens, since a plan is much shorter than code
    - B. It makes it write faster, since its thinking is sorted out in advance
    - C. You catch a misunderstanding before it acts and fix it in one line
    - D. Once the plan is approved, you no longer need to check the result
    > **Answer: C.** This is the highest-return step: catching the off-track before acting costs one sentence; catching it after acting costs throwing out a pile of changes and redoing them (echoing Chapters 14, 24). A and B might happen along the way, but they aren't the point. D is a common misconception: the plan is the gate before acting, and you still read the diff and run tests afterward.
 
-2. **[Basic · Concept]** About the "plan first, execute later" feature, which statement is right? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** About the "plan first, execute later" feature, which statement is right? <!-- quiz: q02 revision: 2 -->
    - A. It's one fixed command, written exactly the same way in every tool
    - B. Only products with a "plan mode" button can work this way at all
    - C. Many tools build it in; without it, one sentence asks for a plan first
    - D. Once it's on, the AI only makes plans and never carries out the task
    > **Answer: C.** Its essence is splitting "make a plan" and "actually act" into two stages with a human-approval gate in between. Names and toggles differ by tool (see the official documentation), so A is wrong; you can ask for it in plain words without any button, so B is wrong; once you approve, it goes ahead and acts, so D is wrong.
 
-3. **[Basic · Misconception]** "Having it plan first is a waste of time, better to just let it work and fix mistakes as they come." What's wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** "Having it plan first is a waste of time, better to just let it work and fix mistakes as they come." What's wrong? <!-- quiz: q03 revision: 2 -->
    - A. Fixing after the fact costs most; catch it late and you must redo it all
    - B. Nothing; today's AI rarely misunderstands, so going straight is fastest
    - C. It's about money: planning is free, and only the actual work is billed
    - D. Plans are more accurate than code, so after reading one you can skip checks
    > **Answer: A.** Spending half a minute on the "blueprint" first beats tearing it out and relaying afterward by a mile. With a big change, the Chapter 25 sign-off set fails and the mistake hides in your blind spot. B underestimates how often it misunderstands; C misses the point, since planning and acting both use your allowance; D treats "reading the plan" as a substitute for signing off.
 
-4. **[Advanced · Misconception]** Someone says: "Breaking a task small just means sending the request as a few sentences in a row; no need to stop in between, just read the whole diff at the end." What does this miss? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** Someone says: "Breaking a task small just means sending the request as a few sentences in a row; no need to stop in between, just read the whole diff at the end." What does this miss? <!-- quiz: q04 revision: 2 -->
    - A. It isn't small enough; real splitting means changing one line per step
    - B. Checking and committing each step, so a mistake can be undone on its own
    - C. Nothing; sending it as several sentences already lowers the risk by itself
    - D. Only tools with a plan mode can split a task into small steps at all
    > **Answer: B.** The value of small pieces is that each one can be followed, verified, and rolled back on its own. Without stopping in between, the final diff is still one huge blob with the mistakes mixed in, so C is wrong. Breaking it small doesn't mean one line at a time (A), and any tool can be asked in one sentence to go step by step (D).
 
-5. **[Basic · Scenario]** It gives you a plan, and the first line reads "I understand you want me to redo the entire payment system." But you only wanted it to "change a button color." What should you do? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** It gives you a plan, and the first line reads "I understand you want me to redo the entire payment system." But you only wanted it to "change a button color." What should you do? <!-- quiz: q05 revision: 2 -->
    - A. Let it work from its own understanding, then see whether the result is right
    - B. Approve the plan, but remind it to change only the parts about the button
    - C. Wait until it finishes the first step, then judge whether it understood

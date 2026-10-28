@@ -117,40 +117,40 @@ Sources checked 2026-10-27.
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** What's the most accurate one-sentence summary of what "attention" does? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What's the most accurate one-sentence summary of what "attention" does? <!-- quiz: q01 revision: 2 -->
    - A. It looks at every word in the sentence evenly, so no information gets missed
    - B. It records all your past conversations so later chats can call them up any time
    - C. For each position, it decides which words to draw on and how much each weighs
    - D. It compresses the whole sentence into one set of numbers for comparing meanings
    > **Answer: C.** The core of attention is "looking with emphasis": giving more weight to words related to the current position, that is, underlining what matters. A is the opposite: it specifically does not look evenly. B mixes attention up with context and product memory (Chapter 3). D sounds more like the embeddings of Chapter 5, which compress meaning into vectors to compare closeness.
 
-2. **[Basic · Concept]** Which statement about the Transformer is correct? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which statement about the Transformer is correct? <!-- quiz: q02 revision: 2 -->
    - A. It's a chat product on a par with ChatGPT, released by one company on its own
    - B. It's an architecture built around attention that most mainstream models are based on
    - C. It's a specialized AI chip, and models have to be installed on it before they can run
    - D. It means every company's LLM is exactly the same program under a different name
    > **Answer: B.** The Transformer is like an "engine type": most mainstream large models are built on it or on improved and hybrid versions of it. A mistakes the architecture for a product; C mistakes it for hardware. D is the most confusing: sharing an architecture doesn't make two models the same, since size, training data, and modifications differ from company to company, and some mix in other kinds of layers.
 
-3. **[Advanced · Misconception]** A model connects "it" to "book" in "Xiao Li returned the book to the library, because it was already overdue," and some say this shows "it already understands like a person." Which view is most sound? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** A model connects "it" to "book" in "Xiao Li returned the book to the library, because it was already overdue," and some say this shows "it already understands like a person." Which view is most sound? <!-- quiz: q03 revision: 2 -->
    - A. It shows useful patterns, even common sense, were learned, but not human-like understanding
    - B. That's right: solving a sentence that needs common sense proves it understands like a person
    - C. It's just luck: the model really only links a pronoun to whichever noun is closest to it
    - D. It got it right by looking up a built-in grammar dictionary, which has nothing to do with training
    > **Answer: A.** This is a Winograd-style sentence: swap "overdue" for "about to close" and "it" becomes the library, which grammar alone can't settle. Getting it right shows it learned useful patterns, possibly including common sense, but doesn't prove human-like understanding. B equates behavior directly with human-like understanding. C doesn't hold up: the noun closest to "it" is "library," so linking to the nearest noun would get it wrong. D is also wrong: grammar rules can't resolve sentences like this, and its behavior comes from patterns learned in training.
 
-4. **[Advanced · Misconception]** "The attention mechanism is very strong, so it almost never errs when handling a sentence." Where does this reasoning wobble? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "The attention mechanism is very strong, so it almost never errs when handling a sentence." Where does this reasoning wobble? <!-- quiz: q04 revision: 2 -->
    - A. It doesn't: as long as attention is used, mix-ups over references basically stop
    - B. It's the reverse: attention makes models more error-prone, so less of it is better
    - C. Errors depend only on the context window's size; a big enough window prevents them
    - D. Underlining well isn't never erring; rare structures or traps can still trip it
    > **Answer: D.** Attention working doesn't mean it can't err. With unusual sentence structures, deliberate traps, or knowledge it never learned, it can still connect things wrong, and its tone may not give that away (Chapter 9). A is the very reasoning in the question. B is backwards: attention is a big reason it can handle long sentences at all. C blames window size, but a bigger window doesn't fix misreadings.
 
-5. **[Basic · Scenario]** You wrote a sentence with a somewhat roundabout reference and sent it to the AI, and it took "this plan" to mean the one you didn't intend. What's the most practical next step? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You wrote a sentence with a somewhat roundabout reference and sent it to the AI, and it took "this plan" to mean the one you didn't intend. What's the most practical next step? <!-- quiz: q05 revision: 2 -->
    - A. Resend the exact same sentence a few times and wait for it to work it out
    - B. Decide it can't read your language, and switch to English so it won't err
    - C. Replace "this plan" with its real name to clear up the ambiguity, then ask
    - D. Add "please read this carefully" at the end, and it will pick the right one
    > **Answer: C.** The more roundabout the reference, the easier it is to misread; rather than hoping it guesses right, remove the ambiguity directly (a basic of prompting in Chapter 11). A leaves the ambiguity in place, and since output has some randomness, resending may not help (Chapter 8). B blows one mix-up up into a language problem, and switching languages doesn't remove the ambiguity. D is a magic phrase, no substitute for saying it clearly.
 
-6. **[Basic · Hands-on]** Make up a sentence with **an ambiguous pronoun**, ask the AI "what does 'it / he / this' refer to here, and why," and try several sentence structures. Also try pairs that differ by a word or two, such as "because it was already overdue" and "because it was about to close." Observe: what kinds of sentences does it answer steadily, and what kinds easily get connected wrong? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Make up a sentence with **an ambiguous pronoun**, ask the AI "what does 'it / he / this' refer to here, and why," and try several sentence structures. Also try pairs that differ by a word or two, such as "because it was already overdue" and "because it was about to close." Observe: what kinds of sentences does it answer steadily, and what kinds easily get connected wrong? <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** With common sentence structures it usually answers quickly and steadily; with tricky structures, sentences that need unusual knowledge, or deliberate traps, it's more likely to connect wrong. Sentence pairs show whether it changes its answer along with the key word. These observations help you judge where it's reliable and where you should reread things yourself, but getting a sentence right or wrong can't by itself prove whether it understands like a person.

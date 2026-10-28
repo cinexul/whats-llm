@@ -127,40 +127,40 @@ That wraps up the first three "close to life" projects of Part Five. You should 
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Project chapters lean toward scenario and hands-on. Think first, then read the answer explanations in the quote blocks.
 
-1. **[Basic · Concept]** What method does this chapter suggest to save the hassle of "verbally explaining the notes format before every meeting"? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What method does this chapter suggest to save the hassle of "verbally explaining the notes format before every meeting"? <!-- quiz: q01 revision: 2 -->
    - A. Explain the format in more detail before each meeting
    - B. Have it look at last time's notes and keep the format itself
    - C. Set one fixed template and have it fill that in every time
    - D. Let it tidy freely, then fix up the format yourself at the end
    > **Answer: C.** Verbal explanations can drop or shift each time, so the output is hit or miss; a written-down template nails "the format I want," and it fills in by the same frame each time, so the results are stable and you check them faster. A is still explaining out loud, and however detailed, it drifts; B relies on it "remembering last time," but the model itself doesn't remember across conversations, and if you hand it last time's notes again, you're really just giving it a template; D hands the formatting work back to you.
 
-2. **[Basic · Concept]** What is this chapter's "red line that won't budge"? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What is this chapter's "red line that won't budge"? <!-- quiz: q02 revision: 2 -->
    - A. Check to-dos and owners by hand, line by line, before sending
    - B. Clean up the transcript by hand before you give it to the AI
    - C. Never leave any "not specified" items in the notes
    - D. Write "don't make things up" in the template and it won't
    > **Answer: A.** A mistake elsewhere is at worst some clumsy phrasing, but with a to-do like "who's responsible for what, due when," once it's wrong (it misheard or invented), the notes go out and really mislead people and cause real harm, so you must check every line yourself before sending. B isn't needed: it can handle a conversational transcript, and what matters is that the transcript is complete; C is the opposite of the advice, since anything uncertain should be marked "not specified"; D's "don't invent" instruction cuts down on guessing but can't replace your check.
 
-3. **[Advanced · Misconception]** "These notes are laid out neatly and read smoothly, so they're probably fine, just mass-send them." What's wrong with this? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** "These notes are laid out neatly and read smoothly, so they're probably fine, just mass-send them." What's wrong with this? <!-- quiz: q03 revision: 2 -->
    - A. Mass-sending is too informal; send them to each person instead
    - B. The issue is the missing signature; add your name and send
    - C. Smooth reading shows it understood the meeting; send it
    - D. Right format isn't right content; still check each to-do
    > **Answer: D.** The notes' results "look right but may actually be wrong," which is exactly where they're most deceptive. It can lay out a task no one mentioned or a wrongly assigned owner without a flaw. C mistakes "reads smoothly" for "understood" and "correct," but fluency doesn't prove the content is right; A and B change how you send or add a signature, and neither touches the problem that the content may be wrong.
 
-4. **[Advanced · Scenario]** When checking the to-dos, what's the most efficient and reliable way? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Scenario]** When checking the to-dos, what's the most efficient and reliable way? <!-- quiz: q04 revision: 2 -->
    - A. Have it give each to-do a confidence score from 1 to 10
    - B. Have it cite each to-do's source line, then compare
    - C. Send the notes out and let attendees spot the errors
    - D. Have it redo the notes in other words and compare the two
    > **Answer: B.** Have it "prove its source," and you can check line by line against the source: did someone really bring this up? Is the owner this person? Is the time something it added itself? The ones that don't match the source, change or delete right away. A's score is still its own judgment, and a high score can sit on an invented item; C pushes the checking onto the recipients after the wrong to-do has already gone out; D's two versions can make the same mistake.
 
-5. **[Basic · Scenario]** The transcript only says "follow up on the coordination after the meeting as soon as possible," with no specific who or what day. What's the safest way to write this to-do in the notes? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** The transcript only says "follow up on the coordination after the meeting as soon as possible," with no specific who or what day. What's the safest way to write this to-do in the notes? <!-- quiz: q05 revision: 2 -->
    - A. By meeting custom, assign it to the meeting chair
    - B. Delete it, so the notes don't carry anything uncertain
    - C. Mark it "owner and date not specified, to be confirmed"
    - D. Have it infer the most likely person and date from context
    > **Answer: C.** For anything uncertain, mark it honestly as "not specified / to be confirmed," and never fill in "as soon as possible" as a specific person and date. A and D make the decision on the meeting's behalf, producing an arrangement that looks specific but that nobody actually agreed to; B makes the item vanish from the notes, so nobody remembers to follow up afterward.
 
-6. **[Advanced · Hands-on]** Following Step 1 of this chapter, write your own "meeting-notes template" by hand (including at least: topic, topics, conclusions, to-dos [what to do / who's responsible / due when], to be confirmed). After writing it, answer: why does the to-dos column specifically require stating "who's responsible, due when" clearly? <!-- quiz: q06 revision: 1 -->
+6. **[Advanced · Hands-on]** Following Step 1 of this chapter, write your own "meeting-notes template" by hand (including at least: topic, topics, conclusions, to-dos [what to do / who's responsible / due when], to be confirmed). After writing it, answer: why does the to-dos column specifically require stating "who's responsible, due when" clearly? <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Because the to-dos are the **only part of the whole notes that lands on "a specific person doing a specific thing,"** and also the part **most likely to cause harm when wrong**; splitting it into "what to do / who / when" makes it both easy to assign and easy for you to check line by line before it goes out. A template standardizes the format, but "being responsible for the content" AI can't do for you. Which tool to use for tidying is **best confirmed against the provider's official documentation** (Chapters 18 and 24).

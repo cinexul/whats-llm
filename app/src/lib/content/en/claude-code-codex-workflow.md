@@ -122,40 +122,40 @@ The next chapter (Chapter 25) covers the step in this workflow most worth practi
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Think first, then read the answer in the quoted block.
 
-1. **[Basic · Concept]** What's the most fundamental difference between a coding agent (like Claude Code / Codex) and a web chat AI? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What's the most fundamental difference between a coding agent (like Claude Code / Codex) and a web chat AI? <!-- quiz: q01 revision: 2 -->
    - A. It uses a stronger model, so its answers are more accurate and less often wrong
    - B. It remembers your whole project and doesn't forget even in a new conversation
    - C. It only answers programming questions and ignores every other subject
    - D. It can read and write project files and run commands, not just hand you text
    > **Answer: D.** A chat AI is "you copy and paste back and forth"; a coding agent "takes action directly in your project." That's exactly why it's efficient, and why it needs the "permission mechanism" watching it. A and C treat the difference as model strength or subject range. B confuses the model with the product: the model itself has no cross-conversation memory, and "project memory" is the product putting files back into the context each time.
 
-2. **[Basic · Concept]** In the "investigate -> plan -> act -> sign off" loop, at which step is the human's work most critical? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** In the "investigate -> plan -> act -> sign off" loop, at which step is the human's work most critical? <!-- quiz: q02 revision: 2 -->
    - A. Investigate: find all the relevant files yourself, then hand them over
    - B. Act: watch every single edit it makes and approve each one by one
    - C. Approving the plan, then reading the diff and running tests afterward
    - D. Writing a clear goal is enough; the remaining steps can all be left to it
    > **Answer: C.** Letting the AI do the work, the human guards two gates: **approve the plan before acting, sign off on the change after acting.** Grunt work like investigating and editing goes to it (A, B); you just skim and stay ready to stop it. D gives up both gates.
 
-3. **[Basic · Misconception]** "It's AI, the code it writes should be correct, just merge it." What's wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** "It's AI, the code it writes should be correct, just merge it." What's wrong? <!-- quiz: q03 revision: 2 -->
    - A. It can be confidently wrong; don't merge what you can't follow or verify
    - B. Nothing; as long as the code runs, that alone shows it must be correct
    - C. The mistake is not asking it to confirm that there's really no problem
    - D. The mistake is not rewriting it all; its code always needs a human to redo it
    > **Answer: A.** Hallucination (Chapter 9) happens when writing code too: inventing functions that don't exist, using the syntax of the wrong version. Running isn't the same as correct (B); having it vouch for itself isn't verification (C); rewriting everything goes to the other extreme (D). Read the diff, run tests, and ask for clarity on what you can't follow.
 
-4. **[Advanced · Misconception]** "Having it do a whole big feature in one go is easiest." Why is it often more work? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "Having it do a whole big feature in one go is easiest." Why is it often more work? <!-- quiz: q04 revision: 2 -->
    - A. It isn't; stating a big task once actually saves back-and-forth messages
    - B. It can only change one file at a time, so a big feature takes many rounds
    - C. Big changes are hard to check line by line, and errors are hard to find or undo
    - D. The only issue is that big tasks use more of your allowance; nothing else differs
    > **Answer: C.** A big change is a big blind spot: the diff is too long to read, mistakes hide in the pile, and rollback isn't clean. Breaking the task small, seeing the plan first, and signing off in small steps is actually fastest (Chapter 27). B is wrong: it can change many files at once, and that is exactly the problem. D sees only the allowance and misses the trouble with checking and rolling back.
 
-5. **[Basic · Scenario]** You have it change code, it goes off track and gets messier. What's the best move to cut losses? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You have it change code, it goes off track and gets messier. What's the best move to cut losses? <!-- quiz: q05 revision: 2 -->
    - A. Keep correcting it line by line in the same conversation until it's right
    - B. Roll back to a clean state and start a new chat that names the pitfalls
    - C. Have it make another pass over the current changes to overwrite the errors
    - D. Delete the whole project and have it generate everything again from scratch
    > **Answer: B.** Grinding away inside a scrambled context (A, C) usually just makes things worse. **Rolling back + reopening a clean conversation that carries the lesson** is almost always faster (Chapters 13, 30). Committing or backing up existing work first gives you a recovery point (Git basics are in Chapter 26). Roll back only this task's changes; deleting the project (D) throws away the good parts too. Git cannot undo external actions.
 
-6. **[Advanced · Hands-on / Observation]** No need to actually install a tool: find a code change you can follow (or the diff example in Chapter 25) and practice answering just three questions: **what did it change? could it break anything else? can I say in one sentence what this bit does?** If you can't answer the third, go back and ask "what does this bit do." <!-- quiz: q06 revision: 1 -->
+6. **[Advanced · Hands-on / Observation]** No need to actually install a tool: find a code change you can follow (or the diff example in Chapter 25) and practice answering just three questions: **what did it change? could it break anything else? can I say in one sentence what this bit does?** If you can't answer the third, go back and ask "what does this bit do." <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** "Signing off" isn't mysterious — it's these three questions. Building the muscle memory of "don't let it through if you can't follow it" matters more than knowing any command. The installation and commands of specific tools: **refer to the official documentation** (see Chapters 28 and 29 and Appendix C).

@@ -86,42 +86,42 @@ Use the four terms to answer four questions: **what generates, what you use, how
 
 ## Quiz
 
-1. **[Basic · Concept]** Which description of these four terms is most accurate? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which description of these four terms is most accurate? <!-- quiz: q01 revision: 2 -->
    - A. Four stacked layers that every product must contain
    - B. Four competing kinds of model; just pick the strongest
    - C. Different views of one system, which can overlap
    - D. Two names for the same thing: API and agent
    > **Answer: C.** A product can contain an agent that calls a model through an API, and other combinations exist. A treats them as floors that must be built in order; D confuses an interface that connects programs with a way of carrying out work.
 
-2. **[Basic · Concept]** What is an API? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What is an API? <!-- quiz: q02 revision: 2 -->
    - A. An agreed interface programs use to request a service
    - B. A class of larger models with more parameters
    - C. A premium feature included with your chat subscription
    - D. A way of letting the AI decide its own next step
    > **Answer: A.** An API connects programs to services, which may be a model or something else such as search or file access. It is not itself a model (B), and a chat subscription does not automatically include API usage (C). D describes an agent.
 
-3. **[Basic · Misconception]** An assistant searches the web once. What can you conclude? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** An assistant searches the web once. What can you conclude? <!-- quiz: q03 revision: 2 -->
    - A. It is an agent that can finish the whole job alone
    - B. It has also gained permission to edit your files
    - C. The search ran locally, so nothing left your device
    - D. It can search, which does not yet prove it acts autonomously
    > **Answer: D.** A fixed workflow can call a tool once too. Whether it is an agent depends on whether it chooses and adjusts its next step based on results. A search capability is not file permission (B), and it says nothing about where content is processed (C).
 
-4. **[Intermediate · Scenario]** You bought a chat subscription and a separate tool requests an API key. What should you check? <!-- quiz: q04 revision: 1 -->
+4. **[Intermediate · Scenario]** You bought a chat subscription and a separate tool requests an API key. What should you check? <!-- quiz: q04 revision: 2 -->
    - A. Nothing; the subscription already covers all usage
    - B. Whether the tool's sign-in and usage are billed separately
    - C. Whether both products display the same model name
    - D. Whether you can paste the key into chat for the AI to set up
    > **Answer: B.** A chat subscription and a developer API balance are not automatically the same entitlement; some tools accept a subscription login, others need a key or a separate balance. A is exactly that misconception; matching model names say nothing about billing (C); a key is a credential and does not belong in a chat (D).
 
-5. **[Basic · Scenario]** A desktop assistant reads a document using a cloud model. Where might the document's contents be processed? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** A desktop assistant reads a document using a cloud model. Where might the document's contents be processed? <!-- quiz: q05 revision: 2 -->
    - A. Possibly at the cloud service, depending on what the app sends
    - B. Only on this computer, because the app is installed right there
    - C. Only on the computer, because the file is on its hard drive
    - D. It is encrypted locally, so the cloud never sees the content
    > **Answer: A.** Installation location and processing location are separate questions. With a cloud model, the excerpts the app sends are processed by the provider. B and C mistake where the app or file sits for where processing happens; D assumes a protection the product has not promised.
 
-6. **[Basic · Observation]** A product does not disclose the exact model handling your request. What is the soundest description? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Observation]** A product does not disclose the exact model handling your request. What is the soundest description? <!-- quiz: q06 revision: 2 -->
    - A. Infer the most likely model from the style of the answers
    - B. Write down the company's newest, strongest model
    - C. Note the product and features; mark the model as unknown

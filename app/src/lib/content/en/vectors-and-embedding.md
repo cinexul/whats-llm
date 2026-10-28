@@ -150,35 +150,35 @@ With this chapter closed, the core of Part One on "the model's inner workings" i
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** What's the most fitting way to understand making a word into an embedding? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What's the most fitting way to understand making a word into an embedding? <!-- quiz: q01 revision: 2 -->
    - A. Giving a word or sentence numeric coordinates to estimate how close meanings are
    - B. Translating the word into a machine-only language, with meaning kept one-to-one
    - C. Encrypting the word into a string of numbers so nobody who gets it can read the text
    - D. Giving each word a fixed serial number, where closer numbers mean closer meanings
    > **Answer: A.** An embedding is a numeric representation that helps compare how close pieces of text are in meaning; the similarity is approximate and depends on the model and comparison method. B treats it as translation, but an embedding doesn't guarantee a one-to-one match of meaning. C treats it as encryption, which section 4 of this chapter corrects. D is the most believable: a serial number is just a label, and neighboring numbers have no link in meaning, whereas an embedding is a long string of numbers compared by overall distance.
 
-2. **[Basic · Concept]** Why turn a word into a string of numbers (a vector) instead of having the computer handle the text directly? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Why turn a word into a string of numbers (a vector) instead of having the computer handle the text directly? <!-- quiz: q02 revision: 2 -->
    - A. Numbers take up less space than text, so converting saves a lot of storage
    - B. Once it's numbers, the model truly understands the word and won't misread it
    - C. Computers only do math; as coordinates, closeness can be measured by distance
    - D. The numbers put words in a fixed order, to make alphabetical lookups easier
    > **Answer: C.** Once words are coordinates, "which two words are similar in meaning" becomes something you can compute (as in chapters 1 and 2, it's all number-crunching underneath). A isn't the goal; a string of hundreds or thousands of numbers often takes more space than the text. B goes too far: coordinates help estimate similarity, which isn't "truly understanding," and errors still happen. D confuses vectors with sort order.
 
-3. **[Advanced · Misconception]** “After I turn sensitive text into an embedding, it is safe to publish because nobody can reconstruct the text.” What is wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** “After I turn sensitive text into an embedding, it is safe to publish because nobody can reconstruct the text.” What is wrong? <!-- quiz: q03 revision: 2 -->
    - A. Nothing; a vector is just numbers, and no one can read any information from it
    - B. It's wrong because any vector can be turned back into text with one click of a tool
    - C. It's fine as long as you make the vectors with an obscure model nobody knows
    - D. A vector isn't encryption; in some conditions text can be recovered, so protect it
    > **Answer: D.** The lack of a universal lossless decoder doesn't guarantee secrecy; research has reconstructed text from vectors for some models and conditions. A is the very misconception to correct. B overstates the risk: recovery depends on the model, the text, and what an attacker knows, so not every vector can be reversed with one click. C is security through obscurity and is no substitute for access control.
 
-4. **[Advanced · Concept]** What does the famous example "king − man + woman ≈ queen" best illustrate about embeddings? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Concept]** What does the famous example "king − man + woman ≈ queen" best illustrate about embeddings? <!-- quiz: q04 revision: 2 -->
    - A. Word meanings add and subtract as precisely as arithmetic, for any words at all
    - B. Some relationships between words can show up as rough directions in the coordinates
    - C. King and queen share the same coordinates in the model and are fully interchangeable
    - D. The model stores the original text of "queen" right next to the word "king"
    > **Answer: B.** The example shows that a relationship like "switch the gender" can appear as a rough direction in the coordinates. A turns it into a rule: the example comes from 2013-era static word vectors, where it held only for some examples, and modern LLM representations can't be added up this simply. C is wrong: "≈" means landing nearby; the two words don't share coordinates. D treats vectors as a place to store original text.
 
-5. **[Basic · Scenario]** In a tool that supports "search by meaning," you search "how do I make my computer run faster," and it puts an article titled "Methods for improving computer performance" at the very top, even though the phrase "run faster" never appears in it. What's the most reasonable explanation? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** In a tool that supports "search by meaning," you search "how do I make my computer run faster," and it puts an article titled "Methods for improving computer performance" at the very top, even though the phrase "run faster" never appears in it. What's the most reasonable explanation? <!-- quiz: q05 revision: 2 -->
    - A. It's a bug; an article that doesn't match the keywords shouldn't show up at all
    - B. That article must have secretly added "run faster" as a hidden keyword somewhere
    - C. Ranking by meaning can put a related article first even with different wording

@@ -139,40 +139,40 @@ In the next chapter we apply this craft to a high-frequency scenario: how to "fe
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** Why does "polish this for me" often not work? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Why does "polish this for me" often not work? <!-- quiz: q01 revision: 2 -->
    - A. "Polish" is too casual; it only responds to formal, precise commands
    - B. Your unstated length, tone, and audience leave it guessing
    - C. The sentence is too short, so the model can't give it enough attention
    - D. Polishing is a subjective judgment, which models are simply bad at
    > **Answer: B.** It can only continue from what you actually wrote (Chapter 4). The unstated requirements behind "polish" get filled in with a guess at what most people usually want, which may not be what you want. A assumes it needs special commands; plain language works fine. C blames the length, but a short sentence can still be clear. D is wrong: polishing is one of its strengths. What's missing is your requirements.
 
-2. **[Basic · Concept]** Which five blocks make up the "all-purpose framework" in this chapter? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which five blocks make up the "all-purpose framework" in this chapter? <!-- quiz: q02 revision: 2 -->
    - A. Context, task, constraints, format, success criteria
    - B. Role, tone, length, layout, reference examples
    - C. Goal, work steps, tools needed, deadline, owner
    - D. Question, material, requirements, examples, regenerate
    > **Answer: A.** Context, task, constraints, format, success criteria. You don't have to write them all every time, but running through them in your head keeps you from missing what matters, especially the often-forgotten "constraints" and "format." In B, tone and length are really part of "constraints," and examples are a separate trick from section 4. D mixes a few tips in with the framework. C is more like a project plan.
 
-3. **[Advanced · Misconception]** Someone says: "The more specific a prompt, the more it limits the AI's play, so you should be vague and let it run free." What's the problem here? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** Someone says: "The more specific a prompt, the more it limits the AI's play, so you should be vague and let it run free." What's the problem here? <!-- quiz: q03 revision: 2 -->
    - A. The idea is right; just regenerate a few times to make up for vagueness
    - B. Specific constraints matter only for long texts; short asks can be vague
    - C. The real problem is that specific prompts use more tokens and cost more
    - D. For everyday tasks like rewriting and summarizing, specifics cut rework
    > **Answer: D.** Everyday tasks want "right, and the version I wanted," so spelling out constraints saves rework. Only open tasks like brainstorming suit a rough direction and free rein. A relies on luck; regenerating helps after you've been clear. B is wrong: short asks still need length, audience, and format. C's few saved tokens are nothing next to the cost of repeated rework.
 
-4. **[Advanced · Misconception]** You want a certain layout style, you keep describing it in words, and it never feels right. Which approach is most likely to work? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** You want a certain layout style, you keep describing it in words, and it never feels right. Which approach is most likely to work? <!-- quiz: q04 revision: 2 -->
    - A. Add more and finer adjectives until the description is precise enough
    - B. Switch to a stronger model, since style depends on the model's ability
    - C. Paste in a sample you're happy with and have it follow that sample
    - D. Rewrite the whole prompt in another language the model handles better
    > **Answer: C.** Copying a sample is easier than following a description, and style is the hardest thing to pin down in words, so one or two samples are the quickest fix. A keeps piling on adjectives, which is exactly why you're stuck. B and D blame the model or the language, when it's really a matter of how the request is expressed.
 
-5. **[Basic · Scenario]** You want the AI to rewrite a technical explanation for an older relative with no technical background. Which prompt is most likely to nail it in one pass? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You want the AI to rewrite a technical explanation for an older relative with no technical background. Which prompt is most likely to nail it in one pass? <!-- quiz: q05 revision: 2 -->
    - A. "Rewrite this technical explanation in a rigorous, expert tone, keep every term, and make it sound authoritative. Original: ..."
    - B. "Make it one paragraph of about 150 words for an older relative, no jargon, with everyday comparisons for hard parts. Original: ..."
    - C. "This explanation isn't great. Please really improve it and make it easier to read, smoother, and better organized. Original: ..."
    - D. "You are a senior technical expert. Think carefully, then rewrite the explanation below and make it absolutely perfect. Original: ..."
    > **Answer: B.** It spells out the audience (an older relative), length (about 150 words), constraints (no jargon, everyday comparisons), and format (one paragraph), so the critical "constraints" and "format" are both there. A gets the tone and audience backwards. C just says "polish" at greater length and still doesn't say how long or for whom. D leans on a role and "absolutely perfect" but gives none of the key constraints or format.
 
-6. **[Basic · Hands-on]** Take a vague instruction you'd normally fire off ("summarize this for me," "write a notice") and fill it out using "context, task, constraints, format, success criteria," especially adding **length, audience, tone, and the format you want**. Ask once with each version, before and after, and compare results. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Take a vague instruction you'd normally fire off ("summarize this for me," "write a notice") and fill it out using "context, task, constraints, format, success criteria," especially adding **length, audience, tone, and the format you want**. Ask once with each version, before and after, and compare results. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** The filled-out version usually has a clearly higher hit rate and clearly less back-and-forth. The difference isn't that the model got smarter; it's that you turned the requirements you'd taken for granted into text it can see. Compare them yourself once and you've got the craft of spelling things out. Next time you're stuck, look back first: length, audience, tone, format, did I say those four?

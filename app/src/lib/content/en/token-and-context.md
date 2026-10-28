@@ -140,40 +140,40 @@ The sources above were checked 2026-10-22.
 
 > Six questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the blockquote under each question. Think first, then check.
 
-1. **[Basic · Concept]** Which sentence is most accurate? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which sentence is most accurate? <!-- quiz: q01 revision: 2 -->
    - A. A token is one character or one letter, so counting characters gives the token count
    - B. A token is one whole sentence; the model reads in a sentence at a time and takes it in
    - C. A token is the unit a model splits text into: a word, part of a word, or a character
    - D. A token is the model's unit for remembering you; the more it stores, the better it knows you
    > **Answer: C.** The units a tokenizer produces need not match characters or words one to one; the count depends on the encoding and the text. A is the most common misconception: character counts and token counts are only loosely related, with no fixed ratio. B pictures the unit as far too big; a sentence is usually split into several tokens. D mixes up how text is split with a product's "memory" feature.
 
-2. **[Basic · Concept]** What does "context window" refer to? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What does "context window" refer to? <!-- quiz: q02 revision: 2 -->
    - A. The token limit for one request, counting instructions, material, and the answer
    - B. The size of the chat app's input box; a bigger box lets you type more at once
    - C. How many days the model can remember you; past that, it forgets automatically
    - D. The total material the model read in training; a bigger window means it knows more
    > **Answer: A.** The window limits the tokens available in one request: system instructions, carried-over history and material, tool content, and the answer to be generated all have to fit; check the model's documentation for the exact input, output, and reasoning-token rules. B mistakes it for the input box on screen. C treats it as a memory period, but the model itself doesn't remember you across conversations. D confuses the window with training data: window size has no direct bearing on how much the model "knows."
 
-3. **[Basic · Misconception]** "I told it my name yesterday, so it should still remember today." Where does this idea go wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** "I told it my name yesterday, so it should still remember today." Where does this idea go wrong? <!-- quiz: q03 revision: 2 -->
    - A. It's right: the model writes every chat into its parameters, so it remembers forever
    - B. The model actually remembers, but pretends not to know you to protect your privacy
    - C. As long as it's the same account, all past chats are carried into a new one automatically
    - D. The model can use it only if the product brings saved information into the new chat
    > **Answer: D.** Ordinary inference doesn't write your name into the trained parameters, but a product can supply it again in a new conversation through saved memory, project material, or personalization settings. A is the very misconception to correct. B pictures the model as a person who "pretends." C goes too far: what gets carried over varies by product, and it isn't all your history by default. Check which memory and project features are on, and restate requirements that matter.
 
-4. **[Advanced · Misconception]** "I only typed one short question this time, so I didn't use many tokens." What's wrong here? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "I only typed one short question this time, so I didn't use many tokens." What's wrong here? <!-- quiz: q04 revision: 2 -->
    - A. It's right: tokens are counted only from the words you typed yourself this time
    - B. Material pasted earlier, carried-over history, and its long reply usually count too
    - C. Only the model's reply counts as tokens; your input never counts, however long
    - D. It's right, because the window is cleared automatically at the start of each turn
    > **Answer: B.** Many people look only at the one line they typed and forget that the 10-page PDF pasted earlier, the history carried into every turn, and the 2,000-word reply are what really eat tokens. A is the very misconception in the question. C is half backwards: input and output both usually count toward usage, though at different rates. D is wrong: within one conversation, products usually keep carrying the relevant history forward rather than clearing it each turn.
 
-5. **[Basic · Scenario]** You've chatted with the AI for a long time, and it starts answering off-topic and forgetting settings you stated earlier. What should you do first? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You've chatted with the AI for a long time, and it starts answering off-topic and forgetting settings you stated earlier. What should you do first? <!-- quiz: q05 revision: 2 -->
    - A. Ask the same question a few more times word for word; one of the tries will be right
    - B. Keep asking in the same conversation; the longer it goes, the better it understands
    - C. Start a new chat and restate the goal, requirements, and facts you still need
    - D. Switch to a model with a bigger context window; that's sure to fix the problem
    > **Answer: C.** A long thread can contain missing, summarized, conflicting, or buried information. Carrying a checked summary of the goal, requirements, and necessary facts into a new conversation is a useful reset, though it doesn't prove the window was full or guarantee a correct answer. A only repeats itself without changing what's on the desk. B tends to pile up more noise. D lets you fit more, but buried key points and contradictions don't go away on their own.
 
-6. **[Basic · Hands-on]** Choose a short public paragraph and its translation. Use an official web-based token counter (for example, OpenAI's [Tokenizer page](https://platform.openai.com/tokenizer), where you paste text and see how it's split and the token count; it reflects only how OpenAI models split text, and it was available as of October 2026, but check the official page), or the usage display in the product or API dashboard you use. Record the model, character count, and token count for each. Repeat after adding a small code snippet. If you can code, you can also count locally with [tiktoken](https://github.com/openai/tiktoken). <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Choose a short public paragraph and its translation. Use an official web-based token counter (for example, OpenAI's [Tokenizer page](https://platform.openai.com/tokenizer), where you paste text and see how it's split and the token count; it reflects only how OpenAI models split text, and it was available as of October 2026, but check the official page), or the usage display in the product or API dashboard you use. Record the model, character count, and token count for each. Repeat after adding a small code snippet. If you can code, you can also count locally with [tiktoken](https://github.com/openai/tiktoken). <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** The ratio of characters to tokens depends on the tokenizer and the text. Compare translations with the same meaning rather than arbitrary passages, and don't infer a universal language ranking from one example. A counter only counts the text you paste; actual usage can also include system instructions, tool content, and output.

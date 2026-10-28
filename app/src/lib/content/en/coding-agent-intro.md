@@ -98,35 +98,35 @@ In the next chapter (Chapter 24) we'll walk through this shared "investigate -> 
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Think first, then read the answer in the quoted block.
 
-1. **[Basic · Concept]** Lining up "coding agent" with the "Agent" from Chapter 19, which sentence is most accurate? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Lining up "coding agent" with the "Agent" from Chapter 19, which sentence is most accurate? <!-- quiz: q01 revision: 2 -->
    - A. It's a kind of Agent; the place where it takes action is your code project
    - B. It's an upgraded chat AI; the main difference is that it writes code more accurately
    - C. It's separate from an Agent: an Agent acts, while it only suggests code
    - D. An Agent is a small built-in feature of it, used only for looking things up
    > **Answer: A.** The Chapter 19 Agent is an AI that breaks goals into steps, calls tools, and runs several steps on its own; a coding agent is that same ability aimed at "changing a code project." B sees only the "writing code" part and misses that it reads the project, edits files, and runs commands itself. C is still stuck on the old impression that "chat AI only gives text," and D gets the relationship backward.
 
-2. **[Basic · Concept]** For a coding agent, what's the difference between "writing code" and "doing things"? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** For a coding agent, what's the difference between "writing code" and "doing things"? <!-- quiz: q02 revision: 2 -->
    - A. No real difference; "doing things" is just a phrase vendors use for marketing
    - B. One hands you code to use; the other reads, edits files, and runs commands itself
    - C. "Doing things" means it can write a longer, more complete program in one go
    - D. The difference is speed: the one that "does things" simply answers faster
    > **Answer: B.** This is exactly the line between the chat layer and the agent layer: the former spits out text and you execute; the latter executes itself and takes several steps in a row. C and D read the difference as "writes more" or "answers faster," but the key is who takes action. A overlooks that it really does change your files.
 
-3. **[Basic · Misconception]** "It's AI, the code it writes should be correct, use it straight away." What's wrong with that? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** "It's AI, the code it writes should be correct, use it straight away." What's wrong with that? <!-- quiz: q03 revision: 2 -->
    - A. AI code is usually right; it just needs a tidy-up for consistent style
    - B. AI code usually doesn't run, so you should rewrite whatever you get back
    - C. Only the free version makes mistakes; code from a paid plan can be used as-is
    - D. It can be confidently wrong; "finished" isn't "correct," so verify it first
    > **Answer: D.** Hallucination (Chapter 9) happens when writing code too, and because code looks "professional" it fools non-experts more easily. That's why later chapters teach "read the diff, run tests." A understates the problem. B goes to the other extreme; it often does run, the problem is that "runs" isn't "correct." C assumes paying prevents mistakes, but every version can get things wrong.
 
-4. **[Advanced · Misconception]** "Claude Code / Codex is one fixed website (or one piece of software), the form is set in stone." Why does thinking this way cause trouble? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "Claude Code / Codex is one fixed website (or one piece of software), the form is set in stone." Why does thinking this way cause trouble? <!-- quiz: q04 revision: 2 -->
    - A. It doesn't; the mainstream form won't change much over the next few years
    - B. It does, because they actually only run inside a web page in the cloud
    - C. The form varies and keeps updating; pin it down and you're soon out of date
    - D. It does, because they only work at a command line, with no visual interface at all
    > **Answer: C.** Form is in the "will change" category: depending on the product you might use it in a terminal, an editor, the web, or the cloud. So this book only covers the mental model that won't date and leaves "where to use it, how to install it" to the official docs. B and D just pin it to a different single form. Two things are stable, though: Claude Code comes from Anthropic (core: Claude), Codex comes from OpenAI.
 
-5. **[Basic · Scenario]** Your first time using it, it says "feature added" in no time flat. As the "person showing it the ropes," what should you do next? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** Your first time using it, it says "feature added" in no time flat. As the "person showing it the ropes," what should you do next? <!-- quiz: q05 revision: 2 -->
    - A. Have it check its own work again, and merge if it says everything is fine
    - B. Sign off: what it changed, whether it broke anything, can you explain it
    - C. Have it build the next feature first, then check everything at the end

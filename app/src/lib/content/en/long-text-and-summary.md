@@ -123,40 +123,40 @@ In the next chapter we switch angles and look at how to manage the "conversation
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** You need to process a very long report. Why is pasting it all in at once not recommended? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** You need to process a very long report. Why is pasting it all in at once not recommended? <!-- quiz: q01 revision: 2 -->
    - A. It may exceed the limit, or key passages may get lost in irrelevant text
    - B. The model memorizes what you paste, so it keeps taking space in new chats
    - C. Models usually read only the first few pages closely and skip the rest
    - D. Longer material always gives worse answers, so cut it as short as possible
    > **Answer: A.** The context window has a limit, and even when the material fits, lots of content unrelated to your question can distract the model so that key passages get overlooked (Chapter 3). B confuses context with memory. C turns how some products behave into an iron rule. D goes too far: Chapter 3 noted that useful material can make answers more accurate; the trouble is irrelevant content.
 
-2. **[Basic · Concept]** Which sentence most accurately describes the benefit of "have it answer from the material only"? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which sentence most accurately describes the benefit of "have it answer from the material only"? <!-- quiz: q02 revision: 2 -->
    - A. It stops using its own knowledge, so answers are always right and need no checks
    - B. It's told to stick to the material, so answers get shorter, faster, and cheaper
    - C. Answers can be traced and cited, and new material escapes the knowledge cutoff
    - D. The material goes into its long-term memory, so you won't need to paste it again
    > **Answer: C.** With a basis to "continue" from, it's far more reliable (Chapter 4), and it can mark sources so you can spot-check. However new the material, that's how new its answer is, so the knowledge cutoff doesn't apply (Chapter 9). A overstates it: it can still misread or mix things up, so spot-check. B swaps the benefit for speed and cost, which aren't the point. D confuses context with memory; the material doesn't stay in the model after the conversation.
 
-3. **[Advanced · Misconception]** Someone says: "I had it summarize this contract, the summary looks pretty complete, so it must be what's in the contract." What's the problem? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** Someone says: "I had it summarize this contract, the summary looks pretty complete, so it must be what's in the contract." What's the problem? <!-- quiz: q03 revision: 2 -->
    - A. Contracts are sensitive, so the AI deliberately skips some clauses to protect privacy
    - B. As long as the summary has no obvious typos, it usually matches the original
    - C. Looking complete isn't being faithful; it may add things the contract doesn't say
    - D. Summaries always cut detail, so they're of no use for material like contracts
    > **Answer: C.** "Looks complete" is exactly where hallucination is most dangerous: it fabricates things that look real (Chapters 4 and 9). For critical material like a contract, ask it to answer only from the material and say so when something isn't there, have it mark sources, and spot-check the key clauses. A invents a motive; it doesn't skip things "deliberately." B judges accuracy by typos, which tells you nothing. D overstates it: summaries are useful, they just need checking. Whether you may paste a contract into an AI at all is a separate question, covered in Chapter 37.
 
-4. **[Advanced · Misconception]** "The internet says 1,000 words is about 1,300 tokens, so if I memorize that ratio I can precisely calculate whether the window will overflow." What's off? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "The internet says 1,000 words is about 1,300 tokens, so if I memorize that ratio I can precisely calculate whether the window will overflow." What's off? <!-- quiz: q04 revision: 2 -->
    - A. The ratio is right; just add a 20 to 30 percent margin and it's precise enough
    - B. It's a rough rule of thumb; counts vary by model, so use the official tool
    - C. Tokens are counted by whole words only, so punctuation and numbers don't count
    - D. English always uses far fewer tokens than other languages, so the ratio is fixed
    > **Answer: B.** Chapter 3 stresses that this is only a rough rule of thumb: the token count depends on the model's tokenizer and is affected by punctuation, numbers, and code, and window sizes keep changing. For precision, use the official counting tool. A tries to turn a rule of thumb into a precise figure by adding a margin, which doesn't work. C is wrong: punctuation and numbers are tokens too, and words are often split into several tokens. D treats a rough impression about languages as a law.
 
-5. **[Basic · Scenario]** You have 30 project emails on hand and want to sort out "the deadline and owner for each to-do." What's the most reliable approach? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You have 30 project emails on hand and want to sort out "the deadline and owner for each to-do." What's the most reliable approach? <!-- quiz: q05 revision: 2 -->
    - A. Paste them all into one conversation and have it list every to-do and owner
    - B. First ask it what to-dos such projects usually have, then compare with the emails
    - C. Ask it to "remember" each email as you paste it, then have it sum up at the end
    - D. Extract from a few emails at a time, citing each source, then combine and check
    > **Answer: D.** This is the standard play for extraction: work in batches (each batch can be its own conversation, and only the results are pasted in to combine), nail down the rules (dates as YYYY-MM-DD, leave blank if missing, say which email each came from), and spot-check. A can overflow the window with that much text and easily misses things. B has it guess the to-dos from nothing, which is asking it to invent. C assumes it can "remember," but the emails just pile up in the same conversation's context.
 
-6. **[Basic · Hands-on]** Find a long article you've read and know well. First have it "summarize into 5 key points" with **no** restriction; then redo it with "summarize from this article only, don't supplement what isn't in the material, and mark which paragraph of the original each point comes from." Compare the two, especially watching for content that "isn't actually in the original" slipping into the first summary. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Find a long article you've read and know well. First have it "summarize into 5 key points" with **no** restriction; then redo it with "summarize from this article only, don't supplement what isn't in the material, and mark which paragraph of the original each point comes from." Compare the two, especially watching for content that "isn't actually in the original" slipping into the first summary. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Without the restriction, it sometimes mixes in "reasonable extensions" not in the original, or content it simply made up. That's hallucination, and it confirms that looking complete is not the same as being faithful to the original. With "answer from the material only + mark sources" added, the drift drops noticeably and you can spot-check more easily. Compare them once yourself and you won't blindly trust a summary it reels off again. That's also the core idea of Chapter 20's RAG: put the right material in front of it.

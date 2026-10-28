@@ -78,40 +78,40 @@ Checked **2026-10-22**; spend limits, prepaid credit, and auto-reload rechecked 
 
 ## Quiz
 
-1. **[Basic · Concept]** Which statement about AI cost is accurate? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which statement about AI cost is accurate? <!-- quiz: q01 revision: 2 -->
    - A. Every AI product charges a separate fee for each token
    - B. A chat subscription also covers your API requests
    - C. Subscriptions, API billing, and extras each need checking
    - D. On a subscription, token usage never affects the allowance
    > **Answer: C.** Different account paths have different charging and limiting rules. Heavy use on a subscription consumes the allowance (so D is wrong) without necessarily creating a separate per-token bill (so A is wrong), and a chat subscription does not automatically include API requests (B).
 
-2. **[Basic · Calculation]** In the invented example, what is the total of $0.040 input, $0.002 cached input, and $0.010 output? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Calculation]** In the invented example, what is the total of $0.040 input, $0.002 cached input, and $0.010 output? <!-- quiz: q02 revision: 2 -->
    - A. $0.052
    - B. $0.52
    - C. $5.20
    - D. $0.0052
    > **Answer: A.** Add the three: 0.040 + 0.002 + 0.010 = $0.052. B, C, and D put the decimal point in the wrong place. Keep token units consistent and add any applicable tool charges in a real bill.
 
-3. **[Advanced · Misconception]** “Every product always resends the entire chat unchanged and bills it at the full input rate.” Why is this unreliable? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** “Every product always resends the entire chat unchanged and bills it at the full input rate.” Why is this unreliable? <!-- quiz: q03 revision: 2 -->
    - A. Because earlier messages never affect the final answer
    - B. Because chat products are entirely free for every user
    - C. Because only output tokens are ever charged
    - D. Selection, compaction, and caching change the costs
    > **Answer: D.** The application controls the active context and the provider sets billing rules; server-side state and other factors affect processing too. The entire visible transcript is not a universal billing formula. Earlier messages can matter (A), chat products are not all free (B), and input is usually charged too (C).
 
-4. **[Basic · Scenario]** You hit a subscription usage limit. Will a new chat reset it? <!-- quiz: q04 revision: 1 -->
+4. **[Basic · Scenario]** You hit a subscription usage limit. Will a new chat reset it? <!-- quiz: q04 revision: 2 -->
    - A. Yes; a new chat starts counting the allowance again
    - B. No; check the account's allowance and reset rules
    - C. Only after you delete the old chat and get usage back
    - D. Only if you keep the next question short enough
    > **Answer: B.** A conversation’s context and an account’s usage allowance are different limits. A new chat (A) or deleting old chats (C) does not give back used allowance, and shorter questions (D) only reduce future use.
 
-5. **[Advanced · Scenario]** A request slows down. Which response is most useful? <!-- quiz: q05 revision: 1 -->
+5. **[Advanced · Scenario]** A request slows down. Which response is most useful? <!-- quiz: q05 revision: 2 -->
    - A. Delete all history and evidence and start over
    - B. Compress the context first; length must be the cause
    - C. Check context, model settings, tools, and service
    - D. Upgrade right away; a pricier plan is always faster
    > **Answer: C.** Several layers can affect latency, so find the actual cause. B fixes on one cause, A deletes the evidence that prevents mistakes, and D spends money before investigating.
 
-6. **[Basic · Hands-on]** Before your next task, record the active account path, the relevant usage limit, whether optional paid extras are enabled, and whether auto-reload is on. After the task, compare usage with the quality of the result. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Before your next task, record the active account path, the relevant usage limit, whether optional paid extras are enabled, and whether auto-reload is on. After the task, compare usage with the quality of the result. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** A useful budget starts with the meter you actually use. Saving duplicated work is valuable; cutting evidence that prevents mistakes can make the whole task more expensive.

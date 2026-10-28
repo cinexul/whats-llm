@@ -117,35 +117,35 @@ Checked **2026-10-27** (installation and plans) and **2026-10-22** (everything e
 
 ## Quiz
 
-1. **[Basic · Concept]** Which description of Codex is accurate? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which description of Codex is accurate? <!-- quiz: q01 revision: 2 -->
    - A. It only works in a web page and can't be installed on your computer
    - B. OpenAI's coding agent, available through several interfaces
    - C. When you use the CLI, the model runs offline on your own computer
    - D. Whatever your plan, you must have an API key ready before using it
    > **Answer: B.** There are CLI, editor extension, desktop app, and web/cloud interfaces, which may use different execution environments, so A is wrong. Running the CLI locally doesn't mean offline model inference; the client still sends task context to the service (C). Signing in with a ChatGPT account is enough; an API key is a separate path (D).
 
-2. **[Basic · Scenario]** You have an eligible ChatGPT plan. What should you do before buying API credits for Codex? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Scenario]** You have an eligible ChatGPT plan. What should you do before buying API credits for Codex? <!-- quiz: q02 revision: 2 -->
    - A. Assume the subscription excludes Codex and just buy API credits
    - B. Assume the subscription covers every API call and skip checking
    - C. Sign in with ChatGPT and check the allowance your account has
    - D. Reinstall with npm first, since only it supports ChatGPT sign-in
    > **Answer: C.** ChatGPT sign-in and API authentication are distinct paths. Check the active account and its allowance before choosing a separately billed API path. A and B both jump to conclusions without checking; and sign-in doesn't depend on how you installed it, since the standalone installer, Homebrew, and npm versions can all sign in with ChatGPT (D).
 
-3. **[Basic · Concept]** What does `AGENTS.md` provide? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Concept]** What does `AGENTS.md` provide? <!-- quiz: q03 revision: 2 -->
    - A. Project instructions that get loaded into the context
    - B. A security setting that restricts which files can be read
    - C. A way to train the rules you write into the model itself
    - D. A guarantee that Codex follows every rule without fail
    > **Answer: A.** It makes project conventions explicit and is loaded into context while working. What actually restricts file access is the sandbox and permission settings (B); it doesn't change model weights (C); and rules in context aren't guaranteed to be followed every time (D).
 
-4. **[Advanced · Misconception]** “If a command is dangerous, Codex must ask me first.” What is missing? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** “If a command is dangerous, Codex must ask me first.” What is missing? <!-- quiz: q04 revision: 2 -->
    - A. Nothing; a dangerous command always brings up a confirmation
    - B. Git: it automatically blocks every action with external effects
    - C. The model: switch to a stronger model and it will ask first
    - D. It depends on the sandbox, approval policy, and permissions
    > **Answer: D.** Actions may already be allowed, require approval, or be blocked, so "it always asks" can't be relied on (A). Git covers recorded files and can't block external actions (B); switching models doesn't change the approval configuration (C). Check the actual configuration, and don't turn on options that skip approvals (Chapter 26).
 
-5. **[Basic · Scenario]** A cloud task fails because a dependency is missing. What is the useful next step? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** A cloud task fails because a dependency is missing. What is the useful next step? <!-- quiz: q05 revision: 2 -->
    - A. Install it on your own computer first; the cloud will pick it up
    - B. Check the environment setup and install the dependency there
    - C. Lift the network and file limits so it can install things itself

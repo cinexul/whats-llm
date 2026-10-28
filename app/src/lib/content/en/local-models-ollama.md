@@ -77,42 +77,42 @@ Choose local processing when it fits your task and constraints. Trace the actual
 
 ## Quiz
 
-1. **[Basic · Concept]** When can a document-summary task run entirely offline? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** When can a document-summary task run entirely offline? <!-- quiz: q01 revision: 2 -->
    - A. Whenever you use a tool built for running models locally
    - B. Whenever the app is a desktop version installed on the PC
    - C. Once the model is downloaded, even with web search left on
    - D. When all it needs is local, with no remote dependency
    > **Answer: D.** Every required part of that operation must be available locally. The kind of tool (A) and where it is installed (B) guarantee nothing, and with web search on (C), queries leave the computer.
 
-2. **[Basic · Misconception]** You installed Ollama. What can you conclude about data leaving your computer? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Misconception]** You installed Ollama. What can you conclude about data leaving your computer? <!-- quiz: q02 revision: 2 -->
    - A. Nothing yet; check where the chosen model and features run
    - B. Nothing leaves, because Ollama is a local-only tool
    - C. Nothing leaves, as long as the model file is small
    - D. Everything leaves, because all Ollama models run in the cloud
    > **Answer: A.** As of October 2026, Ollama's official documentation covers both local and cloud models and offers a setting to turn the cloud features off, so you need to check the selected model and execution route. B overlooks cloud models and web search, D goes to the opposite extreme, and model size (C) has nothing to do with where data goes.
 
-3. **[Basic · Hardware]** A model download is 5 GB. How much free memory does it need? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Hardware]** A model download is 5 GB. How much free memory does it need? <!-- quiz: q03 revision: 2 -->
    - A. Exactly 5 GB; it uses as much as the download size
    - B. About half, because the runtime compresses it further
    - C. Not enough info; runtime, context and more matter
    - D. None, because the model is already stored on disk
    > **Answer: C.** File size alone does not measure total running memory: the runtime, context cache, model format, operating system and other apps all take some. A is the misconception this chapter corrects; the runtime does not halve it again (B); and being on disk does not mean it needs no memory (D).
 
-4. **[Intermediate · Concept]** What is quantization? <!-- quiz: q04 revision: 1 -->
+4. **[Intermediate · Concept]** What is quantization? <!-- quiz: q04 revision: 2 -->
    - A. Cutting the parameter count to turn a 14B model into 8B
    - B. Using fewer bits per value, with task-dependent effects
    - C. Packing the model into an archive that unzips at runtime
    - D. Retraining the model so that it uses less memory
    > **Answer: B.** Quantization lowers the precision of stored values to save storage and memory, and its effect on quality depends on the method, model and task. Parameter count is a separate property (A), and it is neither an ordinary archive (C) nor retraining (D).
 
-5. **[Basic · Scenario]** The model fits in memory but replies too slowly. What is a useful next step? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** The model fits in memory but replies too slowly. What is a useful next step? <!-- quiz: q05 revision: 2 -->
    - A. Max out the context so it can read everything at once
    - B. Blame the network, since a model that fits should be fast
    - C. Give up on local models, since they are all too slow
    - D. Check hardware use; try a smaller model or less context
    > **Answer: D.** Fitting in memory is only one part of performance; processor, GPU, memory bandwidth and configuration matter too, so compare usable configurations on the same task. Longer context usually makes it slower (A), a local model running offline does not depend on the network (B), and one slow run does not rule out local use (C).
 
-6. **[Basic · Observation]** A local model summarizes a file with networking disconnected. What have you established? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Observation]** A local model summarizes a file with networking disconnected. What have you established? <!-- quiz: q06 revision: 2 -->
    - A. That operation can run offline in the tested setup
    - B. No feature of this app will ever go online again
    - C. Summaries made offline cannot contain hallucinations

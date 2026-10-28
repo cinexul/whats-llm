@@ -123,40 +123,40 @@ In the next chapter, we'll push "having AI help you process text" one step furth
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Project chapters lean toward scenario and hands-on. Think first, then read the answer explanations in the quote blocks.
 
-1. **[Basic · Concept]** What is the "number one red line" this chapter repeatedly stresses? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What is the "number one red line" this chapter repeatedly stresses? <!-- quiz: q01 revision: 2 -->
    - A. Give it only text files, never images or spreadsheets
    - B. Before batch processing, make a full backup of the originals
    - C. Put the working folder under Git, and you can skip the backup
    - D. Before starting, have it read every file in full once
    > **Answer: B.** Unlike building a website, in this chapter it's acting on your **real files**. A mistaken delete, a mistaken change, a batch-mangle with no backup, and they're truly gone. A backup is the seatbelt you have to buckle before any batch operation. C is a common misunderstanding: the chapter says to do both, a backup and Git; Git can only take you back to what was committed, while a manual backup also protects files Git never recorded. A and D aren't the red line at all; reading everything or sticking to text won't stop a batch of mistakes.
 
-2. **[Advanced · Scenario]** After you tell it the sorting rules, **what should you do first** before turning it loose on the whole batch of files? <!-- quiz: q02 revision: 1 -->
+2. **[Advanced · Scenario]** After you tell it the sorting rules, **what should you do first** before turning it loose on the whole batch of files? <!-- quiz: q02 revision: 2 -->
    - A. Run the full set now and spot-check a few once it's done
    - B. Write the rules in more detail, then let it do the whole batch
    - C. Have it copy every file it will touch before it starts
    - D. Have it demo on three files, and scale up if it judges right
    > **Answer: D.** "Try a small batch first" is the soul of this chapter. Use the cost of three files to verify whether it understood the rules right; if it's off, fill them in right there at next to no cost. A checks only after the fact, so a mistake means a mess of dozens of files; B, writing more detailed rules, is good, but however detailed they are, you still need to verify it really understood; C, an extra copy, does no harm, but it can't tell you whether the rules were understood correctly.
 
-3. **[Basic · Misconception]** "I'll just have it overwrite the originals directly with the conversion results, to save having more files." What's the risk of this? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** "I'll just have it overwrite the originals directly with the conversion results, to save having more files." What's the risk of this? <!-- quiz: q03 revision: 2 -->
    - A. One mistake ruins the originals; save results to a new folder
    - B. No risk, as long as you saved a Git checkpoint beforehand
    - C. Overwriting changes the file names, so they're hard to find later
    - D. Overwriting is slower than saving anew, which adds up in bulk
    > **Answer: A.** Have it produce **something new** rather than overwrite the old, and the originals are always safe. "Save to a new file, originals untouched" is the good habit running through this chapter. B is only half right: Git can restore only files it recorded in a commit, and anything uncommitted or untracked can't be saved that way; C and D, file names and speed, aren't the issue here.
 
-4. **[Advanced · Scenario]** It's finished a "meeting key-points summary table." Before you send this table to a colleague, what's the most important step? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Scenario]** It's finished a "meeting key-points summary table." Before you send this table to a colleague, what's the most important step? <!-- quiz: q04 revision: 2 -->
    - A. Have it self-check once more for invented content, then send
    - B. If the format is neat and every field is filled, send it
    - C. Pick a few rows; check dates and conclusions at the source
    - D. Have it regenerate once; if both runs match, treat it as right
    > **Answer: C.** When it pulls information, it may copy wrong, miss something, or even invent (Chapter 9). The mistake summarizing is most prone to is quietly changing a number or inventing a conclusion, so spot-check at least a few rows back against the originals. A's self-check is still the AI vouching for itself, not you checking the source; B, a neat format, doesn't mean the content is right; D, two matching runs, can be wrong both times.
 
-5. **[Advanced · Scenario]** You ask it to "find files with duplicate content." For the next step, how do you want it to act for the most safety? <!-- quiz: q05 revision: 1 -->
+5. **[Advanced · Scenario]** You ask it to "find files with duplicate content." For the next step, how do you want it to act for the most safety? <!-- quiz: q05 revision: 2 -->
    - A. Have it merge the duplicates into one file, so no deleting is needed
    - B. Have it list them first, delete nothing, and let you decide
    - C. Have it delete the duplicates outright, since you have a backup
    - D. Have it move the duplicates to the trash, since that's reversible
    > **Answer: B.** For any irreversible operation that "deletes" or "overwrites," have it list first, stop, and wait for your sign-off (echoing the "permission mechanism" in Chapter 26). C and D use "it can be recovered" as a reason to skip your judgment: a backup or the trash is for cleaning up after an accident, not permission for it to delete on its own; A's merge is really an overwrite, so you should look first too.
 
-6. **[Basic · Hands-on]** Before letting an AI tidy one of your real folders, first **manually copy the whole folder as is**, rename it "originals_backup_do_not_touch," and put it somewhere else. After you're done, answer: if it later makes a mess of the working folder, what do you rely on to get things back? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Before letting an AI tidy one of your real folders, first **manually copy the whole folder as is**, rename it "originals_backup_do_not_touch," and put it somewhere else. After you're done, answer: if it later makes a mess of the working folder, what do you rely on to get things back? <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** You rely on this manual backup, the plainest lifesaving move that even people who don't know Git can use. Add to it putting the working folder under Git (so you can see clearly what it changed and go back to a committed version), and that's "two layers of insurance." Batch operations deal with real files, so layer both together and you'll be at ease. For exactly how to use the tools, **refer to the official documentation** (Chapters 25 and 26).

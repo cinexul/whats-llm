@@ -87,42 +87,42 @@ RAG connects an answer to retrieved material. Its quality depends on the source,
 
 ## Quiz
 
-1. **[Basic · Concept]** What is the essential RAG sequence? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What is the essential RAG sequence? <!-- quiz: q01 revision: 2 -->
    - A. Fine-tune the model on your documents, then answer
    - B. Write the answer first, then look for supporting sources
    - C. Retrieve relevant material, then answer based on it
    - D. Put every document into the context at once, then answer
    > **Answer: C.** Retrieval supplies evidence for generation without changing the model's parameters. A describes fine-tuning, which is a different process; B reverses the order and tends to justify a conclusion after the fact; D is not retrieval and breaks down once there is a lot of material.
 
-2. **[Basic · Concept]** Which retrieval design can be used in RAG? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which retrieval design can be used in RAG? <!-- quiz: q02 revision: 2 -->
    - A. Keyword, vector, hybrid or another suitable method
    - B. Only semantic search in a dedicated vector database
    - C. Only exact keyword matching, with no sense of meaning
    - D. Only the knowledge the model memorized in training
    > **Answer: A.** The right method depends on the material and the question: codes and quoted terms suit keywords, while the same idea in different words suits semantic search. RAG does not require a dedicated vector database (B); C names just one method, and D is not retrieval at all.
 
-3. **[Intermediate · Misconception]** A RAG system does not train on a document during retrieval. What follows about storage? <!-- quiz: q03 revision: 1 -->
+3. **[Intermediate · Misconception]** A RAG system does not train on a document during retrieval. What follows about storage? <!-- quiz: q03 revision: 2 -->
    - A. Files and chat logs are deleted automatically after the answer
    - B. Since nothing is trained, the product stores nothing at all
    - C. The document has become part of the model's parameters
    - D. Nothing definite; storage rules need to be checked separately
    > **Answer: D.** Model parameters, stored documents, search indexes and chat history are different things. “Not training” does not mean “not storing” (A, B), and retrieval does not write documents into the model's parameters (C).
 
-4. **[Basic · Evidence]** An answer contains a citation. What should you verify? <!-- quiz: q04 revision: 1 -->
+4. **[Basic · Evidence]** An answer contains a citation. What should you verify? <!-- quiz: q04 revision: 2 -->
    - A. That the link opens; if it does, all is well
    - B. That the source applies and really supports the claim
    - C. That there are enough citations; more means more reliable
    - D. Nothing; a citation shows the sources were checked
    > **Answer: B.** A real citation may still point to an old, irrelevant or misread passage. A link that opens (A) or a large number of citations (C) does not show support for the claim, and D treats a citation as a certificate of truth.
 
-5. **[Intermediate · Scenario]** A system reports no evidence for a rule you can see in a document. What is a plausible explanation? <!-- quiz: q05 revision: 1 -->
+5. **[Intermediate · Scenario]** A system reports no evidence for a rule you can see in a document. What is a plausible explanation? <!-- quiz: q05 revision: 2 -->
    - A. The model never saw the document in training
    - B. Since it wasn't found, the rule must no longer apply
    - C. Retrieval or text extraction missed the passage
    - D. RAG only reads the first page of long documents
    > **Answer: C.** “Not found” describes the search outcome, not necessarily the document's contents; tables, scans or chunking can cause a passage to be missed. RAG does not depend on the model having seen the document in training (A), “not retrieved” does not mean “no longer valid” (B), and D is a baseless guess.
 
-6. **[Basic · Observation]** You paste a short policy into a chat and ask for a cited answer. What have you demonstrated? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Observation]** You paste a short policy into a chat and ask for a cited answer. What have you demonstrated? <!-- quiz: q06 revision: 2 -->
    - A. Answering from supplied material you retrieved yourself
    - B. A complete RAG system that retrieves automatically
    - C. That the model will now remember this policy for good

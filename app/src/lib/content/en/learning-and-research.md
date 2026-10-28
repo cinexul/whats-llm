@@ -119,40 +119,40 @@ In the next chapter, we move the scene to the desk: writing, organizing, tables,
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** Which of these is best handed to AI? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which of these is best handed to AI? <!-- quiz: q01 revision: 2 -->
    - A. Recommending authoritative papers to put straight into your references
    - B. Supplying the latest statistic to put straight into your report
    - C. Re-explaining a passage you don't get in plain words
    - D. Telling you the exact year and day a historical event happened
    > **Answer: C.** Rephrasing and comparisons are "organizing and expressing," exactly its strength, and if the explanation is off you'll usually notice right away. A, B, and D are all checkable hard facts, exactly where it's most likely to fill in gaps and most likely to burn you; check those against original sources yourself.
 
-2. **[Basic · Concept]** Why can't the facts AI gives be trusted directly? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Why can't the facts AI gives be trusted directly? <!-- quiz: q02 revision: 2 -->
    - A. Most training data comes from the web, so it absorbed every error online
    - B. When unsure, it doesn't stop; it spins out a plausible answer
    - C. To seem more helpful, it deliberately exaggerates or embellishes some facts
    - D. It knows facts only when online; offline, everything it says is a guess
    > **Answer: B.** Its job is to pick the most fitting next word (Chapter 4); it has no fact database to check against, and when unsure it fills in the answer that reads most plausibly (the hallucination in Chapter 9). A has some truth to it, but even with flawless training data it can still invent things. C anthropomorphizes it; there's no "deliberately." D is wrong too: offline it's often right, and online it can still misreport, so open the links and check.
 
-3. **[Advanced · Misconception]** "It answered especially fluently and confidently, so the facts this time should be reliable." What's wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** "It answered especially fluently and confidently, so the facts this time should be reliable." What's wrong? <!-- quiz: q03 revision: 2 -->
    - A. You didn't make it search the web first; answers after a search are reliable
    - B. You asked only once; if three tries give the same answer, it's reliable
    - C. Fluency and confidence only show it continued smoothly, not that it's true
    - D. The tone is the issue; ask it to answer again in a cautious tone instead
    > **Answer: C.** Fluency and correctness have no causal link; plenty of people are swayed by its assured tone into treating a made-up quote as real. A is wrong: even after searching it can misreport, so open the links and check. B: the same answer three times may just be the same error repeated. D only changes the wording, not whether the facts are right.
 
-4. **[Advanced · Misconception]** The answer AI gave you has a link attached, looking quite official. You should? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** The answer AI gave you has a link attached, looking quite official. You should? <!-- quiz: q04 revision: 2 -->
    - A. Open it and check that what it reported is really on that page
    - B. If the link opens and the site looks official, cite it with confidence
    - C. Just check the domain; a government or university site means it's reliable
    - D. Ask it to summarize the linked page again to confirm there's no mismatch
    > **Answer: A.** It sometimes gives a real web page yet "reports" content the page doesn't contain; a link existing doesn't mean the content is confirmed. (Web search and link features differ by product; check the official documentation.) B and C only confirm the link is real, not that the claim is. D has the same source vouch for itself again; you need to read the original yourself.
 
-5. **[Basic · Scenario]** You're writing a course paper and want AI's help finding a few related studies to cite. What's the most reliable approach? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You're writing a course paper and want AI's help finding a few related studies to cite. What's the most reliable approach? <!-- quiz: q05 revision: 2 -->
    - A. Have it list papers, each with authors, year, and journal attached
    - B. Have it recommend some, then cite the ones that sound most authoritative
    - C. Have it recommend papers, then ask it "do these papers all really exist?"
    - D. Find real papers in proper databases, then have it help you compare
    > **Answer: D.** Asking it to list papers from memory easily produces ones that don't exist (a hotspot for hallucination). The right move is for you to supply the facts and let it do what it's good at: reading, comparing, organizing. A's authors and years just make an invented paper look more real. B picks by "sounds authoritative" without checking. C asks it to vouch for itself, and it may confidently say "yes" anyway. All of these can leave "ghost papers" that can't be found in your references.
 
-6. **[Basic · Hands-on]** Find a piece of material you're learning (a textbook section or an article works), and do section 4 once: have it write 5 questions of increasing difficulty **based on this material only**, no answers yet; after you answer, have it grade each one **using the basis from the material** and explain clearly where you were wrong; finally, follow up on the weakest question and have it re-explain with another example. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Find a piece of material you're learning (a textbook section or an article works), and do section 4 once: have it write 5 questions of increasing difficulty **based on this material only**, no answers yet; after you answer, have it grade each one **using the basis from the material** and explain clearly where you were wrong; finally, follow up on the weakest question and have it re-explain with another example. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** In this flow, both questions and answers are locked inside "the same material you gave," and it has almost no room to fill in external facts, so the grading is fairly trustworthy; writing questions, instant feedback, and explaining with another example are all its strengths. You'll get a real sense that "test-driven learning" sticks better than passive listening. The moment you ask about a hard fact outside the material, go back to the rule: **check the original source yourself.**

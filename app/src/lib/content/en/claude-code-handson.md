@@ -117,35 +117,35 @@ Checked **2026-10-27**: the [official setup documentation](https://code.claude.c
 
 ## Quiz
 
-1. **[Basic · Concept]** Which installation advice matches the checked official documentation? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which installation advice matches the checked official documentation? <!-- quiz: q01 revision: 2 -->
    - A. npm is the official first choice; install Node.js first, just to be safe
    - B. After installing with Homebrew or WinGet, it keeps itself updated
    - C. Pick one listed method, like the native installer; npm is deprecated
    - D. A free claude.ai account can use it as soon as it's installed
    > **Answer: C.** The official docs recommend the native installer and also list Homebrew and WinGet; the README marks npm installation as deprecated (A). Homebrew and WinGet installs don't auto-update by default, so you run the upgrade command yourself (B). Claude Code requires a Pro, Max, Team, Enterprise, or Console account; the free plan doesn't include it (D).
 
-2. **[Basic · Concept]** What belongs in `CLAUDE.md`? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What belongs in `CLAUDE.md`? <!-- quiz: q02 revision: 2 -->
    - A. Verified project conventions, handy commands, and limits
    - B. API keys, so it can call the services directly every time
    - C. Full transcripts of every earlier conversation, for recall
    - D. A blanket "you never need to ask me for permission again"
    > **Answer: A.** Keep project guidance concise, accurate, and useful. Keys never belong in project files (B); a full history is too long and buries what matters (C); project guidance can't replace permission controls or grant unlimited authorization (D).
 
-3. **[Advanced · Misconception]** Auto memory contains an old test command. What should you do? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** Auto memory contains an old test command. What should you do? <!-- quiz: q03 revision: 2 -->
    - A. Trust the memory, since it was summarized from earlier work
    - B. Take it as a sign the weights changed and wait for a new version
    - C. Turn off all memory features and remember commands yourself
    - D. Verify the current command, then correct the saved note
    > **Answer: D.** Memory is context notes saved by the product, and they can go stale. They aren't a more reliable source than the current repository (A), nor a change to model weights (B). You can inspect and correct notes, so one outdated entry is no reason to switch everything off (C).
 
-4. **[Basic · Scenario]** Before starting a long task, which check helps avoid billing surprises? <!-- quiz: q04 revision: 1 -->
+4. **[Basic · Scenario]** Before starting a long task, which check helps avoid billing surprises? <!-- quiz: q04 revision: 2 -->
    - A. Confirm the install worked and the version number shows up
    - B. Check the account in use, its allowance, and paid extras
    - C. Assume a subscription already covers every single API call
    - D. Keep the request short, which guarantees you stay within limits
    > **Answer: B.** Subscription allowances, API billing, and optional extras are separate concerns; the active account and usage screen provide the relevant evidence. A successful install (A) says nothing about cost; a subscription doesn't pay for an API key (C); a short request can't guarantee usage, since tool output and background work in a long task also count (D).
 
-5. **[Advanced · Scenario]** Two subagents will edit a repository. What is a useful precaution? <!-- quiz: q05 revision: 1 -->
+5. **[Advanced · Scenario]** Two subagents will edit a repository. What is a useful precaution? <!-- quiz: q05 revision: 2 -->
    - A. Separate chats are isolated by nature, so they won't collide
    - B. Let both edit the same files at once, then keep the better one
    - C. Give each its own files or worktree and name an integrator

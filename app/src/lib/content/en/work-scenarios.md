@@ -128,40 +128,40 @@ That brings Part Two, "Putting large models to use," to a close. You can now use
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** By this chapter's "two-column method," which of these belongs in the "must backstop yourself" column? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** By this chapter's "two-column method," which of these belongs in the "must backstop yourself" column? <!-- quiz: q01 revision: 2 -->
    - A. Rewriting a passage in a more formal, written style
    - B. Deciding whether this email should go out, and to whom
    - C. Expanding a few scattered points into a smooth paragraph
    - D. Condensing a long report into a one-page summary
    > **Answer: B.** Whether to send and to whom is judgment and responsibility, which only you can decide. A, C, and D are "labor and expression," safe to outsource (though you still look over the draft). The test for the split: is this doing the work, or making the call and taking responsibility?
 
-2. **[Basic · Concept]** Why are numbers and units especially prone to problems when AI organizes a table? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Why are numbers and units especially prone to problems when AI organizes a table? <!-- quiz: q02 revision: 2 -->
    - A. It generates text, numbers included, and doesn't guarantee they stay put
    - B. When a table overflows the context, the numbers get rounded automatically
    - C. Models are more used to metric, so they tend to convert miles to kilometers
    - D. It recalculates every number each time, and errors creep in along the way
    > **Answer: A.** Its job is to produce the most fitting continuation (Chapter 4); unlike a calculator, it doesn't guarantee that values stay unchanged, so it may write a number wrong or quietly swap a unit. B ties context to rounding, but there's no such mechanism. C overgeneralizes; a swapped unit is just one way things go wrong. D pictures it as a calculator, when most of the time it isn't "calculating" at all.
 
-3. **[Advanced · Misconception]** "This table AI organized for me is beautifully laid out and looks professional, the data should be fine." What's dangerous about this thought? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** "This table AI organized for me is beautifully laid out and looks professional, the data should be fine." What's dangerous about this thought? <!-- quiz: q03 revision: 2 -->
    - A. A polished layout means it worked harder, which makes number errors likelier
    - B. Just have it add "data verified" at the end, and you can use it directly
    - C. The only risk is layout; it may break when exported to spreadsheet software
    - D. Layout and correct numbers are separate; polish lowers your guard
    > **Answer: D.** "Looks good" is formatting; "are the numbers right" is another matter. A polished table with one wrong number is worse than an ugly one, because the polish disarms you. A invents a causal link that doesn't exist. B has it declare the data verified, which isn't the same as verifying it. C worries about formatting, but the real risk is in the data.
 
-4. **[Advanced · Misconception]** You have AI translate a technical document, and it renders the same term two different ways back and forth. What's the most fundamental reason? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** You have AI translate a technical document, and it renders the same term two different ways back and forth. What's the most fundamental reason? <!-- quiz: q04 revision: 2 -->
    - A. It varies the wording on purpose to make the translation livelier
    - B. It doesn't know the term, so it guesses a new rendering each time
    - C. It translates bit by bit, with no fixed glossary held in mind
    - D. The text overflowed the window, so another model did the second half
    > **Answer: C.** This follows directly from its section-by-section nature: it doesn't automatically keep terms consistent across the whole text. The fix is to fix the terms first, write them into the instruction, and have it check after translating. A anthropomorphizes it. B is wrong: it "knows" the term but hasn't fixed a rendering. D is an imagined mechanism.
 
-5. **[Basic · Scenario]** You need to write a reply to an important client who just complained about your service, and it really was your side's mistake. When drafting with AI, what should you most do? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You need to write a reply to an important client who just complained about your service, and it really was your side's mistake. When drafting with AI, what should you most do? <!-- quiz: q05 revision: 2 -->
    - A. Have it make the reply as formal and long as possible to show sincerity
    - B. Explain the relationship and situation, and read it before sending
    - C. First have it decide whether to compensate, then draft by its conclusion
    - D. Have it follow a generic customer-service apology template and send it
    > **Answer: B.** Tone depends on background only you know (the relationship, who's at fault, how sensitive it is), so feed it the situation and read the draft yourself before sending. A mistakes "long and official" for sincerity. C hands the compensation decision to it, which is yours to make. D's generic template will most likely miss the tone and the nuance.
 
-6. **[Basic · Hands-on]** Pick something you write often (weekly report, notice, external email all work) and do it with the "two-step method": step one, have AI **list which blocks of points to cover, no writing yet**, and you scan it and add, cut, adjust; step two, have it **write it up by the settled points.** Compare: how does this differ from "having it produce a finished product right away" in terms of "how much you change"? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Pick something you write often (weekly report, notice, external email all work) and do it with the "two-step method": step one, have AI **list which blocks of points to cover, no writing yet**, and you scan it and add, cut, adjust; step two, have it **write it up by the settled points.** Compare: how does this differ from "having it produce a finished product right away" in terms of "how much you change"? <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** When listing points first, if the direction's wrong you can correct it in one sentence (revising an outline is cheap); once the skeleton is settled and then written up, the draft that comes out is already pointed right and you hardly need big changes. A "one step to the finish" product, by contrast, hides errors throughout the whole piece, slow and tiring to find. Try the comparison yourself and you'll see why "list points first, then write" works for almost all writing work; it's the same principle as Chapter 14's "see the plan before acting."

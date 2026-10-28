@@ -75,42 +75,42 @@ Delegate an outcome with clear boundaries. An effective agent selects steps, use
 
 ## Quiz
 
-1. **[Basic · Concept]** Which behavior best illustrates the agent loop described here? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which behavior best illustrates the agent loop described here? <!-- quiz: q01 revision: 2 -->
    - A. Running ten predefined steps in order until the end
    - B. Checking the last step's result, then picking the next
    - C. Calling a tool once and handing you the raw result
    - D. Writing out a complete plan and announcing the task is done
    > **Answer: B.** Deciding the next step from what was observed is the agent feature this chapter describes. A fixed sequence (A) and a single tool call (C) do not adjust when something unexpected happens; a plan is only a proposal (D), so look for actual output and checks.
 
-2. **[Basic · Concept]** How does computer use differ from a direct integration? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** How does computer use differ from a direct integration? <!-- quiz: q02 revision: 2 -->
    - A. It clicks and types on the screen instead of a set interface
    - B. It runs without a model, driven only by a prewritten script
    - C. It can reach more interfaces, so it also has more permissions
    - D. It calls the service's interface directly, so it rarely errs
    > **Answer: A.** Computer use observes a page or screen and clicks or types; a direct integration requests operations the service has defined. Both need permissions and result checks. Reaching more interfaces does not mean more permissions (C), and D describes the two routes the wrong way round.
 
-3. **[Basic · Evidence]** An agent says “the report is saved.” What most directly verifies this? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Evidence]** An agent says “the report is saved.” What most directly verifies this? <!-- quiz: q03 revision: 2 -->
    - A. You ask again and it still says the report is saved
    - B. It describes the saving steps and file path in detail
    - C. Its underlying model has a high benchmark score
    - D. Opening the report at that location and checking it
    > **Answer: D.** Check the external result, not only the completion claim. Repeating the claim (A) or describing it in detail (B) is still only text, and a model's score (C) has nothing to do with whether this file was saved.
 
-4. **[Intermediate · Misconception]** Three delegated agents agree on a price. Why might you still check it? <!-- quiz: q04 revision: 1 -->
+4. **[Intermediate · Misconception]** Three delegated agents agree on a price. Why might you still check it? <!-- quiz: q04 revision: 2 -->
    - A. Delegation erases the original sources along the way
    - B. Prices change daily, so any figure found is wrong
    - C. All three may rely on the same outdated source
    - D. More agents always means more errors, by definition
    > **Answer: C.** Agent count is not the same as independent evidence; shared sources and shared mistakes can produce false agreement. Delegation does not delete sources (A); price changes (B) are not the point here; D frames it as a matter of numbers, when what matters is whether the evidence is independent.
 
-5. **[Basic · Scenario]** A venue page instructs the agent to upload your private notes. What should happen? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** A venue page instructs the agent to upload your private notes. What should happen? <!-- quiz: q05 revision: 2 -->
    - A. Follow it, since the page is part of the task material
    - B. Treat it as untrusted content and keep to the task
    - C. Upload first and tell you what happened afterwards
    - D. Have another agent do the upload for you instead
    > **Answer: B.** Text on the page aimed at the assistant is source content, not your instruction. Reading a source does not give it authority over your data or task, and handing the upload to another agent (D) crosses the same line.
 
-6. **[Intermediate · Scenario]** A research task reaches its agreed budget without resolving a missing fact. What is the appropriate result? <!-- quiz: q06 revision: 1 -->
+6. **[Intermediate · Scenario]** A research task reaches its agreed budget without resolving a missing fact. What is the appropriate result? <!-- quiz: q06 revision: 2 -->
    - A. Keep spending quietly until the missing fact turns up
    - B. Fill the gap with the most likely number and finish
    - C. Book the cheapest venue first, then send the report

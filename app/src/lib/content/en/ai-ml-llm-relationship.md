@@ -138,35 +138,35 @@ In the next chapter, we'll climb into that little innermost doll and look at **w
 
 > Six questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the blockquote under each question. Think first, then check.
 
-1. **[Basic · Concept]** Which sentence most accurately describes how these four words relate? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which sentence most accurately describes how these four words relate? <!-- quiz: q01 revision: 2 -->
    - A. They are four separate, unrelated technologies; you pick one when you need it
    - B. LLMs contain deep learning, deep learning contains machine learning, which contains AI
    - C. LLMs are part of deep learning, which is part of machine learning, which is part of AI
    - D. AI and machine learning are the same thing; deep learning and LLMs are two types under it
    > **Answer: C.** This is a set of "nested doll" containments: the large language model is innermost and most specific, AI is outermost and broadest. B lists the words in the right order but gets the direction backwards: the big circle contains the small one. A mistakes nesting for side by side. D equates AI with machine learning, but AI also includes the older approach of hand-written rules; it also puts deep learning and LLMs on the same level, when LLMs are one branch of deep learning.
 
-2. **[Basic · Concept]** What's the most fundamental difference between "machine learning" and a traditional program? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What's the most fundamental difference between "machine learning" and a traditional program? <!-- quiz: q02 revision: 2 -->
    - A. Traditional programs follow rules people write; machine learning finds patterns in data
    - B. Machine learning needs no people at all; once built, it keeps getting smarter on its own
    - C. Machine learning stores lots of data first, then searches it for a match when it is used
    - D. Traditional programs just follow orders; machine learning truly understands like a person
    > **Answer: A.** This is the most important turn in the whole diagram: from "people write rules" to "feed data and let the machine work out the patterns." B is wrong: people prepare the data and design the training, and a typical model's parameters are fixed after training, so it doesn't get smarter just by being used (chapter 2). C confuses learning patterns with storing and looking up data (chapter 2 corrects this in detail). D goes too far: learning useful patterns does not prove human-like understanding.
 
-3. **[Advanced · Misconception]** "The AI that beat the world champion at Go must also be great at chatting and able to do anything." Where does this idea go wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** "The AI that beat the world champion at Go must also be great at chatting and able to do anything." Where does this idea go wrong? <!-- quiz: q03 revision: 2 -->
    - A. The Go system just isn't big enough yet; a bigger model would be able to do anything
    - B. Winning at Go shows it already has general intelligence; nobody taught it to talk yet
    - C. A Go AI isn't really AI; it's only a program running on rules that people wrote by hand
    - D. The two can be trained in different ways; being strong at Go doesn't mean it can chat
    > **Answer: D.** "AI" is a broad category. A system trained to win at Go and a model trained to generate language can differ completely in design and ability; they may share some methods, but success at one task does not prove success at another. A ("big enough means it can do anything") and B ("good at Go means general intelligence") are both common overreaches. C is also wrong: top Go programs were trained with machine learning, not built from hand-written rules.
 
-4. **[Basic · Misconception]** "The ChatGPT I use just is 'that large language model' itself." Where is this not quite accurate? <!-- quiz: q04 revision: 1 -->
+4. **[Basic · Misconception]** "The ChatGPT I use just is 'that large language model' itself." Where is this not quite accurate? <!-- quiz: q04 revision: 2 -->
    - A. It's accurate; ChatGPT and GPT are just two names for exactly the same thing
    - B. ChatGPT is a product with an LLM at its core, wrapped in a layer of product features
    - C. ChatGPT doesn't use an LLM; it runs on a large set of question-answer rules people wrote
    - D. The LLM is only a plug-in inside ChatGPT that gets called when a question is hard
    > **Answer: B.** What you open and chat with is the product (like the "restaurant"); the core that actually continues the conversation (like "the chef's craft") is the large language model. Mixing the two up in daily talk is fine, but keep the layers clear in your mind (chapter 17 covers model, product, API, and Agent). A is the very misconception in the question. C has it backwards: the core is an LLM. D flips the roles: the LLM is the core, not an occasional plug-in.
 
-5. **[Basic · Scenario]** A friend points at their phone's photo album and asks, "It can automatically find which photos have cats in them. Is this AI too? Is it the same as the AI I chat with?" How should you answer most accurately? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** A friend points at their phone's photo album and asks, "It can automatically find which photos have cats in them. Is this AI too? Is it the same as the AI I chat with?" How should you answer most accurately? <!-- quiz: q05 revision: 2 -->
    - A. Both are AI, and the phone's cat finder and the chatbot must use the very same model
    - B. Finding cats isn't AI; it's an ordinary feature that just matches colors and shapes
    - C. Both are AI, but finding cats is mostly computer vision, while chatting uses an LLM

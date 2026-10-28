@@ -81,40 +81,40 @@ These illustrate controls and limitations; they do not promise that every model 
 
 > Six questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the blockquote under each question. Think first, then check.
 
-1. **[Basic · Concept]** What does temperature primarily change? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What does temperature primarily change? <!-- quiz: q01 revision: 2 -->
    - A. How much the model knows; the higher the temperature, the more it knows
    - B. How loosely it picks among candidate tokens, i.e. the sampling distribution
    - C. How often answers are right; a lower temperature always means more accuracy
    - D. How long it thinks before answering; the higher it is, the longer it thinks
    > **Answer: B.** Temperature adjusts the relative chance of each candidate token being picked: low temperature gives high scorers more of an edge, high temperature flattens the distribution. A and C are the two most common misconceptions: temperature adds no knowledge and guarantees no correctness, and if the knowledge is wrong, low temperature just errs more consistently. D confuses temperature with reasoning effort; "how much it thinks" belongs to reasoning settings.
 
-2. **[Basic · Concept]** What is a reasonable expectation when increasing reasoning effort? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What is a reasonable expectation when increasing reasoning effort? <!-- quiz: q02 revision: 2 -->
    - A. Wait a little longer and it is guaranteed to get every answer right
    - B. Only the display changes; usage and waiting time stay the same
    - C. The model will remember this round of thinking permanently
    - D. It's usually slower and uses more, and it can still be wrong
    > **Answer: D.** Reasoning effort controls how much it thinks before answering; reasoning tokens usually count toward usage, and you wait longer. It can help on complex problems, but more thinking can't make up for missing evidence or a vague goal. A turns a possible benefit into a guarantee. B overlooks reasoning tokens: not seeing them doesn't mean they weren't generated. C confuses reasoning with memory; this doesn't make the model remember anything across conversations.
 
-3. **[Advanced · Misconception]** Two outputs differ at temperature 0. What should you conclude? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** Two outputs differ at temperature 0. What should you conclude? <!-- quiz: q03 revision: 2 -->
    - A. Check the input, model version, and so on; low temperature isn't word-for-word
    - B. The service must be broken; stop using it right away and contact support
    - C. The model secretly retrained itself on the input you just gave it
    - D. Temperature clearly does nothing, so adjusting it is pointless from now on
    > **Answer: A.** Beyond sampling settings, tiny differences in input, model updates, and how the service runs all affect the result; temperature 0 only makes high scorers almost always win and doesn't guarantee identical text. B treats a normal occurrence as a failure. C is wrong: ordinary use doesn't change the model's parameters (Chapter 2). D overgeneralizes from one difference; temperature still clearly affects how varied the output is.
 
-4. **[Basic · Scenario]** Which approach is more reliable for extracting a fixed set of fields? <!-- quiz: q04 revision: 1 -->
+4. **[Basic · Scenario]** Which approach is more reliable for extracting a fixed set of fields? <!-- quiz: q04 revision: 2 -->
    - A. Turn temperature and reasoning effort all the way up so it thinks hardest
    - B. If the answer reads smoothly and looks complete, you can use it as is
    - C. Set fields and how to mark gaps, get a fixed format, check against the source
    - D. Have it write out all its internal thinking as proof that the result is right
    > **Answer: C.** Decide which fields to extract and how to mark missing ones, have it answer in a fixed format, then check each item against the source: format checks and fact checks are separate jobs, and you need both. A backfires, since high temperature adds looseness. B only checks fluency and won't catch a miscopied number. D's thinking summary isn't a complete record, and length doesn't prove the result right.
 
-5. **[Advanced · Misconception]** Why might copying another model's temperature and reasoning settings fail? <!-- quiz: q05 revision: 1 -->
+5. **[Advanced · Misconception]** Why might copying another model's temperature and reasoning settings fail? <!-- quiz: q05 revision: 2 -->
    - A. Copying is fine in itself; it only works with a paid account, though
    - B. Supported parameters, levels, and combinations can differ by model
    - C. No model allows any parameter changes, so adjusting is pointless anyway
    - D. You actually can copy them, since every provider's parameters mean the same
    > **Answer: B.** "Reasoning effort," "thinking budget," and the like are each provider's own design: some use levels, some take a token count, and some don't allow temperature changes under certain reasoning settings, so copying can simply cause an error. Check the current model's documentation first, then test on a small sample. A shifts the issue to account type. C goes too far; many models let you adjust some parameters. D is the very misconception to correct.
 
-6. **[Basic · Hands-on]** Choose a task with a checkable answer. Record the default result, time, and usage, then change only one setting you're able to adjust and compare. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Choose a task with a checkable answer. Record the default result, time, and usage, then change only one setting you're able to adjust and compare. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Compare performance on the same task, not answer length. Record the model, input, and settings, repeat a few times, and look for variation; if your usage breakdown shows reasoning tokens, note how they change too.

@@ -75,40 +75,40 @@ Checked on 2026-10-27. These are starting points for official information, not l
 
 > Six questions, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** About the "facts" in AI-generated content, which approach is right? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** About the "facts" in AI-generated content, which approach is right? <!-- quiz: q01 revision: 2 -->
    - A. It sounds confident, so it must have a basis; accept it
    - B. Ask the AI "is this true?" and accept it if it says yes
    - C. Check the figures yourself against the original sources
    - D. Only especially important drafts need their facts checked
    > **Answer: C.** A model aims for plausible text and does not guarantee the content is true; a confident tone says nothing about reliability (Chapter 9). B is especially risky, since asking again may just produce another invention. D falls short too: anything verifiable that you are about to send out should be checked.
 
-2. **[Basic · Concept]** About "the copyright of AI-generated content, whether it can be used commercially, whether to label AI," what's this book's stance? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** About "the copyright of AI-generated content, whether it can be used commercially, whether to label AI," what's this book's stance? <!-- quiz: q02 revision: 2 -->
    - A. Rules vary by place; follow local law and platform terms
    - B. AI-generated content can never be used commercially anywhere
    - C. AI-generated content has no copyright, so use it freely
    - D. A single global standard exists, so just follow that
    > **Answer: A.** There is no one-size-fits-all conclusion and the rules are still changing, so the book only teaches habits: read the terms before commercial use, disclose when you should, and ask a legal advisor for important cases. B, C and D all turn something that "depends on region and platform and is still changing" into an absolute.
 
-3. **[Advanced · Misconception]** "This code is open source, open source means free, I can use it however I want." What's wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** "This code is open source, open source means free, I can use it however I want." What's wrong? <!-- quiz: q03 revision: 2 -->
    - A. Open-source code cannot be used in any project at all
    - B. It comes with a license, and conditions vary
    - C. Nothing; open source means you can use it however you like
    - D. Open-source code always requires a paid license to use
    > **Answer: B.** The license sets out how you may use the code and what obligations you take on; some require you to publish your source code under the same license. AI may not tell you the source and license accurately, and compliance remains your responsibility. A goes to the opposite extreme; D is wrong too, since most open-source code is free, but free does not mean unconditional.
 
-4. **[Advanced · Scenario]** An industry report AI wrote for you has a line, "according to a certain authoritative body's 2023 statistics, the market size reached X billion," and it looks very professional. You're about to send it to a client. What should you do first? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Scenario]** An industry report AI wrote for you has a line, "according to a certain authoritative body's 2023 statistics, the market size reached X billion," and it looks very professional. You're about to send it to a client. What should you do first? <!-- quiz: q04 revision: 2 -->
    - A. Check that body's original report; cut it if not found
    - B. Ask the AI whether the figure is accurate, then decide
    - C. Send it as is; the figure is specific and looks credible
    - D. Change it to a round number so it can't count as an error
    > **Answer: A.** The more specific and professional a figure and source look, the more they need checking against the original; if you cannot find it, or the report does not exist, cut or rewrite the line. B hands the check back to an AI that may invent again, and D merely blurs an unverified number without solving the problem.
 
-5. **[Basic · Scenario]** You used AI to help write a large part of something to hand to a teacher or send to a client, and they explicitly care about "whether it was done independently / whether AI was used." What's the safest approach? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You used AI to help write a large part of something to hand to a teacher or send to a client, and they explicitly care about "whether it was done independently / whether AI was used." What's the safest approach? <!-- quiz: q05 revision: 2 -->
    - A. Present it all as your own work and never mention AI
    - B. Edit out the signs of AI so that nobody can tell
    - C. Say nothing, since no law requires you to disclose it
    - D. Tell them honestly how AI was involved, as requested
    > **Answer: D.** Whether to label AI use has two layers: legal or platform requirements, and professional norms. When the other party explicitly cares, or silence would make them think you did everything yourself, transparency is usually the safer choice. A and B are concealment, which puts your integrity at risk; C mistakes "the law does not require it" for "norms do not call for it either."
 
-6. **[Basic · Hands-on / Observation]** Have AI write a short intro on any topic, asking it to "include specific data and a quote from a famous person." Once you have it, pull out the numbers and the quote, and check them against a search engine or original material: do the data hold up? Did that person really say that line? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on / Observation]** Have AI write a short intro on any topic, asking it to "include specific data and a quote from a famous person." Once you have it, pull out the numbers and the quote, and check them against a search engine or original material: do the data hold up? Did that person really say that line? <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Quite often the number has no traceable basis, and the "quote" cannot be found or is attributed to someone who never said it. That is hallucination (Chapter 9), and it shows that fluent and confident is not the same as true. After doing this small experiment once, you will find it natural to check AI-written figures and quotes before using them.

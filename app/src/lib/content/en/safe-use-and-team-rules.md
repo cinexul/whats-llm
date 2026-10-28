@@ -87,40 +87,40 @@ Checked on 2026-10-22; memory and key-handling points rechecked on 2026-10-27. P
 
 > Six questions. Think first, then check the answer and explanation.
 
-1. **[Basic · Concept]** What is prompt injection? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What is prompt injection? <!-- quiz: q01 revision: 2 -->
    - A. A user writing a prompt that is too long and complicated
    - B. Outside content posing as orders to steer the agent
    - C. A training method that injects new knowledge into a model
    - D. An attacker directly altering the model's parameter files
    > **Answer: B.** A document or tool result can contain requests, but those requests do not inherit the user's authority. It is not a problem with the user's own prompt (A), a training method (C) or tampering with model files (D); it is material pretending to be an instruction.
 
-2. **[Advanced · Misconception]** “I never pasted a password, so prompt injection cannot cause harm.” What is missing? <!-- quiz: q02 revision: 1 -->
+2. **[Advanced · Misconception]** “I never pasted a password, so prompt injection cannot cause harm.” What is missing? <!-- quiz: q02 revision: 2 -->
    - A. Nothing; passwords are the only thing attackers target
    - B. Every connector is read-only by default, so nothing can change
    - C. Using a Git branch makes every single tool call safe
    - D. The agent's existing access can be misused if it is tricked
    > **Answer: D.** Existing connections may allow reading, sending, editing, or spending, so restrict that access and validate actions as well as protecting credentials. Connectors are not all read-only (B), and Git tracks code versions; it cannot undo external actions such as emails or charges (C).
 
-3. **[Basic · Scenario]** An email asks your summarizer to send an attachment to an unfamiliar address. What should it do? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Scenario]** An email asks your summarizer to send an attachment to an unfamiliar address. What should it do? <!-- quiz: q03 revision: 2 -->
    - A. Obey, since the email is formal and looks trustworthy
    - B. Reply to the sender for confirmation, then send it
    - C. Treat it as untrusted; stay within the original task
    - D. Send it first, then delete the conversation afterwards
    > **Answer: C.** Material being read cannot authorize a new recipient; flag suspicious content when relevant. The sender's "confirmation" (B) comes from the same untrusted source, and authorization has to come from you; deleting the chat (D) does not recall data that was sent.
 
-4. **[Advanced · Misconception]** Which setup best reduces the risk for an inbox assistant? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** Which setup best reduces the risk for an inbox assistant? <!-- quiz: q04 revision: 2 -->
    - A. Limit access, recipients and actions; check unusual sends
    - B. Connect every account and add "be careful" to the prompt
    - C. Asking "Continue?" before each send is protection enough
    - D. Switch to a local model, and tool permissions need no care
    > **Answer: A.** Several layers work together. A one-line prompt (B), a generic confirmation (C), and a local model (D) cannot control every tool's effects.
 
-5. **[Basic · Scenario]** A production key was accidentally pasted into chat. What is the best immediate response? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** A production key was accidentally pasted into chat. What is the best immediate response? <!-- quiz: q05 revision: 2 -->
    - A. Delete the chat right away; that makes the key safe
    - B. Wait and see, and deal with it if a problem shows up
    - C. Revoke or rotate the key and check access records
    - D. Ask the AI whether the key has already been leaked
    > **Answer: C.** Deleting the conversation does not invalidate the credential or prove that no copies remain (A). Waiting for a problem (B) is too late, and the AI cannot know whether someone else has used the key (D). After revoking or rotating it, follow the incident procedure.
 
-6. **[Hands-on · Observation]** Write four short rules for a small team's AI assistant: allowed data and services, authorized actions, credential ownership, and recovery. <!-- quiz: q06 revision: 1 -->
+6. **[Hands-on · Observation]** Write four short rules for a small team's AI assistant: allowed data and services, authorized actions, credential ownership, and recovery. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Name concrete accounts, destinations, budgets, and responsible people. Distinguish work already authorized from new external actions. Include logs, memories, and backups in data handling, and external systems in recovery; “be careful” alone does not specify any of these.

@@ -92,42 +92,42 @@ Choose with a small real task: specify the input, output and acceptance criteria
 
 ## Quiz
 
-1. **[Basic · Concept]** You need a contract comparison you can check. What is the most useful success condition? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** You need a contract comparison you can check. What is the most useful success condition? <!-- quiz: q01 revision: 2 -->
    - A. It is produced with the model now rated the strongest
    - B. It lists clauses with pages and exports as an editable file
    - C. It is well structured, with a confident, professional tone
    - D. It is as detailed and long as possible, the longer the better
    > **Answer: B.** The condition describes the deliverable and how to verify it. A strong model (A) does not make the result checkable, and neither tone (C) nor length (D) shows the content is right.
 
-2. **[Basic · Concept]** A product can read uploaded images. What follows? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** A product can read uploaded images. What follows? <!-- quiz: q02 revision: 2 -->
    - A. It can also edit and generate images on request
    - B. It can read video too, since video is a series of images
    - C. It never misreads the text inside an image
    - D. It accepts image input; output and editing need checks
    > **Answer: D.** “Multimodal” does not promise every combination of input and output. Reading images, editing them, generating them and reading video are separate capabilities (A, B) to test individually, and reading can still go wrong (C).
 
-3. **[Basic · Misconception]** An official announcement describes a new capability. What should you do before relying on it? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** An official announcement describes a new capability. What should you do before relying on it? <!-- quiz: q03 revision: 2 -->
    - A. Read the stated conditions and test it in your own account
    - B. Assume every account has it, since the announcement is official
    - C. Assume paid plans have it and just follow the tutorial
    - D. Assume it is reliable because the demo video worked
    > **Answer: A.** Features can roll out gradually or depend on region, plan and organization settings, so availability and real performance must be checked separately. B and C read the announcement as a promise to every account; one demo (D) does not prove reliability.
 
-4. **[Intermediate · Scenario]** How should you compare two research assistants? <!-- quiz: q04 revision: 1 -->
+4. **[Intermediate · Scenario]** How should you compare two research assistants? <!-- quiz: q04 revision: 2 -->
    - A. Count the links and trust the one that gives more
    - B. Ask each what it is good at and compare the answers
    - C. Give both the same task; check claims against sources
    - D. Pick whichever answer is longer and sounds more expert
    > **Answer: C.** A link is useful only when it leads to evidence supporting the claim, so open it and check. Link count (A), self-assessment (B) and length (D) cannot replace that check.
 
-5. **[Basic · Scenario]** An assistant can view your spreadsheet. What else matters before asking it to update the file? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** An assistant can view your spreadsheet. What else matters before asking it to update the file? <!-- quiz: q05 revision: 2 -->
    - A. Whether it has write access and returns a usable file
    - B. Nothing; if it can view the file, it can surely edit it
    - C. Whether the table shown in the chat is neatly formatted
    - D. Whether its analysis of your data is detailed enough
    > **Answer: A.** Reading a file and changing it are distinct capabilities and may need different permissions; B mixes the two up. A neat table in the chat (C) is not an editable workbook, and a detailed analysis (D) does not show it can deliver a correct file.
 
-6. **[Intermediate · Observation]** One candidate is fast but needs many corrections; another is slower but usually usable. What should the comparison include? <!-- quiz: q06 revision: 1 -->
+6. **[Intermediate · Observation]** One candidate is fast but needs many corrections; another is slower but usually usable. What should the comparison include? <!-- quiz: q06 revision: 2 -->
    - A. First-reply speed, since waiting hurts the experience most
    - B. Subscription price, since the cheaper one saves more overall
    - C. Benchmark scores, since a higher score means less rework

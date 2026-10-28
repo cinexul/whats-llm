@@ -139,35 +139,35 @@ Recovery guidance checked on 2026-10-22 against Git's official documentation: [b
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Think first, then read the answer in the quoted block.
 
-1. **[Basic · Concept]** In a diff, what does "a green line with a `+` in front" mean? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** In a diff, what does "a green line with a `+` in front" mean? <!-- quiz: q01 revision: 2 -->
    - A. A removed line: it was there before the change and is gone after it
    - B. An error line the tool highlights so you know to check it closely
    - C. A newly added line: it wasn't there before and appears after the change
    - D. An unchanged line, shown only so you can see the code around the change
    > **Answer: C.** A diff is "the before-and-after comparison": green = added (`+`), red = removed (`-`), and lines with no color or symbol are unchanged, there for context (D). Picking A flips added and removed, the thing beginners mix up most; remember "the plus sign means added" and you won't go wrong. B mistakes the color for an error marker; a diff doesn't judge right or wrong.
 
-2. **[Basic · Concept]** What is "running tests" mainly meant to confirm? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What is "running tests" mainly meant to confirm? <!-- quiz: q02 revision: 2 -->
    - A. Whether this change broke a feature that used to work fine
    - B. Whether the new code follows the style rules and reads well
    - C. Whether the AI made its changes exactly as the approved plan said
    - D. Whether every possible case is guaranteed correct after the change
    > **Answer: A.** Tests are like a factory quality-check line, made to automatically check "are existing features still working." They catch the "push down here, pops up there" cases that aren't in the diff in front of you. Whether the code follows the style (B) or matches the plan (C) is for the diff and the three sign-off questions. Passing tests only show the covered cases passed, not that every case is correct (D).
 
-3. **[Basic · Misconception]** "It said 'fixed,' so it must be fixed, merge it directly." What's wrong? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** "It said 'fixed,' so it must be fixed, merge it directly." What's wrong? <!-- quiz: q03 revision: 2 -->
    - A. Nothing; it can check its own code, so if it says fixed, it's fixed
    - B. It skipped a spot check; opening one or two places is enough
    - C. It skipped the full test run; if every test passes, every case is right
    - D. It may be confidently wrong; verify with the diff and relevant checks
    > **Answer: D.** It isn't lying to you; it can be "confidently wrong" (the hallucination of Chapter 9). Its own judgment doesn't replace verification (A); a quick look at one or two places won't catch problems elsewhere (B); relevant tests provide evidence for the behavior they cover, but passing does not prove every case is correct (C).
 
-4. **[Advanced · Misconception]** "Reading a diff means being able to follow every line of code, which a non-expert like me just can't do." Where is this worry unnecessary? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "Reading a diff means being able to follow every line of code, which a non-expert like me just can't do." Where is this worry unnecessary? <!-- quiz: q04 revision: 2 -->
    - A. It isn't; if you can't follow the code, you can't make any sense of the diff
    - B. A diff is mostly about where and how much it changed, and if that's right
    - C. You can skip the diff; if the tests pass, that does the same job
    - D. Counting how many files changed is enough; the contents don't matter
    > **Answer: B.** Signing off doesn't mean reading every line of syntax. "Did it touch the right place, is the scope normal" is like spotting "I ordered a salad, why did braised pork show up," which a non-expert can absolutely judge. Tests can't catch "changed the wrong place," so they can't replace the diff (C); counting files is too coarse to tell whether it touched the part you asked for (D).
 
-5. **[Basic · Scenario]** You want a way to restore a local code change if it goes wrong. What should you arrange beforehand? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You want a way to restore a local code change if it goes wrong. What should you arrange beforehand? <!-- quiz: q05 revision: 2 -->
    - A. Save a starting point with a Git commit or suitable backup, and check coverage
    - B. Just create a new branch, which automatically backs up the whole project folder
    - C. Take a screenshot, and if things break, change everything back by hand from it

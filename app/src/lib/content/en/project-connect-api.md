@@ -160,40 +160,40 @@ Checked: 2026-10-27.
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question; think first, then compare.
 
-1. **[Basic · Concept]** "Connecting AI to an existing program" is essentially using which layer of the four-layer map (Chapter 17)? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** "Connecting AI to an existing program" is essentially using which layer of the four-layer map (Chapter 17)? <!-- quiz: q01 revision: 2 -->
    - A. Product layer: a chat screen people open and use
    - B. Agent layer: an agent that acts in several steps
    - C. API layer: the interface opened up for programs
    - D. Model layer: the trained model itself, as it is
    > **Answer: C.** Having a **program** call the model automatically behind the scenes means going through the API (that "order window," layer three in Chapter 17). A is for a **person** to open and chat; D, the model itself, isn't something your program can touch directly, it goes through the interface; B is a different matter: a program calling an API can be used to build an agent, but "calling the API once to get an answer" isn't an agent in itself.
 
-2. **[Basic · Misconception]** "We want to bring AI into our own system, so let's go buy a ChatGPT membership." What's wrong with this? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Misconception]** "We want to bring AI into our own system, so let's go buy a ChatGPT membership." What's wrong with this? <!-- quiz: q02 revision: 2 -->
    - A. Programs go through the API: get a key, pay by usage
    - B. The plan is too low; you need a team plan to connect
    - C. Nothing; a membership lets the system call it directly
    - D. You should first train a dedicated model of your own
    > **Answer: A.** This is the number one misconception of this chapter. "A person using it in an interface" and "a program calling it automatically behind the scenes" are two different roads: the first uses a product (buy a membership), the second uses the API (Chapter 17). B and C both treat a membership as the way in, but any plan, however high, is for people; D is off target, since with an API you use the provider's ready-made model and don't need to train your own.
 
-3. **[Basic · Concept]** What is that "API key" for when you use an API? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Concept]** What is that "API key" for when you use an API? <!-- quiz: q03 revision: 2 -->
    - A. A membership card that makes a chat product unlimited
    - B. A pass that speeds up the model; pricier means faster
    - C. A switch that limits answers to questions on your account
    - D. Proof that the call is yours, used to bill you by usage
    > **Answer: D.** The key is your "order credential plus billing basis." Precisely because one end of it is tied to your bill, **leaking it means someone can run up your account**, which is why you keep it in an environment variable or `.env`, don't commit it, don't paste it into chats, and set a usage cap (Chapters 37 and 38). A confuses it with a membership; B and C, speed and the scope of answers, have nothing to do with the key.
 
-4. **[Advanced · Misconception]** To save effort, you wrote the key straight into a code file and pushed it to a public GitHub repo. What's most likely to happen? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** To save effort, you wrote the key straight into a code file and pushed it to a public GitHub repo. What's most likely to happen? <!-- quiz: q04 revision: 2 -->
    - A. Nothing; public repos hold so much code nobody will notice
    - B. Scanners grab it fast, abuse it, and you get the bill
    - C. GitHub encrypts keys automatically, so nobody can see it
    - D. Deleting that line afterward undoes the leak for good
    > **Answer: B.** Public repos are watched by dedicated scanners, and a plaintext key is often picked up quickly. The right way is to **keep the key in an environment variable or `.env`, list `.env` in `.gitignore`, never commit it, and set a usage cap to backstop you** (Chapters 37 and 38). A underestimates automated scanning; C doesn't hold, since the key you wrote is plain text; D doesn't work either: deleting the line leaves that commit in Git's history, and a leaked key has to be revoked in the dashboard and replaced.
 
-5. **[Basic · Scenario]** Your program asks the model through the API to "answer only 'positive' or 'negative,'" but once in a while it replies with a whole sentence of explanation. What should you do? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** Your program asks the model through the API to "answer only 'positive' or 'negative,'" but once in a while it replies with a whole sentence of explanation. What should you do? <!-- quiz: q05 revision: 2 -->
    - A. Swap in a new key, since the old key may be faulty
    - B. Decide the API is broken and go back to doing it by hand
    - C. Check the reply in code, with a fallback if off-format
    - D. Keep retrying automatically until it answers in format
    > **Answer: C.** What the model returns can still be wrong or ignore the format (hallucination happens just the same, Chapter 9). A robust program assumes "it might not follow instructions" and checks the return value with a fallback. A and B mistake normal behavior for a fault; D retries with no limit, which may never succeed and burns money for nothing (Chapter 38).
 
-6. **[Basic · Hands-on / Observation]** First draw the data flow of "connecting to an API" on paper: from "your program sends the question out (carrying the key)," to "the model passes the answer back," to "your program uses the answer," and mark three points related to money and safety: where the key goes, where you're billed, where you set the cap. If you can, then do a real run with the minimal path from Step 4 and check it against "Done when." (For the specific syntax, **refer to the official documentation.**) <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on / Observation]** First draw the data flow of "connecting to an API" on paper: from "your program sends the question out (carrying the key)," to "the model passes the answer back," to "your program uses the answer," and mark three points related to money and safety: where the key goes, where you're billed, where you set the cap. If you can, then do a real run with the minimal path from Step 4 and check it against "Done when." (For the specific syntax, **refer to the official documentation.**) <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** This line is actually short: send it out, take it back, use it, just three steps, and that's the whole approach of "connecting AI." But the three points you marked (key in an environment variable or `.env`, billing by token, usage cap in the dashboard) are the spots that really cause trouble and must be managed from day one (Chapters 37 and 38). A real run also shows you that the key never has to pass through the AI for the code to work.

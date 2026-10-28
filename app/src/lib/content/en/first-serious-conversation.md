@@ -120,40 +120,40 @@ Sources checked 2026-10-27. Product features change quickly; go by the latest ve
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** What does this chapter suggest treating the model as, for the steadiest sense of proportion? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What does this chapter suggest treating the model as, for the steadiest sense of proportion? <!-- quiz: q01 revision: 2 -->
    - A. A fast search engine whose answers are mostly facts it looked up
    - B. An expert adviser whose answers on specialist topics you can accept
    - C. A well-read intern who sometimes makes things up, straight-faced
    - D. A program that just strings words together, unfit for real work
    > **Answer: C.** Keep both halves together, "well-read" and "makes things up": it knows more than you, but what it says needs your sign-off. A treats it as looking things up; Chapter 2 showed that it generates answers on the spot, and fluent is not the same as correct. B remembers only "well-read" and leads to blind trust. D remembers only "makes things up" and wastes what it's good at, like rewriting and drafting.
 
-2. **[Basic · Concept]** Which kind of task is best suited to being "safely outsourced" to it? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which kind of task is best suited to being "safely outsourced" to it? <!-- quiz: q02 revision: 2 -->
    - A. Rewriting a notice you wrote so it sounds more casual and warm
    - B. Looking up the exact weight-based dose of a common medicine
    - C. Explaining exactly what a specific article of a regulation says
    - D. Compiling a reading list of papers with their authors and years
    > **Answer: A.** For a rewrite, the material is in your hands and a bad result is obvious at a glance, so it's safe to outsource. B and C are hard facts where mistakes are costly. D sounds like "organizing," but it asks the model to produce authors and years from nothing, exactly where it tends to invent (Chapter 9). All three are yours to backstop.
 
-3. **[Advanced · Misconception]** Someone says: "Writing is what it's best at, so the product-intro email I had it write can go out as is." What's the most accurate correction? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** Someone says: "Writing is what it's best at, so the product-intro email I had it write can go out as is." What's the most accurate correction? <!-- quiz: q03 revision: 2 -->
    - A. It's fine: if the email reads smoothly and politely, send it
    - B. No: anything AI writes must be rewritten by a person from scratch
    - C. The style is fine, just proofread for typos and punctuation first
    - D. The text works, but check specs, prices, and awards separately
    > **Answer: D.** The task looks safe to outsource but hides hard facts. Pull out every number, name, date, and citation in the draft and verify them separately; the rest of the text you can use with confidence. A sees only "writing is its strength" and forgets that fluent isn't the same as correct (Chapters 4 and 9). B overcorrects. C checks the surface; the real risk is in the hard facts.
 
-4. **[Advanced · Misconception]** "I just chatted with it all afternoon, surely it remembers who I am and what I like." Which statement is most accurate? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "I just chatted with it all afternoon, surely it remembers who I am and what I like." Which statement is most accurate? <!-- quiz: q04 revision: 2 -->
    - A. On the same account, the model learns your chats into its parameters
    - B. The model can't remember, but a product's memory may save some
    - C. The model has long-term memory, but only paid plans switch it on
    - D. Nothing is kept; once you close the chat, no product can ever use it
    > **Answer: B.** The model itself has no memory across conversations. But products such as Claude and ChatGPT may offer memory features; some extract memories from chats automatically and may have them on by default. What's saved gets put back into the context of later conversations. A mistakes this for training; ordinary chatting doesn't change the model's parameters. C confuses a product feature with a model ability. D goes too far: a product with memory on really can carry information into a new conversation. For how saving and deleting work, check the official documentation.
 
-5. **[Basic · Scenario]** You're using AI for help for the first time and want a reliable starting strategy. Which is best? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You're using AI for help for the first time and want a reliable starting strategy. Which is best? <!-- quiz: q05 revision: 2 -->
    - A. Use it as a search engine first, asking only fact questions
    - B. Let it get the work to 70; keep fact-checking and decisions
    - C. Start with your most important decisions to see what it can do
    - D. Only chat with it for a month or two before giving it real work
    > **Answer: B.** This is the chapter's rule of thumb: use it to save effort first, and don't rush to use it for conclusions. Drafting, organizing, and finding ideas it does fast and well; checking facts, making the call, and signing off are yours. A puts it exactly where hallucination is most likely. C hands it the conclusions, the riskiest choice. D is too cautious and wastes its strengths.
 
-6. **[Basic · Hands-on]** Pick a real small task you have on hand (rewriting a notice, drafting an email). First think it through: is this "safe to outsource" or "must backstop"? If it's both, circle the "hard fact" parts separately. Then hand it to the AI. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Pick a real small task you have on hand (rewriting a notice, drafting an email). First think it through: is this "safe to outsource" or "must backstop"? If it's both, circle the "hard fact" parts separately. Then hand it to the AI. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** For most everyday tasks the "style part" (how to write it more smoothly, more appropriately) is safe to outsource; what truly needs your backing is usually just the few **hard facts** tucked inside (numbers, names, dates, sources). Circle them once yourself and you build the habit of checking the hard facts first when a draft comes back. For the facts you circled, where an official source is available, go by the official documentation.

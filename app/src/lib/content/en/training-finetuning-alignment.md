@@ -114,40 +114,40 @@ Sources checked 2026-10-27.
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** In this chapter's simplified introductory example, which option best describes the main roles along a common training route? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** In this chapter's simplified introductory example, which option best describes the main roles along a common training route? <!-- quiz: q01 revision: 2 -->
    - A. Pre-training teaches manners, fine-tuning teaches grammar, alignment adds new knowledge
    - B. Pre-training builds a feel for language, fine-tuning teaches following, alignment fits intent
    - C. Alignment sets the rules first, then pre-training reads books, then fine-tuning learns to talk
    - D. Pre-training is enough; fine-tuning and alignment only adjust its tone of voice
    > **Answer: B.** This is a simplified common route: develop broad capabilities, then improve instruction-following and behavior. Alignment is a goal that can overlap with fine-tuning; not every model passes through three separate stages in order. A scrambles the roles; knowledge comes mainly from pre-training. C has the order backwards; pre-training is the first and most resource-hungry step. D underrates later training, which affects not just tone but whether it follows instructions reliably and behaves more safely.
 
-2. **[Basic · Concept]** Which statement about the base model produced by "pre-training" is correct? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which statement about the base model produced by "pre-training" is correct? <!-- quiz: q02 revision: 2 -->
    - A. It can already follow all your instructions reliably, just like a chat assistant
    - B. It can't answer questions at all; it needs fine-tuning before it can give any answer
    - C. It mainly continues text, and won't necessarily answer your instructions reliably
    - D. It stored the full text of the web pages it read, ready to look up whenever needed
    > **Answer: C.** Pre-training mainly learns to predict what comes next, so if you ask a question it might answer, or it might list more questions. A turns a possible ability into a guarantee. B overcorrects: base models can answer correctly, just not reliably. D treats parameters as a complete searchable document archive: some original wording may be memorized, but complete storage and accurate retrieval aren't guaranteed (chapter 2).
 
-3. **[Advanced · Misconception]** It politely declined a request of yours, and someone says "see, it has its own values and stance." What's wrong with this judgment? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** It politely declined a request of yours, and someone says "see, it has its own values and stance." What's wrong with this judgment? <!-- quiz: q03 revision: 2 -->
    - A. Nothing; being able to refuse on its own shows it has consciousness and judgment
    - B. It checked a built-in moral rulebook line by line before deciding to refuse
    - C. Refusing must mean the program malfunctioned; a normal model answers everything
    - D. It's behavior shaped by training and product rules; it doesn't show it has beliefs
    > **Answer: D.** "Attitudes" like refusing or being cautious are mainly behavior shaped by training (especially alignment-related training) and product instructions, which is also why its "personality" changes across versions. Whether anything like human belief lies inside is unsettled, but it certainly can't be inferred from one refusal. A is exactly that inference. B imagines a rule-checking program, but its behavior comes from training, not line-by-line rules. C mistakes normal alignment behavior for a malfunction.
 
-4. **[Advanced · Misconception]** "It always loves to pile on disclaimers and go in circles instead of giving a straight answer, which shows this model is dumb." What's wrong? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "It always loves to pile on disclaimers and go in circles instead of giving a straight answer, which shows this model is dumb." What's wrong? <!-- quiz: q04 revision: 2 -->
    - A. It's mostly caution from alignment, not dumbness, and a clear prompt can ease it
    - B. It's right; piling on disclaimers shows it doesn't know, so it pads with stock phrases
    - C. The context window is nearly full, so it can only fall back on generic stock phrases
    - D. It isn't connected to the internet, so it can't look things up and adds a disclaimer
    > **Answer: A.** Over-politeness, overuse of disclaimers, and dodging often come from alignment's "rather play it safe" tuning, not a lack of ability; spelling out the purpose and boundaries in your prompt often eases it (Chapter 11). B mistakes caution for ignorance. C and D borrow phenomena from other chapters: a nearly full window shows up as losing track of information (Chapter 3), and being online or not doesn't decide whether it adds disclaimers.
 
-5. **[Basic · Scenario]** You need it to give the conclusion directly, for general-audience explanation, but every time it leads with a long "I'm just an AI, please consult a professional." What's the most effective move? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You need it to give the conclusion directly, for general-audience explanation, but every time it leads with a long "I'm just an AI, please consult a professional." What's the most effective move? <!-- quiz: q05 revision: 2 -->
    - A. Keep telling it to "cut the nonsense"; the harsher your tone, the better it obeys
    - B. Decide this product is useless and switch to a different one right away
    - C. Explain the purpose and audience in your prompt and ask for a direct conclusion
    - D. Send the same sentence over and over until it stops adding the disclaimer
    > **Answer: C.** Its caution is a default tuned by alignment; spell out the setting, audience, and what you need (for example, "this is general-audience explanation, please give the conclusion directly, no need for disclaimers") and it'll often give the conclusion directly. A adds emotion but no information, so results are unreliable. B overreacts: this is tunable behavior, not a defect. D changes no information, and with output randomness, resending may not help (Chapter 8).
 
-6. **[Basic · Hands-on]** Take the same slightly sensitive or boundary-blurry question and ask it two ways: **as a single bare sentence**, and **with the "purpose, audience, and degree you want" spelled out**, then compare the two answers. Observe: after you add context, does its "level of caution" and "whether it gives the conclusion directly" change? <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Take the same slightly sensitive or boundary-blurry question and ask it two ways: **as a single bare sentence**, and **with the "purpose, audience, and degree you want" spelled out**, then compare the two answers. Observe: after you add context, does its "level of caution" and "whether it gives the conclusion directly" change? <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** In most cases, once you spell out the purpose and boundaries, it becomes more direct, with fewer disclaimers. That shows its "attitude" is a default behavior tuned by training, and one your prompt can influence. How far each company tunes this tact varies and keeps changing, so refer to the provider's official documentation. Compare it once yourself and you'll see that "how you say it" matters far more than "whether it's dumb."

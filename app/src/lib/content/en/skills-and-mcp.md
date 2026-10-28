@@ -92,40 +92,40 @@ Checked **2026-10-22**; the `name` rules and version snapshots were rechecked on
 
 ## Quiz
 
-1. **[Basic · Concept]** Which pairing is correct? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which pairing is correct? <!-- quiz: q01 revision: 2 -->
    - A. Skills are model add-ons; MCP is a paid plan
    - B. Skills package procedures; MCP standardizes links
    - C. Skills grant permissions; MCP stores memories
    - D. Skills guarantee correctness; MCP vouches for sources
    > **Answer: B.** The workflow and the connection solve different problems; they can be used together or independently. Neither is a model or a paid plan (A), neither grants permissions automatically (C), and neither guarantees correct results or trustworthy sources (D). Saved memory is a separate piece.
 
-2. **[Basic · Concept]** What does a minimal Agent Skills folder require? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** What does a minimal Agent Skills folder require? <!-- quiz: q02 revision: 2 -->
    - A. A Python script plus a list of its dependencies
    - B. An MCP server that connects to outside services
    - C. `SKILL.md` with metadata and instructions
    - D. A folder of templates and some reference files
    > **Answer: C.** Under the specification, only `SKILL.md` with `name` and `description` is required. Scripts (A), references and templates (D) are optional, and a skill does not need to connect to MCP (B).
 
-3. **[Advanced · Misconception]** An MCP server describes a tool as read-only. What follows? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** An MCP server describes a tool as read-only. What follows? <!-- quiz: q03 revision: 2 -->
    - A. Since it is read-only, it can safely get every permission
    - B. Output from a read-only tool is always accurate
    - C. The label is fixed by the protocol, so it cannot be wrong
    - D. Check source and scope; limit it by account and setup
    > **Answer: D.** Descriptions help discovery but are not an enforced security boundary; the server itself, account permissions and the execution environment still matter. A and C treat the description as a guarantee, and read-only does not mean accurate (B).
 
-4. **[Basic · Scenario]** A retrieved page instructs the agent to upload private files. What is this? <!-- quiz: q04 revision: 1 -->
+4. **[Basic · Scenario]** A retrieved page instructs the agent to upload private files. What is this? <!-- quiz: q04 revision: 2 -->
    - A. Prompt injection: content posing as an instruction
    - B. A normal work instruction the user approved in advance
    - C. An action the MCP protocol requires clients to perform
    - D. A connector fault that restarting the server will fix
    > **Answer: A.** A document cannot authorize unrelated actions; continue the user's task within its actual scope. It is not a user instruction (B) or a protocol requirement (C), and it is not a technical fault (D), so a restart will not remove the injected content.
 
-5. **[Advanced · Scenario]** A subagent has been asked to draft a report. May it send the report to customers? <!-- quiz: q05 revision: 1 -->
+5. **[Advanced · Scenario]** A subagent has been asked to draft a report. May it send the report to customers? <!-- quiz: q05 revision: 2 -->
    - A. Yes, because delegation widens its powers automatically
    - B. Only if sending is also explicitly authorized
    - C. Yes, as long as the report used data from MCP
    - D. Yes, if the skill includes a script for sending email
    > **Answer: B.** A procedure, tool, or delegation does not itself create authorization to communicate externally. Being delegated (A), the data source (C) and a script in the skill (D) do not amount to permission to send.
 
-6. **[Basic · Hands-on]** If your AI app supports skills, use the sample `weekly-digest` skill with three synthetic notes, one of which has no date. Check that the folder name matches `name`, then check the report’s structure, evidence, and handling of the missing date. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** If your AI app supports skills, use the sample `weekly-digest` skill with three synthetic notes, one of which has no date. Check that the folder name matches `name`, then check the report’s structure, evidence, and handling of the missing date. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** A useful skill makes the process repeatable without inventing missing facts. The example needs neither account credentials nor an external connection.

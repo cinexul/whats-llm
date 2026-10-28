@@ -109,40 +109,40 @@ Sources checked 2026-10-27.
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** What does "hallucination" refer to? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What does "hallucination" refer to? <!-- quiz: q01 revision: 2 -->
    - A. The model freezes up or answers extremely slowly, as if it got confused
    - B. The model lies on purpose to mislead users, with a clear goal in mind
    - C. The model states nonexistent or wrong content in a convincing way
    - D. The model leaks the contents of your conversation to other users
    > **Answer: C.** The heart of hallucination is wrong content stated as if it were real, hard to tell apart from the wording alone. Causes include generation not checking truth and training and evaluation that often reward guessing. A is a performance problem and D a privacy problem (Chapter 37); neither is hallucination. B treats it as deliberate deception, but carrying on with a plausible error when unsure is not the same as "knowing the truth and lying."
 
-2. **[Basic · Concept]** Which pair correctly distinguishes "knowledge" from "memory"? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which pair correctly distinguishes "knowledge" from "memory"? <!-- quiz: q02 revision: 2 -->
    - A. Knowledge comes from training, with a cutoff; memory relies on this context
    - B. Knowledge holds only in this chat, while memory is written into the parameters
    - C. Both update automatically over time, so any question gets the latest answer
    - D. They're the same thing, just two different names for one feature
    > **Answer: A.** Knowledge comes from training and stays long-term but has a "knowledge cutoff"; memory in context relies on information supplied in this request, and the product manages saved history (closing the window doesn't necessarily delete it). B reverses the two. C is wrong: knowledge stops at the cutoff, and memory doesn't update itself either. D ignores the basic difference in where they come from and how long they last. A product can save and resupply memory, but that doesn't mean the model's parameters learned it.
 
-3. **[Advanced · Misconception]** It gives you an answer full of citations and stated with conviction. Someone says "so smooth and so self-assured, it must be reliable." Which view is most sound? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** It gives you an answer full of citations and stated with conviction. Someone says "so smooth and so self-assured, it must be reliable." Which view is most sound? <!-- quiz: q03 revision: 2 -->
    - A. Right: when the model sounds sure it's usually correct, so use it with confidence
    - B. The reverse: the more certain it sounds, the more it's making up, so trust none of it
    - C. It even cites its sources, so the content must already have been fact-checked
    - D. Certainty is only partly tied to being right; fluency and confidence aren't proof
    > **Answer: D.** How sure the model sounds is somewhat related to being right, and "I'm not sure" deserves attention; but sounding certain and fluent doesn't prove it's right, so important facts still need checking. A stretches "somewhat related" into "use it with confidence." B swings to the opposite: confident answers are often right, and distrusting everything is just as inaccurate. C is dangerous too: even the "sources" can be made up, so have it give its basis and then check for yourself.
 
-4. **[Advanced · Misconception]** "The product I use has a 'memory' feature that remembers my preferences, so the model itself remembers me." What's wrong? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "The product I use has a 'memory' feature that remembers my preferences, so the model itself remembers me." What's wrong? <!-- quiz: q04 revision: 2 -->
    - A. It shows this model is more advanced, with long-term memory built in from birth
    - B. The product puts saved information back into context; the model itself is unchanged
    - C. Your details were written into the parameters for good, so it will always know them
    - D. It's entirely right; the model itself has firmly remembered who you are
    > **Answer: B.** The key is separating the two layers: the model itself has no cross-conversation memory, and a "memory" feature is the product layer putting saved information back into context during the conversation (that table from Chapter 3). What it can "remember" is always only the part the product decides to put back; for how it's stored and whether it can be deleted, refer to the official documentation. A mistakes a product feature for an innate model ability. C assumes the parameters changed, but product-layer memory doesn't alter the model's parameters. D is the very misconception in the question.
 
-5. **[Basic · Scenario]** You want it to help you learn the details of "some new product launched only last month," and it answers in great detail. What's the safest approach? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You want it to help you learn the details of "some new product launched only last month," and it answers in great detail. What's the safest approach? <!-- quiz: q05 revision: 2 -->
    - A. Raise the temperature a bit and ask again so it answers from a different angle
    - B. Ask it several times; if the answer is the same every time, it must be right
    - C. Suspect the knowledge cutoff; have it search or give it material, then check
    - D. It answered in such specific detail that you can just take it at its word
    > **Answer: C.** "What happened recently" is exactly the knowledge cutoff's blind spot, and it may make up something very convincing. Either have it search the web (Chapter 19, and verify what it finds) or paste in official material and have it answer from that, then check the key points yourself. A doesn't solve anything; a higher temperature just makes it pick more loosely (Chapter 8). B isn't reliable; made-up content can come out the same every time. D walks right into the hallucination trap: detail doesn't mean truth.
 
-6. **[Basic · Hands-on]** Deliberately ask it a **fairly obscure and specific** fact (like the publication year of some niche book, or the exact clause of some regulation) and require it to "give the source"; then paste in a reliable piece of material you have on hand, have it answer the same question "based only on this material," and tell it to say so if the material doesn't cover it. Compare the two. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** Deliberately ask it a **fairly obscure and specific** fact (like the publication year of some niche book, or the exact clause of some regulation) and require it to "give the source"; then paste in a reliable piece of material you have on hand, have it answer the same question "based only on this material," and tell it to say so if the material doesn't cover it. Compare the two. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Without material, it may invent a convincing "source" that can't be found, or it may honestly say it isn't sure; once it has material and must answer only from it, the answer is usually easier to check and less likely to be made up. This is exactly the core idea of RAG (Chapter 20): rather than betting it remembers right, put the right material in front of it. Compare them once yourself and you'll see more clearly that sounding convincing is not the same as being backed by evidence.

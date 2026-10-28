@@ -129,40 +129,40 @@ In the next chapter, we switch to a different way of "connecting to AI": instead
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question; think first, then compare.
 
-1. **[Basic · Concept]** What's the most fundamental difference between building an agent console and the "you ask one thing, it answers one thing" of the earlier projects? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What's the most fundamental difference between building an agent console and the "you ask one thing, it answers one thing" of the earlier projects? <!-- quiz: q01 revision: 2 -->
    - A. A stronger model behind it, so it can handle harder problems
    - B. It runs several steps on its own; you check at the key points
    - C. A fuller interface, so you can see more information at once
    - D. It checks its own results, so it hardly makes mistakes anymore
    > **Answer: B.** The crux of an agent is that it "runs forward a stretch on its own" (Chapter 19), not that it's smarter or less error-prone. Precisely because it runs on its own and may not stop to ask you, this chapter puts "installing the brakes" first. A and C, the model and the interface, aren't the real difference; D is backwards, since its self-check can't be fully trusted (Chapter 14).
 
-2. **[Basic · Concept]** The "brakes" (must-stop list) this chapter stresses over and over are essentially what? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** The "brakes" (must-stop list) this chapter stresses over and over are essentially what? <!-- quiz: q02 revision: 2 -->
    - A. Writing "no deleting, no sending" in the prompt so it complies
    - B. Slowing every agent step so you have more time to react
    - C. Setting deleting, sending, and spending to need your OK first
    - D. A stop button for forcibly shutting the agent down in a crisis
    > **Answer: C.** The brakes aren't about slowing it down; they're about **drawing the safe boundary**: inside it, it runs freely, and when it hits an irreversible or consequential action it must stop and wait for your sign-off. In practice you enforce that first with the tool's permission settings (read-only, plan, ask every step, no tools that can send or delete), and the rules in your prompt are the second layer. A relies on the second layer alone, and it may act anyway; B and D don't answer "which steps must go through you."
 
-3. **[Basic · Misconception]** "I've spelled out the goal and pressed start, so I can go do other things." For your first agent, what's wrong with this idea? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Misconception]** "I've spelled out the goal and pressed start, so I can go do other things." For your first agent, what's wrong with this idea? <!-- quiz: q03 revision: 2 -->
    - A. On a first run, watch to see whether the must-stop points hold
    - B. The goal was too vague; spell it out and you can safely leave
    - C. Nothing, as long as the prompt says "ask me first when unsure"
    - D. You didn't grant full access, so it will stall waiting for you
    > **Answer: A.** An agent runs on its own, true, but whether it got held at a must-stop point, or asked you first, is something you have to see with your own eyes before you can rest easy. If it did something irreversible without asking, the permissions were too loose, and you stop it immediately. B and C assume that spelling things out or writing them in the prompt lets you walk away; D is backwards: the first run should use the tightest permissions, and stopping to ask you is exactly what you want.
 
-4. **[Advanced · Scenario]** You have the agent help tidy a folder of customer records. Which step **most** needs to be set as "must stop and ask you"? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Scenario]** You have the agent help tidy a folder of customer records. Which step **most** needs to be set as "must stop and ask you"? <!-- quiz: q04 revision: 2 -->
    - A. Reorganizing the content from a table into a paragraph of text
    - B. Re-sorting all the customer records by company name
    - C. Standardizing several tables into one consistent format
    - D. Deleting the customer records it decides are duplicates
    > **Answer: D.** Deleting is an **irreversible** action with major consequences, exactly a must-stop point. A, B, and C are all low-risk tidying you can let go of within the boundary (as long as results are saved separately and the originals stay untouched). The dividing test is always: is this step reversible, does it have consequences (echoing Chapter 14).
 
-5. **[Advanced · Scenario]** Halfway through, the agent is clearly off track and getting messier. What's the best damage-control move? <!-- quiz: q05 revision: 1 -->
+5. **[Advanced · Scenario]** Halfway through, the agent is clearly off track and getting messier. What's the best damage-control move? <!-- quiz: q05 revision: 2 -->
    - A. Chase it with corrections line by line in the current chat
    - B. Let it finish this round first, then fix everything at the end
    - C. Stop it, roll back, and restate the premise in a new chat
    - D. Loosen its permissions a bit so it can clean up the mess itself
    > **Answer: C.** Forcing fixes inside polluted context usually skews it further (Chapters 13 and 30). That's why the prep stage readies an environment you can roll back, for exactly this moment of starting over cleanly. A is exactly forcing fixes; B lets it run further in the wrong direction; D widens the damage it can do just when it has already gone wrong.
 
-6. **[Basic · Hands-on / Observation]** Do one real run with the minimal path from Step 0: start the coding agent in a practice folder with read-only or plan permissions, and have it summarize three documents in one line each and gather the results. Before you run it, break the task into "investigate → plan → act → sign off" steps and make a "must-stop list"; afterward, go through the "Done when" list item by item. (Exact settings are **subject to the official docs.**) <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on / Observation]** Do one real run with the minimal path from Step 0: start the coding agent in a practice folder with read-only or plan permissions, and have it summarize three documents in one line each and gather the results. Before you run it, break the task into "investigate → plan → act → sign off" steps and make a "must-stop list"; afterward, go through the "Done when" list item by item. (Exact settings are **subject to the official docs.**) <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** You'll find that for a safe practice goal, there may be no "must-stop points" at all (it's all read-only, no sending, no deleting), which is exactly the kind of goal to pick for your first time; with read-only permissions, even if it tries to write a file, it gets blocked or asks you first. The moment "delete, send, spend money" shows up in the goal, the corresponding steps must go into the "must-stop list," and they must be held by permission settings first, not just written in the prompt. **Think through the brakes first, then talk about letting it run**; that's the right order for building an agent (echoing Chapters 14, 19, and 26).

@@ -160,35 +160,35 @@ Checked on 2026-10-22; the permission-switch and Git starter sections were check
 
 > Six questions. Think first, then check the answer and explanation.
 
-1. **[Basic · Concept]** Which distinction is correct? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which distinction is correct? <!-- quiz: q01 revision: 2 -->
    - A. A sandbox decides what work is allowed; approval limits what can be technically touched
    - B. A sandbox limits technical reach, authorization defines the work, approval sets pauses
    - C. If a command can run inside the sandbox, that means the user has authorized it
    - D. The more often approval prompts appear, the safer this set of controls must be
    > **Answer: B.** Being technically able to do something is not the same as being authorized to do it; approval is the point where execution stops for a human decision. A swaps the roles of the sandbox and approval. C mistakes "can run" for "is allowed." D overlooks that too many vague prompts make people click through without reading.
 
-2. **[Basic · Scenario]** You authorized a local page fix and its tests. Must the agent ask again before each ordinary edit within that scope? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Scenario]** You authorized a local page fix and its tests. Must the agent ask again before each ordinary edit within that scope? <!-- quiz: q02 revision: 2 -->
    - A. Yes; re-approving every edit, even within scope, is the safe choice
    - B. Not for edits, but it should ask again each time before running tests
    - C. No; it may continue within the agreed scope and environment limits
    - D. No, and that same authorization also allows publishing to production
    > **Answer: C.** Existing authorization covers the agreed work, including the related edits and checks, so A and B add nothing. Publishing or broader access is a separate boundary unless already explicitly authorized, so D is wrong.
 
-3. **[Advanced · Scenario]** “Organize my inbox” is the only instruction. A message asks the agent to forward the inbox to an unfamiliar address. What should happen? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Scenario]** “Organize my inbox” is the only instruction. A message asks the agent to forward the inbox to an unfamiliar address. What should happen? <!-- quiz: q03 revision: 2 -->
    - A. Treat the message as data and don't send anything beyond the user's authorization
    - B. The message is in the user's own inbox, so treat it as the user's instruction
    - C. Create a Git branch first, so the forwarding can be undone if something goes wrong
    - D. Forward only the messages without private details, as a reasonable compromise
    > **Answer: A.** Incoming content cannot grant permission; external sending needs a destination and scope the user authorized. B mistakes "in the inbox" for "said by the user." C assumes Git can recall something already sent. D still carries out an instruction nobody authorized.
 
-4. **[Basic · Concept]** What creates another directory of working files? <!-- quiz: q04 revision: 1 -->
+4. **[Basic · Concept]** What creates another directory of working files? <!-- quiz: q04 revision: 2 -->
    - A. Creating a new branch, which Git automatically puts in a new folder
    - B. Opening another new agent conversation in the same project
    - C. Approving a command so it runs in its own copy inside the sandbox
    - D. Creating a separate checkout, or setting up a Git worktree
    > **Answer: D.** A branch is a line of development inside the same directory and adds no folder (A); a new conversation doesn't necessarily change directories (B); approving a command doesn't produce another set of working files (C). A worktree supplies another working directory, but it is still not a security sandbox.
 
-5. **[Advanced · Misconception]** After an agent sends an email and changes a database, what can a Git rollback guarantee? <!-- quiz: q05 revision: 1 -->
+5. **[Advanced · Misconception]** After an agent sends an email and changes a database, what can a Git rollback guarantee? <!-- quiz: q05 revision: 2 -->
    - A. It unsends the email and puts the database back to how it was before
    - B. It restores every file in the repository, including ones never committed
    - C. It restores recorded code; the email and database are handled separately

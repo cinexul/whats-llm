@@ -139,40 +139,40 @@ In the next chapter, we'll put the same "AI plus files" approach to another real
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Project chapters lean toward scenario and hands-on. Think first, then read the answer explanations in the quote blocks.
 
-1. **[Basic · Concept]** Which work loop runs through this entire chapter? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** Which work loop runs through this entire chapter? <!-- quiz: q01 revision: 2 -->
    - A. Write the spec, generate it all, publish
    - B. Learn to code, write the page, check it
    - C. Preview, give feedback, change again
    - D. Run commands, read the logs, fix bugs
    > **Answer: C.** You say one thing, it changes one thing, you refresh the browser to see the effect, and if you're not happy you say more. This "preview, give feedback, change again" loop is the most important rapport between you and a coding agent. A is the "do it all in one go" approach, while this chapter asks you to break things down; B assumes you must learn to code first, which the chapter says you don't; D is how programmers hunt down problems, while this chapter checks the work by what you see in the browser.
 
-2. **[Basic · Concept]** Why does this chapter pick a "personal website" as the first hands-on project? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Why does this chapter pick a "personal website" as the first hands-on project? <!-- quiz: q02 revision: 2 -->
    - A. Lowest bar, cheap to break, and a refresh shows the result
    - B. It's the most common project and you can publish it right away
    - C. Web page code is short, so the AI almost never gets it wrong
    - D. You pick up HTML along the way, a base for writing code later
    > **Answer: A.** A single web page is the simplest thing there is and the hardest to break badly, and a refresh tells you right away whether it's right. That kind of "visible result" is the best fit for a beginner to build the confidence of "I can direct it." B is wrong: what you build here is a file you open in your own browser, not a site you publish. C is wrong: it still "fills in the blanks" and makes mistakes on a web page. D is wrong: the chapter stresses that you don't need to understand the code.
 
-3. **[Basic · Scenario]** You ask it to change the big heading to your name, go back to the browser, and **after refreshing nothing has changed**. What should you do first? <!-- quiz: q03 revision: 1 -->
+3. **[Basic · Scenario]** You ask it to change the big heading to your name, go back to the browser, and **after refreshing nothing has changed**. What should you do first? <!-- quiz: q03 revision: 2 -->
    - A. Decide the change failed and have it do the same thing again
    - B. Delete the folder and start over with a simpler request
    - C. Open the code, see which lines changed, find the problem yourself
    - D. Force a refresh, then ask which file you should open to look
    > **Answer: D.** The most common reasons for "refresh, no change" are the browser cache or having the wrong file open instead of the one it just changed. Rule those two out before you draw conclusions. A and B both decide it failed before checking why; C asks you to read code, while this chapter checks the work by what you see in the browser.
 
-4. **[Advanced · Misconception]** "Just have it build the whole website with a blog and a photo album all at once, that's the least hassle." What's wrong with this idea? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "Just have it build the whole website with a blog and a photo album all at once, that's the least hassle." What's wrong with this idea? <!-- quiz: q04 revision: 2 -->
    - A. Nothing; with a detailed enough spec, one go is least hassle
    - B. Too much to review at once, and hard to back out cleanly
    - C. Mostly the token cost; splitting it up saves a lot of money
    - D. The AI can't keep that many requirements in mind; write a file first
    > **Answer: B.** A big change equals a big blind spot. The keynote of this chapter is to **break it down**: one block of content, refresh and check, save a checkpoint once you're happy, then do the next. A assumes a detailed spec makes one pass enough, but however detailed it is, you still have to check every item; C and D are about cost and memory, which aren't the main problem here. Even if you save money or write it all in a file, you still can't review everything that lands at once.
 
-5. **[Basic · Scenario]** After refreshing, you find the intro has an extra line about a hobby **you never mentioned**. What does this show, and what should you do? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** After refreshing, you find the intro has an extra line about a hobby **you never mentioned**. What does this show, and what should you do? <!-- quiz: q05 revision: 2 -->
    - A. It remembered your hobby from past chats, so keep it
    - B. It's sample text from the page template, harmless to keep
    - C. It made that up; catch it when checking and have it removed
    - D. Your wording was ambiguous, so restart from Step 0
    > **Answer: C.** It will confidently embellish, and that's the hallucination that shows up just the same when building a page (Chapter 9). Just because it wrote it doesn't mean you wanted it; your item-by-item check is what counts, and when you find invented content, have it deleted. A is wrong: the model itself doesn't remember you across conversations, and even with a product memory feature, things you didn't ask for shouldn't appear. B is wrong: it's content the AI wrote into your page, not a template you can ignore. D overreacts; deleting that one line is enough.
 
-6. **[Advanced · Hands-on]** Walk through Step 0 of this chapter yourself: have it make the simplest homepage, confirm you can open it in the browser and see the big heading, then change the heading to your name with one sentence and refresh to confirm. After you're done, answer: in this pass, **which sentence was the "feedback," and which action was the "preview"?** <!-- quiz: q06 revision: 1 -->
+6. **[Advanced · Hands-on]** Walk through Step 0 of this chapter yourself: have it make the simplest homepage, confirm you can open it in the browser and see the big heading, then change the heading to your name with one sentence and refresh to confirm. After you're done, answer: in this pass, **which sentence was the "feedback," and which action was the "preview"?** <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** The "feedback" is the sentence you said, "change the heading to my name," and the "preview" is you going back to the browser to refresh and see the effect. You'll feel firsthand that **the whole way through you don't need to understand the code; you can direct it and check the work just by "saying it clearly and looking carefully."** This is the basic skill every later project uses over and over. For exactly how to install the tools and start them inside your folder, **defer to the official documentation** (Chapters 28 and 29).

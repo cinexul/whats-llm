@@ -130,40 +130,40 @@ Sources checked 2026-10-27. Product features change quickly; go by the latest ve
 
 > 6 questions in all, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question. Think first, then check.
 
-1. **[Basic · Concept]** What's the most accurate explanation for a conversation getting "dumber the longer you talk"? <!-- quiz: q01 revision: 1 -->
+1. **[Basic · Concept]** What's the most accurate explanation for a conversation getting "dumber the longer you talk"? <!-- quiz: q01 revision: 2 -->
    - A. The model tires after working so long, so answer quality slowly declines
    - B. Irrelevant, conflicting content builds up in a long chat and distracts it
    - C. The longer you chat, the more errors it learns into its parameters
    - D. Longer chats slow the network, so it can't read everything in time
    > **Answer: B.** As Chapter 3 explained, a full desk isn't bad in itself; the problem is that irrelevant or conflicting content distracts it, and requirements you set early can get buried or lose detail in a summary. A anthropomorphizes it; the model doesn't get "tired." C confuses context with training; ordinary chatting doesn't change the model's parameters. D blames the network, which misses the point.
 
-2. **[Basic · Concept]** Which of these is a typical signal that it's time to open a new conversation? <!-- quiz: q02 revision: 1 -->
+2. **[Basic · Concept]** Which of these is a typical signal that it's time to open a new conversation? <!-- quiz: q02 revision: 2 -->
    - A. This answer is shorter than the last one and the tone is more concise
    - B. You've already asked five or six related questions in this conversation
    - C. It contradicts itself, ignores your rules, and rehashes old drafts
    - D. It quoted, word for word, something you said several turns earlier
    > **Answer: C.** Contradicting itself, repeatedly ignoring requirements, and rehashing rejected drafts mean the noise on the desk is drowning out the signal, so it's time for a clean desk. A is just a change in style and not necessarily a problem. B: the number of turns isn't a signal in itself, and related follow-ups often work better in the same conversation. D shows it still has the earlier content, which is good.
 
-3. **[Advanced · Misconception]** "When it drifts and forgets my requirements, I'll just keep reminding and correcting it in this conversation, and eventually it'll come back." What's the problem? <!-- quiz: q03 revision: 1 -->
+3. **[Advanced · Misconception]** "When it drifts and forgets my requirements, I'll just keep reminding and correcting it in this conversation, and eventually it'll come back." What's the problem? <!-- quiz: q03 revision: 2 -->
    - A. Correcting a messy chat often makes it worse; a fresh conversation works better
    - B. That's right; bold the requirements and repeat them, and it will comply in the end
    - C. Drifting means the model is broken, so reset all its memory in settings at once
    - D. Lower the temperature first, so its answers in the same chat become more stable
    > **Answer: A.** The drift comes from irrelevant and conflicting content piled on the desk, and adding more to the same conversation only makes it messier; open a new conversation and lay out what's still needed cleanly. C jumps ahead: the right order is to try a fresh conversation first, and only if the problem reproduces there, check settings or report it. B assumes emphasis is enough, but volume isn't the issue. D has little to do with this; temperature controls randomness (Chapter 8).
 
-4. **[Advanced · Misconception]** "I turned on 'memory' in some product and it remembers my preferences, so the model itself must have memory across conversations." What's wrong? <!-- quiz: q04 revision: 1 -->
+4. **[Advanced · Misconception]** "I turned on 'memory' in some product and it remembers my preferences, so the model itself must have memory across conversations." What's wrong? <!-- quiz: q04 revision: 2 -->
    - A. Your preferences were written into the model's parameters, so any product knows them
    - B. Memory saves only what you explicitly ask it to remember and nothing else
    - C. That's basically right, but this memory only really works on paid plans
    - D. The product layer puts saved information back; the model itself has no memory
    > **Answer: D.** The model itself has no memory across conversations; "memory" is the product layer putting saved information back into the context of later conversations (Chapter 3). A mixes up a product feature with training. B is wrong: some products extract memories from chats automatically, possibly on by default, which is why you should review and delete them. C also mistakes a product feature for a model ability; check each provider's official documentation for plans and defaults.
 
-5. **[Basic · Scenario]** You've been refining a draft with the AI. It went well at first, but now it ignores new requirements and rehashes approaches you rejected. What's the best move? <!-- quiz: q05 revision: 1 -->
+5. **[Basic · Scenario]** You've been refining a draft with the AI. It went well at first, but now it ignores new requirements and rehashes approaches you rejected. What's the best move? <!-- quiz: q05 revision: 2 -->
    - A. List every requirement again in the same chat and demand it follow them strictly
    - B. Turn on memory so it remembers the requirements, then keep editing in that chat
    - C. Open a new chat, paste your best version, say what to change, leave old drafts
    - D. Delete the whole conversation, switch models, and rewrite the draft from scratch
    > **Answer: C.** This is the chapter's signature move: carry the good intermediate result to a clean desk and leave the scrapped drafts in the old conversation. A is still adding paper to a full desk. B doesn't fix the distraction in the current conversation, and one-off requirements like these don't belong in long-term memory anyway. D is wasteful and throws away the good version too.
 
-6. **[Basic · Hands-on]** If a product you use offers custom instructions, projects, or memory, enter one long-term preference you always have to state (such as "answer in English, professional tone, I work in education"); check the official documentation for where and how. Then open two or three brand-new conversations and see whether it "knows" this preference from the start. Also open the memory management page to see whether it has saved anything else automatically, and think about which information **shouldn't** be stored long-term this way. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** If a product you use offers custom instructions, projects, or memory, enter one long-term preference you always have to state (such as "answer in English, professional tone, I work in education"); check the official documentation for where and how. Then open two or three brand-new conversations and see whether it "knows" this preference from the start. Also open the memory management page to see whether it has saved anything else automatically, and think about which information **shouldn't** be stored long-term this way. <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** Once it's set, new conversations usually follow the preference from the start. That isn't the model remembering you; the product put the preference back into this conversation's context (Chapter 3). On the memory page you may also find things it saved on its own that you never asked it to remember; delete what you don't want. And since this information gets carried into conversation after conversation, **sensitive information (passwords, ID numbers, trade secrets) should never be saved as a preference** (Chapter 37). Features differ by product and keep changing, so check the official documentation.

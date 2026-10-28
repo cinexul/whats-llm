@@ -25,6 +25,7 @@ This directory contains usage guides, maintenance contracts, and dated project r
 
 | 文档 / Document | 保留原因 / Why it is kept / 保持する理由 |
 | --- | --- |
+| [Content revision — 2026-10-27](content-review-2026-10-27.md) | 全书测验重写、章节口径统一、Git入门和项目步骤补全 · Quiz rewrite, consistency fixes, Git and project steps · 小テストの作り直し・表現の統一・Gitと実践手順の追加 |
 | [Content revision — 2026-10-22](content-review-2026-10-22.md) | 章节元数据引用的审核依据和来源快照 · Review evidence referenced by chapter metadata · 章メタデータが参照する確認根拠 |
 | [从阅读到实践](learning-book.md) | 学习功能的整合说明、当时的截图与验证 · Feature integration, screenshots, and validation at that revision · 学習機能の統合・当時の画面と検証 |
 | [手机阅读版](mobile-reader.md) | 第一轮手机界面改版记录 · Initial mobile redesign record · 初回モバイル改修の記録 |
