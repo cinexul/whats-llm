@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 	import { manifests, allChapters } from '$lib/manifest';
 	import { lang } from '$lib/lang';
-	import { ui } from '$lib/ui';
+	import { ui, countText } from '$lib/ui';
 	import Icon from '$lib/Icon.svelte';
 	import FeatureNav from '$lib/FeatureNav.svelte';
 	import { readingChapter } from '$lib/reading';
@@ -34,7 +34,7 @@
 	{#if readCount > 0}<div class="book-progress" role="meter" aria-label={t.statRead} aria-valuenow={readCount} aria-valuemin="0" aria-valuemax={chapters.length}><span style="width: {100 * readCount / chapters.length}%"></span></div>{/if}
 
 	<FeatureNav />
-	<div class="section-heading"><h2>{t.bookOverview}</h2><span>{t.allChaptersLabel.replace('{n}', String(chapters.length))}</span></div>
+	<div class="section-heading"><h2>{t.bookOverview}</h2><span>{countText(t.allChaptersLabel, chapters.length, $lang)}</span></div>
 
 	<div class="part-cards">
 		{#each parts as part, index (part.title)}
@@ -44,7 +44,7 @@
 				<p class="part-desc">
 					{part.chapters.length === 1
 						? part.chapters[0].title
-						: t.allChaptersLabel.replace('{n}', String(part.chapters.length))}
+						: countText(t.allChaptersLabel, part.chapters.length, $lang)}
 				</p></div>
 				<Icon name="chevron" size={18} />
 			</a>

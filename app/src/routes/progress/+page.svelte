@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 	import { manifests, allChapters } from '$lib/manifest';
 	import { lang } from '$lib/lang';
-	import { ui } from '$lib/ui';
+	import { ui, countText } from '$lib/ui';
 	import { quizCopy } from '$lib/quiz-copy';
 	import {
 		cardsStore,
@@ -137,7 +137,7 @@
 			<span class="stat-label" title={copy.accuracyHint}>{copy.accuracy}</span>
 		</div>
 		<div class="stat">
-			<span class="stat-num">{streakN}<span class="stat-of">{t.unitDays}</span></span>
+			<span class="stat-num">{streakN}<span class="stat-of">{countText(t.unitDays, streakN, $lang)}</span></span>
 			<span class="stat-label">{t.statStreak}</span>
 		</div>
 		<div class="stat" class:alert={due.length > 0}>
@@ -148,14 +148,14 @@
 
 	{#if due.length > 0}
 		<a class="review-cta" href="{base}/review/">
-			<span>{t.duePrompt.replace('{n}', String(due.length))}</span>
+			<span>{countText(t.duePrompt, due.length, $lang)}</span>
 			<span class="review-cta-go">{t.reviewCta} →</span>
 		</a>
 	{/if}
 
 	{#if mistakes.length > 0}
 		<a class="mistakes-cta" href="{base}/review/?mode=mistakes">
-			<span>{copy.mistakeCount.replace('{n}', String(mistakes.length))}</span>
+			<span>{countText(copy.mistakeCount, mistakes.length, $lang)}</span>
 			<span>{copy.mistakes} →</span>
 		</a>
 	{/if}

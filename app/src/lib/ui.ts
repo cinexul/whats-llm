@@ -114,3 +114,13 @@ export interface UiStrings {
 }
 
 export const ui: Record<Lang, UiStrings> = uiData as Record<Lang, UiStrings>;
+
+/**
+ * 把模板里的{n}换成数字。英文模板写成“单数|复数”，按数量挑一个；
+ * 中文和日文没有单复数，模板里不写“|”。
+ */
+export function countText(template: string, n: number, lang: Lang): string {
+	const forms = template.split('|');
+	const form = forms.length > 1 && new Intl.PluralRules(lang).select(n) !== 'one' ? forms[1] : forms[0];
+	return form.replaceAll('{n}', String(n));
+}

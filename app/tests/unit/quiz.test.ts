@@ -117,3 +117,15 @@ describe('stable quiz identity', () => {
 		}
 	});
 });
+
+describe('count text', () => {
+	it('picks the English singular or plural and leaves Chinese and Japanese alone', async () => {
+		const { countText, ui } = await import('$lib/ui');
+		expect(countText(ui.en.duePrompt, 1, 'en')).toBe("1 question is due — let's review");
+		expect(countText(ui.en.duePrompt, 3, 'en')).toBe("3 questions are due — let's review");
+		expect(`1${countText(ui.en.unitDays, 1, 'en')}`).toBe('1 day');
+		expect(`2${countText(ui.en.unitDays, 2, 'en')}`).toBe('2 days');
+		expect(countText(ui.zh.duePrompt, 1, 'zh')).toBe('有1道题到期，去复习吧');
+		expect(`5${countText(ui.ja.unitDays, 5, 'ja')}`).toBe('5日');
+	});
+});

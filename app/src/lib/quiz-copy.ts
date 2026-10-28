@@ -14,7 +14,7 @@ export const quizCopy: Record<Lang, QuizCopy> = {
 		topic: 'Topic', chapter: 'Chapter', allTopics: 'All topics', allChapters: 'All chapters',
 		noMistakes: 'No mistakes to practice', noMistakesBody: 'There are no unresolved mistakes in this selection. Try a chapter quiz or choose another topic.',
 		accuracy: 'Historical answer accuracy', accuracyHint: 'Correct answers as a share of all recorded answers in this language, including earlier question versions.',
-		mistakeCount: '{n} questions to revisit', backToChapter: 'Read the chapter',
+		mistakeCount: '{n} question to revisit|{n} questions to revisit', backToChapter: 'Read the chapter',
 		saving: 'Saving answer…', saved: 'Answer saved', practiceOnly: 'Practice answer. Your first recorded answer sets the review schedule.', saveFailed: 'Could not save your answer. Your feedback is still available.',
 		saveAgain: 'Try saving again', loadFailed: 'Could not load this review. Reload the page to try again.'
 	},
