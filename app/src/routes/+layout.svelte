@@ -25,7 +25,8 @@
 	import {
 		cardsStore,
 		ensureLoaded,
-		dueCount
+		dueCount,
+		studyOpenError
 	} from '$lib/study';
 	import { fullTextSearch, ensureIndex, type SearchHit } from '$lib/search';
 
@@ -347,6 +348,9 @@
 		</aside>
 
 		<main class="content" bind:this={mainEl} onscroll={onScroll}>
+			{#if $studyOpenError}
+				<p class="study-error" role="alert">{t.studyUnavailable.replace('{reason}', $studyOpenError)}</p>
+			{/if}
 			{@render children()}
 		</main>
 	</div>
@@ -608,6 +612,16 @@
 		flex: 1;
 		min-width: 0;
 		overflow-y: auto;
+	}
+
+	.study-error {
+		margin: 1rem 1.25rem 0;
+		padding: 0.7rem 1rem;
+		border: 1px solid var(--accent);
+		border-radius: 8px;
+		background: var(--accent-bg);
+		color: var(--accent-text);
+		font-size: 0.9rem;
 	}
 
 

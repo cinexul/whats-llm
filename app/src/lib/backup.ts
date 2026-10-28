@@ -2,6 +2,7 @@ import { BackupError } from './backup-errors';
 import { get } from 'svelte/store';
 import { annotations, ensureLoaded, flushAnnotationWrites, editedAnnotationSnapshot } from './annotations';
 import { reload } from './study';
+import { replay } from './fsrs';
 import { loadLocalEdits, readLocalEdits, withLocalEditLock, writeLocalEditsSnapshot } from './local-edits';
 import { LocalEditError } from './local-edits-schema';
 import type { Lang } from './manifest';
@@ -107,6 +108,10 @@ export function mergeBackups(existing: LearningBackup, incoming: LearningBackup)
 		if (count > (reviewCounts.get(k) ?? 0)) data.study.reviews.push(clone(r));
 	}
 	data.study.reviews.sort((a, b) => a.ts - b.ts || reviewKey(a).localeCompare(reviewKey(b)));
+	// 答题记录是唯一依据：有记录的卡片按合并后的完整记录重算，桌面版的SQLite导入也这样做。
+	const history = new Map<string, PortableReview[]>();
+	for (const r of data.study.reviews) history.set(r.cardId, [...(history.get(r.cardId) ?? []), r]);
+	data.study.cards = data.study.cards.map((c) => (history.has(c.id) ? replay(c, history.get(c.id)!) : c));
 	const read = new Map(data.study.read.map((r) => [`${r.lang}:${r.slug}`, r]));
 	for (const r of incoming.study.read) { const k = `${r.lang}:${r.slug}`; const old = read.get(k); if (!old || r.ts > old.ts) read.set(k, clone(r)); }
 	data.study.read = [...read.values()].sort((a, b) => `${a.lang}:${a.slug}`.localeCompare(`${b.lang}:${b.slug}`));

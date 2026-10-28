@@ -80,6 +80,7 @@ export interface UiStrings {
 	unitDays: string; // 連続学習日数の単位
 	dueSectionTitle: string;
 	dueEmpty: string; // 復習対象が無いとき
+	studyUnavailable: string; // 桌面版学习数据库打不开时，{reason}是原因
 	reviewNewTitle: string; // 还没答过任何题时的复习页标题
 	reviewNewBody: string;
 	progressEmpty: string; // 还没有测验记录时的学习进度提示

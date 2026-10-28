@@ -26,6 +26,8 @@ pub enum StudyError {
     Sqlite(rusqlite::Error),
     Fsrs(fsrs::FSRSError),
     InvalidSnapshot(String),
+    /// 更新的应用写过的数据库。旧程序看不懂新格式，宁可不打开也不能改坏它。
+    NewerDatabase(i64),
 }
 
 impl std::fmt::Display for StudyError {
@@ -34,6 +36,10 @@ impl std::fmt::Display for StudyError {
             StudyError::Sqlite(e) => write!(f, "sqlite: {e}"),
             StudyError::Fsrs(e) => write!(f, "fsrs: {e:?}"),
             StudyError::InvalidSnapshot(e) => write!(f, "snapshot: {e}"),
+            StudyError::NewerDatabase(v) => write!(
+                f,
+                "the learning database uses schema v{v}, which this version of the app can't read; please update the app"
+            ),
         }
     }
 }
@@ -123,7 +129,7 @@ pub struct Card {
 }
 
 /// ファイルを開いて(無ければ作成)スキーマを最新へ移行する。
-pub fn open(path: &Path) -> Result<Connection> {
+pub fn open(path: &Path) -> StudyResult<Connection> {
     let conn = Connection::open(path)?;
     // WAL = 書き込み中の読みを止めない・クラッシュ耐性。synchronous=NORMALはWALでの実用既定。
     conn.execute_batch(
@@ -134,15 +140,18 @@ pub fn open(path: &Path) -> Result<Connection> {
 }
 
 /// テスト・一時用途のオンメモリDB。
-pub fn open_in_memory() -> Result<Connection> {
+pub fn open_in_memory() -> StudyResult<Connection> {
     let conn = Connection::open_in_memory()?;
     conn.execute_batch("PRAGMA foreign_keys=ON;")?;
     migrate(&conn)?;
     Ok(conn)
 }
 
-fn migrate(conn: &Connection) -> Result<()> {
+fn migrate(conn: &Connection) -> StudyResult<()> {
     let v: i64 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
+    if v > SCHEMA_VERSION {
+        return Err(StudyError::NewerDatabase(v));
+    }
     if v < 1 {
         conn.execute_batch(SCHEMA_V1)?;
     }
@@ -308,7 +317,9 @@ pub fn record_answer(
     now_ms: i64,
 ) -> StudyResult<Card> {
     let id = card_id(&meta.lang, &meta.slug, &meta.qhash);
-    let base = get_card(conn, &id)?.unwrap_or(Card {
+    // 卡片和答题记录要么一起写进去，要么都不写
+    let tx = conn.unchecked_transaction()?;
+    let base = get_card(&tx, &id)?.unwrap_or(Card {
         id: id.clone(),
         lang: meta.lang,
         slug: meta.slug,
@@ -325,8 +336,8 @@ pub fn record_answer(
 
     let rating = Scheduler::rating_from_correct(correct);
     let scheduled = scheduler.apply(&base, rating, now_ms)?;
-    upsert_card(conn, &scheduled.card)?;
-    conn.execute(
+    upsert_card(&tx, &scheduled.card)?;
+    tx.execute(
         "INSERT INTO reviews (card_id, ts, rating, elapsed_ms, stability, difficulty, scheduled_days)
          VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)",
         params![
@@ -339,6 +350,7 @@ pub fn record_answer(
             scheduled.interval_days
         ],
     )?;
+    tx.commit()?;
     Ok(scheduled.card)
 }
 
@@ -596,5 +608,29 @@ mod tests {
         assert!(all_reviews(&conn, "en").unwrap().is_empty());
         // 設定は残る
         assert_eq!(kv_get(&conn, "retention").unwrap().as_deref(), Some("0.9"));
+    }
+    #[test]
+    fn refuses_a_database_written_by_a_newer_app() {
+        let path = std::env::temp_dir().join(format!("study-core-newer-{}.db", std::process::id()));
+        let _ = std::fs::remove_file(&path);
+        {
+            let conn = Connection::open(&path).unwrap();
+            conn.pragma_update(None, "user_version", SCHEMA_VERSION + 1)
+                .unwrap();
+        }
+        assert!(
+            matches!(open(&path), Err(StudyError::NewerDatabase(v)) if v == SCHEMA_VERSION + 1)
+        );
+        let conn = Connection::open(&path).unwrap();
+        let v: i64 = conn
+            .pragma_query_value(None, "user_version", |r| r.get(0))
+            .unwrap();
+        assert_eq!(
+            v,
+            SCHEMA_VERSION + 1,
+            "the newer database must be left untouched"
+        );
+        drop(conn);
+        let _ = std::fs::remove_file(&path);
     }
 }

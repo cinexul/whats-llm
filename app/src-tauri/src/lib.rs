@@ -1,4 +1,5 @@
 use std::fs;
+use std::io::Write;
 use std::path::PathBuf;
 use std::process::Command;
 use std::sync::Mutex;
@@ -34,7 +35,11 @@ fn load_annotations(app: tauri::AppHandle) -> Result<String, String> {
 fn save_annotations(app: tauri::AppHandle, data: String) -> Result<(), String> {
     let path = annotations_path(&app)?;
     let tmp = path.with_extension("json.tmp");
-    fs::write(&tmp, data).map_err(|e| e.to_string())?;
+    let mut file = fs::File::create(&tmp).map_err(|e| e.to_string())?;
+    file.write_all(data.as_bytes()).map_err(|e| e.to_string())?;
+    // renameの前に中身を確実にディスクへ書き出す(しないと停電後に空ファイルが残りうる)
+    file.sync_all().map_err(|e| e.to_string())?;
+    drop(file);
     fs::rename(&tmp, &path).map_err(|e| e.to_string())
 }
 
@@ -63,7 +68,8 @@ fn open_external(url: String) -> Result<(), String> {
 // ===== 学習(間隔反復 + 進捗): 埋め込みSQLite + FSRS =====
 // 重い処理・スキーマ・FSRSはstudy-core側でテスト済み。ここはMutexで包んで呼ぶだけ。
 
-struct StudyState(Mutex<Option<study_core::Store>>);
+// 開けなかったときは理由を持っておき、画面に出す(空の進捗だけ見せて黙らない)。
+struct StudyState(Mutex<Result<study_core::Store, String>>);
 
 // 学習DBと注釈の保存先:
 //  - 便携(無安装)版: exeの隣に `data/` フォルダがあればそこへ(フォルダごと持ち運べる)
@@ -91,9 +97,7 @@ fn with_store<T>(
     f: impl FnOnce(&study_core::Store) -> study_core::StudyResult<T>,
 ) -> Result<T, String> {
     let guard = state.0.lock().map_err(|e| e.to_string())?;
-    let store = guard
-        .as_ref()
-        .ok_or_else(|| String::from("学習データベースを利用できません"))?;
+    let store = guard.as_ref().map_err(|e| e.clone())?;
     f(store).map_err(|e| e.to_string())
 }
 
@@ -122,15 +126,6 @@ fn study_record_answer(
             now,
         )
     })
-}
-
-#[tauri::command]
-fn study_due(
-    state: State<StudyState>,
-    lang: String,
-    now: i64,
-) -> Result<Vec<study_core::Card>, String> {
-    with_store(&state, |s| s.due_cards(&lang, now))
 }
 
 #[tauri::command]
@@ -164,14 +159,13 @@ fn study_read_slugs(state: State<StudyState>, lang: String) -> Result<Vec<String
     with_store(&state, |s| s.read_slugs(&lang))
 }
 
+/// 学習DBを開けなかった理由。開けていればNone。
 #[tauri::command]
-fn study_kv_get(state: State<StudyState>, key: String) -> Result<Option<String>, String> {
-    with_store(&state, |s| s.kv_get(&key))
-}
-
-#[tauri::command]
-fn study_kv_set(state: State<StudyState>, key: String, value: String) -> Result<(), String> {
-    with_store(&state, |s| s.kv_set(&key, &value))
+fn study_open_error(state: State<StudyState>) -> Option<String> {
+    match state.0.lock() {
+        Ok(guard) => guard.as_ref().err().cloned(),
+        Err(e) => Some(e.to_string()),
+    }
 }
 
 #[tauri::command]
@@ -200,14 +194,12 @@ pub fn run() {
             save_annotations,
             open_external,
             study_record_answer,
-            study_due,
             study_all_cards,
             study_all_reviews,
             study_mark_read,
             study_read_slugs,
-            study_kv_get,
-            study_kv_set,
             study_reset,
+            study_open_error,
             study_export_snapshot,
             study_import_snapshot
         ])
@@ -219,18 +211,13 @@ pub fn run() {
                         .build(),
                 )?;
             }
-            // 学習DBを開く。失敗してもアプリ自体は動かす(コマンド呼び出し時にエラーを返す)。
+            // 学習DBを開く。失敗してもアプリ自体は動かし、理由は画面に出す(study_open_error)。
             let store = study_db_path(app.handle())
                 .and_then(|p| study_core::Store::open(&p).map_err(|e| e.to_string()));
-            match store {
-                Ok(s) => {
-                    app.manage(StudyState(Mutex::new(Some(s))));
-                }
-                Err(e) => {
-                    log::warn!("study store init failed: {e}");
-                    app.manage(StudyState(Mutex::new(None)));
-                }
+            if let Err(e) = &store {
+                log::warn!("study store init failed: {e}");
             }
+            app.manage(StudyState(Mutex::new(store)));
             Ok(())
         })
         .run(tauri::generate_context!())

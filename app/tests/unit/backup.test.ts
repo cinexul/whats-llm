@@ -4,10 +4,13 @@ import { get } from 'svelte/store';
 import { IDBFactory, IDBObjectStore as FakeIDBObjectStore } from 'fake-indexeddb';
 import { BACKUP_FORMAT, BACKUP_VERSION, backupCounts, parseBackup, validateBackup, serializeBackup, type LearningBackup } from '$lib/backup-schema';
 import type { StudyCard } from '$lib/study';
+import { replay } from '$lib/fsrs';
 import { LOCAL_EDITS_SIGNAL_KEY } from '$lib/local-edits-schema';
 const { invoke } = vi.hoisted(() => ({ invoke: vi.fn() }));
 vi.mock('@tauri-apps/api/core', () => ({ invoke }));
-const card = (patch: Partial<StudyCard> = {}): StudyCard => ({ id: 'en:rag:retired-q1', lang: 'en', slug: 'rag', qn: 1, qhash: 'retired-q1', stability: 3, difficulty: 5, state: 2, due: 3000, lastReview: 1000, reps: 2, lapses: 0, ...patch });
+// 卡片状态由答题记录算出：样本卡片就是“1000时刻答对一次”重放的结果
+const meta = { id: 'en:rag:retired-q1', lang: 'en', slug: 'rag', qn: 1, qhash: 'retired-q1' };
+const card = (patch: Partial<StudyCard> = {}): StudyCard => ({ ...replay(meta, [{ ts: 1000, rating: 3 }]), ...patch });
 function sample(): LearningBackup {
 	return { format: BACKUP_FORMAT, version: BACKUP_VERSION, exportedAt: '2026-10-22T00:00:00.000Z',
 		annotations: [{ id: 'note-one', chapter: 'rag', lang: 'en', exact: 'evidence', prefix: '', suffix: '', color: 'yellow', note: 'My own words', createdAt: '2026-10-20T00:00:00.000Z' }],
@@ -119,13 +122,13 @@ describe('deterministic merge', () => {
 		expect(mergeBackups(legacy, sample()).data.chapterEdits).toEqual(sample().chapterEdits);
 		expect(mergeBackups(legacy, legacy).data.chapterEdits).toEqual([]);
 	});
-	it('keeps newer records, preserves unrelated data, and unions checkpoints and reviews', async () => {
+	it('keeps newer records, rebuilds cards from the combined review log, and unions checkpoints and reviews', async () => {
 		const { mergeBackups } = await import('$lib/backup'); const local = sample(); const remote = sample();
 		local.annotations[0].updatedAt = '2026-10-22T00:00:00.000Z'; local.annotations[0].note = 'new local note'; remote.study.cards[0].lastReview = 2000; remote.study.cards[0].reps = 3;
 		remote.study.reviews.push({ ...remote.study.reviews[0], ts: 2000 }); remote.readingPositions.en!.rag.updatedAt = 2000; remote.readingPositions.en!.rag.progress = .8;
 		remote.learningPaths['first-project'] = ['project-plan', 'project-build']; remote.preferences.theme = 'light';
 		const { data, conflicts } = mergeBackups(local, remote);
-		expect(data.annotations[0].note).toBe('new local note'); expect(data.study.cards[0].lastReview).toBe(2000); expect(data.study.reviews).toHaveLength(2); expect(data.readingPositions.en!.rag.progress).toBe(.8);
+		expect(data.annotations[0].note).toBe('new local note'); expect(data.study.cards[0]).toEqual(replay(meta, [{ ts: 1000, rating: 3 }, { ts: 2000, rating: 3 }])); expect(data.study.reviews).toHaveLength(2); expect(data.readingPositions.en!.rag.progress).toBe(.8);
 		expect(data.learningPaths['first-project']).toEqual(['project-build', 'project-plan', 'project-review']); expect(data.preferences.theme).toBe('dark'); expect(conflicts).toBe(3); expect(mergeBackups(data, remote).data).toEqual(data);
 	});
 	it('retains local values on equal timestamps and preserves identical real review events', async () => {

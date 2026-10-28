@@ -13,6 +13,8 @@ beforeEach(() => {
 });
 
 afterEach(() => { vi.unstubAllGlobals(); });
+// 只数读取学习数据的调用；启动时还会问一次数据库是否打开成功
+const loadCalls = () => invoke.mock.calls.filter(([command]) => command === 'study_all_cards' || command === 'study_read_slugs').length;
 
 it('all concurrent callers wait until saved study data has loaded', async () => {
 	let finish!: (slugs: string[]) => void;
@@ -22,7 +24,7 @@ it('all concurrent callers wait until saved study data has loaded', async () => 
 	);
 	const { ensureLoaded, readStore } = await import('$lib/study');
 	const first = ensureLoaded('en');
-	await vi.waitFor(() => expect(invoke).toHaveBeenCalledTimes(2));
+	await vi.waitFor(() => expect(loadCalls()).toBe(2));
 	let secondFinished = false;
 	const second = ensureLoaded('en').then(() => { secondFinished = true; });
 	await new Promise((resolve) => setTimeout(resolve, 0));
@@ -30,7 +32,7 @@ it('all concurrent callers wait until saved study data has loaded', async () => 
 	finish(['what-is-llm']);
 	await Promise.all([first, second]);
 	expect(get(readStore).en.has('what-is-llm')).toBe(true);
-	expect(invoke).toHaveBeenCalledTimes(2);
+	expect(loadCalls()).toBe(2);
 });
 
 it('retries a failed load instead of permanently treating empty data as loaded', async () => {
@@ -54,7 +56,7 @@ it('does not restore or cache a stale load after the user resets progress', asyn
 	});
 	const { ensureLoaded, resetProgress, readStore } = await import('$lib/study');
 	const oldLoad = ensureLoaded('en');
-	await vi.waitFor(() => expect(invoke).toHaveBeenCalledTimes(2));
+	await vi.waitFor(() => expect(loadCalls()).toBe(2));
 	await resetProgress();
 	finish(['what-is-llm']);
 	await oldLoad;
@@ -115,4 +117,23 @@ it('keeps concurrent language loads in their own editions', async () => {
 	await first;
 	expect([...get(readStore).en]).toEqual(['what-is-llm']);
 	expect([...get(readStore).ja]).toEqual(['rag']);
+});
+
+it('rebuilds cards scheduled by the old web rule from the review log once, with FSRS', async () => {
+	vi.unstubAllGlobals(); // 网页版
+	localStorage.clear();
+	localStorage.setItem('study-migrated', '1');
+	const id = 'en:what-is-llm:q01~old';
+	// 旧规则下的卡片：答对两次，间隔记成3天
+	const old = { id, lang: 'en', slug: 'what-is-llm', qn: 1, qhash: 'q01~old', stability: 3, difficulty: 5, state: 2, due: 1000 + 3 * 86400000, lastReview: 1000, reps: 2, lapses: 0 };
+	const reviews = [{ cardId: id, ts: 500, rating: 3, elapsedMs: null, scheduledDays: 1 }, { cardId: id, ts: 1000, rating: 3, elapsedMs: null, scheduledDays: 3 }];
+	localStorage.setItem('study-v1', JSON.stringify({ cards: { [id]: old }, reviews, read: {} }));
+	vi.resetModules();
+	const { ensureLoaded } = await import('$lib/study');
+	const { replay } = await import('$lib/fsrs');
+	await ensureLoaded('en');
+	const saved = JSON.parse(localStorage.getItem('study-v1')!);
+	expect(saved.cards[id]).toEqual(replay(old, reviews));
+	expect(saved.reviews).toEqual(reviews);
+	expect(localStorage.getItem('study-scheduler')).toBe('fsrs-6');
 });

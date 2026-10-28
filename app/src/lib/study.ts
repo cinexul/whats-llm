@@ -1,12 +1,13 @@
 // 学習データ(設問カード=間隔反復 / 読了 / 復習ログ)のフロント側入口。
 // 実体は2系統:
-//  - Tauri: invoke経由でRust(study-core)の埋め込みSQLite + FSRSを叩く(本番・正)。
-//  - ブラウザ(npm run dev): localStorage + 簡易スケジューラ(プレビュー用フォールバック)。
+//  - Tauri: invoke経由でRust(study-core)の埋め込みSQLite + FSRSを叩く。
+//  - ブラウザ: localStorage + 同じFSRS(fsrs.ts、Rustと同じ対照データでテスト済み)。
 // どちらも同じ非同期APIを出し、UIは実装差を意識しない。
 import { writable } from 'svelte/store';
 import type { Lang } from './manifest';
+import { AGAIN, DAY, GOOD, replay, schedule } from './fsrs';
 
-export const DAY = 86_400_000;
+export { DAY };
 const LANGS: Lang[] = ['zh', 'ja', 'en'];
 
 /** 1設問のカード。RustのCardと同形(serde camelCase)。 */
@@ -90,8 +91,11 @@ const tauri: Backend = {
 	}
 };
 
-// ---- ブラウザ(localStorage)実装。devプレビュー用なので簡易スケジューラ ----
+// ---- ブラウザ(localStorage)実装 ----
 const LS = 'study-v1';
+// 以前的网页版用简化的间隔规则；标记不在时，按答题记录用FSRS重算一遍卡片
+const SCHEDULER_KEY = 'study-scheduler';
+const SCHEDULER = 'fsrs-6';
 interface LocalData {
 	cards: Record<string, StudyCard>;
 	reviews: Review[];
@@ -115,53 +119,34 @@ function saveLocal(d: LocalData) {
 	if (typeof localStorage !== 'undefined') localStorage.setItem(LS, JSON.stringify(d));
 }
 
-// 簡易SM-2風スケジューラ(ブラウザ・フォールバック専用。本番はRustのFSRS)。
-function localGrade(
-	prev: StudyCard | undefined,
-	base: Pick<StudyCard, 'id' | 'lang' | 'slug' | 'qn' | 'qhash'>,
-	correct: boolean,
-	now: number
-): StudyCard {
-	const prevInterval =
-		prev && prev.due != null && prev.lastReview != null
-			? Math.max(1, Math.round((prev.due - prev.lastReview) / DAY))
-			: 0;
-	let reps = prev?.reps ?? 0;
-	let lapses = prev?.lapses ?? 0;
-	let interval: number;
-	if (!correct) {
-		if (reps > 0) lapses++;
-		reps = 0;
-		interval = 1;
-	} else {
-		interval = reps === 0 ? 1 : reps === 1 ? 3 : Math.max(1, Math.round((prevInterval || 1) * 2.3));
-		reps++;
+/** 网页版第一次换成FSRS时，用已有的答题记录重算每张卡片。 */
+function upgradeLocalScheduler() {
+	try {
+		if (typeof localStorage === 'undefined' || localStorage.getItem(SCHEDULER_KEY) === SCHEDULER) return;
+		const d = loadLocal();
+		const history = new Map<string, Review[]>();
+		for (const r of d.reviews) history.set(r.cardId, [...(history.get(r.cardId) ?? []), r]);
+		let changed = false;
+		for (const [id, card] of Object.entries(d.cards)) {
+			const reviews = history.get(id);
+			if (reviews?.length) { d.cards[id] = replay(card, reviews); changed = true; }
+		}
+		if (changed) saveLocal(d);
+		localStorage.setItem(SCHEDULER_KEY, SCHEDULER);
+	} catch {
+		/* 存不下就先保持原样，下次打开再试；答题记录本身没有动 */
 	}
-	return {
-		...base,
-		stability: interval,
-		difficulty: prev?.difficulty ?? 5,
-		state: correct ? 2 : 3,
-		due: now + interval * DAY,
-		lastReview: now,
-		reps,
-		lapses
-	};
 }
 
 const local: Backend = {
 	async recordAnswer(lang, slug, qn, qhash, correct, elapsedMs) {
 		const d = loadLocal();
 		const id = `${lang}:${slug}:${qhash}`;
-		const card = localGrade(d.cards[id], { id, lang, slug, qn, qhash }, correct, Date.now());
+		const now = Date.now();
+		const previous = d.cards[id] ?? { id, lang, slug, qn, qhash, stability: null, difficulty: null, state: 0, due: null, lastReview: null, reps: 0, lapses: 0 };
+		const { card, rating, intervalDays } = schedule({ ...previous, qn }, correct ? GOOD : AGAIN, now);
 		d.cards[id] = card;
-		d.reviews.push({
-			cardId: id,
-			ts: Date.now(),
-			rating: correct ? 3 : 1,
-			elapsedMs,
-			scheduledDays: card.stability
-		});
+		d.reviews.push({ cardId: id, ts: now, rating, elapsedMs, scheduledDays: intervalDays });
 		saveLocal(d);
 		return card;
 	},
@@ -206,6 +191,8 @@ function emptyRead(): Record<Lang, Set<string>> {
 }
 
 export const cardsStore = writable<Record<Lang, StudyCard[]>>(emptyCards());
+/** 桌面版学习数据库打不开时的原因；网页版和正常情况下为null。 */
+export const studyOpenError = writable<string | null>(null);
 export const readStore = writable<Record<Lang, Set<string>>>(emptyRead());
 
 const loadedLangs = new Set<Lang>();
@@ -235,7 +222,14 @@ async function migrateLegacy() {
 }
 
 function ensureMigrated(): Promise<void> {
-	if (!migratePromise) migratePromise = migrateLegacy();
+	if (!migratePromise) migratePromise = migrateLegacy().then(async () => {
+		if (backend === local) upgradeLocalScheduler();
+		else {
+			const { invoke } = await import('@tauri-apps/api/core');
+			const reason = await invoke<string | null>('study_open_error').catch(() => null);
+			studyOpenError.set(typeof reason === 'string' ? reason : null);
+		}
+	});
 	return migratePromise;
 }
 

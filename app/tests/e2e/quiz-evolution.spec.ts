@@ -16,6 +16,7 @@ async function seed(page: import('@playwright/test').Page) {
 		localStorage.setItem('quiz-fixture', '1');
 		localStorage.setItem('lang', 'en');
 		localStorage.setItem('study-migrated', '1');
+		localStorage.setItem('study-scheduler', 'fsrs-6');
 		const rows = [['en', 'what-is-llm', hash], ['ja', 'what-is-llm', jaHash], ['en', 'rag', ragHash]];
 		const cards = rows.map(([lang, slug, qhash], i) => {
 			const id = `${lang}:${slug}:${qhash}`;

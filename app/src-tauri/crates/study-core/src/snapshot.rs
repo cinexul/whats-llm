@@ -1,8 +1,10 @@
 //! 可导入导出的快照，包含已停用卡片及完整的复习和阅读元数据。
 //! 导入时先校验，再在同一个SQLite事务中合并所有表。
-use crate::{get_card, row_to_card, upsert_card, Card, Store, StudyError, StudyResult, CARD_COLS};
+use crate::{
+    get_card, row_to_card, upsert_card, Card, Rating, Store, StudyError, StudyResult, CARD_COLS,
+};
 use rusqlite::{params, Connection};
-use std::collections::{BTreeMap, HashMap, HashSet};
+use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -188,6 +190,36 @@ impl Store {
                     params![r.card_id, r.ts, r.rating, r.elapsed_ms, r.scheduled_days, r.stability, r.difficulty])?;
             }
         }
+        // 合并后的答题记录是唯一依据：受影响的卡片都按完整记录重算一遍，
+        // 不会出现“卡片状态来自一台设备、记录来自两台设备”的矛盾。
+        let touched: BTreeSet<&str> = incoming
+            .cards
+            .iter()
+            .map(|c| c.id.as_str())
+            .chain(incoming.reviews.iter().map(|r| r.card_id.as_str()))
+            .collect();
+        for id in touched {
+            let history = tx
+                .prepare("SELECT ts, rating FROM reviews WHERE card_id=?1 ORDER BY ts, id")?
+                .query_map(params![id], |r| {
+                    Ok((r.get::<_, i64>(0)?, r.get::<_, i64>(1)?))
+                })?
+                .collect::<rusqlite::Result<Vec<_>>>()?;
+            if history.is_empty() {
+                continue;
+            }
+            let ratings = history
+                .into_iter()
+                .map(|(ts, rating)| {
+                    Rating::from_i64(rating)
+                        .map(|r| (ts, r))
+                        .ok_or_else(invalid)
+                })
+                .collect::<StudyResult<Vec<_>>>()?;
+            if let Some(base) = get_card(&tx, id)? {
+                upsert_card(&tx, &self.scheduler.replay(&base, &ratings)?)?;
+            }
+        }
         for r in &incoming.read {
             tx.execute("INSERT INTO read_progress (lang, slug, ts) VALUES (?1, ?2, ?3) ON CONFLICT(lang, slug) DO UPDATE SET ts=MAX(read_progress.ts, excluded.ts)", params![r.lang, r.slug, r.ts])?;
         }
@@ -233,20 +265,32 @@ mod tests {
         let exported = source.export_snapshot().unwrap();
         let target = Store::open_in_memory().unwrap();
         target.import_snapshot(&exported).unwrap();
+        let once = target.export_snapshot().unwrap();
+        assert_eq!(once.reviews, exported.reviews);
+        assert_eq!(once.read, exported.read);
+        assert_eq!(once.kv, exported.kv);
+        // 卡片按导入的完整记录重算；重复导入不再改变任何东西
         target.import_snapshot(&exported).unwrap();
-        assert_eq!(target.export_snapshot().unwrap(), exported);
+        assert_eq!(target.export_snapshot().unwrap(), once);
     }
     #[test]
-    fn import_keeps_newer_cards_and_unions_history() {
+    fn import_rebuilds_cards_from_the_combined_review_log() {
         let local = Store::open_in_memory().unwrap();
         seed(&local, "q", 2000);
         let remote = Store::open_in_memory().unwrap();
         seed(&remote, "q", 1000);
-        let old_card = local.all_cards("en").unwrap()[0].clone();
         local
             .import_snapshot(&remote.export_snapshot().unwrap())
             .unwrap();
-        assert_eq!(local.all_cards("en").unwrap()[0], old_card);
+        // 结果和在同一台设备上先后作答两次一样
+        let together = Store::open_in_memory().unwrap();
+        seed(&together, "q", 1000);
+        seed(&together, "q", 2000);
+        assert_eq!(
+            local.all_cards("en").unwrap(),
+            together.all_cards("en").unwrap()
+        );
+        assert_eq!(local.all_cards("en").unwrap()[0].reps, 2);
         assert_eq!(local.all_reviews("en").unwrap().len(), 2);
         assert_eq!(local.export_snapshot().unwrap().read[0].ts, 2000);
     }

@@ -18,6 +18,19 @@ pub enum Rating {
     Easy = 4,
 }
 
+impl Rating {
+    /// 答题记录里存的数字(1–4)换回评价。
+    pub fn from_i64(value: i64) -> Option<Rating> {
+        match value {
+            1 => Some(Rating::Again),
+            2 => Some(Rating::Hard),
+            3 => Some(Rating::Good),
+            4 => Some(Rating::Easy),
+            _ => None,
+        }
+    }
+}
+
 /// 1回の採点結果。
 pub struct Scheduled {
     pub card: Card,
@@ -101,6 +114,25 @@ impl Scheduler {
             rating,
             interval_days,
         })
+    }
+
+    /// 从空白卡片开始，按时间顺序重放答题记录。卡片状态完全由答题记录决定，
+    /// 所以两台设备的记录合并后重放一遍，结果和在一台设备上依次作答相同。
+    pub fn replay(&self, base: &Card, reviews: &[(i64, Rating)]) -> StudyResult<Card> {
+        let mut card = Card {
+            stability: None,
+            difficulty: None,
+            state: crate::STATE_NEW,
+            due: None,
+            last_review: None,
+            reps: 0,
+            lapses: 0,
+            ..base.clone()
+        };
+        for &(ts, rating) in reviews {
+            card = self.apply(&card, rating, ts)?.card;
+        }
+        Ok(card)
     }
 }
 

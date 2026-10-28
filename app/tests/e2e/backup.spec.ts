@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { savedChapterEdits } from './local-edit-data';
+import { replay } from '../../src/lib/fsrs';
 
 test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 function backup() {
 	return { format: 'whats-llm-learning', version: 1, exportedAt: '2026-10-22T00:00:00.000Z',
 		annotations: [{ id: 'portable-note', chapter: 'rag', lang: 'en', exact: 'retrieval', prefix: '', suffix: '', color: 'yellow', note: 'Evidence comes first', createdAt: '2026-10-22T00:00:00.000Z' }],
-		study: { cards: [{ id: 'en:rag:retired-v1', lang: 'en', slug: 'rag', qn: 1, qhash: 'retired-v1', stability: 3, difficulty: 5, state: 2, due: 3000, lastReview: 1000, reps: 2, lapses: 0 }], reviews: [{ cardId: 'en:rag:retired-v1', ts: 1000, rating: 3, elapsedMs: 200, scheduledDays: 3 }], read: [{ lang: 'en', slug: 'rag', ts: 1000 }], kv: {} },
+		// 卡片要和答题记录一致：导入时会按记录重算
+		study: { cards: [replay({ id: 'en:rag:retired-v1', lang: 'en', slug: 'rag', qn: 1, qhash: 'retired-v1' }, [{ ts: 1000, rating: 3 }])], reviews: [{ cardId: 'en:rag:retired-v1', ts: 1000, rating: 3, elapsedMs: 200, scheduledDays: 3 }], read: [{ lang: 'en', slug: 'rag', ts: 1000 }], kv: {} },
 		readingChapter: { en: 'rag' }, readingPositions: { en: { rag: { anchor: 'evidence', offset: .5, progress: .4, updatedAt: 1000 } } },
 		learningPaths: { 'first-project': ['project-plan'] }, preferences: { lang: 'en' } };
 }
@@ -61,6 +63,7 @@ test('rejects future files before mutation and restores earlier writes when stor
 	});
 	await page.goto('/library/');
 	await expect.poll(() => page.evaluate(() => localStorage.getItem('study-migrated'))).toBe('1');
+	await expect.poll(() => page.evaluate(() => localStorage.getItem('study-scheduler'))).toBe('fsrs-6');
 	const before = await page.evaluate(() => ({ ...localStorage }));
 	await page.getByLabel('Choose a JSON backup').setInputFiles({ name: 'future.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify({ ...backup(), version: 99 })) });
 	await expect(page.getByRole('alert')).toContainText('version'); expect(await page.evaluate(() => ({ ...localStorage }))).toEqual(before);

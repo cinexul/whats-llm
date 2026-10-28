@@ -37,7 +37,7 @@ Files must fit within 32 MiB; export and import use the same limit. Maximum coll
 
 - For a shared annotation ID, use the newer `updatedAt`, or `createdAt` for legacy notes.
 - For a chapter edit or reset with the same language and chapter, use the newer `updatedAt`, preserving its original source snapshot. A newer reset suppresses an older edit; a later edit can replace a reset.
-- For a shared card ID, use the newer `lastReview`.
+- Review events are the source of truth for card state. After the review events are merged, every card that has events is recomputed by replaying them in time order with FSRS, in the browser and in the desktop app alike, so the result equals answering the same questions on one device. A card without any events keeps the version with the newer `lastReview`.
 - For a shared reading position, use the newer `updatedAt`.
 - Timestamp ties keep this device's record. The completion message reports conflicting records and ties.
 - Read chapters and path checkpoints form a union. Read timestamps retain the newer value.
