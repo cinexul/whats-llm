@@ -128,39 +128,39 @@ That wraps up the first three "close to life" projects of Part Five. You should 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Project chapters lean toward scenario and hands-on. Think first, then read the answer explanations in the quote blocks.
 
 1. **[Basic · Concept]** What method does this chapter suggest to save the hassle of "verbally explaining the notes format before every meeting"? <!-- quiz: q01 revision: 1 -->
-   - A. Verbally re-explain each time, in more detail
-   - B. Give it one fixed template, and have it fill in each time
-   - C. Let it improvise, different each time
-   - D. Just skip the format entirely
-   > **Answer: B.** Verbal explanations can drop or shift each time, so the output is hit or miss; a written-down template nails "the format I want," and it fills in by the same frame each time, so the results are stable and you check them faster. This "give a template" approach works for anything you want to produce repeatedly in the same format.
+   - A. Explain the format in more detail before each meeting
+   - B. Have it look at last time's notes and keep the format itself
+   - C. Set one fixed template and have it fill that in every time
+   - D. Let it tidy freely, then fix up the format yourself at the end
+   > **Answer: C.** Verbal explanations can drop or shift each time, so the output is hit or miss; a written-down template nails "the format I want," and it fills in by the same frame each time, so the results are stable and you check them faster. A is still explaining out loud, and however detailed, it drifts; B relies on it "remembering last time," but the model itself doesn't remember across conversations, and if you hand it last time's notes again, you're really just giving it a template; D hands the formatting work back to you.
 
 2. **[Basic · Concept]** What is this chapter's "red line that won't budge"? <!-- quiz: q02 revision: 1 -->
-   - A. The notes must be over a thousand words
-   - B. You must be online to tidy
-   - C. The to-dos and owners must be checked manually, line by line, before they go out
-   - D. You must use the most expensive AI
-   > **Answer: C.** A mistake elsewhere is at worst some clumsy phrasing, but with a to-do like "who's responsible for what, due when," once it's wrong (it misheard or invented), once the notes go out it really misleads people and causes real harm. The to-dos and owners column is what you sign your name to, and you must check every line yourself before it goes out.
+   - A. Check to-dos and owners by hand, line by line, before sending
+   - B. Clean up the transcript by hand before you give it to the AI
+   - C. Never leave any "not specified" items in the notes
+   - D. Write "don't make things up" in the template and it won't
+   > **Answer: A.** A mistake elsewhere is at worst some clumsy phrasing, but with a to-do like "who's responsible for what, due when," once it's wrong (it misheard or invented), the notes go out and really mislead people and cause real harm, so you must check every line yourself before sending. B isn't needed: it can handle a conversational transcript, and what matters is that the transcript is complete; C is the opposite of the advice, since anything uncertain should be marked "not specified"; D's "don't invent" instruction cuts down on guessing but can't replace your check.
 
 3. **[Advanced · Misconception]** "These notes are laid out neatly and read smoothly, so they're probably fine, just mass-send them." What's wrong with this? <!-- quiz: q03 revision: 1 -->
-   - A. Mass-sending costs money
-   - B. Neat notes can't be mass-sent
-   - C. Nothing wrong, neat means right
-   - D. Format right doesn't equal content right; it can write an invented to-do that looks exactly like a real one, and the more it "looks right" the more you must check line by line
-   > **Answer: D.** The notes' results "look right but may actually be wrong," which is exactly where they're most deceptive. It can lay out a task no one mentioned or a wrongly assigned owner without a flaw. A neat structure is all the more reason to gatekeep; don't be fooled by "looks right."
+   - A. Mass-sending is too informal; send them to each person instead
+   - B. The issue is the missing signature; add your name and send
+   - C. Smooth reading shows it understood the meeting; send it
+   - D. Right format isn't right content; still check each to-do
+   > **Answer: D.** The notes' results "look right but may actually be wrong," which is exactly where they're most deceptive. It can lay out a task no one mentioned or a wrongly assigned owner without a flaw. C mistakes "reads smoothly" for "understood" and "correct," but fluency doesn't prove the content is right; A and B change how you send or add a signature, and neither touches the problem that the content may be wrong.
 
 4. **[Advanced · Scenario]** When checking the to-dos, what's the most efficient and reliable way? <!-- quiz: q04 revision: 1 -->
-   - A. Have it trace each to-do back to the matching sentence in the source, and you check line by line against those sentences; the ones that don't match are what it invented or misheard
-   - B. Only check whether the format is right
-   - C. Go by impression, it's about right
-   - D. Delete the notes and regenerate them ten times
-   > **Answer: A.** Have it "prove its source," and you can check line by line against the source: did someone really bring this up? Is the owner this person? Is the time something it added itself? The ones that don't match the source, change or delete right away. This is far more reliable than going by feel.
+   - A. Have it give each to-do a confidence score from 1 to 10
+   - B. Have it cite each to-do's source line, then compare
+   - C. Send the notes out and let attendees spot the errors
+   - D. Have it redo the notes in other words and compare the two
+   > **Answer: B.** Have it "prove its source," and you can check line by line against the source: did someone really bring this up? Is the owner this person? Is the time something it added itself? The ones that don't match the source, change or delete right away. A's score is still its own judgment, and a high score can sit on an invented item; C pushes the checking onto the recipients after the wrong to-do has already gone out; D's two versions can make the same mistake.
 
 5. **[Basic · Scenario]** The transcript only says "follow up on the coordination after the meeting as soon as possible," with no specific who or what day. What's the safest way to write this to-do in the notes? <!-- quiz: q05 revision: 1 -->
-   - A. Write "everyone, immediately"
-   - B. Mark it honestly as "owner / time not specified, to be confirmed," and track someone down after the meeting
-   - C. Just delete this one
-   - D. Have it pick a person and invent a date to fill in
-   > **Answer: B.** For anything uncertain, mark it honestly as "not specified / to be confirmed," and never fill in "as soon as possible" as a specific person and date. Inventing a misleading specific arrangement is far worse than honestly leaving a to-be-confirmed and filling it in after the meeting.
+   - A. By meeting custom, assign it to the meeting chair
+   - B. Delete it, so the notes don't carry anything uncertain
+   - C. Mark it "owner and date not specified, to be confirmed"
+   - D. Have it infer the most likely person and date from context
+   > **Answer: C.** For anything uncertain, mark it honestly as "not specified / to be confirmed," and never fill in "as soon as possible" as a specific person and date. A and D make the decision on the meeting's behalf, producing an arrangement that looks specific but that nobody actually agreed to; B makes the item vanish from the notes, so nobody remembers to follow up afterward.
 
 6. **[Advanced · Hands-on]** Following Step 1 of this chapter, write your own "meeting-notes template" by hand (including at least: topic, topics, conclusions, to-dos [what to do / who's responsible / due when], to be confirmed). After writing it, answer: why does the to-dos column specifically require stating "who's responsible, due when" clearly? <!-- quiz: q06 revision: 1 -->
-   > **What you should notice:** Because the to-dos are the **only part of the whole notes that lands on "a specific person doing a specific thing,"** and also the part **most likely to cause harm when wrong**; splitting it into "what to do / who / when" makes it both easy to assign and easy for you to check line by line before it goes out. A template standardizes the format, but "being responsible for the content" AI can't do for you. Which tool to use for tidying is **best confirmed against the provider's official documentation** (Chapters 24 and 25).
+   > **What you should notice:** Because the to-dos are the **only part of the whole notes that lands on "a specific person doing a specific thing,"** and also the part **most likely to cause harm when wrong**; splitting it into "what to do / who / when" makes it both easy to assign and easy for you to check line by line before it goes out. A template standardizes the format, but "being responsible for the content" AI can't do for you. Which tool to use for tidying is **best confirmed against the provider's official documentation** (Chapters 18 and 24).

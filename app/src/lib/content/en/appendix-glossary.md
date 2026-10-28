@@ -1,4 +1,4 @@
-This glossary collects **162 terms** related to large models and AI tools, grouped by topic. Each entry gives the term in three languages (**Chinese ・ Japanese ・ English**) along with a plain-language definition; many entries also point out a common misconception. Whenever you hit a word you don't understand in the main text, come back here to look it up.
+This glossary collects **164 terms** related to large models and AI tools, grouped by topic. Each entry gives the term in three languages (**Chinese ・ Japanese ・ English**) along with a plain-language definition; many entries also point out a common misconception. Whenever you hit a word you don't understand in the main text, come back here to look it up.
 
 > **Key point:** For the features, prices, and limits of any specific product, always go by each vendor's **official docs**. This table gives you stable explanations of the concepts, not the volatile product details that change all the time.
 
@@ -10,7 +10,7 @@ Getting machines to do things that "used to take human intelligence." It's a ver
 
 **Machine Learning (ML)**（机器学习 ・ 機械学習）  
 An approach to AI where, instead of a human writing out rules one by one, the program finds patterns in large amounts of data on its own. It's the foundation of deep learning and large models.  
-*Common misconception:* People often think the machine "figured it out by itself"; in reality it just derives patterns statistically from data, without understanding what they mean.  
+*Common misconception:* People often think the machine "figured it out by itself"; in reality it learns useful patterns from data. That can make it behave as if it understands, but it doesn't prove it understands meaning the way a person does.  
 
 **Deep Learning (DL)**（深度学习 ・ 深層学習）  
 A kind of machine learning that uses many layers of "computational networks" (neural networks) to learn. Most of today's large models, image generation, and speech synthesis are based on it.  
@@ -119,7 +119,7 @@ The ceiling on the number of tokens a model can "see at once." The whole convers
 
 **Next-Token Prediction**（下一个词预测 ・ 次トークン予測）  
 This is the one core thing a large model does: based on what came before, guess "the next most likely token," and keep going one by one to form a whole passage.  
-*Common misconception:* People often think the AI thinks up the answer first and then says it; in reality it pops out one token at a time, guessing as it writes, with no pre-formed "answer."  
+*Common misconception:* People often think the AI writes out a finished answer first and then reads it off; in reality the output is generated one token at a time, each step based on what's already there, not pulled from some ready-made answer.  
 
 **Probability Distribution**（概率分布 ・ 確率分布）  
 When picking the next token, the model computes a probability for each candidate word (for example, "Tokyo 92%, Edo 0.8%"), then chooses one from among them.  
@@ -135,8 +135,16 @@ A knob that controls "how random the output is." Turn it down for steadier, near
 Another knob for controlling randomness: it picks only from "the small set of candidate words whose probabilities add up high enough," filtering out the very rare options. Often used together with temperature.  
 
 **Reasoning Effort / Extended Thinking**（推理强度/扩展思考 ・ 拡張思考（推論の深さ））  
-Letting the model "think a few more steps" internally before giving an answer (generating a thinking draft), spending more compute for more reliable results. Good for hard problems, unnecessary for simple ones.  
+Having the model generate an intermediate thinking process before its final answer (this part uses up "reasoning tokens"), spending more computation for more reliable results on hard problems. Good for hard problems, unnecessary for simple ones.  
 *Common misconception:* People often think "the longer it thinks, the more correct the answer must be"; in reality it can improve complex reasoning, but it's also slower and more expensive and can still be wrong, so for simple tasks it's actually a waste.  
+
+**Reasoning Tokens / Thinking Tokens**（推理token ・ 推論トークン（思考トークン））  
+The tokens a model uses to generate its "thinking process" before giving the final answer. Some products show them or a summary of them, others don't; they're usually counted toward usage and cost as well. For exactly how they're counted and whether you can see them, check the official documentation.  
+*Common misconception:* People often think that if you can't see the thinking you aren't paying for it, or that a thinking process that reads well guarantees a correct answer; in reality it's usually billed anyway, and however much it looks like reasoning, you still need to check the conclusion yourself.  
+
+**Reasoning**（推理（逐步思考） ・ 推論（段階的な思考））  
+The ability or process of working step by step toward a conclusion, such as solving a multi-step math problem or weighing several conditions. In Chinese and Japanese the same word (推理 / 推論) covers two things: reasoning in this logical sense, and the engineering sense of "running a model to get results" (inference; see "Inference").  
+*Common misconception:* People often mix up "reasoning" as in "reasoning model" or "reasoning effort" with "inference" as in "inference service" or "inference cost"; the former means thinking step by step, the latter means running the model.  
 
 **Vector**（向量 ・ ベクトル）  
 A "coordinate" made of a string of numbers. Once words and sentences are turned into vectors, the machine can use math to compare how far apart they are, which is to say how close in meaning.  
@@ -153,7 +161,7 @@ A number measuring "how close in meaning" two pieces of text are, computed by co
 
 **Attention Mechanism**（注意力机制 ・ アテンション機構）  
 The ability, as the model reads a sentence, to decide "how much each word should attend to which other words." Put plainly, it knows how to mark the key points, which lets it catch the important connections in a long sentence.  
-*Common misconception:* People often think attention means the model "really understood"; in reality it computes the statistical correlation between words, a mathematical weighting, not understanding.  
+*Common misconception:* People often think attention means the model "really understood"; in reality it's a mathematical weighting that decides how much to draw on which words when processing each word. It helps the model learn useful connections, but that alone doesn't prove it understands the way a person does.  
 
 **Self-Attention**（自注意力 ・ 自己注意（セルフアテンション））  
 The core form of the attention mechanism: each word in a sentence looks at the other words in the same sentence, weaving the context relationships in. It's the key component of the Transformer.  
@@ -171,11 +179,11 @@ The "common sense and facts" welded into the parameters during training, which t
 
 **Memory (in-context)**（记忆 ・ 記憶（文脈上の記憶））  
 A temporary memory that lives only within "this conversation," held up entirely by the context window. Close the conversation or get pushed out of the window, and it forgets completely.  
-*Common misconception:* People often think AI remembers you long-term the way a person does; in reality, by default it has no memory across conversations, and next time you meet it's in an "amnesiac" state. Any "memory" you see is added at the product layer, not in the model itself.  
+*Common misconception:* People often think AI remembers you long-term the way a person does; in reality the model itself has no memory across conversations. Some products offer a "memory" feature, which puts saved information back into the context of a new conversation; the model isn't remembering on its own.  
 
 **Hallucination**（幻觉 ・ ハルシネーション）  
-The model stating content that doesn't exist or is wrong, in a convincing, confident way. That's because what it's after is "sounding true," not "being true."  
-*Common misconception:* People often think the more fluent and confident it sounds, the more reliable it is; in reality the smoother it is, the more wary you should be, and important facts must be checked yourself.  
+The model stating content that doesn't exist or is wrong, in a convincing, confident way. That's because what it generates is "a continuation that looks plausible in context," which isn't the same thing as a checked fact.  
+*Common misconception:* People often think the more fluent and confident it sounds, the more reliable it is; in reality neither fluency nor confidence proves the content is right, and important facts must be checked yourself.  
 
 **Emergent Abilities**（涌现能力 ・ 創発的能力）  
 Once a model's scale gets large enough, it "suddenly" shows new abilities that smaller models lack (such as multi-step reasoning). It's like water only boiling once it reaches a certain temperature.  
@@ -274,11 +282,11 @@ Using the API is usually billed by token count, with both input and output costi
 A ready-made code library a vendor provides to help developers call the API more easily, without piecing together requests from scratch.  
 
 **Inference**（推理（运行模型） ・ 推論（インファレンス））  
-"Running an already-trained model to produce results," that is, the computation that happens each time you ask a question and it generates an answer. It's a different thing from "training."  
-*Common misconception:* People often read "inference" here as "logical reasoning"; in reality it refers to "running the model to get results," an engineering term.  
+"Running an already-trained model to produce results," that is, the computation that happens each time you ask a question and it generates an answer. It's a different thing from "training." In Chinese and Japanese the same word (推理 / 推論) also means reasoning, thinking step by step (see "Reasoning").  
+*Common misconception:* People often read "inference" in phrases like "inference cost" as "logical reasoning"; in reality it refers to "running the model to get results," an engineering term.  
 
 **Agent**（智能体 ・ エージェント）  
-An AI that doesn't just answer questions but can "take action": give it a goal and it will call tools on its own, pushing forward through an "investigate, execute, check" loop.  
+An AI that doesn't just answer questions but can "take action": give it a goal and it will call tools on its own, pushing forward through a loop like "investigate → plan → act → sign off."  
 *Common misconception:* People often think an Agent is just a smarter chatbot; in reality its key is "actually being able to get things done," and both its power and its risk come from that.  
 
 **Tool Use / Function Calling**（工具调用 ・ ツール呼び出し（ファンクションコーリング））  
@@ -289,13 +297,13 @@ The mechanism that lets the model "call external tools" while answering (queryin
 The name of Anthropic's AI product and model family (including Opus, Sonnet, Haiku, and others). It's one representative of large models, not "all of AI."  
 
 **Claude Code**（Claude Code ・ Claude Code）  
-A coding agent that runs in the terminal (the command line), able to read project files, change code, and run commands. Think of it as "Claude with hands and feet attached."  
+Anthropic's coding agent, able to read project files, change code, and run commands. It comes in several forms, such as command line, editor extension, desktop app, and web; check the official documentation for specifics. Think of it as "Claude with hands and feet attached."  
 
 **ChatGPT**（ChatGPT ・ ChatGPT）  
 OpenAI's chat product, with the GPT series of models at its core. For many people it's the first large-model product they ever touched.  
 
 **Codex**（Codex ・ Codex）  
-OpenAI's product in the programming and coding-agent direction. Like Claude Code, it belongs to the class of tools that "can actually write code hands-on."  
+OpenAI's coding agent, which like Claude Code belongs to the class of tools that "can actually write code hands-on." It comes in forms such as command line, editor extension, desktop app, and cloud; check the official documentation for specifics.  
 
 **Gemini**（Gemini ・ Gemini）  
 The name of Google's AI product and model family. It's also one of the mainstream large models, often compared alongside Claude and ChatGPT.  
@@ -371,7 +379,7 @@ An Agent made specifically for writing code, changing files, and running command
 *Common misconception:* People often think it can deliver fully automatically with no oversight; in reality it makes mistakes and misunderstands things, so a human must read the diff, run the tests, and sign off.  
 
 **Terminal / Command Line (CLI)**（终端/命令行 ・ ターミナル（コマンドライン））  
-A black-background window you operate by "typing commands." Many coding agents run here. It looks hardcore, but just follow the steps as given.  
+A window you operate by "typing commands." Many coding agents offer a command-line version (others come as editor, desktop-app, or web versions; check the official documentation). It looks hardcore, but just follow the steps as given.  
 *Common misconception:* People often think the command line is "for hackers only and easily breaks the computer"; in reality it's just another way of operating, and going step by step as prompted isn't scary.  
 
 **Diff**（diff（差异） ・ 差分（diff））  
@@ -379,17 +387,17 @@ Laying "before the change" and "after the change" side by side and marking them,
 *Common misconception:* People often think reading diffs is only for programmers; in reality it's just a comparison of "what changed," and even if you don't know code, you should build the habit of reading the diff before approving.  
 
 **Version Control / Git**（版本控制/Git ・ バージョン管理（Git））  
-A system that records the history of every change to your files. With it, even if the AI breaks something, you can return to a previous version with one click. It's the safety net for "daring to let the AI act."  
-*Common misconception:* People often think Git is only a programmer's tool; in reality it gives you the ability to "undo anytime," the key safeguard for letting the AI work freely without losing control.  
+A system that records the history of changes to your files. Each time you commit, it saves a version you can return to, so if the AI breaks something, you can go back to a committed state. It's the safety net for "daring to let the AI act." Chapter 26 covers the basics, and Appendix C lists common commands.  
+*Common misconception:* People often think Git can undo anything; in reality it can only restore file contents you committed. Uncommitted changes, ignored files, emails already sent, and live data already changed are outside its reach.  
 
 **Commit**（提交/commit ・ コミット）  
-"Saving a snapshot" of the current batch of changes into the Git history. Each commit is a restorable save point, handy for later review and rollback.  
+"Saving a snapshot" of the changes you've staged (with `git add`) into the Git history. Each commit is a save point you can return to, handy for later review and rollback; changes you didn't `add` aren't saved.  
 
 **Branch**（分支 ・ ブランチ）  
-A "parallel work line" forked off the main line, where you can change things freely without affecting the main line even if you break something. When letting the AI make sweeping changes, opening a branch first is safer.  
+A named line of development forked off the main line, making it easier to review a batch of changes separately and decide whether to merge them. It isn't a backup: switching branches in the same folder still uses the same files, and it doesn't isolate running programs or external effects that have already happened (Chapter 26).  
 
 **Rollback / Revert**（回滚 ・ 巻き戻し（ロールバック））  
-Restoring files to an earlier save point, the equivalent of "one-click undo." When the AI changes something into a mess, rollback is one of the fastest first-aid measures.  
+Restoring files to an earlier save point (or reversing a change with a new commit). When the AI changes something into a mess, rollback is one of the common first-aid measures, but it only covers files that were recorded; messages already sent, live data, and charges incurred need separate handling (Chapter 26).  
 
 **Test**（测试 ・ テスト）  
 A piece of code that automatically checks "whether the program works as expected." Running the tests after a change quickly reveals whether the AI broke something elsewhere.  
@@ -401,11 +409,11 @@ Before adopting a change, having a person (or another AI) check piece by piece w
 Changing a new feature but breaking an old feature that used to work fine. You catch it in time by running all the existing tests.  
 
 **CLAUDE.md / Project Context**（CLAUDE.md/项目上下文 ・ CLAUDE.md（プロジェクト文脈））  
-A "project manual" placed in the project that the AI reads first every time it starts work, spelling out the tech stack, the rules, the do-nots, and so on, the equivalent of a resident memory for the AI.  
+A "project manual" placed in the project that the AI reads first every time it starts work, spelling out the tech stack, the rules, the do-nots, and so on. It looks like a resident memory, but really the product puts it into the context each time work starts; the model itself doesn't remember it.  
 *Common misconception:* People often think more is better; in reality writing too much takes up context and dilutes the key points, so write only the rules that "actually affect its work."  
 
 **Permission System**（许可机制 ・ 許可（パーミッション）の仕組み）  
-The mechanism by which a coding agent asks you first and acts only after you approve, before "changing files or running commands." Handing dangerous operations to a human to confirm is the key to it "acting without losing control."  
+The mechanism by which a coding agent, before operations like "changing files or running commands," decides according to its settings whether to ask you first, allow it automatically, or refuse. Whether it asks every time depends on the tool and the settings, and the absence of a prompt doesn't mean an action is harmless. Handing dangerous operations to a human to confirm is the key to it "acting without losing control" (Chapter 26).  
 
 **Plan Mode**（计划模式 ・ プランモード）  
 A mode where the AI first lays out its plan for "how it intends to make the changes" and acts only after you approve. Looking at the plan before a big change saves the most rework.  
@@ -414,14 +422,14 @@ A mode where the AI first lays out its plan for "how it intends to make the chan
 "Another AI" the main AI temporarily sends out to do a specialized job, with its own separate context, which brings back only a summary of the result when done, without taking up space in the main line.  
 
 **Task Decomposition**（任务拆分 ・ タスク分割）  
-Cutting a big task into small steps like "investigate, plan, execute, check," handing them to the AI one at a time. This makes it less likely to drift, and easier for you to keep control.  
+Cutting a big task into small steps like "investigate → plan → act → sign off," handing them to the AI one at a time. This makes it less likely to drift, and easier for you to keep control.  
 
 **Acceptance / Sign-off**（验收 ・ 受け入れ確認）  
 At the end, you confirm that "this change really meets the requirements and didn't break anything else" before adopting it. If you don't understand it or aren't sure, don't merge it; the responsibility is the human's.  
 *Common misconception:* People often think passing the tests means all is well; in reality the tests are only the floor. Whether it truly meets the need, and whether it can ship, still takes a human to decide.  
 
 **Workflow**（工作流 ・ ワークフロー）  
-Upgrading "one question, one answer" into a fixed set of steps (such as investigate, plan, execute, accept), so the AI keeps pushing the task forward along the process without losing control.  
+Upgrading "one question, one answer" into a fixed set of steps (such as investigate → plan → act → sign off), so the AI keeps pushing the task forward along the process without losing control.  
 
 **Integrated Development Environment (IDE)**（集成开发环境 ・ 統合開発環境（IDE））  
 The main software programmers write code in (such as VS Code). Many AI coding assistants can be installed and used inside it.  
@@ -439,10 +447,10 @@ Tidying up the internal structure to make code clearer and easier to maintain, w
 Finding and fixing the errors (bugs) in a program. A coding agent can read the error message, look into the cause, try a fix, and run it again, working through this "trial-and-error loop" on its own.  
 
 **Sandbox / Isolated Environment**（沙箱/隔离环境 ・ サンドボックス（隔離環境））  
-An isolated run environment where "even if something goes wrong, it won't reach the real system." Letting the AI try things freely in here is far safer than in the live environment.  
+An isolated run environment that limits which files, network, or system resources a program can touch. Letting the AI try things in here is far safer than working directly in the live environment, but how much it blocks depends on the actual settings; things outside the sandbox, and accounts or networks it's allowed to reach, can still be affected.  
 
 **Recovery / Troubleshooting**（急救/卡住怎么办 ・ トラブル時の応急処置）  
-The standard moves for when the AI gets stuck or makes things messier the more it changes: stop the current run, start a new conversation, roll back the changes, restate the problem. Stop the bleeding first, then investigate.  
+The standard moves for when the AI gets stuck or makes things messier the more it changes, following the five steps in Chapter 30: stop it, take stock of where things are, roll back to the last good state, start over in a new conversation, and finally diagnose why it went off track. Stop the bleeding first, then investigate.  
 
 ## Risk and safety
 
@@ -502,7 +510,7 @@ Unfair tendencies a model learns from its training data (such as stereotypes abo
 
 **Over-reliance / Automation Bias**（过度依赖 ・ 過度の依存）  
 Believing the AI's answers without a second thought, treating it as an authority. It will confidently get things wrong, and the more you cut corners the easier it is to stumble, so the key judgments still have to be made by a human.  
-*Common misconception:* People often think "the AI said so, it should be right"; in reality it has no ability to tell right from wrong, only to sound right, so important decisions can't be outsourced to it directly.  
+*Common misconception:* People often think "the AI said so, it should be right"; in reality sounding fluent and confident doesn't make the content correct, so important decisions can't be outsourced to it directly.  
 
 **Data Masking / Anonymization**（数据脱敏 ・ マスキング（匿名化））  
 Before feeding material to the AI, wiping out or replacing the sensitive parts (names, phone numbers, keys, and so on) with fake values. It's a common compromise for "wanting to use AI while protecting privacy."  
@@ -557,7 +565,7 @@ The English abbreviation for graphics processing unit. Originally for drawing gr
 *Common misconception:* People often think it's just a "gaming graphics card"; in reality it's the key compute for running large models, and how fast a model runs locally depends largely on it.  
 
 **CLI = Command Line Interface**（CLI（缩写） ・ CLI（略語））  
-The English abbreviation for command line interface. The way of operating software or a computer by typing commands, where many coding agents run.  
+The English abbreviation for command line interface. The way of operating software or a computer by typing commands; many coding agents offer a command-line version.  
 
 **GPT = Generative Pre-trained Transformer**（GPT（缩写） ・ GPT（略語））  
 The abbreviated name for a class of large model (generative pre-trained Transformer), the core model series inside ChatGPT.  

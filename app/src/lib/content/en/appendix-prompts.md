@@ -458,7 +458,7 @@ Tip: have it restate "what this is about overall" first, and only after you conf
 
 ---
 
-## 5. Claude Code: investigate -> plan -> implement -> sign-off
+## 5. Claude Code: investigate → plan → act → sign off
 
 > Claude Code is an AI coding tool that "edits code and runs commands for you." The templates below **are all plain-language things you say to it, not commands or buttons inside a product**. Exactly how to install it, and what shortcuts and features it has, change from version to version, so **check the official docs**.
 > One safety thread runs through this category (Chapters 23 to 30): **have it investigate first, look at its plan first, see what it changed (the diff), run the tests, and let a human sign off at the end. Don't merge code you can't understand, and never paste anything containing keys or passwords.**
@@ -500,9 +500,9 @@ After you give me the plan, if I'm happy with it, I'll reply "go with this plan.
 How to fill it in:
 - `<your goal>`: keep it consistent with the previous step.
 
-Tip: the plan step is the checkpoint that saves the most rework. If the approach is wrong, don't approve it. Just say what needs to change and have it produce a new plan (Chapter 29).
+Tip: the plan step is the checkpoint that saves the most rework. If the approach is wrong, don't approve it. Just say what needs to change and have it produce a new plan (Chapter 27).
 
-### Step 3: implement per the plan, ask first if you hit a deviation
+### Step 3: act on the plan, ask first if you hit a deviation
 
 When to use: you've already approved the plan and want it to formally start changing code.
 
@@ -518,7 +518,7 @@ Strictly follow these:
 How to fill it in:
 - Use this template directly; no blanks.
 
-Tip: when it feels like it's starting to change things outside the plan, stop it promptly and point that out. For exactly how to interrupt or roll back, **check the official docs**.
+Tip: when it feels like it's starting to change things outside the plan, stop it promptly and point that out. For exactly how to interrupt it, **check the official docs**; for going back with Git, see Chapter 26 and Appendix C.
 
 ### Understand what it changed (explain the diff)
 
@@ -552,7 +552,7 @@ Finally, in one sentence: is this change safe to merge now?
 How to fill it in:
 - Use directly; no blanks.
 
-Tip: having it run the tests itself and fix based on the results is how it "self-corrects" (Chapter 27). But the final call on "is it safe to merge" rests with you.
+Tip: having it run the tests itself and fix based on the results is how it "self-corrects" (Chapter 25). But the final call on "is it safe to merge" rests with you.
 
 ### Fixing a bug: reproduce first, then fix
 
@@ -580,7 +580,7 @@ Tip: write a "failing test that reproduces the bug" first, and once it's fixed t
 
 ## 6. Codex: another way to use a coding agent
 
-> Codex is another AI coding agent that "does the work for you," and the mental model is a lot like the previous category (Claude Code): **both rely on you giving the task in plain language, and both should follow the safe flow of "investigate -> plan -> implement -> sign-off."** What's below is, again, "things you say to it," **not product commands**.
+> Codex is another AI coding agent that "does the work for you," and the mental model is a lot like the previous category (Claude Code): **both rely on you giving the task in plain language, and both should follow the safe flow of "investigate → plan → act → sign off."** What's below is, again, "things you say to it," **not product commands**.
 > Important: Codex's specific features, install method, commands, and supported actions change from version to version, so for every specific operation in this category, **check the official docs**. This appendix only teaches "how to say things clearly"; it doesn't vouch for the product's features.
 
 ### Getting started: have it get to know the project first
@@ -634,7 +634,7 @@ Start implementing per the confirmed plan. Please follow these:
 How to fill it in:
 - Use directly; no blanks.
 
-Tip: how to view the specific changes, and how to undo them, varies by tool, so **check the official docs**. But whatever tool you use, the principle doesn't change: **the changes have to be ones you can understand, and if you can't understand them, don't adopt them.**
+Tip: how to view the specific changes, and how to undo them, varies by tool, so **check the official docs** (reading a diff is in Chapter 25, going back with Git in Chapter 26). But whatever tool you use, the principle doesn't change: **the changes have to be ones you can understand, and if you can't understand them, don't adopt them.**
 
 ### Run the tests, confirm nothing broke
 
