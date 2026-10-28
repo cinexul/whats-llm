@@ -85,10 +85,14 @@ Run from `app/` with a Node version supported by `package.json` (CI uses Node 24
 - `npm run preview` — preview the build (http://localhost:4173)
 - `npm run tauri -- dev` / `npm run tauri -- build` — run the desktop app / build its configured Windows NSIS installer with platform prerequisites
 - GitHub `release.yml` builds both Windows x64 packages. It uses `tauri build --no-bundle`, packages the executable plus DLLs and `data/` as a portable ZIP and tests extracted startup, then runs `.github/scripts/windows-installer.ps1` to bundle the same runtime DLLs into an NSIS installer and verify silent installation and installed startup with the app-data SQLite path. With a version tag both go into a Release draft; a manual run with an empty tag only uploads Actions artifacts. See [Windows desktop edition](../docs/windows-portable.md); WebView-backed data still requires an explicit backup when moving computers.
-- `npm run check`, `npm run content:check`, `npm run check:quiz` — type, content, and quiz-registry checks
+- `npm run check`, `npm test`, `npm run content:check`, `npm run check:quiz` — type checks, unit tests, content and quiz-registry checks
+- `npm run test:e2e`, `npm run test:e2e:pwa` — browser and offline tests on the production build
 - Build and preview to verify reading, editing, backup, and offline interactions; static checks alone do not verify these flows
 
 See the [documentation index](../docs/README.md) for guides and dated validation records. Previous test counts are not evidence that a new change passes.
 
 ## Tests
-Automated unit and browser tests are kept locally and are not part of the repository; `.gitignore` excludes `*.test.ts`, `e2e/` and the Vitest/Playwright configs.
+- `tests/unit/` — Vitest unit tests (`npm test`). Import app code through `$lib/…`. Don't hard-code book sentences or quiz answers; derive them from the current chapter so content revisions don't break tests.
+- `tests/e2e/` — Playwright tests against the production build (`npm run build`, then `npm run test:e2e`, which starts `npm run preview`). The browser locale is `zh-CN`.
+- `tests/e2e-pwa/` — offline/service-worker tests with their own server (`npm run test:e2e:pwa`).
+- CI (`.github/workflows/check.yml`) runs all of the above plus `cargo fmt --check`, `cargo clippy -p study-core -D warnings` and `cargo test -p study-core`.

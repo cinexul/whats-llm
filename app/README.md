@@ -9,7 +9,7 @@ npm ci
 npm run dev
 ```
 
-Run `npm run check`, `npm run content:check`, `npm run check:quiz`, and `npm run build` to validate changes. Rust tests run from `src-tauri/` with `cargo test --locked -p study-core`.
+Run `npm run check`, `npm test`, `npm run content:check`, `npm run check:quiz`, `npm run build` and `npm run test:e2e` to validate changes. Rust tests run from `src-tauri/` with `cargo test --locked -p study-core`.
 
 Chapter sources are in `src/lib/content/{zh,ja,en}/`. Preserve the quiz heading, stable question IDs, revision markers, A–D choice labels, and localized answer markers; the content and quiz commands validate the three editions together.
 

@@ -28,12 +28,5 @@ vite.config.ts.timestamp-*
 # Tauri
 /src-tauri/target/
 
-# 测试只留在本地，不进仓库
-*.test.ts
-/e2e/
-/e2e-pwa/
-/vitest.config.ts
-/playwright*.config.ts
-
 # Claude Code本地配置
 .claude/

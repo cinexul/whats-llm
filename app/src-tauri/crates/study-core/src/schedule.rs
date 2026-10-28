@@ -67,7 +67,9 @@ impl Scheduler {
             None => 0,
         };
 
-        let next: NextStates = self.fsrs.next_states(memory, self.retention, days_elapsed)?;
+        let next: NextStates = self
+            .fsrs
+            .next_states(memory, self.retention, days_elapsed)?;
         let item: ItemState = match rating {
             Rating::Again => next.again,
             Rating::Hard => next.hard,

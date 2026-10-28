@@ -42,7 +42,7 @@ Svelte 5 + SvelteKit（静的SPA）+ TypeScript、デスクトップ版はTauri 
 
 | ファイル | 実行のタイミング | 役割 |
 | --- | --- | --- |
-| [`check.yml`](.github/workflows/check.yml) | `main`へのプッシュ、Pull Request | 型・内容・小テスト登録のチェック、本番ビルド、Rustのテスト |
+| [`check.yml`](.github/workflows/check.yml) | `main`へのプッシュ、Pull Request | 型チェック、単体テスト、内容・小テスト登録のチェック、本番ビルド、ブラウザテスト（オフライン機能を含む）、Rustの整形・静的チェック・テスト |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 毎週月曜07:17 UTC、または手動 | 見直し時期が来た章の通知と出典リンクの確認。本文は自動で変えません |
 | [`release.yml`](.github/workflows/release.yml) | `v*`タグのプッシュ、または手動実行 | Windows x64のインストーラーとポータブル版を作り、Windows上でインストール・起動を確認します。バージョンを指定するとGitHub Releaseの下書きに置き、確認してから公開します。空欄なら試しに作るだけです |
 
@@ -61,18 +61,24 @@ Svelte 5 + SvelteKit（静的SPA）+ TypeScript、デスクトップ版はTauri 
 `app/`で実行します。
 
 ```bash
-npm run check
-npm run content:check
-npm run check:quiz
+npm run check          # 型チェック
+npm test               # 単体テスト
+npm run content:check  # 章の登録
+npm run check:quiz     # 小テストの登録
 npm run build
+npx playwright install chromium   # 初回だけブラウザをインストール
+npm run test:e2e       # ブラウザテスト（本番ビルドのプレビューを自動で起動）
+npm run test:e2e:pwa   # オフライン機能のテスト
 ```
 
-これらは型・内容登録・ビルドのチェックだけなので、画面の操作は実際に触って確かめてください。Rustの学習データモジュールのテストは、リポジトリのルートから実行します。
+単体テストは`app/tests/unit/`、ブラウザテストは`app/tests/e2e/`と`app/tests/e2e-pwa/`にあります。Rustの学習データモジュールのテスト：
 
 ```bash
 cd app/src-tauri
 cargo test --locked -p study-core
 ```
+
+`main`へのプッシュやPull Requestのたびに、GitHubが上のチェックをすべて自動で実行します。
 
 ブラウザ版は学習記録をlocalStorageに、デスクトップ版はSQLiteに保存します。本文のローカル編集はどちらもIndexedDBです。[Windows版](docs/windows-portable.md)にはインストーラーとポータブル版があります。ダウンロード・更新・保存先は説明を見てください。
 

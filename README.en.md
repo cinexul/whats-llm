@@ -42,7 +42,7 @@ Svelte 5 + SvelteKit (static SPA) + TypeScript, with a Tauri 2 / Rust desktop sh
 
 | File | When it runs | What it does |
 | --- | --- | --- |
-| [`check.yml`](.github/workflows/check.yml) | Pushes to `main` and pull requests | Type, content and quiz-registry checks, production build, Rust tests |
+| [`check.yml`](.github/workflows/check.yml) | Pushes to `main` and pull requests | Type checks, unit tests, content and quiz-registry checks, production build, browser tests (including offline), Rust formatting, lints and tests |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | Mondays 07:17 UTC, or manually | Lists chapters due for review and checks source links. It never edits chapters. |
 | [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually | Builds the Windows x64 installer and portable ZIP and tests installing and starting them on Windows. With a version they go into a GitHub Release draft for you to check and publish; with an empty version it is only a test build. |
 
@@ -61,18 +61,24 @@ Svelte 5 + SvelteKit (static SPA) + TypeScript, with a Tauri 2 / Rust desktop sh
 From `app/`:
 
 ```bash
-npm run check
-npm run content:check
-npm run check:quiz
+npm run check          # type checks
+npm test               # unit tests
+npm run content:check  # chapter registration
+npm run check:quiz     # quiz registration
 npm run build
+npx playwright install chromium   # once, before the first browser test run
+npm run test:e2e       # browser tests; starts a preview of the production build
+npm run test:e2e:pwa   # offline tests
 ```
 
-These only cover types, content registration and the build, so still click through the app to check the interface. The Rust study-data tests run from the repository root:
+Unit tests live in `app/tests/unit/`, browser tests in `app/tests/e2e/` and `app/tests/e2e-pwa/`. The Rust study-data tests:
 
 ```bash
 cd app/src-tauri
 cargo test --locked -p study-core
 ```
+
+GitHub runs all of these on every push to `main` and on every pull request.
 
 The browser version keeps study data in localStorage and the desktop version uses SQLite; local chapter edits live in IndexedDB in both. The [Windows desktop edition](docs/windows-portable.md) comes as an installer and a portable ZIP; see that page for downloads, updates and where data is stored.
 

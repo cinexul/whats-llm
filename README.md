@@ -42,7 +42,7 @@ Svelte 5 + SvelteKit（静态SPA）+ TypeScript，桌面版用Tauri 2 / Rust。M
 
 | 文件 | 什么时候运行 | 做什么 |
 | --- | --- | --- |
-| [`check.yml`](.github/workflows/check.yml) | 推送到`main`或提交Pull Request | 类型、内容和测验登记检查，生产构建，Rust测试 |
+| [`check.yml`](.github/workflows/check.yml) | 推送到`main`或提交Pull Request | 类型检查、单元测试、内容和测验登记检查、生产构建、浏览器测试（含离线功能），Rust格式、静态检查和测试 |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 每周一07:17 UTC，或手动 | 提醒到期该复核的章节，检查来源链接；不会自动改正文 |
 | [`release.yml`](.github/workflows/release.yml) | 推送`v*`标签，或手动运行 | 构建Windows x64安装版和免安装版，并在Windows上实际安装、启动检查。填了版本号时放进GitHub Release草稿，人工确认后再发布；留空只试打包 |
 
@@ -61,18 +61,24 @@ Svelte 5 + SvelteKit（静态SPA）+ TypeScript，桌面版用Tauri 2 / Rust。M
 在`app/`里运行：
 
 ```bash
-npm run check
-npm run content:check
-npm run check:quiz
+npm run check          # 类型检查
+npm test               # 单元测试
+npm run content:check  # 章节登记
+npm run check:quiz     # 测验登记
 npm run build
+npx playwright install chromium   # 第一次跑浏览器测试前安装浏览器
+npm run test:e2e       # 浏览器测试，自动启动正式构建的预览
+npm run test:e2e:pwa   # 离线功能测试
 ```
 
-这些命令只检查类型、内容登记和构建，界面操作还要自己点一遍确认。Rust学习数据模块的测试从仓库根目录执行：
+单元测试在`app/tests/unit/`，浏览器测试在`app/tests/e2e/`和`app/tests/e2e-pwa/`。Rust学习数据模块的测试：
 
 ```bash
 cd app/src-tauri
 cargo test --locked -p study-core
 ```
+
+每次推送到`main`或提交Pull Request，GitHub都会自动跑以上全部检查。
 
 浏览器版用localStorage保存学习记录，桌面版用SQLite；两者的本地正文修改都存在IndexedDB。[Windows桌面版](docs/windows-portable.md)有安装版和免安装版两种，下载、更新和数据位置见说明。
 

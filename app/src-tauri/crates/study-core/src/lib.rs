@@ -11,8 +11,8 @@ use rusqlite::{params, Connection, OptionalExtension, Result};
 
 mod schedule;
 mod snapshot;
-pub use snapshot::{StudySnapshot, SnapshotReview, SnapshotRead};
 pub use schedule::{Rating, Scheduled, Scheduler, DEFAULT_RETENTION};
+pub use snapshot::{SnapshotRead, SnapshotReview, StudySnapshot};
 
 /// カードの学習段階。定着度はおもにstability/intervalから導くので、ここは補助的。
 pub const STATE_NEW: i64 = 0;
@@ -126,7 +126,9 @@ pub struct Card {
 pub fn open(path: &Path) -> Result<Connection> {
     let conn = Connection::open(path)?;
     // WAL = 書き込み中の読みを止めない・クラッシュ耐性。synchronous=NORMALはWALでの実用既定。
-    conn.execute_batch("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA synchronous=NORMAL;")?;
+    conn.execute_batch(
+        "PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA synchronous=NORMAL;",
+    )?;
     migrate(&conn)?;
     Ok(conn)
 }
@@ -253,8 +255,10 @@ pub fn all_reviews(conn: &Connection, lang: &str) -> Result<Vec<Review>> {
 
 /// 設定など雑多な値の取得/保存(theme / lang / font-scales / 目標保持率…)。
 pub fn kv_get(conn: &Connection, key: &str) -> Result<Option<String>> {
-    conn.query_row("SELECT value FROM kv WHERE key = ?1", params![key], |r| r.get(0))
-        .optional()
+    conn.query_row("SELECT value FROM kv WHERE key = ?1", params![key], |r| {
+        r.get(0)
+    })
+    .optional()
 }
 
 pub fn kv_set(conn: &Connection, key: &str, value: &str) -> Result<()> {
@@ -367,7 +371,14 @@ impl Store {
         elapsed_ms: Option<i64>,
         now_ms: i64,
     ) -> StudyResult<Card> {
-        record_answer(&self.conn, &self.scheduler, meta, correct, elapsed_ms, now_ms)
+        record_answer(
+            &self.conn,
+            &self.scheduler,
+            meta,
+            correct,
+            elapsed_ms,
+            now_ms,
+        )
     }
 
     pub fn due_cards(&self, lang: &str, now: i64) -> StudyResult<Vec<Card>> {
