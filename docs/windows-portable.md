@@ -1,33 +1,62 @@
-# Windows免安装版 / Portable edition / ポータブル版
+# Windows桌面版 / Windows desktop edition / Windows版
 
 ## 简体中文
 
-下载`LLM.Learning.Book_<版本号>_windows-x64-portable.zip`，**完整解压**到可写的文件夹，再双击`whats-llm.exe`。本应用无需安装；请保留同目录的DLL和`data/`文件夹，不要在ZIP内直接启动程序。
+每次发布都有两种包，内容完全一样，任选一种：
 
-- 适用于Windows 10（2004或更新版本）及Windows 11 x64，需要已安装Microsoft Edge WebView2 Runtime；运行环境说明见 [Microsoft官方文档](https://learn.microsoft.com/microsoft-edge/webview2/concepts/distribution)。程序引用系统DirectML的`DMLCreateDevice1`，因此要求Windows 10 2004起提供的DirectML 1.1，版本对应见 [Microsoft版本表](https://learn.microsoft.com/windows/ai/directml/dml-version-history)。ZIP不包含WebView2安装程序或固定版本运行时。
-- Visual C++ 运行库DLL随ZIP提供，无需单独安装该运行库；请保留同目录的所有DLL。
-- 学习数据库位于`data/whatsllm.db`，批注位于程序旁的`annotations.json`。
-- 界面设置、阅读位置和本地正文修改仍由本机WebView的浏览器存储保存，**复制文件夹不等于转移全部数据**。更换电脑或更新版本前，请在“我的书包”导出学习备份，再在目标版本中导入。
-- 更新前先导出备份并关闭程序，保留原来的`data/`和`annotations.json`，再替换程序和DLL。
-- 正文和字体已包含在程序中。
-- 同名`.zip.sha256`文件提供ZIP的SHA-256校验值。
+| 文件 | 适合 | 学习记录和笔记存在哪 |
+| --- | --- | --- |
+| `LLM.Learning.Book_<版本号>_x64-setup.exe`（安装版） | 大多数人。双击安装，开始菜单里有图标 | `%APPDATA%\com.whatsllm.reader\` |
+| `LLM.Learning.Book_<版本号>_windows-x64-portable.zip`（免安装版） | 不想安装、想放U盘或整个文件夹带走的人 | 解压后的`data/`文件夹 |
 
-维护者可在GitHub的`Actions → release → Run workflow`中选择`main`并填写以`v`开头的新标签，或推送`v*`标签触发构建。复用已有标签时，必须选择该标签所指向的提交；流程会拒绝标签与构建源码不一致的情况。标签不会自动修改`tauri.conf.json`中的应用版本。工作流跳过安装包构建，打包ZIP，在Windows上解压启动并检查学习数据库的创建，再上传Actions构建产物和GitHub Release草稿。已有草稿的其他附件会保留；已公开的Release不会被修改。
+都需要Windows 10或11（64位）。正文和字体已包含在程序里，不联网也能读。每个文件旁边都有同名的`.sha256`校验文件。
 
-手动运行`release`时勾选`installer`，会同时生成`LLM.Learning.Book_<版本号>_x64-setup.exe`安装包及其校验文件。安装包包含同一套Visual C++ 运行库；缺少WebView2时会下载其引导程序。安装版不带`data/`文件夹，学习数据库使用用户应用数据目录。工作流会执行静默安装和安装后的启动检查；免安装ZIP仍会保留。
+### 安装版
+
+- 双击`-setup.exe`，不需要管理员权限。安装界面会跟随系统语言（中文、日文，其他系统显示英文）。
+- 电脑上缺少Microsoft Edge WebView2 Runtime时，安装程序会自动下载安装。
+- 更新时直接运行新版本的安装包，学习记录不受影响。
+- 卸载在Windows“设置→应用”里进行。卸载时如果勾选删除应用数据，学习记录和笔记会一起删掉。
+
+### 免安装版
+
+- **完整解压**到一个可以写入的文件夹，再双击`whats-llm.exe`。不要在ZIP里直接打开。
+- 请保留同目录的DLL和`data/`文件夹。Visual C++运行库已随ZIP提供。
+- 需要电脑上已有Microsoft Edge WebView2 Runtime（Windows 11自带，Windows 10一般也已随Edge装好）；ZIP里不包含它，缺少时请从[微软官网](https://developer.microsoft.com/microsoft-edge/webview2/)安装。
+- 学习数据库是`data/whatsllm.db`，笔记是`data/annotations.json`。旧版本把笔记放在`whats-llm.exe`旁边，新版本会自动读取，第一次保存后改存到`data/`。
+- 更新时先关闭程序，保留原来的`data/`，再用新版本的其余文件替换。
+
+### 两种都要注意
+
+界面设置、阅读位置和本地正文修改存在本机的WebView里，**复制文件夹或重装不等于转移全部数据**。换电脑、在安装版和免安装版之间切换、或更新前，请在“我的书包”导出学习备份，再到新的地方导入。
+
+### 维护者：怎么发布
+
+1. 把`app/src-tauri/tauri.conf.json`里的`version`改成新版本号（例如`0.2.0`），合并到`main`。
+2. 在GitHub打开`Actions → release → Run workflow`，分支选`main`，版本号填`v0.2.0`，点运行。版本号必须和第1步一致，否则会立刻报错停下，免得打出版本号不对的包。
+3. 等20分钟左右。流程会在Windows上打出安装版和免安装版，分别实际安装、解压、启动检查一遍，再放进一个Release草稿。
+4. 打开仓库的Releases页面，下载草稿里的文件试一试，没问题就点`Publish release`。发布时GitHub会自动创建`v0.2.0`标签。
+
+也可以直接推送`v*`标签触发，效果相同。版本号留空运行时只试打包，不建草稿，打好的文件在那次运行页面底部的Artifacts里下载。已公开的Release不会被修改；对同一个版本号重复运行，会更新草稿里的文件。
 
 ## English
 
-Extract the entire ZIP to a writable folder, then run `whats-llm.exe`. Keep the DLLs and `data/` directory beside it. Windows 10 (2004 or newer) or Windows 11 x64 and Microsoft Edge WebView2 Runtime are required. Visual C++ runtime DLLs are included; WebView2 is not.
+Each release has two packages with the same content:
 
-The learning database lives in `data/whatsllm.db`; annotations live in `annotations.json` beside the executable. Browser-backed settings, reading positions, and local chapter edits remain on this computer. Export a learning backup in **My library** before updating or moving to another computer, and import it there. When updating, close the app and preserve `data/` and `annotations.json`.
+- `LLM.Learning.Book_<version>_x64-setup.exe`: the installer. No administrator rights needed; the installer follows the system language and downloads Microsoft Edge WebView2 Runtime if it is missing. Learning data and notes are stored in `%APPDATA%\com.whatsllm.reader\`. Uninstall from Windows Settings → Apps; choosing to delete app data also deletes your learning records.
+- `LLM.Learning.Book_<version>_windows-x64-portable.zip`: the portable edition. Extract the whole ZIP to a writable folder and run `whats-llm.exe`. Keep the DLLs and the `data/` folder beside it. WebView2 must already be installed (Windows 11 includes it). The learning database is `data/whatsllm.db` and notes are `data/annotations.json`; notes saved by older builds next to the executable are read automatically until the first save. To update, close the app, keep `data/` and replace the other files.
 
-The manual `installer` option also creates and tests an NSIS `-setup.exe` installer, including the runtime DLLs. Installed builds use the user's app-data directory for the learning database. The portable ZIP remains available.
+Both need 64-bit Windows 10 or 11. Settings, reading positions and local chapter edits live in the WebView on this computer. Before moving to another computer, switching editions or updating, export a learning backup in **My library** and import it in the new place.
+
+To publish: set `version` in `app/src-tauri/tauri.conf.json`, merge to `main`, then run `Actions → release → Run workflow` on `main` with the matching tag (for example `v0.2.0`), or push that tag. The workflow builds and tests both packages on Windows and puts them in a Release draft for you to check and publish. A run with an empty tag only uploads Actions artifacts.
 
 ## 日本語
 
-ZIP全体を書き込み可能なフォルダーに展開し、`whats-llm.exe`を開いてください。DLLと`data/`フォルダーは削除せず、実行ファイルと同じ場所に置いてください。Windows 10（2004以降）またはWindows 11のx64版と、Microsoft Edge WebView2 Runtimeが必要です。Visual C++のランタイムDLLは同梱していますが、WebView2は同梱していません。
+リリースごとに中身が同じ2種類のパッケージがあります。
 
-学習データベースは`data/whatsllm.db`、注釈は実行ファイルの横の`annotations.json`に保存されます。表示設定・読書位置・本文のローカル編集は、そのパソコンのWebView内に保存されます。更新や別のパソコンへの移行前に「マイライブラリ」でバックアップを書き出し、移行先で読み込んでください。更新時はアプリを終了し、`data/`と`annotations.json`を残してプログラムとDLLを置き換えます。
+- `LLM.Learning.Book_<バージョン>_x64-setup.exe`：インストーラー。管理者権限は不要で、画面はシステムの言語に合わせて表示されます。Microsoft Edge WebView2 Runtimeが無ければ自動でダウンロードします。学習データとメモは`%APPDATA%\com.whatsllm.reader\`に保存されます。アンインストールはWindowsの「設定→アプリ」から行い、アプリデータの削除を選ぶと学習記録も消えます。
+- `LLM.Learning.Book_<バージョン>_windows-x64-portable.zip`：ポータブル版。ZIP全体を書き込み可能なフォルダーに展開し、`whats-llm.exe`を開いてください。DLLと`data/`フォルダーは同じ場所に残します。WebView2はあらかじめ必要です（Windows 11には標準で入っています）。学習データベースは`data/whatsllm.db`、メモは`data/annotations.json`です。以前のビルドが実行ファイルの横に保存したメモは、最初に保存するまで自動で読み込みます。更新時はアプリを終了し、`data/`を残して他のファイルを置き換えます。
 
-手動実行で`installer`を有効にすると、ランタイムDLLを含むNSISインストーラー（`-setup.exe`）も作成し、インストール後の起動を確認します。インストール版の学習データベースは、ユーザーのアプリデータフォルダーに保存されます。ポータブルZIPも引き続き作成します。
+どちらも64ビット版のWindows 10または11が必要です。表示設定・読書位置・本文のローカル編集はこのパソコンのWebView内に保存されます。別のパソコンへの移行、版の切り替え、更新の前に「マイライブラリ」でバックアップを書き出し、移行先で読み込んでください。
+
+公開手順：`app/src-tauri/tauri.conf.json`の`version`を変えて`main`にマージし、`main`で`Actions → release → Run workflow`を同じ番号のタグ（例：`v0.2.0`）で実行するか、そのタグをプッシュします。Windows上で両方のパッケージを作って動作確認し、Releaseの下書きに入れます。中身を確かめてから公開してください。タグを空欄にすると、Actionsの成果物だけを作ります。

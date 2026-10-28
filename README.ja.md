@@ -6,6 +6,10 @@
 
 中国語・日本語・英語の3版があり、アプリ内でいつでも切り替えられます。40の学習章にはその場で解けて自動採点される小テストがあり、重要な用語には英語を併記しています。
 
+## ダウンロード
+
+Windowsの方は[Releases](https://github.com/cinexul/whats-llm/releases)からダウンロードできます。インストーラー（`-setup.exe`）はダブルクリックでインストール、ポータブル版（`.zip`）は展開するだけで使えます。違いは[Windows版の説明](docs/windows-portable.md)を見てください。ほかのOSでは、下の手順で自分でビルドしてください。
+
 ## 実行
 
 Node.js 24.x（24.15.0以上。ほかの対応バージョンは`app/package.json`）とnpmが必要です。
@@ -40,7 +44,7 @@ Svelte 5 + SvelteKit（静的SPA）+ TypeScript、デスクトップ版はTauri 
 | --- | --- | --- |
 | [`check.yml`](.github/workflows/check.yml) | `main`へのプッシュ、Pull Request | 型・内容・小テスト登録のチェック、本番ビルド、Rustのテスト |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 毎週月曜07:17 UTC、または手動 | 見直し時期が来た章の通知と出典リンクの確認。本文は自動で変えません |
-| [`release.yml`](.github/workflows/release.yml) | `v*`タグのプッシュ、またはバージョンを指定した手動実行 | Windows x64のポータブルZIPを作成。`installer`を選ぶとインストーラーも作成・確認します。成果物はGitHub Releaseの下書きに置き、確認してから公開します |
+| [`release.yml`](.github/workflows/release.yml) | `v*`タグのプッシュ、または手動実行 | Windows x64のインストーラーとポータブル版を作り、Windows上でインストール・起動を確認します。バージョンを指定するとGitHub Releaseの下書きに置き、確認してから公開します。空欄なら試しに作るだけです |
 
 ## 機能
 
@@ -70,7 +74,7 @@ cd app/src-tauri
 cargo test --locked -p study-core
 ```
 
-ブラウザ版は学習記録をlocalStorageに、デスクトップ版はSQLiteに保存します。本文のローカル編集はどちらもIndexedDBです。リリースで作る[WindowsのポータブルZIP](docs/windows-portable.md)には、実行ファイル・DLL・`data/`フォルダーが入っています。実行にはMicrosoft Edge WebView2 Runtimeが必要です。
+ブラウザ版は学習記録をlocalStorageに、デスクトップ版はSQLiteに保存します。本文のローカル編集はどちらもIndexedDBです。[Windows版](docs/windows-portable.md)にはインストーラーとポータブル版があります。ダウンロード・更新・保存先は説明を見てください。
 
 ## スマートフォン
 

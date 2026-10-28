@@ -7,18 +7,14 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: '版本号tag，例如v0.1.0'
-        required: true
-      installer:
-        description: '同时生成Windows安装包 (.exe)'
-        type: boolean
-        default: false
+        description: '版本号，例如v0.1.0。留空只试打包，不建Release草稿'
+        required: false
 
 permissions:
   contents: write
 
 concurrency:
-  group: windows-release-${{ github.event.inputs.tag || github.ref_name }}
+  group: windows-release-${{ inputs.tag || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -26,7 +22,8 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 45
     env:
-      RELEASE_TAG: ${{ github.event.inputs.tag || github.ref_name }}
+      # 推送tag时用tag名；手动运行时用填写的版本号，留空表示只试打包
+      RELEASE_TAG: ${{ inputs.tag || (github.ref_type == 'tag' && github.ref_name) || '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -52,6 +49,7 @@ jobs:
         run: npm ci
 
       - name: Validate release tag
+        if: env.RELEASE_TAG != ''
         shell: pwsh
         run: |
           if (-not $env:RELEASE_TAG.StartsWith('v')) {
@@ -71,6 +69,7 @@ jobs:
           }
 
       - name: Validate tag matches app version
+        if: env.RELEASE_TAG != ''
         shell: pwsh
         run: |
           $config = Get-Content app/src-tauri/tauri.conf.json -Raw | ConvertFrom-Json
@@ -178,7 +177,6 @@ jobs:
           compression-level: 0
 
       - name: Build and test Windows installer
-        if: inputs.installer
         id: installer
         timeout-minutes: 10
         shell: pwsh
@@ -187,7 +185,6 @@ jobs:
         run: ./.github/scripts/windows-installer.ps1
 
       - name: Upload installer build artifact
-        if: inputs.installer
         uses: actions/upload-artifact@v4
         with:
           name: LLM-Learning-Book-windows-x64-installer
@@ -198,6 +195,7 @@ jobs:
           compression-level: 0
 
       - name: Upload Windows packages to release draft
+        if: env.RELEASE_TAG != ''
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -208,32 +206,28 @@ jobs:
           INSTALLER_CHECKSUM: ${{ steps.installer.outputs.checksum }}
         run: |
           $ErrorActionPreference = 'Stop'
+          $setup = Split-Path -Leaf $env:INSTALLER_EXE
+          $zip = Split-Path -Leaf $env:PORTABLE_ZIP
+          $notes = Join-Path $env:RUNNER_TEMP 'release-notes.md'
+          @"
+          Windows x64桌面版，两种任选一种：
+
+          - **安装版**``$setup``：双击安装，不需要管理员权限。缺少WebView2时安装程序会自动下载。学习记录和笔记存在系统的用户数据目录。
+          - **免安装版**``$zip``：完整解压后运行``whats-llm.exe``。学习记录和笔记存在旁边的``data/``文件夹，整个文件夹可以拷走；更新时保留``data/``，替换其余文件。需要电脑上已有Microsoft Edge WebView2 Runtime（Windows 11自带）。
+
+          需要Windows 10或11（64位）。界面设置、阅读位置和本地正文修改存在WebView里，换电脑或换版本前请在“我的书包”导出学习备份，再到新版本里导入。每个文件都附有SHA-256校验文件。
+          "@ | Set-Content -LiteralPath $notes -Encoding utf8
+          $title = "LLM Learning Book $env:RELEASE_TAG (Windows)"
           $draft = gh release view $env:RELEASE_TAG --json isDraft --jq '.isDraft' 2>$null
           if ($LASTEXITCODE -eq 0) {
             if ($draft -ne 'true') {
               throw 'This release is already published. Use a new tag to create a draft.'
             }
-            gh release edit $env:RELEASE_TAG --target $env:GITHUB_SHA
-            if ($LASTEXITCODE -ne 0) { throw 'Failed to update the draft source commit.' }
+            gh release edit $env:RELEASE_TAG --target $env:GITHUB_SHA --title $title --notes-file $notes
+            if ($LASTEXITCODE -ne 0) { throw 'Failed to update the release draft.' }
           } else {
-            $notes = Join-Path $env:RUNNER_TEMP 'portable-release-notes.md'
-            @'
-          Windows x64桌面版：ZIP为免安装版，完整解压后运行whats-llm.exe。
-          请保留data/ 文件夹和DLL；更新时先导出学习备份，再替换程序文件。
-          学习数据库保存在data/，批注保存在程序旁；界面设置和本地正文修改仍由本机WebView保存，跨电脑请使用应用内的备份导出/导入。
-          需要Microsoft Edge WebView2 Runtime。
-          附带SHA-256校验文件。此版本保持草稿，等待人工确认后发布。
-          '@ | Set-Content -LiteralPath $notes -Encoding utf8
-            if ($env:INSTALLER_EXE) {
-              '本次还提供 -setup.exe安装包：双击安装。运行库已包含；缺少WebView2时安装程序会下载其引导程序。安装版的学习数据库保存在用户应用数据目录。' |
-                Add-Content -LiteralPath $notes -Encoding utf8
-            }
-            gh release create $env:RELEASE_TAG --draft --target $env:GITHUB_SHA --title "LLM Learning Book $env:RELEASE_TAG (Windows)" --notes-file $notes
+            gh release create $env:RELEASE_TAG --draft --target $env:GITHUB_SHA --title $title --notes-file $notes
             if ($LASTEXITCODE -ne 0) { throw 'Failed to create release draft.' }
           }
-          gh release upload $env:RELEASE_TAG $env:PORTABLE_ZIP $env:PORTABLE_CHECKSUM --clobber
-          if ($LASTEXITCODE -ne 0) { throw 'Failed to upload portable ZIP.' }
-          if ($env:INSTALLER_EXE) {
-            gh release upload $env:RELEASE_TAG $env:INSTALLER_EXE $env:INSTALLER_CHECKSUM --clobber
-            if ($LASTEXITCODE -ne 0) { throw 'Failed to upload Windows installer.' }
-          }
+          gh release upload $env:RELEASE_TAG $env:PORTABLE_ZIP $env:PORTABLE_CHECKSUM $env:INSTALLER_EXE $env:INSTALLER_CHECKSUM --clobber
+          if ($LASTEXITCODE -ne 0) { throw 'Failed to upload Windows packages.' }

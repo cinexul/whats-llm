@@ -6,6 +6,10 @@ A plain-language book for people with **no programming background**: it explains
 
 The book comes in Chinese, Japanese and English, and you can switch languages at any time. Each of the 40 teaching chapters ends with a quiz you can answer right there and have scored, and key terms carry an English gloss.
 
+## Download
+
+On Windows, download it from [Releases](https://github.com/cinexul/whats-llm/releases): the installer (`-setup.exe`) installs with a double-click, and the portable `.zip` runs after extracting. The [Windows desktop notes](docs/windows-portable.md) explain the difference. On other systems, build it yourself with the steps below.
+
 ## Run it
 
 You need Node.js 24.x (24.15.0 or later; see `app/package.json` for other supported versions) and npm.
@@ -40,7 +44,7 @@ Svelte 5 + SvelteKit (static SPA) + TypeScript, with a Tauri 2 / Rust desktop sh
 | --- | --- | --- |
 | [`check.yml`](.github/workflows/check.yml) | Pushes to `main` and pull requests | Type, content and quiz-registry checks, production build, Rust tests |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | Mondays 07:17 UTC, or manually | Lists chapters due for review and checks source links. It never edits chapters. |
-| [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually with a version | Builds a Windows x64 portable ZIP; the `installer` option also builds and tests an installer. Results go into a GitHub Release draft for you to check and publish. |
+| [`release.yml`](.github/workflows/release.yml) | Pushing a `v*` tag, or manually | Builds the Windows x64 installer and portable ZIP and tests installing and starting them on Windows. With a version they go into a GitHub Release draft for you to check and publish; with an empty version it is only a test build. |
 
 ## Features
 
@@ -70,7 +74,7 @@ cd app/src-tauri
 cargo test --locked -p study-core
 ```
 
-The browser version keeps study data in localStorage and the desktop version uses SQLite; local chapter edits live in IndexedDB in both. The [Windows portable ZIP](docs/windows-portable.md) built by the release workflow contains the program, its DLLs and a `data/` folder, and needs Microsoft Edge WebView2 Runtime.
+The browser version keeps study data in localStorage and the desktop version uses SQLite; local chapter edits live in IndexedDB in both. The [Windows desktop edition](docs/windows-portable.md) comes as an installer and a portable ZIP; see that page for downloads, updates and where data is stored.
 
 ## Mobile
 

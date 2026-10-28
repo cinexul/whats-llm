@@ -1,5 +1,5 @@
 // マーカー(蛍光ペン)とメモの管理。
-// 保存先: Tauri上ではexeと同じフォルダのannotations.json、
+// 保存先: Tauri上では学習DBと同じフォルダのannotations.json、
 // ブラウザプレビューではlocalStorage(開発用フォールバック)。
 import { writable, get } from 'svelte/store';
 import type { Lang } from './manifest';
@@ -93,7 +93,7 @@ export function ensureLoaded(): Promise<void> {
 				}
 			}
 			// ファイルが無い・空・読めないときはlocalStorageのバックアップを採用する。
-			// (exeのフォルダに書き込めない環境ではlocalStorage側が本体になるため)
+			// (ファイルに書き込めない環境ではlocalStorage側が本体になるため)
 			if (!list?.length) list = localAnnotations(LS_KEY) ?? list;
 			if (saveVersion === 0) annotations.set(list ?? []);
 		})();

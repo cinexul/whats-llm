@@ -29,13 +29,13 @@ language switching.
 - `src/lib/study.ts` + `src-tauri/src/lib.rs` (`study_*` commands) — the frontend learning-data layer. Under Tauri it `invoke`s the Rust `Store` (SQLite + FSRS, the source of truth); in the browser preview it falls back to localStorage + a simple JS scheduler. Holds the reactive `cardsStore` / `readStore` and the helpers (`masteryOf`, `dueCards`, `chapterSummary`, `streakFromReviews`, …).
 - `src/routes/review/` — Anki-style cross-chapter review session: pulls all due question-cards, loads + parses each chapter's quiz, matches by `qhash`, and presents them one flashcard at a time.
 - `src/routes/progress/` — learning dashboard with reading, quiz, mastery, historical answer accuracy, streak, due cards, review heatmap, forecast, and per-chapter status. Historical answer accuracy is not predicted retention.
-- `src/lib/annotations.ts` + `src-tauri/src/lib.rs` — highlight / note feature (saved to `annotations.json` next to the executable under Tauri, localStorage in the browser)
+- `src/lib/annotations.ts` + `src-tauri/src/lib.rs` — highlight / note feature (saved to `annotations.json` beside the learning DB under Tauri, localStorage in the browser)
 - `src/app.css` — light/dark palette via `data-theme`
 
 ## Persistence (where user data lives)
 - **Learning data** (per-question cards, review log, read progress) lives in an
   **embedded SQLite DB** (`whatsllm.db`) managed by `study-core`. Location is chosen
-  by a portable-mode sentinel in `study_db_path` (`src-tauri/src/lib.rs`):
+  by a portable-mode sentinel in `data_dir` (`src-tauri/src/lib.rs`):
   - **Portable / no-install build:** if a `data/` folder sits next to the exe, the DB
     goes in `data/whatsllm.db` — so all progress travels with the folder. Ship the
     portable zip with an empty `data/` to opt in automatically.
@@ -45,9 +45,11 @@ language switching.
   - On first run, `study.ts` migrates the legacy `read-chapters` localStorage key into
     SQLite once (old per-chapter `quiz-srs` is not migrated — it can't map to
     per-question cards).
-- **Annotations** use `annotations.json` next to the executable, with a localStorage
-  mirror and recovery snapshot. They do not use the SQLite app-data path; file-write
-  failures must remain visible.
+- **Annotations** use `annotations.json` in the same folder as `whatsllm.db`
+  (`data/` for the portable build, app-data for the installed build), with a
+  localStorage mirror and recovery snapshot. Older builds wrote it next to the
+  executable; that file is still read until the first save. File-write failures must
+  remain visible.
 - **Local chapter edits** use IndexedDB in both browser and Tauri. Saves, resets,
   and backup imports share a Web Lock. A stale editor must not overwrite a newer
   revision. See [local editing](../docs/local-chapter-edits.md).
@@ -82,8 +84,7 @@ Run from `app/` with a Node version supported by `package.json` (CI uses Node 24
 - `npm run build` — static site to `build/`
 - `npm run preview` — preview the build (http://localhost:4173)
 - `npm run tauri -- dev` / `npm run tauri -- build` — run the desktop app / build its configured Windows NSIS installer with platform prerequisites
-- GitHub `release.yml` uses `tauri build --no-bundle`, packages the Windows x64 executable plus DLLs and `data/` as a ZIP, and tests extracted startup before uploading an Actions artifact and a Release draft. See [Windows portable distribution](../docs/windows-portable.md); WebView-backed data still requires an explicit backup when moving computers.
-- The manual `installer` input also runs `.github/scripts/windows-installer.ps1` to bundle the same runtime DLLs into NSIS, then verifies silent installation and installed startup with the app-data SQLite path. It does not include the portable `data/` marker.
+- GitHub `release.yml` builds both Windows x64 packages. It uses `tauri build --no-bundle`, packages the executable plus DLLs and `data/` as a portable ZIP and tests extracted startup, then runs `.github/scripts/windows-installer.ps1` to bundle the same runtime DLLs into an NSIS installer and verify silent installation and installed startup with the app-data SQLite path. With a version tag both go into a Release draft; a manual run with an empty tag only uploads Actions artifacts. See [Windows desktop edition](../docs/windows-portable.md); WebView-backed data still requires an explicit backup when moving computers.
 - `npm run check`, `npm run content:check`, `npm run check:quiz` — type, content, and quiz-registry checks
 - Build and preview to verify reading, editing, backup, and offline interactions; static checks alone do not verify these flows
 

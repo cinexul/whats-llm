@@ -5,30 +5,34 @@ use std::sync::Mutex;
 
 use tauri::{Manager, State};
 
-// マーカー・メモの保存先: 実行ファイルと同じフォルダのannotations.json
-// (インストール不要の単体配布でも、exeの隣に注釈データを持ち運べるようにする)
-fn annotations_path() -> Result<PathBuf, String> {
-  let exe = std::env::current_exe().map_err(|e| e.to_string())?;
-  let dir = exe
-    .parent()
-    .ok_or_else(|| String::from("実行ファイルの場所を取得できません"))?;
-  Ok(dir.join("annotations.json"))
+// マーカー・メモの保存先: 学習DBと同じフォルダのannotations.json
+fn annotations_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
+  Ok(data_dir(app)?.join("annotations.json"))
+}
+
+// 以前はexeの隣に保存していた。新しい場所にまだ無ければこちらを読む
+fn legacy_annotations_path() -> Option<PathBuf> {
+  let exe = std::env::current_exe().ok()?;
+  Some(exe.parent()?.join("annotations.json"))
 }
 
 #[tauri::command]
-fn load_annotations() -> Result<String, String> {
-  let path = annotations_path()?;
-  if !path.exists() {
-    return Ok(String::from("[]"));
+fn load_annotations(app: tauri::AppHandle) -> Result<String, String> {
+  let path = annotations_path(&app)?;
+  if path.exists() {
+    return fs::read_to_string(&path).map_err(|e| e.to_string());
   }
-  fs::read_to_string(&path).map_err(|e| e.to_string())
+  match legacy_annotations_path() {
+    Some(old) if old.exists() => fs::read_to_string(&old).map_err(|e| e.to_string()),
+    _ => Ok(String::from("[]")),
+  }
 }
 
 // 一時ファイルへ書き切ってからrenameで置き換える。
 // 書き込み途中のクラッシュ・電源断で既存のannotations.jsonを壊さないため
 #[tauri::command]
-fn save_annotations(data: String) -> Result<(), String> {
-  let path = annotations_path()?;
+fn save_annotations(app: tauri::AppHandle, data: String) -> Result<(), String> {
+  let path = annotations_path(&app)?;
   let tmp = path.with_extension("json.tmp");
   fs::write(&tmp, data).map_err(|e| e.to_string())?;
   fs::rename(&tmp, &path).map_err(|e| e.to_string())
@@ -61,21 +65,25 @@ fn open_external(url: String) -> Result<(), String> {
 
 struct StudyState(Mutex<Option<study_core::Store>>);
 
-// 学習DBの場所:
+// 学習DBと注釈の保存先:
 //  - 便携(無安装)版: exeの隣に `data/` フォルダがあればそこへ(フォルダごと持ち運べる)
 //  - 安装版: OSのアプリデータ領域(常に書き込め、外には出ない)
-fn study_db_path(app: &tauri::AppHandle) -> Result<std::path::PathBuf, String> {
+fn data_dir(app: &tauri::AppHandle) -> Result<PathBuf, String> {
   if let Ok(exe) = std::env::current_exe() {
     if let Some(dir) = exe.parent() {
       let portable = dir.join("data");
       if portable.is_dir() {
-        return Ok(portable.join("whatsllm.db"));
+        return Ok(portable);
       }
     }
   }
   let dir = app.path().app_data_dir().map_err(|e| e.to_string())?;
-  std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
-  Ok(dir.join("whatsllm.db"))
+  fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+  Ok(dir)
+}
+
+fn study_db_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
+  Ok(data_dir(app)?.join("whatsllm.db"))
 }
 
 fn with_store<T>(

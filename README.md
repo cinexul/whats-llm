@@ -6,6 +6,10 @@
 
 全书有中文、日文、英文三个版本，应用里随时切换。40个教学章节都配有能直接作答、自动评分的小测验，关键术语附英文。
 
+## 下载
+
+Windows用户到[Releases](https://github.com/cinexul/whats-llm/releases)下载：安装版（`-setup.exe`）双击安装，免安装版（`.zip`）解压就能用，区别见[Windows桌面版说明](docs/windows-portable.md)。其他系统请按下面的步骤自己构建。
+
 ## 运行
 
 需要Node.js 24.x（至少24.15.0，其他可用版本见`app/package.json`）和npm。
@@ -40,7 +44,7 @@ Svelte 5 + SvelteKit（静态SPA）+ TypeScript，桌面版用Tauri 2 / Rust。M
 | --- | --- | --- |
 | [`check.yml`](.github/workflows/check.yml) | 推送到`main`或提交Pull Request | 类型、内容和测验登记检查，生产构建，Rust测试 |
 | [`content-maintenance.yml`](.github/workflows/content-maintenance.yml) | 每周一07:17 UTC，或手动 | 提醒到期该复核的章节，检查来源链接；不会自动改正文 |
-| [`release.yml`](.github/workflows/release.yml) | 推送`v*`标签，或手动填写版本号 | 构建Windows x64免安装ZIP；勾选`installer`时同时生成并测试安装包。结果放进GitHub Release草稿，人工确认后再发布 |
+| [`release.yml`](.github/workflows/release.yml) | 推送`v*`标签，或手动运行 | 构建Windows x64安装版和免安装版，并在Windows上实际安装、启动检查。填了版本号时放进GitHub Release草稿，人工确认后再发布；留空只试打包 |
 
 ## 功能
 
@@ -70,7 +74,7 @@ cd app/src-tauri
 cargo test --locked -p study-core
 ```
 
-浏览器版用localStorage保存学习记录，桌面版用SQLite；两者的本地正文修改都存在IndexedDB。发布流程生成的[Windows免安装ZIP](docs/windows-portable.md)包含程序、DLL和`data/`文件夹，运行需要Microsoft Edge WebView2 Runtime。
+浏览器版用localStorage保存学习记录，桌面版用SQLite；两者的本地正文修改都存在IndexedDB。[Windows桌面版](docs/windows-portable.md)有安装版和免安装版两种，下载、更新和数据位置见说明。
 
 ## 手机版
 
