@@ -26,6 +26,12 @@ function load(): Lang {
 
 export const lang = writable<Lang>(load());
 
+// 在任何页面渲染之前就写好<html lang>。等组件挂载后再改的话，
+// 中文页面会先按默认字体排一次版，白白下载一遍日文字体。
+if (typeof document !== 'undefined') {
+	lang.subscribe((value) => { document.documentElement.lang = value === 'zh' ? 'zh-CN' : value; });
+}
+
 export function setLang(next: Lang) {
 	lang.set(next);
 	try { localStorage.setItem(KEY, next); } catch { /* 本次会话仍可切换语言。 */ }

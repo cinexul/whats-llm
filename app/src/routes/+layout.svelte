@@ -55,7 +55,6 @@
 
 	$effect(() => {
 		ensureLoaded($lang);
-		if (browser) document.documentElement.lang = $lang === 'zh' ? 'zh-CN' : $lang;
 	});
 
 
