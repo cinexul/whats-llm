@@ -2897,8 +2897,8 @@
           ]
         },
         "ja": {
-          "revision": 2,
-          "contentHash": "ca30d3064a332cd8f3cef2457b87ab498df98852b704d1093e993cb752941f83",
+          "revision": 3,
+          "contentHash": "90ba154aade5735b6256220d7711664bfb69550b125ba69453bd0bedab99b0e2",
           "reviewedAt": "2026-10-27",
           "reviewScope": "chapter",
           "reviewEvidence": "docs/content-review-2026-10-27.md",
@@ -2913,6 +2913,11 @@
               "revision": 2,
               "date": "2026-10-27",
               "summary": "インストールの参照先を第28・29章に直し、「次章でインストール」を第25章の内容に合わせました。まとめの「ターミナル/エディタで動く」という決めつけを削り、Gitの説明は第26章を指すようにしました。小テストは全面的に書き直しました。"
+            },
+            {
+              "revision": 3,
+              "date": "2026-10-27",
+              "summary": "連続する二つの太字の間の空白を戻し、太字が正しく表示されるよう修正。中国語版との対応は変わりません。"
             }
           ],
           "translatedFrom": {
@@ -2979,8 +2984,8 @@
           ]
         },
         "ja": {
-          "revision": 2,
-          "contentHash": "7bc72e6596c28f066e5db68e566dc1952e66e3cf8c2506d8f6c20e528c739de0",
+          "revision": 3,
+          "contentHash": "e60ed53f27519bb732df222c4f28c4fdc6c980c83c196852fd1844f56b102a5e",
           "reviewedAt": "2026-10-27",
           "reviewScope": "chapter",
           "reviewEvidence": "docs/content-review-2026-10-27.md",
@@ -3000,6 +3005,11 @@
               "revision": 2,
               "date": "2026-10-27",
               "summary": "「ワンクリックで戻せる」と読める表現をやめ、復旧に複数の手順がかかることと第26章のGitの節への参照を加えました。全問Bだった小テストの正解をC・A・D・B・Aに分散し、選択肢を整えました。"
+            },
+            {
+              "revision": 3,
+              "date": "2026-10-27",
+              "summary": "連続する二つの太字の間の空白を戻し、太字が正しく表示されるよう修正。中国語版との対応は変わりません。"
             }
           ],
           "translatedFrom": {
@@ -3704,8 +3714,8 @@
           ]
         },
         "ja": {
-          "revision": 2,
-          "contentHash": "ea4df437b49b294450b34a4877d30f7a64090638d2ffc940a6b5a06fba1d1f51",
+          "revision": 3,
+          "contentHash": "0ff5fd610f2399975c33e97cb56452080bce7c985e8ca7f359817aa70aca6028",
           "reviewedAt": "2026-10-27",
           "reviewScope": "chapter",
           "reviewEvidence": "docs/content-review-2026-10-27.md",
@@ -3720,6 +3730,11 @@
               "revision": 2,
               "date": "2026-10-27",
               "summary": "本文はほぼそのままで、操作問題のツールに関する参照を第18・24章に直しました。小テストは長さをそろえ、冗談の誤答をなくして（「前回の議事録を参考にさせる」「テンプレートに作らないでと書けば作らない」など）書き換えました。"
+            },
+            {
+              "revision": 3,
+              "date": "2026-10-27",
+              "summary": "連続する二つの太字の間の空白を戻し、太字が正しく表示されるよう修正。中国語版との対応は変わりません。"
             }
           ],
           "translatedFrom": {
