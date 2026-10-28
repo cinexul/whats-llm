@@ -1,6 +1,6 @@
 # Offline book and installation
 
-The browser edition is an installable PWA. Open **Library → Offline reading and installation**, then choose **Download complete book**. Wait for the explicit ready message. The download includes all three language editions, every route, interactive lesson, font, and code-highlighting asset; visiting a chapter in advance is unnecessary. The current production bundle is approximately 26 MB before browser cache overhead. External links still require a connection.
+The browser edition is an installable PWA. Open **Library → Offline reading and installation**, then choose **Download complete book**. Wait for the explicit ready message. The download includes all three language editions, every route, interactive lesson, font, and code-highlighting asset; visiting a chapter in advance is unnecessary. The current production bundle is approximately 30 MB before browser cache overhead, about 4 MB of which are the two tokenizers of the token lab. External links still require a connection.
 
 Installation is a separate action. Chromium browsers show **Install this book** when their installation prompt is available. Otherwise use the browser's **Install app / Add to Home Screen** menu; on iPhone and iPad use Safari's Share menu. The panel provides instructions when no programmatic install prompt exists. Installation alone does not download the complete book.
 

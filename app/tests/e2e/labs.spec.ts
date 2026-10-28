@@ -1,4 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { gunzipSync } from 'node:zlib';
 import { test, expect } from '@playwright/test';
+import { Tiktoken } from 'js-tiktoken/lite';
+import o200k from 'js-tiktoken/ranks/o200k_base';
+import { Tokenizer } from '@huggingface/tokenizers';
+import { TOKEN_SAMPLES } from '../../src/lib/labs/token-samples';
 
 test.beforeEach(async ({ page }) => {
 	await page.addInitScript(() => localStorage.setItem('lang', 'en'));
@@ -71,7 +77,8 @@ for (const language of ['zh', 'ja', 'en']) {
 		}, language);
 		await page.goto('/labs/');
 		await expect(page.locator('html')).toHaveAttribute('lang', language === 'zh' ? 'zh-CN' : language);
-		for (const id of ['context', 'rag', 'permissions']) {
+		await expect(page.getByTestId('token-table')).toBeVisible({ timeout: 30_000 });
+		for (const id of ['tokens', 'context', 'rag', 'permissions']) {
 			await page.locator(`.lab-jump a[href="#${id}"]`).click();
 			await expect(page.locator(`#${id}`)).toBeInViewport();
 			const dimensions = await page.evaluate(() => {
@@ -87,3 +94,23 @@ for (const language of ['zh', 'ja', 'en']) {
 		await expect(grant).toBeChecked();
 	});
 }
+
+test('the token lab shows the same counts as the reference tokenizers and updates while typing', async ({ page }) => {
+	const gpt = new Tiktoken(o200k);
+	const qwen = new Tokenizer(JSON.parse(gunzipSync(readFileSync('static/tokenizers/qwen3.json.gz')).toString('utf8')), {});
+	const counts = (text: string) => ({ o200k: gpt.encode(text).length, qwen3: qwen.encode(text, { add_special_tokens: false }).ids.length });
+	await page.goto('/labs/#tokens');
+	const lab = page.locator('#tokens');
+	await expect(lab.getByTestId('token-table')).toBeVisible({ timeout: 30_000 });
+	for (const [preset, name] of [['everyday', 'Everyday request'], ['code', 'A line of code']] as const) {
+		await lab.getByRole('button', { name, exact: true }).click();
+		for (const lang of ['zh', 'ja', 'en'] as const) {
+			const expected = counts(TOKEN_SAMPLES[preset][lang]);
+			await expect(lab.getByTestId(`count-o200k-${lang}`)).toHaveText(String(expected.o200k));
+			await expect(lab.getByTestId(`count-qwen3-${lang}`)).toHaveText(String(expected.qwen3));
+		}
+	}
+	await lab.getByLabel(/^English/).fill('Hello world');
+	await expect(lab.getByTestId('count-o200k-en')).toHaveText('2');
+	await expect(lab.getByRole('button', { name: 'A line of code', exact: true })).toHaveAttribute('aria-pressed', 'false');
+});

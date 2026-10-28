@@ -49,7 +49,7 @@ Svelte 5 + SvelteKit (static SPA) + TypeScript, with a Tauri 2 / Rust desktop sh
 ## Features
 
 - **Learning paths:** a concepts primer, a sourced work report, and a first web page, each with a clear deliverable and saved self-checks.
-- **Interactive labs:** context budgets and compaction, RAG evidence, and agent permissions. All local simulations; no API needed.
+- **Interactive labs:** compare token counts of the same sentence in Chinese, Japanese and English with two real tokenizers, plus simulations of context budgets and compaction, RAG evidence, and agent permissions. Everything runs on your device; no API needed.
 - **My library:** offline download, PWA install and updates, and exporting or merging your learning data.
 - **Local edits and diffs:** edit a chapter, preview the Markdown, and see what changed. See the [editing guide](docs/local-chapter-edits.md).
 - **Paragraph resume:** remembers where you stopped, separately for each language.
