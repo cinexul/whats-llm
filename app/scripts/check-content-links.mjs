@@ -39,4 +39,6 @@ await Promise.all(Array.from({ length: Math.min(4, urls.length) }, async () => {
 results.sort((a, b) => a.url.localeCompare(b.url));
 if (values.output) await writeFile(values.output, JSON.stringify({ checkedAt: new Date().toISOString(), results }, null, 2) + '\n');
 console.log('Reachability is not factual review. No source verification or translation dates were changed.');
-if (results.some((result) => result.outcome !== 'reachable')) process.exitCode = 1;
+// 401/403/429多半是网站拦下了自动请求（openai.com一直如此），只提醒人工用浏览器打开确认，不算失败
+for (const result of results.filter((r) => r.outcome === 'unconfirmed-access')) console.log(`::warning::Open in a browser to confirm: ${result.url}`);
+if (results.some((result) => result.outcome === 'http-error' || result.outcome === 'unconfirmed-network')) process.exitCode = 1;
