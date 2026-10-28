@@ -3,18 +3,28 @@
 import { Marked } from 'marked';
 import markedCjkFriendly from 'marked-cjk-friendly';
 import createDOMPurify from 'dompurify';
-import { createHighlighter, type Highlighter, type ShikiTransformer } from 'shiki';
+import { createHighlighterCore, type HighlighterCore, type ShikiTransformer } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
 
+// 只打包书里用到的语法和主题。整套Shiki带着三百多种语言，会让离线包和桌面程序多出约9MB
 const LANGS = ['bash', 'typescript', 'javascript', 'json', 'yaml', 'markdown', 'diff', 'html'];
 
-let highlighterPromise: Promise<Highlighter> | null = null;
+let highlighterPromise: Promise<HighlighterCore> | null = null;
 
-function getHighlighter(): Promise<Highlighter> {
+function getHighlighter(): Promise<HighlighterCore> {
 	if (!highlighterPromise) {
-		highlighterPromise = createHighlighter({
-			themes: ['github-dark'],
-			langs: LANGS,
+		highlighterPromise = createHighlighterCore({
+			themes: [import('@shikijs/themes/github-dark')],
+			langs: [
+				import('@shikijs/langs/bash'),
+				import('@shikijs/langs/typescript'),
+				import('@shikijs/langs/javascript'),
+				import('@shikijs/langs/json'),
+				import('@shikijs/langs/yaml'),
+				import('@shikijs/langs/markdown'),
+				import('@shikijs/langs/diff'),
+				import('@shikijs/langs/html')
+			],
 			engine: createJavaScriptRegexEngine()
 		});
 	}
@@ -71,7 +81,7 @@ export async function renderMarkdown(src: string): Promise<RenderedChapter> {
 	let html = marked.parse(src) as string;
 
 	// 在DOM解析并解码实体前，保留旧锚点的编码形式，
-	// 确保已保存的链接和语义搜索索引仍然有效。
+	// 确保已保存的链接仍然有效。
 	const generatedIds = new Set<string>();
 	html = html.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, inner: string) => {
 		const id = headingId(inner.replace(/<[^>]+>/g, '').trim());
