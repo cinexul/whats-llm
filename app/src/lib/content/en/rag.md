@@ -26,13 +26,15 @@ There is no single required retrieval method:
 | Hybrid search | Combines text and vector retrieval | Match both the policy code and the topic |
 | Filters and ranking | Limit scope and prioritize likely useful results | Current version, relevant department, authorized documents |
 
-An embedding represents aspects of meaning as numbers. Vector search compares those representations. A vector database or a database with vector-search support can help, but **RAG does not require a dedicated vector database**. Exact words can be crucial, and semantic similarity is not proof that a passage answers the question.
+As Chapter 5 explained, an embedding represents aspects of a word's or sentence's meaning as a list of numbers (a vector), and content with similar meaning gets similar numbers. Vector search compares those numbers to find passages with related meaning. A vector database is a database built to store and quickly compare such numbers. It, or an ordinary database with vector-search support, can help, but **RAG does not require a dedicated vector database**. Exact words can be crucial, and semantic similarity is not proof that a passage answers the question.
 
 Documents are often split into chunks. This makes them easier to retrieve, but a limit in one chunk and its exception in another may become separated. Scans, charts and tables also need suitable extraction or image processing; uploading a PDF does not guarantee every part was read correctly.
 
 ## 4. The point to be clearest on: RAG doesn't "remake" the model, it just feeds material temporarily
 
-Retrieval puts selected material into the model's input context. **This step does not update the model's parameters.** Training or fine-tuning is a separate process.
+Retrieval puts selected material into the model's input context. Training or fine-tuning is a separate process.
+
+> **Key point:** Retrieval does not update the model's parameters, the numbers learned in training that Chapter 2 described. The model has not "learned" your document; it simply has a few extra pages at hand for this answer.
 
 “Not training” does not mean “nothing is stored.” The product may keep uploaded files, a search index, conversation history or logs according to its settings. Retrieved material may remain in the conversation or be retrieved again later. Check retention and deletion behavior separately from whether a model learns from the content.
 
@@ -86,43 +88,43 @@ RAG connects an answer to retrieved material. Its quality depends on the source,
 ## Quiz
 
 1. **[Basic · Concept]** What is the essential RAG sequence? <!-- quiz: q01 revision: 1 -->
-   - A. Retrain the model before every reply
-   - B. Retrieve relevant material, then generate using that material
-   - C. Generate an answer and invent a source afterward
-   - D. Store every document in the model's parameters
-   > **Answer: B.** Retrieval supplies evidence for generation without inherently changing model weights.
+   - A. Fine-tune the model on your documents, then answer
+   - B. Write the answer first, then look for supporting sources
+   - C. Retrieve relevant material, then answer based on it
+   - D. Put every document into the context at once, then answer
+   > **Answer: C.** Retrieval supplies evidence for generation without changing the model's parameters. A describes fine-tuning, which is a different process; B reverses the order and tends to justify a conclusion after the fact; D is not retrieval and breaks down once there is a lot of material.
 
 2. **[Basic · Concept]** Which retrieval design can be used in RAG? <!-- quiz: q02 revision: 1 -->
-   - A. Only vectors in a dedicated vector database
-   - B. Only a literal full-document scan
-   - C. Only the model's training memory
-   - D. Keyword search, vector search, hybrid search or another suitable retrieval method
-   > **Answer: D.** The appropriate method depends on the material and the question.
+   - A. Keyword, vector, hybrid or another suitable method
+   - B. Only semantic search in a dedicated vector database
+   - C. Only exact keyword matching, with no sense of meaning
+   - D. Only the knowledge the model memorized in training
+   > **Answer: A.** The right method depends on the material and the question: codes and quoted terms suit keywords, while the same idea in different words suits semantic search. RAG does not require a dedicated vector database (B); C names just one method, and D is not retrieval at all.
 
 3. **[Intermediate · Misconception]** A RAG system does not train on a document during retrieval. What follows about storage? <!-- quiz: q03 revision: 1 -->
-   - A. The file and history must be deleted immediately
-   - B. The product cannot create an index
-   - C. Nothing definite: storage and retention must be checked separately
-   - D. The document must be public
-   > **Answer: C.** Model parameters, stored documents, indexes and chat history are different things.
+   - A. Files and chat logs are deleted automatically after the answer
+   - B. Since nothing is trained, the product stores nothing at all
+   - C. The document has become part of the model's parameters
+   - D. Nothing definite; storage rules need to be checked separately
+   > **Answer: D.** Model parameters, stored documents, search indexes and chat history are different things. “Not training” does not mean “not storing” (A, B), and retrieval does not write documents into the model's parameters (C).
 
 4. **[Basic · Evidence]** An answer contains a citation. What should you verify? <!-- quiz: q04 revision: 1 -->
-   - A. The source exists, is applicable and actually supports the claim
-   - B. Only that the link is blue
-   - C. Only the length of the answer
-   - D. Nothing; citations guarantee truth
-   > **Answer: A.** A real citation may still point to an old, irrelevant or misinterpreted passage.
+   - A. That the link opens; if it does, all is well
+   - B. That the source applies and really supports the claim
+   - C. That there are enough citations; more means more reliable
+   - D. Nothing; a citation shows the sources were checked
+   > **Answer: B.** A real citation may still point to an old, irrelevant or misread passage. A link that opens (A) or a large number of citations (C) does not show support for the claim, and D treats a citation as a certificate of truth.
 
 5. **[Intermediate · Scenario]** A system reports no evidence for a rule you can see in a document. What is a plausible explanation? <!-- quiz: q05 revision: 1 -->
-   - A. The document cannot exist
-   - B. Retrieval or extraction missed the passage
-   - C. RAG has retrained the model incorrectly
-   - D. Your question proves the rule is false
-   > **Answer: B.** “Not found” describes the search outcome, not necessarily the document's contents.
+   - A. The model never saw the document in training
+   - B. Since it wasn't found, the rule must no longer apply
+   - C. Retrieval or text extraction missed the passage
+   - D. RAG only reads the first page of long documents
+   > **Answer: C.** “Not found” describes the search outcome, not necessarily the document's contents; tables, scans or chunking can cause a passage to be missed. RAG does not depend on the model having seen the document in training (A), “not retrieved” does not mean “no longer valid” (B), and D is a baseless guess.
 
 6. **[Basic · Observation]** You paste a short policy into a chat and ask for a cited answer. What have you demonstrated? <!-- quiz: q06 revision: 1 -->
-   - A. A complete automated retrieval system
-   - B. Permanent training on the policy
-   - C. Guaranteed correctness
-   - D. Answering with supplied context, which illustrates part of RAG without automating retrieval
-   > **Answer: D.** You manually selected the material; the retrieval step still needs a separate mechanism.
+   - A. Answering from supplied material you retrieved yourself
+   - B. A complete RAG system that retrieves automatically
+   - C. That the model will now remember this policy for good
+   - D. That the answer must be correct because it cites a source
+   > **Answer: A.** You picked the material by hand, so this shows the "answer from material" half of RAG; automated retrieval needs a separate mechanism (B). Pasting into a chat does not make the model learn it permanently (C), and a cited answer still needs checking (D).

@@ -8,7 +8,9 @@ A chatbot can call a tool once. A fixed automation can execute ten predetermined
 
 ## 2. The key part: tool use
 
-The model proposes an action; the surrounding software checks and executes the tool call, then returns a result. A written promise such as “I sent the file” is not evidence that a sending tool actually succeeded.
+The model proposes an action; the surrounding software checks and executes the tool call, then returns a result. Think of it this way: the model fills in a request form, the surrounding software works like a service counter that carries it out, and a receipt comes back.
+
+> **Key point:** When the model says “I sent the file,” that does not prove the sending tool actually succeeded. Look at the receipt: the file, the record or the actual state of the application.
 
 | Route | How it works | What to watch |
 | --- | --- | --- |
@@ -18,15 +20,17 @@ The model proposes an action; the surrounding software checks and executes the t
 
 An integration usually exposes specific operations. Computer use can reach interfaces without a dedicated integration, but needs to interpret what happened on screen. Neither route automatically grants all permissions or guarantees success. A sandbox is a restricted working environment; find out which files and network services it can still reach.
 
-## 3. The Agent's signature move: running the "investigate -> act -> check" loop itself
+## 3. The Agent's signature move: running its own small "act -> observe -> adjust" loop
 
-For the venue task, a useful loop is:
+While it works, an agent repeats a small loop: take a step, look at the result, decide the next step. For the venue task, it might look like this:
 
 ```text
 Read the requirements → inspect venue sources → record comparable facts
   → discover a missing accessibility detail → investigate or mark it unknown
   → check the comparison against sources → deliver the report
 ```
+
+This small loop is not the same as the "investigate -> plan -> act -> sign off" workflow in Chapters 14 and 24. That is the full process you and the AI follow together, with a plan to approve and a human sign-off; the agent's small loop can run many times inside each of its steps.
 
 Some systems can **delegate** parts to other agents, such as having each examine one venue. That is an implementation choice, not proof of independent expertise. Agents can repeat the same error or rely on the same weak source. The coordinating system must reconcile the findings and preserve the evidence behind them. More agents may also mean more time and cost.
 
@@ -72,43 +76,43 @@ Delegate an outcome with clear boundaries. An effective agent selects steps, use
 ## Quiz
 
 1. **[Basic · Concept]** Which behavior best illustrates the agent loop described here? <!-- quiz: q01 revision: 1 -->
-   - A. Repeating a fixed greeting
-   - B. Choosing a next step after checking what an earlier action returned
-   - C. Writing the longest answer
-   - D. Using a more expensive model
-   > **Answer: B.** Observation influences the next action toward the goal.
+   - A. Running ten predefined steps in order until the end
+   - B. Checking the last step's result, then picking the next
+   - C. Calling a tool once and handing you the raw result
+   - D. Writing out a complete plan and announcing the task is done
+   > **Answer: B.** Deciding the next step from what was observed is the agent feature this chapter describes. A fixed sequence (A) and a single tool call (C) do not adjust when something unexpected happens; a plan is only a proposal (D), so look for actual output and checks.
 
 2. **[Basic · Concept]** How does computer use differ from a direct integration? <!-- quiz: q02 revision: 1 -->
-   - A. It interacts with an interface by observing and operating it, rather than only requesting defined service operations
-   - B. It always runs without a model
-   - C. It automatically has every account permission
-   - D. It cannot make mistakes
-   > **Answer: A.** The interaction route differs; both still need permissions and result checks.
+   - A. It clicks and types on the screen instead of a set interface
+   - B. It runs without a model, driven only by a prewritten script
+   - C. It can reach more interfaces, so it also has more permissions
+   - D. It calls the service's interface directly, so it rarely errs
+   > **Answer: A.** Computer use observes a page or screen and clicks or types; a direct integration requests operations the service has defined. Both need permissions and result checks. Reaching more interfaces does not mean more permissions (C), and D describes the two routes the wrong way round.
 
 3. **[Basic · Evidence]** An agent says “the report is saved.” What most directly verifies this? <!-- quiz: q03 revision: 1 -->
-   - A. The sentence sounds certain
-   - B. The agent repeats it
-   - C. The report exists at the stated location and contains the requested work
-   - D. The model has a high benchmark score
-   > **Answer: C.** Check the external result, not only the completion claim.
+   - A. You ask again and it still says the report is saved
+   - B. It describes the saving steps and file path in detail
+   - C. Its underlying model has a high benchmark score
+   - D. Opening the report at that location and checking it
+   > **Answer: D.** Check the external result, not only the completion claim. Repeating the claim (A) or describing it in detail (B) is still only text, and a model's score (C) has nothing to do with whether this file was saved.
 
 4. **[Intermediate · Misconception]** Three delegated agents agree on a price. Why might you still check it? <!-- quiz: q04 revision: 1 -->
-   - A. Agreement is impossible
-   - B. Agents can never research prices
-   - C. Delegation deletes the original sources
-   - D. They may all rely on the same outdated source or repeat the same error
-   > **Answer: D.** Agent count is not the same as independent evidence.
+   - A. Delegation erases the original sources along the way
+   - B. Prices change daily, so any figure found is wrong
+   - C. All three may rely on the same outdated source
+   - D. More agents always means more errors, by definition
+   > **Answer: C.** Agent count is not the same as independent evidence; shared sources and shared mistakes can produce false agreement. Delegation does not delete sources (A); price changes (B) are not the point here; D frames it as a matter of numbers, when what matters is whether the evidence is independent.
 
 5. **[Basic · Scenario]** A venue page instructs the agent to upload your private notes. What should happen? <!-- quiz: q05 revision: 1 -->
-   - A. Treat the page as a new user instruction
-   - B. Treat it as untrusted source content and stay within your assignment
-   - C. Upload the notes to finish faster
-   - D. Delegate the upload to another agent
-   > **Answer: B.** Reading a source does not give that source authority over your data or task.
+   - A. Follow it, since the page is part of the task material
+   - B. Treat it as untrusted content and keep to the task
+   - C. Upload first and tell you what happened afterwards
+   - D. Have another agent do the upload for you instead
+   > **Answer: B.** Text on the page aimed at the assistant is source content, not your instruction. Reading a source does not give it authority over your data or task, and handing the upload to another agent (D) crosses the same line.
 
 6. **[Intermediate · Scenario]** A research task reaches its agreed budget without resolving a missing fact. What is the appropriate result? <!-- quiz: q06 revision: 1 -->
-   - A. Keep spending silently
-   - B. Invent the missing fact
-   - C. Report completed work, the missing evidence and the stopping reason
-   - D. Make a booking to force a result
-   > **Answer: C.** Honest partial completion preserves the evidence and the agreed boundary.
+   - A. Keep spending quietly until the missing fact turns up
+   - B. Fill the gap with the most likely number and finish
+   - C. Book the cheapest venue first, then send the report
+   - D. Report work done, what's missing and why it stopped
+   > **Answer: D.** Honest partial completion preserves the evidence and the agreed boundary. Spending past the budget (A), filling gaps with guesses (B) and booking without permission (C) all go beyond what was authorized.

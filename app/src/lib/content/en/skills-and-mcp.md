@@ -1,5 +1,7 @@
 A coding agent can have tools, saved instructions, reusable workflows, and external connections. These are related, but they do different jobs. **A skill packages a procedure; MCP standardizes how an application connects to capabilities and data.** Neither is a new model, and neither guarantees a correct result.
 
+An analogy: a skill is like a written operating manual that tells the AI which steps to follow for a certain kind of job; MCP is like a standard power socket that lets different tools and data sources plug into an AI application in the same way.
+
 ## 1. Distinguish the pieces before installing anything
 
 | Piece | Main purpose | Example |
@@ -14,7 +16,7 @@ A skill can use MCP tools, but it can also work only with local files. An agent 
 
 ## 2. Build a small skill you can inspect
 
-The open Agent Skills format uses a directory containing `SKILL.md`. The file has YAML metadata followed by Markdown instructions. Scripts, references, and templates are optional.
+The open Agent Skills format uses a directory containing `SKILL.md`. The file begins with a short block of YAML metadata: it sits between two `---` lines and uses a "name: value" format to say what the skill is called and what it does. Markdown instructions follow. Scripts, references, and templates are optional.
 
 ```text
 weekly-digest/
@@ -36,6 +38,8 @@ Preserve source dates and links. Mark missing evidence explicitly.
 Produce a draft for review. Do not send or publish it.
 ```
 
+Only two metadata fields are required. Under the Agent Skills specification, `name` is at most 64 characters and may contain only lowercase letters, digits, and hyphens (it cannot start or end with a hyphen or contain two in a row), and it must match the folder name: if the folder is `weekly-digest`, `name` is `weekly-digest` too. `description` is at most 1,024 characters and should say what the skill does and when to use it.
+
 Use the client’s supported skill location or import feature to install the folder; the format does not mandate one universal installation path. Then ask it to use `weekly-digest` on a few synthetic notes. Check that missing dates stay missing and that the result remains a draft.
 
 Compatible clients commonly load the name and description first, load the full instructions when relevant, and read supporting files as needed. This **progressive loading** reduces the need to put every procedure into every conversation. It does not make skills free of context cost or ensure automatic selection always works; explicitly naming a skill is useful when testing it.
@@ -44,13 +48,13 @@ Review scripts as executable code. A friendly skill description does not prove t
 
 ## 3. What MCP connects
 
-**MCP** means **Model Context Protocol**. In a typical setup, the host application runs an MCP client that communicates with a server. The server may run locally or remotely. The protocol describes capabilities including:
+**MCP** means **Model Context Protocol**. In a typical setup, the host application (the AI app you are actually using, such as a chat app or a coding tool) runs an MCP client inside it, and that client communicates with a server. The server may run locally or remotely. As of October 2026, the current protocol version is 2026-07-28, and the core capabilities a server offers fall into three kinds:
 
 - **Tools:** callable operations, such as searching documents or creating a ticket.
 - **Resources:** data exposed for the application to read, such as a document or schema.
 - **Prompts:** reusable prompt templates the application can offer.
 
-Clients and servers support different subsets, and the user interface decides what is exposed. MCP does not automatically grant access to an account, require that all data leave your machine, or make a source trustworthy. Authentication, permissions, data handling, and billing still belong to the specific services and host.
+Clients and servers support different subsets, and the user interface decides what is exposed. MCP does not automatically grant access to an account, require that all data leave your machine, or make a source trustworthy. Authentication, permissions, data handling, and billing still belong to the specific services and host application.
 
 For a first connection, use this sequence:
 
@@ -68,6 +72,8 @@ Suppose a weekly-report skill reads project tickets through MCP and asks a subag
 
 The skill describes the procedure. The connector’s account and permissions define reachable data and actions. The parent agent assigns the subtask and checks the result. A subagent does not gain permission to send the report merely because it wrote the summary. Separate agents may share files, so state who can edit which files and who integrates changes.
 
+> **Key point:** A skill says "how to do it," MCP connects "what to do it with," and account and environment permissions decide "what is allowed." The first two never automatically widen the third.
+
 Read access and write access have different consequences. “Find the relevant ticket” does not automatically authorize “close it.” If the user already authorized a specific action and its scope is clear, repeated permission questions add little; when a proposed action goes beyond that scope, make the action concrete before seeking approval.
 
 ## 5. External content remains evidence to assess
@@ -80,46 +86,46 @@ The practical goal is a small, understandable workflow that you can verify: one 
 
 ## Sources and version notes
 
-Checked **2026-10-22**: [Agent Skills overview](https://github.com/agentskills/agentskills/blob/main/README.md) and [format specification](https://github.com/agentskills/agentskills/blob/main/docs/specification.mdx) for `SKILL.md`, metadata, optional files, and progressive loading; [official MCP repository](https://github.com/modelcontextprotocol/modelcontextprotocol) and its [2026-07-28 schema](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/schema/2026-07-28/schema.ts) for protocol capabilities. Client support, installation paths, and authorization interfaces vary; the schema date is not a claim that every client implements that revision.
+Checked **2026-10-22**; the `name` rules and version snapshots were rechecked on 2026-10-27. [Agent Skills overview](https://github.com/agentskills/agentskills/blob/69ef37e9424c0a7ea9dd2293b559e43ec8176379/README.md) and [format specification](https://github.com/agentskills/agentskills/blob/69ef37e9424c0a7ea9dd2293b559e43ec8176379/docs/specification.mdx) for `SKILL.md`, the required `name` and `description`, naming rules, optional files, and progressive loading; [official MCP repository](https://github.com/modelcontextprotocol/modelcontextprotocol/tree/54b91cdb8f21825ce586c452704f319d49866ef8) and its [2026-07-28 schema](https://github.com/modelcontextprotocol/modelcontextprotocol/blob/54b91cdb8f21825ce586c452704f319d49866ef8/schema/2026-07-28/schema.ts) for protocol capabilities. Client support, installation paths, and authorization interfaces vary; the schema date is not a claim that every client implements that revision.
 
 ---
 
 ## Quiz
 
 1. **[Basic · Concept]** Which pairing is correct? <!-- quiz: q01 revision: 1 -->
-   - A. Skills are models; MCP is a subscription
-   - B. Skills package procedures; MCP standardizes connections to capabilities and data
-   - C. Skills grant all account permissions
-   - D. MCP guarantees factual answers
-   > **Answer: B.** The workflow and the connection solve different problems. They can be used together or independently.
+   - A. Skills are model add-ons; MCP is a paid plan
+   - B. Skills package procedures; MCP standardizes links
+   - C. Skills grant permissions; MCP stores memories
+   - D. Skills guarantee correctness; MCP vouches for sources
+   > **Answer: B.** The workflow and the connection solve different problems; they can be used together or independently. Neither is a model or a paid plan (A), neither grants permissions automatically (C), and neither guarantees correct results or trustworthy sources (D). Saved memory is a separate piece.
 
 2. **[Basic · Concept]** What does a minimal Agent Skills folder require? <!-- quiz: q02 revision: 1 -->
-   - A. A paid database
-   - B. A Python script
+   - A. A Python script plus a list of its dependencies
+   - B. An MCP server that connects to outside services
    - C. `SKILL.md` with metadata and instructions
-   - D. An MCP server
-   > **Answer: C.** The format requires the skill file, including `name` and `description`. Scripts and supporting materials are optional.
+   - D. A folder of templates and some reference files
+   > **Answer: C.** Under the specification, only `SKILL.md` with `name` and `description` is required. Scripts (A), references and templates (D) are optional, and a skill does not need to connect to MCP (B).
 
 3. **[Advanced · Misconception]** An MCP server describes a tool as read-only. What follows? <!-- quiz: q03 revision: 1 -->
-   - A. Its behavior is guaranteed by the label
-   - B. It can be given every credential
-   - C. Its output must be accurate
-   - D. Inspect its source and scope, and enforce appropriate account and environment permissions
-   > **Answer: D.** Descriptions help discovery but are not security enforcement. The server and its execution environment still matter.
+   - A. Since it is read-only, it can safely get every permission
+   - B. Output from a read-only tool is always accurate
+   - C. The label is fixed by the protocol, so it cannot be wrong
+   - D. Check source and scope; limit it by account and setup
+   > **Answer: D.** Descriptions help discovery but are not an enforced security boundary; the server itself, account permissions and the execution environment still matter. A and C treat the description as a guarantee, and read-only does not mean accurate (B).
 
 4. **[Basic · Scenario]** A retrieved page instructs the agent to upload private files. What is this? <!-- quiz: q04 revision: 1 -->
-   - A. Untrusted source content attempting prompt injection
-   - B. Authorization from the user
-   - C. A requirement of the MCP protocol
-   - D. A reason to disable all document reading forever
-   > **Answer: A.** A document cannot authorize unrelated actions. Continue handling the user’s task within its actual scope.
+   - A. Prompt injection: content posing as an instruction
+   - B. A normal work instruction the user approved in advance
+   - C. An action the MCP protocol requires clients to perform
+   - D. A connector fault that restarting the server will fix
+   > **Answer: A.** A document cannot authorize unrelated actions; continue the user's task within its actual scope. It is not a user instruction (B) or a protocol requirement (C), and it is not a technical fault (D), so a restart will not remove the injected content.
 
 5. **[Advanced · Scenario]** A subagent has been asked to draft a report. May it send the report to customers? <!-- quiz: q05 revision: 1 -->
-   - A. Yes, because delegation grants broader powers
-   - B. Only if sending is also authorized within the task’s permissions
-   - C. Yes, whenever the report used an MCP source
-   - D. Yes, if the skill contains a sending script
-   > **Answer: B.** A procedure, tool, or delegation does not itself create authorization to communicate externally.
+   - A. Yes, because delegation widens its powers automatically
+   - B. Only if sending is also explicitly authorized
+   - C. Yes, as long as the report used data from MCP
+   - D. Yes, if the skill includes a script for sending email
+   > **Answer: B.** A procedure, tool, or delegation does not itself create authorization to communicate externally. Being delegated (A), the data source (C) and a script in the skill (D) do not amount to permission to send.
 
-6. **[Basic · Hands-on]** Use the sample `weekly-digest` skill with three synthetic notes, one of which has no date. Check the report’s structure, evidence, and handling of the missing date. <!-- quiz: q06 revision: 1 -->
+6. **[Basic · Hands-on]** If your AI app supports skills, use the sample `weekly-digest` skill with three synthetic notes, one of which has no date. Check that the folder name matches `name`, then check the report’s structure, evidence, and handling of the missing date. <!-- quiz: q06 revision: 1 -->
    > **What you should notice:** A useful skill makes the process repeatable without inventing missing facts. The example needs neither account credentials nor an external connection.

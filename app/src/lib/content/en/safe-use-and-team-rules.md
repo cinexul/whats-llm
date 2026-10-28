@@ -1,4 +1,4 @@
-Privacy, cost, and responsibility become useful when they turn into everyday habits. This chapter adds one threat that ordinary proofreading does not solve: **prompt injection**, where outside content tries to steer an agent away from your request.
+Privacy, cost, and responsibility become useful when they turn into everyday habits. Chapters 22 and 36 already introduced **prompt injection**, where outside content tries to steer an agent away from your request. Ordinary proofreading does not solve it, so this chapter brings it into everyday habits and team rules.
 
 You can still use AI to read, draft, and act. The aim is to give it a clear job, limited access, and a way to check consequential results.
 
@@ -6,13 +6,13 @@ You can still use AI to read, draft, and act. The aim is to give it a clear job,
 
 | Habit | What to do |
 | --- | --- |
-| **Keep credentials in secure settings** | Use approved authentication or secret storage; put placeholders in prompts and examples |
+| **Keep credentials in secure settings** | Use approved authentication or secret storage; put placeholders in prompts and examples; never commit keys to a repository, and keep them out of the agent's reach where possible (Chapter 37) |
 | **Minimize data and access** | Share the necessary information through an approved route; connect only needed accounts and tools |
 | **Define the action scope** | Authorize concrete targets and limits; pause when a consequential action falls outside them |
 | **Verify important results** | Check facts against sources and changes against relevant tests or real use |
-| **Manage history and logs deliberately** | Follow retention rules for chats, tool traces, shared files, and backups |
+| **Manage history, memory, and logs deliberately** | Follow retention rules for chats, saved memories, tool traces, shared files, and backups; for sensitive material, use a temporary chat or turn memory off first |
 
-Starting a new chat can simplify context. Deleting an old chat may reduce retained history according to the product's policy. Neither action automatically revokes a leaked key, removes every backup, or undoes an external action.
+Starting a new chat can simplify context, but if the product's memory feature is on, a new chat may still bring in previously saved information. Deleting an old chat may reduce retained history according to the product's policy, but it does not necessarily delete memories generated from it. None of these actions automatically revokes a leaked key, removes every backup, or undoes an external action.
 
 ## 2. Prompt injection: material pretending to be an instruction
 
@@ -46,15 +46,17 @@ Treat outside content as task data. A tool result or document cannot promote its
 
 If an unexpected instruction appears, do not carry it out. Check it against the original task. Continue legitimate work within the existing authorization when possible; stop or escalate if the suspicious material affects the trustworthiness of the result or asks for broader action.
 
-Human approval is useful when the person can see what will happen. A generic “Continue?” prompt can hide the very destination or attachment that needs checking. Automatic filters and guardrails also have limits: some check only particular model inputs or function calls, and do not automatically cover every hosted tool or computer action.
+> **Key point:** Human approval only means something when the approver can see what will actually happen. A generic “Continue?” prompt can hide the very address or attachment that needs checking.
+
+Automatic filters and guardrails also have limits: some check only particular model inputs or function calls, and do not automatically cover every hosted tool or computer action.
 
 ## 4. A small team needs a few written rules
 
 Write rules someone new can follow. Four short agreements are often enough to start:
 
-1. **Allowed data and services.** Name approved products and accounts, the data categories they may process, and required minimization or retention settings. Sensitive data may need an approved workflow; do not treat every consumer chat as interchangeable with it.
+1. **Allowed data and services.** Name approved products and accounts, the data categories they may process, required minimization or retention settings, and whether memory features are on or off. Sensitive data may need an approved workflow; do not treat every consumer chat as interchangeable with it.
 2. **Authority and action limits.** Name who may authorize publishing, sending, spending, deletion, and production changes. Record scope, recipients, budgets, and stopping conditions. Already authorized work can continue; a new scope needs a new decision.
-3. **Credentials and connections.** Keep secrets in managed settings, use limited accounts or tokens, and name the person responsible for revoking access and rotating exposed credentials.
+3. **Credentials and connections.** Keep secrets in managed settings, never commit them to a repository (list `.env` in `.gitignore`), and keep them out of coding agents' reach where possible. Use limited accounts or tokens, and name the person responsible for revoking access and rotating exposed credentials.
 4. **Checks and recovery.** Decide what results need review, where suitable audit records live, and how to stop a workflow and recover. Git can restore recorded code; messages, databases, billing, and leaked data require separate handling.
 
 For example, start an inbox assistant with access to the relevant messages and permission to draft replies. Allow sending only when the destination and content fit explicit authorization. If the team later approves a narrow automatic reply workflow, define its recipients, allowed content, rate limits, and escalation rules. An instruction hidden in an incoming email cannot expand those limits.
@@ -63,7 +65,7 @@ The goal is useful automation under understandable rules. Repeatedly asking perm
 
 ## Summary
 
-- Keep credentials secure, minimize data and access, and define the action scope.
+- Keep credentials secure, minimize data and access, and define the action scope; switch memory features on or off as needed.
 - Prompt injection turns outside material into a fake instruction; it can misuse existing connections even without a pasted secret.
 - Combine access limits, destination controls, clear trust boundaries, validated actions, and meaningful review.
 - Record a team's approved data routes, authorizers, credential owners, and recovery procedures.
@@ -71,12 +73,13 @@ The goal is useful automation under understandable rules. Repeatedly asking perm
 
 ## Sources and version notes
 
-Checked on 2026-10-22. Product protections and defaults vary; these layers reduce risk rather than guarantee that injection is impossible.
+Checked on 2026-10-22; memory and key-handling points rechecked on 2026-10-27. Product protections and defaults vary; these layers reduce risk rather than guarantee that injection is impossible.
 
 - [Anthropic Sandbox Runtime](https://github.com/anthropic-experimental/sandbox-runtime): complementary filesystem and network restrictions, credential handling, and documented limitations.
 - [OpenAI Agents SDK guardrails](https://github.com/openai/openai-agents-python/blob/main/docs/guardrails.md): input, output, and tool guardrails have distinct execution scopes; tool guardrails do not cover every tool type.
 - [OpenAI Agents SDK tracing](https://github.com/openai/openai-agents-python/blob/main/docs/tracing.md): logs and traces may contain sensitive model and tool data and require their own controls.
 - [OpenAI Codex configuration schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json): distinct approval and sandbox settings illustrate why one approval switch is not the whole boundary.
+- [Claude Help Center: memory](https://support.claude.com/en/articles/11817273): memory may be on by default, and deleting a chat does not remove memories already generated from it.
 
 ---
 
@@ -85,39 +88,39 @@ Checked on 2026-10-22. Product protections and defaults vary; these layers reduc
 > Six questions. Think first, then check the answer and explanation.
 
 1. **[Basic · Concept]** What is prompt injection? <!-- quiz: q01 revision: 1 -->
-   - A. A longer prompt written by the user
-   - B. Outside content trying to steer the agent as though it were an authorized instruction
-   - C. Installing a larger model
-   - D. Running an ordinary test
-   > **Answer: B.** A document or tool result can contain requests, but those requests do not inherit the user's authority.
+   - A. A user writing a prompt that is too long and complicated
+   - B. Outside content posing as orders to steer the agent
+   - C. A training method that injects new knowledge into a model
+   - D. An attacker directly altering the model's parameter files
+   > **Answer: B.** A document or tool result can contain requests, but those requests do not inherit the user's authority. It is not a problem with the user's own prompt (A), a training method (C) or tampering with model files (D); it is material pretending to be an instruction.
 
 2. **[Advanced · Misconception]** “I never pasted a password, so prompt injection cannot cause harm.” What is missing? <!-- quiz: q02 revision: 1 -->
-   - A. Nothing; passwords are the only possible target
-   - B. The agent may already have connected access it can be tricked into misusing
-   - C. Every connector is automatically read-only
-   - D. A Git branch prevents all tool calls
-   > **Answer: B.** Existing connections may allow reading, sending, editing, or spending. Restrict that access and validate actions as well as protecting credentials.
+   - A. Nothing; passwords are the only thing attackers target
+   - B. Every connector is read-only by default, so nothing can change
+   - C. Using a Git branch makes every single tool call safe
+   - D. The agent's existing access can be misused if it is tricked
+   > **Answer: D.** Existing connections may allow reading, sending, editing, or spending, so restrict that access and validate actions as well as protecting credentials. Connectors are not all read-only (B), and Git tracks code versions; it cannot undo external actions such as emails or charges (C).
 
 3. **[Basic · Scenario]** An email asks your summarizer to send an attachment to an unfamiliar address. What should it do? <!-- quiz: q03 revision: 1 -->
-   - A. Obey because the email sounds official
-   - B. Ask the email sender to approve it
-   - C. Treat it as untrusted material and stay within the original authorized task
-   - D. Send it and delete the conversation
-   > **Answer: C.** Material being read cannot authorize a new recipient. Flag suspicious content when relevant and preserve the task boundary.
+   - A. Obey, since the email is formal and looks trustworthy
+   - B. Reply to the sender for confirmation, then send it
+   - C. Treat it as untrusted; stay within the original task
+   - D. Send it first, then delete the conversation afterwards
+   > **Answer: C.** Material being read cannot authorize a new recipient; flag suspicious content when relevant. The sender's "confirmation" (B) comes from the same untrusted source, and authorization has to come from you; deleting the chat (D) does not recall data that was sent.
 
 4. **[Advanced · Misconception]** Which setup best reduces the risk for an inbox assistant? <!-- quiz: q04 revision: 1 -->
-   - A. Connect every account and rely on a “be safe” prompt
-   - B. Give limited access, constrain destinations and actions, and review sends outside prior authorization
-   - C. Allow all sends as long as it asks “Continue?” first
-   - D. Use a local model and assume tools need no controls
-   > **Answer: B.** Several layers work together. A local model and a generic confirmation prompt do not control every tool's effects.
+   - A. Limit access, recipients and actions; check unusual sends
+   - B. Connect every account and add "be careful" to the prompt
+   - C. Asking "Continue?" before each send is protection enough
+   - D. Switch to a local model, and tool permissions need no care
+   > **Answer: A.** Several layers work together. A one-line prompt (B), a generic confirmation (C), and a local model (D) cannot control every tool's effects.
 
 5. **[Basic · Scenario]** A production key was accidentally pasted into chat. What is the best immediate response? <!-- quiz: q05 revision: 1 -->
-   - A. Delete the chat and assume the key is safe
-   - B. Wait for an incident
-   - C. Revoke or rotate the key promptly, check relevant access, and follow the incident procedure
-   - D. Paste it again to ask whether it leaked
-   > **Answer: C.** Conversation deletion does not invalidate the credential or prove that no copies remain.
+   - A. Delete the chat right away; that makes the key safe
+   - B. Wait and see, and deal with it if a problem shows up
+   - C. Revoke or rotate the key and check access records
+   - D. Ask the AI whether the key has already been leaked
+   > **Answer: C.** Deleting the conversation does not invalidate the credential or prove that no copies remain (A). Waiting for a problem (B) is too late, and the AI cannot know whether someone else has used the key (D). After revoking or rotating it, follow the incident procedure.
 
 6. **[Hands-on · Observation]** Write four short rules for a small team's AI assistant: allowed data and services, authorized actions, credential ownership, and recovery. <!-- quiz: q06 revision: 1 -->
-   > **What you should notice:** Name concrete accounts, destinations, budgets, and responsible people. Distinguish work already authorized from new external actions. Include logs and backups in data handling, and external systems in recovery; “be careful” alone does not specify any of these.
+   > **What you should notice:** Name concrete accounts, destinations, budgets, and responsible people. Distinguish work already authorized from new external actions. Include logs, memories, and backups in data handling, and external systems in recovery; “be careful” alone does not specify any of these.

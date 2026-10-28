@@ -13,11 +13,11 @@ Define success before opening the app: “I need a one-page comparison, with pag
 | Examples | What to recognize | What to check for your task |
 | --- | --- | --- |
 | ChatGPT — OpenAI; Claude — Anthropic; Gemini — Google | General assistant products; Claude and Gemini are also model-family names | Available modes, files, tools, limits and account settings |
-| Codex, Claude Code, Gemini CLI | Examples of coding tools that can work with project files and tools | Supported environment, permissions, authentication and billing |
+| Codex, Claude Code, Gemini CLI / Antigravity CLI | Examples of coding tools that can work with project files and tools | Supported environment, permissions, authentication and billing |
 | Dedicated image, video, voice and document tools | Products focused on particular inputs or deliverables | Editing control, export format, quality and usage terms |
 | Assistants embedded in office or business software | AI accessible inside a workflow you already use | Which files or records it can read, and which actions it can perform |
 
-**A concrete dated change:** the Gemini CLI repository states that unpaid-tier and Google One users were moved to **Antigravity CLI on June 18, 2026**. This is the scope stated in that repository, not a claim that every Gemini CLI user was migrated. Check your account’s supported route before following an older Gemini CLI tutorial.
+**A concrete dated change:** the Gemini CLI repository states that unpaid-tier and Google One users were moved to Antigravity CLI on June 18, 2026. As of October 2026, it also says Gemini CLI is not optimized for the latest Gemini models and recommends Antigravity CLI for coding with them. This is the scope stated in that repository, not a claim that every Gemini CLI user was migrated. Check your account’s supported route before following an older Gemini CLI tutorial.
 
 A category is not a capability promise. A command-line coding tool is also different from the same provider's chat app. A capability documented in a developer SDK is not proof that every consumer account has it.
 
@@ -36,7 +36,7 @@ A category is not a capability promise. A command-line coding tool is also diffe
 
 Reading video, producing video and transcribing audio are separate capabilities. Test the exact operation you need.
 
-**Second, where is your work already stored?** A useful integration may save repeated copying. Check whether it can access the relevant folder and whether access is read-only or allows changes. Computer use, where an assistant clicks a screen, is a different mechanism from a direct integration with a service.
+**Second, where is your work already stored?** A useful integration may save repeated copying. Check whether it can access the relevant folder and whether access is read-only or allows changes. Computer use, where an assistant looks at a screen and clicks, is a different mechanism from a direct integration with a service.
 
 **Third, what constraints matter?** Include budget, time, accessibility, language, data location and whether you need occasional help or repeated automation. Check quotas and billing for the route you will actually use.
 
@@ -55,7 +55,7 @@ What failed or remained unverified:
 Time, cost and corrections needed:
 ```
 
-Official documentation describes intended availability; a hands-on test establishes what worked in your setup. Neither a launch announcement nor one successful demo proves reliable performance on every task.
+> **Key point:** Official documentation describes intended availability; a hands-on test establishes what worked in your setup. Neither a launch announcement nor one successful demo proves reliable performance on every task.
 
 ## 5. Don't judge a product by a "single experience"
 
@@ -67,7 +67,7 @@ A failure may come from retrieval, a file parser, permissions, a service problem
 
 No. Difficult reasoning, specialist vocabulary and precise image understanding can expose meaningful differences. Use tests that resemble your work and have an answer you can check. A benchmark measures selected tasks under selected conditions; it does not include all your usability, price or integration requirements.
 
-There is no evidence that one fixed percentage of everyone's tasks is “easy enough.” Decide whether performance is sufficient for **your** task, with its cost of errors.
+For small everyday tasks, the differences between mainstream products are sometimes hard to notice. Whether one is good enough depends on your task and on what a mistake would cost: a quick personal draft and a contract comparison for a client call for very different standards.
 
 ## 7. Common misconceptions, cleared up
 
@@ -84,7 +84,7 @@ Choose with a small real task: specify the input, output and acceptance criteria
 
 ---
 
-**Verification scope — October 22, 2026:** checked the following official repository snapshots for the mechanisms and product examples in this chapter. This is a documentation-check date, not a model release date or a guarantee of access in your account.
+**Verification scope — October 22, 2026 (Gemini CLI notes rechecked October 27, 2026):** checked the following official repository snapshots for the mechanisms and product examples in this chapter. This is a documentation-check date, not a model release date or a guarantee of access in your account.
 
 [Codex](https://github.com/openai/codex/blob/86e17e98c7f901277aeeb4649cf1b01462b082f2/README.md) · [Claude Code](https://github.com/anthropics/claude-code/blob/5ed799e5cc56bea9efff57398ca43e31d82784ff/README.md) · [Gemini CLI](https://github.com/google-gemini/gemini-cli/blob/09d81bf116b6f0ef084731dc996aa9d56438bb70/README.md)
 
@@ -93,43 +93,43 @@ Choose with a small real task: specify the input, output and acceptance criteria
 ## Quiz
 
 1. **[Basic · Concept]** You need a contract comparison you can check. What is the most useful success condition? <!-- quiz: q01 revision: 1 -->
-   - A. The answer sounds confident
-   - B. The app is popular
-   - C. The model name is long
-   - D. The comparison identifies clauses, cites pages and exports in a usable format
-   > **Answer: D.** The condition describes the deliverable and how to verify it.
+   - A. It is produced with the model now rated the strongest
+   - B. It lists clauses with pages and exports as an editable file
+   - C. It is well structured, with a confident, professional tone
+   - D. It is as detailed and long as possible, the longer the better
+   > **Answer: B.** The condition describes the deliverable and how to verify it. A strong model (A) does not make the result checkable, and neither tone (C) nor length (D) shows the content is right.
 
 2. **[Basic · Concept]** A product can read uploaded images. What follows? <!-- quiz: q02 revision: 1 -->
-   - A. It can necessarily edit and generate images
-   - B. It has an image-input capability; image output and editing need separate checks
-   - C. It can necessarily generate video
-   - D. It never misreads text inside an image
-   > **Answer: B.** “Multimodal” does not promise every combination of input and output.
+   - A. It can also edit and generate images on request
+   - B. It can read video too, since video is a series of images
+   - C. It never misreads the text inside an image
+   - D. It accepts image input; output and editing need checks
+   > **Answer: D.** “Multimodal” does not promise every combination of input and output. Reading images, editing them, generating them and reading video are separate capabilities (A, B) to test individually, and reading can still go wrong (C).
 
 3. **[Basic · Misconception]** An official announcement describes a new capability. What should you do before relying on it? <!-- quiz: q03 revision: 1 -->
-   - A. Check its documented conditions and test it in your own account
-   - B. Assume every account already has it
-   - C. Assume the free and paid plans are identical
-   - D. Skip a trial because the announcement is official
-   > **Answer: A.** Availability and performance in your setup are separate things to verify.
+   - A. Read the stated conditions and test it in your own account
+   - B. Assume every account has it, since the announcement is official
+   - C. Assume paid plans have it and just follow the tutorial
+   - D. Assume it is reliable because the demo video worked
+   > **Answer: A.** Features can roll out gradually or depend on region, plan and organization settings, so availability and real performance must be checked separately. B and C read the announcement as a promise to every account; one demo (D) does not prove reliability.
 
 4. **[Intermediate · Scenario]** How should you compare two research assistants? <!-- quiz: q04 revision: 1 -->
-   - A. Count adjectives in their answers
-   - B. Reward whichever produces more links
-   - C. Give them the same task and verify the relevant claims against the cited sources
-   - D. Ask each one whether it is the best
-   > **Answer: C.** A link is useful only when it leads to evidence supporting the claim.
+   - A. Count the links and trust the one that gives more
+   - B. Ask each what it is good at and compare the answers
+   - C. Give both the same task; check claims against sources
+   - D. Pick whichever answer is longer and sounds more expert
+   > **Answer: C.** A link is useful only when it leads to evidence supporting the claim, so open it and check. Link count (A), self-assessment (B) and length (D) cannot replace that check.
 
 5. **[Basic · Scenario]** An assistant can view your spreadsheet. What else matters before asking it to update the file? <!-- quiz: q05 revision: 1 -->
-   - A. Its icon color
-   - B. Whether it has write access and can return a correct, usable edited file
-   - C. Whether it praises your data
-   - D. Whether its reply is long
-   > **Answer: B.** Reading a file and changing it are distinct capabilities and permissions.
+   - A. Whether it has write access and returns a usable file
+   - B. Nothing; if it can view the file, it can surely edit it
+   - C. Whether the table shown in the chat is neatly formatted
+   - D. Whether its analysis of your data is detailed enough
+   > **Answer: A.** Reading a file and changing it are distinct capabilities and may need different permissions; B mixes the two up. A neat table in the chat (C) is not an editable workbook, and a detailed analysis (D) does not show it can deliver a correct file.
 
 6. **[Intermediate · Observation]** One candidate is fast but needs many corrections; another is slower but usually usable. What should the comparison include? <!-- quiz: q06 revision: 1 -->
-   - A. Only the first reply time
-   - B. Only the number of words
-   - C. Only the subscription price
-   - D. Total time, correctness, cost and the effort to reach a usable result
-   > **Answer: D.** The practical outcome matters more than a single convenient metric.
+   - A. First-reply speed, since waiting hurts the experience most
+   - B. Subscription price, since the cheaper one saves more overall
+   - C. Benchmark scores, since a higher score means less rework
+   - D. Total time, correctness, cost and the correction effort
+   > **Answer: D.** What matters is the total cost of reaching a usable result. First-reply speed (A), subscription price (B) or a score (C) alone miss the time and money spent on repeated corrections.
