@@ -32,10 +32,10 @@
 
 ### 维护者：怎么发布
 
-1. 把`app/src-tauri/tauri.conf.json`里的`version`改成新版本号（例如`0.2.0`），合并到`main`。
-2. 在GitHub打开`Actions → release → Run workflow`，分支选`main`，版本号填`v0.2.0`，点运行。版本号必须和第1步一致，否则会立刻报错停下，免得打出版本号不对的包。
+1. 把`app/src-tauri/tauri.conf.json`里的`version`改成新版本号（例如`1.1.0`），合并到`main`。
+2. 在GitHub打开`Actions → release → Run workflow`，分支选`main`，版本号填`v1.1.0`，点运行。版本号必须和第1步一致，否则会立刻报错停下，免得打出版本号不对的包。
 3. 等20分钟左右。流程会在Windows上打出安装版和免安装版，分别实际安装、解压、启动检查一遍，再放进一个Release草稿。
-4. 打开仓库的Releases页面，下载草稿里的文件试一试，没问题就点`Publish release`。发布时GitHub会自动创建`v0.2.0`标签。
+4. 打开仓库的Releases页面，下载草稿里的文件试一试，没问题就点`Publish release`。发布时GitHub会自动创建`v1.1.0`标签。
 
 也可以直接推送`v*`标签触发，效果相同。版本号留空运行时只试打包，不建草稿，打好的文件在那次运行页面底部的Artifacts里下载。已公开的Release不会被修改；对同一个版本号重复运行，会更新草稿里的文件。
 
@@ -48,7 +48,7 @@ Each release has two packages with the same content:
 
 Both need 64-bit Windows 10 or 11. Settings, reading positions and local chapter edits live in the WebView on this computer. Before moving to another computer, switching editions or updating, export a learning backup in **My library** and import it in the new place.
 
-To publish: set `version` in `app/src-tauri/tauri.conf.json`, merge to `main`, then run `Actions → release → Run workflow` on `main` with the matching tag (for example `v0.2.0`), or push that tag. The workflow builds and tests both packages on Windows and puts them in a Release draft for you to check and publish. A run with an empty tag only uploads Actions artifacts.
+To publish: set `version` in `app/src-tauri/tauri.conf.json`, merge to `main`, then run `Actions → release → Run workflow` on `main` with the matching tag (for example `v1.1.0`), or push that tag. The workflow builds and tests both packages on Windows and puts them in a Release draft for you to check and publish. A run with an empty tag only uploads Actions artifacts.
 
 ## 日本語
 
@@ -59,4 +59,4 @@ To publish: set `version` in `app/src-tauri/tauri.conf.json`, merge to `main`, t
 
 どちらも64ビット版のWindows 10または11が必要です。表示設定・読書位置・本文のローカル編集はこのパソコンのWebView内に保存されます。別のパソコンへの移行、版の切り替え、更新の前に「マイライブラリ」でバックアップを書き出し、移行先で読み込んでください。
 
-公開手順：`app/src-tauri/tauri.conf.json`の`version`を変えて`main`にマージし、`main`で`Actions → release → Run workflow`を同じ番号のタグ（例：`v0.2.0`）で実行するか、そのタグをプッシュします。Windows上で両方のパッケージを作って動作確認し、Releaseの下書きに入れます。中身を確かめてから公開してください。タグを空欄にすると、Actionsの成果物だけを作ります。
+公開手順：`app/src-tauri/tauri.conf.json`の`version`を変えて`main`にマージし、`main`で`Actions → release → Run workflow`を同じ番号のタグ（例：`v1.1.0`）で実行するか、そのタグをプッシュします。Windows上で両方のパッケージを作って動作確認し、Releaseの下書きに入れます。中身を確かめてから公開してください。タグを空欄にすると、Actionsの成果物だけを作ります。

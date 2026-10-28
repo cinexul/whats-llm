@@ -3,7 +3,7 @@ members = ["crates/study-core"]
 
 [package]
 name = "whats-llm"
-version = "0.1.0"
+version = "1.0.0"
 description = "LLM Learning Book — an offline trilingual (zh/ja/en) e-book reader"
 authors = []
 license = "MIT"
