@@ -1,112 +1,111 @@
-By now you know how the model cuts text into tokens (Chapter 3), how it adds words one at a time (Chapter 4), and how it underlines what matters with attention (Chapter 6). But a more basic question hasn't been answered: **it started out knowing nothing, so how was it "taught" into what it is now**?
+By now you know how the model cuts text into tokens (Chapter 3), adds words one at a time (Chapter 4), and picks out what matters with attention (Chapter 6). A more basic question remains: it started out knowing nothing, so how was it "taught" into what it is now?
 
-A model gets its capabilities through training. This chapter uses **pre-training, fine-tuning, and alignment** to explain how it becomes an assistant, but these are not three separate stages that every model must follow in order. Understanding them also helps explain format-following, cautious responses, and differences in tone across products.
+The answer is training. This chapter uses three concepts, pre-training, fine-tuning, and alignment, to explain how a model becomes an assistant. Along the way they also explain why it follows formats, speaks cautiously, and sounds different from one product to another.
 
 ## 1. Three concepts, one table
 
-Start with a simplified training route: pre-training develops broad capabilities, later training improves task performance, and alignment is a goal of matching human intent that can span several parts of training.
+Roughly: pre-training lays the foundation, and later training makes the model better at getting things done. Alignment names a goal, making the model behave the way people intend, and several stages of training can work toward it.
 
-| Concept | In one sentence | What it learns | An analogy |
+| Concept | In a sentence | What it learns | Analogy |
 | --- | --- | --- | --- |
-| **Pre-training** | Read huge amounts of text, practice "guess the next word" | **A feel for language**: how words connect, roughly how the world is | A widely read person who has read everything |
-| **Fine-tuning** | Catch up using "instruction, then good answer" examples | **Doing as told**: understanding instructions, answering to spec and format | Teaching that well-read person how to "answer properly, your way" |
-| **Alignment** | Make its behavior match human intentions (a goal, reached by several methods) | **Tact**: helpful, honest, harmless | Setting rules: what to say, what not to, and how to say it appropriately |
+| Pre-training | Read huge amounts of text and practice guessing the next word | A feel for language: how words connect, roughly what the world is like | Someone extremely well read who has read everything |
+| Fine-tuning | Extra lessons from "instruction → good answer" examples | Following instructions: understanding requests and answering in the format asked | Teaching that well-read person to answer properly and do what you say |
+| Alignment | Make behavior match what people intend (a goal, with several methods) | Judgment: helpful, honest, harmless | Setting ground rules: what to say, what not to say, and how to say it appropriately |
 
-**These concepts overlap, and training recipes vary.** Instruction fine-tuning is one kind of fine-tuning; alignment can use supervised or preference-based learning, among other methods. Base models can be useful for completion, research, or tasks demonstrated in a prompt, even if they are less reliable as conversational assistants.
+The three overlap, and every developer's training route is different. Alignment, for example, can be taught with example answers or with comparisons of "which answer is better." Let's take them one at a time.
 
 ## 2. Pre-training: read huge amounts of text, learn a "feel for language"
 
-The first step, and the most time-consuming and expensive: have the model read **huge amounts of text** (web pages, books, code, and so on) and repeatedly practice that thing from Chapter 4, **guessing the most likely next word given what came before**.
+The first step is also the slowest and most expensive: have the model read huge amounts of text (web pages, books, code, and so on) and practice the thing from Chapter 4 over and over, guessing the next word from what came before.
 
-Training compares the predicted probabilities with the actual next token, measures the error, and adjusts the parameters in a direction that reduces it; a wrong guess does not undo the previous update. After billions of guesses, the patterns of language (how words go together, how sentences flow, roughly what common sense about the world looks like) get "pressed" bit by bit into its parameters. The product of this step is called the **base model**.
+After each guess, the training program compares the probabilities the model gave with the actual next token, measures how far off it was, and nudges the parameters slightly in the direction that reduces the error. Repeat this billions of times, and how words combine, how sentences flow, and roughly how the world works get pressed, bit by bit, into the parameters. The result of this step is called a **base model**.
 
-But here's the key, and most counterintuitive, point:
+For a sense of scale, take a public example. DeepSeek's technical report for DeepSeek-V3, released in December 2024, says pre-training read 14.8 trillion tokens and used about 2.66 million GPU hours, roughly $5.33 million at a rental price of $2 per hour; the later fine-tuning, alignment, and other post-training used only about 5,000 GPU hours. These figures cover only the official training run, not earlier research and experiments, but they show how different the two steps are in weight.
 
-> **Key point:** Pre-training primarily predicts subsequent text; **it does not guarantee reliable instruction-following in chat**. Asked “What is the capital of France?”, a base model might answer “Paris” or continue listing similar questions, depending on the model and context. It is not incapable of answering, but that ability alone does not make it a reliable chat assistant.
-
-Later training helps apply existing capabilities more consistently to instructions, formats, and tasks; it does not create all question-answering ability from scratch.
+The counterintuitive part: pre-training only practices producing a plausible continuation, which doesn't guarantee that the model will reliably follow instructions. Ask a base model "What's the capital of France?" and it may answer "Paris," or it may keep listing similar questions, depending on the model and the context. Base models can still continue text, be used for research, or handle tasks set up with examples in the prompt; they just aren't steady enough to use directly as a chat assistant. What later training does is make those existing abilities work reliably with instructions and formats; the groundwork for answering questions is already laid in pre-training.
 
 ## 3. Fine-tuning: from "knows how to add words" to "knows how to do as told"
 
-**Fine-tuning** means further training an existing model. This section uses **instruction fine-tuning** as an example, with carefully prepared instruction-and-answer pairs. Fine-tuning can also change knowledge, specialist skills, and task performance, not just style; it is not a reliably searchable database whose facts can be updated one by one.
+**Fine-tuning** means training an existing model further. Take instruction tuning as the example: the model is shown a large number of pairs of "someone makes a request → a good response," such as "summarize this passage in three points → (a clear three-point summary)" or "help me write an apology email → (a well-judged email)." After enough of them, it gradually shifts from "continue whatever it sees" to "when given an instruction, respond to it."
 
-These examples look like this: show it lots of pairs of "**a person made a request → a good response**", such as "please summarize this passage into three points → (a nicely done three-point summary)", "help me write an apology email → (a tactful email)". After seeing enough examples like this, it shifts from "carry on whatever it sees" to "**receive an instruction, give the matching response**."
+As an analogy: pre-training brings in someone extremely well read who just keeps talking on their own; fine-tuning teaches them, step by step, that when someone speaks to them they should respond, and in the form the person wants. When you ask for "a table" or "under 200 words" and it complies, that is largely thanks to this kind of later training, though prompts, tools, and product settings matter too.
 
-An analogy: pre-training brought in a widely read person, but he only rambles on to himself; fine-tuning is teaching him hand over hand, "when someone speaks to you, you **respond**, and in the way they asked for."
-
-> **How you'll actually run into this:** Later training such as instruction fine-tuning often improves requests like “list this in a table” or “keep it under two hundred words.” Pre-training, prompts, tools, and product settings also influence the result. Not every chat model follows the same three-stage recipe.
+Fine-tuning changes more than style; knowledge, specialist skills, and how well the model does a task can all shift too. But don't treat it as a fact database you can update entry by entry and look things up in reliably: facts it learns may be incomplete or wrong. For material that changes often and needs sources, RAG (Chapter 20) is usually the first thing to try.
 
 ## 4. Alignment: teaching it "helpful, honest, harmless"
 
-**Alignment** is the goal of making behavior better match human intentions and requirements, including helpfulness, honesty, and safety. Fine-tuning and other training methods can contribute to it; it need not be a separate third stage after fine-tuning.
+**Alignment** means bringing the model's behavior closer to what people intend and ask for; the goals usually named are "helpful, honest, harmless." It can be achieved through fine-tuning or other training methods, so it isn't necessarily a separate third step after fine-tuning.
 
-There's more than one way to pursue alignment. An early, well-known method is **reinforcement learning from human feedback** (RLHF): people rank several of the model's answers to the same question, and those preferences are used to train it further, so it leans toward answers people approve of and trust. Later came methods where an AI compares answers against a written set of principles, replacing part of the human labeling (AI feedback, RLAIF), and preference optimization methods such as DPO that learn directly from pairs of "this answer is better than that one" without training a separate scoring model. Reasoning models are also often trained with reinforcement learning on tasks whose answers can be checked automatically, like math and coding, rewarded when they get it right; this mainly builds reasoning ability. How each company combines these is usually not fully disclosed, so knowing the names is enough.
+There's more than one method. These are the names you'll hear most:
 
-Why is this step a must? Because a model that has only learned a feel for language and then learned to do as told, but **hasn't been through alignment**, will "talk nonsense":
+- Reinforcement learning from human feedback (RLHF): an early, well-known method. People rank several of the model's answers to the same question, and those preferences are used to keep training it so it leans toward answers people approve of.
+- AI feedback (RLAIF): an AI compares answers against a written set of principles, replacing part of the human labeling.
+- Preference optimization (such as DPO): learns directly from pairs of "which of these two answers is better," without training a separate scoring model.
+- Reinforcement learning on checkable answers: reasoning models practice on problems whose answers can be checked automatically, such as math and programming, and get a reward for correct answers. This mainly improves reasoning.
 
-- Ask it something dangerous or harmful and it might just teach you, step by step;
-- Ask it something it's unsure of and it may lean toward **making up a plausible answer** rather than saying "I'm not sure";
-- It soaks up and spits out all kinds of bias and profanity wholesale.
+How each developer combines these is usually not fully public; knowing the names is enough.
 
-Alignment is setting rules for this "well-read, obedient, but tactless" assistant: what it can't say, when it should admit "I don't know," and how to say things without offending people.
+Why is this step needed? A model that has learned a feel for language and learned to follow instructions, but hasn't been aligned, might:
 
-> **Key point:** "An unaligned model talks nonsense" traces back to Chapter 4: pre-training aims at producing a plausible continuation, not at checking what's true. Alignment can largely hold down this tendency, making it more honest and safer; but it **only lowers the risk — it doesn't remove it**. So even with an aligned model, you still have to double-check important facts yourself (Chapter 9 covers this in detail).
+- explain a dangerous or harmful request in full detail;
+- make up a plausible answer to something it's unsure about, rather than say "I'm not sure";
+- pick up the biases and abuse in its training text and repeat them.
+
+Alignment sets ground rules for this well-read, obedient, but tactless assistant: what not to say, when to admit "I don't know," and how to say things without offending. The root goes back to Chapter 4: pre-training aims at a plausible continuation, not at checking what's true. Alignment can suppress that tendency to a large extent, but it only lowers the risk and can't remove it, so you still need to check important facts from an aligned model yourself (Chapter 9).
 
 ### A side effect of alignment: those "little quirks" that annoy you
 
-Here's something often misunderstood, spelled out for you. While alignment keeps risks in check, it **also brings side effects**. A lot of the quirks that annoy you come precisely from this step being "overdone" or "playing it safe":
+While alignment keeps risk in check, it has side effects. Many of the habits that annoy you come from this step being pushed too far, or from erring on the side of caution:
 
-| What you run into | Is actually a side effect of alignment |
+| What you run into | What's behind it |
 | --- | --- |
-| Slapping on a long string of disclaimers at the drop of a hat | Trained to "rather over-warn than take the blame" |
-| Over-politeness, going in circles, refusing to give a straight answer | Trained to "rather be roundabout than offend" |
-| Clearly able to answer, yet dodging with "I'm just an AI" | Trained to "if unsure, don't answer, don't cause trouble" |
+| Long disclaimers at every turn | Trained to warn too much rather than take responsibility |
+| Overly polite, roundabout, won't give a straight answer | Trained to be indirect rather than risk offending |
+| Could answer, but dodges with "I'm just an AI" | Trained to skip anything uncertain and avoid trouble |
 
-Knowing these **aren't it being dumb or malfunctioning, but caution deliberately tuned in**, you won't be puzzled, and you can treat the cause: spell out the boundaries in your prompt ("this is for general-audience explanation, please give the conclusion directly, no need for disclaimers") and it'll often loosen up (Chapter 11 covers how to phrase it). How far each company tunes this "tact" varies and keeps changing, so refer to the provider's official documentation.
+All of this is caution tuned in on purpose; it says nothing about the model being incapable or broken. Once you know the cause, you can work with it: state the purpose and limits in your prompt, for example "This is for a general-audience explainer; please give the conclusion directly, no disclaimers needed," and it often loosens up (Chapter 11 covers how to write this). How far each developer sets this dial varies, and it changes between versions from the same developer.
 
 ## 5. The question most worth thinking through: does it have its own stance?
 
-This is the chapter's most important section.
+When it politely turns down a request, or weighs every word on a sensitive topic, it's easy to feel that it has its own values and "doesn't want" to say something. That's a natural feeling, but the behavior doesn't support the conclusion.
 
-When it politely declines a request, or weighs every word on a sensitive topic, it's easy to feel: **it has its own values and stance; it "doesn't want" to say this.** That's a very natural feeling, but you can't draw that conclusion from this kind of behavior.
-
-The "attitudes" it shows (gentle, cautious, evasive, holding to some bottom line) are mainly **behavior patterns shaped by training (especially alignment-related training) and product instructions**. As Chapter 4 showed, at every step it computes probabilities from what came before and picks the next word; what alignment changes is which kinds of things it tends to say in various situations. Whether there's anything like human beliefs, likes and dislikes, or consciousness inside it is an open question, and at the very least it can't be inferred from "it turned me down" or "it's so polite."
+The "attitudes" it shows, gentle, cautious, evasive, holding to some line, are mainly behavior shaped by training (especially alignment-related training) and product instructions. As Chapter 4 explained, at each step it computes probabilities from what came before and picks the next word; alignment changes which kinds of things it tends to say in different situations. Whether it has anything like human beliefs, likes, or consciousness inside is not settled, and in any case can't be inferred from "it refused me" or "it's very polite."
 
 | | Looks like | A sounder reading |
 | --- | --- | --- |
-| It "holds" a stance | It has beliefs | Training tuned "respond this way on this topic" to high probability |
-| It "refuses" you | It's "unwilling" | This kind of request was marked as one to avoid, in training or in product rules |
-| It's "very polite" | It "has a good personality" | Polite wording got rewarded over and over and became its default |
+| It "holds" a stance | It has beliefs | Training made "respond to this topic this way" highly probable |
+| It "refuses" you | It's "unwilling" | Training or product rules marked this kind of request as one to avoid |
+| It's "very polite" | It "has a nice personality" | Polite wording was rewarded again and again and became its default |
 
-> **Key point:** Understanding its "attitude" first as **behavior shaped by training and product instructions**, rather than as someone's conviction, has two benefits: first, you won't be led around by its tone into thinking it's speaking for someone; second, it explains why its "personality" changes across products and versions, because that was tuned by each company in the first place. This isn't a claim that there's "nothing" inside; it just means you can use it well without settling that hard question.
+Read this way, its tone won't carry you into thinking it speaks for someone, and it's clear why its "personality" changes from product to product and version to version: each developer tuned it. This doesn't claim there's "nothing" inside; it just means you can use it well without answering that hard question.
 
 ## 6. Common misconceptions, cleared up
 
-| Common misconception | Reality |
+| Misconception | Reality |
 | --- | --- |
-| The model was made by people writing out rules one by one | It's **trained**: read huge amounts of text for a feel for language, then tune behavior with examples, preference feedback, and other methods; nobody writes out line by line how it should answer |
-| Pre-training guarantees a reliable chat assistant | A base model may answer questions, but pre-training does not guarantee reliable instruction-following; later training often improves task performance and safety |
-| Fine-tuning only changes style, or works as a reliable fact database | It can also change knowledge and capabilities, but may learn facts incompletely or introduce errors. For changing private material that needs citations, usually consider RAG first (Chapter 20); the two can also be combined |
-| After alignment it's absolutely safe and reliable | Alignment only **lowers** the risk, doesn't remove it; and it brings side effects like over-politeness, overuse of disclaimers, and a habit of dodging |
-| If it shows a stance, it must have its own consciousness and values | These attitudes are mainly **behavior shaped by training and product instructions**; whether anything like human beliefs or consciousness lies inside is unsettled, and at least can't be inferred from this behavior |
+| A model is built by people writing rules one by one | It's trained: it learns a feel for language from huge amounts of text, then its behavior is adjusted with examples, preference feedback, and other methods; nobody writes its answers rule by rule |
+| Fine-tuning only changes style, or works as a reliable fact database | Fine-tuning can change knowledge and abilities too, but learned facts may be incomplete or wrong; for material that changes often and needs sources, consider RAG first (Chapter 20); the two can also be combined |
+| Once aligned, it's completely safe and reliable | Alignment only lowers risk, it doesn't remove it, and it brings side effects like over-politeness, piles of disclaimers, and evasiveness |
+| It showed a stance, so it has its own consciousness and values | These attitudes are mainly behavior shaped by training and product instructions; whether it has anything like human beliefs is unsettled, and in any case can't be inferred from them |
 
 ## Summary
 
-- **Pre-training, fine-tuning, and alignment** describe developing broad capabilities, adapting to tasks, and matching human intentions. They overlap, and there is more than one training recipe.
-- A **base model** primarily learns text continuation and may answer questions or perform other tasks. Reliable instruction-following is not guaranteed; later training can improve it.
-- **Alignment** is a goal; methods include human feedback (RLHF), AI feedback (RLAIF), and preference optimization (such as DPO), and reasoning models also use reinforcement learning on tasks with checkable answers. Alignment makes it safer and more honest, but only lowers the risk, doesn't remove it; it also brings **side effects** like over-politeness, overuse of disclaimers, and a habit of dodging.
-- The thing most worth thinking through: its "attitude / stance" is first of all **behavior shaped by training and product instructions**, and you can't conclude from it that it has consciousness or convictions. Its "personality" changes across versions precisely because it was tuned.
-- Even after alignment, verify important facts (Chapter 9). Fine-tuning and RAG serve different purposes; for current private material with traceable sources, usually consider RAG first, possibly combined with fine-tuning (Chapter 20).
+- Pre-training, fine-tuning, and alignment correspond to learning basic abilities, adapting to tasks, and making behavior match what people intend. They overlap, and there's more than one training route.
+- Pre-training takes the most resources: DeepSeek-V3's pre-training read 14.8 trillion tokens, and its post-training used less than 1% of that compute.
+- A base model mainly learns to continue text. It may answer questions correctly, but isn't guaranteed to follow instructions reliably; later training makes it better at doing as told.
+- Alignment is a goal, pursued with RLHF, RLAIF, preference optimization (such as DPO), and more; reasoning models also get reinforcement learning on tasks with checkable answers. Alignment lowers risk without removing it, and brings side effects like over-politeness, piles of disclaimers, and evasiveness, which clear prompts can ease.
+- Its "attitudes" and "stances" are first of all behavior shaped by training and product instructions, not evidence of consciousness or convictions; its "personality" changes between versions precisely because it was tuned.
 
-In the next chapter we move from "how it was taught" to "what you can adjust when you use it" — the two knobs most worth knowing: temperature and reasoning effort.
+The next chapter moves from "how it was taught" to "what you can adjust when using it": the two dials of temperature and reasoning effort.
 
 ## Sources and verification
 
-- Ouyang et al., *Training language models to follow instructions with human feedback* (InstructGPT, 2022): [arXiv paper page](https://arxiv.org/abs/2203.02155). Supervised fine-tuning on human-written demonstrations, followed by reinforcement learning from human rankings of answers.
+- Ouyang et al., *Training language models to follow instructions with human feedback* (InstructGPT, 2022): [arXiv paper page](https://arxiv.org/abs/2203.02155). Supervised fine-tuning on human-written demonstrations first, then reinforcement learning from human rankings of answers.
 - Bai et al., *Constitutional AI: Harmlessness from AI Feedback* (2022): [arXiv paper page](https://arxiv.org/abs/2212.08073). Replaces part of the human labeling with a written set of principles and AI comparisons, which the paper calls RLAIF.
-- DeepSeek-AI, *DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning* (2025): [arXiv paper page](https://arxiv.org/abs/2501.12948). Uses reinforcement learning on tasks with checkable answers, such as math and coding, to build reasoning ability.
+- DeepSeek-AI, *DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning* (2025): [arXiv paper page](https://arxiv.org/abs/2501.12948). Uses reinforcement learning on tasks with checkable answers, such as math and programming, to improve reasoning.
+- DeepSeek-AI, *DeepSeek-V3 Technical Report* (2024): [arXiv paper page](https://arxiv.org/abs/2412.19437). The abstract says pre-training used 14.8 trillion tokens and full training took 2.788M H800 GPU hours; Table 1 lists 2,664K GPU hours for pre-training and 5K for post-training at $2 per GPU hour, noting that prior research and ablation experiments are excluded.
 
-Sources checked 2026-10-27.
+Sources checked: the first three on 2026-10-27, the fourth on 2026-10-28.
 
 ---
 

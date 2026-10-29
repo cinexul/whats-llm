@@ -22,6 +22,7 @@ function toPlain(md: string): string {
 	return md
 		.replace(/```[\s\S]*?```/g, ' ') // コードブロック
 		.replace(/`([^`]+)`/g, '$1')
+		.replace(/<\/?aside\b[^>]*>/g, ' ') // おまけ囲みのタグ
 		.replace(/^>\s?/gm, '')
 		.replace(/^#{1,6}\s+/gm, '')
 		.replace(/^\s*[-*]\s+/gm, '')

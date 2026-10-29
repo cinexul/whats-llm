@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" font-family="'Hiragino Sans','Yu Gothic','Meiryo','Noto Sans CJK JP','IPAGothic',sans-serif">
+  <title>意味の地図の模式図：意味の近い語は近くに並ぶ</title>
+  <rect x="1" y="1" width="718" height="418" rx="12" fill="#faf9f5" stroke="#e5e1d8"/>
+
+  <!-- clusters -->
+  <ellipse cx="170" cy="160" rx="110" ry="70" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+  <ellipse cx="555" cy="160" rx="110" ry="70" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <ellipse cx="360" cy="318" rx="120" ry="56" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+
+  <text x="170" y="76" text-anchor="middle" font-size="16" fill="#5f7f3a" font-weight="bold">動物</text>
+  <text x="555" y="76" text-anchor="middle" font-size="16" fill="#b08a2e" font-weight="bold">果物</text>
+  <text x="360" y="250" text-anchor="middle" font-size="16" fill="#3d6a8a" font-weight="bold">感情</text>
+
+  <!-- distance lines -->
+  <line x1="115" y1="150" x2="195" y2="130" stroke="#aa563d" stroke-width="2" stroke-dasharray="5 4"/>
+  <line x1="195" y1="130" x2="512" y2="150" stroke="#aa563d" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="354" y="126" text-anchor="middle" font-size="15" fill="#aa563d">距離が遠い＝意味も遠い</text>
+  <text x="160" y="176" text-anchor="middle" font-size="15" fill="#aa563d">距離が近い＝意味も近い</text>
+
+  <!-- animals -->
+  <circle cx="115" cy="150" r="5" fill="#5f7f3a"/>
+  <text x="105" y="156" text-anchor="end" font-size="17" fill="#191919">猫</text>
+  <circle cx="195" cy="130" r="5" fill="#5f7f3a"/>
+  <text x="195" y="116" text-anchor="middle" font-size="17" fill="#191919">犬</text>
+  <circle cx="130" cy="204" r="5" fill="#5f7f3a"/>
+  <text x="140" y="210" font-size="17" fill="#191919">ウサギ</text>
+
+  <!-- fruits -->
+  <circle cx="512" cy="150" r="5" fill="#b08a2e"/>
+  <text x="522" y="156" font-size="17" fill="#191919">リンゴ</text>
+  <circle cx="562" cy="122" r="5" fill="#b08a2e"/>
+  <text x="572" y="128" font-size="17" fill="#191919">バナナ</text>
+  <circle cx="560" cy="194" r="5" fill="#b08a2e"/>
+  <text x="570" y="200" font-size="17" fill="#191919">ブドウ</text>
+
+  <!-- feelings -->
+  <circle cx="300" cy="306" r="5" fill="#3d6a8a"/>
+  <text x="310" y="312" font-size="17" fill="#191919">うれしい</text>
+  <circle cx="392" cy="298" r="5" fill="#3d6a8a"/>
+  <text x="402" y="304" font-size="17" fill="#191919">悲しい</text>
+  <circle cx="350" cy="342" r="5" fill="#3d6a8a"/>
+  <text x="360" y="348" font-size="17" fill="#191919">怒り</text>
+
+  <text x="360" y="402" text-anchor="middle" font-size="14" fill="#56544b">模式図：実際のembeddingは数百〜数千次元。ここでは2次元に押しつぶしています</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" role="img" font-family="'Hiragino Sans','Yu Gothic','Meiryo','Noto Sans CJK JP','IPAGothic',sans-serif">
+  <title>注意の模式図：同じ「それ」が、二つの文で別の名詞につながる</title>
+  <rect x="1" y="1" width="718" height="428" rx="12" fill="#faf9f5" stroke="#e5e1d8"/>
+  <path d="M 520 128 Q 362 -41 200 128" fill="none" stroke="#aa563d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 520 128 Q 463 65 403 128" fill="none" stroke="#aa563d" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 520 128 Q 323 -72 122 128" fill="none" stroke="#aa563d" stroke-width="7" stroke-linecap="round"/>
+  <text x="73" y="150" text-anchor="middle" font-size="16" fill="#56544b">太郎が</text>
+  <rect x="106" y="128" width="32" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="122" y="150" text-anchor="middle" font-size="16" fill="#191919">本</text>
+  <text x="153" y="150" text-anchor="middle" font-size="16" fill="#56544b">を</text>
+  <rect x="167" y="128" width="65" height="30" rx="6" fill="#ffffff" stroke="#56544b" stroke-width="1.5"/>
+  <text x="200" y="150" text-anchor="middle" font-size="16" fill="#191919">図書館</text>
+  <text x="306" y="150" text-anchor="middle" font-size="16" fill="#56544b">に返した。なぜなら</text>
+  <rect x="379" y="128" width="47" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="403" y="150" text-anchor="middle" font-size="16" fill="#191919">それ</text>
+  <text x="455" y="150" text-anchor="middle" font-size="16" fill="#56544b">がもう</text>
+  <rect x="483" y="128" width="82" height="30" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="524" y="150" text-anchor="middle" font-size="16" fill="#191919">期限切れ</text>
+  <text x="623" y="150" text-anchor="middle" font-size="16" fill="#56544b">だったからだ。</text>
+  <text x="360" y="188" text-anchor="middle" font-size="15" fill="#3d6a8a">「期限切れ」で振り返ると「本」への注意がいちばん大きい：この「それ」は本</text>
+  <path d="M 558 308 Q 352 108 142 308" fill="none" stroke="#aa563d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 558 308 Q 492 235 422 308" fill="none" stroke="#aa563d" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 558 308 Q 390 130 219 308" fill="none" stroke="#aa563d" stroke-width="7" stroke-linecap="round"/>
+  <text x="93" y="330" text-anchor="middle" font-size="16" fill="#56544b">太郎が</text>
+  <rect x="126" y="308" width="32" height="30" rx="6" fill="#ffffff" stroke="#56544b" stroke-width="1.5"/>
+  <text x="142" y="330" text-anchor="middle" font-size="16" fill="#191919">本</text>
+  <text x="172" y="330" text-anchor="middle" font-size="16" fill="#56544b">を</text>
+  <rect x="187" y="308" width="65" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="219" y="330" text-anchor="middle" font-size="16" fill="#191919">図書館</text>
+  <text x="325" y="330" text-anchor="middle" font-size="16" fill="#56544b">に返した。なぜなら</text>
+  <rect x="399" y="308" width="47" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="422" y="330" text-anchor="middle" font-size="16" fill="#191919">それ</text>
+  <text x="489" y="330" text-anchor="middle" font-size="16" fill="#56544b">がもうすぐ</text>
+  <rect x="532" y="308" width="59" height="30" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="562" y="330" text-anchor="middle" font-size="16" fill="#191919">閉まる</text>
+  <text x="626" y="330" text-anchor="middle" font-size="16" fill="#56544b">からだ。</text>
+  <text x="360" y="368" text-anchor="middle" font-size="15" fill="#3d6a8a">「閉まる」で振り返ると「図書館」への注意がいちばん大きい：この「それ」は図書館</text>
+  <text x="360" y="412" text-anchor="middle" font-size="14" fill="#56544b">線が太いほど注意が大きい（模式図で、実測値ではありません）</text>
+</svg>

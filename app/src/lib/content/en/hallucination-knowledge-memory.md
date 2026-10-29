@@ -1,107 +1,94 @@
-It can write poems, fix code, and boil a long article down to its main points. But you've surely also run into two deflating things: it **states errors with a straight face** — citing a paper that doesn't exist at all, quoting an "expert" who can't be found anywhere, making up numbers that sound utterly convincing; and it **doesn't remember you** — losing the thread in a fresh conversation today about something you told it only yesterday.
+It can write poems, fix code, and summarize a long article neatly, yet you've probably run into two letdowns. One: it gets things wrong with total seriousness, citing a paper that doesn't exist, naming an "expert" nobody can find, making up numbers that look perfectly real. Two: it doesn't remember you. Something you told it yesterday means nothing to it today when you start a new conversation.
 
-Both have to do with how it works; it isn't being "lazy." This chapter works through both at once: **hallucination** (why it gets things wrong), and **knowledge vs. memory** (what sticks and what's forgotten the moment you turn away). Understand this chapter and you'll have a feel for how much to trust it and where to put things. It's also the chapter in the whole book most about not stepping on landmines.
+Both come from how it works; it isn't "slacking." This chapter covers three things: why it gets things wrong (hallucination), how to catch the mistakes (checking), and what it keeps versus what's gone in a blink (knowledge and memory). Whenever other chapters of this book say "check it," they mean the methods in this chapter.
 
 ## 1. Hallucination: stating things that don't exist as if they were real
 
-**Hallucination** means the model states **nonexistent or wrong** content in a **convincing** way. The trouble isn't that it can be wrong; everyone is wrong sometimes. The trouble is that wrong content often comes out just as fluent and assured as right content, so you can't tell them apart from the wording alone.
+**Hallucination** is when the model states things that don't exist, or are wrong, as if they were true. Making mistakes isn't the surprising part; everyone does. The trouble is that wrong content often reads just as smoothly and confidently as right content, so you can't tell them apart by the wording.
 
-Why does this happen? There are two sides to it.
+Why does this happen? There are two reasons.
 
-**First, generation itself doesn't check what's true.** The model's job is to produce a plausible continuation of what came before (Chapter 4), and it has no "fact database" to check each claim against. When its knowledge falls short, it can say "I'm not sure," and sometimes it does. But it can also follow the momentum of language and produce the answer that reads most plausibly. A fake paper comes out so convincing (a plausible title, authors, journal) precisely because it has seen what thousands of real papers look like. It isn't lying (lying requires knowing the truth first); it's carrying on even when it isn't sure.
+First, it doesn't check whether things are true while it writes. What the model does is produce a plausible continuation of what came before (Chapter 4); it has no "fact database" to check each claim against. When its knowledge runs out it can say "I'm not sure," and sometimes it really does. But it may also just keep going and land on whatever answer reads most naturally. A fake paper can look real, with a title, authors, and a journal all in place, precisely because the model has seen what thousands of real papers look like. It isn't lying (to lie you have to know the truth first); it just keeps talking when it isn't sure.
 
-**Second, training and evaluation often reward guessing.** In September 2025, researchers at OpenAI pointed out in the paper "Why Language Models Hallucinate" that many evaluations score only right or wrong, so answering "I don't know" earns zero, the same as a wrong answer. It's like a multiple-choice test with no penalty for wrong answers: a guess always beats a blank. A model optimized against such scoring learns to "give some answer even when unsure." The researchers propose changing evaluations to penalize wrong answers, so that appropriately expressing uncertainty no longer costs points.
+Second, training and evaluation often encourage guessing. In September 2025, OpenAI researchers pointed out, in the paper "Why Language Models Hallucinate" and an accompanying article, that many evaluations only score right or wrong, so answering "I don't know" gets zero, the same as a wrong answer. It's like a multiple-choice test that doesn't take points off for wrong answers: a guess always beats a blank. A model tuned against that standard easily learns to "give some answer even when unsure." They suggest that evaluations take off more for wrong answers than for saying "not sure," so that being honest about uncertainty no longer costs anything.
 
-So can the "confidence" it shows serve as a guide? A little, but never as proof. How sure a model sounds is somewhat related to how likely it is to be right: where it says outright that it isn't sure, it often really is more likely to be wrong, and that's worth taking seriously. The reverse doesn't hold, though: sounding certain and fluent doesn't prove it's right.
+So can you go by how confident it seems? A little, but not as evidence. How sure the model is does have some link to how likely it is to be right: where it clearly says "I'm not sure," it often is more likely to be wrong, so take that seriously. The reverse doesn't hold, though: sounding certain and smooth doesn't prove it's right.
 
-Once you understand the causes, the countermeasures follow naturally. These three are often used together: the first two reduce the chances of error, and the last is the backstop.
+## 2. How to check: a method you can follow
 
-| Countermeasure | How to do it | What it's good for |
-| --- | --- | --- |
-| **Give it material** | Paste in reliable material and have it "answer based **only** on this," saying so if the material doesn't cover it | Shrinks the room for making things up at the source |
-| **Ask for its basis, and allow "I don't know"** | Have it list sources and explain what its claim rests on; tell it plainly, "if you're not sure, say so" | No basis, or a dubious one, is a warning sign |
-| **Double-check it yourself** | Check key facts (numbers, quotes, names, dates, legal or medical conclusions) against reliable sources | The last line of defense; the other two can't replace it |
+Not every sentence needs checking. For brainstorming, rewording, or title ideas, if it looks right, that's fine. But mistakes in the following are costly, so check them one by one: numbers and amounts, dates, names of people and organizations, quotations and citations, links, legal, medical, and financial conclusions, "recent events," and any code or formulas you'll actually run.
 
-> **Key point:** Fluency and confidence only show that it carries on smoothly; they don't prove the content is true. When it volunteers that it's unsure, take that seriously; when it sounds certain, still check the facts that matter. The more important something is, and the more readily it reels off specifics (numbers, sources, names, dates), the more you should verify them yourself. "Give it material and have it answer from that material" is exactly the core idea behind RAG (Chapter 20): rather than betting it remembers right, put the right material in front of it.
+Checking takes four steps:
 
-## 2. Knowledge vs. memory: one table to tell apart "sticks" and "forgotten in a blink"
+1. Make it harder for it to make things up. Paste in reliable material, ask it to answer only from that material and to say "it's not in the material" when something isn't there, and tell it plainly: "If you're not sure, say so." This cuts down on mistakes, but it doesn't replace the steps that follow.
+2. Make it show where things come from. Ask for each key claim to name which document and which sentence it comes from, or to give a link you can open. Anywhere it can't say, or is vague about it, is where to look hardest.
+3. Go to the source yourself. Open the link and confirm the page exists and actually says that; don't go by the title. Compare quotations word for word, and take numbers back to the original table or report. For papers and books, search the title in a scholarly search engine or on the publisher's site, and if there's a DOI number, enter it at doi.org and see whether it opens. The "source" it gave may itself be made up.
+4. Check against one more independent source: an official website, the original document, a trusted reference work. Redo anything numerical with a calculator or spreadsheet, and actually run code and its tests (Chapter 25). Asking the same AI again in different words doesn't count, because made-up content can come out the same every time. Having another AI look for errors can point out things that seem off, but you still need to confirm them at the source.
 
-What's in its head is actually of **two kinds**, with completely different temperaments. Confusing the two is where beginners most often trip.
+For important conclusions, jot down the source and the date you checked. Next time you use it, or when someone asks, you can say where it came from. The idea behind step 1 is "put the right material in front of it rather than bet on its memory," and that's also the basic idea behind RAG (Chapter 20).
 
-- **Knowledge**: the common sense and facts **learned into its parameters** during training. It answers without hesitation and doesn't depend on the material you give this time. Ask it for the boiling point of water, or whether the Tang dynasty came before or after the Song, and it answers straight off.
-- **Memory in context**: temporary information available in **the context of the current request** (the “table” from Chapter 3). The model can use your name or preferences when that information is retained or supplied again. **Closing the window does not delete the chat history**: the product may save it and supply selected parts when you continue. Product-layer long-term memory is explained below.
+## 3. Knowledge vs. memory: one table to tell "sticks" from "forgotten in a blink"
+
+What it "knows" actually comes in two kinds that work completely differently. The most common beginner mistake is treating them as the same thing.
+
+- **Knowledge**: common sense and facts learned into its parameters during training. It can answer without any material from you; ask "the boiling point of water" or "did the Tang dynasty come before or after the Song," and it answers right away.
+- **Memory in context**: temporary information it can use within this request's context, the "table" from Chapter 3. A name or preference you told it can be used only if it's still on the table or gets put back there. Closing a window doesn't necessarily delete the chat history: a product may keep it and put part of it back when you carry on.
 
 Side by side:
 
-| | Knowledge | Memory |
+| | Knowledge | Memory in context |
 | --- | --- | --- |
-| Stored where | **Learned into the parameters** (in training) | Only in **this conversation's context** |
-| Comes from | Huge amounts of training text | What you fed in this conversation |
-| Lasts how long | Long-term (but has a "cutoff," see below) | Available only when included in the current context; history retention depends on the product |
-| Answers without prompting | Yes, doesn't need material from you | No, depends entirely on what's laid on the table this time |
-| Typical example | "Paris is the capital of France" | "I just said I'm allergic to peanuts" |
+| Where it lives | Learned into the parameters (during training) | Only in this request's context |
+| Where it comes from | Huge amounts of training text | What you put into this conversation, or what the product put in for you |
+| How long it lasts | Always there, but has a cutoff date (see below) | Unusable unless it's in this request's context; whether history is saved is up to the product |
+| Can it answer without material? | Yes | No, it depends on what's on the table this time |
+| Typical example | "Paris is the capital of France" | "I just told you I'm allergic to peanuts" |
 
-Knowledge has one hard limit you can't get around: the **knowledge cutoff**. The model's training data has a "deadline." The model **doesn't know on its own** about anything that happened, any new version that came out, or any new term that appeared **only after this point in time**. Push it to answer and it may say it doesn't know, or it may make something up.
+Knowledge has a limit you can't get around, called the **knowledge cutoff**: the training data has a last date, and the model itself doesn't know about events, new versions, or new terms that came after it. Ask anyway, and it may say it doesn't know, or it may make something up. For example, as of October 2026, Anthropic lists the reliable knowledge cutoff of Claude Opus 5.5 as June 2026, so it knows very little on its own about anything after that. When you ask "what happened recently," don't trust an answer it gives without looking anything up: either have it search the web (Chapter 19, and check what it finds using the steps in the previous section) or paste in up-to-date material.
 
-> **Key point:** Each model's knowledge cutoff differs and shifts with versions, so this book doesn't pin it down — refer to the provider's official documentation. You just need to remember the intuition: **for anything that happened recently, by default don't trust the answer it reels off.** Either have it search the web (Chapter 19, and verify even what it finds) or paste the latest material in for it to read. Its "knowledge" is a snapshot of one moment, and it won't update on its own.
+## 4. The misconception most worth clearing up: does it remember you long-term like a person?
 
-## 3. The misconception most worth clearing up: does it remember you long-term like a person?
+After chatting with it for a while, it's natural to feel it "knows" you. But as Chapter 3 said, the model itself has no memory across conversations. When you start a new conversation, unless the product brings in history, memory, or custom instructions, the model doesn't know what you said before. And when one conversation runs long and gets close to the context limit, the product may summarize, cut some of it, pull in only the relevant pieces, or just refuse, so earlier details can get lost (Chapter 3). The model itself simply has no place to keep anything from one conversation to the next.
 
-This is the most important point worth sorting out in the chapter, and in the whole book. It picks up from that line in Chapter 3 and goes deeper.
+You might ask right away: then what about the "projects" and "memory" features in products? I've definitely seen it remember my preferences and a whole project.
 
-After talking with it for a long time, it's hard not to feel it "knows" you. But remember the conclusion from Chapter 3: **the model itself has no cross-conversation memory.** In a fresh conversation, **unless the product supplies history, memory, or custom instructions**, the model does not automatically know what you said before. Within one conversation, if it runs so long that it nears the context limit, the product may summarize, trim, retrieve only the relevant pieces, or refuse an oversized request, and earlier details can get lost along the way (see Chapter 3). It isn't forgetful — **the model itself simply has no place to store things across conversations.**
+The answer is that these features are built in the product layer, outside the model. As of October 2026, many products, including Claude and ChatGPT, have project and memory features, and there are also project instruction files for coding tools (such as CLAUDE.md; see Chapter 28), account personalization settings, internal company knowledge bases, and so on. They all do the same thing: during a conversation, they put the relevant information back into this request's context. Underneath, it's still "a model with no memory, plus context put back in each time." Some products automatically pick out things to remember from your chats, possibly by default; exactly what each one remembers, for how long, whether it's on by default, and whether you can delete it vary and change quickly, so check each product's official description (Chapter 13 covers managing it, and Chapter 37 the privacy side).
 
-But you'll immediately ask back: **then what about products' "project" and "memory" features? I've clearly seen it "remember" my preferences, remember a whole project!** This is the key thing that has to be made clear.
-
-> **The model itself really has no cross-conversation memory; but many products provide a "memory" capability at the "product layer" outside the model.** As of October 2026, Claude, ChatGPT, and many other products offer project and memory features; there are also project instruction files in coding tools (such as CLAUDE.md; how they're loaded is described in the official docs), personalization settings in your account, company knowledge bases, and so on. But this **isn't the model itself growing a memory; it's the product layer putting the relevant information back into the current context during the conversation.** So these features being there isn't a contradiction: lift the lid and underneath it's still a memory-less model plus context re-fed each time (exactly that "table" from Chapter 3). Some products automatically extract things to remember from your chats, and this may be on by default; for exactly how each company remembers, how long, whether it's on or off by default, and whether it can be deleted, refer to the provider's official documentation (Chapters 10 and 13).
-
-Telling these two layers apart beats memorizing any one product's usage:
-
-| | The model itself | The product layer's "memory" |
+| | The model itself | Product-layer "memory" |
 | --- | --- | --- |
-| What it is | The core that only picks words by probability | A layer of features the product adds outside the model |
-| Does it remember you | **Does not store past conversations itself**; uses the information supplied for this request | Stores "what should be remembered" for you |
-| How it's done | (nothing) | **During the conversation, puts this information back into the current context** (back to that table again) |
-| The limit of what it "remembers" | (nothing) | Always only **the part the product decides to put back on the table**; whatever isn't put back, it still doesn't know |
+| What it is | The core that continues text by probability | A layer of features the product adds outside the model |
+| Does it remember you? | Doesn't save past conversations itself; sees only what this request provides | Stores "what should be remembered" for you |
+| How | — | Puts that information back into this request's context during the conversation |
+| Limits of what it "remembers" | — | Only the part the product decides to put back on the table; anything not put back, it still doesn't know |
 
-> **Key point:** Once you understand "**no memory underneath, the upper layer re-feeds it**," you can predict how these features behave: what it can "remember" is always the part the product puts back into context for you; what you assume it should remember but the product didn't put back, it just doesn't know. This also explains why it sometimes "inexplicably forgot" a preference you set — most likely that piece of information wasn't put back on the table this time. This may reflect retrieval, settings, or context selection, but it could also be a fault; forgetting alone does not establish the cause.
-
-## 4. Tying off the earlier "misconceptions"
-
-This chapter has two misconceptions that echo each other, clearest placed side by side:
-
-- **"The more confident it is, the more reliable."** Wrong. How sure it sounds is only somewhat related to being right, and fluency and confidence aren't evidence; the more important and the more readily it answers off the cuff, the more you should verify it yourself.
-- **"It remembers me long-term like a person."** Wrong. The model itself has no cross-conversation memory; the "remembering" you see is the product layer putting information back into context, not the model itself remembering.
-
-These two things are really **two sides of the same underlying fact**: it has no "truth database" and no "long-term memory store." All it has is the knowledge learned into its parameters during training (with a cutoff) plus the context laid on the table this time. Lock this in, and its getting things wrong and its forgetting both stop being strange.
+Keep these two layers apart and you can guess how these features will behave. What it "remembers" is always the part the product put back into the context. When it suddenly "forgets" a preference you set, that piece of information most likely wasn't put back on the table this time; the cause may be in the product's search, settings, or choice of context, or it may be a bug, and "it forgot" alone doesn't tell you which.
 
 ## 5. Common misconceptions, cleared up
 
-| Common misconception | Reality |
+| Misconception | Reality |
 | --- | --- |
 | The more fluent and confident it sounds, the more reliable | Fluency and confidence aren't evidence; take "I'm not sure" seriously, and check important facts even when it sounds certain |
-| It never admits it doesn't know | It can say "I'm not sure," and explicitly allowing it to often helps; but you can't count on it noticing every time it's unsure |
-| Its "errors" are occasional lapses, and a reminder fixes them | Hallucination is tied to how generation works and to training and evaluation that reward guessing; guard against it by giving material, asking for its basis, and double-checking |
-| It knows what just happened | Knowledge has a **cutoff**; it doesn't know what came after on its own, and pushing it can lead to made-up answers; have it search the web or feed it material (refer to the provider's official documentation) |
-| What you told it this time, it'll remember forever | That is memory in context; using it again depends on whether the product retains and supplies the relevant information |
-| A "memory" feature means the model itself remembered me | It's the **product layer** putting information back into context, not the model itself remembering; refer to the provider's official documentation for specifics |
+| It never admits it doesn't know | It can say "I'm not sure," and telling it that's allowed often helps; but you can't count on it noticing its uncertainty every time |
+| Getting things wrong is an occasional lapse; a reminder fixes it | Hallucination is tied to how it generates text and to training and evaluation that reward guessing; prevent it by supplying material, asking where things come from, and checking at the source |
+| If the same question gets the same answer every time, it's right | Made-up content can also come out the same every time; check against an independent source |
+| It knows about recent events | Its knowledge has a cutoff; it doesn't know what came after and may make things up if you ask anyway; have it search the web or give it material |
+| A "memory" feature means the model itself remembers me | The product layer puts information back into the context; the model itself doesn't remember |
 
 ## Summary
 
-- **Hallucination**: stating nonexistent/wrong things as if they were real. Causes include generation itself not checking truth (Chapter 4) and training and evaluation that often reward guessing over admitting uncertainty. Countermeasures: give it material so it "answers based only on the material" (leading to RAG in Chapter 20), ask for its basis and allow "I don't know," and double-check key facts yourself.
-- How sure it sounds is somewhat related to being right, and "I'm not sure" is a signal worth heeding; but fluency and confidence by themselves are never evidence.
-- **Knowledge vs. memory**: knowledge is **learned into the parameters** and comes without prompting, but has a **knowledge cutoff**; memory in context is limited to **the information visible in this request**; the product manages stored chat history. When a long conversation nears the limit, the product may summarize, trim, or retrieve, and details can get lost (Chapter 3).
-- The model itself has **no cross-conversation memory**; the project and memory features, coding tools' project instruction files, account preferences, company knowledge bases, and so on that you see are **the product layer putting information back into context**, not the model itself remembering. Refer to the provider's official documentation.
-- One line to wrap it up: it has neither a "truth store" nor a "long-term memory store," only **knowledge in its parameters (with a cutoff) plus the context on the table this time**. Its getting things wrong and its forgetting both tie back to this.
+- Hallucination means stating things that don't exist, or are wrong, as if they were real. One cause is that it doesn't check truth while generating (Chapter 4); the other is that training and evaluation often reward guessing rather than admitting uncertainty. Take "I'm not sure" seriously, but fluency and confidence are never evidence in themselves.
+- The four steps of checking: give it material so it makes less up, make it show where things come from, go to the source yourself, and check against one more independent source. Numbers, dates, names, quotations, links, professional conclusions, and recent events need it most.
+- Knowledge is learned into the parameters and needs no material from you, but has a knowledge cutoff; memory in context is limited to what this request can see, and whether chat history is kept is up to the product.
+- The model itself has no memory across conversations. Projects, memory features, project instruction files, account preferences, and company knowledge bases are the product layer putting information back into the context.
+- In short, it has neither a "truth database" nor a "long-term memory store," only knowledge in its parameters (with a cutoff) and the context on the table this time. Both its mistakes and its forgetting come from this.
 
-That's the end of Part One. You've built the intuition for "what the model is and how it runs." From the next part, we turn to **how to use it well**: from your first serious conversation to the prompting skill of saying "what I want" clearly.
+That's the end of Part One: you now have a rough feel for what the model is and how it works. The next part is about using it well, from your first serious conversation to using prompts to make clear what you want.
 
 ## Sources and verification
 
-- Kalai, Nachum, Vempala, and Zhang, *Why Language Models Hallucinate* (September 2025): [arXiv paper page](https://arxiv.org/abs/2509.04664). The paper argues that training and evaluation procedures tend to reward guessing over acknowledging uncertainty; under right-or-wrong scoring, "I don't know" earns no credit. OpenAI published an accompanying article, ["Why language models hallucinate"](https://openai.com/index/why-language-models-hallucinate/), at the same time.
-- [Claude Help Center: chat search and memory](https://support.claude.com/en/articles/11817273): an example of product-layer memory, explaining that memory is saved automatically as you chat, is on by default for some plans, and how to view and delete it.
-
-Sources checked 2026-10-27.
+- Kalai, Nachum, Vempala, and Zhang, *Why Language Models Hallucinate* (September 2025): [arXiv paper page](https://arxiv.org/abs/2509.04664). The paper argues that training and evaluation procedures tend to reward guessing over acknowledging uncertainty. OpenAI's accompanying article, ["Why language models hallucinate"](https://openai.com/index/why-language-models-hallucinate/), explains that accuracy-only scoring encourages models to guess rather than say "I don't know," and suggests penalizing confident errors more than expressions of uncertainty. Source checked 2026-10-29.
+- [Claude Help Center: chat search and memory](https://support.claude.com/en/articles/11817273): an example of product-layer memory, explaining that memory is saved automatically from chats, is on by default on the Free, Pro, and Max plans, and how to view and delete it. Source checked 2026-10-29.
+- [Anthropic: models overview](https://platform.claude.com/docs/en/about-claude/models/overview): the comparison table lists Claude Opus 5.5's reliable knowledge cutoff as June 2026. Source checked 2026-10-29.
 
 ---
 

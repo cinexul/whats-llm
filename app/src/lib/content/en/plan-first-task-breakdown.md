@@ -1,122 +1,115 @@
-〔Wherever this chapter touches a specific product's name for the "plan" feature, its toggle, commands, or interface, those change with each version, so always **refer to the provider's official documentation**. This chapter only covers the **shared, stable** way of working, and that part won't go out of date.〕
+The last two chapters covered how to sign off after it acts (Chapter 25) and how to keep it under control while it acts (Chapter 26). This chapter steps back to the moment before it acts, and to the single cheapest habit in the whole workflow: instead of letting it dive straight into edits, have it explain how it intends to make the change, and let it act only once you've approved. Alongside that comes a companion habit: breaking big tasks into small ones.
 
-The previous two chapters solved "how to sign off after it acts" (Chapter 25) and "how to keep it from losing control while it acts" (Chapter 26). This chapter steps back one more, to the thing most worth doing and most labor-saving **before it acts**: **don't let it barrel in and start changing things; first have it "say clearly how it intends to change them," and once you've signed off, then let it act.**
+## 1. Why "see the plan first" saves so much: stopping mistakes before it acts
 
-This sounds like a redundant extra step: "I already worked out what I want it to do, and now I have to make it explain first?" Quite the opposite. **This half-minute of "see the plan first" is the highest-return step in the whole workflow**, and it blocks most of the "went off track and didn't notice for half an hour" rework. Let's talk through why, and the partner principle of "breaking the task small."
+It may misunderstand what you meant, or pick a poor approach. If it acts straight away, you discover the misunderstanding only when you read the diff after it has changed a pile of files, and all of those changes have to be thrown out: its work is wasted, you've waited for nothing, and the context is cluttered with discarded drafts (Chapter 13 showed how longer conversations get muddled). If it explains the plan first ("I'll change these files, add this, in these steps"), you can see at a glance that it has things backwards and fix it with one sentence, before a single line of code is written.
 
-## 1. Why "see the plan first" saves so much: blocking mistakes before acting
+Either way you discover the same wrong turn, but before it acts the cost is one sentence; after it acts, the cost is redoing a pile of changes. As Chapter 14 put it, the earlier you align on direction, the less rework you have.
 
-Recall the iron rule we keep repeating: **it makes mistakes.** It might **misread your meaning**, and it might **pick a bad approach.** The problem is:
-
-If it **acts directly**, and you only notice "it misunderstood" when you read the diff after it's changed a whole pile of files, then that whole pile of changes **has to be thrown out and redone.** It worked for nothing, you waited for nothing, and the context is stuffed with this pile of scrap (Chapter 13 covered how it gets dumber the longer you chat).
-
-But if it **lays out the plan first**, "I plan to change these files, add this thing, in these steps," you see right away "wait, you've got it backward," and **one sentence corrects it, with not a single line of code written yet.**
-
-That's the key difference:
-
-> **Key point:** **Seeing the plan first moves "the mistake it might make" forward, from "after it's changed things" to "before it acts."** For the same off-track moment, **catching it before acting costs one sentence; catching it after acting costs throwing out a pile of changes and redoing them.** This is exactly what Chapter 14, "keeping the AI moving the task forward," kept stressing: **the earlier you align on direction, the more rework you save.** Half a minute of planning buys you half an hour you won't waste.
-
-A comparison: it's like looking at the **blueprint** before a renovation. Before the crew actually knocks down walls and lays pipes, they run the blueprint by you, "we'll change the living room like this, move the kitchen here," and your one sentence on the blueprint, "the gas line in the kitchen can't move," saves untold trouble compared to shouting stop after they've already torn the pipes out. **The plan is that blueprint it shows you before acting.**
+It's like looking at the blueprints before a renovation. If the builders show you the drawings before knocking down walls, one remark ("don't touch the gas pipe in the kitchen") saves far more trouble than shouting stop after the pipe is out. The plan is the blueprint it shows you before it starts.
 
 ## 2. "Plan first, execute later": many tools have this built in
 
-The good news: this is so important that **many coding agents have built it in directly as a feature**, where you can put it in a state of "**only plan, don't act yet**": it'll investigate, write the approach out for you, **but stop there and not touch your files**, starting to execute only once you approve.
+As of October 2026, both Claude Code and Codex have a built-in plan mode, entered by typing `/plan` in a session (in Claude Code you can also switch to it with Shift+Tab). In this mode it investigates and writes up its approach for you, but doesn't change your files; it starts only after you approve. Mode names and switches may change; Chapters 28 and 29 show the current usage.
 
-Different tools have **different names for this feature and different ways to toggle it** (some call it a "plan mode" or the like; **for the exact name and how to turn it on, refer to the official documentation**). But they're all after the same thing: **splitting "make a plan" and "actually act" into two stages, with a "human approves" gate wedged between them**, which is exactly "gate 1" in that diagram from Chapter 24.
+With tools that don't have such a mode, one sentence does the same job:
 
-Even if the tool you're using has no ready-made "mode" like this, you can **implement it manually anytime with one sentence.** Say something like this to it:
+> "Don't change any files yet. Just give me a plan: which files you intend to change, what you'll add, and how many steps. Start only after I confirm."
 
-> *"Don't edit any files yet, just give me a plan: which files you plan to change, what to add, in how many steps. Start only after I confirm."*
+That's something you say to the AI, not a fixed command in any product. As long as "plan first, don't act yet" comes across, it works.
 
-The essence of this sentence is to **explicitly halt "acting" and ask only for "the approach."** Note that this is **something you say to the AI, not some product's fixed command**; get the meaning of "plan first, don't act" across in plain words and that's enough.
-
-> **Common misconception / Reality:** Some people think "having it plan first is a waste of time, better to just let it work and deal with mistakes as they come." **In reality, 'deal with mistakes as they come' is the most wasteful road**, especially when the change is big and you simply can't sign off line by line (Chapter 25); the mistake hides where you can't see it. **Spending half a minute on the blueprint first beats tearing it out and relaying afterward by a mile.** "Plan first, execute later" isn't dawdling — it's the shortcut.
+Some people think asking for a plan wastes time and it's better to let it get on with it and fix mistakes later. But once a change gets big, you can't sign it off line by line (Chapter 25), and mistakes hide where you can't see them. Half a minute with the blueprint is far cheaper than tearing things out and redoing them.
 
 ## 3. When reading the plan, what a non-expert should look at
 
-Like reading a diff (Chapter 25), reading the plan **doesn't require you to know code.** What you need to confirm are a few things a non-expert can fully judge:
+Like reading a diff, reading a plan doesn't require knowing code. A plan looks something like this:
 
-- **Did it understand the task?** The start of a plan usually restates "what it thinks you want it to do." **This sentence is the most worth reading**: if it misunderstood, everything after is wrong, and correcting now is the most labor-saving.
-- **Is the place it wants to touch right?** It says it'll change the "user login" part, but you clearly told it to change the "homepage title." **Wrong place, call a halt.**
-- **Is the scope absurdly big?** You wanted a small change, and it lists "rewrite ten files in fifteen steps." **Either it overcomplicated it or it misunderstood**; have it clarify, or break the task small (next section).
-- **Are there any dangerous moves?** If the plan mentions "delete so-and-so, overwrite so-and-so, send so-and-so," cross-check against Chapter 26: these are the red lines you need to **watch especially closely** and confirm manually when it acts.
+```text
+My understanding: add a search box to the blog homepage that searches articles by title.
+Plan:
+1. Add a search box below the heading in index.html.
+2. Create search.js: filter the article list by title as you type.
+3. Add styles for the search box in style.css, with a separate adjustment for phone widths.
+Won't change: article content files, the comments feature.
+Verification: search for "invoice" on the homepage and confirm only related articles appear.
+```
 
-> **Key point:** Reading the plan is about **"is the direction right, is the scope reasonable," not the technical detail of each step.** Like reading a renovation blueprint, you look at "is the layout right, did they touch the gas line," not "how many millimeters is this pipe." **Direction right, then let it act; direction wrong, call a halt now, the cheapest interception in the whole run.**
+You're checking four things any non-expert can judge:
+
+- Did it understand the task? A plan usually opens by restating what it thinks you want. That line deserves the most attention: if the understanding is wrong, everything after it is wrong.
+- Is it touching the right place? You asked about the homepage title and it says it will change the "user login" part: stop it there.
+- Is the scope reasonable? You wanted a small change and it lists "rewrite ten files in fifteen steps": either it's overcomplicating things or it misunderstood. Have it explain why, or break the task down.
+- Are there risky actions? If the plan mentions deleting, overwriting, sending, or publishing, check against Chapter 26: those need your explicit OK.
+
+You're looking at direction and scope, not the technical details of each step. With renovation drawings you check the layout and whether anyone is touching the gas pipe, not the pipe's diameter. Once the direction is right, let it act.
 
 ## 4. Break the task small: don't let it do a whole big feature in one go
 
-"See the plan first" comes paired with a twin principle: **break the task small, sign off in small steps.**
+"See the plan first" has a twin principle: break the task small and sign off in small steps. The size of a change directly decides whether you can sign it off at all.
 
-Why? Because **the "size" of a change directly decides whether you "can or can't sign off."** This is the root of that rookie crash scene from Chapter 23:
+Having it build a whole big feature in one go is the most common beginner mistake. It changes twenty or thirty files and hundreds of lines at once; the diff is too long to read, so Chapter 25's sign-off stops working, and when something breaks, the mistake is buried in the pile, hard to find and hard to roll back cleanly (Chapter 26).
 
-**Having it "do a whole big feature in one go" is the most common way beginners crash.** Think about it: it changes twenty or thirty files and hundreds of lines at once, the diff so long you can't possibly finish reading it (the Chapter 25 sign-off set completely fails), and if something goes wrong the mistake is mixed into one huge blob of changes, so you **can't find where it is and can't cleanly roll back** (Chapter 26). The bigger the change, the bigger your blind spot.
-
-The right move is to break a big thing into a string of small things, **do one little piece, sign off on one little piece, commit once, then do the next** ("commit" means saving a version with Git; see "Git: the bare minimum to get started" in Chapter 26):
+The better approach is to turn the big job into a series of small ones: build a small piece, sign it off, commit, then do the next (a "commit" saves a version with Git; see "Git: the bare minimum to get started" in Chapter 26).
 
 ```text
-wrong move:  one "do the whole feature" ─→ it wildly changes a huge blob ─→ diff too long to read, mistakes hard to find, hard to roll back
+All at once:   "build the whole feature" ─→ it changes a pile ─→ diff too long, bugs hidden, hard to roll back
 
-right move:  big task
-              │ broken into
-              ├─ small step 1 ─→ read diff/run tests (sign off) ─→ commit ✔
-              ├─ small step 2 ─→ read diff/run tests (sign off) ─→ commit ✔
-              └─ small step 3 ─→ read diff/run tests (sign off) ─→ commit ✔
-                         (each little piece is followable, verifiable, rollback-able on its own)
+Small steps:   big task
+                 │ broken into
+                 ├─ step 1 ─→ sign off (read diff, try it) ─→ commit
+                 ├─ step 2 ─→ sign off (read diff, try it) ─→ commit
+                 └─ step 3 ─→ sign off (read diff, try it) ─→ commit
 ```
 
-The benefits of breaking it small each cure a pain of yours:
+Take "add a guestbook to my small website." It splits into three steps: first, just a box where you can type a message and see it displayed, with nothing saved yet; next, save the messages so they're still there after a reload; finally, add a length limit and checks against junk entries. After each step you can open the page and try it yourself, and if something goes wrong you roll back only that step.
 
-- **You can sign off on every little piece:** the diff is short, and the three sign-off questions (Chapter 25) are answerable.
-- **Mistakes are easy to locate:** the problem from that one small step is only so big in scope, and you can pinpoint it right away.
-- **Rollback is clean:** to undo, you only back out the one small step that broke, and the results you already signed off on are still there.
-- **Wrong direction, fast loss-cutting:** spotting the off-track on the very first small step, the loss is just one little piece, not the whole big feature.
+Broken down like this, every step has a short diff and you can answer the three sign-off questions (Chapter 25); a mistake is confined to a small area and easy to find; to change your mind you undo only the step that went wrong, and everything already signed off stays; and if the very first step shows the direction is wrong, you lose only that small piece.
 
-> **Common misconception / Reality:** "Doing one little piece at a time, how slow, better to let it do it all at once." **This is an illusion.** Doing it all at once looks fast, but the moment something's wrong you sink into "a diff too long to read + a bug you can't find + a mess too hard to roll back," and the rework time far exceeds the bit you "saved." **Small steps at a slow jog turns out to be the fastest road to the finish**, because you almost never backtrack. This is of a piece with Chapter 14, "keeping the AI moving forward": **small rhythm, frequent alignment, fastest overall.**
+Doing it all at once looks faster, but once something breaks, you're left with an unreadable diff, a bug you can't find, and a mess that's hard to undo, and the rework far outweighs what you "saved." Small steps almost never backtrack, so overall they're faster (the same idea as Chapter 14).
 
-## 5. The two things combined: a "before acting" routine that saves trouble
+## 5. The two things combined: a "before acting" routine
 
-Put "see the plan first" and "break the task" together and you have this chapter's "before acting" approach, tied tightly to that "gate 1" from Chapter 24:
+Put "see the plan first" and "break it small" together and you have the full routine for the first gate in Chapter 24's work loop:
 
 ```text
 big goal
    │
    ▼
-1. have it make a plan first (many tools build in "plan first, execute later," name per the official docs;
-   without it, you can ask by hand in one sentence: "don't act yet, just give me a plan")
+1. have it plan first (plan mode, or "don't act yet, just give me a plan")
    │
    ▼
-2. you read the plan: understood right? right place? reasonable scope? any dangerous moves?
+2. read the plan: right understanding? right place? reasonable scope? risky actions?
    │
-   ├─ direction wrong ─→ correct in one sentence (most labor-saving now, it hasn't acted yet)
+   ├─ wrong direction ─→ correct it in one sentence, have it rewrite the plan
    │
-   └─ direction right ─→ go ahead and break it into a few small steps
+   └─ right direction ─→ break it into small steps
                      │
                      ▼
-   3. one small step at a time: do a piece -> sign off on a piece (Chapter 25) -> commit -> next piece
+3. one step at a time: build → sign off (Chapter 25) → commit → next
 ```
 
-Remember this chapter's summary: **for a big change, see the blueprint before breaking ground; the bigger the work, the more you cut it into small pieces, doing one and verifying it before the next.** The half-minute spent on this step and the extra sentence or two you type are the **highest-return investment** in all of AI programming: they keep rework outside the door.
+Approving a plan doesn't mean you can skip signing off. The plan is the gate before it acts; after it acts you still read the diff and follow your acceptance steps. Both gates need guarding.
 
-## 6. Common misconceptions, cleared up together
+## 6. Common misconceptions
 
 | Misconception | Reality |
 | --- | --- |
-| Having it plan first is a waste of time, just work and deal with mistakes as they come | "Deal with mistakes as they come" is the most wasteful: catching the off-track after acting means throwing out a pile of changes; **see the plan before acting and a correction is one sentence** |
-| Reading the plan needs technical detail, which I can't do | Reading the plan is about "understood right, right place, reasonable scope, any dangerous moves," which **a non-expert can judge** (like reading a renovation blueprint for the layout) |
-| "Plan first, execute later" is one product's exclusive command | Many tools build in this feature (**for its name and toggle, refer to the official documentation**); without it you can **say it to the AI in one sentence**, "don't act yet, just the plan," which is something you say to the AI, not a fixed command |
-| Having it do a whole big feature in one go is easiest | A big change's diff is too long to read, mistakes hard to find, hard to roll back (Chapters 25, 26); **break it into small pieces and verify each one as you go** to go fastest |
-| Doing it one little piece at a time is too slow | An illusion: small steps almost never backtrack and are fastest overall; do it all at once and once it's wrong the rework far exceeds what you saved (echoing Chapter 14) |
-| Once the plan is approved you can ignore sign-off | The plan is the "before acting" gate; **after acting you still sign off** (read the diff, run tests, Chapter 25), guard both gates |
+| Asking for a plan wastes time; fix mistakes later | Finding a wrong turn after it acts means redoing a pile of changes; before it acts, one sentence fixes it |
+| Reading a plan requires technical knowledge | You check understanding, place, scope, and risky actions, which any non-expert can judge |
+| "Plan first, execute later" is one product's special command | Many tools have a plan mode; without one, just say "don't act yet, give me a plan" |
+| Having it build a whole big feature at once is easiest | Big changes mean unreadable diffs, hidden bugs, and hard rollbacks; small pieces signed off one by one are fastest |
+| Breaking things into small pieces is too slow | Small steps almost never backtrack, so they're faster overall; when an all-at-once job fails, the rework outweighs any savings |
+| Once the plan is approved, no sign-off is needed | You still sign off after it acts (Chapter 25); both gates need guarding |
 
 ## Summary
 
-- **Seeing the plan before acting is the highest-return step in the whole workflow**: it moves "the mistake it might make" forward, from "after it's changed things" to "before it acts." **Correcting before acting takes one sentence, correcting after acting means throwing out a pile and redoing it** (echoing Chapters 14, 24).
-- Many tools build in a "**plan only, don't act yet**" feature (**for its name and toggle, refer to the official documentation**); without it you can **ask manually in one sentence**: "don't act yet, just give me a plan." That's something you say to the AI, not a product command.
-- Reading the plan **doesn't need code knowledge**: look at whether **it understood right, the place it touches is right, the scope is reasonable, and there are any dangerous moves** (cross-check dangerous moves against Chapter 26).
-- **Break the task small, sign off in small steps:** don't let it do a whole big feature in one go, a big change's diff is too long to read, mistakes hard to find, hard to roll back. **Do a piece, verify it (Chapter 25), commit once, then the next.**
-- Summary: **see the blueprint before breaking ground, the bigger the work the smaller you cut it.** This is the step that saves the most rework, and small steps at a slow jog are actually fastest.
+- Reviewing the plan before it acts is the step that saves the most rework: before it acts, one sentence fixes a wrong turn; afterwards, a pile of changes has to be redone (Chapters 14 and 24).
+- As of October 2026, both Claude Code and Codex have a plan mode (`/plan`); without one, you can just ask: "don't act yet, give me a plan."
+- Reading a plan doesn't require knowing code: check its understanding, the place it will touch, whether the scope is reasonable, and whether there are risky actions (Chapter 26).
+- Break tasks small: build a piece, sign it off (Chapter 25), commit, then do the next.
+- After the plan is approved, you still sign off once it has acted.
 
-With that, the four "shared" approaches of Part Four are complete: **it's a capable new coworker who makes mistakes (Chapter 23) -> learn to sign off (Chapter 25) -> let it act but not lose control (Chapter 26) -> see the plan and break the task small before acting (Chapter 27).** Carry this tool-agnostic mental model and, whichever coding agent you use down the line and however it updates, you'll hold your direction steady.
+That completes the shared method of Part 4: it's a capable new coworker who makes mistakes (Chapter 23), it works through the investigate, plan, act, sign-off loop (Chapter 24), you learn to sign off (Chapter 25), you let it act without losing control (Chapter 26), and you review the plan and break tasks small before it acts (Chapter 27). The next two chapters walk through this for real in Claude Code and Codex.
 
 ---
 

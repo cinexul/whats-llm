@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img">
+<title>Four permission levels, from read only to never asking</title>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#56544b"/></marker>
+<marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#aa563d"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5f7f3a"/></marker>
+</defs>
+<rect x="0.75" y="0.75" width="718.5" height="418.5" rx="12" fill="#faf9f5" stroke="#e5e1d8" stroke-width="1.5"/>
+<g font-family="system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif">
+<line x1="40" y1="56" x2="40" y2="404" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="56" x2="80" y2="404" stroke="#56544b" stroke-width="2"/>
+<text x="104" y="42" font-size="15" fill="#56544b" text-anchor="start">Higher up, it can do more without asking you</text>
+<line x1="60" y1="50" x2="60" y2="24" stroke="#56544b" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="40" y1="360.0" x2="80" y2="360.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="360.0" x2="104" y2="360.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="326" width="436" height="68" rx="10" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="120" y="355" font-size="17" fill="#191919" text-anchor="start" font-weight="600">1  Read only</text>
+<text x="120" y="380" font-size="14" fill="#56544b" text-anchor="start">Looks at files and answers; changes nothing</text>
+<rect x="554" y="343.0" width="152" height="34" rx="17" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+<text x="630.0" y="365.0" font-size="14" fill="#191919" text-anchor="middle" font-weight="600">Beginner OK</text>
+<line x1="40" y1="274.0" x2="80" y2="274.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="274.0" x2="104" y2="274.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="240" width="436" height="68" rx="10" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="120" y="269" font-size="17" fill="#191919" text-anchor="start" font-weight="600">2  Asks before each change</text>
+<text x="120" y="294" font-size="14" fill="#56544b" text-anchor="start">Waits for your OK before edits or commands</text>
+<rect x="554" y="257.0" width="152" height="34" rx="17" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+<text x="630.0" y="279.0" font-size="14" fill="#191919" text-anchor="middle" font-weight="600">Beginner OK</text>
+<line x1="40" y1="188.0" x2="80" y2="188.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="188.0" x2="104" y2="188.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="154" width="436" height="68" rx="10" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="120" y="183" font-size="17" fill="#191919" text-anchor="start" font-weight="600">3  Edits project files freely</text>
+<text x="120" y="208" font-size="14" fill="#56544b" text-anchor="start">No prompt for edits inside the project; asks beyond it</text>
+<rect x="554" y="171.0" width="152" height="34" rx="17" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="630.0" y="193.0" font-size="14" fill="#191919" text-anchor="middle" font-weight="600">OK after a Git save</text>
+<line x1="40" y1="102.0" x2="80" y2="102.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="102.0" x2="104" y2="102.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="68" width="436" height="68" rx="10" fill="#faece7" stroke="#aa563d" stroke-width="2"/>
+<text x="120" y="97" font-size="17" fill="#191919" text-anchor="start" font-weight="600">4  Runs anything without asking</text>
+<text x="120" y="122" font-size="14" fill="#56544b" text-anchor="start">Approvals off, and sometimes the sandbox too</text>
+<rect x="554" y="85.0" width="152" height="34" rx="17" fill="#aa563d" stroke="#aa563d" stroke-width="1.5"/>
+<text x="630.0" y="107.0" font-size="14" fill="#faf9f5" text-anchor="middle" font-weight="600">Beginners: avoid</text>
+</g></svg>

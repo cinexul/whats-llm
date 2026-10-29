@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" role="img" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei','Noto Sans CJK SC','WenQuanYi Zen Hei',sans-serif">
+  <title>注意力示意：同一个“它”，在两句话里连到不同的名词</title>
+  <rect x="1" y="1" width="718" height="428" rx="12" fill="#faf9f5" stroke="#e5e1d8"/>
+  <path d="M 517 127 Q 415 17 309 127" fill="none" stroke="#aa563d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 517 127 Q 474 78 427 127" fill="none" stroke="#aa563d" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 517 127 Q 364 -36 208 127" fill="none" stroke="#aa563d" stroke-width="7" stroke-linecap="round"/>
+  <text x="158" y="150" text-anchor="middle" font-size="17" fill="#56544b">小李把</text>
+  <rect x="192" y="127" width="32" height="31" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="208" y="150" text-anchor="middle" font-size="17" fill="#191919">书</text>
+  <text x="249" y="150" text-anchor="middle" font-size="17" fill="#56544b">还给</text>
+  <rect x="275" y="127" width="68" height="31" rx="6" fill="#ffffff" stroke="#56544b" stroke-width="1.5"/>
+  <text x="309" y="150" text-anchor="middle" font-size="17" fill="#191919">图书馆</text>
+  <text x="377" y="150" text-anchor="middle" font-size="17" fill="#56544b">，因为</text>
+  <rect x="411" y="127" width="32" height="31" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="427" y="150" text-anchor="middle" font-size="17" fill="#191919">它</text>
+  <text x="470" y="150" text-anchor="middle" font-size="17" fill="#56544b">已经</text>
+  <rect x="496" y="127" width="50" height="31" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="521" y="150" text-anchor="middle" font-size="17" fill="#191919">过期</text>
+  <text x="571" y="150" text-anchor="middle" font-size="17" fill="#56544b">了。</text>
+  <text x="360" y="188" text-anchor="middle" font-size="15" fill="#3d6a8a">读到“过期”时往回看：“书”分到的注意力最多，这里的“它”是书</text>
+  <path d="M 525 307 Q 364 136 200 307" fill="none" stroke="#aa563d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 525 307 Q 474 250 419 307" fill="none" stroke="#aa563d" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 525 307 Q 415 188 301 307" fill="none" stroke="#aa563d" stroke-width="7" stroke-linecap="round"/>
+  <text x="150" y="330" text-anchor="middle" font-size="17" fill="#56544b">小李把</text>
+  <rect x="184" y="307" width="32" height="31" rx="6" fill="#ffffff" stroke="#56544b" stroke-width="1.5"/>
+  <text x="200" y="330" text-anchor="middle" font-size="17" fill="#191919">书</text>
+  <text x="241" y="330" text-anchor="middle" font-size="17" fill="#56544b">还给</text>
+  <rect x="267" y="307" width="68" height="31" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="301" y="330" text-anchor="middle" font-size="17" fill="#191919">图书馆</text>
+  <text x="369" y="330" text-anchor="middle" font-size="17" fill="#56544b">，因为</text>
+  <rect x="403" y="307" width="32" height="31" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="419" y="330" text-anchor="middle" font-size="17" fill="#191919">它</text>
+  <text x="470" y="330" text-anchor="middle" font-size="17" fill="#56544b">马上要</text>
+  <rect x="504" y="307" width="50" height="31" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="529" y="330" text-anchor="middle" font-size="17" fill="#191919">关门</text>
+  <text x="579" y="330" text-anchor="middle" font-size="17" fill="#56544b">了。</text>
+  <text x="360" y="368" text-anchor="middle" font-size="15" fill="#3d6a8a">读到“关门”时往回看：“图书馆”分到的注意力最多，这里的“它”是图书馆</text>
+  <text x="360" y="412" text-anchor="middle" font-size="14" fill="#56544b">线越粗＝分到的注意力越多（示意，不是实测数值）</text>
+</svg>

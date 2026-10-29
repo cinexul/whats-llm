@@ -1,121 +1,114 @@
-Everyone's computer has a "junk drawer": a folder stuffed with scattered files. Dozens of meeting notes, a pile of articles you downloaded, notes scattered here and there, file names all over the place, and finding one means digging through everything.
+Everyone's computer has a "junk drawer": a folder stuffed with scattered files. Dozens of meeting notes, downloaded articles, notes here and there, file names all over the place, and finding one means digging through the lot.
 
-This chapter's project is to clean up that drawer. We'll make a **document and note tool**, which isn't really a fancy piece of software but a way to use a coding agent's help to **batch-tidy, convert, and summarize** a pile of scattered files into the shape you want. For example: sorting dozens of files by content, renaming them consistently, pulling their key points into one master table, batch-converting one format into another.
+This chapter tidies that drawer. "A small document and note tool" doesn't mean building software. You set the rules, and a coding agent sorts, renames, summarizes, and converts a pile of files in bulk. Repetitive work that would take you an afternoon by hand gets done in batches once the rules are clear; it's the most down-to-earth use of Chapter 14's "letting AI keep a task moving." When you're done you'll have two things: a folder organized by your rules, and a summary table you can open in a spreadsheet program.
 
-Why use this to get hands-on? Because it lets you feel firsthand something very plain and also very powerful: **AI plus files equals the most effortless automation**. Repetitive work that used to take you a whole afternoon of doing one file at a time, you can hand off: spell out the rules, and it does the whole batch tirelessly. Chapter 14 covered "keeping the AI pushing a task forward," and this chapter is one of the most down-to-earth places it lands.
-
-But this chapter has a **safety red line the other projects don't have**, so let's put it right up front and keep it taut the whole way through.
-
-> **Key point:** **Before you start any batch processing, back up the originals first.** This is the number one iron rule of this chapter, no exceptions. The reason is simple: in the last chapter, building a website, if you broke something a refresh told you and going back fixed it. But in this chapter it's **acting on your real files in bulk**, and once it mistakenly deletes, mistakenly changes, or batch-mangles dozens of files and you have no backup, those are truly gone. **Backing up the originals is the seatbelt you have to buckle before any batch operation.**
+Unlike the last chapter, this time it's working on your real files. A broken web page shows up on refresh and you go back; a batch of dozens of files changed wrongly, with no backup, is truly gone. So the first rule of this chapter is: **before any batch processing, make a full backup of the originals.**
 
 ## 1. Getting ready: what you need, the minimum starting point
 
-**The minimum starting point you need:**
+- A coding agent, such as Claude Code or Codex, that can read the files in your folder and organize them as you say (whether it runs locally or in the cloud depends on the product; see Chapter 24).
+- The folder you want to tidy.
+- A backup of the originals: before it does anything, copy the whole folder as it is to somewhere outside the working folder, for example renamed "originals_backup_do_not_touch," and leave it alone the whole time.
+- Git: when it works on your own computer, also put the working folder under Git as described in "Git: the bare minimum to get started" in Chapter 26.
 
-- **A coding agent**: Claude Code, Codex, or the like. It can read the files in your folder and tidy and rewrite them as you say. It comes in many forms (command line, editor extension, desktop app, web, cloud, and so on), and **some run locally while others run in the cloud; the exact form varies and keeps changing, so refer to the provider's official documentation** (Chapter 24 covered the general workflow).
-- **The folder you want to tidy**: that "junk drawer" of yours.
-- **A backup of the originals** (**most important**): before you let it touch anything, **copy the whole folder as is** to somewhere else, for example renaming it "`originals_backup_do_not_touch`." This is your lifesaving copy, and you don't go near it the whole time.
-- **A safety net you can fall back on**: besides that manual backup above, **when it's working on your local machine**, it's best to also put the working folder under version control (Git) for an extra layer of insurance (see "Git: the bare minimum to get started" in Chapter 26).
+Use the backup and Git together, not one or the other. A manual copy is the plainest move, needs no Git knowledge, and also protects files Git never recorded; Git shows you clearly which files it changed and lets you go back to a committed version.
 
-> **Key point:** A backup and "using Git" are **two things, both to be done**, not one or the other. Manually copying the originals is the plainest, least error-prone lifesaving move, one even people who don't know Git can do; Git lets you see clearly "which files it actually changed and how" and go back to a version you committed. Batch operations are dealing with real files, so **layer both kinds of insurance together and you'll sleep at night**.
+Also watch the permission mode (Chapter 26 explains the ideas). As of October 2026, recent versions of Claude Code start in auto mode in the terminal and won't necessarily ask before changing files. For your first batch job, press `Shift+Tab` to switch to manual mode, shown as "manual mode on" in the status bar, and it will ask before every file change or command. In Codex, choosing Read Only with `/permissions` has a similar effect.
 
-**Getting ready mentally**: same as always, treat it like the "capable colleague on their first day" (Chapter 24). When you ask them to tidy dozens of files, they're quick on their feet, but **whether they misread your sorting rules or fumble and delete the wrong file is on you to watch**. So this chapter puts special weight on one thing: **try one or two files first, confirm it understood the rules and got it right, then turn it loose on the whole batch.**
+The rhythm of the chapter is: back up → try two or three files → check → process everything.
 
 ## 2. Doing it step by step
 
-Each step below gives you one **plain-language line to say to the AI** (to stress it again: this is what you say to the AI, **not a command for you to type**), and **what you, the human, need to confirm**. Note the overall rhythm is: **back up, try a small batch first, check that it's right, then run the full set.**
+Each step gives you a plain-language line to say to the AI (something you say to it, not a command you type) and what you need to confirm.
 
-### Step 0: Back up first, then have it "get the lay of the land"
+### Step 0: Back up first, then have it "survey the situation"
 
-The first thing, always, is to back up.
+The backup is your job. Before you open the coding agent, copy the whole folder by hand to somewhere outside the working folder, such as another drive or another spot on your desktop.
 
-**Make the backup yourself first:** before you open the coding agent, **manually copy the whole folder** as the originals backup and put it somewhere **outside** the working folder (another drive, or a different spot on your desktop). This step is on you, not on it.
+Then start the agent with the working folder as its project: in a desktop app or editor that's usually "Open folder"; in a terminal, `cd` into the folder and type `claude` or `codex` (Chapters 28 and 29). Don't start it in a parent folder that holds both the working folder and the backup, or the backup ends up inside its workspace too.
 
-**Then have it start inside the working folder:** open the coding agent and have it treat this working folder as the project. How depends on the form of the product: in a desktop app or editor it's usually "Open folder"; in a terminal you usually `cd` into the folder first, then type the tool's start command (for example `claude` or `codex`). Follow the official documentation for the details (Chapters 28 and 29). Be careful not to start it in a parent folder that "holds both the working folder and the backup," or the backup ends up inside its workspace too.
+> Plain-language request: *"I'm about to tidy the files in this folder. First, confirm: which folder are you in right now? My 'originals backup' isn't here; don't go looking for it, and don't touch it."*
 
-> Plain-language request: *"I'm about to tidy the files in this folder. Before you start, let's check: which folder are you in right now? My 'originals backup' isn't in here, so don't go looking for it or touch it. We'll only work in this current working folder."*
+What to confirm: it should name the working folder. If it names the wrong place, quit and start it again in the right folder. Then have it look without touching:
 
-**What you need to confirm:**
-- It should name your working folder. If it's in the wrong place, exit, switch to the right folder, and start it again.
-- Then have it **only look, not touch**, to get the lay of the land:
+> Plain-language request: *"Don't move any files yet. Just look at what's in this folder: how many files there are, what types, and whether the file names follow any pattern. Give me a list."*
 
-> Plain-language request: *"Don't touch any file yet, just help me see roughly what's in this folder: how many files total, what types they are, whether the file names follow any pattern. Give me a list."*
+What to confirm: is the count right, did it miss any type? This is the "investigate" step of the workflow (Chapters 14 and 24): it learns first and you check first, so it doesn't start rearranging blindly.
 
-**What you need to confirm:**
-- Look at the list it gives and confirm it **really understands the current state of your pile of files** (is the count right, did it miss any types). This step is "investigate" (the first step of the workflow from Chapters 14 and 24): have it understand first, you check first, and you avoid it charging in and making a mess.
+### Step 1: Spell out the "sorting rules"
 
-### Step 1: State the "tidying rules" clearly
+Tidying succeeds or fails on how clear the rules are; with vague rules it can only guess.
 
-With tidying, success or failure rests entirely on "are the rules stated clearly." Vague rules leave it only able to guess.
+> Plain-language request: *"Sort like this: file names containing 'meeting' go into a 'Meeting notes' folder; ones containing 'reimbursement' or 'invoice' go into 'Finance'; everything else goes into 'Other.' Only move files; don't change their contents."*
 
-> Plain-language request: *"I want to sort like this: files with the word 'meeting' in the name go to the 'meeting notes' folder; ones with 'reimbursement' or 'invoice' go to the 'finance' folder; the rest go to 'other.' When sorting, **just move files, don't change file contents**."*
+What to confirm: think through the gray areas for it. A file name with both "meeting" and "invoice": which folder? Does a file with none of the keywords go to "Other"? Decide and tell it. Keep the "only move, don't change contents" line too: spelling out what it may and may not touch is the habit this chapter most wants you to build.
 
-**What you need to confirm:**
-- Think ahead for it about the **gray areas** in the rules: what if a file name has both "meeting" and "invoice"? Does one with no keyword at all count as "other"? **Think it through and tell it**; don't leave it to guess.
-- Pay special attention to that line "**just move, don't change contents**." Nailing down "what it can and can't touch" is the habit this chapter most wants you to build.
+### Step 2: Try a small batch first, see if it understood
 
-### Step 2: Try a small batch first, see whether it understood
+Never skip this step. Once the rules are stated, have it demonstrate on just two or three files.
 
-**This step is the soul of this chapter; whatever you do, don't skip it.** Once you've stated the rules, **don't turn it loose on the whole batch yet**; have it **handle only two or three files as a demo**.
+> Plain-language request: *"Don't do all of them yet. Pick 3 files and tell me which folder you'd put each one in under these rules, and why. Don't actually move them; just tell me."*
 
-> Plain-language request: *"Don't touch all of them yet. Pick 3 files and walk me through how you'd sort them by the rule just now; tell me which folder you plan to put each file in and why. Don't actually move them yet, just talk me through it."*
+What to confirm: if its calls match what you meant, move on; if not, fill in the rules right there and have it explain again. Correcting it now costs almost nothing. Skip this step, and if it sorts dozens of files under a misunderstood rule, you're left cleaning up dozens of files.
 
-**What you need to confirm:**
-- Look at whether its judgment on these 3 **matches what you meant**. If it matches, it understood the rules and you can move on; if not, **fill in the rules right there** and have it explain again. **Correcting at this point costs next to nothing.**
-- Picture the counterexample: if you skip this step and just let it run dozens of files, by the time it sorts everything wrong by a "misunderstood rule" and you find out, that's a mess of dozens of files. **Trying a small batch first uses the cost of three files to head off a disaster across dozens.**
+### Step 3: Once it's right, do the full set
 
-### Step 3: Confirm it's right, then run the full set
+> Plain-language request: *"Those calls are all right. Now sort the whole folder by these rules."*
 
-Only after the small batch passes do you let it handle the whole batch.
+What to confirm:
 
-> Plain-language request: *"The judgments are all right. Now, by this rule, sort all the files in the whole folder."*
-
-**What you need to confirm:**
-- After it's done, **spot-check a few**: open a few folders at random and see whether the files that should be there are there and nothing that shouldn't be has crept in.
-- If you're using Git, you can have it **say "which files were touched this time and where they moved"** and glance at it for comparison (the diff, Chapter 25). It's fine if you can't read the technical details; the point is to confirm "the scope of what was touched matches what you expected."
-- **If you find the whole batch is wrong**: don't panic, and don't keep changing on top of the wrong state. This is exactly what that backup from the start is for; **go back and run it again.**
+- Spot-check a few folders: everything that belongs is there and nothing that doesn't has slipped in; the total number of files is the same as before.
+- If you're using Git, have it tell you "which files it moved this time and where to," and look it over (the diff, Chapter 25). The point is that what it touched matches what you expected; it's fine if the technical details are beyond you.
+- If the whole batch is wrong, don't keep fixing on top of the mistake; go back with the backup or Git and redo it.
 
 ### Step 4: Going further: summarizing and converting
 
-Sorting is just the appetizer. Where "AI plus files" really saves effort is in **summarizing** and **converting**.
+Sorting is only the start; "AI plus files" saves the most effort in summarizing and converting.
 
-> Plain-language request (summarizing): *"From the 'meeting notes' folder, pull out each file's title, date, and single most important conclusion, gather them into one table, and save it as a new file. **Leave the original files alone.**"*
+> Plain-language request (summarize): *"From each file in the 'Meeting notes' folder, pull out the title, the date, and the single most important conclusion, put them into one table, and save it as a new file, `meeting-summary.csv`. Don't touch the original files."*
 
-> Plain-language request (converting): *"Convert the text notes in this folder all to the same format, and put the results in a new 'converted' folder, **keeping the original files untouched.**"*
+> Plain-language request (convert): *"Convert the text notes in this folder into one consistent format, put the results in a new 'Converted' folder, and leave the original files as they are."*
 
-**What you need to confirm:**
-- Once the summary table is done, **pick two or three rows and check them back against the original files**: are the title, date, and conclusion it pulled out real, did it copy something wrong or invent it (it will "fill in the blanks," Chapter 9). **The mistake summarizing is most prone to is quietly changing a number or inventing a conclusion**, so a spot-check is a must.
-- Notice that both lines above stress "**results go to a new file or new folder, originals untouched.**" This is a good habit: **have it produce something new rather than overwrite the old**, so the originals are always safe.
+A CSV file is a table stored as text with commas between the columns; Excel, WPS, and Numbers can all open it. If Excel shows garbled characters for non-English text, ask it to save the file again as "UTF-8 with BOM."
+
+What to confirm: pick two or three rows and check them against the original files: did it copy a title, date, or conclusion wrong, or make one up (Chapter 9)? The mistake summaries are most prone to is a quietly changed number or an invented conclusion. Both requests send the results to a new file or folder: when it produces something new instead of overwriting the old, the originals stay safe.
+
+### Done when
+
+The project is done when all of these are true:
+
+- The backup of the originals sits outside the working folder, untouched.
+- The working folder is sorted by your rules, the files you spot-checked are all in the right place, and the total number of files hasn't changed.
+- There's a new `meeting-summary.csv` that opens in a spreadsheet program, and the rows you checked match the originals.
+- The original files' contents are unchanged; Git shows only moved files and newly created ones.
 
 ## 3. Common pitfalls
 
-- **Skipping "try a small batch first" and running the full set directly.** This is the deadliest pitfall of this chapter. If it understands the rules even a little wrong, running the full set produces mistakes in bulk. **Always try two or three first, confirm it's right, then scale up.**
-- **Starting without a backup.** Saying the opening red line again: it's acting on your **real files**, and a mistaken delete or change with no backup can't be recovered. **A backup is the seatbelt to buckle before you start, no exceptions.**
-- **Giving rules that are too vague.** "Just tidy up the messy files," but what counts as messy and what to tidy it into, it can only guess, and you can't blame it for guessing wrong. **The more specific the rules (what word goes where, what to do in gray areas), the more accurately it works.**
-- **Having it "overwrite in place" instead of "save to a new file."** If you have it change the originals directly when converting or summarizing, one mistake destroys the originals. **Try to land the results in a new file or new folder** and keep the originals.
-- **Accepting the summary as is without checking.** When it pulls information, it may copy wrong, miss something, or even invent. **Spot-check at least a few rows of the summary table back against the originals**, and don't use its "filled-in" content as if it were real data.
-- **Dumping files full of private information on it all at once.** If a file has things like an ID number, a password, or customer privacy in it, **those get sent out** (Chapter 37). Before processing sensitive files, think clearly about what can be handed over and what has to be scrubbed first or simply not handed over.
+- Skipping "try a small batch first" and processing everything at once. If its reading of the rules is even slightly off, the full run produces mistakes in bulk.
+- Starting without a backup. It's working on real files; a mistaken delete or change with no backup can't be recovered.
+- Vague rules. "Tidy up the messy files": what counts as messy, and tidy into what? It can only guess. The more specific the rules (which word goes where, what to do in gray areas), the more accurately it works.
+- Letting it overwrite in place. If converting or summarizing changes the original files directly, one mistake ruins them. Have the results go to a new file or folder.
+- Taking the summary at face value. It may copy wrong, leave things out, or even make things up; check at least a few rows against the originals.
+- Handing over files with private information wholesale. ID numbers, passwords, client details: before handing them over, think about what can go and what should be removed first (Chapter 37).
 
 ## 4. Taking it one step further
 
-Once tidying, summarizing, and converting run smoothly, you can try more "automated" plays (all still the same old routine of "state the rules clearly, try a small batch first, check"):
+All of these follow the same routine: state the rules → try a small batch → check.
 
-- **Rename consistently**: *"Rename these files consistently in a 'date_topic' format; show me a demo with 3 first."*
-- **Batch-extract key points into a directory**: *"Generate a directory file for this whole folder, listing each file's title and a one-line summary."*
-- **Find duplicates and outdated files**: *"Help me find files that are almost duplicates in content, give me a list, **don't delete yet**, let me decide myself."* (Anything involving "deleting," all the more reason to have it list first and let you call the shots, never letting it delete automatically.)
-- **Turn this set of rules into a small repeatable process for the future**: you can have it write the tidying logic into a set of instructions, to follow next time new files come in. Whether to make it into a more formal automation, take it as far as you can manage, and **for the specifics of how to implement it, refer to the official documentation**.
-
-> **Key point:** "Taking it one step further" has one unchanging safety principle running through it: **for any operation that "deletes" or "overwrites," have it list first, stop, and wait for your sign-off, never letting it run automatically.** Tidying you can hand off freely, but the decision to "do something irreversible" **stays in your hands always** (this echoes the spirit of the "permission mechanism" in Chapter 26: let it work, but actions with consequences need your approval).
+- Consistent names: *"Rename these files in a 'date_topic' format. Show me 3 as a demo first."*
+- A table of contents: *"Make a contents file for the whole folder listing each file's title and a one-sentence summary."*
+- Finding duplicates: *"Find files whose contents are nearly identical and list them for me. Don't delete anything; I'll decide."* For anything that deletes or overwrites, have it list first, stop, and wait for your go-ahead (Chapter 26).
+- Writing the rules down: have it write these sorting rules into a short instructions file, so new files can be handled the same way next time.
 
 ## Summary
 
-- The second project lets you feel "**AI plus files equals the most effortless automation**": **batch-tidy, convert, and summarize** a pile of scattered files into the shape you want.
-- **The number one red line: back up the originals before you start any batch processing.** It's acting on real files, and a mistaken delete or change with no backup can't be recovered; a backup is the seatbelt to buckle. Keep the backup outside the working folder, and start the agent inside the working folder.
-- The core rhythm is **back up, try a small batch first (two or three files to confirm it understood the rules), check that it's right, then run the full set**; the "try a small batch first" step is the soul, so don't skip it.
-- **State the rules specifically** (what word goes where, what to do in gray areas), have the results **land in a new file or new folder, originals untouched**; **spot-check the summary table back against the originals** to guard against invention.
-- For any irreversible operation like "deleting or overwriting," **have it list first and let you call the shots**, never run it automatically (Chapter 26); think clearly before handing over files with private information (Chapter 37).
+- This project is a taste of "AI plus files" automation: sort, convert, and summarize scattered files in bulk, ending with an organized folder and a summary table.
+- The first rule: back up the originals before any batch processing and keep the backup outside the working folder; add Git, and use both layers.
+- The rhythm is back up → try two or three files → check → process everything; "try a small batch first" is the step you must not skip.
+- Make the rules specific, send results to new files and leave the originals alone, and spot-check the summary table against the source.
+- For operations you can't undo, such as deleting or overwriting, have it list first and decide yourself (Chapter 26); think before handing over files with private information (Chapter 37).
 
-In the next chapter, we'll push "having AI help you process text" one step further: turning a messy meeting transcript into a clearly structured **set of meeting notes**.
+In the next chapter, we start from a messy meeting transcript and turn it into clearly structured meeting notes.
 
 ---
 
@@ -158,5 +151,5 @@ In the next chapter, we'll push "having AI help you process text" one step furth
    - D. Have it move the duplicates to the trash, since that's reversible
    > **Answer: B.** For any irreversible operation that "deletes" or "overwrites," have it list first, stop, and wait for your sign-off (echoing the "permission mechanism" in Chapter 26). C and D use "it can be recovered" as a reason to skip your judgment: a backup or the trash is for cleaning up after an accident, not permission for it to delete on its own; A's merge is really an overwrite, so you should look first too.
 
-6. **[Basic · Hands-on]** Before letting an AI tidy one of your real folders, first **manually copy the whole folder as is**, rename it "originals_backup_do_not_touch," and put it somewhere else. After you're done, answer: if it later makes a mess of the working folder, what do you rely on to get things back? <!-- quiz: q06 revision: 2 -->
-   > **What you should notice:** You rely on this manual backup, the plainest lifesaving move that even people who don't know Git can use. Add to it putting the working folder under Git (so you can see clearly what it changed and go back to a committed version), and that's "two layers of insurance." Batch operations deal with real files, so layer both together and you'll be at ease. For exactly how to use the tools, **refer to the official documentation** (Chapters 25 and 26).
+6. **[Basic · Hands-on]** Before letting an AI tidy one of your real folders, first **manually copy the whole folder as is**, rename it "originals_backup_do_not_touch," and put it somewhere else. After you're done, answer: if it later makes a mess of the working folder, what do you rely on to get things back? <!-- quiz: q06 revision: 3 -->
+   > **What you should notice:** You rely on this manual backup, the plainest lifesaving move that even people who don't know Git can use. Add to it putting the working folder under Git (so you can see clearly what it changed and go back to a committed version), and that's "two layers of insurance." Batch operations deal with real files, so layer both together and you'll be at ease. How to use Git is covered in Chapters 25 and 26.

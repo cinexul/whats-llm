@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" role="img" font-family="system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif">
+  <title>Attention sketch: the same "it" links to a different noun in each sentence</title>
+  <rect x="1" y="1" width="718" height="428" rx="12" fill="#faf9f5" stroke="#e5e1d8"/>
+  <path d="M 642 128 Q 497 -26 349 128" fill="none" stroke="#aa563d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 642 128 Q 563 42 480 128" fill="none" stroke="#aa563d" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 642 128 Q 435 -72 225 128" fill="none" stroke="#aa563d" stroke-width="7" stroke-linecap="round"/>
+  <text x="111" y="150" text-anchor="middle" font-size="16" fill="#56544b">Xiao Li returned the</text>
+  <rect x="197" y="128" width="56" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="225" y="150" text-anchor="middle" font-size="16" fill="#191919">book</text>
+  <text x="284" y="150" text-anchor="middle" font-size="16" fill="#56544b">to the</text>
+  <rect x="315" y="128" width="70" height="30" rx="6" fill="#ffffff" stroke="#56544b" stroke-width="1.5"/>
+  <text x="349" y="150" text-anchor="middle" font-size="16" fill="#191919">library,</text>
+  <text x="426" y="150" text-anchor="middle" font-size="16" fill="#56544b">because</text>
+  <rect x="468" y="128" width="23" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="480" y="150" text-anchor="middle" font-size="16" fill="#191919">it</text>
+  <text x="547" y="150" text-anchor="middle" font-size="16" fill="#56544b">was already</text>
+  <rect x="603" y="128" width="84" height="30" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="646" y="150" text-anchor="middle" font-size="16" fill="#191919">overdue.</text>
+  <text x="360" y="188" text-anchor="middle" font-size="15" fill="#3d6a8a">Looking back from "overdue": "book" gets the most attention, so "it" = the book</text>
+  <path d="M 645 308 Q 441 108 233 308" fill="none" stroke="#aa563d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 645 308 Q 568 224 488 308" fill="none" stroke="#aa563d" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 645 308 Q 503 156 357 308" fill="none" stroke="#aa563d" stroke-width="7" stroke-linecap="round"/>
+  <text x="119" y="330" text-anchor="middle" font-size="16" fill="#56544b">Xiao Li returned the</text>
+  <rect x="205" y="308" width="56" height="30" rx="6" fill="#ffffff" stroke="#56544b" stroke-width="1.5"/>
+  <text x="233" y="330" text-anchor="middle" font-size="16" fill="#191919">book</text>
+  <text x="292" y="330" text-anchor="middle" font-size="16" fill="#56544b">to the</text>
+  <rect x="322" y="308" width="70" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="357" y="330" text-anchor="middle" font-size="16" fill="#191919">library,</text>
+  <text x="434" y="330" text-anchor="middle" font-size="16" fill="#56544b">because</text>
+  <rect x="476" y="308" width="23" height="30" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="488" y="330" text-anchor="middle" font-size="16" fill="#191919">it</text>
+  <text x="558" y="330" text-anchor="middle" font-size="16" fill="#56544b">was about to</text>
+  <rect x="618" y="308" width="62" height="30" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="649" y="330" text-anchor="middle" font-size="16" fill="#191919">close.</text>
+  <text x="360" y="368" text-anchor="middle" font-size="15" fill="#3d6a8a">Looking back from "close": "library" gets the most attention, so "it" = the library</text>
+  <text x="360" y="412" text-anchor="middle" font-size="14" fill="#56544b">Thicker line = more attention (illustration, not measured values)</text>
+</svg>

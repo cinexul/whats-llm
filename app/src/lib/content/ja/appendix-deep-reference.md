@@ -1,4 +1,4 @@
-この付録はClaude CodeとCodexの実用リファレンスです。第28・29章では最初の作業を試しました。ここでは次に使う機能を選び、問題を切り分けます。例は**2026-10-27**に確認しています。違いがあれば、インストール済みバージョンのヘルプで照合してください。
+この付録はClaude CodeとCodexの実用リファレンスです。第28・29章では最初の作業を試しました。ここでは次に使う機能を選び、問題を切り分けます。例は2026-10-29に確認しています。違いがあれば、インストール済みバージョンのヘルプで照合してください。
 
 ## 一、実行ファイルとアカウントを確認する
 
@@ -28,7 +28,7 @@ codex --help
 | 先に計画を出させる | `/plan`、または`Shift+Tab`で計画モードへ | `/plan` | 計画が具体的なファイルと検証方法に落ちているか |
 | プロジェクト指示の下書き | `/init`の後に`CLAUDE.md`を確認 | `/init`の後に`AGENTS.md`を確認 | パス、コマンド、規則の正確さ |
 | 変更確認 | `/diff`または`git diff` | `/diff`または`git diff` | 追跡済みの変更と想定外のファイル |
-| このセッションのファイル編集を戻す | `/rewind`（入力欄が空のときに`Esc`を二回押しても可） | Gitを使う（第十一節） | 編集ツールで変えたファイルだけが対象。Bashコマンドによる変更や外部への影響は含まれない |
+| このセッションのファイル編集を戻す | `/rewind`（入力欄が空のときに`Esc`を二回押しても可） | Gitを使う（第十一節） | このセッションで編集ツールを使って変えたファイルだけが戻る。Bashコマンドだけが変えたファイル、多くのサブエージェントによる変更、外部への影響は含まれない |
 | 保存された知識の確認 | `/memory` | `/memories`とプロジェクトファイル | 古いノートや矛盾 |
 | 長い会話の整理 | `/compact`、または`/clear`で新しい会話 | `/compact`、または`/new`で新しい会話 | 要件と証拠が要約に残っているか |
 | スキルの確認 | `/skills` | `/skills`、または`$`で名指し | スキル名、説明、出所 |
@@ -38,20 +38,20 @@ codex --help
 
 ## 三、プロジェクト指示、メモリ、スキル、設定
 
-**プロジェクト指示**には安定した作業規約、**メモリ**には保持した観察、**スキル**には再利用する手順を置きます。設定は有効なツール、接続情報、モデル選択、権限など、アプリ自体を制御します。Markdownの文章はOSの制限を強制するものではありません。
+プロジェクト指示には安定した作業規約、メモリには保持した観察、スキルには再利用する手順を置きます。設定は有効なツール、接続情報、モデル選択、権限など、アプリ自体を制御します。Markdownの文章はOSの制限を強制するものではありません。
 
 良い指示ファイルは、確認できる長さで、実行できる具体性があります。
 
 ```markdown
-- 最初に README と既存の実装を読む。
+- 最初にREADMEと既存の実装を読む。
 - 文書で指定されたロックファイルとパッケージ管理を使う。
 - 完了前に、変更した動作に関係する確認を実行する。
 - 実行したコマンド、結果、未確認の仮定を報告する。
 ```
 
-必要なら確認済みのリポジトリ情報で具体化します。個人の好みや秘密情報を共有の規則に混ぜないでください。下位ディレクトリにも指示ファイルがある場合、編集対象にどれが適用されるかを確認します。すべてが全体に適用されるとは限りません。
+必要なら確認済みのリポジトリ情報で具体化します。個人の好みや秘密情報を共有の規則に混ぜないでください。下位ディレクトリにも指示ファイルがある場合、編集対象にどれが適用されるかを確認します。すべてが全体に適用されるとは限りません。Claude Codeはリポジトリに`CLAUDE.md`がなければ`AGENTS.md`を読むので、二つのツールで一つの指示ファイルを共有できます。
 
-エージェントに読ませたくないファイル（鍵を入れた`.env`など）は、ツールが対応している範囲で読み取りを制限します。Claude Codeは設定の`permissions.deny`に`Read(./.env)`と書けます。Codexは権限設定でそのファイルを`deny`にできます。こうしたルールがあらゆる読み取り経路を防ぐとは限らないので、鍵そのものは自分で設定し、会話には貼り付けないでください（第35章）。
+エージェントに読ませたくないファイル（鍵を入れた`.env`など）は、ツールが対応している範囲で読み取りを制限します。Claude Codeは設定の`permissions.deny`に`Read(./.env)`と書けます。Codexは権限設定（permissions profile）のファイルシステム規則に`"**/*.env" = "deny"`と書けます。こうしたルールがあらゆる読み取り経路を防ぐとは限らないので、鍵そのものは自分で設定し、会話には貼り付けないでください（第35章）。
 
 ## 四、計画と推論設定
 
@@ -85,7 +85,7 @@ codex --help
 
 ## 八、スキル、プラグイン、MCP
 
-初めてスキルを作る、MCPサーバーをつなぐときの最小限の手順――スキルのフォルダをどこに置くか、`SKILL.md`の冒頭をどう書くか、`claude mcp add`と`codex mcp add`の使い方――は**第36章**にあります。ここでは判断のポイントだけを挙げます。
+初めてスキルを作る、MCPサーバーをつなぐときの最小限の手順（スキルのフォルダをどこに置くか、`SKILL.md`の冒頭をどう書くか、`claude mcp add`と`codex mcp add`の使い方）は第36章にあります。ここでは判断のポイントだけを挙げます。
 
 内容を確認できるスキルから始めます。`SKILL.md`、明確な説明、短い手順、必要な補助ファイルをそろえます。`name`はAgent Skillsの標準に従い、小文字の英字、数字、ハイフンだけを使い、フォルダと同じ名前にします。架空のデータで検証します。保存先や任意のメタデータはクライアントごとに違います。
 
@@ -115,7 +115,7 @@ MCPでは提供元、ローカルのコマンドかリモートのURL、アカ�
 
 ## 十一、Gitのよく使うコマンド早見表
 
-これらのコマンドを何のために、いつ使い、どこまで戻せるのかは**第26章**で説明しています（「Gitの最小限の始め方」と、復元の限界を含む）。ここは早見表だけです。プロジェクトのフォルダでターミナルから実行します。エージェントに代わりに実行させてもかまいませんが、実行する前にどのコマンドを走らせるのかをよく見てください。
+これらのコマンドを何のために、いつ使い、どこまで戻せるのかは第26章で説明しています（「Gitの最小限の始め方」と、復元の限界を含む）。ここは早見表だけです。プロジェクトのフォルダでターミナルから実行します。エージェントに代わりに実行させてもかまいませんが、実行する前にどのコマンドを走らせるのかをよく見てください。
 
 | コマンド | 何をするか | 注意 |
 | --- | --- | --- |
@@ -142,4 +142,4 @@ Gitが戻せるのは、Gitが記録したファイルだけです。送って�
 
 ## 出典とバージョンについて
 
-確認日：**2026-10-27**。[Codex README](https://github.com/openai/codex/blob/main/README.md)、[CLIコマンドのソース](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs)、[設定スキーマ](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json)、[Codex MCP](https://developers.openai.com/codex/mcp)、[Codexの権限](https://developers.openai.com/codex/permissions)、[Claude Codeのコマンド](https://code.claude.com/docs/en/commands)、[チェックポイントと`/rewind`](https://code.claude.com/docs/en/checkpointing)、[設定](https://code.claude.com/docs/en/settings)、[Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md)と[変更履歴](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)、[Agent Skills仕様](https://agentskills.io/specification)、[MCP仕様リポジトリ](https://github.com/modelcontextprotocol/modelcontextprotocol)、Git公式ドキュメント（[git-restore](https://git-scm.com/docs/git-restore)、[git-revert](https://git-scm.com/docs/git-revert)、[git-switch](https://git-scm.com/docs/git-switch)）を確認しました。製品文書の入口は [Codex](https://developers.openai.com/codex) と [Claude Code](https://code.claude.com/docs/en/overview) です。コマンドやポリシーはバージョンと組織によって異なります。
+確認日：2026-10-29。[Codex README](https://github.com/openai/codex/blob/main/README.md)、[CLIコマンドのソース](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs)、[設定スキーマ](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json)、[Codex MCP](https://learn.chatgpt.com/docs/extend/mcp?surface=cli)、[Codexの権限](https://learn.chatgpt.com/docs/permissions)、[Codexのスキル](https://learn.chatgpt.com/docs/build-skills)、[Claude Codeのコマンド](https://code.claude.com/docs/en/commands)、[チェックポイントと`/rewind`](https://code.claude.com/docs/en/checkpointing)、[設定](https://code.claude.com/docs/en/settings)、[プロジェクトの記憶](https://code.claude.com/docs/en/memory)、[Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md)と[変更履歴](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)、[Agent Skills仕様](https://agentskills.io/specification)、[MCP仕様リポジトリ](https://github.com/modelcontextprotocol/modelcontextprotocol)、Git公式ドキュメント（[git-restore](https://git-scm.com/docs/git-restore)、[git-revert](https://git-scm.com/docs/git-revert)、[git-switch](https://git-scm.com/docs/git-switch)）を確認しました。製品文書の入口は[Codex](https://learn.chatgpt.com/docs)と[Claude Code](https://code.claude.com/docs/en/overview)です（Codexの文書は以前developers.openai.com/codexにあり、現在はlearn.chatgpt.comに移っています）。コマンドやポリシーはバージョンと組織によって異なります。

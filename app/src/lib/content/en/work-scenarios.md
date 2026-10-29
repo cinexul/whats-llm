@@ -1,34 +1,28 @@
-There's a big category of office work nobody likes but can't escape: piecing a pile of points into a presentable email, stuffing scattered information into a table, shrinking meeting conclusions into three sentences, translating a foreign-language passage. This work isn't hard, but it's **grinding, time-consuming, and draining.**
+Every office has a pile of chores nobody enjoys but nobody can avoid: turning a list of points into a polite email, squeezing scattered information into a table, boiling a meeting's conclusions down to three sentences, translating a passage from another language. None of it is hard, but it's tedious and eats time. AI could have been made for this work: it never gets bored, it's fast, and it can give you several versions to pick from. For many people, this is where AI first pays off.
 
-AI is practically made for this kind of work. It doesn't mind, it works fast, and it can immediately give you several versions to pick from. Outsourcing this tedious text work to it is the **first sweet taste** most people get from using AI.
-
-But there are traps behind the sweetness. Ask it to translate and the same technical term comes out two different ways; have it tidy a table and it casually changes a number or a unit; have it write an email and it uses the wrong tone, getting buddy-buddy where it should be respectful. This chapter teaches both how to hand off this work gracefully and how to watch the few spots most likely to go off the rails. The one-line spoiler up front: **outsource the tedium to it, keep the judgment for yourself.**
+There are traps, though. In a translation it renders the same technical term two different ways; tidying a table, it quietly changes a number or a unit; writing an email, it strikes the wrong tone and gets chummy where it should be respectful. This chapter covers how to hand these jobs off well and which spots to watch most closely.
 
 ## 1. First sort it out: what to outsource, and what you must backstop
 
-This is the master switch for using AI at work. Run the task through your head and split it into two columns:
+Before you start, run the task through your head and split it into two columns:
 
 | Safe to outsource to it | You must backstop yourself |
 | --- | --- |
-| Drafting a first version, rephrasing, adjusting tone | **Whether the facts are right** (numbers, names, dates, amounts) |
-| Expanding points into paragraphs, shrinking long text into a summary | **Whether to send it, to whom, whether it's appropriate** |
-| Formatting, applying a template, outlining | **Professional judgment and the final call** (legal, contracts, external commitments) |
-| Translating a first draft, generating several alternatives | **Whether the tone is appropriate, whether it offends anyone** |
-| Converting information from one form to another (text <-> table) | **Whether privacy-sensitive information can go in** (see Chapter 37) |
+| Drafting a first version, rephrasing, adjusting tone | Whether the facts are right (numbers, names, dates, amounts) |
+| Expanding points into paragraphs, shrinking long text to a summary | Whether to send it, to whom, whether it's appropriate |
+| Formatting, applying templates, outlining | Professional judgment and the final call (legal, contracts, commitments to outsiders) |
+| A first-draft translation, several alternative versions | Whether the tone is right, whether it will offend anyone |
+| Moving information from one form to another (text ↔ table) | Whether sensitive information may go in at all (Chapter 37) |
 
-The logic of the split is simple: **the left is "labor and expression," the right is "judgment and responsibility."** AI can do the work for you, but **you remain responsible for the result** — the email goes out under your name, and you are accountable for the numbers in the report. This follows the last chapter's advice to use AI as a study partner while checking its facts, and Chapter 14's advice to review whether its work meets your requirements.
+The left column is labor and expression; the right is judgment and responsibility. It can do the work for you, but it can't take responsibility for you: the email goes out under your name, and the numbers in the report are on you. This is the same line as Chapter 15's "a reading buddy, not a source of facts" and Chapter 14's "it runs the flow, you sign off." Once you can tell the two columns apart, you can outsource the left freely and keep a firm hold on the right.
 
-> **Key point:** Using AI at work, how efficient you are doesn't depend on how well you "command" it, but on whether you **tell apart these two columns.** Wrongly handing off judgment and responsibility to it will blow up sooner or later; clutching the physical work to yourself wears you out for nothing. **Outsource boldly what should be outsourced, backstop firmly what should be backstopped.**
+## 2. The three places it most often goes wrong
 
-## 2. Three most common pitfalls
+### First, translation: terms that don't stay consistent
 
-The three scenarios below almost everyone uses, and almost everyone has tripped on. Recognize the trap first, then you can dodge it.
+Ask it to translate a document full of technical terms and it may well render the same term as A in one paragraph and B in the next. A product name, a technical term or a person's name keeps shifting, as if two people did the translation. The reason is that it translates paragraph by paragraph and doesn't keep a glossary of "this word is always called this."
 
-### Pitfall one: translation, inconsistent terminology
-
-You have it translate a document with technical terms, and it very likely renders **the same term as A in this section and B in the next.** A product name, a technical term, a person's name — wobbling back and forth, reading like two people translated it. The reason is its nature again: it translates section by section, "continuing" as it goes, and it **has no stable glossary in mind** keeping "this term must be called this throughout."
-
-**What to do**: **fix the terms first, write them into the instruction.**
+The fix is to pin down the terms first and write them into the instructions:
 
 ```text
 Please translate the following English document into Spanish.
@@ -38,23 +32,23 @@ Use these agreed translations consistently throughout:
 After translating, check: do any of these terms appear with a different rendering anywhere?
 ```
 
-### Pitfall two: tables / data, numbers and units quietly changed
+### Second, tables and data: numbers and units quietly changed
 
-This is easy to overlook. Have it organize or convert a table, and it sometimes **copies a number incorrectly, changes a unit (kilometers to miles), or changes a date format**, without telling you. Generating text (Chapter 4) **does not guarantee that the original values are preserved**. Check the output against the source, and use a calculator or spreadsheet for calculations.
+This is the hardest to notice and the most dangerous. Ask it to tidy or convert a table and it sometimes gets a number wrong, swaps a unit (kilometers become miles) or scrambles a date format, without telling you. Its job is to produce the most plausible continuation (Chapter 4); unlike a calculator, it doesn't guarantee that values stay the same. To it, numbers are also text that can be "smoothed out" along the way.
 
-**What to do**:
+So:
 
-- For any organizing that involves numbers, **check each one against the original data yourself**, especially amounts, units, dates.
-- Explicitly instruct: "**Copy original numbers and units exactly, don't change or convert a single one.**"
-- If you really need to compute (sum, convert), don't count on its mental math — have it **lay out the formula so you can check**, or just use spreadsheet software.
+- Whenever numbers are involved, check them one by one against the original data, especially amounts, units and dates.
+- Say it plainly: "Copy all original numbers and units exactly. Don't change or convert a single one."
+- If you need real arithmetic (totals, conversions), don't rely on its mental math. Have it write out the formula so you can check it, or just use a spreadsheet.
 
-> **Key point:** Pull this one out and remember it firmly: **AI is not a calculator — don't trust the numbers it hands you.** It can lay out a table beautifully, but whether the numbers are right is something you must verify against the original data yourself. A beautifully formatted table with one wrong number is far more dangerous than an ugly one, because pretty makes you let your guard down.
+> **Key point:** AI is not a calculator; check the numbers it hands you against the original data. A beautifully formatted table with one wrong number is more dangerous than an ugly one, because the polish makes you drop your guard.
 
-### Pitfall three: email / copy, tone wrong for the occasion
+### Third, email and copy: the wrong tone for the occasion
 
-Have it write an email, and its default tone isn't necessarily on point: a reply to a client comes out too casual, a request to a colleague too stiff and official; where it should refuse it beats around the bush, where it should apologize it glosses over. It **doesn't know your relationship with the recipient or how sensitive the matter is** — only you know those.
+Its default tone may not fit: a reply to a client comes out too casual, a request to a colleague too stiff; it beats around the bush when it should decline clearly, and glosses over what calls for an apology. It doesn't know your relationship with the recipient or how sensitive the matter is. Only you know that.
 
-**What to do**: feed it the "occasion."
+So tell it the occasion:
 
 ```text
 Help me write a reply email to a client.
@@ -63,16 +57,14 @@ Help me write a reply email to a client.
 - Length: brief, within 5 sentences.
 ```
 
-> **Key point:** Tone is the thing that most tests your sense of proportion, and proportion is exactly what most depends on **background only you hold**: your relationship, the weight of the matter, the company's conventions. So an email can be drafted by it, but **before it goes out you must read it yourself** — what you're reading is whether the tone fits and whether any line will offend. This belongs squarely in the last section's "must backstop yourself" column.
+Let it draft the email, but read it yourself before it goes out, checking whether the tone fits and whether any line could offend. That belongs in the "must backstop yourself" column from section 1.
 
 ## 3. One small trick that instantly steadies the output: list points first, then write
 
-If you learn only one trick, learn this: **don't have it hand you a finished product right away, have it list the points first.**
-
-Compare two ways of using it:
+If you learn only one trick, make it this: don't ask for the finished piece right away; have it list the points first.
 
 ```text
-x One step to the finish: "Write me a project weekly report." -> It spits out a big piece
+x One step to the finish: "Write me a project weekly report." -> It writes out a big piece
             directly, and you have to fish through the draft for which line is off, what's
             missing.
 
@@ -83,44 +75,26 @@ v Two steps:   (1) "First list which blocks of points this weekly report should 
                -> The draft that comes out is already pointed right, with small changes.
 ```
 
-Why does this work?
+Fixing an outline is much cheaper than fixing a draft. If a point is wrong, you see it at a glance and fix it in one sentence; once it's a long piece, the mistakes hide between the lines and take a while to dig out. Once you've approved the skeleton, it fills in the content without wandering off to another topic. Doing one thing at a time (structure first, then content) also makes the quality steadier, the same idea as Chapter 14's "see the plan before acting." It works for emails, reports, proposals and summaries alike.
 
-- **Revising an outline is far cheaper than revising a draft.** A wrong point you spot immediately and fix in a sentence; once it's written into a long flowing piece, the error hides between the lines, slow and tiring to find.
-- **You hold the helm on direction.** The points are the skeleton; once you sign off on the skeleton, the flesh it grows on top won't drift off to another topic.
-- **It also answers more accurately.** Doing one thing at a time (structure first, then content) is steadier in quality than "thinking and writing at once, charging to the end" — the same principle as Chapter 14's "see the plan before acting."
+## 4. Common misconceptions, corrected
 
-> **Key point:** "List points first, then write" works for almost all writing and organizing work: emails, reports, proposals, summaries. It splits a one-shot "bet it all" into two steps, "agree on the skeleton first, then fill in content," letting you set the direction right at the **cheapest stage** (before it's written). Build this habit and your output gets visibly steadier.
-
-## 4. A few small reminders for keeping the judgment in your hands
-
-A few last running reminders, all to hold the line of "judgment and responsibility are yours":
-
-- **Numbers, names, dates, amounts — check each one.** These are what it most loves to change in passing, and the most damaging when wrong.
-- **Things going out, read them yourself before sending.** Emails, announcements, documents for clients — what you're reading is tone and proportion.
-- **Don't paste sensitive information casually.** Client privacy, company secrets, personal ID — think first about whether it can go in (Chapter 37 covers this).
-- **Don't let it make the call for you.** "Should I agree to this condition," "can this sentence be a promise" — this is your work, not its.
-- **The "facts" it gives still need checking.** It hallucinates at work too (Chapter 9); the policies, clauses, and data it cites all need confirming against the original source.
-
-> **Key point:** Condense this chapter into one sentence and hang it in your mind: **let AI be a nimble assistant, don't let it be the one who decides.** It clears the tedious text work fast and well, and you put the saved energy where it truly matters, checking facts, gauging proportion, making judgments, taking responsibility. This is the right posture for using AI at work.
-
-## 5. Common misconceptions, corrected
-
-| Common misconception | Reality |
+| Misconception | Reality |
 | --- | --- |
-| The tables AI organizes shouldn't have number errors | It's not a calculator; numbers, units, and dates can all be changed in passing, so you must check against the original data yourself |
-| Just hand translation to it, it'll handle consistency | It translates section by section with no stable glossary in mind, so the same term is often inconsistent; fix the terms first and write them into the instruction |
-| Have it write the email and send it directly, saves effort | It doesn't know your relationship with the other party or the occasion, so the tone is often off; before anything goes out you must read it yourself |
-| Having it go one step to the finished product is most effortless | Listing points first then writing is more effortless: revising an outline is cheaper than revising a draft, and the direction drifts less |
-| Since it can write emails and make tables, it can make the call for me | It does the work for you, but it can't be responsible for you; whether to send, whether to promise, is your judgment |
+| A table the AI tidied up should have correct numbers | It's not a calculator; numbers, units and dates can get changed along the way. Check against the original data |
+| Leave translation to it and it will keep things consistent | It translates paragraph by paragraph with no fixed glossary; pin the terms down in the instructions |
+| Have it write the email and send it straight off | It doesn't know your relationship or the occasion; read anything external before sending |
+| Getting a finished piece in one step saves the most effort | Points first, then the draft saves more: an outline is cheaper to fix and keeps the direction on track |
+| If it can write emails and build tables, it can make my decisions | It works for you but can't take responsibility; whether to send or promise is your call |
 
 ## Summary
 
-- The master switch for using AI at work: **tell apart the "outsource" and "backstop" columns** — the left is labor and expression, the right is judgment and responsibility. It does the work for you, but it can't be responsible for you.
-- The three most common pitfalls: **inconsistent translation terminology** (fix the terms first), **table numbers / units quietly changed** (it's not a calculator, check yourself), and **email tone wrong for the occasion** (feed it the relationship and occasion, read it yourself before sending).
-- The habit most worth building: **have it list points first, you set the direction, then write** — revising an outline is cheaper than revising a draft, and the output steadies instantly (same as Chapter 14's "plan first, then act").
-- Running backstop: check each number, read it yourself before sending out, don't paste sensitive information carelessly (Chapter 37), don't let it make the call, and remember its "facts" still need verifying against the original source (Chapter 9).
+- Using AI at work starts with two columns: labor and expression on the left can be outsourced; judgment and responsibility on the right stay with you.
+- The three places it most often goes wrong: inconsistent terms in translation (set a glossary first), numbers and units quietly changed in tables (check against the original data), email tone wrong for the occasion (tell it the relationship and setting, and read before sending).
+- The habit most worth building: have it list the points, set the direction yourself, then have it write.
+- Think before pasting sensitive information (Chapter 37); policies, clauses and figures it gives you at work also need checking against the original source (Chapter 9).
 
-That brings Part Two, "Putting large models to use," to a close. You can now use AI steadily in daily life, learning, and work. In the next part, we switch perspective and look at the "tool map" behind the names Claude, ChatGPT, API, and Agent.
+That wraps up Part 2, "Putting large models to work." The next part shifts perspective to the tool landscape behind names like Claude, ChatGPT, API and agent.
 
 ---
 
@@ -156,12 +130,12 @@ That brings Part Two, "Putting large models to use," to a close. You can now use
    - D. The text overflowed the window, so another model did the second half
    > **Answer: C.** This follows directly from its section-by-section nature: it doesn't automatically keep terms consistent across the whole text. The fix is to fix the terms first, write them into the instruction, and have it check after translating. A anthropomorphizes it. B is wrong: it "knows" the term but hasn't fixed a rendering. D is an imagined mechanism.
 
-5. **[Basic · Scenario]** You need to write a reply to an important client who just complained about your service, and it really was your side's mistake. When drafting with AI, what should you most do? <!-- quiz: q05 revision: 2 -->
+5. **[Basic · Scenario]** You need to write a reply to an important client who just complained about your service, and it really was your side's mistake. When drafting with AI, what should you most do? <!-- quiz: q05 revision: 3 -->
    - A. Have it make the reply as formal and long as possible to show sincerity
    - B. Explain the relationship and situation, and read it before sending
    - C. First have it decide whether to compensate, then draft by its conclusion
    - D. Have it follow a generic customer-service apology template and send it
-   > **Answer: B.** Tone depends on background only you know (the relationship, who's at fault, how sensitive it is), so feed it the situation and read the draft yourself before sending. A mistakes "long and official" for sincerity. C hands the compensation decision to it, which is yours to make. D's generic template will most likely miss the tone and the nuance.
+   > **Answer: B.** Tone depends on background only you know (the relationship, who's at fault, how sensitive it is), so tell it the situation and read the draft yourself before sending. A mistakes "long and official" for sincerity. C hands the compensation decision to it, which is yours to make. D's generic template will most likely miss the tone and the nuance.
 
 6. **[Basic · Hands-on]** Pick something you write often (weekly report, notice, external email all work) and do it with the "two-step method": step one, have AI **list which blocks of points to cover, no writing yet**, and you scan it and add, cut, adjust; step two, have it **write it up by the settled points.** Compare: how does this differ from "having it produce a finished product right away" in terms of "how much you change"? <!-- quiz: q06 revision: 2 -->
    > **What you should notice:** When listing points first, if the direction's wrong you can correct it in one sentence (revising an outline is cheap); once the skeleton is settled and then written up, the draft that comes out is already pointed right and you hardly need big changes. A "one step to the finish" product, by contrast, hides errors throughout the whole piece, slow and tiring to find. Try the comparison yourself and you'll see why "list points first, then write" works for almost all writing work; it's the same principle as Chapter 14's "see the plan before acting."

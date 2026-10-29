@@ -1,6 +1,6 @@
 # LLM Learning Book — project guide
 
-A web/PWA and offline desktop reader for *LLM Learning Book · 大模型学习手册*, a plain-language
+A web/PWA and offline desktop reader for *LLM Learning Book · 大模型学习手册 · やさしいLLM入門*, a plain-language
 introduction to large language models and to building your own projects with AI
 coding tools, written for readers with no programming background. The book ships
 as a trilingual edition (Chinese / Japanese / English) with one-click in-app

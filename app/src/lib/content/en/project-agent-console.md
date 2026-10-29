@@ -1,127 +1,151 @@
-In the last three projects (Chapters 31, 32, and 33), the AI basically worked alongside you in a "you say one thing, it does one thing" way. This chapter we switch it up: we build an **agent console**, giving it a goal and a process and letting it **run several steps in a row on its own**, while you sit beside it watching it move through "investigate → plan → act → sign off" and step in only at the key points.
+In the previous three projects (Chapters 31–33), the AI mostly worked "you say one thing, it does one thing." This chapter changes the game: you give it a goal and a process, it runs several steps in a row on its own, and you sit beside it watching it move through "investigate → plan → act → sign off," stepping in only at the key points. When you're done you'll have three things: a "must-stop list," a summary file, `summary.md`, that it wrote and you checked, and having seen with your own eyes that it really did stop and ask you before writing a file.
 
-This is the first time that "AI that acts" from Chapter 19 truly lands in your hands. And precisely because it acts, the main event of this chapter isn't "how to make it run harder," but the reverse: **install the brakes first**. The brakes come in two layers. The first layer is the tool's own permission settings (read-only, plan first, ask me at every step), and that's the layer that can actually stop it. The second layer is the rules you write in your prompt; they tell the agent where to stop and ask you, but they can't physically stop it from doing something. Building an agent you can use with peace of mind isn't about getting it to run; the hard part is thinking through **which few steps must never be left to its own call**, and then holding them with both layers.
-
-> [This chapter is about the general approach to "handling an agent that runs on its own." For practice we use a coding agent (such as Claude Code or Codex) as the example, but nothing here is tied to one product. Which product, which interface, and how you configure permissions and tools all differ from provider to provider and update fast, so always **refer to the provider's official documentation**.]
+This is the "AI that takes action" from Chapter 19 landing in your hands for real. Because it takes action, this chapter practices the brakes first. The brakes have two layers. The first is the tool's **permission settings** (read-only, ask before changing anything, and so on), which actually stop operations. The second is the rules you write into your prompt, which tell the agent where to stop and ask, but can't stop it from actually doing something.
 
 ## 1. Getting ready
 
-Before you start, get clear on "what exactly am I building," and don't pile on features right away.
-
-- **Pick a small goal that's "multi-step but not dangerous at any step" to practice on.** For your first agent, the goal should be small and safe. A good example: have it "read a few documents in a folder, write a one-line summary for each, and gather them into one list." This takes several steps (read each, summarize each, finally gather), but **no step deletes anything, sends anything, or spends money**. A bad example: have it "auto-clean my inbox" or "auto-reply to customers"; touching that kind of irreversible work on your first try is like dropping a new driver straight onto the highway.
-- **Get clear on which steps the task breaks into.** You have to break the goal into the few steps of "investigate → plan → act → sign off" in your head (or on paper) first. A process you can't even spell out yourself can't be handed to it to run (this is the hands-on version of the workflow loop from Chapter 14).
-- **Have an environment you can fall back on ready.** An agent really does act, so **the things it can touch should ideally all be recoverable**. If local files are involved, try it in a separate practice folder that holds only **copies** of your documents, managed with Git (see "Git: the bare minimum to get started" in Chapter 26); if you use a platform's built-in agent, look at the isolation or sandbox it provides, and **refer to its official documentation.**
-- **The single most important thing: make a "must-stop list."** Before letting it run, write down "which steps can only be done with my sign-off." This list is the soul of this chapter, and Section 2 below walks you through making it and backing it up with permission settings.
-
-> **Key point:** Half the prep for building an agent is technical (environment, permissions, tools), and the other half is **judgment** (is the goal safe enough, is the process broken down clearly, is the brake list complete). That latter half is what really decides whether you crash.
+- Pick a small goal with several steps where no step is dangerous. Use this one the first time: read three documents in a folder, write a one-line summary of each, and gather them into one list. It takes several steps (list the files, read each, summarize each, gather), but it deletes nothing, sends nothing, and spends no money. Don't start with "clean up my inbox" or "auto-reply to customers"; that's putting a new driver straight onto the highway.
+- Think through how it breaks into steps. A process you can't explain yourself can't be handed to it (Chapter 14).
+- Prepare an environment you can undo: a separate practice folder holding only copies of the documents, under Git (Chapter 26). With an agent built into a platform, check what kind of isolated environment it offers.
+- Make a "must-stop list": the steps that need your OK first. Step 2 shows how.
 
 ## 2. Doing it step by step
 
-The process below doesn't depend on any specific product; Step 0 gives a minimal runnable path using a coding agent. If you use another platform, fit the same approach in (for the specific buttons and commands, **defer to the official documentation**).
-
 ### Step 0: The minimal runnable path: use a coding agent, and tighten permissions first
 
-You don't need to set up a separate platform for this chapter's "console." A coding agent is itself an agent that runs several steps in a row, and the screen where you talk to it is your console. For the first run:
+You don't need to set up another platform: a coding agent already runs multiple steps on its own, and the screen where you talk to it is where you watch it work and can stop it at any moment. The first time, do this:
 
-1. **Make a practice folder.** Call it something like `agent-practice` and put **copies** of three short documents in it (a page or two each is plenty; no originals). Then initialize Git as in Chapter 26 and make one commit as your starting point.
-2. **Start the coding agent inside this folder.** Open the folder, or `cd` into it in a terminal and start the tool, depending on the product (Chapters 28 and 29). Once it's running, ask it "which folder are you in right now?" to make sure it's in the right place.
-3. **Set permissions to the tightest level.** For the first run, use only read-only, plan mode, or an "ask me before every step" setting. Examples as of October 2026: in Claude Code you can enter plan mode with `/plan` (or cycle to it with `Shift+Tab`); in that mode it reads files and proposes a plan but doesn't edit your files, and its default manual mode also asks you before editing files or running commands. In Codex you can pick "Read Only" with `/permissions` (read-only: editing files or going online needs your approval), and it also has a `/plan` mode. Names and entry points change, so check the official documentation.
-4. **Don't connect tools that can send or delete.** This practice doesn't need external tools like email, chat, cloud storage, or calendars. Use `/mcp` to see what's connected right now (Chapters 22 and 36 cover MCP); anything that can send messages, delete things, or spend money on your behalf, switch off first, or move to an environment where they aren't connected.
-5. **Paste in the "goal + process + rules" from Step 1**, and ask it to write the summary list **directly in the chat** rather than saving it to a file. That way the whole task fits within read-only permissions.
+1. Make a practice folder, say `agent-practice`, and put copies of three short documents in it (a page or two each; no originals). Initialize Git and make one commit as described in Chapter 26, as your starting point.
+2. Start the coding agent in this folder (Chapters 28 and 29) and first ask it "which folder are you in right now?" to make sure it's in the right place.
+3. Set permissions to "ask me before changing anything." As of October 2026: from v2.1.283 on, Claude Code starts in auto mode in the terminal and VS Code, where a second model reviews actions and usually no confirmation appears, so switch out of it first. Start it with `claude --permission-mode manual`, or after starting press `Shift+Tab` until the status bar shows "manual mode on." In manual mode it reads files without asking, but asks before changing files, running most commands, or going online. In a folder under Git, Codex defaults to Auto, which can change files directly, so use `/permissions` to switch to Read Only: it can read files in the current folder, and changing files or going online needs your approval. These names and entry points change between versions.
+4. Don't connect tools that can send or delete. This exercise needs no email, chat, cloud drive, or calendar tools. Type `/mcp` in the session to see what's connected (MCP is in Chapters 22 and 36); anything that can send messages, delete things, or spend money on your behalf, turn off for now or switch to an environment without it.
 
-Run it like this, and if it tries to cross a line, the tool will block it or ask you first; you just choose "deny" in the prompt that appears.
+Run this way, it has to ask you before changing anything, and you just pick "deny" in the confirmation that pops up.
 
 ### Step 1: Give it a goal plus a process in plain language
 
-Don't just toss it a goal and let go. Spell out "which steps to follow" too. A request aimed at a non-programmer looks roughly like this:
+Don't just toss it a goal and walk away; spell out the steps too:
 
 ```text
-Goal: Take the few documents in this folder, write a one-line summary for each, and gather them into one list.
+Goal: write a one-line summary of each of the three documents in this folder and gather them into one list.
 
-Please follow this process:
-1. Investigate first: list which documents are in the folder, don't act yet, let me have a look.
-2. Then read each one and write a one-line summary for each.
-3. Finally, write the combined list directly in the chat for me. Don't save it to a file.
+Follow this process:
+1. Investigate first: list which documents are in the folder, then stop and show me.
+2. When I say "continue," read each one and write a one-line summary.
+3. Write the gathered list directly in the chat; don't save it to a file yet.
 
-Rules (very important):
-- You may only "read" and "write the list in the chat." No deleting, no modifying any file, no sending anything out.
-- After investigating, stop and let me see whether the list is right; only continue when I say "continue."
-- For anything you're unsure about, don't guess for me; stop and ask me.
+Rules:
+- Don't delete or change any existing file, and don't send anything anywhere.
+- Where you're unsure, don't guess for me; stop and ask.
 ```
 
-Notice that **half of this passage is about "what not to do" and "where to stop."** This is the second layer of brakes: it tells the agent where to stop and ask you. What can actually stop it is the permission layer from Step 0.
+Half of this text is about "what not to do" and "where to stop." That's the second layer of brakes. What can actually stop it is the permission setting from Step 0.
 
 ### Step 2: Make the "must-stop list" first, the core of this chapter
 
-Before you press "start," mark these kinds of actions **in advance** as "requires human confirmation." The test is just one sentence: **is this step reversible? Does it have consequences?**
+Before you press start, mark actions like these as "must have human confirmation." The test is a single question: can this step be undone, and does it have consequences?
 
-| Fine to let it do itself | Must stop and wait for your sign-off |
+| Fine to let it do on its own | Must stop and wait for your OK |
 | --- | --- |
-| Read files, tidy, sort, generate drafts, list things | **Spends money**: calls a pay-per-use service, places an order, draws down a quota |
-| Pick one among a few unimportant minor options | **Deletes data / overwrites**: deletes, clears, rewrites your original files |
-| Do one step, report back, then do the next | **Sends outward**: sends email, submits, publishes, calls an external interface |
-| Convert content from one form to another | **A judgment where it's unsure and needs you to decide** |
+| Reading files, organizing, sorting, drafting, making lists | Spending money: calling pay-per-use services, ordering, using up credit |
+| Picking one of a few unimportant small options | Deleting or overwriting data: deleting, clearing, rewriting your original files |
+| Finishing a step, reporting, then doing the next | Sending outward: email, submitting, publishing, calling outside services |
+| Converting content from one form into another | Judgment calls it's unsure about and you need to make |
 
-This list is enforced in two layers. The first layer goes to the tool: use permission settings so every action in the right-hand column has to go through you, and on the first run don't connect tools that can send, delete, or spend money at all. The second layer is the rules in your prompt. As Chapter 26 explained, the absence of a prompt doesn't mean an action is harmless, and Appendix C points out that a line in a Markdown file or a prompt can't replace a limit the system actually enforces. This table is Chapter 14's "holding the brake" and Chapter 26's "permission mechanism" landing in a project. **Both the list and the permission settings come before it acts, not as a patch after it's caused trouble.**
+The list is enforced in two layers. The first layer belongs to the tool: hold the right-hand actions with permission settings, and the first time, don't connect tools that can send, delete, or spend at all. Only the second layer is the rules in your prompt. As Chapter 26 explained, no confirmation popping up doesn't mean an action is harmless; Appendix C also warns that a sentence in a Markdown file or a prompt can't replace a restriction enforced at the system level. Settle the list and the permissions before it acts, not after it has caused trouble.
 
 ### Step 3: Let it run, and watch the "investigate → plan → act → sign off" process
 
-After you press start, **don't walk away**. An agent's value is that it runs forward on its own, but the first time you use it, keep every step it runs in sight:
+Once you press start, don't walk away; the first time, watch every step:
 
-- **Watch whether its "investigation" is right**: did it find the right files, did it understand the goal right? If the first step is off, it builds ever more "tidily" on a wrong premise (Chapter 14 covered this pitfall).
-- **Watch whether the must-stop points really hold it**: in read-only or plan mode, when it tries to edit a file or run a command that changes something, the tool blocks it or asks you first, and you choose deny. If it did something irreversible without asking you, that means the permissions were too loose or a tool was connected that shouldn't have been; it isn't a matter of your prompt not being stern enough. Stop it immediately, take stock and recover as in Chapter 30, and tighten the permissions before the next run.
-- **If you feel it's going off track, cut in anytime**: say it clearly, then let it continue; or just go back to a clean state and start over.
+- Is its "investigate" right? Did it find the right files and understand the goal? If the first step goes wrong, it builds ever neater work on a wrong premise (Chapter 14).
+- After listing the documents, did it stop and wait for your "continue"?
+- Did the must-stop points actually hold it? In manual mode or Read Only, when it wants to change a file or run a command that changes things, the tool shows a confirmation first. If something changed without it asking, the permissions were too loose or a tool that shouldn't be connected was; it's not about how firmly the prompt was worded. Stop it immediately, take stock and recover as in Chapter 30, and tighten the permissions before running again.
+- If it seems to be going off track, interrupt any time, explain, and let it continue, or go back to a clean state and start over.
 
-### Checking the result
+### Step 4: Sign off, then approve one write
 
-After one run, check by these three (the idea comes from "the three sign-off questions" in Chapter 25):
+When a round is done, use Chapter 25's "three sign-off questions":
 
-1. **What did it actually do?** Don't just look at the final list it gave; look at what it touched along the way, whether it acted on anything you didn't tell it to. Run `git status` in the practice folder (or ask it to run this read-only command and show you); there should be no changes.
-2. **Did it stop where it should have?** Go back and confirm: after investigating, did it stop and wait for you to say "continue"? Along the way, was there any write, delete, or send you didn't approve? This one matters more than how nice the result looks.
-3. **Can you trust the result?** For the summaries it generated, spot-check a few pieces of key information yourself; its self-check can't be fully trusted (Chapter 14), and nice doesn't equal right.
+1. What did it actually do? Look not only at the final list but at what it touched along the way. Have it run `git status` for you (a read-only Git command that lists any changes in the folder); there should be no changes.
+2. Did it stop where it should? After listing the documents, did it wait for your "continue"? Were there any writes, deletions, or sends you didn't approve? This matters more than how polished the result is.
+3. Can you trust the result? Pick two summaries and check them against the originals; its self-check can't be fully trusted (Chapter 14).
+
+If all is well, have it save the list:
+
+> Plain-language request: *"I've checked the list. Save it as a new file, `summary.md`, in this folder, and don't touch any other file."*
+
+It will first ask whether it may create the file. Check the file name and content, then approve. Once it's saved, look at `git status` again: there should be just one new untracked file, `summary.md`, and no existing file changed. This step lets you see the brakes at work: it stops, says what it wants to do, and you decide whether it goes ahead.
 
 ### Done when
 
-The project is complete when all of the following are true:
+The project is done when all of these are true:
 
-- It ran inside the practice folder under read-only, plan, or ask-every-step permissions, with no tools connected that can send or delete.
-- It first listed the documents in the folder, then stopped and waited for you to say "continue."
-- Each of the three documents has a one-line summary, and the combined list appeared in the chat.
+- It ran in a practice folder holding only copies, in manual mode or Read Only, with no tools that can send or delete.
+- It listed the three documents first and stopped to wait for your "continue."
 - You spot-checked at least two summaries and they match the originals.
-- The files in the practice folder weren't changed (`git status` shows no changes).
-- Nothing was written, deleted, or sent without your approval; whenever it tried to cross a line, the permission settings blocked it or it asked you first.
+- It asked you before creating `summary.md`; after you approved, `git status` showed just that one new file.
+- At no point was there a write, deletion, or send you didn't approve.
 
 ## 3. Common pitfalls
 
-| Pitfall | What's going on / how to dodge it |
+| Pitfall | What happens / how to avoid it |
 | --- | --- |
-| **Giving it a big "irreversible" job right off the bat** | Having it delete email, send messages, or move money on the first try; trouble there is real trouble. Practice first on a safe "read-only, no-write" goal |
-| **Relying on the prompt alone as the brakes** | Writing "ask me before deleting" in the prompt while giving it permissions and tools that can delete and send; it may do it anyway. Start with read-only, plan, or ask-every-step permissions, and don't connect tools that can send or delete; the rules in your prompt are the second layer |
-| **Walking away once you press start** | An agent runs on its own, but the first time you use it you must watch the whole way through, especially whether it "gets held at the must-stop points." Letting go entirely is exactly the dangerous use Chapter 19 warns about over and over |
-| **Taking "it says it checked" as a real check** | Its self-check is still "going along with the conversation," not a real, objective pair of eyes (Chapter 14). Re-verify key information yourself |
-| **Forcing fixes inside a mess after it goes off track** | The more you fix, the more it skews. Just **go back to a clean state and open a new conversation**, re-explaining "the pitfall you just hit" as a premise (Chapters 13 and 30) |
-| **Thinking "more steps equals stronger"** | Letting it run a dozen-plus steps at once leaves you no way to gatekeep step by step. **Take smaller steps and set checkpoints closer together**, and it's actually steadier |
+| Handing it a big irreversible job right away | Deleting email, sending messages, moving money: an accident is a real accident. Practice with a goal that sends nothing, deletes nothing, and writes just one new file at the end |
+| Relying on the prompt alone as the brakes | You write "ask me before deleting" in the prompt but give it permissions and tools that can delete or send, and it may go ahead anyway. Tighten permissions and leave dangerous tools off first; the prompt is the second layer |
+| Assuming the default settings will ask you | Recent Claude Code defaults to auto mode, and in a folder under Git, Codex can change files directly by default. Before the first run, check the mode in the status bar or with `/permissions` |
+| Pressing start and walking away | The first time you must watch the whole way, especially whether it gets held at the must-stop points (Chapter 19) |
+| Treating "it says it checked" as a real check | Its self-check is still "continuing the text"; recheck key information yourself (Chapter 14) |
+| Forcing fixes inside the mess after it goes off track | Go back to a clean state, open a new chat, and restate the premise including the problem you just ran into (Chapters 13 and 30) |
+| Thinking more steps means more power | Let it run a dozen steps at once and you can't check them one by one. Smaller steps and more checkpoints are steadier |
 
 ## 4. Taking it one step further
 
-After the first safe little agent runs smoothly, you can expand **cautiously**, asking again at every step "are the brakes enough":
+At each step forward, ask again whether the brakes are enough:
 
-- **Connect it to a tool or two, or a data source** (using the MCP/Skills approach from Chapter 22), so it can read more and do more. But remember what Chapters 22 and 36 stress over and over: **every new capability you add is one more entry point for mistakes and attacks**, so add as needed, add minimally, and start with read-only access.
-- **Solidify a process you run often**: if you repeatedly need a certain "investigate → plan → act → sign off" routine, you can package it into a fixed process (the Skills approach, Chapters 22 and 36) and call it with one sentence next time.
-- **Gradually loosen permissions, but with great restraint**: only when you're thoroughly sure a step is safe and it really is reversible should you consider letting it do that without asking. **For the few involving spending money, deleting data, or sending outward, we recommend keeping them in "must-stop" for good**, no matter how familiar you are.
-- **Write a "how it should work" guide**: put this project's rules, landmines, and what it can and can't touch into the project's instruction file (the project-context approach, Chapter 28). The model itself doesn't remember your last conversation; the product puts that file back into the context every time work starts, which is why it seems to "remember" the rules.
+- Connect a tool or data source or two (MCP, Chapters 22 and 36). Each new capability is one more entry point for errors and attacks; connect only what you need, with read-only access first.
+- Turn a process you run often into a skill (Skills, Chapters 22 and 36), so one sentence calls it next time.
+- Loosen permissions gradually, and sparingly: only let it act without asking when you're completely sure a step is safe and it can be undone. Spending money, deleting data, and sending outward are best kept on the must-stop list for good.
+- Write a "how you should work" guide: put the rules and what it may and may not touch into the project's instructions file (Chapter 28). The model itself doesn't remember the last conversation; it "remembers" these rules because the product puts that file back into context every time work starts.
 
-> **Key point:** The real skill in building an agent console isn't "how much it can do"; it's **thinking through in advance which few steps must not be left to its own call, and blocking them with permission settings.** The capability is what it brings; the safety is what you design. Brakes first, then the gas: spending money, deleting data, and sending outward always check with you first.
+<aside data-callout="gift">
+
+**A small bonus:** Once you start having a coding agent write real programs, consider putting the text below in your project instructions file (`CLAUDE.md` or `AGENTS.md`, Chapters 28 and 29). It's written for the AI, so you don't need to follow every line: it asks the AI to keep the code clear and easy to change from the start, so fewer messes pile up for later. It doesn't replace signing off (Chapter 25), and the AI won't follow every rule every time, but it usually saves a fair amount of rework.
+
+```text
+While writing code, keep to these principles throughout:
+1. Before changing anything, understand the existing structure and the related code. Keep the project's existing stack, naming and layering, and don't reimplement what already exists.
+2. Modules work together through clear interfaces and types, not through hidden global state, call order, or another module's internals.
+3. Use types and data structures to rule out invalid states. For example, don't represent mutually exclusive states with several independent booleans.
+4. Keep each business rule in one place, so that when requirements change, the edit stays inside the related module.
+5. Give each module one main job. Merge logic only when it is truly the same and changes for the same reasons; don't force together code that merely looks similar.
+6. Don't add abstraction layers, pass-through wrappers or design patterns for imagined future needs. Start with the simplest design that meets the current need.
+7. Validate external input and API responses at the system boundary, don't rely on front-end checks in place of back-end checks, and handle or report errors instead of silently swallowing them.
+8. First build the smallest version that runs and can be verified, then improve it. Keep throwaway test code separate from the real implementation.
+9. After each piece, check whether any of the problems above crept in, and run type checks and tests.
+10. Keep changes within the task. If a larger refactor is needed, explain why and what it affects, and wait for my go-ahead. Where a rule is unclear, state your assumption instead of building it into the real implementation.
+```
+
+</aside>
 
 ## Summary
 
-- This project has you handle, for the first time, an **agent that runs several steps in a row on its own** (Chapter 19); the core practice isn't "make it run hard" but "make it run safely."
-- The minimal runnable path: a practice folder (copies only, started with Git), the coding agent started inside it, **permissions set to read-only, plan, or ask-every-step first**, no tools connected that can send or delete, and the results written in the chat.
-- The brakes have two layers: **the tool's permission settings are the first**, the rules in your prompt are the second. If it did something irreversible without asking, the permissions were too loose; tighten them before the next run.
-- When doing it: give the goal, process, and rules in plain language, and watch its "investigate → plan → act → sign off" process. Three questions for checking the work: what did it actually do, did it stop where it should have, can you trust the result.
-- For the three kinds of irreversible action, **spending money, deleting data, and sending outward**, we recommend keeping them set to "requires human confirmation" for good (echoing Chapters 14, 19, and 26). The specific platform and configuration are **subject to the official docs.**
+- This project is your first time handling an agent that runs several steps on its own (Chapter 19); what you practice is keeping it under control, not making it run hard.
+- The minimal path: a practice folder with copies only, started under Git; permissions set to manual mode or Read Only (recent Claude Code defaults to auto mode, so switch first); no tools that can send or delete.
+- The brakes have two layers: the tool's permission settings are the first, the rules in your prompt the second. If something changed without it asking, the permissions were too loose; tighten them and run again.
+- While it runs, watch "investigate → plan → act → sign off"; when signing off, check what it did, whether it stopped where it should, and whether you can trust the result, then approve one write yourself and confirm with `git status` that only `summary.md` was added.
+- Spending money, deleting data, and sending outward are best always set to require human confirmation (Chapters 14, 19, and 26).
 
-In the next chapter, we switch to a different way of "connecting to AI": instead of a ready-made interface, we let your own program call the model directly through an **API**.
+In the next chapter, we connect AI a different way: instead of a ready-made interface, your own program calls the model directly through an API.
+
+## Sources and version notes
+
+Checked on: 2026-10-29.
+
+- [Claude Code permission modes](https://code.claude.com/docs/en/permission-modes): from v2.1.283 on, terminal and VS Code sessions start in auto mode; manual mode (config value `default`, with `manual` also accepted on the command line) asks before editing files, running shell commands, or reaching the network; `Shift+Tab` switches modes and `--permission-mode` sets one at startup.
+- [Codex approvals and security](https://learn.chatgpt.com/docs/agent-approvals-security): in folders under version control Codex recommends Auto (edits and commands in the working directory without asking); switch to read-only with `/permissions`.
+- [Codex approval presets source](https://github.com/openai/codex/blob/main/codex-rs/utils/approval-presets/src/lib.rs): Read Only can read files in the current workspace, and editing files or accessing the internet needs approval.
+- [Claude Code commands](https://code.claude.com/docs/en/commands): in-session commands such as `/mcp` and `/permissions`.
 
 ---
 
@@ -129,19 +153,19 @@ In the next chapter, we switch to a different way of "connecting to AI": instead
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Answers and explanations are in the quote block under each question; think first, then compare.
 
-1. **[Basic · Concept]** What's the most fundamental difference between building an agent console and the "you ask one thing, it answers one thing" of the earlier projects? <!-- quiz: q01 revision: 2 -->
+1. **[Basic · Concept]** What's the most fundamental difference between letting an agent run a multi-step task and the "you ask one thing, it answers one thing" of the earlier projects? <!-- quiz: q01 revision: 3 -->
    - A. A stronger model behind it, so it can handle harder problems
    - B. It runs several steps on its own; you check at the key points
    - C. A fuller interface, so you can see more information at once
    - D. It checks its own results, so it hardly makes mistakes anymore
    > **Answer: B.** The crux of an agent is that it "runs forward a stretch on its own" (Chapter 19), not that it's smarter or less error-prone. Precisely because it runs on its own and may not stop to ask you, this chapter puts "installing the brakes" first. A and C, the model and the interface, aren't the real difference; D is backwards, since its self-check can't be fully trusted (Chapter 14).
 
-2. **[Basic · Concept]** The "brakes" (must-stop list) this chapter stresses over and over are essentially what? <!-- quiz: q02 revision: 2 -->
+2. **[Basic · Concept]** The "brakes" (must-stop list) this chapter stresses over and over are essentially what? <!-- quiz: q02 revision: 3 -->
    - A. Writing "no deleting, no sending" in the prompt so it complies
    - B. Slowing every agent step so you have more time to react
    - C. Setting deleting, sending, and spending to need your OK first
    - D. A stop button for forcibly shutting the agent down in a crisis
-   > **Answer: C.** The brakes aren't about slowing it down; they're about **drawing the safe boundary**: inside it, it runs freely, and when it hits an irreversible or consequential action it must stop and wait for your sign-off. In practice you enforce that first with the tool's permission settings (read-only, plan, ask every step, no tools that can send or delete), and the rules in your prompt are the second layer. A relies on the second layer alone, and it may act anyway; B and D don't answer "which steps must go through you."
+   > **Answer: C.** The brakes aren't about slowing it down; they're about **drawing the safe boundary**: inside it, it runs freely, and when it hits an irreversible or consequential action it must stop and wait for your sign-off. In practice you enforce that first with the tool's permission settings (manual mode or read-only, no tools that can send or delete), and the rules in your prompt are the second layer. A relies on the second layer alone, and it may act anyway; B and D don't answer "which steps must go through you."
 
 3. **[Basic · Misconception]** "I've spelled out the goal and pressed start, so I can go do other things." For your first agent, what's wrong with this idea? <!-- quiz: q03 revision: 2 -->
    - A. On a first run, watch to see whether the must-stop points hold
@@ -164,5 +188,5 @@ In the next chapter, we switch to a different way of "connecting to AI": instead
    - D. Loosen its permissions a bit so it can clean up the mess itself
    > **Answer: C.** Forcing fixes inside polluted context usually skews it further (Chapters 13 and 30). That's why the prep stage readies an environment you can roll back, for exactly this moment of starting over cleanly. A is exactly forcing fixes; B lets it run further in the wrong direction; D widens the damage it can do just when it has already gone wrong.
 
-6. **[Basic · Hands-on / Observation]** Do one real run with the minimal path from Step 0: start the coding agent in a practice folder with read-only or plan permissions, and have it summarize three documents in one line each and gather the results. Before you run it, break the task into "investigate → plan → act → sign off" steps and make a "must-stop list"; afterward, go through the "Done when" list item by item. (Exact settings are **subject to the official docs.**) <!-- quiz: q06 revision: 2 -->
-   > **What you should notice:** You'll find that for a safe practice goal, there may be no "must-stop points" at all (it's all read-only, no sending, no deleting), which is exactly the kind of goal to pick for your first time; with read-only permissions, even if it tries to write a file, it gets blocked or asks you first. The moment "delete, send, spend money" shows up in the goal, the corresponding steps must go into the "must-stop list," and they must be held by permission settings first, not just written in the prompt. **Think through the brakes first, then talk about letting it run**; that's the right order for building an agent (echoing Chapters 14, 19, and 26).
+6. **[Basic · Hands-on / Observation]** Do one real run of Steps 0–4 in this chapter: start the coding agent in a practice folder in manual mode or Read Only, have it summarize three documents in one line each and gather the results, and after checking them approve saving them to `summary.md`. Before you run it, break the task into "investigate → plan → act → sign off" steps and make a "must-stop list"; afterward, go through the "Done when" list item by item. <!-- quiz: q06 revision: 3 -->
+   > **What you should notice:** You'll find this practice goal has just one must-stop point: the final write that creates `summary.md`. In manual mode or Read Only it stops and asks you there, and after you approve, `git status` shows only that one new file. Nothing sent, nothing deleted, and the one write is visible and reversible: exactly the kind of goal to pick for your first time. The moment "delete, send, spend money" shows up in the goal, the corresponding steps must go into the "must-stop list," and they must be held by permission settings first, not just written in the prompt. **Think through the brakes first, then talk about letting it run**; that's the right order for building an agent (echoing Chapters 14, 19, and 26).

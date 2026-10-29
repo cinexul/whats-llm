@@ -1,4 +1,4 @@
-This appendix is a working reference for Claude Code and Codex. Chapters 28 and 29 provide first-session exercises; this page helps you choose the next capability and troubleshoot it. The examples were checked on **2026-10-27**. Use your installed version’s help output to resolve differences.
+This appendix is a working reference for Claude Code and Codex. Chapters 28 and 29 provide first-session exercises; this page helps you choose the next capability and troubleshoot it. The examples were checked on 2026-10-29. Use your installed version’s help output to resolve differences.
 
 ## 1. Start with the executable and the account
 
@@ -28,7 +28,7 @@ Record the version, platform, execution location, and active account when report
 | Plan before acting | `/plan`, or cycle to plan mode with `Shift+Tab` | `/plan` | Whether the plan names concrete files and a validation method |
 | Draft project guidance | `/init`, then review `CLAUDE.md` | `/init`, then review `AGENTS.md` | Accuracy of paths, commands, and rules |
 | Inspect changes | `/diff` or `git diff` | `/diff` or `git diff` | Relevant tracked changes and unexpected files |
-| Undo this session's file edits | `/rewind` (or press `Esc` twice with an empty prompt) | Use Git (Section 11) | Covers only files changed with its editing tools; changes made by Bash commands and external effects are not included |
+| Undo this session's file edits | `/rewind` (or press `Esc` twice with an empty prompt) | Use Git (Section 11) | Restores only files it changed with its editing tools in this session; files changed only by Bash commands, most subagent edits, and external effects are not included |
 | Inspect retained knowledge | `/memory` | `/memories` plus project files | Stale or conflicting notes |
 | Reduce a long conversation | `/compact`, or `/clear` for a new conversation | `/compact`, or `/new` for a new conversation | Requirements and evidence preserved in the summary |
 | Check skills | `/skills` | `/skills`, or type `$` to name one | Skill name, description, source |
@@ -38,7 +38,7 @@ This table is a navigation aid, not a promise of identical interfaces. An editor
 
 ## 3. Project instructions, memory, skills, and configuration
 
-Use **project instructions** for stable working conventions, **memory** for retained observations, and **skills** for reusable procedures. Configuration controls the application itself: enabled tools, connection settings, model choices, and permissions. Putting a sentence into a Markdown instruction file does not enforce an operating-system restriction.
+Use project instructions for stable working conventions, memory for retained observations, and skills for reusable procedures. Configuration controls the application itself: enabled tools, connection settings, model choices, and permissions. Putting a sentence into a Markdown instruction file does not enforce an operating-system restriction.
 
 A good project instruction file is short enough to review and specific enough to act on:
 
@@ -49,9 +49,9 @@ A good project instruction file is short enough to review and specific enough to
 - Report commands run, outcomes, and any unverified assumptions.
 ```
 
-Replace these general rules with verified repository details where useful. Keep personal preferences and secrets out of shared project rules. For nested instruction files, inspect which files apply to the directory being edited; do not assume every instruction file applies globally.
+Replace these general rules with verified repository details where useful. Keep personal preferences and secrets out of shared project rules. For nested instruction files, inspect which files apply to the directory being edited; do not assume every instruction file applies globally. Claude Code reads `AGENTS.md` when a repository has no `CLAUDE.md`, so both tools can share one instruction file.
 
-For files you don't want the agent to read (such as a `.env` holding a key), restrict reading wherever the tool supports it: Claude Code accepts `Read(./.env)` under `permissions.deny` in its settings, and Codex lets you set the file to `deny` in its permissions configuration. Such rules don't necessarily cover every way a file can be read, so set the key yourself and never paste it into a chat (Chapter 35).
+For files you don't want the agent to read (such as a `.env` holding a key), restrict reading wherever the tool supports it: Claude Code accepts `Read(./.env)` under `permissions.deny` in its settings, and Codex accepts `"**/*.env" = "deny"` in the filesystem rules of a permissions profile. Such rules don't necessarily cover every way a file can be read, so set the key yourself and never paste it into a chat (Chapter 35).
 
 ## 4. Planning and reasoning settings
 
@@ -85,7 +85,7 @@ Before enabling them, read the actual commands and set the working directory, cr
 
 ## 8. Skills, plugins, and MCP
 
-The minimal steps for a first skill or MCP server (where the skill folder goes, how to write the top of `SKILL.md`, and how to use `claude mcp add` and `codex mcp add`) are in **Chapter 36**. This section lists only the judgment points.
+The minimal steps for a first skill or MCP server (where the skill folder goes, how to write the top of `SKILL.md`, and how to use `claude mcp add` and `codex mcp add`) are in Chapter 36. This section lists only the judgment points.
 
 Start with a skill you can inspect: `SKILL.md`, a clear description, short instructions, and only the supporting files needed. Under the Agent Skills standard, `name` uses only lowercase letters, digits, and hyphens and matches its folder. Validate it on synthetic data. Client installation locations and optional metadata differ.
 
@@ -115,7 +115,7 @@ Change one suspected cause at a time and keep the original error. Repeatedly res
 
 ## 11. Git command quick reference
 
-Why to use these commands, when, and how far they can take you back is explained in **Chapter 26** (including "Git: the bare minimum to get started" and the limits of recovery). This is only a quick reference. Run the commands in a terminal inside the project folder; you can also have the agent run them, but read exactly which command it's about to run first.
+Why to use these commands, when, and how far they can take you back is explained in Chapter 26 (including "Git: the bare minimum to get started" and the limits of recovery). This is only a quick reference. Run the commands in a terminal inside the project folder; you can also have the agent run them, but read exactly which command it's about to run first.
 
 | Command | What it does | Watch out for |
 | --- | --- | --- |
@@ -142,4 +142,4 @@ A review should state the concrete problem, resulting behavior, and validation e
 
 ## Sources and version notes
 
-Checked **2026-10-27**: [Codex README](https://github.com/openai/codex/blob/main/README.md), [CLI command source](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs), [configuration schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json), [Codex MCP](https://developers.openai.com/codex/mcp), and [Codex permissions](https://developers.openai.com/codex/permissions); [Claude Code commands](https://code.claude.com/docs/en/commands), [checkpointing and `/rewind`](https://code.claude.com/docs/en/checkpointing), [settings](https://code.claude.com/docs/en/settings), [Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md), and [changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md); [Agent Skills specification](https://agentskills.io/specification); [MCP specification repository](https://github.com/modelcontextprotocol/modelcontextprotocol); Git documentation for [git-restore](https://git-scm.com/docs/git-restore), [git-revert](https://git-scm.com/docs/git-revert), and [git-switch](https://git-scm.com/docs/git-switch). The product documentation entry points are [Codex](https://developers.openai.com/codex) and [Claude Code](https://code.claude.com/docs/en/overview). Command availability and policy settings vary by installed version and organization.
+Checked 2026-10-29: [Codex README](https://github.com/openai/codex/blob/main/README.md), [CLI command source](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs), [configuration schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json), [Codex MCP](https://learn.chatgpt.com/docs/extend/mcp?surface=cli), [Codex permissions](https://learn.chatgpt.com/docs/permissions), and [Codex skills](https://learn.chatgpt.com/docs/build-skills); [Claude Code commands](https://code.claude.com/docs/en/commands), [checkpointing and `/rewind`](https://code.claude.com/docs/en/checkpointing), [settings](https://code.claude.com/docs/en/settings), [memory](https://code.claude.com/docs/en/memory), [Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md), and [changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md); [Agent Skills specification](https://agentskills.io/specification); [MCP specification repository](https://github.com/modelcontextprotocol/modelcontextprotocol); Git documentation for [git-restore](https://git-scm.com/docs/git-restore), [git-revert](https://git-scm.com/docs/git-revert), and [git-switch](https://git-scm.com/docs/git-switch). The product documentation entry points are [Codex](https://learn.chatgpt.com/docs) and [Claude Code](https://code.claude.com/docs/en/overview) (Codex's documentation used to live at developers.openai.com/codex and has moved to learn.chatgpt.com). Command availability and policy settings vary by installed version and organization.

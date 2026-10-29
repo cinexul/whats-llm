@@ -1,56 +1,41 @@
-A lot of people who use AI have hit these "odd things": partway through a conversation it forgets what you said at the start; you paste in a long article and it says "too long"; you ask roughly the same amount as before, yet this month's quota burns down fast.
+Many people who use AI have hit these odd things: partway through a chat it forgets what you said at the start; you paste in a long article and it says "too long"; you ask about as much as usual, yet this month's quota drops fast.
 
-These seemingly unrelated phenomena are really one and the same thing underneath: **AI sees text differently from how we do.** It doesn't read character by character, and it doesn't "remember" the whole conversation in its head. Understand the two words in this chapter, **token** and **context window**, and all those odd things make sense. This is also one of the most practical chapters in the book: understand it, and a lot of what you do with AI will suddenly "click."
+They share one cause: AI sees text differently from how we do. It doesn't read letter by letter, and it doesn't keep the whole conversation "in its head." Understand this chapter's two words, token and context window, and all of these make sense.
 
 ## 1. Token: the "grains" AI cuts text into
 
-When we read “please help me write an email,” we see six words. The model processes a sequence of **tokens**:
+We read "Please help me write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m." as 17 words, or 95 characters counting spaces and punctuation. The model receives a sequence of **tokens**: a tokenizer first cuts the text into pieces, then hands them to the model. The figure below shows how two real tokenizers split this sentence: o200k_base, used by GPT-4o, and the tokenizer of Alibaba's Qwen3.
 
-```text
-Input:  please help me write an email
-Tokens: please / help / me / write / an / email      (the split is just illustrative)
-```
+![The same English sentence split into 21 tokens by both o200k_base and Qwen3, with a table comparing token counts for the Chinese, Japanese, and English versions of the sentence](/figures/en/tokens.svg)
 
-A token is a **unit used to represent text for the model**, not necessarily a character or a word. A **tokenizer** applies an encoding and vocabulary prepared for the model; it does not invent a new splitting rule every time you chat.
+Here both tokenizers produce the same 21 tokens. Most words are one token each, including the space in front of them; "tomorrow's" becomes "tomorrow" plus "'s", and "3 p.m." takes five tokens.
 
-- A token may be a word, a word fragment, a character, or a fragment of a character’s encoding. Punctuation, spaces, and line breaks count too, sometimes combined with neighboring text in one token.
-- **Different models may use different tokenizers, and some share one.** Counts depend on the encoding and text. Do not assume a fixed ratio between characters, words, languages, or models.
+A token is the unit a model works with, not necessarily a character or a word:
 
-> **Why does the model cut it this way?** Because cutting by "letters" makes the sequence too long and too fragmented for the model to grasp meaning; cutting by "whole words," there are far too many words in the world and they keep coming (new words, misspellings, foreign words). Tokens are a compromise between the two: **not too fragmented, yet able to spell out any text**, including words it has never seen. You don't have to remember exactly how it's cut. It's enough to know "the length in the model's eyes is counted in tokens, and it doesn't exactly match the character count you'd tally."
+- It may be a word, part of a word, a single character, or even part of a character's encoding. Take the Chinese word 骆驼 ("camel"): o200k_base splits it into 4 tokens (each character in two halves), Qwen3 into 2, while the English "camel" is a single token in both. Punctuation, spaces, and line breaks count too, sometimes merged with neighboring text.
+- A tokenizer is a fixed vocabulary and set of splitting rules set up for a model ahead of time; it doesn't make up new rules each time you chat. Different models often use different tokenizers, so the same sentence can come out at different token counts.
 
-> **Quick-math sidebar: roughly how many tokens is a passage?**
-> Building a **sense of scale** is enough: a short passage of a few hundred Chinese characters is usually a few hundred to a bit over a thousand tokens. If you want a finer rule of thumb: common English is roughly "4 characters ≈ 1 token," and Chinese is often "1 character ≈ 1 to 2 tokens."
-> But these are all **rough rules of thumb, not iron laws**: how many tokens you actually get depends on **which model's tokenizer** is used, and is also affected by punctuation, spaces, digits, and any code mixed in. People used to say "English uses fewer tokens than Chinese," but on newer tokenizers that gap has shrunk a lot, and it can't be taken as a law. **For precision, use the official token-counting tool for the product in question, and refer to the provider's official documentation.**
+Why cut text this way? Splitting into single letters or characters makes sequences long and fragmented; splitting into whole words means far too many words, with new words and typos appearing all the time. Tokens are the compromise: common combinations become one piece and rare ones are split smaller, so text is never too fragmented, yet any string can be spelled out.
+
+> **Quick math: roughly how many tokens is a passage?**
+> Measured on this book's text with these two tokenizers, English comes to about 1.3 tokens per word (one token per 4 to 5 characters on average). Chinese and Japanese come to about 0.65 to 0.77 tokens per character. So a 1,000-word English article is about 1,300 tokens, and a 1,000-character Chinese article about 700. An older tokenizer such as cl100k_base, used by GPT-4, needed about one token per Chinese character.
+> These are rough rules of thumb: counts depend on the tokenizer and are affected by punctuation, digits, and code. The example sentence takes 21 tokens in both Chinese and English with o200k_base, and with Qwen3 the Chinese version needs fewer, so "English uses fewer tokens than Chinese" is not a law. For precise counts, use the counter for the model in question or check the usage the API reports. Appendix E compares more sentences.
 
 ## 2. The context window: the model's "workbench"
 
-Once you know tokens, the second word is easy.
+The **context window** is the maximum number of tokens a model can handle in one request. Think of it as a desk: to work on something, everything you need has to be spread out on it. System instructions (what the product tells the model ahead of time), earlier conversation, material you paste in, and tool descriptions and results all take up space, and there has to be room left for the answer. The thinking tokens a reasoning model produces before it answers (chapter 8) count too. The figure below draws the desk as a fixed budget:
 
-The **context window** limits the tokens available for a model request. Think of it as the space used by the input context plus the generated response; exact accounting and separate input/output limits depend on the model. System instructions, tool definitions/results, and the "thinking" tokens a reasoning model generates before it answers (reasoning tokens, chapter 8) also use the relevant budget. Leave room for the answer.
+![The context window drawn as a fixed-length budget bar shared by system instructions, conversation history, attachments, and room for the answer; after a long chat the history grows until the budget is full, and four things a product may do near the limit are listed below](/figures/en/context-window.svg)
 
-An analogy: the context window is like a **desk**. To handle something, you have to lay all the relevant material out on the desktop. What you said, its earlier replies, the document you pasted in, the instructions you gave it: **all of it takes up desk space.** Desks come in different sizes, but even a big one has an edge.
+What's on the desk isn't just what you typed. Many people look at their own short question and wonder why "I barely said anything," forgetting that the 10-page PDF they pasted earlier and the 2,000-word reply already cover most of the desk.
 
-```text
-Everything spread on the desk this conversation counts toward the context window:
-┌─────────────────────────────────────────────┐
-│  The instructions you gave ("use a casual tone")  │
-│  The material you pasted (that 5,000-word article) │
-│  The questions you've asked over time              │
-│  The answers it's given over time                  │
-└─────────────────────────────────────────────┘   ← the total can't exceed the window limit
-```
+How big is the desk? As of October 2026, the Claude models Anthropic offers through its API have a context window of 1 million tokens and can write up to 128,000 tokens in one reply; by Anthropic's estimate, 1 million tokens is about 555,000 English words. Appendix E lists other mainstream models. How much you can actually use in a chat product depends on the product and plan.
 
-> **Key point:** What's on the desk **isn't just the characters you typed.** The long text you pasted in and the lengthy replies it wrote are what really take up space. Many people stare at their own short line of a question, puzzled that "I barely said anything," forgetting that the 10-page PDF they just pasted in and its rambling 2,000-word answer already covered the desk.
+## 3. What you chat about and what it learned in training are different things
 
-Different products and different models have desks of different sizes, and they keep getting bigger, so **this book won't give specific numbers** (writing them down would go stale fast; refer to the provider's official documentation). You only need to build the intuition that "the desktop is limited."
+A model can use the earlier conversation, but chatting normally doesn't write anything into its trained parameters. Whether the service keeps transcripts, memories, or logs is a different question, about the product and privacy (chapter 37).
 
-## 3. Conversation context and trained knowledge are different
-
-This is where beginners most easily go wrong, so let's pull it out and address it on its own.
-
-A model can use earlier conversation text, but **ordinary chat does not write each conversation into its trained parameters**. Whether the service stores transcripts, memories, or logs is a separate product and privacy question.
-
-The software makes **selected conversation state available for the next response**. A simple implementation sends the whole message history. Other products may maintain state on the server, reuse cached processing, select relevant passages, or supply summaries. The diagram below shows the simple case, not a requirement to resend everything unchanged.
+Before each reply, the software picks what part of the conversation to hand the model. The simplest way is to send the whole history every time, like this; other products keep state on the server, reuse cached work, pick out only the relevant passages, or swap in summaries.
 
 ```text
 Round 1:       [your question A]                              → answer a
@@ -59,70 +44,57 @@ Round 3: [question A + answer a + question B + answer b + question C]  → answe
             └──────── illustrative full-history implementation ────────┘
 ```
 
-“Remembering the conversation” means the relevant information is available in the current context or supplied through product features. Near the limit, a product may **summarize, trim, retrieve selected content, or reject an oversized request**. Losing details is possible, but it is not a universal rule that the oldest text is automatically dropped.
+So "it remembers what I said" really means the relevant information is in this request's context, or the product put it back in. Near the limit, a product may summarize, cut some of it, pull in only the relevant parts, or just refuse a request that's too long (the figure in the previous section). Details can get lost that way, but not every product simply "pushes out the oldest text first."
 
-> **Misconception vs. reality:** “I told it my name yesterday, so a new conversation must remember.” It may remember only if the product supplies that information through history, saved memory, project material, or personalization. A new chat still has system instructions and may have such context; it is not necessarily a blank desk. Check what is enabled and repeat critical requirements.
+A new chat isn't necessarily an empty desk either: system instructions are always there, and a product may bring in history, saved memories, project material, or personalization. The name you mentioned yesterday is usable only if it's brought in this way. If you're not sure, check which features are on, or just say the important requirements again.
 
-For an **online service**, material you submit is sent to that service for processing. Context management does not mean the service has deleted its stored copy. Retention and training use are separate questions (Chapter 37); local processing has a different data path.
+Also, an online service does receive the material you send; when material drops out of the context, that doesn't mean the service has deleted the copy it stored (chapter 37).
 
-### Then what are products' "project" and "memory" features?
+Products' "project" and "memory" features do the same thing: they put saved information back into the context when it's needed, rather than having the chat retrain the model. That's also different from the training-time memorization of text in chapter 2. Chapter 9 explains how these features work, and chapter 13 covers managing them day to day and what to do when you'd rather not be remembered.
 
-You might immediately push back: but I've clearly seen products that can "remember" my preferences, remember a whole project. As of October 2026, Claude, ChatGPT, and many other products offer **project** and **memory** features: projects let you keep material and instructions together for reuse, and memory stores your preferences and points from past chats. Coding tools often have project instruction files, your account has personalization settings, and a company may connect an internal knowledge base. Doesn't this contradict "the model has no memory"?
+## 4. Why does it lose track when a conversation runs long?
 
-**No contradiction.** The key is to separate two layers:
-
-| | The model itself | The product layer's "memory" |
-| --- | --- | --- |
-| What it is | Trained parameters used with the current context | Features for storing and supplying relevant information |
-| Does it remember | Ordinary inference does not save the chat into its parameters | May retain history, preferences, or project material |
-| How it works | Uses the context available for this request | Supplies selected information when relevant; not necessarily every stored item on every turn |
-
-In other words, remembering your preference usually means the **product supplied relevant saved information**, rather than your conversation retraining the model. That is distinct from the training-data memorization discussed in Chapter 2.
-
-> **Key point:** Project and memory features differ in scope from product to product. Some products **automatically extract** things to remember from your chats, and this may be on by default; on the other hand, not every saved item is used in every answer. For things you don't want remembered, use a temporary chat (some products call it incognito) or turn memory off first; now and then, check what's been saved in settings and delete anything outdated or wrong. For what's saved, used, and shared, and how to delete it, check the official documentation (Chapters 10 and 13).
-
-## 4. Why can a long conversation lose track?
-
-Even before the context limit is reached, a long conversation **can become harder to follow**. Length alone does not determine quality: useful context can improve an answer, while irrelevant or conflicting material can hurt it. Three possible problems fit the "desk" analogy:
+Even before the limit, a long conversation can get harder for it to follow. Length itself isn't the problem: more useful material makes answers better, and what gets in the way is material that's irrelevant or contradicts itself. In desk terms, three things commonly happen:
 
 | Reason | Desk metaphor | What it looks like |
 | --- | --- | --- |
 | The point gets buried | Too much material on the desk; the truly important sheet is pressed underneath | A key requirement you set early on, it later "can't see" |
-| Contradictions pile up | Old discarded approaches and wrong info from trial and error are still spread on the desk | It gets dragged along by its own earlier mistakes, drifting further off |
-| Summarizing loses detail | As the desk fills up, old material gets "boiled down to a sticky note," and the details are gone | Specific numbers and agreements stated early get blurred |
+| Contradictions pile up | Old approaches and wrong information from trial and error are still spread on the desk | It gets dragged along by its own earlier mistakes, drifting further off |
+| Summarizing loses detail | As the desk fills up, old material gets "boiled down to a sticky note," and the details are gone | Specific numbers and agreements from early on get fuzzy |
 
-> **How you'll actually run into it:** A typical scene: you and it polish a draft back and forth, and the first 10 rounds are great, but the further on it goes the more "stubborn" it gets, starting to ignore your new requirements and rehash phrasings it already rejected. This isn't it "getting tired." It's that the desk is packed with this long string of trial and error, and **the noise has drowned out the signal.**
+A common case: you and the AI go back and forth on a draft. The first 10 rounds go fine, but later it gets stubborn, ignoring new requests and bringing back wording you already turned down. It isn't tired; the desk is piled with leftovers from trial and error, and the useful information is buried under them.
 
-## 5. Tokens also decide "the cost" and "how much you can fit"
+## 5. Why longer context costs more and runs slower
 
-One last practical thing: **the token is the unit of measure.**
+The token is the unit of measure, and both cost and speed follow it.
 
-- Many **text APIs** meter input and output tokens, often at different rates, with possible cache discounts and tool charges. Subscription quotas may instead depend on messages, tools, compute, model choice, or other limits; they are not universally a visible token balance.
-- The **context limit** is measured in tokens, but products may also impose file-size, page-count, or upload limits. A document may be retrieved in parts rather than placed entirely in the context.
+- Cost: APIs bill input and output tokens separately, and output is usually much more expensive. For example, as of October 2026, Claude Opus 5.5 costs $4 per million input tokens and $20 per million output tokens through the API. In a multi-turn chat, the history carried along is counted as input again on every turn, though many services discount repeated content through caching. Subscription plans may instead limit messages, model choice, or usage, and don't necessarily show a token balance.
+- Speed: as the model reads its input, each token is compared with every token before it (the attention described in chapter 6). Double the tokens and this comparison work roughly quadruples, so the work grows faster than the length. While writing the answer, each new token also looks back over everything before it. So the longer the input, the longer you wait before the answer starts, and the writing itself can slow down. Many models use various techniques to lighten this load, but the overall pattern holds: longer means pricier and slower.
+- Other limits: products may also cap file size, page count, or number of uploads, and an uploaded document may be searched so that only a few passages go into the context.
 
-So you get situations like this: you feel "I just asked a small question," but because you pasted a big chunk of material earlier and then had it generate a long answer, **tokens climb fast and the quota drops fast.** Chapter 38 covers how to "use it sparingly"; for now, remember one sentence:
+So even when you feel you "just asked a small question," pasting a lot of material earlier and having it write a long answer makes tokens climb fast and the quota drop with them. Chapter 38 covers what this costs in practice and how to save.
 
-> **Key point:** **Keep the material relevant and leave room for the response.** Longer input can increase processing, cost, and distraction, but useful context can improve accuracy, and caching or plan rules change the cost. A fuller desk is not automatically worse.
+> **Key point:** Put only what you need on the desk and leave room for the answer. The more you pile on, the more it costs and the longer you wait, and it can distract the model; but useful material makes answers more accurate, so a fuller desk isn't automatically worse.
 
 ## 6. Common misconceptions, corrected all at once
 
 | Misconception | Reality |
 | --- | --- |
-| A token is one character | A token is a unit of text representation; it can be a word, half a word, or a character, and doesn't map exactly to "character count" |
-| It must remember every earlier chat | The application chooses what history or memory to supply. Ordinary inference does not write the chat into the trained parameters |
-| I only typed one short line this time, so it didn't cost much | The long text pasted earlier, the history carried along, and its long answer are what really eat tokens |
-| The bigger the context window, the more carefree | A bigger window holds more, but relevance, output room, retrieval, and actual pricing still matter |
-| Forgetting always means a malfunction | Missing or summarized context is one possible cause; a model can also overlook information that is still present |
+| A token is one character | A token is a tokenizer's unit; it can be a word, part of a word, a character, or even part of a character |
+| English always uses fewer tokens | It depends on the tokenizer: this chapter's example is 21 tokens in Chinese and English with o200k_base, and only 16 in Chinese with Qwen3 |
+| It must remember every earlier chat | The product decides what history or memory to bring in; chats aren't written into the parameters |
+| The bigger the context window, the more carefree | It holds more, but costs more and runs slower, and irrelevant content still gets in the way |
+| Forgetting always means a malfunction | The information may not have been brought in, or was summarized or trimmed; a model can also overlook information that is still there |
 
 ## Summary
 
-- A **token** is a tokenizer’s unit of text. Use the model’s actual encoding or provider counter for precise counts; subscription quotas need not be token balances.
-- The **context window** is the upper limit on the tokens the model can lay on the "desk" in a single request. What you say, what it says, and the material you paste all take up the desk.
-- The application manages **conversation state**. Full history, saved state, selected passages, and summaries are different ways to supply context; they are not new learning in the model’s parameters.
-- A long conversation can lose focus when key details get buried, instructions conflict, or summaries omit information. Useful context can also improve the answer.
-- Keep **relevant context** and reserve output space. Check actual usage and pricing rather than assuming length alone determines accuracy, speed, or cost (Chapters 13 and 38).
+- A token is the unit of text a tokenizer produces. The same English sentence is 21 tokens with both o200k_base and Qwen3, while its Chinese version is 21 and 16; use the model's own counter for precise numbers.
+- The context window is one request's token budget, shared by system instructions, history, material, and the answer. As of October 2026, Claude's API window is 1 million tokens.
+- The product manages the conversation: full history, summaries, and selected passages are all ways of supplying context, and none of them retrains the model.
+- In a long conversation, key points can get buried, content can contradict itself, and summaries can drop details, so it loses track; but useful context also makes answers better.
+- Longer context costs more and runs slower. Keep what's relevant and leave room for the answer (chapters 13 and 38).
 
-In the next chapter we'll look at this: after the model cuts text into tokens and lays them on the desk, how does it actually "continue" with the next sentence?
+In the next chapter we'll look at how the model, after cutting text into tokens and laying them on the desk, actually "continues" with the next words.
 
 ## Sources and verification
 
@@ -132,7 +104,8 @@ In the next chapter we'll look at this: after the model cuts text into tokens an
 
 The sources above were checked 2026-10-22.
 
-- [Claude Help Center: chat search and memory](https://support.claude.com/en/articles/11817273): at the time of checking, it states that memory is on by default for Free, Pro, and Max plans, is saved automatically as you chat, excludes incognito chats, and is kept separately for each project, and explains how to view and delete it. Checked 2026-10-27.
+- [Anthropic models overview](https://platform.claude.com/docs/en/about-claude/models/overview): current Claude models have a 1M-token context window and 128K-token maximum output, with 1M tokens roughly 555K English words; Claude Opus 5.5 costs $4 per million input tokens and $20 per million output tokens. Checked 2026-10-28.
+- Token counts in this chapter were measured with js-tiktoken's o200k_base encoding and the [Qwen3-0.6B tokenizer file](https://huggingface.co/Qwen/Qwen3-0.6B) on 2026-10-28.
 
 ---
 

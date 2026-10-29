@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img">
+<title>権限の四段階：読み取りのみから何も聞かない実行まで</title>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#56544b"/></marker>
+<marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#aa563d"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5f7f3a"/></marker>
+</defs>
+<rect x="0.75" y="0.75" width="718.5" height="418.5" rx="12" fill="#faf9f5" stroke="#e5e1d8" stroke-width="1.5"/>
+<g font-family="'Hiragino Sans','Yu Gothic','Meiryo','Noto Sans CJK JP','IPAGothic',sans-serif">
+<line x1="40" y1="56" x2="40" y2="404" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="56" x2="80" y2="404" stroke="#56544b" stroke-width="2"/>
+<text x="104" y="42" font-size="15" fill="#56544b" text-anchor="start">上に行くほど、同意なしでできることが増える</text>
+<line x1="60" y1="50" x2="60" y2="24" stroke="#56544b" stroke-width="1.5" marker-end="url(#a)"/>
+<line x1="40" y1="360.0" x2="80" y2="360.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="360.0" x2="104" y2="360.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="326" width="436" height="68" rx="10" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="120" y="355" font-size="17" fill="#191919" text-anchor="start" font-weight="600">1  読み取りのみ</text>
+<text x="120" y="380" font-size="14" fill="#56544b" text-anchor="start">ファイルを見て答えるだけで、何も変えない</text>
+<rect x="554" y="343.0" width="152" height="34" rx="17" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+<text x="630.0" y="365.0" font-size="14" fill="#191919" text-anchor="middle" font-weight="600">初心者向き</text>
+<line x1="40" y1="274.0" x2="80" y2="274.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="274.0" x2="104" y2="274.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="240" width="436" height="68" rx="10" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="120" y="269" font-size="17" fill="#191919" text-anchor="start" font-weight="600">2  変更のたびに確認</text>
+<text x="120" y="294" font-size="14" fill="#56544b" text-anchor="start">ファイル変更やコマンド実行の前に止まって同意を待つ</text>
+<rect x="554" y="257.0" width="152" height="34" rx="17" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+<text x="630.0" y="279.0" font-size="14" fill="#191919" text-anchor="middle" font-weight="600">初心者向き</text>
+<line x1="40" y1="188.0" x2="80" y2="188.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="188.0" x2="104" y2="188.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="154" width="436" height="68" rx="10" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="120" y="183" font-size="17" fill="#191919" text-anchor="start" font-weight="600">3  プロジェクト内のファイルは自由に編集</text>
+<text x="120" y="208" font-size="14" fill="#56544b" text-anchor="start">プロジェクト内の変更は毎回聞かない。範囲外は確認</text>
+<rect x="554" y="171.0" width="152" height="34" rx="17" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="630.0" y="193.0" font-size="14" fill="#191919" text-anchor="middle" font-weight="600">起点の保存後なら</text>
+<line x1="40" y1="102.0" x2="80" y2="102.0" stroke="#56544b" stroke-width="2"/>
+<line x1="80" y1="102.0" x2="104" y2="102.0" stroke="#56544b" stroke-width="1.5" stroke-dasharray="3 3"/>
+<rect x="104" y="68" width="436" height="68" rx="10" fill="#faece7" stroke="#aa563d" stroke-width="2"/>
+<text x="120" y="97" font-size="17" fill="#191919" text-anchor="start" font-weight="600">4  何も聞かずに実行</text>
+<text x="120" y="122" font-size="14" fill="#56544b" text-anchor="start">承認をオフにし、サンドボックスまで外すこともある</text>
+<rect x="554" y="85.0" width="152" height="34" rx="17" fill="#aa563d" stroke="#aa563d" stroke-width="1.5"/>
+<text x="630.0" y="107.0" font-size="14" fill="#faf9f5" text-anchor="middle" font-weight="600">初心者は使わない</text>
+</g></svg>

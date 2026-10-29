@@ -63,7 +63,7 @@
         },
         {
           "slug": "long-text-and-summary",
-          "title": "12　长文处理与资料总结：喂资料的正确姿势"
+          "title": "12　长文处理与资料总结：怎么把资料交给它"
         },
         {
           "slug": "multi-turn-and-context",
@@ -183,11 +183,11 @@
       "chapters": [
         {
           "slug": "privacy-and-data-tiers",
-          "title": "37　隐私与数据分级：什么能喂、什么绝对不能"
+          "title": "37　隐私与数据分级：什么能交给AI、什么绝对不能"
         },
         {
           "slug": "cost-quota-context",
-          "title": "38　费用、额度与上下文成本：别烧钱也别浪费"
+          "title": "38　费用、额度与上下文成本：不乱花钱，也不浪费"
         },
         {
           "slug": "content-review-and-responsibility",
@@ -196,6 +196,15 @@
         {
           "slug": "safe-use-and-team-rules",
           "title": "40　安全使用与团队规范"
+        }
+      ]
+    },
+    {
+      "title": "终章",
+      "chapters": [
+        {
+          "slug": "making-of-this-book",
+          "title": "41　这本书是怎么做出来的：一个文科生用AI做完整项目的实录"
         }
       ]
     },
@@ -217,6 +226,10 @@
         {
           "slug": "appendix-harness",
           "title": "附录D　Harness方法论与上线前检查清单"
+        },
+        {
+          "slug": "appendix-numbers",
+          "title": "附录E　常用数字速查（截至2026年10月）"
         }
       ]
     }
@@ -405,7 +418,7 @@
       "chapters": [
         {
           "slug": "privacy-and-data-tiers",
-          "title": "37　プライバシーとデータ分類：何を渡してよく、何は絶対ダメか"
+          "title": "37　プライバシーとデータ分類：何を渡してよく、何は絶対に渡せないか"
         },
         {
           "slug": "cost-quota-context",
@@ -418,6 +431,15 @@
         {
           "slug": "safe-use-and-team-rules",
           "title": "40　安全な使い方とチームのルール"
+        }
+      ]
+    },
+    {
+      "title": "終章",
+      "chapters": [
+        {
+          "slug": "making-of-this-book",
+          "title": "41　この本はどう作られたか：文系の著者がAIで作り切った記録"
         }
       ]
     },
@@ -439,6 +461,10 @@
         {
           "slug": "appendix-harness",
           "title": "付録D　ハーネス方法論と公開前チェックリスト"
+        },
+        {
+          "slug": "appendix-numbers",
+          "title": "付録E　よく使う数字の早見表（2026年10月時点）"
         }
       ]
     }
@@ -507,7 +533,7 @@
         },
         {
           "slug": "long-text-and-summary",
-          "title": "12. Long documents and summaries: how to feed it material the right way"
+          "title": "12. Long documents and summaries: how to hand it material the right way"
         },
         {
           "slug": "multi-turn-and-context",
@@ -627,11 +653,11 @@
       "chapters": [
         {
           "slug": "privacy-and-data-tiers",
-          "title": "37. Privacy and data tiers: what you can feed it, and what you never should"
+          "title": "37. Privacy and data tiers: what you can share, and what you never should"
         },
         {
           "slug": "cost-quota-context",
-          "title": "38. Cost, quotas, and the price of context: don't burn money or waste it"
+          "title": "38. Cost, quotas, and the price of context: don't overspend, don't waste"
         },
         {
           "slug": "content-review-and-responsibility",
@@ -640,6 +666,15 @@
         {
           "slug": "safe-use-and-team-rules",
           "title": "40. Safe use and team rules"
+        }
+      ]
+    },
+    {
+      "title": "Epilogue",
+      "chapters": [
+        {
+          "slug": "making-of-this-book",
+          "title": "41. How this book was made: a non-programmer's build log"
         }
       ]
     },
@@ -661,6 +696,10 @@
         {
           "slug": "appendix-harness",
           "title": "Appendix D. The harness method and a pre-release checklist"
+        },
+        {
+          "slug": "appendix-numbers",
+          "title": "Appendix E. Numbers at a glance (as of October 2026)"
         }
       ]
     }

@@ -1,4 +1,4 @@
-本附录是一份Claude Code与Codex的操作参考。第28、29章提供第一次使用的练习；这里帮助你选择下一项能力，并定位问题。示例核查于**2026-10-27**；如果实际界面不同，用已安装版本的帮助输出核对。
+本附录是一份Claude Code与Codex的操作参考。第28、29章提供第一次使用的练习；这里帮助你选择下一项能力，并定位问题。示例核查于2026-10-29；如果实际界面不同，用已安装版本的帮助输出核对。
 
 ## 一、先确认程序和账号
 
@@ -28,7 +28,7 @@ codex --help
 | 先出计划再动手 | `/plan`，或按`Shift+Tab`切到计划模式 | `/plan` | 计划是否落到具体文件和验证方式 |
 | 起草项目指引 | `/init`后审阅`CLAUDE.md` | `/init`后审阅`AGENTS.md` | 路径、命令、规则是否准确 |
 | 检查改动 | `/diff`或`git diff` | `/diff`或`git diff` | 已跟踪文件改动和意外文件 |
-| 撤回本会话的文件编辑 | `/rewind`（或在输入框为空时连按两次`Esc`） | 用Git（见第十一节） | 只覆盖它用编辑工具改过的文件；Bash命令改的、外部影响不在内 |
+| 撤回本会话的文件编辑 | `/rewind`（或在输入框为空时连按两次`Esc`） | 用Git（见第十一节） | 只恢复它在本会话中用编辑工具改过的文件；只被Bash命令改过的文件、多数子智能体的改动和外部影响都不在内 |
 | 检查保留的信息 | `/memory` | `/memories`及项目文件 | 过时或冲突的笔记 |
 | 缩短长对话 | `/compact`，或`/clear`开新对话 | `/compact`，或`/new`开新对话 | 摘要是否保留要求和证据 |
 | 查看技能 | `/skills` | `/skills`，或输入`$`点名 | 技能名、描述、来源 |
@@ -38,26 +38,26 @@ codex --help
 
 ## 三、项目指引、记忆、技能与配置
 
-**项目指引**记录稳定的工作约定，**记忆**保留观察，**技能**封装可复用流程。配置则控制应用本身，例如启用哪些工具、连接参数、模型和权限。Markdown文件里的一句话，不能替代操作系统的强制限制。
+项目指引记录稳定的工作约定，记忆保留观察，技能封装可复用流程。配置则控制应用本身，例如启用哪些工具、连接参数、模型和权限。Markdown文件里的一句话，不能替代操作系统的强制限制。
 
 好的项目指引应短到能审阅，又具体到能执行：
 
 ```markdown
-- 先读项目 README 和现有实现。
+- 先读项目README和现有实现。
 - 使用文档规定的依赖锁文件和包管理器。
 - 完成前运行与行为变化相关的检查。
 - 报告执行命令、结果和未验证的假设。
 ```
 
-适合时用核实过的仓库细节替换泛泛表述。个人偏好和密钥不要混进共享项目规则。存在嵌套指引文件时，确认哪些规则适用于正在修改的目录，不能假定每份指引全局生效。
+适合时用核实过的仓库细节替换泛泛表述。个人偏好和密钥不要混进共享项目规则。存在嵌套指引文件时，确认哪些规则适用于正在修改的目录，不能假定每份指引全局生效。Claude Code在仓库里没有`CLAUDE.md`时会读取`AGENTS.md`，所以两个工具可以共用一份指引。
 
-不想让智能体读到的文件（例如放密钥的`.env`），在工具支持的地方设读取限制：Claude Code可以在设置的`permissions.deny`里写`Read(./.env)`；Codex可以在权限配置里把它设为`deny`。这类规则不一定覆盖所有读取途径，密钥本身仍要由你自己设置、不贴进对话（第35章）。
+不想让智能体读到的文件（例如放密钥的`.env`），在工具支持的地方设读取限制：Claude Code可以在设置的`permissions.deny`里写`Read(./.env)`；Codex可以在权限配置（permissions profile）的文件系统规则里写`"**/*.env" = "deny"`。这类规则不一定覆盖所有读取途径，密钥本身仍要由你自己设置、不贴进对话（第35章）。
 
 ## 四、计划与推理设置
 
 目标不明确、改动跨多个系统，或错误假设代价很高时，先做计划（第27章）。要求列出相关文件、建议改法和验证方式；计划应落到具体的下一步。
 
-推理强度和模型选择会影响延迟、用量与结果。高强度适合某些难题，但不会自动补齐证据或修复错误需求。一个小文案修改，长篇规划可能比修改本身更费力。
+推理强度和模型选择会影响延迟、用量与结果。高强度适合某些难题，但不会自动补齐证据或修复错误需求。一个小文案修改，长篇规划可能比修改本身还吃力。
 
 ## 五、沙箱与审批是不同控制
 
@@ -84,7 +84,7 @@ Hooks在指定生命周期事件发生时运行配置的动作；无人值守模
 
 ## 八、Skills、插件和MCP
 
-第一次做技能、接MCP服务器的最小步骤——技能文件夹放在哪、`SKILL.md`开头怎么写、`claude mcp add`和`codex mcp add`怎么用——见**第36章**。这里只列判断要点。
+第一次做技能、接MCP服务器的最小步骤（技能文件夹放在哪、`SKILL.md`开头怎么写、`claude mcp add`和`codex mcp add`怎么用）见第36章。这里只列判断要点。
 
 从看得懂的技能开始：`SKILL.md`、清晰描述、简短指令，以及确实需要的支持文件。`name`按Agent Skills标准只用小写字母、数字和连字符，并与文件夹同名。用虚构数据验证。各客户端的安装位置和可选元数据可能不同。
 
@@ -114,7 +114,7 @@ MCP要检查发布者、本地启动命令或远程URL、账号范围和暴露�
 
 ## 十一、Git常用命令速查
 
-这些命令为什么要用、什么时候用、能恢复到什么程度，见**第26章**（包括“Git最小起步”和恢复的边界）。这里只是速查表，在项目文件夹里的终端中运行；也可以请智能体代为运行，但执行前先看清它要跑哪条命令。
+这些命令为什么要用、什么时候用、能恢复到什么程度，见第26章（包括“Git最小起步”和恢复的边界）。这里只是速查表，在项目文件夹里的终端中运行；也可以请智能体代为运行，但执行前先看清它要跑哪条命令。
 
 | 命令 | 做什么 | 注意 |
 | --- | --- | --- |
@@ -141,4 +141,4 @@ Git只能恢复它记录过的文件。已经发出的邮件、改过的线上�
 
 ## 来源与版本说明
 
-核查日期：**2026-10-27**。[Codex README](https://github.com/openai/codex/blob/main/README.md)、[CLI命令源码](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs)、[配置schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json)、[Codex MCP](https://developers.openai.com/codex/mcp)、[Codex权限](https://developers.openai.com/codex/permissions)；[Claude Code命令](https://code.claude.com/docs/en/commands)、[检查点与`/rewind`](https://code.claude.com/docs/en/checkpointing)、[设置](https://code.claude.com/docs/en/settings)、[Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md)及[更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)；[Agent Skills规范](https://agentskills.io/specification)；[MCP规范仓库](https://github.com/modelcontextprotocol/modelcontextprotocol)；Git官方文档：[git-restore](https://git-scm.com/docs/git-restore)、[git-revert](https://git-scm.com/docs/git-revert)、[git-switch](https://git-scm.com/docs/git-switch)。产品文档入口为 [Codex](https://developers.openai.com/codex) 和 [Claude Code](https://code.claude.com/docs/en/overview)。命令与政策设置因安装版本和组织而异。
+核查日期：2026-10-29。[Codex README](https://github.com/openai/codex/blob/main/README.md)、[CLI命令源码](https://github.com/openai/codex/blob/main/codex-rs/tui/src/slash_command.rs)、[配置schema](https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json)、[Codex MCP](https://learn.chatgpt.com/docs/extend/mcp?surface=cli)、[Codex权限](https://learn.chatgpt.com/docs/permissions)、[Codex技能](https://learn.chatgpt.com/docs/build-skills)；[Claude Code命令](https://code.claude.com/docs/en/commands)、[检查点与`/rewind`](https://code.claude.com/docs/en/checkpointing)、[设置](https://code.claude.com/docs/en/settings)、[项目记忆](https://code.claude.com/docs/en/memory)、[Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md)及[更新日志](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)；[Agent Skills规范](https://agentskills.io/specification)；[MCP规范仓库](https://github.com/modelcontextprotocol/modelcontextprotocol)；Git官方文档：[git-restore](https://git-scm.com/docs/git-restore)、[git-revert](https://git-scm.com/docs/git-revert)、[git-switch](https://git-scm.com/docs/git-switch)。产品文档入口为[Codex](https://learn.chatgpt.com/docs)和[Claude Code](https://code.claude.com/docs/en/overview)（Codex文档原在developers.openai.com/codex，现已转到learn.chatgpt.com）。命令与政策设置因安装版本和组织而异。

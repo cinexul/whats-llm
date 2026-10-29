@@ -1,118 +1,96 @@
-〔This chapter doesn't depend on any specific tool's commands or interface: it's about what crashes have in common and the universal moves for first aid. Where it touches how a particular tool operates, always **refer to the official documentation** (basic Git commands are in Chapter 26; tool features are in Appendix C).〕
+The last few chapters covered how to get a coding agent working smoothly: the general workflow (Chapter 24), and hands-on use of Claude Code and Codex (Chapters 28 and 29). But however skilled you get, things will still go wrong: it makes mistakes, drifts off course, and confidently does the wrong thing. This chapter doesn't teach you how to never go wrong. It teaches two more practical things: recognizing the eight most common mistakes and knowing their causes and fixes, and, when you're truly stuck or things have turned into a mess, a first-aid checklist that gets you back to a clean state. None of this depends on which tool you use.
 
-The last several chapters walked through "how to get a coding agent working smoothly" in full: the general workflow (Chapter 24), Claude Code put to work (Chapter 28), Codex put to work (Chapter 29). But there's one thing we have to be honest about: **no matter how skilled you are, a crash will happen.** It will make mistakes, go off course, and charge ahead with confidence — as Chapter 24 said, this follows from a coding agent's nature of "will make mistakes + will act."
+## 1. The eight common mistakes: symptom → cause → fix
 
-So this chapter doesn't teach you how to "avoid all crashes" (that's not realistic); it teaches two more practical things: **one, recognize the eight most common "crash scenes," know where the root cause is and how to treat it; two, when you really are stuck or have made a mess, have a "first-aid checklist" that gets you back to a clean state.** This chapter is tool-agnostic; it works for both Claude Code and Codex.
-
-## 1. The eight crash scenes: symptom → cause → fix
-
-Every one below is a trap beginners step into over and over. We suggest you **match yourself against them**: chances are you've already hit a few.
+Each one below is a problem beginners run into again and again. Try matching yourself against them.
 
 ### 1. The task is too vague, so it drops things
 
-- **Symptom**: You say "help me optimize this page," and what it changes is nothing like what you wanted, or only half done.
-- **Cause**: The instruction is too broad, so it can only **guess** what you want, and it often guesses wrong (echoing "say clearly what you want" from Chapter 11).
-- **Fix**: Say the goal **specifically**: what to achieve, which part to touch, what counts as "done." Have it **restate its understanding** before it acts; far cheaper than reworking afterward.
+You say "help me optimize this page," and what comes back is nothing like what you wanted, or is only half done. When the instruction is too broad, it can only guess, and it often guesses wrong (Chapter 11). Make the goal specific: what you want to achieve, which part to touch, and what counts as "done." Before it starts, have it restate its understanding.
 
 ### 2. Too big a change at once, no way to check it
 
-- **Symptom**: You have it "finish the whole feature," it changes a dozen-plus files, you stare at a screenful of diff baffled, and when something breaks you don't know where to look.
-- **Cause**: The bigger the change, the **bigger the blind spot**; big enough that you can't check it line by line, and it's hard to roll back (stressed over and over in Chapter 24).
-- **Fix**: **Break the task small**: do a little, check a little, commit once, then do the next bit. Small steps at a slow jog turn out to be the fastest (Chapters 24 and 27).
+You ask it to "finish the whole feature," it changes a dozen or more files, the diff fills the screen and you can't take it all in, and when something breaks you don't know where to start looking. The bigger the change, the bigger the blind spot. Break the task into small pieces: do one small piece, sign it off, commit, then do the next (Chapter 27).
 
 ### 3. Not looking at the diff, clicking "approve" away
 
-- **Symptom**: Every time it requests permission you click "approve" in an instant, then find it touched files it shouldn't have, or even deleted something important.
-- **Cause**: Treating "permission confirmation" as a hassle, as routine — **like ripping out the brakes** (Chapter 26).
-- **Fix**: **Before permission, look at what it's about to do and what it changed (the diff).** This step takes a few seconds and blocks what could be a few hours of disaster. If you can't follow it, ask "what is this step doing" first; **if you can't read it, don't let it through** (Chapter 25).
+Every time it asks for permission, you click approve without looking, and later find it touched files it shouldn't have, or even deleted something important. Treating confirmation as a routine formality is like removing the brakes (Chapter 26). Before you approve, look at what it's about to do and what it changed. If you can't follow it, ask "What is this step for?" and let it through only once you understand (Chapter 25).
 
 ### 4. Chatting through one conversation from start to finish, never switching
 
-- **Symptom**: You've chatted dozens of turns in the same conversation, and it gets more and more "stubborn": ignoring your new requests, rehashing scrapped ideas that were already rejected, contradicting itself.
-- **Cause**: This is exactly that "desk" from Chapters 3 and 13: the longer the conversation, the more **noise drowns out signal**, the important parts get buried, and contradictions pile up. It didn't get dumber — the desk just got stuffed full.
-- **Fix**: **One topic per conversation**; when you feel it starting to get "stubborn," decisively **start a new conversation** and restate "the information still needed" clearly (Chapter 13). Swapping in a clean desk is far faster than digging through a messy one.
+You've gone dozens of turns in the same conversation, and it listens less and less: it ignores your new requests, brings back ideas you already rejected, and contradicts itself. This is the context problem from Chapters 3 and 13: the longer the conversation, the more noise there is, and the important points get buried. Use one conversation per topic. When it stops listening, open a new conversation and restate the information it still needs.
 
 ### 5. Trusting hallucinations, not double-checking
 
-- **Symptom**: It confidently uses a way of writing that doesn't exist at all, or cites a basis for something that turns out not to be the case; you take it all at face value, and it ends up wrong.
-- **Cause**: What it's after is "sounding true," not "being true" (the "hallucination" of Chapter 9). **The smoother and more confident it sounds, the less that means it's reliable.**
-- **Fix**: **The more important it is, and the more readily it reels off an answer, the more you verify it yourself.** Have it give a basis, run tests to confirm, and check key facts again yourself (Chapter 9).
+It confidently uses a way of writing code that doesn't exist, or cites a source for something that turns out not to be true, and you take it at face value. What it aims for is "sounds true," not "is true" (Chapter 9), and sounding fluent doesn't make it any more reliable. The more important something is, the more it needs checking: have it give its sources, run the tests, and look up key facts again yourself.
 
-### 6. Stubbornly fixing a failing approach, getting more off course with each change
+### 6. Stubbornly fixing a failing approach, making it worse with each change
 
-- **Symptom**: A direction has clearly hit a dead end, and you keep clinging to it, having it fix the original plan one line at a time, and it gets messier and more roundabout.
-- **Cause**: The wrong context has already filled the "desk," and it's being **carried along** by its own earlier mistakes (Chapter 13). Stubbornly fixing in a messy context is often negative work.
-- **Fix**: **Admit this road doesn't go through, roll back + start over.** Go back to the last clean state, start a new conversation, and restate "the trap we just stepped in" as a premise (Chapters 13 and 24). This is almost always faster than stubbornly fixing.
+A direction clearly isn't working, but you keep having it fix the original plan one instruction at a time, and things only get messier. The failed attempts have already filled the context, and it's being carried along by its own earlier mistakes (Chapter 13). Admit this road is a dead end: roll back to the last clean state, open a new conversation, and give it the problem you just ran into as a starting premise.
 
-### 7. Making a big change with no tests
+### 7. Merging without signing off
 
-- **Symptom**: It finishes and you merge and ship directly, only to find a couple of days later that it broke a feature that was working fine.
-- **Cause**: Treating "it says it's done" as "it did it right": **no verification, no certainty** (Chapters 23 and 25).
-- **Fix**: When it's done, **have it run the tests**, confirm it didn't break the existing features; and try saying clearly in one sentence what this stretch is doing yourself. **If you can't say it clearly and haven't tested it, don't merge** (Chapter 25).
+It says it's done, you merge and ship right away, and a couple of days later you find that a feature that used to work is broken. That's mistaking "it says it's done" for "it did it right." Sign it off as described in Chapter 25: have it explain what it changed, follow the steps you wrote in advance yourself, and run the related tests. If you can't answer the three sign-off questions, don't merge.
 
-### 8. Pasting in keys / sensitive information
+### 8. Pasting in keys or sensitive information
 
-- **Symptom**: To save effort you paste an API key, a password, or real personal information into the conversation, or write it into code and push it to a public repository.
-- **Cause**: Forgetting that iron rule: **what you paste in is as good as handed over** (Chapter 37); an API key is like the key to your account, and whoever gets it can spend your money (Chapter 35).
-- **Fix**: **Keys / passwords / sensitive information never go in the chat box, never in a public repository** (Chapter 37). If you do paste one out, **go to the platform right away to revoke the old key and issue a new one** (**refer to its official documentation for the exact steps**), and don't count on luck.
+To save effort, you paste an API key, a password, or real personal information into the conversation, or write it into code and push it to a public repository. Anything you paste in has effectively been handed over (Chapter 37), and if a key ends up in someone else's hands, they can spend your money (Chapter 35). If one does get out, go to that platform right away, revoke the old key, and create a new one. Don't count on luck.
 
-> **Key point:** String these eight together and you'll see they really only break **three principles**: (1) not saying things clearly (1, 2), (2) not holding the "two gates before and after acting" (3, 5, 7), (3) not managing context / data well (4, 6, 8). Remembering these three is more useful than memorizing eight scenes: they're exactly the flip side of the workflow from Chapter 24 and the safety discipline of the whole book.
+> **Key point:** The eight really break only three principles: not saying things clearly (1, 2), not holding the two gates before and after it acts (3, 5, 7), and not managing context and data well (4, 6, 8). Remembering these three is more useful than memorizing all eight.
 
 ## 2. What to do when you're stuck: the five-step first-aid checklist
 
-The section above is "prevention"; this one is "rescue." When it's already gone off course, you're at a total loss, and things are a mess, **don't panic, and don't keep wrestling inside the mess.** Follow the five steps below and you can almost always get yourself back.
+The section above was about prevention; this one is about rescue. When it has already drifted, you've lost track of what's going on, and things are a mess, don't keep struggling inside the mess. Go through these five steps:
 
 ```text
-Stuck / made a mess, go in order:
-① Interrupt first ──→ ② State the situation ──→ ③ Roll back to the last good state ──→ ④ Start a new conversation ──→ ⑤ Diagnose
-(halt right away)    (don't rush to let it keep changing)  (get back to a clean place)         (swap in a clean desk)      (think through why it went off)
+Stuck or made a mess? Go in order:
+
+① Interrupt first                    (stop it right away)
+   ↓
+② State the situation                (take stock before you act)
+   ↓
+③ Roll back to the last good state   (get back to a clean place)
+   ↓
+④ Start a new conversation           (swap in a clean desk)
+   ↓
+⑤ Diagnose                           (work out why it drifted)
 ```
 
-**① Interrupt first: halt right away**
-When something feels off, **your first reaction is to cut it off**, not watch it keep running into the trap. "Being able to halt anytime" is a basic right of yours (Chapter 26); the sooner you stop, the smaller the loss. Stop, take a breath, and don't keep clicking "approve" in a panic.
+1. Interrupt first. When something feels wrong, your first move is to stop it, not to watch it keep heading the wrong way. As of October 2026, both Claude Code and Codex let you press Esc to interrupt what they're doing. The sooner you stop it, the less you lose; and once it has stopped, don't go on clicking approve in a panic.
 
-**② State the situation: take stock first, don't rush to let it keep changing**
-After stopping, ask yourself three things first: **What has it changed so far? Which of those did I want, and which came from it going off course? Where is my last "clean, working" state?** Take stock of the situation clearly and you'll know where to retreat to. This step lays the groundwork for "rolling back" later; roll back without taking stock and you easily retreat too far or not far enough.
+2. State the situation. Take stock first: What has it changed so far? Which of those changes did you want, and which came from it drifting? Where is the last clean, working state? `git status` and `git diff` list the files that changed (Chapter 26). If you roll back without taking stock, it's easy to go back too far or not far enough.
 
-**③ Roll back to the last good state: this is what checking out a branch earlier was for**
-This is the core act of first aid. If you **listened to the last few chapters** and were managing with **Git** from the start with a **new branch** checked out (Chapter 26), then right now you can **take this task's changes back to that clean state** and clear out what it produced while off course. That may take a few steps: first work out which changes to undo, then restore or revert them one by one.
+3. Roll back to the last good state. This is the heart of first aid. If you saved a starting point with Git and created a new branch at the start, you can now take this task's changes back to that clean state; the exact commands are in "Git: the bare minimum to get started" in Chapter 26. Claude Code's `/rewind` can also restore the files it changed itself (Chapter 28). This moment is why earlier chapters kept saying "save a starting point before you start." Rolling back can't undo outside effects, such as emails already sent or cloud data already deleted.
 
-> **Key point:** The earlier chapters (Chapters 24, 26, 28, and 29) harp on "save a starting point and check out a Git branch before acting" **precisely for this moment in step ③**. Rolling back isn't failure — it's your **biggest safety net**. That "environment you can undo" is exactly this ability made real. (Web / cloud forms usually have the platform's own rollback / versioning; **refer to its official documentation**.) For the commands that restore and undo changes, **see "Git: the bare minimum to get started" in Chapter 26**, and Appendix C and the official docs for other tool features; this chapter only covers the act of "getting back to the last good state" itself. Remember that Git can't bring back external effects such as sent emails or deleted cloud data.
+4. Start a new conversation. Once you're back at a clean state, don't continue in the conversation that got messy. Open a new one, tell it "that approach didn't work, and here's the problem it ran into" as a premise, and have it plan again with that lesson in mind. The old conversation is piled with failed attempts, and if you keep going on top of them, it will just drift again.
 
-**④ Start a new conversation: swap in a clean desk**
-After getting back to a clean state, **don't keep going in that conversation that's already a mess.** Start a **new conversation**, tell it "the road we just took doesn't go through, and here's the trap we stepped in" as a **premise**, and let it plan again carrying that lesson. Why start a new one? Because the old conversation's "desk" is piled with failed attempts (Chapter 13); keep going on it and it'll still be carried along by the old mistakes.
+5. Diagnose. Finally, take a minute to look back: what was the root cause this time? Was the task too vague (mistake 1)? Did you have it change too much at once (mistake 2)? Or did you keep forcing fixes when you should have rolled back (mistake 6)? Once you find the cause, you can stop it at the source next time, for example by having it produce a plan first (Chapter 27), or by breaking the task smaller.
 
-**⑤ Diagnose: think through "why it went off," don't trip over the same thing again**
-Last, spend a minute reviewing: where's the root of this going-off-course? Was the **task said too vaguely** (back to scene 1 in section one)? **Had it change too much at once** (scene 2)? Or **should you have rolled back early but stubbornly fixed instead** (scene 6)? Find the root cause, and when you start over **plug it at the source**: for example, have it produce a plan you review first this time (Chapter 27), or break the task even smaller.
+The most common beginner error isn't things going wrong; it's refusing to roll back once they have. You keep thinking "one more tweak and it'll be fine," and half an hour later you're worse off than when you started. Experienced users do the opposite: the moment the direction feels wrong, they'd rather roll back and start over than keep patching a mess.
 
-> **How you'll actually run into this:** The most common beginner mistake isn't "the crash" itself, it's **flat refusing to roll back after the crash**: always feeling "one more tweak and it'll be fine," and ending up sinking deeper into the mess, worse off half an hour later than at the start. **The veteran's instinct is exactly the opposite: the moment the direction feels wrong, they'd rather roll back and start over than patch a wreck.** Rolling back + starting a new conversation is often the fastest road, not admitting defeat.
-
-## 3. The whole thing in one line
-
-Boil this chapter down to one line you can carry around:
-
-> **For prevention, hold the workflow from Chapter 24 (say it clearly, break it small, look at the diff, run the tests); for rescue, remember "interrupt → take stock → roll back → start over → diagnose."** A crash isn't scary; what's scary is gritting it out inside the mess. Your biggest backing is that "environment you can undo," so the step of "save a starting point and check out a branch before acting," never skip it.
-
-## 4. Common misconceptions, cleared up together
+## 3. Common misconceptions
 
 | Misconception | Reality |
 | --- | --- |
-| If I'm skilled enough I can avoid crashes | It "will make mistakes + will act," so crashes are the norm; the key isn't avoiding crashes, it's knowing how to rescue (Chapter 24) |
-| When it goes off course, keep chasing it with fixes | You should roll back + start a new conversation; stubbornly fixing in a messy context often gets worse (scene 6, Chapter 13) |
-| Permission confirmation is a hassle, clicking approve away is fine | That's ripping out the brakes; look at the diff before permission, and if you can't read it don't let it through (scene 3, Chapters 25 and 26) |
-| If it says it's done, it did it right | If it's untested and you can't say it clearly, don't merge (scene 7, Chapter 25) |
-| Rolling back = failure, = admitting defeat | Rolling back is the biggest safety net, the veteran's instinct, often the fastest (steps ② and ③) |
-| Pasting a key once should be fine | Pasting it in = handing it over; revoke and reissue right away, don't count on luck (scene 8, Chapter 37) |
+| If I'm skilled enough, nothing will go wrong | It makes mistakes and can act, so things going wrong is normal; what matters is knowing how to recover |
+| When it drifts, keep chasing it with corrections | Roll back and start over in a new conversation; forcing fixes in a messy context often makes things worse (mistake 6) |
+| Permission prompts are a hassle, so just keep clicking approve | That's like removing the brakes; before approving, look at what it's about to do (mistake 3, Chapter 26) |
+| If it says it's done, it did it right | Don't merge anything you haven't signed off (mistake 7, Chapter 25) |
+| Rolling back means failure, admitting defeat | Rolling back is your biggest safety net, and often the fastest way back on track |
+| Pasting a key once should be fine | Pasting it in means handing it over; revoke it and replace it right away (mistake 8, Chapter 37) |
 
 ## Summary
 
-- A coding agent **will definitely crash** (will make mistakes + will act); the goal isn't "never crash," it's **recognizing the scene and rescuing yourself back**.
-- **The eight crash scenes**: vaguely dropping the task, too big a change at once, clicking permission away without looking at the diff, never switching the conversation, trusting hallucinations, stubbornly fixing a failing approach, making a big change with no tests, pasting in a key. They really only break three principles: not saying it clearly, not holding the two gates, not managing context / data well.
-- **The five-step first-aid checklist**: ① interrupt first ② state the situation ③ roll back to the last good state ④ start a new conversation ⑤ diagnose. The core is step ③ rolling back: exactly the value that "save a starting point and check out a Git branch before acting" makes real.
-- The biggest misconception is **flat refusing to roll back after a crash** and gritting it out in the mess; the veteran's instinct is to **rather roll back and start over** (echoing Chapters 13, 24, and 25).
-- For the exact rollback commands, see "Git: the bare minimum to get started" in Chapter 26; for tool steps, **refer to the official documentation** (see Appendix C); the "act" this chapter covers is tool-agnostic and won't go stale.
+- A coding agent will go wrong at some point, because it makes mistakes and can also act. The goal isn't never going wrong; it's recognizing problems and getting back from them.
+- The eight common mistakes: a vague task, too big a change at once, clicking approve without reading the diff, never switching conversations, trusting hallucinations, forcing fixes on a failing approach, merging without signing off, and pasting in keys. They break only three principles: not saying things clearly, not holding the two gates, and not managing context and data well.
+- Five-step first aid: interrupt first, state the situation, roll back to the last good state, start over in a new conversation, and diagnose. The heart of it is rolling back, which is exactly why you save a starting point and create a branch before you start.
+- The biggest mistake is refusing to roll back once things go wrong. The exact rollback commands are in Chapter 26.
 
-That brings Part Four, "AI coding in practice," to a close: you now have the general workflow, the getting-started map for the two main tools, and the first-aid skills for when you crash. In the next part, we **actually build a project hands-on**, turning these abilities into results you can see.
+That brings Part 4 to a close: you now have the general workflow, a way to get started with both tools, and first aid for when things go wrong. The next part is where you start building real projects.
+
+## Sources and version notes
+
+Interrupting with Esc was checked on 2026-10-29: the [Claude Code costs documentation](https://code.claude.com/docs/en/costs) says pressing Escape stops it immediately, and in the [Codex terminal interface source code](https://github.com/openai/codex/blob/main/codex-rs/tui/src/status_indicator_widget.rs), the default interrupt key is Esc and "esc to interrupt" is shown while it runs.
 
 ---
 
@@ -120,12 +98,12 @@ That brings Part Four, "AI coding in practice," to a close: you now have the gen
 
 > Six questions, covering four types: concept, misconception, scenario, and hands-on. Think for yourself first, then read the answer in the quoted block.
 
-1. **[Basic · Concept]** What's this chapter's basic attitude toward "crashing"? <!-- quiz: q01 revision: 2 -->
-   - A. Most crashes come from badly written prompts; write them well to avoid them
+1. **[Basic · Concept]** What's this chapter's basic attitude toward things going wrong? <!-- quiz: q01 revision: 3 -->
+   - A. Most mistakes come from badly written prompts; write them well to avoid them
    - B. Crashes are the norm; the goal is to recognize them and rescue yourself
-   - C. A crash means the tool is no good, and you should switch to another one
-   - D. Once you're experienced enough, you'll hardly ever crash at all anymore
-   > **Answer: B.** Crashes come from a coding agent's nature of "will make mistakes + will act" (Chapters 23 and 24). Better prompts reduce some of them (A), but neither switching tools (C) nor experience (D) makes them go away. The mature way to use it is **knowing how to rescue**: recognizing the eight scenes and using the five-step first aid.
+   - C. A mistake means the tool is no good, and you should switch to another one
+   - D. Once you're experienced enough, things will hardly ever go wrong anymore
+   > **Answer: B.** Things go wrong because of a coding agent's nature of "will make mistakes + will act" (Chapters 23 and 24). Better prompts reduce some of them (A), but neither switching tools (C) nor experience (D) makes them go away. The mature way to use it is **knowing how to rescue**: recognizing the eight common mistakes and using the five-step first aid.
 
 2. **[Basic · Concept]** What's the correct order of the five-step first-aid checklist? <!-- quiz: q02 revision: 2 -->
    - A. Roll back → interrupt → new conversation → state the situation → diagnose
@@ -134,26 +112,26 @@ That brings Part Four, "AI coding in practice," to a close: you now have the gen
    - D. State the situation → diagnose → interrupt → roll back → new conversation
    > **Answer: C.** The order matters: **stop the loss first (interrupt), then take stock (state the situation), get back to a clean place (roll back), swap in a clean desk (new conversation), and finally think through why (diagnose).** Without interrupting first (A, D), it keeps changing things while you take stock; skip taking stock and roll back directly (B) and you easily retreat to the wrong spot.
 
-3. **[Advanced · Misconception]** "It went off course, I'll just cling to it and correct the original plan line by line." Why does this often get worse the more you correct? <!-- quiz: q03 revision: 2 -->
+3. **[Advanced · Misconception]** "It went off course, I'll just cling to it and correct the original plan line by line." Why does this often get worse the more you correct? <!-- quiz: q03 revision: 3 -->
    - A. It grows more careful with each correction, so it gets there eventually
    - B. The problem is that it corrects too slowly; a stronger model would fix it
    - C. As long as you explain in more detail each time, you can pull it back
    - D. Failed attempts fill the context, and it's carried along by old mistakes
-   > **Answer: D.** This is the sixth scene, "stubbornly fixing a failing approach," rooted in that stuffed-full "desk" from Chapter 13. More detailed explanations (C) or a different model (B) leave the old mistakes sitting in the context. **Getting back to a clean state and starting a new conversation carrying the lesson** is almost always faster than stubbornly fixing in the mess: this is also steps ③ and ④ of the first-aid checklist.
+   > **Answer: D.** This is mistake 6, "stubbornly fixing a failing approach," rooted in the overfilled "desk" from Chapter 13. More detailed explanations (C) or a different model (B) leave the old mistakes sitting in the context. **Getting back to a clean state and starting a new conversation carrying the lesson** is almost always faster than stubbornly fixing in the mess: this is also steps ③ and ④ of the first-aid checklist.
 
-4. **[Advanced · Misconception]** "Rolling back equals failure, equals admitting defeat." Where's the mistake in this thought? <!-- quiz: q04 revision: 2 -->
+4. **[Advanced · Misconception]** "Rolling back equals failure, equals admitting defeat." Where's the mistake in this thought? <!-- quiz: q04 revision: 3 -->
    - A. There's no mistake; rolling back means everything before was wasted
    - B. Rolling back is a safety net, often the fastest way back on track
    - C. Rolling back deletes the whole project, so it's only a last resort
    - D. Rolling back is for beginners; once skilled, you should fix it in place
-   > **Answer: B.** "Save a starting point and check out a Git branch before acting" (Chapter 26) is laying the groundwork for exactly this moment. Rolling back only undoes the changes that went off course; the work you committed earlier is still there (A, C). The most common beginner mistake is precisely **flat refusing to roll back and gritting it out on a wreck** (D), ending up worse and worse.
+   > **Answer: B.** "Save a starting point and check out a Git branch before acting" (Chapter 26) is laying the groundwork for exactly this moment. Rolling back only undoes the changes that went off course; the work you committed earlier is still there (A, C). The most common beginner mistake is precisely **flat refusing to roll back and grinding on inside the mess** (D), ending up worse and worse.
 
-5. **[Basic · Scenario]** You're watching it work and suddenly notice it's about to delete a file you think is very important. What should you do most at this moment? <!-- quiz: q05 revision: 2 -->
+5. **[Basic · Scenario]** You're watching it work and suddenly notice it's about to delete a file you think is very important. What should you do most at this moment? <!-- quiz: q05 revision: 3 -->
    - A. Hold off approving, see what it's trying to do, and ask if it's unclear
    - B. Approve it; you can always get the file back with Git later anyway
    - C. Let it delete first, then read the diff afterward to judge if it was right
    - D. Close the whole tool and start this task over again from the beginning
-   > **Answer: A.** This hits both "clicking approve without looking at the diff" (scene 3) and step ① of first aid, "interrupt first." **See clearly before permission, and if you can't read it don't let it through** (Chapters 25 and 26). B and C assume a deleted file can always be recovered, but a file that was never committed has no copy in Git; closing the tool outright (D) throws away the chance to find out what's going on.
+   > **Answer: A.** This hits both "clicking approve without looking at the diff" (mistake 3) and step ① of first aid, "interrupt first." **See clearly before permission, and if you can't read it don't let it through** (Chapters 25 and 26). B and C assume a deleted file can always be recovered, but a file that was never committed has no copy in Git; closing the tool outright (D) throws away the chance to find out what's going on.
 
-6. **[Basic · Hands-on / Observation]** You don't have to actually install the tool: look back at the eight crash scenes in this chapter and **match yourself against them**: in your past use of AI (even just chatting), which two or three did you step into most? Then copy down the corresponding "fixes" and stick them somewhere you'll see them later. <!-- quiz: q06 revision: 2 -->
-   > **What you should notice:** Most people will find they keep tripping over the same one or two (a very common pair is "never switching the conversation" and "trusting hallucinations"). The eight scenes really only break three principles: **not saying it clearly, not holding the two gates, not managing context / data well**; watching your own high-frequency items and plugging them at the source is more useful than memorizing all eight. For the basic rollback commands, see "Git: the bare minimum to get started" in Chapter 26; for how a specific tool operates, **refer to the official documentation** (see Appendix C).
+6. **[Basic · Hands-on / Observation]** You don't have to actually install the tool: look back at the eight common mistakes in this chapter and **match yourself against them**: in your past use of AI (even just chatting), which two or three did you run into most? Then copy down the corresponding "fixes" and stick them somewhere you'll see them later. <!-- quiz: q06 revision: 3 -->
+   > **What you should notice:** Most people will find they keep making the same one or two (a very common pair is "never switching the conversation" and "trusting hallucinations"). The eight mistakes really only break three principles: **not saying it clearly, not holding the two gates, not managing context / data well**; watching your own high-frequency items and plugging them at the source is more useful than memorizing all eight. For the basic rollback commands, see "Git: the bare minimum to get started" in Chapter 26; for how each tool works, see Chapters 28 and 29 and Appendix C.

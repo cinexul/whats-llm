@@ -1,29 +1,26 @@
-In the last chapter we pinned a large language model's place on the AI map: it's in the innermost circle, the "language-focused" branch of deep learning. But "a huge model focused on language" still sounds abstract. Where exactly is it "large"? What's packed inside it? Why can it speak so fluently, yet now and then confidently talk nonsense?
+In the last chapter we placed the large language model on the AI map: the innermost circle, the branch of deep learning focused on language. But "a huge model focused on language" still sounds abstract. Where exactly is it "large"? What's inside it? Why can it write so fluently, yet now and then be confidently wrong?
 
-This chapter **opens up** that innermost doll for a look. By the end you'll have two things: an intuition for "parameters" (the model's "body"), and a core insight that will **keep you from a lot of pitfalls**: **a large language model generates from learned parameters and context; it is not a complete, reliably searchable library.** Once this clicks, you'll stop being surprised by all its "magic" and all its crashes.
+This chapter opens up that innermost doll. By the end you'll have two things: an intuition for "parameters," which are the model's body, and an insight that will keep you out of a lot of trouble: **a large language model generates text from learned parameters plus the current context; it is not a library you can search completely and reliably.**
 
 ## 1. The "large" in "large language model," where exactly is it large?
 
-It's called a "large" model, and that's not just talk. The "large" shows up in two places, both absurdly large at once:
+It's large in two ways: the amount of text it read during training, and the number of adjustable values (parameters) inside it. Here are three real examples whose makers published the details. The figures come from each developer's model documentation, checked as of October 2026. A token is the small unit of text a model works with; chapter 3 explains it.
 
-| Where it's large | In plain terms | A sense of scale (**illustrative only; refer to the provider's official documentation**) |
-| --- | --- | --- |
-| Amount of training data | The volume of text it has "read" | Massive: roughly a big sweep through the books, web pages, and articles you can find on the internet |
-| Number of parameters | The count of "adjustable knobs" inside it | Billions to hundreds of billions is common; as of October 2026, some open-weight models (whose parameter files you can download) have about a trillion in total |
+| | DeepSeek-V3 | Qwen3-235B-A22B | Kimi K2 |
+| --- | --- | --- | --- |
+| Developer | DeepSeek | Alibaba (Qwen) | Moonshot AI |
+| Text read in training | 14.8 trillion tokens | about 36 trillion tokens | 15.5 trillion tokens |
+| Total parameters | 671 billion | 235 billion | about 1 trillion |
+| Parameters actually used per generated token | 37 billion | 22 billion | 32 billion |
 
-- **It reads a lot:** During "training," it was fed a staggering amount of text. Books, web pages, forums, code. Pretty much a big pass over everything humans have publicly written down.
-- **It has many knobs:** Inside it are billions of **parameters**, and in some models up to around a trillion. Together these numbers decide "given a sentence, how it continues."
-
-> **Note:** Exactly "how many" parameters and "how much" data differ from model to model and keep changing, so **this book won't pin down these numbers (writing them down would go stale fast; refer to the provider's official documentation)**. You only need to build one intuition: **both are large to a degree an ordinary person can hardly imagine.** The next section focuses on that more central and harder word: parameters.
+How much is 14.8 trillion tokens? By the ratio measured in chapter 3, a 100,000-word English book is roughly 130,000 tokens, so 14.8 trillion tokens is on the order of 100 million such books. Parameter counts range from hundreds of millions to over a trillion: the smallest Qwen3 model has about 600 million, and Kimi K2 in the table has about a trillion. We picked these three because they also published how much data they were trained on; closed models such as Claude and GPT usually publish neither. Open models released since then are bigger still, and Appendix E lists their numbers as of October 2026.
 
 ## 2. What parameters are: hundreds of millions of "knobs," and training is turning them over and over
 
-This is the one metaphor in the chapter most worth understanding deeply, so read it slowly.
+Imagine an enormous mixing board with billions of knobs packed across it. Where every knob is set decides how the model tends to continue after seeing a sentence.
 
-Imagine an enormous **mixing board** with **billions of knobs** packed across it. **Each way you set the knobs (where every knob is turned to)** corresponds to one tendency for "after seeing a sentence, what word the model will continue with next."
-
-- **Parameters** are the **current positions** of those billions of knobs (long strings of numbers). They're the model's "body." A "trained model" is, at heart, **this whole set of turned knob positions**.
-- **Training** is the process of **turning these knobs over and over**. How? Show the model a real sentence, cover the back half, and have it guess "what the next word is." If it guesses wrong, nudge the relevant knobs a little so it's more likely to guess right next time. Do this with **massive amounts of text, hundreds of millions of times**, and the knobs gradually get tuned to a magical position: **the words the model "says" simply sound right.**
+- **Parameters** are the current positions of those knobs: a very long list of numbers. They're the model's body. A "trained model" is, when it comes down to it, this whole set of tuned knob positions. When you download an open-weight model, these numbers are mostly what you get.
+- Training is turning those knobs over and over. Show the model a real sentence, cover what comes next, and have it guess the next word; if it guesses wrong, nudge the relevant knobs a little so it's more likely to get it right next time. Repeat this across huge amounts of text, and the knobs gradually settle into positions where the model's words simply sound right.
 
 ```text
 What training is doing (bare-bones illustration):
@@ -33,82 +30,70 @@ What training is doing (bare-bones illustration):
   ...repeat this hundreds of millions of times, and the knobs get tuned to the "speaks smoothly" position
 ```
 
-In ordinary use, the trained parameters stay **fixed**: asking a question does not itself retrain the model. It uses those parameters together with the current context to generate a response. Its training knowledge does not automatically update after the cutoff, but it can use newer information supplied in the conversation or retrieved by tools (Chapter 9).
+In everyday use, the trained parameters stay fixed: asking a question doesn't retrain the model. It uses those parameters together with the current context to generate an answer. What it learned in training stops at a cutoff date and doesn't update itself, but it can use new material you give it in the conversation or information retrieved by tools (chapter 9).
 
-> **Why does it need so many parameters?** Because language has so many patterns, and they're so fine-grained: which words to use in which situations, how sentences fit together, how different fields phrase things. To dial all of this in, you need a huge number of knobs to share the load. With too few parameters, there's no room to hold language patterns this complex, and it would speak haltingly.
+Why so many parameters? Language has a huge number of fine-grained patterns: which words fit which situations, how sentences fit together, how each field phrases things. Holding all that takes a vast number of knobs; with too few, those patterns don't fit.
 
 ### But: more parameters ≠ necessarily smarter
 
-This is a misconception especially worth puncturing.
+Hearing "hundreds of billions of parameters," many people assume that settles it. A bigger model often has more potential, but three other things matter:
 
-Hearing "this model has hundreds of billions of parameters, that one only tens of billions," many people immediately conclude "more parameters, stronger." **That's only half right.** Parameter count is indeed one facet of "scale," and a bigger one often **has the potential** to be stronger, but it's **far from the whole story**:
+- Data quality: train it on sloppy, error-filled text and no number of knobs will learn good skills, like feeding a mixing board nothing but noise.
+- Training method: at the same scale, a model trained cleverly can beat one trained clumsily.
+- How many parameters each step actually uses: all three models in the table use a "mixture of experts" design. The inside is split into many groups of "expert" parameters, and each generated token calls on only some of them. That part is called the **active parameters**, and in the table it's only a tenth to a thirtieth of the total (the "A22B" in Qwen3's name means "22 billion active"). Speed and cost depend mainly on the active parameters, the hardware, and how the model is served, so the total alone tells you little.
 
-- **Data quality** matters just as much: feed it dirty, messy text, and no number of knobs will learn good skills. It's like feeding an enormous mixing board nothing but noise. No number of knobs will tune out good sound.
-- **Training method** also sets the ceiling: at the same scale, training cleverly can beat training clumsily.
-- **A large total doesn't mean every parameter is used every time.** Some models use a "mixture of experts" design: the inside is split into many groups of "expert" parameters, and each small piece of text it generates calls on only a few of them. The part that actually takes part in each step is called the **active parameters**, and it can be just a few percent of the total. So speed and cost depend on the active parameters, the hardware, and how the model is served; you can't guess them from the total alone.
+So don't rank models by parameter count. For you, which product works well and is good value on your own tasks matters more than who has more parameters (chapters 17 and 18 cover how to choose).
 
-> **Key point:** Don't rank models simply by "how many parameters." Parameter count, data quality, and training method together decide whether a model is good to use; and for you, the user, **which product feels good to use often matters more than who has more parameters** (chapters 17 and 18 cover how to choose).
+## 3. The key point: it is not a database you can "look things up" in
 
-## 3. The core correction: it is not a database you can "look things up" in
+If you take away only one sentence from this chapter, let it be this: **a large language model is not a database that stores books on a disk and retrieves them on demand.**
 
-If you take away only one sentence from this chapter, let it be this: **a large language model is not a database that memorizes books onto a hard drive and retrieves them on demand.**
+Many people picture a giant library inside: you ask, it turns to the right page and reads it out. In reality, training tunes the parameters to pick up patterns and facts; it doesn't build an archive of all the source text you can search. That said, while learning general patterns it can also memorize particular passages, and sometimes it reproduces training text word for word. So "not a database" doesn't mean "never keeps the original wording."
 
-This misunderstanding is far too common. Many people think it has a "super library" inside, and when you ask, it flips to the right page and reads it to you. **That's not how it works at all.**
-
-Training **adjusts the parameters to learn patterns and facts**, rather than building a searchable archive of all the source documents. But **learning general patterns and memorizing particular passages can both happen**: models can sometimes reproduce training text verbatim. “Not a database” does not mean “cannot retain original wording.”
-
-An analogy makes it clearer:
-
-| | A database (it is **not** this) | A large language model (it **actually** is this) |
+| | A database (it is not this) | A large language model (it actually is this) |
 | --- | --- | --- |
 | What is stored | Original records | Learned patterns and facts in parameters, sometimes including memorized passages |
-| What it does when answering | **Retrieve**: find that record, read it out | **Compute on the spot**: generate it word by word from the patterns |
+| What it does when answering | Retrieve: find that record, read it out | Compute on the spot: generate it token by token from the patterns |
 | Ask the same question twice | Reads the exact same thing each time | The wording often differs, because picking the next word usually involves a bit of random sampling (chapter 4) |
-| When there's no matching content | Honestly says "no such record" | May admit uncertainty or produce a plausible but **false** passage |
+| When there's no matching content | Honestly says "no such record" | May admit uncertainty or produce a plausible but false passage |
 
-This one point directly explains two seemingly contradictory traits of large language models:
+This table also explains two traits that seem to contradict each other:
 
-- **Why can it respond to unfamiliar questions?** It learns **general patterns**, so it can generate an answer to a question it has never seen word for word. This ability to generalize can coexist with memorization of some training examples.
-- **Why can it confidently get things wrong?** Generating a plausible continuation does not by itself verify the facts. A model may express uncertainty, but it may also produce a fluent, false answer. This is the **hallucination** discussed in Chapter 9.
+- Why can it answer questions it has never seen? What it learned are general patterns, so it can answer a question it has never seen in exactly those words by following them. That doesn't clash with it having memorized some training text.
+- Why can it be confidently wrong? Generating a plausible continuation is not the same as checking the facts. It may say "I'm not sure," or it may give a fluent, false answer. This is the **hallucination** discussed in chapter 9.
 
-> **Common misconception:** “If it can recite a poem, it must contain a searchable copy of every book.” Models can **memorize and reproduce some text exactly**, with repetition among the factors that affect memorization. That gives neither a complete archive nor a guarantee of accurate retrieval. Check important quotations against the original; do not treat model parameters as a way to anonymize sensitive training data.
+Another misunderstanding: "If it can recite a whole poem, it must hold a searchable copy of every book." Memorizing fragments does happen. Researchers extracted word-for-word training text from GPT-2, including names, phone numbers, and email addresses that had been public online, and some of it appeared in only one document in the training data. But this memory is neither complete nor reliably searchable. So check important quotations against the original; and once sensitive information is in training data, it can come back out verbatim (chapter 37).
 
-> **How you may encounter it:** A model can give a neatly formatted but nonexistent citation. If it has not actually used a search or retrieval tool, the citation is generated text, not evidence of a lookup. Even when tools are used, inspect the retrieved source and whether it supports the claim.
+Likewise, a model can give a neatly formatted citation that doesn't exist. If it hasn't actually used a search or retrieval tool, that citation is generated text, not evidence of a lookup (chapter 9 covers how to check).
 
-## 4. Tying this chapter together: generating answers from learned parameters
-
-Looking back, the chapter's three points are really one chain of logic:
-
-1. It **read massive amounts of text** (big data);
-2. Through **training**, it **compressed language patterns into billions of parameters** (many knobs). This is its "body";
-3. When it answers, it **generates from learned parameters and context**. That supports fluent responses to many kinds of questions, but does not guarantee factual correctness.
-
-Remember: **it generates from learned parameters and context; it can generalize, memorize, and make mistakes.** Treat it as a useful assistant whose factual claims and quotations need checking. Part Two (starting from Chapter 10) develops that practical habit.
-
-## 5. Common misconceptions, corrected all at once
+## 4. Common misconceptions, corrected all at once
 
 | Misconception | Reality |
 | --- | --- |
-| A large language model is a giant database; answering is by "retrieval" | What it stores is **language patterns (squeezed into parameters)**; answering is **computed and generated on the spot**, not looked up |
-| It contains a complete, searchable copy of every training book | It learns through parameters and can memorize some passages; neither complete storage nor reliable retrieval is guaranteed |
-| More parameters always means smarter | Data, training, architecture, and the task matter too; total parameters alone do not determine quality, speed, or cost |
-| It answers so fluently and confidently, it must be true | Training can encourage accurate answers, but fluency alone does not prove a claim is true; check important facts (chapter 9) |
-| Since it can answer, it must "understand" exactly as a person does | Useful responses show learned capabilities; they do not by themselves establish human-like understanding (chapter 1) |
-| It updates its training knowledge whenever I chat | Ordinary inference does not retrain the parameters; current context or tools can supply new information |
+| A large language model is a giant database; answering is by "retrieval" | Patterns live in the parameters, and answers are generated on the spot |
+| It contains a complete copy of every training book | It can memorize some passages, but neither complete storage nor reliable retrieval is guaranteed |
+| More parameters always means smarter | Data, training method, and the task matter too; speed and cost depend more on active parameters |
+| It sounds so fluent and confident, it must be true | Fluency doesn't prove truth; check important facts (chapter 9) |
+| It updates its training knowledge whenever I chat | Everyday use doesn't change the parameters; new information comes from the current context or tools |
 
 ## Summary
 
-- The "large" in a large language model is large in two places: **amount of training data** and **number of parameters**, both larger than you can easily imagine; the exact numbers differ by model and change often, so **refer to the provider's official documentation**.
-- **Parameters** are the current positions of the model's billions of "knobs," its **body**; **training** is repeatedly "turning the knobs" with massive amounts of text, until the words it "says" simply sound right.
-- **More parameters ≠ necessarily better**: evaluate quality on your task along with actual speed and cost, rather than comparing total parameter counts alone.
-- **The core correction:** a model generates from **learned parameters and context**. It may reproduce memorized wording, but it is not a complete, reliably searchable database.
-- A model can be **fluent and useful while still making factual errors** (hallucination, chapter 9), so verify important facts against reliable sources.
+- A large language model is large in two ways: it read a lot of text in training (DeepSeek-V3 read 14.8 trillion tokens), and it has many parameters (from hundreds of millions to over a trillion).
+- Parameters are the current positions of countless "knobs" inside the model, its body; training turns those knobs again and again on huge amounts of text until its words sound right.
+- More parameters isn't automatically better. Mixture-of-experts models use only a small part of theirs at each step; judge a model by quality, speed, and cost on your own tasks.
+- A model generates from learned parameters and context. It may reproduce memorized wording, but it is not a complete, reliably searchable database.
+- It can be fluent and useful while still getting facts wrong (hallucination, chapter 9), so check important facts against reliable sources.
 
-The next chapter (Chapter 3) covers how the model cuts text into **tokens** and lays them out in a "context window." The one after (Chapter 4) looks at how it actually "computes" the next word in real time — the answer to "if it's not a database, how does it produce the words?"
+The next chapter covers how the model cuts text into tokens and lays them out in a "context window." Chapter 4 then looks at how it "computes" an answer one token at a time: the answer to "if it's not a database, how does it produce fluent text?"
 
 ## Sources and verification
 
-Carlini et al., *Extracting Training Data from Large Language Models* (2021): [authors’ code and paper link](https://github.com/ftramer/LM_Memorization). The work demonstrates extraction of memorized training text from GPT-2; it does not claim every model reproduces every training document. Source checked 2026-10-22.
+- Carlini et al., *Extracting Training Data from Large Language Models* (2021): [abstract](https://arxiv.org/abs/2012.07805), [authors’ code and paper link](https://github.com/ftramer/LM_Memorization). The work extracted memorized training text from GPT-2 (including public names, phone numbers, and email addresses), some of which appeared in only one document; it does not claim every model reproduces every training document. Source checked 2026-10-22; abstract rechecked 2026-10-28.
+- [DeepSeek-V3 model card](https://huggingface.co/deepseek-ai/DeepSeek-V3): 671B total parameters, 37B activated per token, pre-trained on 14.8 trillion tokens.
+- [Qwen3 release blog](https://qwenlm.github.io/blog/qwen3/): pre-trained on about 36 trillion tokens; Qwen3-235B-A22B has 235B total and 22B activated parameters; the smallest dense model is Qwen3-0.6B.
+- [Kimi K2 model card](https://huggingface.co/moonshotai/Kimi-K2-Instruct): a mixture-of-experts model with 1 trillion total and 32 billion activated parameters, pre-trained on 15.5 trillion tokens.
+
+The three sources above were checked 2026-10-28.
 
 ---
 

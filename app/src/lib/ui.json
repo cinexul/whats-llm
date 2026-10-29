@@ -107,9 +107,9 @@
     "readingProgress": "本章阅读进度"
   },
   "ja": {
-    "appTitle": "LLM Learning Book",
+    "appTitle": "やさしいLLM入門",
     "coverLabel": "クイックスタートガイド",
-    "coverTitleHtml": "LLM<br />Learning Book",
+    "coverTitleHtml": "やさしい<br />LLM入門",
     "coverLead": "「大規模言語モデルとは何か」という直感から、ツールのエコシステム、AIプログラミングの実践、責任ある使い方まで、順を追って学べます。AIやプログラミングの経験がなくても大丈夫、第1部から読み進めてください。",
     "allChaptersLabel": "全{n}章",
     "coverNote": "本書の内容は執筆時点の情報に基づきます。最新の仕様は公式ドキュメントをご確認ください。",

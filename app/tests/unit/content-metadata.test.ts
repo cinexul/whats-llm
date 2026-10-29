@@ -39,8 +39,8 @@ const baseline = () => {
 const slug = 'what-is-llm';
 
 describe('content maintenance', () => {
-	it('covers all 45 chapters in all three editions with acknowledged content hashes', () => {
-		expect(slugs).toHaveLength(45);
+	it('covers all 47 chapters in all three editions with acknowledged content hashes', () => {
+		expect(slugs).toHaveLength(47);
 		expect(validateContentMetadata(fresh(), inventory, hashes)).toEqual([]);
 	});
 

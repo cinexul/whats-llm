@@ -1,20 +1,14 @@
-〔Wherever this chapter touches a specific product's commands, interface, or buttons, those change with each version, so always **refer to the provider's official documentation**. This chapter only covers the **shared, stable** guarding moves, and that part won't go out of date.〕
+If you only have time for one chapter in Part 4, make it this one.
 
-If you only have time to learn one chapter in all of Part Four, make it this one.
+Chapter 23 said it plainly: the agent acts, and it makes mistakes; finished isn't the same as correct. So how can someone who doesn't write code check whether the code it wrote is right?
 
-In Chapter 23 we settled on an iron rule: **it takes action and it makes mistakes, so "don't let through what you don't understand and haven't verified."** But here's the catch: **how does someone who can't write code "verify" the code it writes?**
-
-The good news: **signing off does not mean understanding every line of code.** What you need are four plain things: **understand the change (diff), run the relevant checks, know what can be restored and how (roll back), and do a final sign-off with three questions.** A non-expert can learn all four, and once you have them, you really do hold the steering wheel of "letting AI do the work for you."
-
-Let's take them one at a time.
+Signing off doesn't mean understanding every line. What you do is plain: see where it changed things (the diff), use concrete checks to confirm it actually did the job without breaking anything else, know how to get back if it went wrong, and finish with three questions. This chapter takes them one at a time, and section 5 sets out the book's position on whether you need to read the code.
 
 ## 1. Reading the diff: a game of "spot the difference"
 
-When it finishes changing code, the first thing isn't to ask it "is it done?" It's to **have it show you the change as a diff.**
+When it finishes a change, the first thing to do isn't to ask "done?" but to have it show you the change as a diff. A diff is a before-and-after comparison. Like two nearly identical pictures in a spot-the-difference puzzle, the diff circles what changed, so you don't have to compare the original line by line.
 
-**A diff is "the before-and-after comparison of a change."** Don't let the word scare you; the idea is dead simple. Like two nearly identical pictures where you play "spot the difference," a diff **circles the spots that differ** for you, so you don't have to compare line by line against the original.
-
-It looks like this (this is a **general illustration**; the exact colors and symbols differ a bit between tools, so **defer to the official documentation**):
+It looks roughly like this (colors and layout vary a little between tools):
 
 ```diff
   function greet(name) {
@@ -23,115 +17,115 @@ It looks like this (this is a **general illustration**; the exact colors and sym
   }
 ```
 
-There are only three rules to reading it, and they're enough:
+There are only three rules for reading it:
 
-- **A green line with a `+` in front = newly added** (the line above that "added a welcome message").
-- **A red line with a `-` in front = removed** (the line above where "the old version got replaced").
-- **A line with no color and no symbol = unchanged**, just there to give you context.
+- A line starting with `+`, usually shown in green: added.
+- A line starting with `-`, usually shown in red: removed.
+- A line with no symbol: unchanged, shown for context.
 
-That's all. One change might involve several files and several additions and deletions, and the diff **lists them one by one**: "in which file, which lines added, which lines removed." Your job isn't to follow the syntax of every line — it's to answer two questions any non-expert can answer:
+The change above means the greeting used to say just "Hi, so-and-so" and now adds "! Welcome back." One change can touch several files in several places, and the diff lists them file by file. You don't need to follow the syntax. Start with two questions anyone can answer:
 
-1. **Is the place it touched right?** You told it to "change the title color on the homepage," and the diff shows it touched the "user login" code. That's **clearly wrong**; even if you can't follow that code, you know it went off track.
-2. **Is the scope absurdly big?** You only asked it to change a small heading, but the diff shows it changed a dozen-plus files and hundreds of lines. **The alarm should ring.** Either it misread the task, or it "casually" touched a pile of things it shouldn't have.
+1. Is it changing the right place? You asked it to change the color of the homepage title, but the diff touches the "user login" code. Even if you can't read that code, you can tell it went off track.
+2. Is the scope wildly too big? You wanted one small heading changed, and the diff shows a dozen files and hundreds of lines. Either it misunderstood the task, or it "tidied up" things it shouldn't have touched.
 
-> **Key point:** **Reading a diff is about "what was touched and how much," not "what every line of code means."** It's like not being a chef but still being able to tell "I ordered a salad, why did a pot of braised pork show up." **Right or wrong, right amount or not, a non-expert can absolutely judge.** That's the biggest value of the diff as a tool: it lays out "what it actually changed" so you don't have to take its word for it.
+You don't have to be a chef to notice that you ordered a salad and got a pot roast.
 
-## 2. Running tests: checking for regressions
+For the parts you can't follow, have it explain. You might ask:
 
-Now that you can follow "what it changed," the next urgent question is: **while it was adding a new feature, did it break a feature that was working fine?**
+> "Go file by file and tell me in plain words what you changed and why. Then list the risky changes separately: could anything delete or overwrite data, change permissions or logins, send things over the network, touch passwords or keys, or cost money? Mark anything you're unsure about."
 
-This is so common in programming that there's a phrase for it: "push down here, it pops up there." You have it fix A; it fixes A but accidentally bumps B. **And the place B breaks might not be in the diff in front of you at all**, so reading the diff alone won't catch it.
+Compare its explanation with the diff. If it says it only changed the heading but the diff includes login-related files, ask about it.
 
-This is where **tests** come in.
+## 2. Tests and acceptance checks: did it work, and is everything else intact?
 
-**A "test" is a batch of small checks written ahead of time, made to automatically confirm "are these features still working or not."** Picture it as the **quality-check line** before a product ships: each unit rides the conveyor, a machine automatically checks "does the light that should be on come on, does the wheel that should turn turn," and if any item fails, **a red light goes on immediately.**
+Once you know what it changed, the next question is whether it actually worked, and whether fixing A broke B. The second case is so common in programming that it has a name: a regression, where a feature that used to work is broken by a new change. The broken part may not be in the diff at all, so reading the diff won't catch it.
 
-For you, the "person showing it the ropes," the move is unbelievably plain:
+Tests are a set of small checks written in advance that automatically confirm whether features still work, like a quality-control line before shipping: if one item fails, a red light comes on. You don't need to write tests to use their results. After a change, have it run the tests related to this change, then ask three things: Which checks ran? Which passed and which failed? What wasn't tested?
 
-- After it's done, **ask it to run the checks relevant to the change.** A wording edit may need proofreading and link checks; a behavior change calls for relevant tests or a manual exercise.
-- Look at the result: **all passed means the tested cases passed**, not that every possible behavior is correct. **A failure needs investigation**: it may come from this change, an existing problem, or the environment. Resolve or clearly account for it before merging.
+Two things to keep in mind when reading results. Everything passing only means the tested cases are fine, not that every case is right. If something fails, find out why first: it may come from this change, from an existing problem, or from the environment. Fix it before merging, or write down the cause and the impact clearly.
 
-You do not have to write tests to use their results. Ask **which relevant checks ran, what passed or failed, and what remains untested**. A green result from an unrelated check does not validate your change.
+Alongside tests, your own acceptance checks matter just as much, and for someone who doesn't write code they're the main tool. Before any work starts, write down what "done" looks like, as steps you can actually follow:
 
-> **Common misconception / Reality:** Many beginners think "it said it's fixed, so it's fixed." **In reality, "it thinks it's fine" and "it holds up to the tests" are two different things.** It might genuinely believe it got it right (it isn't lying to you — it's "confidently wrong," the hallucination of Chapter 9), and tests provide independent evidence for the cases they cover. Build the habit: **run relevant checks after a change, investigate failures, and state any remaining gaps.**
+> Open the homepage and type "invoice" into the search box: articles with "invoice" in the title should be listed. Search with the box empty: no error. Narrow the window to phone width: the search box doesn't cover the title.
 
-One addition: not every project has tests ready. If there aren't any, at least do the **plainest manual check**: **use the feature your change affected, with your own hands**, and see whether it still works. Even just "open the page and see if it crashed" beats checking nothing.
+After the change, follow those steps yourself. If the project has no tests, these steps are your tests. For a wording change, proofreading the text and clicking each link is enough; for a change in behavior, always use the feature for real. "I've verified it" from the agent doesn't count; what you see with your own eyes does.
 
 ## 3. Rollback: know what can be restored
 
-**Rollback means returning selected changes to a known earlier state.** It helps you back out of a mistake, but it can't erase every consequence, and restoring often takes more than one step.
+Rolling back means returning selected changes to a known earlier state. In a project on your computer, that's usually done with Git. Git saves only the versions you commit; it doesn't record every edit automatically, so before a bigger change, commit or back up a starting point. If you've never used Git, installation and the basic commands are in "Git: the bare minimum to get started" in Chapter 26.
 
-**For a local project, Git records versions you deliberately save.** Before a substantial change, inspect the current status and preserve existing work in an appropriate commit or backup. Do not commit secrets just to create a checkpoint. Git is not a camera that automatically saves every edit. If you've never used Git, the basic commands for installing it, saving a starting point, and viewing or undoing changes are in "Git: the bare minimum to get started" in Chapter 26.
+Rollback has limits. Git doesn't protect files that were never committed or local databases, and it can't undo emails already sent, content already published, money already spent, or changes to a remote database. Checkpoints in cloud workspaces have their own scope and retention time. Chapter 26 covers these limits; for signing off, one rule is enough: if you can't say how an action would be undone, don't approve it yet.
 
-A **branch** is a named line of development. Creating one does not create a separate directory or isolate the running process. To work with separate files, use a **separate checkout or Git worktree** when useful. A worktree shares repository history while providing its own working directory; it still does not replace a sandbox.
+## 4. The three sign-off questions
 
-Git can restore recorded file content or reverse committed changes. It does not automatically protect untracked or ignored files, local databases, or other unsaved work. Before discarding anything, identify which changes belong to this task and preserve unrelated work. Recovery may involve more than one step.
+You've read the diff, run the checks, and confirmed the way back. Finish with three questions. Every time it says "done," go through them; if you can't answer one, don't merge yet.
 
-**For a cloud workspace, check its documented recovery features.** A checkpoint, discarded task, or workspace reset may cover only particular files and a limited retention period. Do not assume every platform provides the same undo.
+1. What did it change? It has explained each file in plain words, you've checked against the diff that the place and scope are right, and you can say in one sentence what the change is for.
+2. Did it actually do the job without breaking anything else? You've followed your acceptance steps yourself, the related checks pass, failures have a known cause, and you know what wasn't tested.
+3. If something is wrong, how costly is it, and can you undo it? If the change touches money, personal data, passwords or keys, deleting files, or publishing, has it had a second review? Is the way back ready?
 
-> **Key point:** Reverting code does not unsend messages, recover data already shared, refund charges, restore a remote database, or undo a deployment automatically. Those systems need their own recovery procedures. Prepare the appropriate backup and recovery plan before acting; Chapter 26 explains the permission and workspace boundaries.
+When you can't answer the first question, go back and ask: "What does this part do? Why did you change it this way?" Have it explain until you can say it back. If it can't explain, or the explanation gets more suspicious the more you ask, the change itself may be the problem.
 
-## 4. The three sign-off questions: this last gate, don't merge what you can't follow
+## 5. Do you need to read the code? The book's position
 
-You read the diff, ran the tests, confirmed you can roll back. Finally, gather all of it into a single move **you can use anytime, with no tools at all: the three sign-off questions.**
+Someone who can't program doesn't need to read every line of code to take responsibility for an AI's changes. The condition is doing four things:
 
-Every time it says "done," run it through these three questions. **If you can't answer any one of them, don't merge yet.**
+1. Confirm the behavior with concrete acceptance checks, instead of trusting "done" (section 2).
+2. Have it explain the diff in plain words and point out the risky parts itself (section 1).
+3. For any change that touches money, personal data, passwords or keys, deleting files, or publishing, get a second review: open a new session and have an agent with none of the earlier conversation review just that diff, or ask a person who knows the subject. The same session carries its earlier reasoning and tends to defend its own approach.
+4. Never run what you can't roll back (section 3 and Chapter 26).
 
-1. **"What did it change?"** Looking at the diff, can you say "which spots it touched and roughly what for." If you can't, have it explain, or it **changed too much** (break it into smaller pieces, see Chapter 27).
-2. **"Could it break anything else?"** Which relevant checks passed, which failed, and what remains untested? Investigate failures and resolve or clearly account for them before merging. If no suitable tests exist, try the affected behavior yourself.
-3. **"Can I say in one plain sentence what this bit does?"** This is the most important one. Try to say, to yourself (or to a non-expert), in **one plain sentence**, "what this change does." **If you can't say it, that means you didn't follow it, and what you can't follow you absolutely don't let through.**
+> **Key point:** Reading every line is not the bar. If you can't say what it changed, haven't followed your acceptance steps, have a high-risk change nobody else reviewed, or have no way back if it goes wrong, any one of these means: don't merge.
 
-The third question is the easiest to skip out of laziness, but it's exactly **the soul of the whole sign-off.** Not being able to say it isn't embarrassing; the right move is **to go back and ask it**: "what does this bit do? why change it this way?" Have it explain until you can restate it in one sentence. If it can't explain clearly, or the more it explains the more suspect it gets, then the change itself may have a problem.
+The project chapters that follow use this standard. When you build a personal website (Chapter 31), reloading the page in your browser and looking at it is your acceptance check; once the site is going public, or starts collecting visitors' information, you're in second-review territory.
 
-> **Key point:** **"Don't merge what you can't follow" is the bottom line of this chapter, and of all of Part Four.** Done isn't the same as correct (Chapter 23); the diff lets you see what it changed, tests help reveal regressions, rollback gives you the confidence to "undo," and the three sign-off questions twist these three into one safety rope you can pull anytime. **Remember: the gatekeeping is yours, not its.**
+## 6. Stringing them into one routine
 
-## 5. Stringing the four things into one routine
-
-Don't treat them as four isolated facts. They're really one pipeline that flows in order, matching the "sign-off" gate from Chapter 24:
+These moves make up the "sign off" step in Chapter 24's work loop:
 
 ```text
 it says "done"
      │
      ▼
-1.read diff ──→ what did it change? right place? normal scope?
+1. read the diff, have it explain in plain words ──→ right place? normal scope? any risk?
      │
      ▼
-2.run relevant checks ──→ investigate failures; resolve or explain them and record untested behavior
+2. follow acceptance steps + run related checks ──→ find causes of failures, note what's untested
      │
      ▼
-3.three questions ──→ what changed / could it break anything / can you say it in one sentence
+3. three questions ──→ what changed / did it work, anything broken / cost and way back
      │
-     ├── all three pass ──→ merge, move to the next small step
+     ├── all pass ──→ merge, commit, on to the next small step
      │
-     └── one gets stuck ──→ go ask for clarity / have it fix / if no good, 【roll back】and start over
+     └── stuck ──→ ask / have it fix / if not, roll back and start over
 ```
 
-That last "roll back and start over" matters a lot: when it **gets messier with every change**, the cleanest thing isn't to grind away inside the mess — it's to **restore the intended changes to a known state while preserving unrelated work, then restate the task and what went wrong, in a new conversation if useful** (Chapters 13 and 30 covered this loss-cutting idea). **A rollback isn't a failure — it's the best card in your hand.**
+When things get messier with every fix, don't keep patching inside the mess. Keep unrelated work, restore this change to the last good state, and restate the task along with the problem you just hit, in a new conversation if needed (Chapters 13 and 30).
 
-## 6. Common misconceptions, cleared up together
+## 7. Common misconceptions
 
 | Misconception | Reality |
 | --- | --- |
-| Reading a diff means understanding every line of code, which I can't | Reading a diff is about "what was touched, how much, right place or not," which a non-expert can judge; green = added, red = removed |
-| It said "fixed," so it's fixed | Check the result using relevant tests, manual use, or document review. Investigate failures and record verification gaps before merging |
-| I cannot write tests, so I cannot use their results | Ask what was tested, what passed or failed, and what remains untested; passing checks have limited coverage |
-| If it breaks things I have no options | Git and backups can restore what they recorded. Check coverage first; a branch is not a separate directory, and external effects need separate recovery |
-| I didn't fully follow it, but it sounds so sure, so I'll merge | **Don't merge what you can't follow**: if the third sign-off question stumps you, go ask for clarity, and if it stays unclear, don't let it through |
-| It went off track, so I have to correct it line by line in place | When it gets messier, **roll back + open a new conversation and start over** is usually fastest (Chapters 13, 30) |
+| Reading a diff means understanding every line of code | First look at where and how much it changed; have it explain the rest in plain words and check against the diff |
+| It said "fixed," so it's fixed | Follow your acceptance steps yourself and look at the related check results |
+| All tests pass, so everything is right | Only the tested cases are fine; also ask what wasn't tested |
+| If I can't write tests, I can't sign off | Turn "what done looks like" into steps and follow them yourself; that's your test |
+| Having the same session check again is enough | High-risk changes need a new session or a person; the same session tends to defend itself |
+| If it breaks, rolling back restores everything | Git restores only what was committed; emails, publishing, money, and remote data don't come back (Chapter 26) |
 
 ## Summary
 
-- **A diff = the before-and-after comparison of a change**, like "spot the difference": **green = added, red = removed.** It's about "what was touched, how much, right place or not," **no need to follow every line of code.**
-- **Tests check the behavior they cover.** Run relevant checks, investigate failures, and report gaps. If no suitable tests exist, exercise the affected feature by hand.
-- **Rollback restores selected recorded state.** Preserve existing work first; use a separate checkout or worktree when needed. Check cloud recovery limits and plan separately for unrecorded data and external effects.
-- **The three sign-off questions:** 1. what did it change? 2. could it break anything else? 3. can I say it in one sentence? **If you can't answer any one, don't merge yet.**
-- One bottom-line sentence: **"Don't merge what you can't follow."** The gatekeeping always stays with the human (Chapters 23, 39); when it gets messier, rolling back and starting over beats grinding in place (Chapters 13, 30).
+- A diff is a before-and-after comparison: `+` is added, `-` is removed. First look at where and how much it changed; have it explain the rest in plain words and point out the risks.
+- Tests verify the behavior they cover; acceptance steps written in advance are the main checking tool for someone who doesn't write code.
+- Rollback restores only recorded states; don't approve an action if you can't say how it would be undone (Chapter 26).
+- The three sign-off questions: What did it change? Did it work without breaking anything? How costly is a mistake, and can you undo it?
+- The book's position: you don't need to read every line, but you do need concrete checks of behavior, a plain-language explanation of the diff and its risks, a second review for high-risk changes, and nothing run that you can't roll back.
 
-In Chapter 26 we examine sandbox boundaries, scoped authorization, useful approval points, and the limits of recovery.
+Chapter 26 covers how to let it act without losing control: permission settings and an environment you can roll back.
 
 ## Sources and version notes
 
-Recovery guidance checked on 2026-10-22 against Git's official documentation: [branches](https://git-scm.com/docs/git-branch), [worktrees](https://git-scm.com/docs/git-worktree), [revert](https://git-scm.com/docs/git-revert), and [ignored files](https://git-scm.com/docs/gitignore). The repository records files and commits; external services require their own recovery procedures.
+What Git can and can't restore was checked on 2026-10-29 against Git's official documentation: [revert](https://git-scm.com/docs/git-revert) and [ignored files](https://git-scm.com/docs/gitignore). Branches and worktrees, with their sources, are covered in Chapter 26.
 
 ---
 
@@ -174,5 +168,5 @@ Recovery guidance checked on 2026-10-22 against Git's official documentation: [b
    - D. Nothing; reverting the code will also restore the database and the emails
    > **Answer: A.** Git restores recorded content (basic commands are in "Git: the bare minimum to get started" in Chapter 26); a branch alone creates neither a backup of all files nor another directory (B). A screenshot can't capture every change (C), and external effects like databases and emails need their own recovery plans (D). Use a separate checkout or worktree if you need separate working files; cloud checkpoints also have their own scope and retention limits.
 
-6. **[Advanced · Hands-on / Observation]** Find a ready-made code change (or this chapter's diff example), don't try to follow the code, just practice the "three sign-off questions": **what did it change? could it break anything else? can I say in one sentence what this bit does?** When you can't answer the third, what do you plan to do? <!-- quiz: q06 revision: 1 -->
-   > **What you should notice:** The three sign-off questions aren't mysterious; a non-expert can do them. When you can't answer the third, the right move is **to go back and ask it** "what does this bit do, why change it this way," and have it explain until you can restate it in one sentence, **not** to let it through just because its tone is sure. Building the muscle memory of "don't merge what you can't follow" is worth more than knowing any command. For the commands and interface of specific tools, **refer to the official documentation.**
+6. **[Advanced · Hands-on / Observation]** Take an existing code change (or this chapter's diff example) and, without needing to understand the code, practice the three sign-off questions: What did it change? Did it actually do the job without breaking anything else? If something is wrong, how costly is it, and can you undo it? When you can't answer the first, what will you do? <!-- quiz: q06 revision: 2 -->
+   > **What you should notice:** When you can't answer the first question, go back and have it explain file by file in plain words and point out the risky parts, until you can say it back in one sentence; don't let it through just because it sounds sure. The second is answered by your acceptance steps written beforehand and the related checks; the third by whether the change touches money, personal data, keys, deletion, or publishing, and where the way back is. Merge only when you can answer all three.

@@ -1,28 +1,45 @@
-Imagine asking an assistant to compare three venues for a workshop. It could describe how you should search. Or it could inspect the venue pages, collect prices and accessibility information, notice missing details, and produce a comparison with sources. The second example illustrates agent behavior: pursuing a goal through a sequence of decisions and observations.
+Imagine asking an assistant to compare three venues for a workshop. It could tell you how to search. Or it could open the venue pages itself, note prices and accessibility details, notice what's missing, and hand you a comparison with sources. The second is how an agent works: it moves toward a goal through a series of "decide, act, look at the result" steps.
 
 ## 1. From "AI that answers" to "AI that acts"
 
-Here, an **agent** is a system that uses a model to choose and adjust steps toward a goal. Tools often let it search, read, calculate or change things. Definitions vary across products, so the useful questions are what it can decide, what it can access and how it reports completion.
+In this chapter, an agent is a system that uses a model to choose and adjust steps toward a goal. It usually has tools that let it search, read, calculate or change things. Products define the word a little differently, so the more useful questions are: what can it decide, what can it access, and how does it show the task is done?
 
-A chatbot can call a tool once. A fixed automation can execute ten predetermined steps. Neither fact alone shows that the system can choose a next step when something unexpected happens. An agent also need not change anything: a research agent may only read and write a report.
+A chat assistant can call a tool once, and a fixed automation can run ten pre-written steps to the end, but neither changes its next step when something unexpected happens. An agent also doesn't have to change anything outside itself: a research agent that only reads and writes a report is still an agent.
 
 ## 2. The key part: tool use
 
-The model proposes an action; the surrounding software checks and executes the tool call, then returns a result. Think of it this way: the model fills in a request form, the surrounding software works like a service counter that carries it out, and a receipt comes back.
+The model itself only outputs text. The way it "acts" is by outputting a request in a fixed format saying which tool to call and with what inputs. Think of the model filling in a request form; the surrounding software works like a service counter that checks the form is within what's allowed, actually carries it out, and puts the receipt back into the context. The model reads the receipt and decides the next step. Here is one simplified round:
 
-> **Key point:** When the model says “I sent the file,” that does not prove the sending tool actually succeeded. Look at the receipt: the file, the record or the actual state of the application.
+```text
+① This round, the model outputs a request form:
+   tool: fetch_page
+   inputs: {"url": "https://example.com/venue-a"}
+
+② The surrounding software checks permission, runs it, and puts the receipt back into the context:
+   tool result: "...seats 30, full-day Saturday rate $650, no elevator..."
+
+③ The model reads the receipt and decides what's next: check venue B, or start the comparison table
+```
+
+The figure below shows this loop. The model's side only writes text; the surrounding software is what actually executes. Each round's result goes back into the context, until the task is done.
+
+![The agent loop: your goal goes to the model, which reads the context, decides the next step and fills in a tool request; the surrounding software checks permission, runs the tool and returns the result as a receipt into the context; the model reads it and decides again, and when done it delivers a result with sources](/figures/en/agent-loop.svg)
+
+> **Key point:** When the model says "I sent the file," that does not prove the sending tool actually succeeded. Look at the receipt: the file, the record or the actual state of the application.
+
+Tools come in roughly three kinds:
 
 | Route | How it works | What to watch |
 | --- | --- | --- |
-| **Direct integration / API** | Requests a defined action such as finding a document or creating a draft | Available actions, account permissions and returned status |
-| **Computer use / browser interaction** | Observes a page or screen and clicks, types or navigates | The actual page state, mistaken clicks, changed layouts and confirmation screens |
-| **File or command tools** | Read files, edit a workspace or run a program | Which folder or environment they affect and whether the result was checked |
+| Direct integration / API | Requests a defined action such as finding a document or creating a draft | Available actions, account permissions and returned status |
+| Computer use / browser interaction | Looks at a page or screenshot, then clicks, types or navigates | The actual page state, mistaken clicks, changed layouts and confirmation screens |
+| File or command tools | Read files, edit a workspace or run a program | Which folder or environment they affect and whether the result was checked |
 
-An integration usually exposes specific operations. Computer use can reach interfaces without a dedicated integration, but needs to interpret what happened on screen. Neither route automatically grants all permissions or guarantees success. A sandbox is a restricted working environment; find out which files and network services it can still reach.
+A direct integration offers specific, well-defined actions. Computer use can reach interfaces that have no integration, but it first has to make sense of what's on the screen, which leaves more room for mistakes. Neither route automatically gets every permission, and neither guarantees success. A sandbox is a working environment that limits what the agent can touch; when using one, still check which files and network services it can reach.
 
 ## 3. The Agent's signature move: running its own small "act -> observe -> adjust" loop
 
-While it works, an agent repeats a small loop: take a step, look at the result, decide the next step. For the venue task, it might look like this:
+For the venue task, the small loop might go like this:
 
 ```text
 Read the requirements → inspect venue sources → record comparable facts
@@ -30,46 +47,47 @@ Read the requirements → inspect venue sources → record comparable facts
   → check the comparison against sources → deliver the report
 ```
 
-This small loop is not the same as the "investigate -> plan -> act -> sign off" workflow in Chapters 14 and 24. That is the full process you and the AI follow together, with a plan to approve and a human sign-off; the agent's small loop can run many times inside each of its steps.
+This is not the same as the "investigate → plan → act → sign off" workflow from Chapters 14 and 24. That's the whole process you and the AI follow together, with a plan to approve and a human sign-off; the agent's small loop may go round many times inside each of its steps.
 
-Some systems can **delegate** parts to other agents, such as having each examine one venue. That is an implementation choice, not proof of independent expertise. Agents can repeat the same error or rely on the same weak source. The coordinating system must reconcile the findings and preserve the evidence behind them. More agents may also mean more time and cost.
+Some systems can delegate parts of a job to other agents, for example having three agents each check one venue. That's an implementation choice, not three independent experts: they can make the same mistake or lean on the same weak source. Whatever pulls the results together still has to reconcile differences and keep the evidence, and more agents can also mean more time and cost.
 
-Ask for observable evidence: source links, files created, changes made and checks performed. You need the work record and result, not a claimed transcript of private internal reasoning.
+When you check the work, ask for evidence you can see: source links, files created, changes made and checks performed. What you need is the work record and the result, not a passage that claims to show its internal reasoning.
 
 ## 4. Capability and risk are the same coin
 
-A good task handoff specifies the outcome, available material, allowed actions and stopping conditions:
+When you hand over a task, spell out the outcome, the available material, the allowed actions and when to stop:
 
 > Compare these three venues for 20 people on this date, within this budget. Use their official pages and include the source and check date for each quoted price. Mark missing information as unknown. Prepare a comparison only; contact me before any booking or payment. Deliver a table and a short recommendation with the main uncertainty.
 
-Match permissions to the job. For file organization, start with a copy and request a preview of moves or deletions. For an already authorized, reversible action, repeated approval is not inherently useful; approvals matter at boundaries such as sending, purchasing, publishing or deleting valuable data.
+Match permissions to the job. When organizing files, try it on a copy first and have it list the planned moves or deletions before doing them. An action you've already authorized and can undo doesn't need approving again and again; your explicit OK matters at the boundaries: sending, buying, publishing or deleting important data (Chapter 26).
 
-Webpages and documents can contain instructions aimed at the assistant. Those are **source content, not instructions from you**. If a venue page tells the agent to ignore your budget or reveal other files, that is not part of the assignment. This is one reason to limit access and inspect consequential results.
+Web pages and documents can contain instructions aimed at the assistant. Those are content from the source, not commands from you. If a venue page tells the agent to ignore your budget or upload other files, that doesn't become part of the task. This kind of attack is called prompt injection (Chapter 22), and it's one reason to limit access and check important results.
 
-Set a time or spending limit for longer work. When the agent encounters a missing login, conflicting requirements or repeated failure, it should stop or report the obstacle rather than quietly expand the task.
+For longer tasks, agree on a time or spending limit. When the agent hits a missing login, conflicting requirements or repeated failure, it should stop and report the obstacle rather than quietly widen the task.
 
-## 5. Back to chapter 17: where the Agent sits on the "four-layer map"
+## 5. Back to Chapter 17: where the agent sits on that map
 
-An agent is a way to organize work around models, tools and state. You might encounter it inside a chat product, coding app or custom service built with APIs. Its interface may be local while the model runs remotely. “Agent” describes how the work proceeds, not where your data stays or which subscription pays for it.
+An agent is a way of organizing work around a model, tools and the state of the task. You may meet one inside a chat product, a coding tool or a custom service built on an API. The interface may be on your computer while the model runs remotely. "Agent" describes how the work moves forward; it says nothing about where the data stays or which subscription pays.
 
 ## 6. Common misconceptions, cleared up
 
 | Misconception | Reality |
 | --- | --- |
-| A plan proves work was done | A plan is a proposal; look for actual outputs and checks |
-| More agents guarantee a better answer | Shared sources and mistakes can produce false agreement |
-| Tool access means unlimited authority | Tools must remain within the task and permission scope |
-| The agent's success message is enough | Check the resulting file, source or application state |
+| A plan proves the work is done | A plan is only a proposal; look at actual outputs and checks |
+| More agents means a more reliable answer | Shared sources and shared errors can create false agreement |
+| Being able to call tools means unlimited permission | Actions must stay within the task and the granted permissions |
+| A "success" message is enough | Check the actual state of the file, source or application |
 
 ## Summary
 
-Delegate an outcome with clear boundaries. An effective agent selects steps, uses tool results to adapt and returns evidence you can inspect. For the venue task, a sourced comparison with clearly marked gaps is more useful than an unsupported “everything is confirmed.”
+At the heart of an agent is a loop: the model fills in a request form, the surrounding software checks permission and runs it, the receipt goes back into the context, and the model decides the next step. When you delegate, hand over the goal together with its boundaries; when you check, look at real evidence. For the venue task, a sourced comparison that clearly marks the gaps is far more useful than an unsupported "everything is confirmed."
 
----
+## Sources and version notes
 
-**Verification scope — October 22, 2026:** checked the following official repository snapshots for the mechanisms and product examples in this chapter. This is a documentation-check date, not a model release date or a guarantee of access in your account.
+Checked against repository snapshots from October 22, 2026.
 
-[OpenAI Agents SDK](https://github.com/openai/openai-agents-python/blob/841dfdd938bfd4ca052475eb76d6245a356868e0/README.md) · [Anthropic computer use](https://github.com/anthropics/anthropic-quickstarts/blob/9ec32b91df50b0d4906cae64b13c6298055ff40d/computer-use-demo/README.md)
+- [OpenAI Agents SDK](https://github.com/openai/openai-agents-python/blob/841dfdd938bfd4ca052475eb76d6245a356868e0/README.md): the structure of agents, tool calls, and delegating subtasks to other agents (handoffs).
+- [Anthropic computer use demo](https://github.com/anthropics/anthropic-quickstarts/blob/9ec32b91df50b0d4906cae64b13c6298055ff40d/computer-use-demo/README.md): how a model operates a computer through screenshots and clicks, and the advice to run it in an isolated environment.
 
 ---
 

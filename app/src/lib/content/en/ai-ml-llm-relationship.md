@@ -1,14 +1,12 @@
-"Will AI replace humans?" "AI is already conscious, right?" "I heard AI even beat the world champion at Go, so doesn't that mean it can do everything?" The moment the word "AI" shows up, the conversation gets pulled into something huge and mystical.
+"Will AI replace humans?" "AI is already conscious, right?" "AI even beat the world champion at Go, so can't it do everything?" The moment AI comes up, the conversation tends to get huge and hazy.
 
-But have you noticed that the "AI" people talk about is actually a bunch of completely different things? The thing that plays chess is AI. The thing that chats is AI. The thing in your phone's photo album that "automatically recognizes this is a cat" is also AI. And spam getting blocked is AI too. They look worlds apart, so what gives them the right to share one name?
+Yet the "AI" people talk about is really a collection of very different things. The thing that plays chess is AI. The thing that chats is AI. Your photo album recognizing "this is a cat" is AI, and so is the filter that blocks spam. They're worlds apart, so why do they share one name?
 
-This chapter skips the mysticism. We'll do just one thing: **give you a nested "matryoshka diagram"** that sorts out, all at once, the four words you hear most often and mix up most easily: artificial intelligence (AI), machine learning, deep learning, and large language models (LLMs). Once you understand this diagram, you can place any "AI" around you in its right spot, and you won't mistake "can play chess" for "can chat" again. This is the foundation for understanding every later chapter.
+This chapter does just one thing: it uses a "nesting doll" diagram to sort out four words you hear all the time and mix up easily: artificial intelligence (AI), machine learning, deep learning, and large language models (LLMs). Once you understand the diagram, you can place any "AI" around you in its right spot, and you won't mistake "can play chess" for "can chat" again.
 
 ## 1. First, get one thing straight: they're "nested dolls," not "side by side"
 
-Many people, hearing these words for the first time, assume they're **four things sitting side by side**, like four brands of phone for you to pick from.
-
-**They're not.** They're a **layer-inside-a-layer, large-to-small** containment, like Russian nesting dolls, the big one holding the smaller one inside:
+Many people assume these are four things sitting side by side, like four brands of phone to pick from. They're actually a layer-inside-a-layer containment, like Russian nesting dolls, with the big one holding the smaller ones inside:
 
 ```text
 ┌───────────────────────────────────────────────────────────┐
@@ -27,110 +25,105 @@ Many people, hearing these words for the first time, assume they're **four thing
 └───────────────────────────────────────────────────────────┘
 ```
 
-The right way to read this diagram: **the further in you go, the narrower and more specific it gets**. An LLM is a kind of deep learning, deep learning is a kind of machine learning, and machine learning is a kind of artificial intelligence. Put the other way: the large language model you chat with every day is just the smallest doll, all the way inside. It's **one very specific little corner** of the whole AI world, and definitely not "all of AI."
+The further in you go, the narrower and more specific it gets. An LLM is a kind of deep learning, deep learning is a kind of machine learning, and machine learning is a kind of artificial intelligence. The large language model you chat with every day is the smallest doll, all the way inside: one very specific corner of the AI world, not all of AI.
 
-> **Key point:** One sentence is enough to remember: **LLM ⊂ deep learning ⊂ machine learning ⊂ artificial intelligence**. In the next three sections we go from outside in, explaining each circle one layer at a time: what it is, why we need it, and where people commonly misunderstand it.
+> **Key point:** The whole diagram fits in one line: LLM ⊂ deep learning ⊂ machine learning ⊂ artificial intelligence.
 
 ## 2. Four circles, taken apart layer by layer
 
-We'll use a comparison table to build the big picture first, then explain each one.
+A table first, for the big picture; then each layer in turn.
 
 | Layer (large to small) | What it is, in a sentence | An everyday example | How it relates to the layer outside it |
 | --- | --- | --- | --- |
-| Artificial intelligence (AI) | Getting machines to do things that "used to take a human brain" | Playing chess, recognizing objects in images, route planning, spam filtering | The biggest umbrella term; everything below counts as AI |
-| Machine learning | Instead of people writing rules by hand, let the machine **find patterns in data itself** | After looking at tens of thousands of cat and dog photos, it learns to tell them apart | One **way of doing** AI (not the only way) |
-| Deep learning | A kind of machine learning, using a computing network with **many layers** | Today's image recognition, speech, and translation mostly rely on it | A **particularly strong** branch within machine learning |
-| Large language model (LLM) | A kind of deep learning, a huge model that **learns language specifically** | The core behind Claude and ChatGPT | The branch of deep learning **focused on "word continuation"** |
+| Artificial intelligence (AI) | Getting machines to do things that used to take a human brain | Playing chess, recognizing objects in images, route planning, spam filtering | The biggest umbrella term; everything below counts as AI |
+| Machine learning | Instead of people writing rules by hand, the machine finds patterns in data itself | After seeing tens of thousands of cat and dog photos, it learns to tell them apart | One way of doing AI (not the only way) |
+| Deep learning | A kind of machine learning that uses a computing network with many layers | Today's image recognition, speech, and translation mostly rely on it | The most widely used branch of machine learning |
+| Large language model (LLM) | A kind of deep learning: a huge model that learns language specifically | The core behind Claude and ChatGPT | The branch of deep learning focused on "word continuation" |
 
 ### Layer 1, artificial intelligence (AI): a "goal," not a "technique"
 
-**Artificial intelligence** is the biggest and oldest of these four words. It refers to a **goal**: getting machines to do things that "used to take human intelligence," like recognizing faces, understanding speech, playing chess, driving a car, and recommending things you might want to buy.
+Artificial intelligence is the biggest and oldest of the four words. It names a goal: getting machines to do things that used to take human intelligence, like recognizing faces, understanding speech, playing chess, driving a car, or recommending things you might want to buy.
 
-The key is that AI is an **umbrella term**, with many **completely different** techniques stuffed underneath it.
+AI is an umbrella term with many completely different techniques underneath. A lot of early AI was programmers writing rules by hand, one by one: "if the board looks like this, make this move." It couldn't learn anything on its own. Even today the label covers a wild range, from chess players to image recognizers to chatbots, and their inner workings can be worlds apart.
 
-- A lot of early AI was programmers **writing rules by hand, one by one**: "if the board looks like this, make this move." This kind of AI had no ability to "learn on its own" at all; it all relied on people thinking ahead.
-- Even today, the label "AI" still covers a wild range: some can play chess, some can recognize images, some can chat. Their **inner workings can be worlds apart**; they're just all grouped under the big goal of "making machines smart."
-
-> **Why do we need this word?** Because it's a "banner" that makes it convenient to talk about "getting machines to do intellectual labor." But precisely because it's so broad, **"AI" specifies almost nothing precisely**. Hearing "this is an AI," you still don't actually know what it can do or how it does it. So the next three layers exist to pin down exactly "which kind of AI" we're talking about.
+Because the word is so broad, hearing "this is an AI" still tells you little about what it can do or how. The next three layers pin down which kind of AI we mean.
 
 ### Layer 2, machine learning: from "people write rules" to "machines find patterns"
 
-This is the **most important turn** in the whole diagram, so make sure you understand it.
+This is the most important turn in the whole diagram.
 
-A traditional program works like this: a person writes the rules out **clearly, one by one**, and the machine follows them. But some things just can't be written out as rules. Can you describe in words what "a cat looks like" precisely enough that a computer recognizes every cat? Pointy ears? Whiskers? What about a fox, then?
+A traditional program works like this: a person writes the rules out one by one, and the machine follows them. But some things can't be written out as rules. Could you describe what a cat looks like precisely enough for a computer to recognize every cat? Pointy ears? Whiskers? What about a fox, then?
 
-**Machine learning** takes a different approach: **stop writing rules, feed it data instead**. Show the machine tens of thousands of photos labeled "cat" and "dog," and let it **figure out for itself** what actually separates cats from dogs. After it's done learning, give it a new photo it hasn't seen, and it can make a pretty good call.
+**Machine learning** takes a different approach: instead of writing rules, feed it data. Show the machine tens of thousands of photos labeled "cat" and "dog," and let it work out for itself what separates them. Afterward, give it a photo it hasn't seen, and it can usually make the right call.
 
 ```text
 Traditional program: person works out rules → writes them into code → machine follows
 Machine learning:    give a bunch of examples → machine finds patterns itself → learns a "knack for judging"
 ```
 
-> **Common misconception:** "Machine learning means the machine understands things exactly as a person does." It learns patterns and representations from data, which can support useful predictions and reasoning. But getting an answer right does not establish human-like understanding, and learned patterns can fail on unfamiliar cases. Data quality, training, and the task all affect its errors; no single slogan explains every AI failure (see chapter 9).
+Keep in mind that what the machine learns is patterns in the data. It can use them to make useful predictions, but getting answers right doesn't mean it understands things the way a person does, and the patterns it learned may not hold up in situations it hasn't seen. Chapter 9 looks at why AI gets things wrong.
 
 ### Layer 3, deep learning: learning with "many layers"
 
-Machine learning has many specific methods, and **deep learning** is one of the **most widely used** branches of the past decade or so. Today's image recognition, speech, translation, and chat mostly rely on it.
+Machine learning has many specific methods, and **deep learning** has been the most widely used one for the past decade or so. Today's image recognition, speech, translation, and chat mostly rely on it.
 
-That "deep" in the name refers to its "computing network," the **neural network**, which is stacked with **many, many layers**. Data enters at the first layer and passes upward layer by layer, and each layer distills slightly more abstract information out of it. Multiple layers can help it learn complex patterns, but adding layers alone does not guarantee better results; training data, network design, and training methods matter too.
+"Deep" refers to the many stacked layers of its computing network, called a **neural network**. Data enters at the first layer and passes upward layer by layer, and each layer distills slightly more abstract information. More layers let it learn more complex patterns, but just adding layers doesn't automatically make it better; the data, how the network is designed, and how it's trained matter just as much.
 
-- The name **neural network** reflects a loose inspiration from biological neurons. Its artificial units perform numerical calculations; they are not a detailed simulation of a human brain. The name alone tells you nothing about whether a system has human-like thought or feelings.
-- The reason deep learning suddenly got powerful in recent years is that three things came together at once: **more data** (the vast content on the internet), **stronger computing power** (specialized chips), and **mature methods**.
+Neural networks borrow a rough idea from biological neurons, but their "neurons" only do arithmetic; they aren't a copy of a human brain. The name alone tells you nothing about whether a system has human-like thoughts or feelings.
 
-> **How you'll actually run into it:** You'll almost never see the word "deep learning" pop up on its own. It hides behind products. But when someone says some AI "is based on neural networks" or "was made with deep learning," be clear about this: that describes **which kind of technical approach** it uses, a branch within the big machine learning circle. It still hasn't said what the thing actually does.
+Deep learning took off in recent years because three things came together at once: more data (the vast content of the internet), more computing power (specialized chips), and mature methods.
+
+You'll rarely see "deep learning" mentioned on its own; it hides behind products. When someone says an AI "is based on neural networks" or "uses deep learning," they're describing the technical approach, not what the thing actually does.
 
 ### Layer 4, large language model (LLM): the deep-learning branch "focused on language"
 
-Finally we reach the innermost little doll, and the star of this book.
+Finally we reach the innermost doll, and the star of this book.
 
-A **large language model** (LLM for short) is a kind of deep learning, **built specifically to handle language (text)**. From massive amounts of text it learned "how words follow one another," so it can write articles, answer questions, translate, and write code. The cores of Claude, ChatGPT, and Gemini are all this kind of model.
+A **large language model** (LLM for short) is the kind of deep learning built specifically to handle language (text). From massive amounts of text it learned how words follow one another, so it can write articles, answer questions, translate, and write code. The cores of Claude, ChatGPT, and Gemini are all this kind of model.
 
 A note on wording: in everyday talk, "large model" (in Chinese, 大模型) can also mean a large vision model that works with images, or a multimodal model that handles text, images, and sound together. In this book, unless we say otherwise, it means a large language model.
 
-Note where it sits:
+Two things to note about where it sits on the map:
 
-- It's **one branch of deep learning, centered on language**. Computer vision focuses on images, and other methods handle speech. These categories can overlap: many modern models are **multimodal**, meaning they combine text with images, audio, or other inputs. Being good at chatting does not by itself establish which other abilities a particular model has; check the model and product (chapter 18).
-- Where the "large" is large, how it actually works inside, why it makes mistakes: those are what a whole part, **chapters 2 through 9**, will lay out. Here you only need to nail down its **place on the map**: **it's in the innermost circle, a very small and very specific subtype of AI.**
+- It's the branch of deep learning that's mainly about language. Images and speech have their own methods, but the lines are blurry: many models today are multimodal and can handle text, images, and sound. Being good at chatting doesn't tell you what else a model can do; check what the specific model and product support (chapter 18).
+- Where it's "large," how it works inside, and why it makes mistakes are what chapters 2 through 9 lay out. For now, just fix its place: the innermost circle, a very specific subtype of AI.
 
-> **Key point:** Put the large language model back in its place, and you'll immediately become "desensitized" to a lot of exaggerated claims. "AI has woken up," "AI can do anything." These sound like they're about the boundless "AI" of the outermost circle, but what you're actually using is just the innermost circle, **a "language model focused on continuing text."** It's strong, but its abilities have edges and origins.
+With the LLM back in its place, a lot of hype loses its grip. "AI has woken up" and "AI can do anything" sound like claims about the boundless outer circle, but what you're actually using is the innermost one: a language model that works with text. It's powerful, but its abilities have limits and a traceable origin.
 
 ## 3. So which layer are Claude and ChatGPT, exactly?
 
-This is the easiest place to get stuck, so let's make it clear on its own.
+You might ask: aren't Claude and ChatGPT large language models? Strictly speaking, they're products built on large language models, a little further out than the model itself.
 
-You might ask: by your account, Claude and ChatGPT are "large language models," right? **Strictly speaking, they're the "productized" form of large language models, a little further out than the pure model itself.**
+An analogy: a large language model is like a very skilled chef, while the ChatGPT and Claude apps are a restaurant that brings the chef in and adds a menu, tables, and waiters, so you can walk in and order. The chat interface you open is the product; the core behind it that actually continues the conversation is the large language model.
 
-An analogy: a large language model is like a **very skilled chef** (the "craft" of cooking), while the ChatGPT and Claude apps are a **restaurant**, which brings the chef in and adds a menu, tables, and waiters, so you can "walk in and order." The chat interface you open every day is the **product**; the core behind it that actually "holds the conversation" is the **large language model**.
-
-| What you say | What it actually is | In the matryoshka diagram |
+| What you say | What it actually is | In the nesting-doll diagram |
 | --- | --- | --- |
-| "I use ChatGPT" | A **product** (a chat interface for people) | The core is a large language model, wrapped in a "product" layer |
-| "ChatGPT's core is GPT" | GPT is the **large language model** | The little doll in the innermost circle |
-| "Claude" | Refers to both the model family and, often, its product | Depends on context: could mean the core, or the "restaurant" |
+| "I use ChatGPT" | A product (a chat interface for people) | The core is an LLM, wrapped in a product layer |
+| "ChatGPT's core is GPT" | GPT is the large language model | The little doll in the innermost circle |
+| "Claude" | Both the model family and, often, its product | Depends on context: the chef or the restaurant |
 
-How exactly to tell apart model, product, API, and Agent: we'll save that for a whole chapter, **chapter 17**. Here you only need to remember: **the "AI chat product" you use every day is the innermost large language model with another layer ("packaging for people") wrapped around it.** It still sits firmly in one small corner of the big AI map.
+Chapter 17 spends a whole chapter on telling model, product, API, and Agent apart. For now it's enough to know that the AI chat product you use every day is a large language model with another layer, packaging for people, wrapped around it.
 
 ## 4. Common misconceptions, corrected all at once
 
 | Misconception | Reality |
 | --- | --- |
-| AI = an all-powerful "computer brain" | AI is the umbrella term for a huge class of techniques, each handling its own thing, all **specialized**; no single AI "can do everything" |
-| The AI that plays chess and the AI that chats are the same thing | Their inner workings can be **completely different**; they're just both called "AI." One is good at calculating chess, one at continuing text, and one ability does not automatically imply the other |
-| LLM = all of AI | An LLM is just **one small subtype** in AI's innermost circle (the language-focused branch of deep learning) |
-| Machine learning is the machine "figuring it out itself" | It learns **patterns from data**; useful predictions do not by themselves establish human-like understanding |
-| A neural network "thinks like a human brain" | It is **loosely inspired by neurons**, but its artificial units are mathematical operations, not a detailed brain simulation |
-| ChatGPT just is "that large language model" | ChatGPT is a **product**; the core is the large language model (GPT); there's a "packaging for people" layer in between (chapter 17) |
+| AI = an all-powerful "computer brain" | AI is an umbrella term for many techniques, each with its own specialty; no AI can do everything |
+| The AI that plays chess and the AI that chats are the same thing | Their inner workings can be completely different. AlphaGo, which beat Lee Sedol 4–1 in 2016, was trained only to play Go and can't hold a conversation |
+| LLM = all of AI | An LLM is just one subtype in AI's innermost circle |
+| Machine learning is the machine "figuring it out itself" | It learns patterns from data; useful predictions don't prove human-like understanding |
+| A neural network "thinks like a human brain" | It's only loosely inspired by neurons; what it does is arithmetic |
+| ChatGPT just is "that large language model" | ChatGPT is a product; the core is the large language model (chapter 17) |
 
 ## Summary
 
-- These four words are a **nesting relationship**, not side by side: **LLM ⊂ deep learning ⊂ machine learning ⊂ artificial intelligence**, getting broader from inside out.
-- **Artificial intelligence (AI)** is the biggest umbrella term: a goal of "getting machines to do intellectual work," with all kinds of **completely different** techniques packed underneath.
-- **Machine learning** is one way of doing AI: instead of writing rules by hand, **let the machine find patterns in data itself** (but learning patterns does not establish human-like understanding).
-- **Deep learning** is a widely used branch of machine learning, learning with a **many-layered neural network**; its units are numerical operations, loosely inspired by neurons.
-- **Large language models (LLMs)** are the deep-learning branch **centered on language**. The AI chat product you use has one at its core, but it's only a **very small corner** of the AI world.
-- The Claude and ChatGPT you use daily are the **productized** form of large language models, with another layer wrapped around the bare model (chapter 17 covers this in detail).
+- The four words nest; they don't sit side by side: LLM ⊂ deep learning ⊂ machine learning ⊂ artificial intelligence.
+- Artificial intelligence is the biggest umbrella term, the goal of getting machines to do intellectual work, with very different techniques underneath.
+- Machine learning doesn't hard-code rules; the machine finds patterns in data. Learning patterns is not the same as understanding like a person.
+- Deep learning learns with many-layered neural networks and is the most widely used machine-learning method today.
+- Large language models are the deep-learning branch centered on language. The Claude and ChatGPT you use are products that wrap another layer around such a model (chapter 17).
 
-In the next chapter, we'll climb into that little innermost doll and look at **where a large language model is actually "large," what those "hundreds of millions of knobs" inside it mean**, and the one misunderstanding most worth clearing up: **it is not a database you can look things up in.**
+In the next chapter, we'll climb into that innermost doll and look at where a large language model is "large," what the countless "knobs" inside it are, and the misunderstanding most worth clearing up: it is not a database you can look things up in.
 
 ---
 
@@ -145,12 +138,12 @@ In the next chapter, we'll climb into that little innermost doll and look at **w
    - D. AI and machine learning are the same thing; deep learning and LLMs are two types under it
    > **Answer: C.** This is a set of "nested doll" containments: the large language model is innermost and most specific, AI is outermost and broadest. B lists the words in the right order but gets the direction backwards: the big circle contains the small one. A mistakes nesting for side by side. D equates AI with machine learning, but AI also includes the older approach of hand-written rules; it also puts deep learning and LLMs on the same level, when LLMs are one branch of deep learning.
 
-2. **[Basic · Concept]** What's the most fundamental difference between "machine learning" and a traditional program? <!-- quiz: q02 revision: 2 -->
+2. **[Basic · Concept]** What's the most fundamental difference between "machine learning" and a traditional program? <!-- quiz: q02 revision: 3 -->
    - A. Traditional programs follow rules people write; machine learning finds patterns in data
    - B. Machine learning needs no people at all; once built, it keeps getting smarter on its own
    - C. Machine learning stores lots of data first, then searches it for a match when it is used
    - D. Traditional programs just follow orders; machine learning truly understands like a person
-   > **Answer: A.** This is the most important turn in the whole diagram: from "people write rules" to "feed data and let the machine work out the patterns." B is wrong: people prepare the data and design the training, and a typical model's parameters are fixed after training, so it doesn't get smarter just by being used (chapter 2). C confuses learning patterns with storing and looking up data (chapter 2 corrects this in detail). D goes too far: learning useful patterns does not prove human-like understanding.
+   > **Answer: A.** This is the most important turn in the whole diagram: from "people write rules" to "give it data and let the machine work out the patterns." B is wrong: people prepare the data and design the training, and a typical model's parameters are fixed after training, so it doesn't get smarter just by being used (chapter 2). C confuses learning patterns with storing and looking up data (chapter 2 corrects this in detail). D goes too far: learning useful patterns does not prove human-like understanding.
 
 3. **[Advanced · Misconception]** "The AI that beat the world champion at Go must also be great at chatting and able to do anything." Where does this idea go wrong? <!-- quiz: q03 revision: 2 -->
    - A. The Go system just isn't big enough yet; a bigger model would be able to do anything

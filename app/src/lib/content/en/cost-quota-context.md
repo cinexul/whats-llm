@@ -1,4 +1,4 @@
-A long AI task can consume money, an included usage allowance, execution time, and context capacity. These are connected, but they are **not the same meter**. Before trying to save, identify what your account is actually being charged or limited for.
+A long task can consume several things: money, a plan's included allowance, execution time, and context capacity. They are connected, but they are **not the same meter**. Before trying to save, find out what your account is actually charged for and limited by. Whenever another chapter of this book mentions costs and limits, this is the chapter it means; current prices and context window sizes for the major models are collected in Appendix E (Numbers at a glance).
 
 ## 1. Identify the billing path first
 
@@ -9,17 +9,15 @@ A long AI task can consume money, an included usage allowance, execution time, a
 | Optional extras | Credits, paid modes, connected services, or infrastructure | Whether enabled, which account pays, and any spending cap |
 | Local model | Your hardware or rented compute and electricity | Hardware capacity, runtime, and separate external services |
 
-Using more of a subscription’s allowance does not necessarily create a new per-token charge. Buying a chat subscription also does not automatically pay for API requests. The same coding tool may support both subscription sign-in and API authentication, so check the **active account path**, not just the product name.
+Using more of a subscription's allowance does not necessarily create a new per-token charge, and buying a chat subscription does not automatically pay for API requests. The same coding tool may support both; Codex, for example, can sign in with a ChatGPT account or use an API key. So check which account path is active, not just the product name.
 
-A budget alert is not always a hard limit. On some API platforms, spend alerts only send a notification and requests keep going; a hard cap has to be switched on separately, and because enforcement can lag slightly, actual spend may end up a little over the set amount. For example, as of October 2026, spend alerts on the OpenAI API platform only notify, and "Enforce a hard limit" is a separate setting; Anthropic's Claude Console stops requests once you reach a spend limit you set.
+A budget alert is not necessarily a brake. As of October 2026, spend alerts on the OpenAI API platform only send a notification while requests keep going; "Enforce a hard limit" must be switched on separately, and because enforcement lags slightly, actual spend can end up a little over the set amount. Anthropic's Claude Console lets you set your own spend limit; once you reach it, requests are refused until you raise the limit.
 
-A safer approach: where the platform supports it, use prepaid credit, which you top up first and which stops when it runs out, and turn auto-reload off. As of October 2026, the OpenAI and Anthropic API consoles both use prepaid credits and both offer an auto-reload switch; it may already be on once you add a payment method, so check. The exact options and defaults are whatever the official console shows. Do not enable paid overflow or extra credits without understanding how they are charged.
+A safer approach is prepaid credit: you top up first, and usage stops when it runs out. Also make sure auto-reload is off. As of October 2026, both the OpenAI and Anthropic APIs use prepaid credits, and Anthropic's console lets you set up auto-reload; check in your billing settings whether it is on. Do not enable paid overflow or extra credits before you understand how they are charged.
 
-> **Key point:** A budget alert is an alarm clock, not necessarily a brake. If you want a real brake, use prepaid credit with auto-reload off, and check whether a hard limit is actually switched on.
+## 2. How token costs are calculated
 
-## 2. Understand token costs without overgeneralizing
-
-For a text API, a simplified calculation is:
+When you use an API, the model itself does not remember the previous turn (Chapter 9), so every request carries the context needed for that request: system instructions, the conversation so far, file excerpts, and tool results. These are billed as input tokens, and what the model writes is billed as output tokens. A simplified formula:
 
 ```text
 cost = uncached input tokens × input rate
@@ -28,9 +26,9 @@ cost = uncached input tokens × input rate
      + applicable tool or other charges
 ```
 
-Use the same unit throughout. If prices are quoted per million tokens, divide each token count by one million. Some APIs have additional categories such as cache writes, media processing, or billed reasoning tokens; use the provider’s actual usage fields and pricing rules.
+Use the same unit throughout: if prices are quoted per million tokens, divide each token count by one million. Some services also bill cache writes, image processing, or reasoning tokens separately; go by the usage fields actually returned on your bill.
 
-Here is an **invented example for arithmetic, not a current provider price**. Assume input costs $2 per million tokens, cached input $0.20, and output $10. A request with 20,000 uncached input tokens, 10,000 cached input tokens, and 1,000 output tokens costs:
+Here is a calculation at Claude Sonnet 5's API list price as of October 2026: $2 per million input tokens, $0.20 per million cached reads, and $10 per million output tokens. A request with 20,000 uncached input tokens, 10,000 cached input tokens, and 1,000 output tokens costs:
 
 ```text
 20,000 / 1,000,000 × $2    = $0.040
@@ -39,15 +37,19 @@ Here is an **invented example for arithmetic, not a current provider price**. As
 Total                    = $0.052
 ```
 
-An agent task can make many such requests and tool calls. Its final message is not a reliable measure of the total work. A short visible answer can follow substantial searching, intermediate output, or delegated work.
+These prices show two common patterns: output costs much more than input (as of October 2026, every Anthropic model's output rate is five times its input rate), and input that hits the cache costs much less than ordinary input (one tenth on most Anthropic models). Per-model prices are in Appendix E.
 
-## 3. Context is selected, cached, and sometimes summarized
+The longer a conversation runs, the more history each turn carries. If each exchange adds about 1,000 tokens, the request at turn 30 carries about 30,000 tokens; over all 30 turns, about 465,000 tokens are billed as input, roughly 15 times the last turn alone. Prompt caching makes the repeated opening much cheaper, but that material still occupies the context.
 
-The model needs relevant context for each response. That context can include instructions, previous messages, file excerpts, tool results, and retained notes. **Do not assume every product always sends the entire conversation unchanged.** Applications can select history, retrieve relevant material, compact earlier turns, or store state on the server.
+An agent task can make dozens of such requests and tool calls. The length of the final message says little about the total work: a short conclusion can follow a lot of searching, intermediate output, and delegated work.
 
-Prompt caching can reduce the cost or processing time of eligible repeated input; it does not erase that material’s role in the model’s context. A summary can shorten context but lose a critical detail. Starting a new chat may remove distraction, yet it may require re-reading files or lose cache reuse.
+## 3. Context is selected, cached, and sometimes compacted
 
-More context is not inherently worse. Relevant evidence can improve a difficult answer; irrelevant or conflicting material can obscure requirements. Long inputs often require more processing, but latency also depends on model, reasoning effort, tools, network, and service load. “Slow” does not by itself diagnose an overfull conversation.
+The previous section describes the basic API mechanism. A finished application does not necessarily resend the entire history unchanged each time: it can select history, retrieve relevant material, compact earlier turns, or keep state on the server.
+
+A summary shortens context but can lose a critical detail. A new chat can remove distraction, yet it may require re-reading files and lose cache reuse.
+
+More context is not inherently worse. Relevant evidence can help with a difficult problem; irrelevant or conflicting material can bury the requirements. Long inputs usually need more processing, but latency also depends on the model, reasoning effort, tools, network, and service load. "It got slow" does not by itself prove the conversation is overfull.
 
 ## 4. Tell four different limits apart
 
@@ -58,21 +60,21 @@ More context is not inherently worse. Relevant evidence can improve a difficult 
 | Context window | Material the model can process in one request | Retrieve selectively, summarize, or split the task while preserving requirements |
 | Spending or credit limit | What an account may spend or its remaining balance | Inspect billing settings and actual usage before increasing it |
 
-A new conversation does not reset your subscription quota. Paying more does not necessarily remove a context limit. Retrying immediately many times can worsen rate limiting. Read the actual error rather than treating every limit as “the AI ran out of memory.”
+A new conversation does not reset your subscription quota. Paying more does not necessarily remove a context limit. A rate-limit error is usually HTTP 429, often with a suggested number of seconds to wait; retrying immediately and repeatedly only makes it worse. Read the actual error rather than calling every limit "the AI ran out of memory."
 
 ## 5. Control cost while preserving the evidence
 
-Start by defining a clear deliverable and acceptance criteria. Ask the agent to locate relevant files before reading entire directories. Keep essential requirements, decisions, and source references visible; trim duplicated logs and obsolete trials.
+Start by defining the deliverable and acceptance criteria. Ask the agent to locate relevant files before reading whole directories. Keep essential requirements, decisions, and sources; trim duplicated logs and obsolete attempts.
 
-Use a smaller or faster model when the task allows it, and raise the reasoning effort when the problem warrants it. Keep output length useful. Parallel agents and repeated retries can increase total usage even when the wall-clock task finishes sooner.
+Use a smaller or faster model when the task allows it, and raise the reasoning effort when the problem calls for it. Keep output as long as it is useful. Parallel agents and repeated retries can shorten the wait yet increase total usage.
 
-When a task stalls, inspect one failing command or assumption before asking for another full attempt. A focused repair is often cheaper and more reliable than several broad reruns. For a new session, bring a short handoff with the goal, current state, verified facts, and unresolved issue.
+When a task stalls, check one failing command or wrong assumption before asking for another full attempt. A focused repair is often cheaper and more reliable than several broad reruns. For a new session, hand over the goal, current state, verified facts, and open problems.
 
-Compare results using the account’s usage records and a quality check. A single faster response is not proof of lower cost or better accuracy, especially if caching, model, or service load changed. The goal is **useful completed work per unit of spending or allowance**, not the fewest possible tokens at any cost.
+Compare results using the account's usage records plus a quality check. One faster response does not prove lower cost or better accuracy, especially if caching, the model, or service load changed. What you want is more useful finished work per unit of spending or allowance, not the fewest possible tokens at any cost.
 
 ## Sources and version notes
 
-Checked **2026-10-22**; spend limits, prepaid credit, and auto-reload rechecked on 2026-10-27. [Codex’s official sign-in guidance](https://github.com/openai/codex/blob/main/README.md) distinguishes ChatGPT-plan use from API-key use; [Claude Code’s official changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md), observed at **2.1.308**, documents subscription usage limits, optional usage credits, prompt-cache behavior, and compaction. [OpenAI's spend limits guide](https://developers.openai.com/api/docs/guides/spend-limits) explains that spend alerts only notify, that a hard limit must be enabled separately, and that enforcement can lag slightly; [Claude API limits documentation](https://platform.claude.com/docs/en/api/rate-limits) explains that an organization can set its own spend limit and that requests stop when it is reached; [Claude API payment guidance](https://support.claude.com/en/articles/8977456-how-do-i-pay-for-my-api-usage) covers prepaid credits and the auto-reload switch. For actual rates and account rules, use [OpenAI API pricing](https://openai.com/api/pricing/), [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing), and the active account’s usage screen. This chapter intentionally quotes no live unit prices or plan quotas; the numerical example is hypothetical.
+Checked 2026-10-29. The [Codex README](https://github.com/openai/codex/blob/main/README.md) distinguishes ChatGPT-plan sign-in from API keys; [OpenAI's spend limits guide](https://developers.openai.com/api/docs/guides/spend-limits) explains that spend alerts only notify, that a hard limit must be enabled separately, and that enforcement lags; the [Claude API limits documentation](https://platform.claude.com/docs/en/api/rate-limits) explains that an organization can set its own spend limit and requests stop when it is reached, and that rate limits return 429 with a suggested wait; the [Claude API payment guidance](https://support.claude.com/en/articles/8977456-how-do-i-pay-for-my-api-usage) covers prepaid credits and the auto-reload switch; [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing) gives Sonnet 5's prices, the output-to-input ratio, and cache discounts. For other services, see [OpenAI API pricing](https://openai.com/api/pricing/) and Appendix E.
 
 ---
 
@@ -85,7 +87,7 @@ Checked **2026-10-22**; spend limits, prepaid credit, and auto-reload rechecked 
    - D. On a subscription, token usage never affects the allowance
    > **Answer: C.** Different account paths have different charging and limiting rules. Heavy use on a subscription consumes the allowance (so D is wrong) without necessarily creating a separate per-token bill (so A is wrong), and a chat subscription does not automatically include API requests (B).
 
-2. **[Basic · Calculation]** In the invented example, what is the total of $0.040 input, $0.002 cached input, and $0.010 output? <!-- quiz: q02 revision: 2 -->
+2. **[Basic · Calculation]** In the example in Section 2, what is the total of $0.040 input, $0.002 cached input, and $0.010 output? <!-- quiz: q02 revision: 3 -->
    - A. $0.052
    - B. $0.52
    - C. $5.20

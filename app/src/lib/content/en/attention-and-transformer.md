@@ -1,115 +1,105 @@
-In Chapter 3 we said the model cuts text into tokens and lays them out on the "table"; in Chapter 4 we said it works across the table, adding the next word one word at a time. But one question went unanswered: a sentence has so many words, so when it picks the next word, **which words is it actually looking at**?
+In Chapter 3 we said the model cuts text into tokens and lays them out on the "table"; in Chapter 4, that it adds the next word one at a time. One question is still open: a sentence has so many words, so when the model picks the next one, which words is it actually looking at?
 
 Read this sentence:
 
-> "Xiao Li returned the book to the library, because **it** was already overdue."
+> "Xiao Li returned the book to the library, because it was already overdue."
 
-"It" refers to the book, not the library. You get it at a glance: what goes "overdue" is a borrowed book, not a library. When you reach "overdue," you instinctively glance back and pick whichever of "book" and "library" makes sense. The model has to do this too, and what it relies on is the star of this chapter: **attention**. This chapter won't use any formulas; it just helps you build an intuition for how it manages to **grab what matters** out of a long string of words.
+"It" refers to the book, not the library. You get it at a glance: what goes overdue is a borrowed book. When you reach "overdue," you instinctively glance back and pick whichever of "book" and "library" makes sense. The model has to do this too, and it relies on the star of this chapter: **attention**. There are no formulas here; the goal is an intuition.
 
 ## 1. Attention: reading a sentence, your eyes scan back and forth between words
 
-When we read a long sentence, our eyes don't sweep evenly over every character. As we read a particular word, we automatically look more at the few words related to it, underline what matters, and just glance past the rest.
+When we read a long sentence, our eyes don't sweep evenly over every word. As we read a word, we naturally look more at the few words related to it and only glance at the rest. Attention is the machine version of this: each time the model processes a position, it decides which tokens to take information from, and in what proportions.
 
-Attention is the "machine version" of exactly this. When the model processes a sentence, for **every position** it has to answer one question:
+All of those tokens are earlier ones. The large language models used for chat write one token after another (Chapter 4), so each position can only look back: it can draw on itself and what came before, but it can't see words that haven't appeared yet. So when the model reads "it," the word "overdue" isn't there yet, and what "it" means is still open. When it reaches "overdue," it looks back for "what can be overdue," links the information in "it" and "book," and from then on treats "it" as that book.
 
-> For the current token, **which earlier tokens should contribute information, and with what weights**?
+The figure below draws this, using the chapter's example and a second sentence that changes only the ending (section 5 comes back to this pair). A thicker line means the model looks back at that word more from that position:
 
-Why "earlier"? Because the large language models used for chat write one token after another (Chapter 4), so each position can only **look back**: it can draw on itself and what came before, but it can't peek at words that haven't appeared yet. In the example, when the model reads "it," the word "overdue" hasn't appeared, so whether "it" means the book or the library is still open. When it reaches "overdue," it looks back for "what can be overdue":
+![Attention sketch for two sentences. First sentence, "Xiao Li returned the book to the library, because it was already overdue": looking back from "overdue," the line to "book" is thickest, the line to "it" is medium, and the line to "library" is thinnest, so here "it" is the book. Second sentence, "Xiao Li returned the book to the library, because it was about to close": looking back from "close," the line to "library" is thickest, so here "it" is the library](/figures/en/attention.svg)
 
-```text
-Looking back from "overdue" (weights invented for illustration):
+The two sentences are word-for-word identical up to "it," so when the model reads "it," it sees exactly the same thing in both. The difference comes from the word after: looking back from "overdue," "book" gets the most attention; looking back from "close," "library" does. The line widths are only an illustration. In a real model, attention is spread across many layers and many heads (section 3) and is never this tidy.
 
-Xiao Li   returned   the   book   to   the   library   because   it   was   already   overdue
-  ▏          ▏        ▏    ███     ▏    ▏       █         ▏      ██    ▏       ▏      ← current position
-                     ("book" heaviest, "it" next, "library" lighter)
-```
+Attention that can only look back is called causal attention, and it's what text-generating chat models use. Some models built only to understand text, not generate it (encoders used for search or classification, for example), can look at the context on both sides. Everything you send at once, your question and any material, comes before the answer, so all of it is available when the answer is generated.
 
-So at the "overdue" step, the information in "it" and "book" gets linked, and as the model goes on writing, it treats "it" as "that book." That's attention: **for each position, work out which earlier words to focus on.**
+## 2. How does it decide what to look at?
 
-> **A note on terms:** Attention that can only look back is called **causal attention**, and it's what text-generating chat models use. Some models built only to understand text, not generate it (encoders used for search or classification, for example), can look at the context on both sides; that's bidirectional attention. Everything you send at once, your question and any material, comes before the answer, so all of it is available when the answer is generated.
+Which earlier words get the most attention isn't a rule written in advance; it's worked out fresh at every step. You can picture it like this:
 
-> **Key point:** Attention isn't "reading the whole sentence at an even glance"; it's **looking with emphasis, some heavy and some light**. That emphasis is what gives it a chance, in a sentence packed with several nouns, to connect "it" to "book" rather than getting pulled toward the nearer "library." Being able to underline what matters is a big part of why it can read long sentences and catch key connections that are far apart.
+- Each token sends out a "question" describing what information it needs right now. The position at "overdue," for instance, is roughly asking "what can be overdue?"
+- Each token also carries a "label" describing what it can offer, plus some "content," the information it actually passes along.
+- The model compares the current position's question with the label of every earlier token (including itself). The better a label matches, the more of that token's content gets passed along. The match results are turned into proportions that add up to exactly 100%, and the current position mixes everyone's content in those proportions and adds the mix to its own representation.
 
-Why does it need this skill? Think back to Chapter 4: how well it "adds the next word" depends heavily on whether it has pinned down the key parts of what came before. The longer and more roundabout a sentence (pronoun references, callbacks, "that plan I mentioned earlier"), the more it needs to reach across a heap of words in between and **pull out the few relevant ones**. If it could only take the two or three nearest words into account, it would lose the thread as soon as a sentence got long.
+The technical names for these three are query, key, and value. What the questions, labels, and contents actually look like is learned in training, not written by hand.
 
-## 2. It doesn't just look once — it looks with "several sets of eyes" at once
+There's one thing this matching can't do on its own: tell the order apart. It only checks how well questions and labels fit; it has no idea which word came first. If the model weren't told positions separately, "dog bites man" and "man bites dog" would be the same three words, and this step would struggle to tell who bit whom. So the model is also given each token's position. The original Transformer added a set of numbers meaning "this is position N" straight onto each token's vector; many large models today (Qwen3, for example) use a different method that takes into account how far apart two tokens are when it compares a question with a label.
 
-There's one more layer worth knowing (still no formulas): when the model looks at a sentence, it doesn't use just "one way of paying attention"; it uses **several at the same time**. The technical term is multiple **attention heads**.
+## 3. Not just one look: several viewpoints, layer after layer
 
-Here's an analogy: a draft is handed to several different editors to read at once. The table below is only an illustration to help you picture it:
+The model doesn't use just one set of questions, labels, and contents on a sentence. It uses several at once, and each set is called an attention head. Picture handing one draft to several editors at the same time, each watching for something different. The table below is only an illustration:
 
-| What this "set of eyes" might watch for | In the example sentence, it would notice |
+| What this "viewpoint" might watch for | What it would notice in the example |
 | --- | --- |
-| Who refers to whom | "it" ↔ "book" |
-| Who did what to whom | "Xiao Li" → "returned" → "library" |
-| Cause-and-effect, contrast | "because" hooks the second half to the first |
+| who refers to whom | "it" ↔ "book" |
+| who did what to whom | "Xiao Li" → "returned" → "library" |
+| cause and contrast | "because" hooks the second half to the first |
 
-In a real model, what each head focuses on takes shape during training; the division of labor is usually not this neat, and it can't always be described in plain words. Just know this: **it weighs the same sentence from multiple angles at once** and then pools what each one underlined, rather than sweeping over it in a single line. That's one reason it can attend to grammar, reference, and logic at the same time.
+In a real model, what each head watches for forms on its own during training; the division of labor is usually not this neat and may not be expressible in words at all. The heads' results are combined and handed to the next layer, so one layer's output is the next layer's input. Models stack many such layers: as of October 2026, Qwen3-8B, whose configuration is public, has 36 layers with 32 attention heads in each.
 
-## 3. The Transformer: the "engine type" inside today's mainstream large models
+## 4. The Transformer: the "engine type" of today's mainstream models
 
-Take this "attention" mechanism, build it into a complete architecture that can be stacked layer on layer and scaled up very large, and you get a name: the **Transformer**. It comes from the 2017 paper "Attention Is All You Need."
+Combine attention with a few other parts into a complete structure that can be stacked layer upon layer and scaled up, and you have the **Transformer**. It comes from the 2017 paper "Attention Is All You Need."
 
-About it, you only need to remember one sentence:
+Today's mainstream large models (Claude, GPT, Gemini, and so on) are basically built on the Transformer or on improved or hybrid versions of it. Think of it as a car's engine type: you don't need to know how the engine works to drive, but knowing that most cars use this kind of engine helps explain why different models share so many habits.
 
-> **Today's mainstream large models (Claude, GPT, Gemini, and so on) are basically built on the Transformer or on improved and hybrid versions of it.** It's like a car's "engine type." You don't need to understand how an engine works inside to drive, but knowing that "cars on the market basically all use this type of engine" helps you understand why they share certain tendencies.
+"Improved or hybrid versions" means that over the past year or two, some models have replaced part of their standard attention layers with cheaper linear-attention or state-space layers and mixed the two kinds. As of October 2026, for example, Alibaba's Qwen3-Next uses such a hybrid structure.
 
-"Improved and hybrid versions" means that over the last year or two, some models have replaced part of their standard attention layers with cheaper linear-attention or state-space layers, mixing the two kinds. For example, as of October 2026, Alibaba's Qwen3-Next uses such a hybrid design. For the structure of any specific product, defer to its official technical report.
+The Transformer has many other parts and terms (such as "encoder/decoder," listed in the Appendix A glossary). Taken apart, it's all math, which doesn't help much with using it well and not being fooled by it. Three things are enough to remember: its core is attention; it can be stacked very deep and made very large; and most mainstream models are built on it or a variant. You'll almost never meet the word "Transformer" while using AI, though it shows up all the time in tech news and product announcements.
 
-This chapter **deliberately doesn't open the hood**. There are many more parts and terms inside (you may have heard words like "encoder/decoder," which are in the glossary in Appendix A, but you don't need to dig into them here). The reason is simple: open it up and it's all math, which does little for our goal of "using it well and not getting fooled by it." Three things are enough:
+## 5. The question most worth thinking through: did it "understand"?
 
-- Its core is the **attention** described above (it underlines what matters);
-- It can be **stacked deep and built large**, which is one of the reasons large models are "large";
-- Most mainstream large models are built on it or a variant of it, so the underlying principles are shared.
+Seeing attention link "it" to "book," many people say the model truly understood the sentence. That question has no simple yes or no, so let's take it in two parts.
 
-> **How you'll actually run into this:** You'll almost never bump into the word "Transformer" directly while using AI; it hides at the very bottom. But you'll see it again and again in tech news and product write-ups. Next time you see it, just have it clear in your mind: that's the "engine type" these models share, not some new product or piece of magic tech.
+What we can say for sure is that the example isn't as easy as it looks. It's a "Winograd-style" sentence (after the Winograd schema): change a word or two and the pronoun points to something else, like the second sentence in the figure. Grammar alone can't tell them apart; you need common sense, such as that books go overdue and libraries close. When a model gets sentences like this right, it has learned useful patterns from huge amounts of text, very likely including a good deal of common sense.
 
-## 4. The question most worth thinking through: did it "understand"?
+What we can't say is whether getting it right proves human-like understanding, such as firsthand experience of the world or knowing why it judged as it did. Its abilities come from patterns in its training data. With sentence structures rare in training, deliberately designed traps, or knowledge it never learned, it can link things wrongly, and its tone may not change when it does.
 
-This is the most important section of the chapter.
-
-Seeing attention connect "it" to "book," a lot of people will blurt out: **it really understood this sentence.** There's no simple yes or no here, so let's take it in two parts.
-
-**What we can say for sure:** The example sentence is not as easy as it looks. It's a "Winograd-style" sentence (after the Winograd schema): change a word or two and the pronoun points to something else. Change the second half to "because it was about to close," and "it" becomes the library. Grammar alone can't tell them apart; you need common sense, such as that books go overdue and libraries close. When a model gets sentences like this right, it shows it has learned useful patterns from huge amounts of text, very likely including a good deal of common sense.
-
-**What we can't say for sure:** Getting it right doesn't prove human-like understanding, such as first-hand experience of the world or awareness of why it judged as it did. Its abilities come from patterns in its training data. With sentence structures that were rare in training, deliberately designed traps, or knowledge it never learned, it can connect things wrong, and its tone may not change when it does.
-
-| | A human reader | The model |
+| | Human reader | Model |
 | --- | --- | --- |
-| Relies on | Knowledge of language, plus first-hand experience of the real world | Patterns learned from huge amounts of text, which may include a lot of common sense |
-| What getting "it = book" right shows | The reader knows books go overdue | It has learned patterns that can solve sentences like this; whether it understands like a person can't be proven from this |
-| When it tends to go wrong | Carelessness, or a genuinely ambiguous sentence | Rare structures, deliberately designed traps, knowledge missing from training |
+| Relies on | Knowledge of language, plus firsthand experience of the world | Patterns learned from huge amounts of text, possibly including a lot of common sense |
+| What linking "it = book" correctly shows | The reader knows books go overdue | It learned patterns that solve this kind of sentence; whether it understands like a person can't be proven from this |
+| When it tends to go wrong | Carelessness, or when the sentence itself is ambiguous | Rare structures, deliberate traps, knowledge missing from training |
 
-> **Key point:** "It can grab what matters and use common sense" and "it understood like a person" are two separate questions. The first can be checked by its behavior; the second is still unsettled. This book takes the same stance as Chapters 1 and 2: treat it as a system that has learned a great many useful patterns but can go wrong in unexpected places. In practice that comes down to one habit: double-check important references and facts yourself (Chapter 9 explains why fluent answers can still be wrong).
+This book's stance is the same as in Chapters 1 and 2: treat it as a system that has learned a lot of useful patterns but goes wrong in unexpected places. In practice, check important references and facts yourself; Chapter 9 explains why fluent answers can still be wrong and how to check them.
 
-## 5. Common misconceptions, cleared up
+## 6. Common misconceptions, set straight
 
-| Common misconception | Reality |
+| Misconception | Reality |
 | --- | --- |
-| The model reads a sentence by looking over it evenly from start to finish | Attention lets it look **with emphasis**, giving related words more "attention weight" |
-| A chat model can see the context on both sides of every word it processes | Text-generating models can only look back; but everything you send at once comes before the answer, so it can all be used when generating the answer |
-| Getting "it = book" right proves it understood like a person | It shows it learned useful patterns (possibly including common sense), but doesn't prove human-like understanding |
-| The Transformer is a specific AI product | It's an **underlying architecture** (an engine type); most mainstream large models are built on it or a variant of it |
-| To use AI well, you first have to understand the Transformer's internals | No need. Knowing "its core is attention, and it's the shared foundation of mainstream models" is enough |
-| The stronger the attention, the less it'll err | Being good at underlining isn't the same as never erring; with rare, tricky sentence structures it can still connect wrong |
+| The model reads a sentence by looking evenly from start to finish | Attention lets it look with emphasis, giving related words more weight |
+| When a chat model processes each word, it can see the context on both sides | Text-generating models can only look back; but everything you send at once comes before the answer, so all of it is available for the answer |
+| Attention only matches content, so word order doesn't matter | The model is given position information separately, so "dog bites man" and "man bites dog" are different to it |
+| Linking "it = book" correctly proves it understood like a person | It shows useful learned patterns (possibly including common sense), not human-like understanding |
+| The Transformer is a specific AI product | It's an underlying architecture; most mainstream models are built on it or a variant |
+| The stronger the attention, the less it gets wrong | Picking out what matters isn't the same as never being wrong; rare or tricky structures can still trip it up |
 
 ## Summary
 
-- **Attention**: when processing each position, the model decides which available tokens to take information from and how much weight each gets; in short, it **underlines what matters**. Text-generating chat models can only look back (causal attention).
-- It's precisely because it looks with emphasis that it can reach across a heap of words and catch the key connections in a long sentence (like who a pronoun actually refers to).
-- It also looks with **multiple attention heads** at once; what each head focuses on takes shape in training, and the division of labor in the table is only an illustration.
-- The **Transformer** is the underlying architecture of today's mainstream large models (or the basis of their improved and hybrid versions), like an "engine type," with attention at its core. Knowing it exists is enough; its internal structure isn't worth digging into.
-- Getting "it" right shows it learned useful patterns, even common sense, but doesn't prove human-like understanding; with rare structures and traps it can still go wrong.
+- Attention: when processing each position, the model decides which available tokens to take information from and in what proportions; in other words, it picks out what matters. Text-generating chat models can only look back.
+- How the proportions are set: each token sends out a "question" and carries a "label" and "content"; the better a label matches the question, the more content is passed along (query, key, value). Position information is supplied separately, so the model can tell word order apart.
+- The model looks again and again, with many attention heads and many layers; what each head watches for forms during training.
+- The Transformer is the underlying architecture of today's mainstream models (or the basis of improved and hybrid versions), and its core is attention.
+- Linking "it" correctly shows useful learned patterns, even common sense, but doesn't prove human-like understanding; with rare structures and traps it can still go wrong.
 
-In the next chapter we switch angles: how was a model like this, one that knows how to underline what matters and how to add words, originally **"taught"**, from reading huge amounts of text to learning to do what you say properly.
+The next chapter takes a different angle: how a model that picks out what matters and continues text was "taught" in the first place, from reading huge amounts of text to learning to do what you ask.
 
 ## Sources and verification
 
-- Vaswani et al., *Attention Is All You Need* (2017): [arXiv paper page](https://arxiv.org/abs/1706.03762). It introduced the Transformer; the abstract describes it as based solely on attention mechanisms.
-- The [Winograd Schema page](https://cs.nyu.edu/~davise/papers/WinogradSchemas/WS.html) maintained by Davis, Morgenstern, and Ortiz: such sentences come in pairs that differ by a word or two, and resolving the pronoun takes common sense and reasoning.
-- The [Qwen3-Next-80B-A3B model card](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct): an example that mixes linear-attention (Gated DeltaNet) layers with standard attention layers.
+- Vaswani et al., *Attention Is All You Need* (2017): [arXiv paper page](https://arxiv.org/abs/1706.03762). Introduces the Transformer; the abstract says it is based solely on attention. The paper describes attention in terms of a query and key-value pairs, with the output as a weighted sum of the values, and adds positional encodings to the input so the model can use word order.
+- The [Winograd Schema page](https://cs.nyu.edu/~davise/papers/WinogradSchemas/WS.html) maintained by Davis, Morgenstern, and Ortiz: these sentences come in pairs that differ by a word or two, and resolving the pronoun takes common sense and reasoning.
+- [Qwen3-Next-80B-A3B model card](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct): an example that mixes linear-attention (Gated DeltaNet) layers with standard attention layers.
+- Su et al., *RoFormer: Enhanced Transformer with Rotary Position Embedding* (2021): [arXiv paper page](https://arxiv.org/abs/2104.09864). Rotary position embedding (RoPE) brings relative position into the attention calculation.
+- [Qwen3-8B model configuration](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json): 36 layers (`num_hidden_layers`), 32 attention heads per layer (`num_attention_heads`), and RoPE for positions (`rope_theta`).
 
-Sources checked 2026-10-27.
+Sources checked: the first three on 2026-10-27, the last two on 2026-10-28.
 
 ---
 

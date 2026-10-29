@@ -1,137 +1,139 @@
-Starting with this chapter, we switch up how we learn: no more new concepts — instead we **actually build something real**. Everything you picked up in the earlier parts (how to describe what you want to an AI, how to see what it did, how to check the work) all comes into play here.
+From this chapter on we learn differently: no new concepts, just building something real and using everything from earlier parts, namely how to describe what you want, how to see what the AI did, and how to check the work.
 
-For the first project, we'll make **your own personal website**: a web page you can open in a browser, with your name, a one-line intro about yourself, and a few links. How it looks is up to you.
+The first project is your own personal website: one web page with your name, a one-line intro, and a few links, looking however you like. You'll build it on your own computer first, then publish it and get a web address other people can open.
 
-Why start here? Because it meets two "beginner-friendly" conditions. **The bar is as low as it gets**: a single web page is the simplest thing there is, and the hardest to break badly. **The results are visible**: you don't need to understand any code; just refresh the browser and you'll know right away whether it's right. That loop of "I say one thing, it changes one thing, I see the change immediately" is the most important rapport you can build with a coding agent. Building that rapport is worth more than memorizing any command.
-
-The rhythm of the whole chapter comes down to three steps: **preview, give feedback, change again**. We'll first run that loop with one small move that gives you a "five minutes to a win" feeling, then slowly pile on more.
+It makes a good first project because the bar is low and the results are visible. Whether it's right, you find out by refreshing the browser and checking item by item. "I say one thing, it changes one thing, I see the change right away" is the basic rhythm of working with a coding agent (an AI tool that can read and write files and run commands in your folder). The whole chapter is one loop: **preview, give feedback, change again**.
 
 ## 1. Getting ready: what you need, the minimum starting point
 
-This chapter doesn't ask you to write a single line of code, but a few things need to be in place first. **This book won't pin down exactly how to install them or which version to use; always refer to the provider's official documentation** (installation is covered in Chapters 28 and 29). Here we'll only cover "what you need to gather."
+- A coding agent, such as Claude Code or Codex. It creates files, writes the page, and changes things as you say. Whether it runs on your computer or in the cloud depends on the product and the form you use (installation is in Chapters 28 and 29, the general workflow in Chapter 24).
+- A browser, for looking at the results.
+- An empty folder, for example a new folder on your desktop called `my-site`.
+- A safety net you can fall back on. When the agent works on your own computer, first put the folder under Git as described in "Git: the bare minimum to get started" in Chapter 26, so that if things get messy you can go back to your last save. Some web and cloud forms have built-in checkpoints; how much they can restore depends on the product.
 
-**The minimum starting point you need:**
-
-- **A coding agent**: Claude Code, Codex, or the like. It will create files for you, write the page, and change things as you say. It comes in many forms (command line, editor extension, desktop app, web, cloud, and so on), and **some run on your own machine while others run in the cloud; the exact form varies and keeps changing, so refer to the official documentation** (Chapter 24 covered this general workflow).
-- **A browser**: whatever you already have on your computer works, for looking at the results.
-- **An empty folder**: a clean home for this project, for example a new folder on your desktop called `my-site`.
-- **A safety net you can fall back on**: **when it's working on your local machine**, put this folder under version control (Git) first (see "Git: the bare minimum to get started" in Chapter 26). That way, if it messes up the page, you can go back to how things were at your last save. If you're using a web or cloud form, some platforms provide an isolated environment or checkpoints; check the official documentation for how much they can restore.
-
-> **Key point:** Don't let the word "website" scare you. What we're making in this chapter isn't the kind of formal site where you buy a domain, rent a server, and let the whole world visit. It's **a web page file you can open in your own browser**. It lives on your computer, and if you break it, deleting it and starting over costs nothing. Setting the goal here is what gives you the nerve to experiment freely.
-
-**One thing to get ready mentally**: treat this agent like the "capable colleague on their first day" from Chapter 24. It's quick on its feet, but it doesn't know what style or content you want; that's on you to say. It will also make mistakes with full confidence. So **assigning the work and checking it are your job**.
+As for mindset, treat the agent like the "capable colleague on their first day" from Chapter 24: quick, but it doesn't know the style or content you want, and it makes mistakes with full confidence. Assigning the work and checking it are your job.
 
 ## 2. Doing it step by step
 
-Each step below gives you two things: one **plain-language line to say to the AI** (note: this is what you say to the AI, **not a product command for you to type**), and **what you, the human, need to confirm once the step is done**.
+Each step gives you a plain-language line to say to the AI (something you say to it, not a command you type) and what you need to confirm once the step is done.
 
 ### Before you start: have it work inside this folder
 
-A coding agent normally treats "the folder you put it in" as its workspace. So the first job is to get it "standing" in the empty folder you just made. How you do that depends on the form of the product you use:
+A coding agent treats the folder you put it in as its workspace. In a desktop app or editor extension, that's usually "Open folder," then `my-site`. In a terminal, first `cd` into the folder, then type the start command (`claude` for Claude Code, `codex` for Codex). Web and cloud forms usually have you connect a code repository first. The exact buttons change; Chapters 28 and 29 walk through them.
 
-- **Desktop app or editor extension**: usually "Open folder" or "Choose project," then pick `my-site`.
-- **Terminal (command line)**: first use the `cd` command to go into the folder, then type the tool's start command (for example, `claude` for Claude Code or `codex` for Codex).
-- **Web or cloud form**: you usually connect a code repository first; follow the official documentation.
-
-The exact buttons and commands change. Chapters 28 and 29 walk through them hands-on, and **the official documentation has the final word**.
-
-**What you need to confirm:**
-- Once it's running, ask it first: "**Which folder are you in right now, and what files are in it?**" It should name `my-site` and tell you it's empty. Make sure it's in the right place before you go on.
+Once it's running, ask: "Which folder are you in right now, and what files are in it?" It should name `my-site` and say it's empty. Make sure it's in the right place before going on.
 
 ### Step 0: Run the loop once, change a heading with one sentence, refresh and see it
 
-Don't aim for much yet. Just walk through the "preview, give feedback, change again" loop with your own hands and get your first win.
+First have it build the smallest possible skeleton:
 
-First, have it set up the skeleton:
+> Plain-language request: *"Make me the simplest possible personal homepage: one big heading that says 'Hello' and a placeholder paragraph for my intro. Use just one file, `index.html`, with the styling (CSS) written inside it. No frameworks, don't install anything, and don't start a server; I want to double-click the file and have it open in my browser. When it's done, tell me how to open it."*
 
-> Plain-language request: *"Make me the simplest possible personal homepage. Start with one big heading that says 'Hello' and a placeholder paragraph for my intro, that's all. Requirements: use just one file, `index.html`, with the styling (CSS) written right inside that file. Don't use any framework, don't install anything, and don't start a server — I want to double-click the file and have it open in my browser. When it's done, tell me how to open it."*
+Those last sentences matter. Without them it may build a "proper" website project that installs a pile of dependencies and needs a local server running before you can see anything. One `index.html` you open with a double-click is the easiest start for a beginner, and it's exactly what GitHub Pages needs at the end.
 
-Why add those last sentences? Without limits, it may build a "proper" website project: install a pile of dependencies, and require you to start a local server before you can look at anything. That's extra baggage for a beginner. **One `index.html` you can open with a double-click** is the most hassle-free starting point for this chapter.
+What to confirm: double-click `index.html` and you should see a big heading that says "Hello." If it still wants to install things, creates a pile of files, or goes fancy all at once, stop it: "Just one `index.html` for now. It only needs to open and show a big heading."
 
-**What you need to confirm:**
-- It will create files first, then tell you how to preview. **Find `index.html` and double-click it** (or open it in the browser the way it says), and you should see a big heading reading "Hello." Once you see it, the "preview" part of the loop is working.
-- If it still wants to install things, creates a pile of files, or tries to do something fancy all at once (a pile of styles, a pile of sections), you can cut it off: "**Just one `index.html` for now. It only needs to open and show one big heading; save the rest for later.**" Small steps are the keynote of this chapter.
+Then make the first change:
 
-Now for the most satisfying move: **change that big heading to your name**:
+> Plain-language request: *"Change the big heading from 'Hello' to my name, 'Lin Xiaoyu.'"*
 
-> Plain-language request: *"Change the big heading on the homepage from 'Hello' to my name, 'Lin Xiaoyu.'"*
+What to confirm: go back to the browser and refresh; the heading should now be your name. You've just done one full round of "I give feedback, it changes, I refresh and see it." Every later step repeats this round.
 
-**What you need to confirm:**
-- Once it's done, **go back to the browser and hit refresh**. The big heading should immediately become your name.
-- **This moment matters**: you just did a full pass of "I give one sentence of feedback, it changes, I refresh and see the change." Everything from here on is the same loop repeated, just with more and more content. Once this rhythm clicks, you're past the beginner stage.
-
-> **Key point:** The value of this step isn't "changed a heading," it's that you confirmed something firsthand: **you don't need to understand the code to direct it and check the result**. Your eyes (what you see in the browser) are your tool for checking the work. Hand the parts you can't read to it, and you call the shots on the results you can see.
+This step also shows where the book stands on reading code (Chapter 25 covers it in detail). You don't need to understand every line, but you check the work with concrete checks: is the heading your name, does each link open the right page, does it lay out neatly on a phone. When there's a change you can't explain, have it tell you in plain words what it changed and what could go wrong. Changes that touch money, personal data, keys, deleting files, or publishing need a second look from someone who knows the area, and don't run anything you can't undo. In this project only the final "publish" falls into that group, so Section 3 checks it separately.
 
 ### Step 1: Fill in your own content
 
-The skeleton works, so start filling in the real stuff. Say one block at a time; don't dump it all at once.
+Say one block at a time; don't dump it all at once.
 
-> Plain-language request: *"Under my name, add an intro paragraph that says: I'm a graphic designer, I love travel and photography, and I live in Chengdu. Below that, add three links: my email, my Weibo, and my portfolio (I'll fill in the links later, use placeholders for now)."*
+> Plain-language request: *"Under my name, add an intro paragraph: I'm a graphic designer, I love travel and photography, and I live in Chengdu. Below that, add three links: my email, my Weibo, and my portfolio. Use placeholders for the links; I'll fill them in later."*
 
-**What you need to confirm:**
-- Refresh the browser and **check item by item** against what you said: is the intro there, are the three links present, is the text wrong anywhere, did it add content on its own.
-- **It may "fill in the blanks"**: for example, it invents a hobby you never mentioned, or quietly puts a fake URL on "portfolio." That's the kind of mistake it makes (hallucination, covered in Chapter 9, and it happens just the same when building a page). When you see something off, just say: "**That sentence you added yourself, delete it**" or "**That URL is fake, use a placeholder for now.**"
+What to confirm: refresh and check item by item: is the intro there, are all three links there, any typos, anything it added on its own. It may "fill in the blanks," for example inventing a hobby you never mentioned or putting a fake URL on the portfolio link. That's the hallucination from Chapter 9. When you see it, say so: "You added that sentence yourself; delete it."
 
 ### Step 2: Adjust the look: colors, fonts, layout
 
-The content is right, so now adjust "how it looks." Appearance is the best fit for going back and forth in plain language.
+> Plain-language request: *"Make the page feel cleaner: a light beige background, a darker color for the heading, bigger text, everything centered, with some margin on both sides."*
 
-> Plain-language request: *"I want the whole page to feel cleaner: use a light beige background, a darker color for the heading, a bigger font, center everything, and leave some margin on both sides so it doesn't hit the edges."*
-
-**What you need to confirm:**
-- Refresh and look at the effect. Wherever it feels off, **keep giving feedback in plain language**; this is exactly "preview, give feedback, change again" in motion: *"the heading is still too small, bigger"*, *"the beige is too dark, lighter"*, *"the links are cramped together, space them out."*
-- **No need to nail it in one shot.** With appearance, three to five rounds back and forth is normal; as long as each round is a little better than the last, you're on track.
+What to confirm: refresh, and wherever it feels off, keep saying so in plain language: "make the heading bigger," "the beige is too dark," "space the links out." Three to five rounds on appearance is normal; each round a little better than the last is enough.
 
 ### Step 3: Add a photo or a section (optional)
 
-Want a bit more? You can add an avatar or a small "my projects" list. Same rule as always: **add one thing at a time**.
+Again, one thing at a time.
 
-> Plain-language request: *"Above my name, add a spot for a round avatar. I'll put the image in later; for now just hold the spot with a gray circle."*
+> Plain-language request: *"Above my name, add a spot for a round avatar. Hold the spot with a gray circle for now; I'll add the image later."*
 
-**What you need to confirm:**
-- Refresh and confirm the placeholder circle shows up in the right spot.
-- When it comes to putting in a real image, it usually tells you "which folder to put the image file in, and what to name it." **Do as it says**, then refresh to see whether the image shows up.
+What to confirm: the placeholder circle appears in the right place. When you swap in a real image, it will tell you which folder to put the file in and what to name it; do that, refresh, and check that the image shows.
 
 ### Step 4: A milestone "save"
 
-Each time you finish a block you're happy with, have it **save a checkpoint** (in a project using Git, this is called making a commit).
+Each time you finish a block you're happy with, have it save a checkpoint (in Git this is a commit).
 
-> Plain-language request: *"I'm pretty happy with this version. Save me a checkpoint, with the note 'finished the homepage's basic content and colors.'"*
+> Plain-language request: *"I'm happy with this version. Save a checkpoint with the note 'finished the homepage's basic content and colors.'"*
 
-**What you need to confirm:**
-- This step is your **undo button**. After saving a checkpoint, you can change boldly again, and if you break it, you can go back to this version you liked. Note that it only keeps the files Git recorded at the moment you saved; changes you make afterward and haven't committed aren't in it.
-- Build the habit of "**finish a small block, save a checkpoint once you're happy**." It's far safer than barreling straight through all your changes at once. Chapter 25 covers reading the diff, and Chapter 26 covers saving and going back, in more detail. In this project you mainly check the work by "refreshing to see the effect," and it's fine if you can't read the diff, but **do use this checkpoint safety net**.
+What to confirm: after a save you can change things boldly and go back to this version if you break something. A save only keeps the files Git recorded at that moment; changes made afterward and not committed aren't in it. Make "finish a small block, save once you're happy" a habit; Chapters 25 and 26 cover reading the diff and going back.
 
-## 3. Common pitfalls
+## 3. Publishing it: a public address with GitHub Pages
 
-- **Asking it to do too much at once.** "Build me the whole website with a blog and a photo album," and you get a heap of stuff piled on at once, where you can't review what's wrong and can't cleanly back any of it out. **Always break it down**: one block of content, refresh, satisfied, save, then the next.
-- **You refreshed but nothing changed, so you think it did nothing.** It's usually the browser cache, or you've got the wrong file open, not the one it just changed. **Force a refresh first**; if that doesn't work, go back and ask it "**which file should I open to look?**" Don't rush to conclude it did nothing.
-- **It built you a whole project that needs installing and a running server.** Usually Step 0 didn't spell out the limits. Have it switch back to "just one `index.html`, nothing installed, opens with a double-click," or simply go back to your last checkpoint and start that step again.
-- **It added things you didn't ask for.** An invented intro, a fake link, a section out of nowhere; catch these when you check item by item, and one sentence has it delete them. **Just because it wrote it doesn't mean you wanted it; your check is what counts.**
-- **It gets messier the more you change, and no matter what you say it won't go back to what you want.** Don't keep fixing on top of the mess. The cleanest move is: **go back to the last good checkpoint and say what you want again, more clearly** (the first-aid approach from Chapter 30). Chasing fixes sentence by sentence inside a mess usually makes it worse.
-- **Treating the real stuff as real too early.** Don't fill in your real email or real account passwords right off the bat; **passwords and private information in particular should never go into the page or the chat** — they get sent out (Chapter 37 covers this in detail). Use fake placeholders first, swap in the real ones at the end.
+So far the page lives only on your computer. One free way to give it a web address, with no command line, is **GitHub Pages**: static website hosting from GitHub (a site for storing code and files) that publishes the HTML, CSS, and images in a repository as a web page. The steps below were checked against GitHub's Pages help on October 29, 2026.
 
-## 4. Taking it one step further
+### Before you publish: what must not go up
 
-Once you've got the basics down, if you want to play more, try these (all still the same old routine of "make a request in one sentence, refresh to check"):
+**Anything you publish is public.** On a free account the repository that holds the site has to be public, so not just the page but every file you upload to the repository can be seen and downloaded by anyone, and files you delete later stay in the commit history. Before uploading, make sure none of these are in it:
 
-- **Add a "dark mode" switch**: *"Add a small button that switches the whole page to a dark background when clicked."*
-- **Make it look good on a phone too**: *"When it opens on a phone, the content should still lay out neatly and not get crammed together."*
-- **Add the look of a simple comment or contact form** (do "how it looks" first; whether messages actually get through is a separate matter that involves more complex things, so take it as far as you can manage).
-- **Actually publish it online**: this step involves "deployment," and there are many ways to do it that differ from one provider to another. You can have the AI **first walk you through the options and what each one takes**, then decide whether to bother once you understand it (**for the specific platform and steps, defer to its official documentation**).
+- passwords, API keys, or files that hold keys, such as `.env`;
+- ID numbers, your home address, your personal phone number, or other people's photos and details without their consent;
+- drafts and private files you don't want everyone to see.
 
-> **Key point:** "Taking it one step further" still relies on that one loop the whole way through: **make a request, preview, give feedback, change again**. You'll find that going from a crude site to a polished one rests not on how much code you learned, but on you **stating what you want more and more clearly and looking at the results more and more carefully**. Those two things are what this book really wants to teach you.
+An email address on the page is also visible to everyone, including programs that harvest addresses, so consider a separate address for public use. Under Chapter 25's rule, publishing is an action that gets a second look: before you upload, ask a friend or colleague to open your page and look over the list of files you're about to upload.
+
+### Publish in six steps
+
+1. Create an account: go to `github.com/signup`, follow the prompts, and verify your email address (you can't create a repository until you do). GitHub strongly recommends turning on two-factor authentication (2FA) as well. Note your username, for example `linxiaoyu`.
+2. Create the repository: once signed in, click the "+" in the upper-right corner and choose New repository. Name it `your-username.github.io`, for example `linxiaoyu.github.io`; if your username has capital letters, write them in lowercase here. Choose Public, turn Add README on, and click Create repository.
+3. Upload the files: on the repository's main page, choose Add file → Upload files and drag in `index.html` and your image files from inside `my-site`. Drag the files inside the folder, not the `my-site` folder itself, because `index.html` has to sit at the top level of the repository. Below, choose to commit directly to the `main` branch (Commit directly to the main branch) and click the green Commit changes button. Browser uploads are limited to 25 MiB per file and 100 files at a time.
+4. Turn on Pages: click Settings at the top of the repository (if you can't see it, use the "⋯" menu), then Pages in the left sidebar. Under Build and deployment, set Source to Deploy from a branch, choose `main` as the branch and `/ (root)` as the folder, and click Save.
+5. Wait a little: publishing can take up to 10 minutes. Back on the Pages page in Settings, when the site address and a Visit site button appear at the top, it's live.
+6. Open the address: `https://your-username.github.io`. Open it once on your phone too, then send it to the friend who checked it for you.
+
+To change it later, edit and check it on your computer first, save a checkpoint, then upload the file again with the same name to replace the old one, commit, wait a few minutes, and refresh. If nothing has changed after 10 minutes, look at the repository's Actions page for a failed run marked in red, and paste the message you find there to your coding agent to ask why. Once you're comfortable with Git, you can also push your local repository straight to GitHub; we won't cover that here.
+
+## 4. Common pitfalls
+
+- Asking it to do too much at once. "Build the whole site with a blog and a photo album" piles everything on at once; you can't review what's wrong and can't cleanly back it out. One block at a time: build, refresh, happy, save.
+- Refreshing, seeing no change, and deciding it did nothing. It's usually the browser cache, or you have a different file open from the one it changed. Force a refresh first; if that doesn't help, ask "which file should I open?"
+- It builds a whole project that needs installing and a running server. Usually Step 0 didn't spell out the limits. Have it switch back to "one `index.html` that opens with a double-click," or go back to a saved checkpoint and redo the step.
+- It adds things you didn't ask for. An invented intro, a fake link, a mystery section: catch them when you check item by item, and one sentence gets them deleted.
+- It gets messier the more you change. Don't chase fixes sentence by sentence inside a mess; go back to the last checkpoint you were happy with and say what you want again, more clearly (Chapter 30).
+- Using real details too early. Start with placeholders, and keep passwords and private information out of the page and out of the chat (Chapter 37). Before publishing, go through the list in Section 3 again.
+
+## 5. Taking it one step further
+
+All of these use the same routine: one sentence to ask, refresh to check.
+
+- Add a dark mode switch: *"Add a small button that switches the whole page to a dark background when clicked."*
+- Make it look good on a phone: *"When it opens on a phone, the content should still line up neatly."* After publishing, open the address on your phone to check it.
+- Add the look of a contact form. GitHub Pages only hosts static files, so on its own it can't receive form submissions, and GitHub says it shouldn't be used for sensitive transactions such as sending passwords or credit card numbers. Actually receiving messages takes a third-party service, so go only as far as you can manage.
+- Use your own domain: GitHub Pages supports custom domains. Buy a domain first, then follow GitHub's instructions to set it up.
 
 ## Summary
 
-- The first project is a **personal website**, because it has **the lowest bar and visible results**, the best fit for building the core rapport between you and a coding agent.
-- Before you start, get the agent working inside your project folder (open the folder, or `cd` into it in a terminal and start the tool, depending on the product). In Step 0, say clearly: "one `index.html`, nothing installed, opens with a double-click."
-- The loop running through the whole chapter is: **preview, give feedback, change again**. Run it first with "one sentence to change the big heading to your own name, refresh and see it."
-- You **don't need to understand the code**: what you see in the browser is your tool for checking the work, and **you call the shots on the results you can see**.
-- The iron rule for getting work done is to **break it down**: one block of content, refresh, satisfied, save, then the next; if it gets messy, go back to a saved version and start over, don't keep forcing fixes.
-- The safety baseline: use fake placeholders first, and **passwords and private information never go into the page or the chat** (Chapter 37); before working locally, start with Git, and a saved checkpoint is your undo button (Chapter 26).
+- The first project is a personal website: low bar, visible results, and at the end you publish it with GitHub Pages and get a public address like `https://your-username.github.io`.
+- Before you start, get the agent working inside your project folder; in Step 0, say clearly: "one `index.html`, nothing installed, opens with a double-click."
+- The loop running through the chapter is preview, give feedback, change again. Run it first with "one sentence to change the big heading to your name, refresh and see it."
+- You don't need to understand every line of code, but you check the work with concrete checks; have it explain any change you can't explain, and get a second look before outward-facing actions like publishing (Chapter 25).
+- Build one small block at a time and save once you're happy; if it gets messy, go back to a save and redo it (Chapters 26 and 30).
+- Anything you publish is public, and so are the repository's files and history. Keep passwords, keys, ID numbers, addresses, and other people's details off it (Chapter 37).
 
-In the next chapter, we'll put the same "AI plus files" approach to another real task: **tidying up a pile of scattered documents and notes**.
+In the next chapter, we'll put the same "AI plus files" approach to another real task: tidying up a pile of scattered documents and notes.
+
+## Sources and version notes
+
+Checked on: 2026-10-29.
+
+- [Quickstart for GitHub Pages](https://docs.github.com/en/pages/quickstart): the repository name `<username>.github.io`, choosing Deploy from a branch under Settings → Pages, and that publishing can take up to 10 minutes.
+- [Creating a GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site): on GitHub Free the repository must be public; a Pages site is public even if its repository is private; the entry file can be `index.html`, `index.md`, or `README.md`.
+- [GitHub Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits): not to be used for sensitive transactions such as sending passwords or credit card numbers; published sites may be no larger than 1 GB.
+- [Adding a file to a repository](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository): browser uploads are limited to 25 MiB per file and 100 files at a time.
+- [Creating an account on GitHub](https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github): a verified email address is needed to create a repository, and two-factor authentication is recommended.
 
 ---
 
@@ -139,26 +141,26 @@ In the next chapter, we'll put the same "AI plus files" approach to another real
 
 > 6 questions, covering concept, misconception, scenario, and hands-on. Project chapters lean toward scenario and hands-on. Think first, then read the answer explanations in the quote blocks.
 
-1. **[Basic · Concept]** Which work loop runs through this entire chapter? <!-- quiz: q01 revision: 2 -->
+1. **[Basic · Concept]** Which work loop runs through this entire chapter? <!-- quiz: q01 revision: 3 -->
    - A. Write the spec, generate it all, publish
    - B. Learn to code, write the page, check it
    - C. Preview, give feedback, change again
    - D. Run commands, read the logs, fix bugs
-   > **Answer: C.** You say one thing, it changes one thing, you refresh the browser to see the effect, and if you're not happy you say more. This "preview, give feedback, change again" loop is the most important rapport between you and a coding agent. A is the "do it all in one go" approach, while this chapter asks you to break things down; B assumes you must learn to code first, which the chapter says you don't; D is how programmers hunt down problems, while this chapter checks the work by what you see in the browser.
+   > **Answer: C.** You say one thing, it changes one thing, you refresh the browser to see the effect, and if you're not happy you say more. This "preview, give feedback, change again" loop runs through the whole chapter, even after you publish. A is the "do it all in one go" approach, while this chapter asks you to break things down; B assumes you must learn to code first, which the chapter doesn't require; D is how programmers hunt down problems, while this chapter mainly checks the work with concrete checks in the browser.
 
-2. **[Basic · Concept]** Why does this chapter pick a "personal website" as the first hands-on project? <!-- quiz: q02 revision: 2 -->
+2. **[Basic · Concept]** Why does this chapter pick a "personal website" as the first hands-on project? <!-- quiz: q02 revision: 3 -->
    - A. Lowest bar, cheap to break, and a refresh shows the result
-   - B. It's the most common project and you can publish it right away
+   - B. It goes online automatically, so others can see it right away
    - C. Web page code is short, so the AI almost never gets it wrong
    - D. You pick up HTML along the way, a base for writing code later
-   > **Answer: A.** A single web page is the simplest thing there is and the hardest to break badly, and a refresh tells you right away whether it's right. That kind of "visible result" is the best fit for a beginner to build the confidence of "I can direct it." B is wrong: what you build here is a file you open in your own browser, not a site you publish. C is wrong: it still "fills in the blanks" and makes mistakes on a web page. D is wrong: the chapter stresses that you don't need to understand the code.
+   > **Answer: A.** A single web page is the simplest thing there is and the hardest to break badly, and a refresh tells you right away whether it's right. That kind of visible result is the best fit for a beginner to build the confidence of "I can direct it." B is wrong: the page doesn't go online by itself; it becomes public only when you publish it in Section 3, after checking it first. C is wrong: it still "fills in the blanks" and makes mistakes on a web page. D is wrong: the chapter doesn't ask you to learn HTML; you check the work with concrete checks.
 
-3. **[Basic · Scenario]** You ask it to change the big heading to your name, go back to the browser, and **after refreshing nothing has changed**. What should you do first? <!-- quiz: q03 revision: 2 -->
+3. **[Basic · Scenario]** You ask it to change the big heading to your name, go back to the browser, and **after refreshing nothing has changed**. What should you do first? <!-- quiz: q03 revision: 3 -->
    - A. Decide the change failed and have it do the same thing again
    - B. Delete the folder and start over with a simpler request
    - C. Open the code, see which lines changed, find the problem yourself
    - D. Force a refresh, then ask which file you should open to look
-   > **Answer: D.** The most common reasons for "refresh, no change" are the browser cache or having the wrong file open instead of the one it just changed. Rule those two out before you draw conclusions. A and B both decide it failed before checking why; C asks you to read code, while this chapter checks the work by what you see in the browser.
+   > **Answer: D.** The most common reasons for "refresh, no change" are the browser cache or having the wrong file open instead of the one it just changed. Rule those two out before you draw conclusions. A and B both decide it failed before checking why; C isn't the first move, because tracing the code line by line is slow and hard, and ruling out the two common causes is quicker.
 
 4. **[Advanced · Misconception]** "Just have it build the whole website with a blog and a photo album all at once, that's the least hassle." What's wrong with this idea? <!-- quiz: q04 revision: 2 -->
    - A. Nothing; with a detailed enough spec, one go is least hassle
@@ -174,5 +176,5 @@ In the next chapter, we'll put the same "AI plus files" approach to another real
    - D. Your wording was ambiguous, so restart from Step 0
    > **Answer: C.** It will confidently embellish, and that's the hallucination that shows up just the same when building a page (Chapter 9). Just because it wrote it doesn't mean you wanted it; your item-by-item check is what counts, and when you find invented content, have it deleted. A is wrong: the model itself doesn't remember you across conversations, and even with a product memory feature, things you didn't ask for shouldn't appear. B is wrong: it's content the AI wrote into your page, not a template you can ignore. D overreacts; deleting that one line is enough.
 
-6. **[Advanced · Hands-on]** Walk through Step 0 of this chapter yourself: have it make the simplest homepage, confirm you can open it in the browser and see the big heading, then change the heading to your name with one sentence and refresh to confirm. After you're done, answer: in this pass, **which sentence was the "feedback," and which action was the "preview"?** <!-- quiz: q06 revision: 2 -->
-   > **What you should notice:** The "feedback" is the sentence you said, "change the heading to my name," and the "preview" is you going back to the browser to refresh and see the effect. You'll feel firsthand that **the whole way through you don't need to understand the code; you can direct it and check the work just by "saying it clearly and looking carefully."** This is the basic skill every later project uses over and over. For exactly how to install the tools and start them inside your folder, **defer to the official documentation** (Chapters 28 and 29).
+6. **[Advanced · Hands-on]** Walk through Step 0 of this chapter yourself: have it make the simplest homepage, confirm you can open it in the browser and see the big heading, then change the heading to your name with one sentence and refresh to confirm. After you're done, answer: in this pass, **which sentence was the "feedback," and which action was the "preview"?** <!-- quiz: q06 revision: 3 -->
+   > **What you should notice:** The "feedback" is the sentence you said, "change the heading to my name," and the "preview" is you going back to the browser to refresh and see the effect. You'll find that without reading the code line by line, you can direct it and check the work by saying clearly what you want and looking at the result item by item. That's the basic skill every later project uses (installing and starting the tools is covered in Chapters 28 and 29).

@@ -1,114 +1,82 @@
-In Chapter 2 we cleared up a big misunderstanding: a large language model is not a database; its answers are "computed and generated on the spot," not looked up. But a new question immediately pops up: **if it's not looking things up, how does it "compute" a smooth passage in the first place?**
+Chapter 2 explained that a large language model is not a database: its answers are computed on the spot, not looked up. That raises the next question right away: if it isn't looking things up, how does it "compute" a smooth passage?
 
-For most chat language models, the core text-generation loop is **predict a distribution of possible next tokens, choose one, then repeat**. A token can be a word or part of one. The calculations behind each prediction can be complex; generating one token at a time does not mean the model cannot reason or plan.
+For most chat models, the way text gets written is surprisingly simple: work out what the next token is likely to be, pick one, add it, and do it again. The math behind each step can be complicated, and writing one token at a time doesn't mean the model can't reason or think ahead.
 
-This chapter explains that core generation loop. Understand it, and you'll work out three things in one go: why it can write long articles, code, and tables; why it answers the same question a little differently each time; and most importantly, **why fluent answers can still contain fabricated details** (hallucination, covered in chapter 9).
+Once you understand this loop, three things click at once: why it can write long articles, code, and tables; why it answers the same question a little differently each time; and why an answer that reads smoothly can still have made-up details in it.
 
-## 1. A starting analogy: much more capable keyboard autocomplete
+## 1. A comparison to start: keyboard autocomplete, only far smarter
 
-You use a "predict the next word" thing every day: the **autocomplete on your phone's keyboard.**
+You use something that predicts the next word every day: your phone keyboard's autocomplete. Type "the weather today is really," and suggestions pop up: "nice," "good," "hot." It has tallied huge amounts of text and knows what usually follows those words.
 
-You type "the weather today is really," and candidates jump up above: "nice," "good," "hot." How does it guess? Because it has tallied massive amounts of text and knows which words **most often follow** "the weather today is really."
-
-**Predicting a continuation is a useful starting analogy for a large language model, but its learned representations and capabilities are much richer.** You give it an opening, and based on the language patterns it learned during training (that set of "tuned knobs" from chapter 2), it computes "what the next token most likely is" and picks one to continue with; then it treats "the opening + the word it just added" as a new opening and **computes the next one**; one after another like this, it **rolls out a whole passage, like a snowball.**
+That's a fine first picture of a large language model, except that what it has learned is far richer than autocomplete. You give it an opening; using the patterns it learned in training (the tuned knobs from chapter 2), it computes what the next token is likely to be and adds one. Then it treats "the opening plus the token it just added" as a new opening and computes the next. One after another, it rolls out a whole passage like a snowball.
 
 ```text
-At each step it's doing this "fill in the blank":
+At each step it's doing this "fill in the blank" (token boundaries as o200k_base actually splits them):
 
-  So far: "The capital of China is"
-       ↓  compute: what's the most likely next token?
-  Add one: "Bei"
-       ↓  treat "The capital of China is Bei" as the new opening, compute again
-  Add one: "jing"
-       ↓  keep going...
-  Finally rolls out: "The capital of China is Beijing."
+  So far: "The capital of Japan is"
+     ↓  compute the probability list, choose " Tokyo"
+  So far: "The capital of Japan is Tokyo"
+     ↓  compute again, choose "."
+  So far: "The capital of Japan is Tokyo."
+     ↓  compute again, choose a special token meaning "done," and stop
 ```
 
-> **Key point:** The visible text is usually generated token by token. That does **not** tell us everything the model computed before choosing each token. Reasoning models may also generate intermediate reasoning before the final response (chapter 8). The "Bei / jing" split here is only an illustration; actual token boundaries depend on the tokenizer. Each new output token is another iteration of the generation loop.
+In both o200k_base and Qwen3, " Tokyo" happens to be a single token; with a different tokenizer, the same word might be cut in two and take one more step. The loop keeps going until the model chooses the special "done" token or hits an output limit set by the product. Reasoning models may also generate intermediate reasoning before the final answer (chapter 8).
 
 ## 2. How it "picks" the next word: a probability list
 
-A more accurate picture of "predict the next word": at each step, the model gives **every candidate token** in its vocabulary a probability score, arranges them into a list, and then **picks one** to continue with.
+A more accurate picture: at every step, the model assigns a probability to every token in its vocabulary, lines them up in a list, and picks one. If the text so far is "The capital of Japan is," the list looks roughly like the top half of the figure below (the numbers are made up for illustration; you normally can't see a real model's probabilities):
 
-An example. Suppose what came before is "The capital of Japan is," and the list the model computes inside looks roughly like this:
+![Bar chart: after "The capital of Japan is," the next token is "Tokyo" with 92% probability, "Japan" 2%, "Osaka" 1.5%, "Edo" 0.8%, and all other candidates 3.7% combined; below, three bars compare Tokyo's chance of being picked at temperature 0.5, 1, and 1.5: 99.9%, 92%, and about 64%](/figures/en/next-token.svg)
 
-```text
-Before: "The capital of Japan is" → probability list for the next token (numbers are made up for illustration):
+Where do these probabilities come from? At each step, the model first gives every token in its vocabulary a score (these raw scores are called logits). The vocabulary is large: o200k_base has about 200,000 tokens and Qwen3 about 150,000. A fixed conversion (softmax) then turns the scores into probabilities: the higher the score, the higher the probability, and all the probabilities add up to exactly 100%. So every candidate gets a probability, though almost all are too small to matter.
 
-  Tokyo ........ 92%   ← highest probability
-  Japan ........  2%
-  Osaka ........  1.5%
-  Edo ..........  0.8%
-  ...(thousands more candidates, all with low probability)
-```
+It usually leans toward high-probability tokens, but it doesn't always take the top one:
 
-> **Important reminder:** The percentages above are **a made-up example for illustration**, not the real numbers of any real model. The real probabilities are computed inside the model and you don't normally see them. They're used here only to give you a picture: **the "next word" in the model's eyes is a candidate list with probabilities, not a single fixed answer.**
+- Choosing the highest-probability token at every step is called **greedy decoding**. In theory, the same input then gives the same output every time; in a real service, small differences in the input or the computation can still change the result.
+- Many systems instead sample according to the probabilities, mixing in a bit of randomness you can turn up or down, so the wording can differ between runs (or happen to come out the same). The temperature covered in chapter 8 widens or narrows the gaps between scores before they're turned into probabilities: at low temperature "Tokyo" is picked almost every time, while high temperature gives other candidates more of a chance, as in the bottom half of the figure.
 
-When picking a word it usually **leans toward the high-probability ones**, but it **doesn't always rigidly pick number one**. Hidden here is a phenomenon you've long noticed:
-
-- Choosing the highest-probability token at each step is called **greedy decoding**. With identical inputs and a fully deterministic implementation, it produces the same output. A real service may still vary because its inputs or computation differ.
-- Many systems instead use **sampling**, which introduces controlled randomness. This can change the wording between runs, but does not guarantee a different answer every time.
-
-> **How you'll actually run into it:** "Regenerate" may produce a different answer through sampling. Rephrasing also changes the input, so it can change the answer even without randomness. Neither guarantees an improvement. Chapter 8 explains temperature and other controls; availability depends on the product.
+So hitting "regenerate" may get you a different answer through sampling, and rephrasing changes the input itself, so the answer can change even with no randomness at all. Neither one is sure to give you a better answer, and which settings you can adjust depends on the product.
 
 ## 3. With just this one thing, how can it write long articles, code, and tables?
 
-You might doubt it: it's just "guessing the next word," so how can such a plain action write a logically coherent long article, runnable code, an aligned table?
+You might doubt it: it's just guessing the next word, so how can something that simple produce a coherent long article, code that runs, or a neatly lined-up table?
 
-The key is that **the "next word" is computed together with the text that came before.** Every word it guesses takes **the earlier content available in its context window** into account (your question + the part it has already written), which is exactly what the "context window" from chapter 3 holds. So:
+The key is that the next token is computed together with the text before it. Every step uses what's visible in the current context window, including your question and the part it has already written (the desk from chapter 3). So:
 
-- Writing an **article**: it wrote "First, ..." earlier, so when computing the next paragraph, "Second," becomes a high-probability continuation. **The structure emerges naturally**, with no one having to dictate it.
-- Writing **code**: code is also a kind of "language," with strong patterns (brackets must pair, indentation matters, an `if` is often followed by a condition). It learned these patterns into its parameters too, so **token by token, it can also "continue" code that follows the syntax.**
-- Making a **table**: the `|` and `---` of a Markdown table are also a patterned text format, and it can continue them by pattern just the same.
+- Writing an article: if it wrote "First, ..." earlier, then "Second," becomes a likely continuation for the next paragraph, and structure emerges naturally.
+- Writing code: code is a "language" with strong patterns: brackets come in pairs, indentation matters, and `if` is usually followed by a condition. These patterns are learned into the parameters too, so it can continue code token by token in a way that follows the syntax.
+- Making a table: the `|` and `---` of a Markdown table are patterned text as well, and it continues them the same way.
 
-```text
-Why "only guessing the next word" can still make a whole piece:
-  every step uses the earlier content available in the context window
-  → the previous sentence steers the next one
-  → relayed step by step, logic and structure "grow" out
-```
-
-> **Key point:** Next-token prediction can support complex behavior. Learned patterns and the available context let the model maintain structure over many steps; an outline or intermediate reasoning can help too. But coherent structure does not guarantee correct logic, working code, or accurate facts.
+Writing an outline first, or reasoning a bit before answering, also helps it keep a long piece on track. But a tidy structure doesn't mean the logic is right, the code works, or the facts are accurate.
 
 ## 4. The point most worth remembering: a plausible answer is not a verified answer
 
-Now, putting the previous three sections together leads to a conclusion that's a little unsettling but extremely important.
+Put the three sections together and you reach an important conclusion: a next-token probability says how natural a continuation is under the model, not how true a statement is. "Tokyo" is likely after "The capital of Japan is" because that's the most common continuation in the patterns it learned, not because the model checked.
 
-A next-token probability measures **how likely a continuation is under the model**, not whether a statement is true. Training can reward accurate answers and honest uncertainty; some products also search, use calculators, or check sources. However, **the generation loop itself provides no guarantee that every claim has been verified against reliable evidence**.
+Training can encourage it to answer accurately and to say so when it isn't sure, and some products also search, use a calculator, or check sources; but the loop of adding one token after another doesn't check each claim against evidence. When it has nothing to go on and what it learned is shaky, it can keep going with a smooth, confident, wrong answer. This is the **hallucination** covered in chapter 9. Surface features like formatting, tone, and phrasing nearly always come out polished, so fluency only shows that an answer looks like a good one.
 
-In other words:
-
-> **Fluency and confidence are not evidence that an answer is correct.**
-
-This helps explain one of its most frustrating failure modes: **it confidently talks nonsense (hallucination):**
-
-- When evidence is missing or its learned knowledge is unreliable, the model **may generate a plausible but false answer**. It can also say "I'm not sure," especially after training that rewards honesty. The problem is that neither confident wording nor a statement of uncertainty is a dependable accuracy test by itself.
-- Surface features like formatting, tone, and phrasing almost always come out polished, even when the content is wrong. So a confident tone is only loosely related to being right: confident answers are often correct, but they can also be wrong in a very convincing way. Fluency shows that something looks like a good answer, not that it is one; judge it by the evidence.
-
-> **Common misconception:** "The answer is so coherent that it must have been checked." A model may reason, plan, and use tools, but smooth prose alone does not show that those steps were successful—or that sources were checked at all. **Judge factual claims by their evidence, not their presentation** (chapter 9).
-
-> **How you'll actually run into it:** Summarizing material you provide gives it a source to work from and gives you something to check. It can still omit or distort details. Asking for an obscure number, citation, or quotation without a source is riskier: learned knowledge may be incomplete, and it may invent a convincing detail. Check important claims against the original source in either case (chapter 15).
+This also explains why the risk differs by task. When you ask it to summarize material you've given it, it has something to work from and you can check against the original, though it can still leave things out or get details wrong. Asking for an obscure figure, citation, or quotation with no source at all is much riskier: it may fill in a convincing detail. Chapters 9 and 15 cover how to check.
 
 ## 5. Common misconceptions, corrected all at once
 
 | Misconception | Reality |
 | --- | --- |
-| It must have the whole answer ready before writing | Text is generally generated **token by token**; a model may also produce an outline or intermediate reasoning before its final response |
-| Its answer is "looked up" from somewhere | It's **generated on the spot by probability** (following chapter 2: not a database) |
-| For the same question, its answer should be word for word identical | Word-picking carries a bit of **randomness**, so the wording often differs each time (how randomness is adjusted, see chapter 8) |
-| It speaks coherently, so it "understood" and "verified" | Coherence does not prove accuracy; check whether the answer is supported by reliable evidence |
-| Since it "guesses the next word," it can only write short sentences | Learned patterns and **the available context** can support long passages, structured explanations, and code |
-| When it confidently says something wrong, it must be a software bug | Hallucinations can occur even when the software runs as designed; training and tools can reduce them, but important claims still need checking |
+| It must have the whole answer ready before writing | Text is generally generated token by token; a model may also produce an outline or intermediate reasoning before its final answer |
+| Its answer is "looked up" from somewhere | It's generated on the spot from probabilities (following chapter 2: not a database) |
+| For the same question, its answer should be word for word identical | Sampling adds a bit of randomness, so the wording often differs (chapter 8) |
+| It speaks coherently, so it must have checked | Coherence doesn't prove accuracy; look for reliable evidence |
+| Since it only "guesses the next word," it can only write short sentences | Learned patterns plus the available context can support long passages, code, and tables |
+| When it confidently says something wrong, it must be a software bug | Hallucinations happen even when the software runs as designed; training and tools reduce them but don't eliminate them |
 
 ## Summary
 
-- The core text-generation loop predicts a **probability distribution over next tokens**, selects one, and repeats. The calculations behind that loop can support complex reasoning and planning.
-- It selects tokens from a **probability distribution** (our percentages are illustrative). Sampling can vary the output; identical wording is also possible. Chapter 8 explains generation settings.
-- Learned patterns and **available context** help maintain structure across a long answer. Outlines and intermediate reasoning can also guide generation; coherence alone does not prove correctness.
-- **A likely continuation is not automatically a true statement.** Training can encourage truthfulness and uncertainty, and tools can supply evidence, but none of that guarantees every claim is correct (chapter 9).
-- Providing source material makes answers easier to ground and check. Unsupported specific facts are especially risky; verify important details, including those in summaries (chapter 15).
+- The core generation loop: score every token in the vocabulary, convert the scores into probabilities that add up to 100%, pick one, append it, and repeat, until the model picks the special "done" token or hits the output limit.
+- Picking leans toward high probabilities, but many systems sample, so the wording may or may not change; temperature widens or narrows the gaps between scores (chapter 8). This chapter's percentages are illustrative.
+- Every step is computed with the earlier text in the context window, which is how it writes structured long passages, code, and tables; reading smoothly doesn't make it correct.
+- A high probability means a continuation is natural, not that it's true. Providing source material makes answers easier to ground and check; specific facts without a source need checking most (chapters 9 and 15).
 
-In the next chapter (Chapter 5), we look at its "inner workings" from another angle: how it turns the **meaning** of words into computable "coordinates," so it can "sense" which words are close in meaning. This is **vectors and embeddings**, also the basis of search and RAG (chapter 20).
+In the next chapter (chapter 5), we look at its foundations from another angle: how it turns the meaning of words into computable "coordinates," so it can "sense" which words are close in meaning. This is vectors and embeddings, also the basis of search and RAG (chapter 20).
 
 ---
 

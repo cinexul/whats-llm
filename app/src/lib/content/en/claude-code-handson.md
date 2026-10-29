@@ -1,30 +1,28 @@
-Claude Code is Anthropic’s coding agent. It can explore a repository, edit files, run tools, and assist with Git workflows. You can use it through a terminal and supported editor or other product interfaces. This chapter uses the terminal to make the first session concrete.
+Claude Code is Anthropic's coding agent. It can explore a project, edit files, run commands, and help with Git. It has terminal, editor extension, desktop app, and web entry points; this chapter uses the terminal and walks through a concrete first exercise.
 
-The installation methods, account requirements, and command examples were checked on **2026-10-27**. Record your installed version: instructions from an old tutorial can describe an installation method or interface that has since changed.
+The installation methods, account requirements, and commands in this chapter were checked on 2026-10-29. Before you start, note the version you installed: older tutorials may describe installation steps or screens that have since changed.
 
-## 1. Install and open a small project
+## 1. Install it and open a small project
 
-Check your account first. As of October 2026, the official documentation says Claude Code requires a Pro, Max, Team, or Enterprise plan or a Console (API) account; the free claude.ai plan does not include it. It can also be used through third-party cloud providers such as Amazon Bedrock.
+First, check your account. As of October 2026, Claude Code requires a Pro, Max, Team, or Enterprise plan or a Console (API) account; the free claude.ai plan doesn't include it. You can also use it through a third-party cloud such as Amazon Bedrock. If you're not comfortable with the terminal, there's also an official desktop app (macOS, Windows, Linux); the download links are in the setup documentation.
 
-If you're not comfortable in a terminal, there is also an official desktop app (macOS, Windows, Linux) that lets you use Claude Code without the command line; the download links are in the official setup documentation. This chapter uses the terminal as the example.
-
-The officially recommended method is the native installer, which then updates itself in the background. On macOS or Linux (including WSL on Windows):
+The recommended method is the native installer, which then updates itself in the background. On macOS and Linux (including WSL on Windows):
 
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-In Windows PowerShell (there is an equivalent CMD command in the official docs):
+In Windows PowerShell (there's also a command for CMD):
 
 ```powershell
 irm https://claude.ai/install.ps1 | iex
 ```
 
-Both commands download and execute an installer script; make sure the address is the official one and follow your organization's installation rules. On Windows, the docs also recommend installing Git for Windows (see Chapter 26) so Claude Code can run Bash commands; without it, Claude Code still works and uses PowerShell instead.
+Both commands download and run an installation script, so make sure the address is the official one and follow your organization's rules. On Windows, also installing Git for Windows (Chapter 26) lets Claude Code run Bash commands; without it, Claude Code still works and uses PowerShell instead.
 
-You can also use a package manager: `brew install --cask claude-code` with Homebrew, or `winget install Anthropic.ClaudeCode` with WinGet. These two don't update automatically by default, so run `brew upgrade claude-code` or `winget upgrade Anthropic.ClaudeCode` from time to time. Choose one method. The README in the official GitHub repository marks npm installation as deprecated, so an old tutorial's `npm install -g @anthropic-ai/claude-code` is no longer the preferred starting point.
+You can also use a package manager: `brew install --cask claude-code` with Homebrew, or `winget install Anthropic.ClaudeCode` with WinGet. These don't update automatically by default, so run `brew upgrade claude-code` or `winget upgrade Anthropic.ClaudeCode` from time to time. Pick one method. The `npm install -g @anthropic-ai/claude-code` command in older tutorials is marked deprecated in the official README.
 
-After installing, open a new terminal window, check that the command works, and enter a practice project. The `git` commands below need Git installed; if the project isn't under Git yet, save a starting point first as described in "Git: the bare minimum to get started" in Chapter 26:
+Once installed, open a new terminal window, confirm the command works, and go to your practice project. The `git` commands below need Git installed; if the project isn't under Git yet, save a starting point first as described in "Git: the bare minimum to get started" in Chapter 26:
 
 ```bash
 claude --version
@@ -35,11 +33,11 @@ git switch -c practice/claude-first-task
 claude
 ```
 
-Replace the path with your project's actual folder. `git status` confirms there are no unsaved changes (or save existing work separately first), and `git switch -c` creates a practice branch. The first time you run `claude`, follow the browser prompts to log in, then use `/status` to inspect the session and active account. Subscription sign-in and API-backed configurations are different ways to use the tool; installing the CLI does not itself make API usage free.
+Replace the path with a real directory. `git status` confirms there are no unsaved changes, and `git switch -c` creates a practice branch. The first time you run `claude`, sign in through the browser prompts; afterwards, `/status` shows the version, model, and account in use. If installation goes wrong, `claude doctor` prints diagnostics.
 
 ## 2. Ask for investigation, then one change
 
-A useful first request is:
+A good first request:
 
 ```text
 Read the project instructions and README. Explain what this project does,
@@ -55,11 +53,11 @@ Inspect the diff and perform the relevant checks. Report the files changed,
 the commands actually run, and any unresolved issue. Do not push or deploy.
 ```
 
-Read `git diff` yourself. If the change affects software behavior, also exercise that behavior and run appropriate project tests. For an unfamiliar repository, a concise explanation backed by file paths is more useful than a confident story about how the project “probably” works.
+Then sign off as in Chapter 25: have it explain each change in `git diff` in plain words and compare that with the diff. If it changed how something works, also run the relevant tests and try the new behavior yourself.
 
 ## 3. Project instructions, memory, and skills are different
 
-`CLAUDE.md` contains instructions such as project conventions, useful commands, and constraints. `/init` can help draft project guidance; inspect the generated file. A small example:
+`CLAUDE.md` holds project conventions, common commands, and constraints, and is loaded into the context at the start of each session. `/init` can draft it for you, but check what it generates. A small example:
 
 ```markdown
 # Project guidance
@@ -70,48 +68,46 @@ Read `git diff` yourself. If the change affects software behavior, also exercise
 - Explain what was verified and what remains uncertain.
 ```
 
-Replace general statements with specific commands only after verifying those commands. Do not paste an entire manual or credentials into the file.
+Replace general statements with specific commands only after checking those commands. Don't paste an entire manual or any keys into it.
 
 | Mechanism | What it stores | How to treat it |
 | --- | --- | --- |
 | `CLAUDE.md` and project rules | Deliberate instructions for working in this project | Review and maintain them like other project documentation |
-| Auto memory, where enabled | Notes retained by the product from previous work | Inspect and correct them; old observations may become wrong |
-| Skills | Reusable procedures and optional scripts or reference files | Use when the task matches, after reviewing the source |
-| Current conversation | This task’s requirements, evidence, and progress | Summarize important state when handing work to a new session |
+| Auto memory, where enabled | Notes the product kept from earlier work | Inspect and correct them; old observations may no longer hold |
+| Skills | Reusable procedures, optionally with scripts or reference files | Check the source; use them when the task matches |
+| Current conversation | This task's requirements, evidence, and progress | Hand over the key state when moving to a new session |
 
-Use `/memory` to inspect the memory interface available in your version. Persisted notes and loaded instructions are product features, not evidence that the model’s weights learned your project. Memory also does not make an unverified claim true.
+`/memory` lets you edit `CLAUDE.md`, turn auto memory on or off, and view what it has saved. All of this is the product putting saved text back into the context; the model itself hasn't "learned" your project, and a claim written into memory doesn't become true because it's there.
 
 ## 4. Learn a few commands by their purpose
 
-| In-session command | What it helps you do |
+These in-session commands are available as of October 2026; type `/` to see what your version actually offers.
+
+| In-session command | Purpose |
 | --- | --- |
-| `/help` | Discover available commands |
-| `/status` | Inspect session and account configuration |
-| `/plan` | Enter the planning workflow for a task |
-| `/permissions` | Inspect or change permission rules within your control |
-| `/memory` | Inspect project guidance and memory controls |
-| `/usage` | Inspect available usage information and limits |
-| `/diff` | Inspect changes through the supported interface |
+| `/help` | See available commands |
+| `/status` | See version, model, account, and connection status |
+| `/plan` | Enter plan mode: propose an approach without changing files (Chapter 27) |
+| `/permissions` | View or adjust allow, ask, and deny rules |
+| `/memory` | Edit `CLAUDE.md` and manage auto memory |
+| `/diff` | See changes in your working files, including the edits it just made |
+| `/code-review` | Review the current diff for correctness problems (alias `/review`) |
+| `/rewind` | Return the conversation and the files it edited to an earlier checkpoint (or press Esc twice with an empty prompt) |
+| `/usage` | See this session's usage and your plan limits (alias `/cost`) |
 
-Commands available in a terminal, editor, or cloud session can differ. Planning is useful when scope is uncertain; it is not a replacement for the execution environment’s permission controls. Once you have authorized a clear, bounded change, the agent can usually perform its routine implementation and checks without asking you to approve every step again.
+Two cautions. `/rewind` tracks only files Claude Code changed with its own editing tools; files changed only by terminal commands, or by you by hand, aren't covered, and outside actions certainly aren't. The documentation says plainly that it doesn't replace Git. `/code-review` runs in the same session, which makes it a good first check; for changes touching money, personal data, keys, deletion, or publishing, still get a review from a new session or a person, as Chapter 25 says.
 
-## 5. Keep execution and billing boundaries visible
+## 5. Know the boundaries of permissions, execution, and cost
 
-Read a permission request as a concrete action: **which command, which files or service, and what effect?** A permission can cover repeated operations, so do not assume every later action will prompt again. Shell commands, hooks, skills with scripts, and external tools can all do real work. A Git branch cannot undo an external message or payment.
+The four permission levels and the matching modes are in Chapter 26. As of October 2026, recent versions of Claude Code start terminal sessions in auto mode, where another model reviews actions for you, so it won't necessarily ask you each time. For your first practice run, press Shift+Tab until the status bar shows "manual mode on": in Manual mode it asks before most file edits and commands. Pressing Shift+Tab again switches to `acceptEdits` or plan mode. When it asks for permission, read what command it is, which files or services it touches, and what the consequences are. One approval may cover later repeats of the same action, so don't assume you'll be asked every time. Terminal commands, hooks (scripts that run automatically at set moments), skills with scripts, and external tools can all have real effects, and a Git branch can't take back a sent message or a payment.
 
-Subagents can divide investigation or implementation when supported and authorized. Give each a clear scope and decide who integrates the results. Separate conversations do not necessarily mean separate working directories; parallel writers can overwrite each other. Delegation does not expand the permissions granted to the task.
+If the product supports it and the task allows it, subagents can share investigation or implementation work. Divide their areas first and decide who integrates the results. Separate conversations don't necessarily work in separate directories, so parallel edits can overwrite each other, and delegating work doesn't widen the original task's permissions.
 
-Check `/status` and your account’s usage page to distinguish:
-
-- **Subscription use**, which consumes included allowances under the plan’s rules.
-- **API or provider use**, which follows that account’s billing and limits.
-- **Optional credits, paid modes, or connected services**, which can add costs when enabled.
-
-Do not assume a consumer subscription pays for an API key, or that all long sessions create a separate token invoice. If usage is unexpected, check the active credentials, model/mode, task length, repeated tool results, and background work before changing plans.
+Think about cost by account path: a subscription draws on your plan's allowance, which `/usage` shows; API or third-party cloud use is billed through those accounts; optional usage credits, once turned on, are counted separately. A subscription doesn't pay for an API key. For a sense of scale: as of October 2026, Anthropic says enterprise deployments billed through the API average about $13 per developer per active day, with 90% of users under $30. If usage looks unusual, first check the account you're signed in with, the model, the length of the task, and background work (Chapter 38).
 
 ## Sources and version notes
 
-Checked **2026-10-27**: the [official setup documentation](https://code.claude.com/docs/en/setup) for the native installer (including Windows PowerShell), the fact that Homebrew and WinGet installs don't auto-update, the account requirements (the free claude.ai plan doesn't include Claude Code), and the desktop app; the [official Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md) for npm deprecation; the [commands reference](https://code.claude.com/docs/en/commands) for the in-session commands in this chapter. When checked on 2026-10-22, the [official changelog](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)'s first entry was **2.1.308**, covering memory controls, subscription usage, and evolving permission behavior. These are observed documentation and repository versions, not a claim about your installed release. For costs, see the [cost documentation](https://code.claude.com/docs/en/costs).
+Checked on 2026-10-29. The [setup documentation](https://code.claude.com/docs/en/setup) supports the account requirements, desktop app, native installer (including Windows PowerShell and CMD), Homebrew and WinGet not updating automatically by default and their upgrade commands, and `claude doctor`; the [official Claude Code README](https://github.com/anthropics/claude-code/blob/main/README.md) supports npm installation being deprecated; the [commands reference](https://code.claude.com/docs/en/commands) supports the in-session commands and aliases listed here; the [checkpointing documentation](https://code.claude.com/docs/en/checkpointing) supports what `/rewind` covers and that it doesn't replace Git; the [costs documentation](https://code.claude.com/docs/en/costs) supports `/usage` and the average cost figures. This records what the documentation showed, which may differ from your installed version.
 
 ---
 

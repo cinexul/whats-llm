@@ -1,120 +1,129 @@
-If Appendix C is "which buttons the tool has," this Appendix D is about "**how to string those buttons into a way of working you can trust.**" It comes from a method that frontline teams have polished over and over, called the **Harness**. The core is one sentence: **don't let the AI run free and improvise; put a harness on it — the frame of "investigate first, then set the rules, propose a plan first, then act, and sign off at the end."** Whether you use Claude Code or Codex, this method works the same.
+Appendix C lists the commands and settings the tools offer. This appendix is about connecting them with your own rules and checks so that a coding agent's work can be trusted. The industry calls this whole arrangement a harness.
 
-> **Key point:** the biggest risk when AI writes code isn't that it "can't write it" — it's that it **acts on its own and starts over from scratch.** It may ignore the existing approach in your project and force in its own style, throwing off the overall design. The Harness exists to prevent this: have it work **along with what you already have**, instead of tearing it down and rebuilding. This method is the other side of Chapters 26, 27, 28, and 29; read them together.
+## 1. What "harness" means
 
-## 1. What the Harness is: four moves
+A harness is originally the gear you put on a horse: the horse is no stronger, but with the harness it can pull a cart in the direction you want. In AI, a common way of putting it as of 2026 is "agent = model + harness": the harness is everything in an agent except the model itself, including the instructions given to the model, the tools it can call, the loop that keeps calling the model until the task is done, the context management that decides what the model sees at each step, and permissions and checks. Anthropic, for example, calls the Claude Agent SDK a general-purpose agent harness and describes it as providing the same tools, agent loop, and context management that power Claude Code.
 
-Treat the AI as a collaborator who's **very capable, but it's their first day and they don't know your project yet.** You wouldn't let that kind of person write straight to the main branch, right? You'd have them:
+From the user's side, a harness has two layers. The inner layer comes with the tool: coding agents such as Claude Code and Codex already have a loop, tools for reading and writing files and running commands, context compaction, and a permission system built in, and you usually cannot change them. The outer layer is the one you build: project rule files, reviewing a plan before work starts, automated tests and checks, and human acceptance. Birgitta Böckeler of Thoughtworks sorts the outer layer into two kinds: guides, which tell the agent how to work before it acts (rule files, for example), and sensors, which catch problems after it acts and let it correct itself (tests and code checks, for example).
 
-1. **Investigate first:** get clear on the existing code and the existing rules.
-2. **Set the rules:** write down "how things are done in this project" in black and white.
-3. **Propose a plan first:** before acting, say which files will change and which existing things will be reused; you sign off, then they do it.
-4. **Act, then sign off:** carry out the plan, self-check against the rules when done, and you read the diff yourself too (Chapter 25).
+What follows is this book's working checklist for building that outer layer. It combines the sources above with the practices in Chapters 24 to 27; it is not any vendor's official method. The ideas are the same whether you use Claude Code or Codex.
 
-These four moves are the Harness. It doesn't depend on any one tool's particular buttons; it's a way of thinking. Put simply, it's the "investigate → plan → act → sign off" workflow loop from Chapter 24, with one extra step, "set the rules," added in the middle.
+## 2. The outer layer you can build: four parts
 
-## 2. The five-step workflow (follow along)
+| Part | Kind | What it does | Examples |
+| --- | --- | --- | --- |
+| Project rule file | Guide | Goes into the context at the start of every session and tells the agent how this project works | `CLAUDE.md`, `AGENTS.md` (Chapter 28, Appendix C) |
+| Plan gate | Guide | Confirms which files will change and what will be reused before any work starts | Plan mode (Chapter 27) |
+| Automated checks | Sensor | Run after every change; failures go back to the agent to fix | Tests, code checks, builds |
+| Human acceptance | Sensor | Confirms the behavior meets the requirement, with an extra review for high-risk changes | The checklist in Section 6 of this appendix (Chapter 25) |
 
-Bringing those four moves down into an actual conversation gives you these five steps. Each step comes with a sample "thing to say to the AI." These are **plain-language prompts, not product commands**; edit them and they're ready to use.
+One distinction matters: a rule file is just text placed in the context. The model usually follows it, but nothing guarantees that. Anything you truly need to block, such as reading `.env` or deleting a directory, should be enforced with the tool's permission rules or a sandbox (Chapter 26).
 
-| Step | What this step has it do | Sample prompt (plain words) |
+## 3. The five-step workflow
+
+Put into an actual conversation, the outer layer becomes these five steps. Each step comes with a sample of "what to say to the AI"; these are plain-language prompts, not product commands.
+
+| Step | What you want at this step | Sample prompt |
 | --- | --- | --- |
-| 1. Investigate | Get clear on the current state first, don't act | "Before acting, investigate this project: the overall structure, existing approaches similar to this need, shared modules I can reuse (network requests / error handling / logging / forms, etc.), naming and code style. List them for me **with file paths**, and don't write code yet." |
-| 2. Set the rules | Lock the findings into rules | "Take the findings above and organize them into a project-rules file for the AI: which mechanisms must be reused, which things are forbidden." |
-| 3. Plan gate | Propose a plan, wait for your approval | "The task is <...>. Before acting, give me a plan first: which files to change / add, which existing mechanisms to reuse, whether to add a new dependency (if so, explain why). **Don't write code before I approve.**" |
-| 4. Act | Go along with what exists | "Approved. Implement strictly by the existing directory structure, naming, and style, reusing the shared modules you just found. **Don't introduce new abstractions of your own.**" |
-| 5. Sign off | Self-check, and you check | "Self-check against the existing approaches you just referenced: any reinvented wheels, anything that breaks the overall design, anything that bypasses the shared modules?" Then **read the diff and run the tests yourself** (Chapter 25). |
+| ① Investigate | Understand the current state; no changes yet | "Before changing anything, investigate this project: its overall structure, existing approaches similar to this request, shared modules we can reuse (network requests, error handling, logging, forms, and so on), and its naming and code style. List them with file paths, and don't write code yet." |
+| ② Write the rules | Turn the findings into rules | "Turn that investigation into project rules for the AI: which mechanisms must be reused and what is forbidden." |
+| ③ Plan gate | Propose a plan and wait for approval | "The task is 〈…〉. Before changing anything, give me a plan: which files you'll change or add, which existing mechanisms you'll reuse, and whether you need any new dependency (and why). Don't write code until I approve." |
+| ④ Implement | Follow what already exists | "Approved. Follow the existing directory structure, naming, and style strictly, and reuse the shared modules you found. Don't introduce new abstractions of your own." |
+| ⑤ Accept | Self-check, then your review | "Check yourself against the existing code you referenced: did you reinvent anything, break the overall design, or bypass a shared module? Then tell me in plain words what you changed and where the risks are." After that, go through the checklist in Section 6. |
 
-> **Key point:** the most important part of the whole flow is **the "plan gate" at step 3**: look at what it's going to do before it acts. Many tools build in a "plan mode" (Chapter 27, Appendix C) that can force this step for you; **refer to the provider's official documentation for the exact switch.** Building the habit of "see the plan first, then allow it through" matters more than remembering any command.
+The step that saves the most rework is ③: see what the agent intends to do before it does it. Many tools have a plan mode that helps you hold that line (Chapter 27, Appendix C).
 
-## 3. The project-rules file: a starter you can copy
+## 4. Project rule file: a starter you can copy
 
-The "rules" that step 2 produces are best landed as a **rules file** in the project, so the tool reads it automatically every time it starts work (Claude Code tends to use `CLAUDE.md`, Codex has its own equivalent; **the exact file name and location are best confirmed in the official documentation**, see Appendix C).
+The rules from step ② work best as a file in the project that the tool reads automatically at the start of every session: Claude Code uses `CLAUDE.md` (and reads `AGENTS.md` when there is no `CLAUDE.md`), and Codex uses `AGENTS.md` (Appendix C). It looks as if the agent "remembers the project's rules," but in fact the product puts the file back into the context every time; the model itself remembers nothing (Chapter 13). So it only "remembers" what is written in the file, and the more specific the rules, the steadier the results.
 
-> **Key point (product-layer memory, echoing Chapters 3 and 13):** the reason this file "makes it remember the project's rules" is **not that the model itself grew a memory**; it's that **the product re-injects it into the context every time it starts work** and feeds it to the model. So: **what's written in the file is what it "remembers"; what isn't, it "doesn't remember."** The more specific the rules, the steadier it is.
-
-Here's a general starter; replace the `<...>` with your project's real details:
+Replace each `<...>` in this starter with your project's real details:
 
 ```markdown
-# Project rules / AI collaboration rules
+# Project rules / rules for working with AI
 
-## Most important principles (must follow)
-- Go along with the existing implementation and design, don't bring in your own style.
-- Before introducing any new mechanism (library / abstraction / layer), check whether something similar already exists.
-  - If it does, reuse it; if it doesn't or it's not enough, explain the reason and the alternative before acting, and wait for my approval.
-- No changes that break the overall architecture (the layering, the direction of dependencies, the naming rules).
+## Most important principles
+- Follow the existing implementation approach and design; don't bring in a style of your own.
+- Before introducing any new mechanism (library, abstraction, layer), check for an existing one of the same kind. Reuse it if it exists; if not, explain why and propose alternatives first, and wait for approval.
+- Don't make changes that break the overall architecture (layering, dependency direction, naming rules).
 
-## Implementation process (required)
-1. First investigate the relevant existing implementations, shared modules, and similar features, and list the reference locations (paths).
-2. Give an implementation plan (which files to change / add, what to reuse, whether to add a new dependency and why).
-3. Implement only after I approve. Don't write code before approval.
-4. Get the existing checks / formatting / tests to pass.
+## Workflow
+1. First investigate the relevant existing code and shared modules, and list where you looked (paths).
+2. Give an implementation plan (files to change or add, what you'll reuse, whether a new dependency is needed and why); write code only after approval.
+3. After changing code, run the existing checks, formatting, and tests (<e.g. npm run lint && npm test>) and report the results.
 
 ## Tech stack and versions
-- Language / framework / main libraries: <e.g. TypeScript 5 / React 18 / Vite>
+- <e.g. TypeScript 5 / React 18 / Vite>
 
 ## Directory structure and responsibilities
-- <e.g.> components/: UI  hooks/: logic  services/: API communication  utils/: shared functions
-- Dependency direction: <e.g.> UI -> hooks -> services, one way, no reverse or cross-layer.
+- <e.g. components/ UI   hooks/ logic   services/ API calls   utils/ shared helpers>
+- Dependency direction: <e.g. UI → hooks → services, one way only; no reverse or layer-skipping dependencies>
 
-## Shared mechanisms that must be reused (no rebuilding)
-- Network requests: use <e.g. services/apiClient> (no writing fetch directly all over the place)
-- Error handling: use <e.g. AppError / errorHandler>
-- Logging: use <e.g. logger> (no direct console.log)
+## Shared mechanisms that must be reused
+- Network requests: <e.g. services/apiClient> (don't call fetch directly all over the code)
+- Error handling: <e.g. AppError / errorHandler>
+- Logging: <e.g. logger> (don't use console.log directly)
 
 ## Forbidden
-- Adding a third-party dependency on your own
-- Reinventing your own wheel that bypasses the existing shared mechanisms
-- Cross-layer dependency violations (e.g. the UI layer touching the database / API details directly)
+- Adding third-party dependencies without approval
+- Reading or printing key files such as .env
+- Layer-skipping dependencies (for example, the UI layer touching the database directly)
 ```
 
-## 4. A few tricks for making it actually work
+## 5. Tips that make it work
 
-| Trick | How to do it |
+| Tip | How |
 | --- | --- |
-| Rules use proper nouns | "Write it cleaner" is useless; pinning down the **module names, file paths, and forbidden items** as proper nouns is what works. |
-| Keep investigating, planning, and acting separate | Don't try to do everything in one sentence. Running **the investigation and the "plan approval" gate** as their own round is the biggest trick. |
-| Small steps, fast | Having it change a huge chunk at once is the easiest way to go off track. **Break it into small pieces and review each step as you go.** |
-| Grow the rules | When you find it going off track, add the matching rule to the rules file, share it with the team, and keep updating. It **gets better the more you use it.** |
-| A human looks at the end, always | Even with a Harness it can go off track. **Be sure to review the diff yourself from the angle of "does this fit the existing approach"** (Chapter 25). |
-| Don't over-abstract | Overdoing "reuse" breeds unnecessary wrapping. **Stay at the same grain as the existing code** and you're fine. |
+| Make rules specific | "Write clean code" does nothing; name the modules to reuse, the file paths, and what is forbidden |
+| Separate investigating, planning, and acting | Don't try to do it all in one message; give investigation and plan approval their own rounds |
+| Work in small steps | Big changes in one go drift most easily; break the work up and check each step |
+| Keep adding rules | When the agent drifts, add the matching rule to the file and share it with the team |
+| Let checks run automatically | Put the test and code-check commands in the rule file and require the agent to run them after every change and report the results |
+| Don't over-abstract | Too much "reuse" breeds needless wrappers; match the granularity of the existing code |
 
-## 5. A pre-release checklist (the part most worth running through)
+## 6. Pre-release checklists
 
-Keep these two checklists at hand. Run the first one **before you feed anything in**, and the second **before you actually use / commit its output.**
+Keep these two checklists at hand: go through the first before you give anything to the AI, and the second before you adopt what it produced.
 
-### Before feeding content to the AI
+### Before giving it to the AI
 
-- Does the content you're about to feed contain **confidential code, production data, or personal privacy**? (If so, scrub it first, or just don't feed it. See Chapter 37.)
-- Did any **API keys, passwords, or connection details** slip in? (Keys must never be fed. See Chapter 40.)
-- Is the **service and plan** you're using one your company / situation allows?
-- Did you spell out the **premises** (language, framework, version)?
-- Did you give enough **context** (the relevant code, logs, expected behavior)?
+- Does the material contain confidential code, production data, or personal information? If so, mask it first or leave it out (Chapter 37).
+- Have API keys, passwords, or connection strings slipped in? Never hand these over (Chapter 37).
+- Is the service and plan you're using allowed by your company or for this situation?
+- Have you stated the basics: language, framework, versions?
+- Have you given enough context: relevant code, logs, expected behavior?
 
-### Before committing / adopting its output
+### Before adopting its output
 
-- Did you **read the diff line by line and understand it before reviewing**? (Chapter 25.) **Don't use code you can't understand.**
-- Do the automatic / manual **tests pass**, and did anything that used to work break (a regression)?
-- Did you look at it once from a **security angle** (input validation, permissions, injection risk)?
-- For the new **dependency** added, are the license and source trustworthy?
-- Do the **function names / APIs / config fields it gave actually exist**? (Check them against the official docs; it will make things up with a straight face, see Chapter 9.)
-- Did you double-check the **important facts, numbers, and quotes** yourself? (Chapters 9, 15, and 39.)
+If you don't write code, you don't need to understand every changed line. You do need to do the following:
 
-## 6. When a team needs to set rules (for whoever leads)
+- Confirm the behavior with concrete acceptance checks: which page to open, what to click, what you should see; whether the relevant tests pass and the old features still work (Chapter 25).
+- Have the agent explain the diff in plain words: which files changed and why, and which parts are risky. If the scope of the change doesn't match what you asked for, don't adopt it yet.
+- For any change that touches money, personal data, keys, deleting files, or publishing, get a second review: a colleague who knows the area, or at least a separate, independent review pass.
+- Don't run anything you can't roll back. First make sure the change is committed to Git and the data is backed up (Chapter 26). Git cannot bring back sent emails or changed live data.
+- Is any newly added library from a trustworthy source, and does its license allow your use (Chapter 39)?
+- Do the function names, APIs, and settings it mentions really exist? Check against official documentation or actual run results (Chapter 9).
+- Have you checked important facts, numbers, and quotes yourself (Chapter 39)?
 
-One person working solo runs on habit; a group working together runs on **written rules.** If you lead a team, pin down at least these six things:
+## 7. When a team sets its rules
 
-1. **Draw the line:** which data may be fed to the AI and which absolutely may not, written down in black and white.
-2. **Limit the tools:** which services and plans are allowed and which external sources may be connected (echoing the MCP security in Appendix C).
-3. **Set the approval flow:** for AI-generated code, what the review -> merge -> deploy approval flow is.
-4. **Manage the keys:** how keys are stored, who can touch them, and **how to rotate and revoke them if one leaks** (Chapter 40).
-5. **Build shared assets:** organize the project-rules file and the common prompt templates (Appendix B) for the team to share.
-6. **Build the mechanism:** hold regular share-outs, set up a place for questions, and review the rules on a schedule. The AI keeps changing, so the rules have to keep up.
+One person can rely on habits; a team needs written rules. How to write the four basic rules on data, authority, credentials, and recovery is covered in Chapter 40. A coding team should add two more:
+
+1. An approval flow: who approves AI-generated code from review through merge to deployment, and by what standard.
+2. Shared assets: collect the project rule files and frequently used prompt templates (Appendix B) for the whole team, and review them regularly, since tools and models keep changing.
 
 ## Summary
 
-- **The Harness = putting the harness of "investigate → set the rules → plan → act → sign off" on the AI**, so it works along with what you already have instead of starting over. Both Claude Code and Codex apply.
-- Landing it is the **five-step workflow**, in which the **"plan gate" (see the plan before acting) is the linchpin.**
-- Write the rules into the **project-rules file**, and remember that it's **product-layer memory** (re-fed in each time); the more specific you write it, the steadier it is.
-- Two **checklists** guard both ends: don't leak before you feed, and understand before you use. **Don't use code you can't understand, and double-check the important facts yourself.**
-- A product's specs, prices, and data terms all change, so **for the latest, go by the official docs and your own (company) AI usage rules.**
+- A harness is everything in an agent except the model: instructions, tools, the loop, context management, permissions, and checks. Coding tools come with the inner layer; you build the outer layer.
+- The outer layer consists of guides (rule files, the plan gate) and sensors (automated checks, human acceptance). What truly must be blocked is enforced with permissions and sandboxes, not just written in the rules.
+- Of the five steps, reviewing the plan before work starts saves the most rework.
+- Before adopting output, you don't need to read every line, but you do need concrete checks of the behavior, an explanation of the diff and its risks, a second review for high-risk changes, and no operations you can't roll back.
+
+## Sources and version notes
+
+Checked on 2026-10-29. The five-step workflow and the checklists are this book's working method, not a vendor's official methodology.
+
+- [Birgitta Böckeler: Harness engineering for coding agent users](https://martinfowler.com/articles/harness-engineering.html) (martinfowler.com, 2026-04-02): "Agent = Model + Harness," the harness built into tools versus the outer harness users build, and guides versus sensors.
+- [Anthropic: Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) (2025-11-26): calls the Claude Agent SDK a general-purpose agent harness and describes feature lists, progress files, Git commits, and end-to-end testing for long tasks.
+- [Claude Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview): the SDK provides the same tools, agent loop, and context management that power Claude Code.
+- [Claude Code documentation: memory](https://code.claude.com/docs/en/memory): `CLAUDE.md` is context, not enforced configuration; a repository without `CLAUDE.md` has its `AGENTS.md` read instead.

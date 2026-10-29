@@ -1,12 +1,10 @@
-AI has finished a draft, a proposal or a block of code for you, and you are about to send it out. A few questions usually come up at this point: can I use this as is? Who is responsible if something goes wrong? Should I say AI helped? Can I trust the data and quotes it cites?
+AI has finished a draft, a proposal or a block of code for you, and you are about to send it out. A few questions usually come up at this point: can I use this as is? Who is responsible if something goes wrong? Should I say AI helped? Can I trust the data and quotes in it?
 
-This chapter answers those questions. In short, "how to say it" work such as wording, structure and first drafts is fine to hand to AI; whether the content is right, whether it can go out and whether you need to disclose anything is for you to judge and answer for. We cover three areas: checking facts, copyright and attribution, and licenses when you use open-source code.
+In short, "how to say it" work such as wording, structure and first drafts is fine to hand to AI; whether the content is right, whether it can go out and whether you need to disclose anything is for you to judge and answer for. Whenever another chapter of this book says "check before it goes out; the responsibility is yours," this is the chapter it means. We cover three areas, checking facts, copyright and attribution, and licenses for open-source code, and then how thorough a review needs to be.
 
 ## 1. Check facts against the original sources
 
-As Chapter 9 (hallucination) and Chapter 15 (learning and verifying) explained, a model produces text that reads as plausible; it has no fact database it can check against at will. When it does not know something, it may fill in a reasonable-sounding answer by following the flow of language, in the same fluent, confident tone. Once you are about to send something out, this matters even more.
-
-So anything that can be verified should be checked against the original source: numbers, dates, names, places, quotes, citations, statutes, paper titles and statistics. Do not use them just because they are written confidently.
+A model produces text that reads as plausible. It does not check facts automatically, and where it does not know something it may fill the gap in the same fluent, confident tone (Chapter 9 explains why). So anything that can be verified should be checked against the original source: numbers, dates, names, places, quotes, citations, statutes, paper titles and statistics.
 
 It helps to look at a draft as two layers:
 
@@ -15,59 +13,56 @@ It helps to look at a draft as two layers:
 | Expression | Wording, tone, structure, rephrasing, smoothing the text | Yes; this is what it does well (Chapter 16) |
 | Facts | Whether numbers, quotes and sources are right, and whether conclusions hold | It can help organize them, but you do the checking |
 
-> **Key point:** A practical routine: when the draft is done, pull out every number, quoted line, name and source one by one and check each against the original material. Simply asking the AI "is this true?" is not enough; it may make something up again. The step takes little time and catches most errors that "sound true."
+A practical routine: when the draft is done, pull out every number, quoted line, name and source one by one and check each against the original material. Simply asking the AI "is this true?" is not enough; it may make something up again. The step takes little time and catches most errors that "sound true."
 
 ## 2. Copyright, attribution, and AI disclosure: varies by region and platform, still changing
 
-Next come questions many people care about: who owns AI-generated content? Can it be used commercially? Do you have to label it as AI-made?
+Who owns AI-generated content? Can it be used commercially? Do you have to label it as AI-made? Laws differ between countries and terms differ between platforms, and both are still changing, so there is no single worldwide answer. Two examples show the general direction:
 
-The answers differ between the laws of different countries and regions and between platform terms, and they are still changing, so this book does not give a single conclusion. Two examples: China's Measures for Labeling AI-Generated Synthetic Content took effect on September 1, 2025 and set labeling requirements for AI-generated and synthesized content; a report published by the U.S. Copyright Office in January 2025 specifically examines whether AI-generated material can be protected by copyright. For specifics, follow the law where you are and the official terms of the platform or service you publish on; for important cases involving commercial use, copyright or attribution, ask a legal advisor or other professional.
+- In China, the Measures for Labeling AI-Generated Synthetic Content took effect on September 1, 2025. Service providers must add explicit labels (such as a visible text notice) and implicit labels (embedded in the file data) to generated content, and users who publish generated content on an online platform must declare it and use the platform's labeling function.
+- In the United States, a report published by the Copyright Office in January 2025 concluded that purely AI-generated material is not protected by copyright; that with current technology, writing prompts alone does not make you the author; and that your own expression that you put in and that remains perceptible in the output, along with creative selection, arrangement and modification of generated material, can be protected.
 
-A few points are fairly stable and useful to keep in mind:
+Elsewhere, follow local law and the terms of the platform you publish on. For important cases involving commercial use, copyright or attribution, ask a legal advisor or other professional. A few points are fairly stable:
 
-- **Material you put in**: the rights to articles or data you paste in for processing generally do not change just because they "went through AI," though the terms of service still govern the details.
-- **Platform terms**: many AI products state in their terms who may use generated content and whether it can be used commercially. Look before you use it commercially.
-- **Whether to label AI involvement**: sometimes the law or a platform requires it, so follow the official guidance; sometimes it is a matter of professional norms and honesty, for example when a school, publication or client explicitly asks for disclosure, or when staying silent would make people think you did everything yourself. In the second kind of case, transparency is usually the safer choice.
-- **Imitation and similarity**: asking AI to write in a certain style is common. Whether a style itself is protected, and when imitation might become infringement, depends on the rules and standards where you are. The clearer lines are: do not pass generated content off as someone else's work, and do not copy someone else's protected specific content or registered trademarks. When unsure, especially for commercial use, check official sources or consult a legal professional.
-
-> **Key point:** You do not need to memorize rules here; three habits are enough: read the product and platform terms before commercial use; disclose when you should, and lean toward transparency when unsure; and for important cases involving money or copyright, ask a legal advisor or other professional.
+- Material you put in: the rights to articles or data you paste in for processing generally do not change just because they "went through AI," though the terms of service govern the details.
+- Platform terms: many AI products state in their terms who may use generated content and whether it can be used commercially. Look before you use it commercially.
+- Whether to label AI involvement: sometimes the law or a platform requires it; sometimes it is a matter of professional norms and honesty, for example when a school, publication or client explicitly asks for disclosure, or when staying silent would make people think you did everything yourself. In the second kind of case, transparency is usually the safer choice.
+- Imitation and similarity: asking AI to write in a certain style is common, and whether a style itself is protected depends on where you are. The clearer lines are: do not pass generated content off as someone else's work, and do not copy someone else's protected specific content or registered trademarks.
 
 ## 3. If you use open-source code, check the license first
 
 If AI writes code for you or hands you a ready-made snippet, there is one more easy-to-miss checkpoint: open source does not mean "use it however you like."
 
-Open-source code almost always comes with a **license** (OSS license) that says how you may use it, what you may not do and what obligations you take on. Licenses differ a lot. Some are permissive and mostly ask you to keep the copyright notice; others are copyleft licenses (sometimes called "viral"), under which distributing a program that uses the code may require you to publish your own source code under the same license. And some code has published source but no open-source license at all, and may restrict commercial use. Ignoring the license can drag you or your company into an infringement dispute or a demand to release your code.
+Open-source code almost always comes with a **license** that says how you may use it and what obligations you take on. Licenses differ a lot. Permissive licenses such as MIT mostly ask you to keep the copyright notice and license text. Copyleft licenses such as the GPL require that, if you distribute a program that uses the code, you provide the corresponding source code under the same license to the people who receive it. And some code has published source but no open-source license at all, and may restrict commercial use. Ignoring the license can drag you or your company into an infringement dispute or a demand to release your code.
 
-When AI hands you code, it will not necessarily tell you, on its own or accurately, where the code came from or what license applies. It may even present code with specific license requirements as a "common way of writing it."
+When AI hands you code, it will not necessarily tell you accurately where the code came from or what license applies, and it may even present code with specific license requirements as a "common way of writing it." So before using any ready-made code, whether you found it yourself or AI supplied it, confirm the license, especially for commercial or closed-source release; when unsure, ask someone who knows or a legal advisor.
 
-> **Key point:** For any ready-made open-source code, whether you found it yourself or AI supplied it, confirm the license before deciding whether and how to use it, especially for commercial or closed-source release. What a given license allows and requires is set by its own text and official explanation; when unsure, ask someone who knows or a legal advisor.
-
-## 4. What the three have in common: you are the last check
+## 4. Match the review to the risk; you are the last check
 
 | Task | What AI can help with | What you need to check |
 | --- | --- | --- |
 | Writing a draft or proposal | First drafts, style adjustments, smoother wording | Whether the facts are right and the conclusions hold |
 | Publishing and attribution | Drafting, layout | Whether it can go out, who owns it, whether to disclose (per terms, law and norms) |
-| Writing code | Ready-made snippets, completion | Whether the license is respected and the source is clear |
+| Writing code | Ready-made snippets, completion | Whether the license is respected, the source is clear, and the change passed acceptance checks (Chapter 25) |
 
-AI can write a lot for you, but content that goes out under your name is treated as yours, both by other people and under the rules. So you check the facts, you judge whether it can be sent, and you answer for compliance.
+How carefully you review should follow the consequences. A draft only you will read needs one check by you. For anything published, sent to a client, or touching money, health, the law or someone's personal information, have a second person look at it as well; the same goes for code changes. Content that goes out under your name is treated as yours, both by other people and under the rules, and "the AI wrote it" does not shift the responsibility to the AI or the tool's maker.
 
 ## Summary
 
-- Check verifiable details such as numbers, quotes, sources and names against the original material; do not rely on asking the AI again (Chapters 9 and 15).
-- Rules on copyright, attribution and AI disclosure vary by region and platform and are still changing. Read the terms before commercial use, disclose when you should, consult a legal advisor for important cases, and follow official sources and professional advice.
+- Check verifiable details such as numbers, quotes, sources and names against the original material; do not rely on asking the AI again (Chapter 9).
+- Rules on copyright, attribution and AI disclosure vary by region and platform and are still changing: read the terms before commercial use, disclose when you should, and consult a legal advisor for important cases.
 - Check the license before using open-source code. Conditions differ between licenses, AI will not necessarily tell you the source, and compliance is your responsibility.
-- All three follow the same idea: generating can be left to AI, but checking stays with you.
+- Match the review to the consequences: for anything published or touching money, health, the law or personal information, get a second person to look. Generating can be left to AI, but checking stays with you.
 
 The next chapter closes the risk section by setting up personal safety habits and team rules together. Chapters 22 and 36 already introduced prompt injection; the next chapter covers how to guard against it in everyday use and in team rules.
 
 ## Sources and version notes
 
-Checked on 2026-10-27. These are starting points for official information, not legal advice; the rules that apply to you are set by the law where you are and by the platform's terms.
+Checked on 2026-10-29. These are starting points for official information, not legal advice; the rules that apply to you are set by the law where you are and by the platform's terms.
 
-- [Cyberspace Administration of China: release of the Measures for Labeling AI-Generated Synthetic Content (in Chinese)](https://www.cac.gov.cn/2025-03/14/c_1743654685899683.htm): issued jointly by four agencies, in effect from September 1, 2025.
-- [U.S. Copyright Office: Copyright and Artificial Intelligence](https://www.copyright.gov/ai/): the Office's series of reports on AI and copyright; Part 2 (January 2025) covers the copyrightability of AI-generated output.
-- [Open Source Initiative: Licenses](https://opensource.org/licenses): the list and full texts of licenses approved by the Open Source Initiative.
+- [Chinese government portal: full text of the Measures for Labeling AI-Generated Synthetic Content (in Chinese)](https://www.gov.cn/zhengce/zhengceku/202503/content_7014286.htm): definitions of explicit and implicit labels (Article 3), users' duty to declare and label when publishing (Article 10), in effect from September 1, 2025 (Article 14).
+- [U.S. Copyright Office: Copyright and Artificial Intelligence](https://www.copyright.gov/ai/): the Office's series of reports on AI and copyright; Part 2 (January 29, 2025) covers the copyrightability of AI-generated output, including the conclusion that prompts alone do not make a user the author.
+- [Open Source Initiative: Licenses](https://opensource.org/licenses): the list and full texts of licenses approved by the Open Source Initiative, including MIT and the GPL.
 
 ---
 

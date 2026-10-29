@@ -1,5 +1,4 @@
-> Use this template library alongside Chapter 11, "The structure of a prompt." The main text explains "why you write it this way"; this appendix gives you "fill in the blanks and go."
-> Anywhere a specific product (Claude Code, Codex, and so on) has features, buttons, or commands that change from version to version, this appendix marks it "**check the official docs**." The prompts here are "plain-language things you say to the AI," not commands inside a product.
+> Use this template library alongside Chapter 11, "The structure of a prompt": the chapter explains why you write prompts this way, and this appendix gives you templates to fill in and use. They are all plain-language things you say to the AI, not commands inside a product; the specific keys and commands for each product are in Chapters 28 and 29 and Appendix C.
 
 ---
 
@@ -7,18 +6,18 @@
 
 Every template has the same shape, so it's easy to copy:
 
-1. **When to use**: one line telling you which situation this template fits.
-2. **The prompt template**: in a gray code box, with `<angle brackets>` marking "the blanks you fill in yourself." **Copy the whole block**, then replace each `<...>` with your real content.
-3. **How to fill it in**: explains each blank one by one.
-4. **Tip** (sometimes): a single thing to watch out for.
+1. When to use: one line telling you which situation this template fits.
+2. The prompt template: in a gray code box, with `<angle brackets>` marking the blanks you fill in yourself. Copy the whole block, then replace each `<...>` with your real content.
+3. How to fill it in: explains each blank one by one.
+4. Tip (sometimes): a single thing to watch out for.
 
-Three points to keep in mind first:
+Three points to keep in mind:
 
-- **Replace the angle brackets along with the text inside them.** For example, swap the whole `<your job>` for "elementary school teacher"; don't leave the brackets behind.
-- **A template is a starting point, not scripture.** Once you're comfortable, change it freely: drop the constraints you don't need, add your own requirements. The AI won't get upset because you "didn't follow the format."
-- **The five parts of a good prompt** (running through this whole appendix, explained in detail in Chapter 11): **give context** (who I am, what I'm trying to do), **state the task** (what specifically to do), **give constraints** (what limits and preferences apply), **specify the output form** (a table, or bullet points), and **give the "standard for success"** (what counts as getting it right). The templates leave a spot for all five; you just fill them in.
+- Replace the angle brackets along with the text inside them. For example, swap the whole `<your job>` for "elementary school teacher"; don't leave the brackets behind.
+- A template is a starting point. Once you're comfortable, change it freely: drop the constraints you don't need and add your own requirements.
+- A good prompt has five parts (explained in Chapter 11): context (who I am, what I'm trying to do), task (what specifically to do), constraints (what limits and preferences apply), output form (a table, or bullet points), and a standard for success (what counts as getting it right). The templates leave a spot for all five.
 
-> **One safety reminder that runs through the whole book:** Never paste passwords, API keys, card numbers, or other people's private information into the chat box. When you need to paste material that contains something sensitive, mask the sensitive part with `××` first.
+> Before pasting material, remove passwords, API keys, card numbers, and other people's personal information, or replace them with `××` (Chapter 37 covers what can and cannot be pasted).
 
 ---
 
@@ -116,7 +115,7 @@ How to fill it in:
 - `<what you wrote>`: what you're trying to say, even if it's rough.
 - `<the tone you want>` / `<word count>`: your preference and length limit.
 
-Tip: stating what you want in the positive ("keep it concise") works better than the negative ("don't ramble"). That's a small trick the whole book keeps coming back to.
+Tip: stating what you want in the positive ("keep it concise") usually works better than the negative ("don't ramble"). The same applies to the constraints in every template below.
 
 ---
 
@@ -160,8 +159,6 @@ How to fill it in:
 - `<column>`: which columns you want the table to have.
 - `<material>`: your raw information, pasted in as one block.
 
-Tip: the "write not provided if it's missing, don't invent" rule matters a lot. It keeps it from handing you a table that "looks complete but is half made up."
-
 ### Boil a long piece down to briefing points
 
 When to use: you've finished a long piece of material and need to report to a manager or coworker, in person or in writing, so you need the key points.
@@ -173,7 +170,7 @@ Output structure:
 1. A one-sentence conclusion (lead with the most important thing);
 2. Three to five key points;
 3. What the other person needs to decide, or what I should do next.
-Keep the whole thing under <word count> words, in plain language the other person will get instantly.
+Keep the whole thing under <word count> words, in plain language the other person can take in at a glance.
 Here's the material:
 <paste the material>
 ```
@@ -220,8 +217,6 @@ How to fill it in:
 - `<document type>`: the name of the thing you're writing.
 - `<information it must include>`: the list of core content. The more complete it is, the less it leaves out.
 
-Tip: having it mark uncertain spots as "<to fill in>" is far safer than letting it force in a number.
-
 ### Turn meeting or discussion notes into action items
 
 When to use: a meeting left you with a pile of scattered notes, and you want to sort out "who should do what."
@@ -240,13 +235,11 @@ Here's the material:
 How to fill it in:
 - `<material>`: your meeting notes or shorthand, pasted in as one block.
 
-Tip: "write not assigned if it wasn't specified" helps you see at a glance which items from the meeting didn't actually get nailed down.
-
 ---
 
 ## 3. Study: reading along, self-testing, fact-checking, taking notes, exam prep
 
-> These templates share one ground rule: **have the AI answer based on the material you give it, not make things up; if it's unsure, have it say so.** That's because large models will confidently get things wrong while sounding completely sure of themselves (explained in detail in Chapter 9), and in study situations this rule especially matters.
+> These templates share one ground rule: have the AI answer based on the material you give it, not make things up, and say so when it's unsure. Chapter 9 explains why.
 
 ### Be my reading partner
 
@@ -303,7 +296,7 @@ Please:
 How to fill it in:
 - `<the claim>`: the statement you want to verify.
 
-Tip: **the AI is not a source of facts.** It can help you sort out your thinking and point out doubtful spots, but the final conclusion has to be checked against authoritative material (emphasized again and again in Chapters 9 and 15).
+Tip: the AI is not a source of facts. It can help you sort out your thinking and point out doubtful spots, but the final conclusion has to be checked against authoritative material (Chapters 9 and 15).
 
 ### Turn material into study notes
 
@@ -344,13 +337,13 @@ How to fill it in:
 - `<exam name>` / `<date>` / `<how many days>` / `<available time>`: the hard constraints on scheduling.
 - `<weak spot>`: so it gives your weak areas more time.
 
-Tip: a plan is rigid, but you're not. If you fall behind while following it, come back and have it reschedule.
+Tip: if you fall behind the plan, come back and have it reschedule.
 
 ---
 
 ## 4. Summarizing material: long-text summaries, comparing documents, extracting points, making outlines
 
-> These templates share the same ground rule as above: **answer using only the material I give you, not your own invention; if it's not in the material, say it isn't.** When you feed in long material and it won't all fit in one paste, you can paste it in a few parts, and say up front "I'll send the material in several parts; start summarizing only when I say 'that's all.'"
+> The same ground rule applies here: use only the material I give you, and if it's not in the material, say so. If long material won't fit in one paste, send it in parts and say up front, "I'll send the material in several parts; start summarizing only when I say 'that's all.'"
 
 ### Summarize a long piece (conclusion first, then details)
 
@@ -416,8 +409,6 @@ How to fill it in:
 - `<what you want to extract>`: the kind of information you're fishing for, such as "all the time points mentioned" or "all the names."
 - `<material>`: the raw material.
 
-Tip: having it "note where each came from" lets you verify against the original quickly, instead of blindly trusting its extraction.
-
 ### Lay the material out into an outline
 
 When to use: you're going to write an article, give a report, or teach a class based on a piece of material, and you want a clear skeleton first.
@@ -458,10 +449,27 @@ Tip: have it restate "what this is about overall" first, and only after you conf
 
 ---
 
-## 5. Claude Code: investigate → plan → act → sign off
+## 5. Coding agents (Claude Code, Codex, and others): investigate → plan → act → sign off
 
-> Claude Code is an AI coding tool that "edits code and runs commands for you." The templates below **are all plain-language things you say to it, not commands or buttons inside a product**. Exactly how to install it, and what shortcuts and features it has, change from version to version, so **check the official docs**.
-> One safety thread runs through this category (Chapters 23 to 30): **have it investigate first, look at its plan first, see what it changed (the diff), run the tests, and let a human sign off at the end. Don't merge code you can't understand, and never paste anything containing keys or passwords.**
+> These templates work with coding agents such as Claude Code and Codex. They are all plain-language things you say to the agent, not commands or buttons inside a product. One safety thread runs through them (Chapters 23 to 27): have it investigate first and look at its plan first; you don't need to read every line of code, but have it explain the changes and risks in plain words and confirm the behavior with concrete acceptance checks; get a second review for any change that touches money, personal data, keys, deleting files, or publishing; don't run anything you can't roll back; and never paste anything containing keys or passwords.
+
+### Getting started: have it get to know the project first
+
+When to use: it's your first time using it in a particular project, and you want it to get the lay of the land before doing work.
+
+```text
+This is the first time I'm having you work in this project. Please help me get familiar with it first, and don't change anything at this step.
+Please tell me:
+- Roughly what this project does and which main parts it's made of;
+- What the key files and folders are each for;
+- If I want to do <what you plan to do>, roughly which areas it would involve.
+Explain it in language someone like me, who doesn't know much about code, can follow, and include file paths so I can match things up.
+```
+
+How to fill it in:
+- `<what you plan to do>`: the change you want to make next, so it circles the relevant spots along the way.
+
+Tip: the first time, you can run this step in a read-only or plan mode (Appendix C).
 
 ### Step 1: investigate only, don't touch anything yet
 
@@ -487,7 +495,7 @@ Tip: open the two or three file paths it lists and take a look yourself, to conf
 When to use: once the investigation is clear, you want it to put forward a plan, and you approve it before it touches anything.
 
 ```text
-Based on that investigation, please give me an implementation plan first, and **don't change any code until I approve it**.
+Based on that investigation, please give me an implementation plan first, and don't change any code until I approve it.
 What I want to do: <restate your goal>.
 In the plan, spell out:
 - Which files you plan to change or add, and what each does;
@@ -518,7 +526,7 @@ Strictly follow these:
 How to fill it in:
 - Use this template directly; no blanks.
 
-Tip: when it feels like it's starting to change things outside the plan, stop it promptly and point that out. For exactly how to interrupt it, **check the official docs**; for going back with Git, see Chapter 26 and Appendix C.
+Tip: when it starts changing things outside the plan, stop it promptly and point that out. Both Claude Code and Codex can be interrupted with Esc (Chapter 30); for going back with Git, see Chapter 26 and Appendix C.
 
 ### Understand what it changed (explain the diff)
 
@@ -528,14 +536,15 @@ When to use: it's finished, and you want to see "which parts it actually touched
 Please walk me through all the changes you made this time, file by file, explaining it to someone who doesn't know much about code:
 - For each file, what you changed and why;
 - Which changes are core, and which are just small supporting fixes;
-- Could any of these changes affect features that used to work fine? If there's a risk, point it out.
+- Could any of these changes affect features that used to work fine? If there's a risk, point it out;
+- Does any part touch money, personal data, keys, deleting files, or publishing? If so, list those parts separately.
 If there's anywhere I read it and still feel uneasy, I'll follow up with "what exactly is this part doing?"
 ```
 
 How to fill it in:
 - Use directly; no blanks.
 
-Tip: besides hearing it out, it's best to go through the list of changes it gives you yourself. **If you can't understand the code, or the explanation doesn't hold up, don't merge it.**
+Tip: you don't need to understand every line of code, but compare its explanation with what you asked for and check that the scope matches. Don't merge changes that don't match or that it can't explain clearly, and get a second person to review the high-risk parts it listed (Chapter 25).
 
 ### Have it write tests first, then confirm nothing broke
 
@@ -545,14 +554,15 @@ When to use: you've finished changing code and want to confirm "the new feature 
 Please verify whether this change is solid.
 1. First add tests for the feature you added or changed this time, covering the normal case and also the error and edge cases (such as empty data, very large data, oddly formatted input);
 2. Run all the existing tests in the project too, to confirm you didn't break features that were working fine;
-3. If any test fails, tell me which one and why, and propose a fix (don't make big changes right away).
+3. If any test fails, tell me which one and why, and propose a fix (don't make big changes right away);
+4. Then give me two or three acceptance checks I can do by hand: where to open, what to click, and what I should see.
 Finally, in one sentence: is this change safe to merge now?
 ```
 
 How to fill it in:
 - Use directly; no blanks.
 
-Tip: having it run the tests itself and fix based on the results is how it "self-corrects" (Chapter 25). But the final call on "is it safe to merge" rests with you.
+Tip: having it run the tests itself and fix based on the results is how it self-corrects (Chapter 25). Do those acceptance checks by hand once; whether to merge is your decision.
 
 ### Fixing a bug: reproduce first, then fix
 
@@ -562,7 +572,7 @@ When to use: you have a bug to fix and want it not to flail around, but to under
 There's a bug to fix. Don't rush to change things; go in this order:
 What happens: <what occurs when it goes wrong>.
 When it shows up: <steps to reproduce, or the pattern you've observed>.
-(If you have an error message, you can paste it here, but **before pasting, check whether it contains keys, passwords, or personal information, and mask anything it does**.)
+(If you have an error message, you can paste it here, but before pasting, check whether it contains keys, passwords, or personal information, and mask anything it does.)
 Please:
 1. First investigate the possible causes and list them from most to least likely;
 2. First write a test that "reproduces this bug" (so it fails right now);
@@ -574,105 +584,11 @@ How to fill it in:
 - `<what happens>`: how the bug shows up.
 - `<steps to reproduce>`: how to make the bug appear again. This is the key to locating the problem.
 
-Tip: write a "failing test that reproduces the bug" first, and once it's fixed the test goes green on its own. That way you have proof the bug was really fixed, not just that it "looks fine."
+Tip: write a failing test that reproduces the bug first; once the fix makes it pass, you have proof the bug was really fixed, not just that it "looks fine."
 
 ---
 
-## 6. Codex: another way to use a coding agent
-
-> Codex is another AI coding agent that "does the work for you," and the mental model is a lot like the previous category (Claude Code): **both rely on you giving the task in plain language, and both should follow the safe flow of "investigate → plan → act → sign off."** What's below is, again, "things you say to it," **not product commands**.
-> Important: Codex's specific features, install method, commands, and supported actions change from version to version, so for every specific operation in this category, **check the official docs**. This appendix only teaches "how to say things clearly"; it doesn't vouch for the product's features.
-
-### Getting started: have it get to know the project first
-
-When to use: it's your first time using it in a particular project, and you want it to get the lay of the land before doing work.
-
-```text
-This is the first time I'm having you work in this project. Please help me get familiar with it first, and **don't change anything at this step**.
-Please tell me:
-- Roughly what this project does and which main parts it's made of;
-- What the key files and folders are each for;
-- If I want to do <what you plan to do>, roughly which areas it would involve.
-Explain it in language someone like me, who doesn't know much about code, can follow, and include file paths so I can match things up.
-```
-
-How to fill it in:
-- `<what you plan to do>`: the change you want to make next, so it circles the relevant spots along the way.
-
-Tip: which tools it can call, and whether it can run commands, differ by version, so **check the official docs**.
-
-### Before giving it the task, ask for a plan
-
-When to use: you want to hand it a specific task, but you want it to lay out an approach first, and you approve it before it starts.
-
-```text
-I have a task to hand you, but please give me an approach first and **don't change any code right away**.
-Task: <what you want it to do, be specific>.
-Background: <the relevant situation, such as the current problem with this feature and what you expect>.
-Please give me a plan first: which areas to change, how, whether it'll affect other features, whether anything new needs installing.
-Please stick to the project's existing way of writing and its style as much as you can. Once I confirm the plan, I'll reply "let's go."
-```
-
-How to fill it in:
-- `<task>`: your specific need.
-- `<background>`: the relevant situation, to help it understand the context.
-
-Tip: just like the Claude Code category, "see the plan before doing the work" is the step that saves rework. It's a good general habit and doesn't depend on any specific product feature.
-
-### Implement and explain the changes
-
-When to use: once the plan is approved, have it do the work and also explain the changes clearly.
-
-```text
-Start implementing per the confirmed plan. Please follow these:
-- Stick to the project's existing directory structure, naming, and style;
-- If you can reuse an existing approach, don't rebuild one;
-- If you find you need a change outside the plan, stop and ask me first;
-- When you're done, explain file by file "what you changed and why," for someone who doesn't know much about code.
-```
-
-How to fill it in:
-- Use directly; no blanks.
-
-Tip: how to view the specific changes, and how to undo them, varies by tool, so **check the official docs** (reading a diff is in Chapter 25, going back with Git in Chapter 26). But whatever tool you use, the principle doesn't change: **the changes have to be ones you can understand, and if you can't understand them, don't adopt them.**
-
-### Run the tests, confirm nothing broke
-
-When to use: after the changes, you want to confirm the quality, so have it add tests and verify.
-
-```text
-Please confirm this change is solid:
-1. Add tests for the added or changed feature, covering normal, error, and edge cases;
-2. Run all the existing tests, to confirm you didn't break the original features;
-3. For anything that fails, tell me which one and why, give a fix idea, and don't make sweeping changes first.
-In one final sentence, tell me: is this change OK to merge?
-```
-
-How to fill it in:
-- Use directly; no blanks.
-
-Tip: whether it can run tests automatically, and how, depends on the product, so **check the official docs**. But "tests should cover error and edge cases, and a human makes the final call" always holds.
-
-### Fixing a bug (the safe flow)
-
-When to use: you want it to fix a bug and want it to investigate first before acting.
-
-```text
-There's a bug to fix; don't rush to change things.
-What happens: <how the problem shows up>.
-How to reproduce: <steps or pattern to reproduce>.
-(If you're going to paste an error message, **check and mask the keys, passwords, and personal information in it first**.)
-Please: (1) first list the possible causes from most to least likely; (2) first write a failing test that reproduces this bug; (3) then fix until the test passes and the existing tests are unaffected. Confirm with me after each step.
-```
-
-How to fill it in:
-- `<what happens>` / `<steps to reproduce>`: same as the bug-fixing template in the previous category, these are the key to locating the problem.
-
-Tip: whatever tool you use, the same safe habits apply: reproduce first, then fix, let a human sign off, and don't paste keys.
-
----
-
-## 7. Project management: breaking down tasks, planning, tracking progress, retrospectives, risk
+## 6. Project management: breaking down tasks, planning, tracking progress, retrospectives, risk
 
 ### Break a big goal into doable tasks
 
@@ -712,8 +628,6 @@ How to fill it in:
 - `<start day>` / `<due day>`: the two endpoints of the schedule.
 - `<people / time available>`: this decides how much can run in parallel and how much you can move forward each day.
 
-Tip: plans never survive contact with reality, so treat it as a first draft and come back to adjust it as you go.
-
 ### Sort out progress, see whether we're behind
 
 When to use: the project is halfway through, and you want to sort out "what's done, where it's stuck, and what's still missing."
@@ -752,7 +666,7 @@ Please especially flag the risks that "optimism tends to overlook."
 How to fill it in:
 - `<project overview>`: the project's situation. The more specific, the more the risk read fits reality.
 
-Tip: having it "act as a nitpicky advisor" forces out real problems better than vaguely asking "what are the risks." Giving it a role is a handy little trick (Chapter 11).
+Tip: having it act as a nitpicky advisor forces out real problems better than vaguely asking "what are the risks" (Chapter 11 covers giving it a role).
 
 ### Project retrospective (sum up after it's done)
 
@@ -762,7 +676,7 @@ When to use: a project or phase has ended, and you want to sum up the lessons le
 Please do a project retrospective.
 Project / phase overview: <what was done, what the original goal was>.
 Actual result: <how it turned out in the end, compared with the goal>.
-Key events along the way: <what went smoothly, the pitfalls you hit, the last-minute changes>.
+Key events along the way: <what went smoothly, the problems you ran into, the last-minute changes>.
 Based on the information I provide, please organize:
 1. What was done well and worth keeping next time;
 2. What went wrong or could be improved, and how to avoid it next time;
@@ -794,13 +708,11 @@ How to fill it in:
 - `<audience>`: who you're updating, which decides the detail and tone.
 - `<content comes from>`: the real progress, the raw material it organizes the content from.
 
-Tip: have it list "things that need the other person's support or sign-off" separately, so they know what decisions to make for you.
-
 ---
 
 ## The universal skeleton (when you can't recall a template, fill this in)
 
-> Underneath, every template above is this one structure. In any situation, as long as you fill in the five blocks below clearly, you've got a good prompt. When you can't recall a specific template, come back to this skeleton.
+> Underneath, every template above is this one structure. When you can't recall a specific template, fill in the five blocks below.
 
 ```text
 [Context] I'm <your identity / situation>, and I'm <the thing you're solving or the setting you're in>.
@@ -815,10 +727,8 @@ If you think the information still isn't enough, or there's a better approach, t
 ```
 
 How to fill it in:
-- **Context**: who you are, what situation you're in. The AI can't read your mind, so this is the premise for it understanding you.
-- **Task**: what exactly you want it to do, stated with a verb ("organize into a table," "rewrite as an email").
-- **Constraints**: your limits and preferences. When material or facts are involved, be sure to add "work only from the material, don't make things up, and say so if you're unsure."
-- **Output form**: the shape you want. Say it clearly up front so it doesn't give you the wrong format.
-- **Standard for success**: what counts as getting it right. This is the one the whole book emphasizes most; it gives the AI a yardstick to "check itself" against.
-
-> Stating what you want in the positive ("write to the existing style," "keep it to 300 words") works better than the negative ("don't write all over the place," "don't make it too long"). It's a small trick the book holds to throughout, and it applies inside any of the `<constraints>` above.
+- Context: who you are, what situation you're in. The AI can't read your mind, so this is the premise for it understanding you.
+- Task: what exactly you want it to do, stated with a verb ("organize into a table," "rewrite as an email").
+- Constraints: your limits and preferences. When material or facts are involved, add "work only from the material, don't make things up, and say so if you're unsure."
+- Output form: the shape you want. Say it clearly up front so it doesn't give you the wrong format.
+- Standard for success: what counts as getting it right. It gives the AI a yardstick to check itself against.

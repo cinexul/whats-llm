@@ -1,19 +1,18 @@
-You ask an assistant about your organization's travel policy. Its training may contain general travel advice, but that cannot establish your employer's actual rules. The useful approach is to find the relevant policy and answer from it. RAG helps automate that process.
+You ask an assistant about your company's travel policy. Its training data may include general travel advice, but that can't tell you what your employer actually allows. The safer approach is to find your company's policy first and answer from that. RAG automates that process.
 
 ## 1. Why it's needed: three problems AI can't solve on its own
 
-A model's training knowledge can be **out of date**, omit **private documents**, or be insufficient for **verifiable detail**. Supplying current, authorized sources can help. It does not make the model or the sources infallible.
+A model's training knowledge can be out of date (training data has a cutoff, Chapter 9), it doesn't include your private documents, and it often can't supply details you could verify. Giving it current material you're authorized to access solves much of this, but it doesn't make the model or the material infallible.
 
-## 2. The one-line intuition: turn a "closed-book exam" into an "open-book exam"
+## 2. An analogy: turn a "closed-book exam" into an "open-book exam"
 
-**RAG means retrieval-augmented generation: retrieve relevant material, then use it while generating an answer.** The retrieval step might search documents, query records or look up web pages.
+RAG stands for retrieval-augmented generation: first retrieve the material, then answer from it. Retrieval can mean searching documents, querying database records or searching the web.
 
-```text
-Question → retrieve relevant evidence → give evidence and question to the model
-         → generate an answer with traceable sources → check important claims
-```
+The figure below shows a typical RAG system. The top half happens once, ahead of time: documents are split into small chunks and indexed. The bottom half runs every time you ask: the most relevant chunks are found in the index, put into the context together with your question, and the model answers from them with citations.
 
-The open-book metaphor is useful because the reader must still find the right page, interpret it correctly and notice exceptions. Pasting a short document into a chat demonstrates answering with supplied context; it is not, by itself, an automated retrieval system.
+![The RAG pipeline: in the top half, documents are split into small chunks ahead of time and indexed by keywords and vectors; in the bottom half, each question triggers a search of the index for the most relevant chunks, which go into the context with the question, and the model answers with citations; a label notes that the model's parameters stay unchanged](/figures/en/rag-pipeline.svg)
+
+The open-book comparison fits well: even with the book open, you still have to find the right page, understand it and notice the exceptions. Pasting a short document into a chat demonstrates "answer from the material provided," with you choosing the material by hand; automatic retrieval needs the machinery in the top half of the figure.
 
 ## 3. How it "looks up material": keywords, meaning and filters
 
@@ -22,66 +21,67 @@ There is no single required retrieval method:
 | Method | What it helps with | Example |
 | --- | --- | --- |
 | Keyword / exact matching | Precise names, codes and quoted terms | Find policy `TR-2026-04` |
-| Semantic search using embeddings | Related meaning expressed in different words | “Claim meal costs” finds “meal reimbursement” |
+| Semantic search using embeddings | Related meaning expressed in different words | "Claim meal costs" finds "meal reimbursement" |
 | Hybrid search | Combines text and vector retrieval | Match both the policy code and the topic |
-| Filters and ranking | Limit scope and prioritize likely useful results | Current version, relevant department, authorized documents |
+| Filters and ranking | Limit scope and put likely useful results first | Current version, relevant department, authorized documents |
 
-As Chapter 5 explained, an embedding represents aspects of a word's or sentence's meaning as a list of numbers (a vector), and content with similar meaning gets similar numbers. Vector search compares those numbers to find passages with related meaning. A vector database is a database built to store and quickly compare such numbers. It, or an ordinary database with vector-search support, can help, but **RAG does not require a dedicated vector database**. Exact words can be crucial, and semantic similarity is not proof that a passage answers the question.
+As Chapter 5 explained, an embedding represents aspects of a word's or sentence's meaning as a list of numbers (a vector), and similar meanings get similar numbers. Vector search compares those numbers to find passages with related meaning. You can use a dedicated vector database or an ordinary database that supports vector search; RAG itself doesn't care which. Exact wording sometimes matters a lot, and a passage that means something similar doesn't necessarily answer the question.
 
-Documents are often split into chunks. This makes them easier to retrieve, but a limit in one chunk and its exception in another may become separated. Scans, charts and tables also need suitable extraction or image processing; uploading a PDF does not guarantee every part was read correctly.
+Documents are usually split into chunks first. For a concrete example: as of October 2026, an open-source RAG sample that Microsoft publishes on GitHub splits documents into chunks of about 1,000 characters by default (roughly 400 to 500 tokens of English), overlaps neighboring chunks by 10%, and records the source file and page number for each chunk so answers can cite them. The cost of chunking is that a spending limit in one chunk can get separated from its exception in another. Scans, charts and tables need proper text extraction, and uploading a PDF doesn't guarantee every part was read correctly.
 
-## 4. The point to be clearest on: RAG doesn't "remake" the model, it just feeds material temporarily
+## 4. The most important point: RAG doesn't change the model, it just hands it a few pages for now
 
-Retrieval puts selected material into the model's input context. Training or fine-tuning is a separate process.
+What retrieval finds just goes into the context for this one answer; training or fine-tuning is a different thing.
 
 > **Key point:** Retrieval does not update the model's parameters, the numbers learned in training that Chapter 2 described. The model has not "learned" your document; it simply has a few extra pages at hand for this answer.
 
-“Not training” does not mean “nothing is stored.” The product may keep uploaded files, a search index, conversation history or logs according to its settings. Retrieved material may remain in the conversation or be retrieved again later. Check retention and deletion behavior separately from whether a model learns from the content.
+"Not training" doesn't mean "nothing is stored," either. Depending on its settings, a product may keep uploaded files, a search index, conversation history or logs; retrieved material may stay in later turns of the conversation or be retrieved again. Check how long things are kept and how to delete them separately from whether the model learned anything (Chapter 37).
 
-## 5. What it can and can't solve (don't make it magic)
+## 5. What it can and can't fix
 
-RAG can give the answer a checkable basis. Failures can arise at different points:
+RAG can attach checkable evidence to an answer, but errors can happen at different stages:
 
-| What goes wrong | What you might see | A useful response |
+| Problem | What you may see | What to do |
 | --- | --- | --- |
-| Wrong or stale source | A precise answer using last year's policy | Check effective dates and superseded versions |
-| Retrieval misses the relevant passage | “Not found,” although the file contains it | Try an exact term, file name or narrower question; inspect search results |
-| Table or exception is missing | A general rule is presented as universal | Open the original page and adjacent sections |
-| Generation overstates the evidence | The citation exists but does not support the conclusion | Compare each important claim with its quoted passage |
-| Sources conflict | One confident answer hides disagreement | Ask for both sources, dates and unresolved differences |
+| Wrong or outdated source | A precise answer based on last year's policy | Check effective dates and replacement versions |
+| Relevant passage not retrieved | The file has it, but the system says it found nothing | Retry with exact terms, the file name or a narrower question; inspect the search results |
+| Table or exception not extracted | A general rule presented as universal | Open the original page and nearby clauses |
+| Generation goes beyond the evidence | A real citation that doesn't support the conclusion | Compare each important claim with the cited passage |
+| Conflicting sources | One confident answer hides a disagreement | Ask for both sources, dates and the unresolved difference |
 
-A citation is a **route to inspect evidence**, not a certificate of truth. Open it. Check that the passage supports the particular claim, applies to the right people and dates, and comes from a suitable authority. “No evidence was retrieved” also differs from “the answer is no.”
+A citation is a way into the evidence, not a certificate of correctness. Open it and check whether the original really supports this claim, whether it applies to your situation and dates, and whether the source is in a position to say so. "No evidence was retrieved" is also not the same as "the answer is no."
 
-Private retrieval must respect access permissions. Connecting a shared knowledge base should not make documents visible to people who could not otherwise read them. Retrieved text can also contain malicious instructions; treat it as material to analyze, not authority to change the task.
+Searching private material has to respect access rights: once a shared knowledge base is connected, people who couldn't open a file before still shouldn't be able to read it through the assistant. Retrieved content can also contain malicious instructions; it's material to analyze and can't change the task (prompt injection, Chapter 22).
 
-## 6. Pulling it together: the full picture of one RAG Q&A
+## 6. Putting it together: one complete RAG answer
 
-Suppose you ask, “Can I claim a taxi after 10 p.m.?” A useful system searches the current policy, retrieves the transport rule **and** any approval conditions, and answers with a section or page reference. If it retrieves only a meal policy, it should say it lacks the relevant evidence and try a better search or ask for the document.
+Suppose you ask, "Can I claim a taxi after 10 p.m.?" A good system retrieves the current policy, finds both the transport rule and the approval conditions, and answers with clause or page references. If it only finds the meal policy, it should say it couldn't find support for that part, search a different way, or ask you for the document.
 
-A practical request is:
+A practical request:
 
-> Use the current travel policy. State the taxi rule, exceptions and required approval. Cite the document title, effective date and section for each important claim. If the retrieved sources do not answer a point, mark it unknown instead of filling it from general knowledge.
+> Use the current travel policy to explain the taxi rules, exceptions and required approvals. Cite the document name, effective date and clause for each important claim. Mark anything the retrieved sources do not answer as unknown; do not fill it in from general knowledge.
 
-These instructions improve inspectability; they do not guarantee that retrieval will succeed. You still check the passages that affect the decision.
+Asking this way makes the result easier to check, but it can't guarantee the retrieval succeeded. For any clause that affects a decision, read the original.
 
-## 7. Common misconceptions, cleared up
+## 7. Common misconceptions, corrected
 
 | Misconception | Correction |
 | --- | --- |
-| RAG means only vector search | Keyword, vector, hybrid and other retrieval methods can be used |
-| Uploading a file trains the model | Retrieval supplies context; training and storage are separate issues |
-| A citation makes the answer correct | Its source, date and support for the claim need checking |
-| Not retrieved means not present | Search can miss existing material |
+| RAG only uses vector search | It can use keyword, vector, hybrid and other retrieval methods |
+| Uploading a file trains the model | Retrieval supplies context; training and storage are separate questions |
+| A citation means the answer is correct | Check the source, its date and whether it supports the claim |
+| If retrieval found nothing, it doesn't exist | Search can miss material that is there |
 
 ## Summary
 
-RAG connects an answer to retrieved material. Its quality depends on the source, extraction, retrieval and interpretation. Ask for sources and gaps, then inspect the evidence behind important claims. The next chapter asks where the processing takes place: on a cloud service or on your own computer.
+RAG retrieves first and answers second: documents are chunked and indexed ahead of time, each question pulls the most relevant chunks into the context alongside it, and the model's parameters never change. Answer quality depends on the sources, text extraction, retrieval and interpretation. Ask it to show its sources and gaps, and check important claims against the original. The next chapter looks at where this processing happens: in the cloud or on your own computer.
 
----
+## Sources and version notes
 
-**Verification scope — October 22, 2026:** checked the following official repository snapshots for the mechanisms and product examples in this chapter. This is a documentation-check date, not a model release date or a guarantee of access in your account.
+Checked October 29, 2026 (repository links point to snapshots from October 22, 2026).
 
-[Azure RAG example](https://github.com/Azure-Samples/azure-search-openai-demo/blob/558ffd397eddcfe4da5c85ebc285796b367eb9b2/README.md) · [Retrieval implementation](https://github.com/Azure-Samples/azure-search-openai-demo/blob/558ffd397eddcfe4da5c85ebc285796b367eb9b2/app/backend/approaches/approach.py)
+- [Azure RAG example](https://github.com/Azure-Samples/azure-search-openai-demo/blob/558ffd397eddcfe4da5c85ebc285796b367eb9b2/README.md) · [Retrieval implementation](https://github.com/Azure-Samples/azure-search-openai-demo/blob/558ffd397eddcfe4da5c85ebc285796b367eb9b2/app/backend/approaches/approach.py): retrieve-then-generate, with keyword, vector and hybrid retrieval.
+- [Azure RAG example: data ingestion and chunking](https://github.com/Azure-Samples/azure-search-openai-demo/blob/558ffd397eddcfe4da5c85ebc285796b367eb9b2/docs/data_ingestion.md): about 1,000 characters per chunk by default, 10% overlap between neighboring chunks, and the source file and page number stored with each chunk.
 
 ---
 

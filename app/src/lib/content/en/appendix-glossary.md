@@ -1,6 +1,6 @@
-This glossary collects **164 terms** related to large models and AI tools, grouped by topic. Each entry gives the term in three languages (**Chinese ・ Japanese ・ English**) along with a plain-language definition; many entries also point out a common misconception. Whenever you hit a word you don't understand in the main text, come back here to look it up.
+This glossary collects 171 terms related to large models and AI tools, grouped by topic. Each entry gives the term in three languages (Chinese, Japanese, English) along with a plain-language definition; many entries also point out a common misconception. Whenever you hit a word you don't understand in the main text, come back here to look it up.
 
-> **Key point:** For the features, prices, and limits of any specific product, always go by each vendor's **official docs**. This table gives you stable explanations of the concepts, not the volatile product details that change all the time.
+The explanations here are of concepts that don't change much. Numbers that do change, such as prices and context window sizes, are collected in Appendix E (Numbers at a glance); for the specific features and commands of each product, see Chapters 28 and 29 and Appendix C.
 
 ## Basic concepts
 
@@ -64,7 +64,7 @@ The first stage of building a large model: have it read huge amounts of text and
 
 **Fine-tuning**（微调 ・ ファインチューニング）  
 Giving an already pre-trained model some extra "tutoring" with a smaller dataset, so it gets better at a certain kind of task or better at answering the way you want. It's one of the common methods for alignment.  
-*Common misconception:* People often think fine-tuning means "teaching" the model new knowledge and storing it as fact; in reality it's more about adjusting "behavior and style," and for feeding it private material, RAG is a better fit.  
+*Common misconception:* People often think fine-tuning means "teaching" the model new knowledge and storing it as fact; in reality it's more about adjusting "behavior and style," and if you want it to make use of private material, RAG is a better fit.  
 
 **Instruction Tuning**（指令微调 ・ 指示チューニング）  
 A specialized kind of fine-tuning that uses many "instruction and good-answer" examples to teach the model to understand and carry out people's instructions, turning it from a "text-continuation machine" into an "assistant that follows directions."  
@@ -82,7 +82,7 @@ The text, code, and other material used to train a model. The data's quality, sc
 
 **Knowledge Cutoff**（知识截止 ・ 知識カットオフ）  
 The "deadline" of a model's training data. The model itself doesn't know about anything that happened, or any new version that came out, only after that point in time.  
-*Common misconception:* People often think AI always knows the latest news; in reality, unless it goes online or is fed material, it knows nothing about events after the cutoff and may make things up.  
+*Common misconception:* People often think AI always knows the latest news; in reality, unless it goes online or you give it material, it knows nothing about events after the cutoff and may make things up.  
 
 **Foundation Model / Base Model**（基础模型 ・ 基盤モデル）  
 A "base layer" large model trained on huge amounts of general data. It has very broad abilities on its own and can be turned into all sorts of products through further fine-tuning and alignment.  
@@ -113,13 +113,23 @@ The smallest unit of text in a large model's eyes. It might be a word, half a wo
 **Tokenization**（分词 ・ トークン化（分かち書き））  
 The process of splitting a piece of text into individual tokens. Different models split differently, which is why the same sentence has a different token count in different models.  
 
+**Tokenizer**（分词器 ・ トークナイザー）  
+The program and vocabulary that cut text into tokens and then turn each token into a number (its ID). Every model comes with its own tokenizer, so the same sentence can come to a different number of tokens in different models. For example, in a count made in October 2026, the sentence "Please help me write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m." came to 21 tokens with both OpenAI's o200k_base and Qwen3's tokenizer, while the Chinese version of the same sentence came to 21 and 16 (Chapter 3, Appendix E).  
+*Common misconception:* People often think "English always uses fewer tokens than Chinese"; in reality it depends on the tokenizer, and it's only a rough rule of thumb.  
+
 **Context Window**（上下文窗口 ・ コンテキストウィンドウ）  
-The ceiling on the number of tokens a model can "see at once." The whole conversation has to fit onto this "temporary workbench." Go over it, and the earlier content gets pushed out.  
-*Common misconception:* People often think it's the AI's long-term memory; in reality it's just the temporary capacity for this conversation. Close it or fill it up and it forgets, and the fuller it is, the slower and more expensive it gets.  
+The ceiling on the number of tokens a model can "see at once": the system instructions, the conversation history, the material you paste in, and the answer it's going to write all have to fit on this "temporary workbench." When the limit is exceeded, an API usually just returns an error, while a chat product may summarize or cut earlier content, or refuse the request (Chapter 3). Appendix E lists the window sizes of various models.  
+*Common misconception:* People often think it's the AI's long-term memory; in reality it's just the capacity for this one request, and in a different conversation it's no longer there. The fuller the window, the slower and more expensive things usually get, and irrelevant content can bury the key points.  
 
 **Next-Token Prediction**（下一个词预测 ・ 次トークン予測）  
 This is the one core thing a large model does: based on what came before, guess "the next most likely token," and keep going one by one to form a whole passage.  
 *Common misconception:* People often think the AI writes out a finished answer first and then reads it off; in reality the output is generated one token at a time, each step based on what's already there, not pulled from some ready-made answer.  
+
+**Logits**（logits ・ ロジット）  
+At each step of generation, the "raw score" the model first gives every candidate token in its vocabulary. A score can be positive or negative and isn't a probability yet; the higher the score, the more likely that token is to be picked.  
+
+**Softmax**（softmax ・ ソフトマックス）  
+The calculation that turns a set of raw scores (logits) into probabilities: each number becomes a value between 0 and 1, they all add up to exactly 1, and a higher score gets a higher probability. Temperature works just before this step, dividing all the scores by the same number to make the probability distribution sharper (low temperature) or flatter (high temperature).  
 
 **Probability Distribution**（概率分布 ・ 確率分布）  
 When picking the next token, the model computes a probability for each candidate word (for example, "Tokyo 92%, Edo 0.8%"), then chooses one from among them.  
@@ -139,7 +149,7 @@ Having the model generate an intermediate thinking process before its final answ
 *Common misconception:* People often think "the longer it thinks, the more correct the answer must be"; in reality it can improve complex reasoning, but it's also slower and more expensive and can still be wrong, so for simple tasks it's actually a waste.  
 
 **Reasoning Tokens / Thinking Tokens**（推理token ・ 推論トークン（思考トークン））  
-The tokens a model uses to generate its "thinking process" before giving the final answer. Some products show them or a summary of them, others don't; they're usually counted toward usage and cost as well. For exactly how they're counted and whether you can see them, check the official documentation.  
+The tokens a model uses to generate its "thinking process" before giving the final answer. Some products show them or a summary of them, others don't; they're usually billed as output tokens and also count toward usage.  
 *Common misconception:* People often think that if you can't see the thinking you aren't paying for it, or that a thinking process that reads well guarantees a correct answer; in reality it's usually billed anyway, and however much it looks like reasoning, you still need to check the conclusion yourself.  
 
 **Reasoning**（推理（逐步思考） ・ 推論（段階的な思考））  
@@ -164,7 +174,13 @@ The ability, as the model reads a sentence, to decide "how much each word should
 *Common misconception:* People often think attention means the model "really understood"; in reality it's a mathematical weighting that decides how much to draw on which words when processing each word. It helps the model learn useful connections, but that alone doesn't prove it understands the way a person does.  
 
 **Self-Attention**（自注意力 ・ 自己注意（セルフアテンション））  
-The core form of the attention mechanism: each word in a sentence looks at the other words in the same sentence, weaving the context relationships in. It's the key component of the Transformer.  
+The core form of the attention mechanism: each token in a piece of text looks at the other tokens in the same text, weaving the context relationships in. Models that generate text can only look back at earlier tokens (causal attention, Chapter 6). It's the key component of the Transformer.  
+
+**Query / Key / Value (Q/K/V)**（查询、键、值（Q/K/V） ・ クエリ・キー・バリュー）  
+In the attention mechanism, each token computes three sets of numbers: a query (what am I looking for), a key (what clues can I offer), and a value (the content actually passed along). Comparing one token's query with the other tokens' keys shows which tokens to attend to and how much; their values are then added up in those proportions (Chapter 6).  
+
+**Positional Encoding / Positional Information**（位置编码/位置信息 ・ 位置エンコーディング（位置情報））  
+Attention on its own doesn't care about word order, so the model has to give each token extra information about where it sits in the sequence; only then do "dog bites man" and "man bites dog" come out different. There are several ways to do this, such as turning the position into numbers that are added to the token's vector, or rotating the vectors according to position when computing attention, but the goal is the same.  
 
 **Transformer**（Transformer ・ トランスフォーマー）  
 The underlying architecture of almost all mainstream large models today, with the attention mechanism at its core. Think of it as the "engine type" of large models; it's enough just to know it exists.  
@@ -173,12 +189,15 @@ The underlying architecture of almost all mainstream large models today, with th
 **Encoder / Decoder**（编码器/解码器 ・ エンコーダ・デコーダ）  
 The two kinds of components in a Transformer: the encoder handles "understanding the input," and the decoder handles "generating the output." Chat-style large models mainly use the decoder side.  
 
+**KV Cache**（KV缓存 ・ KVキャッシュ）  
+The model stores the intermediate results it has already computed for each earlier token (the keys and values from attention) and reuses them when generating the next token, instead of recomputing everything from the start. This is also one reason long contexts take up so much memory.  
+
 **Knowledge (parametric)**（知识 ・ 知識）  
 The "common sense and facts" welded into the parameters during training, which the model reels off without relying on the material you give this time. But events after its cutoff aren't in there.  
 *Common misconception:* People often treat "the model knows" as "the model stored the original text and can look it up"; in reality it's a statistical impression learned during training, and it may garble or misremember.  
 
 **Memory (in-context)**（记忆 ・ 記憶（文脈上の記憶））  
-A temporary memory that lives only within "this conversation," held up entirely by the context window. Close the conversation or get pushed out of the window, and it forgets completely.  
+A temporary memory that lives only within "this conversation," held entirely in the context window. Once you close the conversation, or the content is trimmed out of the context, it no longer knows it.  
 *Common misconception:* People often think AI remembers you long-term the way a person does; in reality the model itself has no memory across conversations. Some products offer a "memory" feature, which puts saved information back into the context of a new conversation; the model isn't remembering on its own.  
 
 **Hallucination**（幻觉 ・ ハルシネーション）  
@@ -186,7 +205,7 @@ The model stating content that doesn't exist or is wrong, in a convincing, confi
 *Common misconception:* People often think the more fluent and confident it sounds, the more reliable it is; in reality neither fluency nor confidence proves the content is right, and important facts must be checked yourself.  
 
 **Emergent Abilities**（涌现能力 ・ 創発的能力）  
-Once a model's scale gets large enough, it "suddenly" shows new abilities that smaller models lack (such as multi-step reasoning). It's like water only boiling once it reaches a certain temperature.  
+Once a model's scale gets large enough, it seems to "suddenly" show new abilities that smaller models lack (such as multi-step reasoning), like water only boiling once it reaches a certain temperature. Some research points out that part of this "suddenness" comes from how the models are evaluated: with finer-grained scoring, the improvement turns out to be gradual.  
 *Common misconception:* People often describe emergence as the AI "waking up" or gaining consciousness; in reality it's just an ability jump that comes with scale, and inside it's still numerical computation.  
 
 **Multimodal**（多模态 ・ マルチモーダル）  
@@ -258,7 +277,7 @@ Treating the AI's output as a "first draft," not a finished product: it helps yo
 *Common misconception:* People often want the AI to nail it in one shot and deliver directly; in reality treating it as a "drafting intern" with you finishing up is better for both quality and safety.  
 
 **Prompt Leaking**（提示词泄露 ・ プロンプト漏洩）  
-Someone using clever wording to coax the AI into "spitting out" the system prompt or hidden instructions you set. So don't put real secrets into the prompt.  
+Someone using clever wording to coax the AI into revealing the system prompt or hidden instructions you set. So don't put real secrets into the prompt.  
 
 ## The tool ecosystem
 
@@ -275,8 +294,8 @@ A secret string used to prove "it's you" when calling the API, the equivalent of
 *Common misconception:* People often think it's fine to paste the key into a chat box or into code; in reality, once it leaks it can be used to run up charges, so it must never be made public, and a leak should be revoked and reset immediately.  
 
 **Token-based Pricing**（Token计费 ・ トークン課金）  
-Using the API is usually billed by token count, with both input and output costing money. The longer you chat and the more material you feed it, the more you spend. (This is a rough way to think about cost, not a fixed law.)  
-*Common misconception:* People often think only the words they type cost money; in reality the AI's reply, and the history re-attached each turn, all count as tokens, so long conversations burn through a lot.  
+Using the API is usually billed by token count, with both input and output costing money, and output usually costs more per token. The longer you chat and the more material you give it, the more you spend (Chapter 38).  
+*Common misconception:* People often think only the words they type cost money; in reality the AI's reply, and the history re-attached each turn, all count as tokens, so long conversations can cost quite a bit (the part that hits the cache is much cheaper).  
 
 **Software Development Kit (SDK)**（SDK ・ SDK）  
 A ready-made code library a vendor provides to help developers call the API more easily, without piecing together requests from scratch.  
@@ -297,13 +316,13 @@ The mechanism that lets the model "call external tools" while answering (queryin
 The name of Anthropic's AI product and model family (including Opus, Sonnet, Haiku, and others). It's one representative of large models, not "all of AI."  
 
 **Claude Code**（Claude Code ・ Claude Code）  
-Anthropic's coding agent, able to read project files, change code, and run commands. It comes in several forms, such as command line, editor extension, desktop app, and web; check the official documentation for specifics. Think of it as "Claude with hands and feet attached."  
+Anthropic's coding agent, able to read project files, change code, and run commands. Where you can use it (command line, editor, desktop app, web, and so on) depends on the product and version (Chapter 28). Think of it as "Claude with hands and feet attached."  
 
 **ChatGPT**（ChatGPT ・ ChatGPT）  
 OpenAI's chat product, with the GPT series of models at its core. For many people it's the first large-model product they ever touched.  
 
 **Codex**（Codex ・ Codex）  
-OpenAI's coding agent, which like Claude Code belongs to the class of tools that "can actually write code hands-on." It comes in forms such as command line, editor extension, desktop app, and cloud; check the official documentation for specifics.  
+OpenAI's coding agent, which like Claude Code belongs to the class of tools that "can actually write code hands-on." Where you can use it (command line, editor, desktop app, cloud, and so on) depends on the product and version (Chapter 29).  
 
 **Gemini**（Gemini ・ Gemini）  
 The name of Google's AI product and model family. It's also one of the mainstream large models, often compared alongside Claude and ChatGPT.  
@@ -312,8 +331,8 @@ The name of Google's AI product and model family. It's also one of the mainstrea
 A general term for AI assistants embedded in editors and office software (such as code completion or a document assistant). Here we only cover the concept of it as a "co-pilot."  
 
 **Retrieval-Augmented Generation (RAG)**（检索增强生成 ・ 検索拡張生成（RAG））  
-First "retrieving" relevant content from your own library of material, then feeding it to the model so it answers "based on this material." Used to work around the knowledge cutoff, reduce hallucination, and make use of private material.  
-*Common misconception:* People often think RAG means "training" the material into the model; in reality it's temporarily retrieved and fed into the context, without changing the model itself, and updating the material needs no retraining.  
+First "retrieving" relevant content from your own library of material, then handing it to the model so it answers "based on this material." Used to work around the knowledge cutoff, reduce hallucination, and make use of private material.  
+*Common misconception:* People often think RAG means "training" the material into the model; in reality it's temporarily retrieved and placed into the context, without changing the model itself, and updating the material needs no retraining.  
 
 **Vector Database**（向量数据库 ・ ベクトルデータベース）  
 A database specialized in storing "text vectors (embeddings)" and quickly finding the "most similar content." It's the common component handling the "retrieval" step in RAG.  
@@ -340,7 +359,7 @@ Storing the numbers in a model at a "coarser" precision, making the model smalle
 *Common misconception:* People often think quantization makes a model "much dumber"; in reality moderate quantization usually lowers quality only slightly while greatly reducing the hardware requirements.  
 
 **Skills**（Skills/技能 ・ スキル）  
-Packaging "the steps for doing something and the related files" into a reusable "skill" that loads only when needed, so it doesn't take up context the rest of the time. Think of it as a plug-and-play plugin pack for the AI.  
+Packaging "the steps for doing something and the related files" into a reusable "skill." Normally only its name and a one-sentence description sit in the context; the full contents load only when needed. Think of it as a plug-and-play plugin pack for the AI.  
 
 **Model Context Protocol (MCP)**（模型上下文协议 ・ モデルコンテキストプロトコル（MCP））  
 An open standard that lets AI applications connect to external tools and data sources in a uniform way, often likened to "the USB port of the AI world": plug in and various peripherals just work.  
@@ -366,7 +385,7 @@ The craft of carefully arranging "which information to put into the context, and
 A model specialized in turning text into vectors (embeddings), often a different model from the large model that generates the conversation. RAG uses it to give material its "coordinates."  
 
 **Prompt Caching**（提示词缓存 ・ プロンプトキャッシュ）  
-"Caching" the same stretch of context that gets used repeatedly, so reusing it next time is faster and cheaper. Very useful for cases that repeatedly carry the same long prefix.  
+"Caching" the same stretch of context that gets used repeatedly, so reusing it next time is faster and cheaper. It applies only to an opening portion that is exactly the same, and it's very useful when requests repeatedly start with the same long prefix (Chapter 38).  
 
 **Application / Wrapper Layer**（应用/封装层 ・ アプリ・ラッパー層）  
 The concrete applications built on top of a model or API (websites, plugins, industry tools). Countless applications can grow on top of the same underlying model, and this layer decides how you actually use it.  
@@ -379,12 +398,12 @@ An Agent made specifically for writing code, changing files, and running command
 *Common misconception:* People often think it can deliver fully automatically with no oversight; in reality it makes mistakes and misunderstands things, so a human must read the diff, run the tests, and sign off.  
 
 **Terminal / Command Line (CLI)**（终端/命令行 ・ ターミナル（コマンドライン））  
-A window you operate by "typing commands." Many coding agents offer a command-line version (others come as editor, desktop-app, or web versions; check the official documentation). It looks hardcore, but just follow the steps as given.  
+A window you operate by "typing commands." Many coding agents offer a command-line version (others come as editor, desktop-app, or web versions, depending on the product). It may look a little intimidating, but following the steps as given is enough.  
 *Common misconception:* People often think the command line is "for hackers only and easily breaks the computer"; in reality it's just another way of operating, and going step by step as prompted isn't scary.  
 
 **Diff**（diff（差异） ・ 差分（diff））  
 Laying "before the change" and "after the change" side by side and marking them, so you can see at a glance exactly which lines the AI touched. It's the basis for reviewing changes.  
-*Common misconception:* People often think reading diffs is only for programmers; in reality it's just a comparison of "what changed," and even if you don't know code, you should build the habit of reading the diff before approving.  
+*Common misconception:* People often think reading diffs is only for programmers; in reality it's just a comparison of "what changed," and even if you don't know code, you can see which files changed and whether the scope looks right, then have the AI explain each change.  
 
 **Version Control / Git**（版本控制/Git ・ バージョン管理（Git））  
 A system that records the history of changes to your files. Each time you commit, it saves a version you can return to, so if the AI breaks something, you can go back to a committed state. It's the safety net for "daring to let the AI act." Chapter 26 covers the basics, and Appendix C lists common commands.  
@@ -409,7 +428,7 @@ Before adopting a change, having a person (or another AI) check piece by piece w
 Changing a new feature but breaking an old feature that used to work fine. You catch it in time by running all the existing tests.  
 
 **CLAUDE.md / Project Context**（CLAUDE.md/项目上下文 ・ CLAUDE.md（プロジェクト文脈））  
-A "project manual" placed in the project that the AI reads first every time it starts work, spelling out the tech stack, the rules, the do-nots, and so on. It looks like a resident memory, but really the product puts it into the context each time work starts; the model itself doesn't remember it.  
+A "project manual" placed in the project that the AI reads first every time it starts work, spelling out the tech stack, the rules, the do-nots, and so on (Codex uses a similar file called AGENTS.md). It looks like a resident memory, but really the product puts it into the context each time work starts; the model itself doesn't remember it.  
 *Common misconception:* People often think more is better; in reality writing too much takes up context and dilutes the key points, so write only the rules that "actually affect its work."  
 
 **Permission System**（许可机制 ・ 許可（パーミッション）の仕組み）  
@@ -425,11 +444,14 @@ A mode where the AI first lays out its plan for "how it intends to make the chan
 Cutting a big task into small steps like "investigate → plan → act → sign off," handing them to the AI one at a time. This makes it less likely to drift, and easier for you to keep control.  
 
 **Acceptance / Sign-off**（验收 ・ 受け入れ確認）  
-At the end, you confirm that "this change really meets the requirements and didn't break anything else" before adopting it. If you don't understand it or aren't sure, don't merge it; the responsibility is the human's.  
+At the end, you confirm that "this change really meets the requirements and didn't break anything else" before adopting it. Someone who doesn't write code doesn't need to understand every line, but should confirm the behavior with concrete acceptance checks and have the AI explain the change and its risks in plain words; if it hasn't been verified, don't merge it (Chapter 25).  
 *Common misconception:* People often think passing the tests means all is well; in reality the tests are only the floor. Whether it truly meets the need, and whether it can ship, still takes a human to decide.  
 
 **Workflow**（工作流 ・ ワークフロー）  
 Upgrading "one question, one answer" into a fixed set of steps (such as investigate → plan → act → sign off), so the AI keeps pushing the task forward along the process without losing control.  
+
+**Agent Harness**（Harness（智能体的外围框架） ・ ハーネス）  
+Everything in an agent except the model: the instructions given to the model, the tools it can call, the loop that keeps calling the model, context management, and permissions and checks. A coding tool comes with one layer built in; the rule files, tests, and sign-off steps you set up are a layer you add on the outside (Appendix D).  
 
 **Integrated Development Environment (IDE)**（集成开发环境 ・ 統合開発環境（IDE））  
 The main software programmers write code in (such as VS Code). Many AI coding assistants can be installed and used inside it.  
@@ -450,7 +472,7 @@ Finding and fixing the errors (bugs) in a program. A coding agent can read the e
 An isolated run environment that limits which files, network, or system resources a program can touch. Letting the AI try things in here is far safer than working directly in the live environment, but how much it blocks depends on the actual settings; things outside the sandbox, and accounts or networks it's allowed to reach, can still be affected.  
 
 **Recovery / Troubleshooting**（急救/卡住怎么办 ・ トラブル時の応急処置）  
-The standard moves for when the AI gets stuck or makes things messier the more it changes, following the five steps in Chapter 30: stop it, take stock of where things are, roll back to the last good state, start over in a new conversation, and finally diagnose why it went off track. Stop the bleeding first, then investigate.  
+The standard moves for when the AI gets stuck or makes things messier the more it changes, following the five steps in Chapter 30: interrupt it, state the situation, roll back to the last good state, start over in a new conversation, and finally diagnose why it went off track. Limit the damage first, then investigate.  
 
 ## Risk and safety
 
@@ -459,7 +481,7 @@ The question of how the content you give the AI gets handled, and whether it's r
 *Common misconception:* People often think what they put in is "gone once it's used"; in reality whether it's retained or used for training depends on the product's settings and terms, and those change, so confirm first.  
 
 **Data Classification / Tiering**（数据分级 ・ データ分類（機密度レベル））  
-Sorting information into a few tiers by sensitivity (such as public, internal, confidential, top secret), and deciding from that which can be fed to the AI and which absolutely cannot. A simple, practical self-protection framework.  
+Sorting information into a few tiers by sensitivity (this book uses four: public, internal, sensitive, and highly restricted; Chapter 37), and deciding from that which can be given to the AI and which absolutely cannot. A simple, practical self-protection framework.  
 
 **Prompt Injection**（提示注入 ・ プロンプトインジェクション）  
 An attacker hiding "fake instructions" in external content the AI will read (web pages, emails, documents), tricking it into doing something you never meant it to do.  
@@ -469,11 +491,11 @@ An attacker hiding "fake instructions" in external content the AI will read (web
 Using special wording to coax the AI into bypassing its safety limits and saying things it shouldn't. It's a form of misuse, and an attack vendors keep working to prevent.  
 
 **Sensitive Information / Secrets**（敏感信息/密钥 ・ 機密情報・シークレット）  
-Things that must never leak, like passwords, API keys, database connection strings, and private keys. Never paste them into a chat box or into code; if you do, revoke and reset them immediately.  
+Things that must never leak, like passwords, API keys, database connection strings, and private keys. Never paste them into a chat box or into code; if you do, revoke and reset them immediately (Chapter 37).  
 *Common misconception:* People often think pasting into an AI chat box is "private"; in reality it may be retained or leaked, which is like posting your house key to a group chat.  
 
 **Personally Identifiable Information (PII)**（个人信息（PII） ・ 個人情報（PII））  
-Information that can identify a specific person, such as a name, address, phone number, ID number, or email. Before feeding it to the AI, confirm whether any has slipped in and redact it.  
+Information that can identify a specific person, such as a name, address, phone number, ID number, or email. Before giving material to the AI, check whether any has slipped in and redact it.  
 *Common misconception:* People often think only an ID number counts as PII; in reality a name plus an employer, an email, a location, and so on can also identify someone when combined, so all of it needs care.  
 
 **Content Moderation**（内容审核 ・ コンテンツモデレーション）  
@@ -491,11 +513,11 @@ The usage terms of open-source code. For any third-party library the AI brings i
 *Common misconception:* People often think open source means "use it however"; in reality the restrictions differ a lot between licenses, and some require you to make your code public or keep the notices.  
 
 **Context Cost**（上下文成本 ・ コンテキストコスト）  
-The longer the context, the slower and more expensive each answer, and the easier it is to drift. So "saving context" often saves money, boosts speed, and improves quality, all at once. (Treat this as a rough rule, not a precise law.)  
-*Common misconception:* People often think cramming in all the material at once is safest; in reality cramming in too much burns money, slows things down, and dilutes the key points, making mistakes more likely.  
+The longer the context, the more expensive and slower a single request usually gets, and irrelevant material can bury your requirements. So giving context as needed often saves money, boosts speed, and improves quality all at once (Chapter 38).  
+*Common misconception:* People often think putting in all the material at once is safest; in reality relevant evidence helps, but irrelevant or conflicting material adds cost, slows things down, and may lead it to focus on the wrong points.  
 
 **Quota / Rate Limit**（额度/限流 ・ 利用上限・レート制限）  
-The vendor's limit on how much you can use per unit of time; go over it and you have to wait or move to a higher tier. You'll actually run into it when usage is heavy.  
+Two different limits. A quota (usage allowance) is the total amount your plan allows over a set period; once it's used up, you wait for it to reset or upgrade. A rate limit caps the number of requests or tokens over a short interval; going over it usually returns an HTTP 429 error, and waiting a moment before retrying is enough (Chapter 38).  
 
 **Zero Data Retention (ZDR)**（零数据保留 ・ ゼロデータ保持）  
 An arrangement where the service provider doesn't keep your input and output (discarded once used), often used in privacy-sensitive scenarios. Whether it's available and how to enable it depends on the product.  
@@ -509,14 +531,14 @@ Unfair tendencies a model learns from its training data (such as stereotypes abo
 *Common misconception:* People often think the machine is "objective and neutral"; in reality it learns the biases in the data wholesale, its output isn't necessarily fair, and important cases need a human to gatekeep.  
 
 **Over-reliance / Automation Bias**（过度依赖 ・ 過度の依存）  
-Believing the AI's answers without a second thought, treating it as an authority. It will confidently get things wrong, and the more you cut corners the easier it is to stumble, so the key judgments still have to be made by a human.  
+Believing the AI's answers without a second thought, treating it as an authority. It will confidently get things wrong, and the more you cut corners, the easier it is to go wrong, so the key judgments still have to be made by a human.  
 *Common misconception:* People often think "the AI said so, it should be right"; in reality sounding fluent and confident doesn't make the content correct, so important decisions can't be outsourced to it directly.  
 
 **Data Masking / Anonymization**（数据脱敏 ・ マスキング（匿名化））  
-Before feeding material to the AI, wiping out or replacing the sensitive parts (names, phone numbers, keys, and so on) with fake values. It's a common compromise for "wanting to use AI while protecting privacy."  
+Before giving material to the AI, wiping out or replacing the sensitive parts (names, phone numbers, keys, and so on) with fake values. It's a common compromise for "wanting to use AI while protecting privacy."  
 
 **Team Usage Policy**（团队使用规范 ・ チーム利用ガイドライン）  
-A set of rules a team agrees on in advance: "what can be fed, what can't, who reviews, how keys are managed." It upgrades personal habits into a shared understanding, so no one causes trouble unintentionally.  
+A set of rules a team agrees on in advance: "what can be given to the AI, what can't, who reviews, how keys are managed." It upgrades personal habits into a shared understanding, so no one causes trouble unintentionally.  
 
 **Fabricated Citation**（幻觉引用 ・ 架空の出典）  
 A classic form of hallucination: the AI makes up references, links, or legal provisions that look proper but don't actually exist. Citations must be verified one by one for authenticity.  

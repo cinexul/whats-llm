@@ -1,29 +1,40 @@
-“Which AI should I use?” becomes easier when you name the job: reading a lease, practicing a language, editing a photo, or organizing a folder. These tasks need different capabilities, and the best choice depends on whether you can verify the result and use it in your own workflow.
+"Which AI should I use?" gets easier once you name the job: reading a lease, practicing a language, editing a photo, or organizing a folder. Different jobs need different capabilities, and the right choice also depends on whether you can check the result and fit it into the way you actually work.
 
-This chapter gives you a way to compare products without memorizing a ranking that soon changes.
+This chapter gives you a snapshot of the main products as of October 2026, plus a method for comparing them. The snapshot will change within months; the method keeps working.
 
-## 1. First, get this clear: you're not choosing a "model," you're choosing a "product experience"
+## 1. You're choosing a whole product experience
 
-The product includes its interface, models, file handling, tools, storage, permissions and pricing. A strong model with an awkward export format may be a poor fit for a document job. A convenient assistant may still be unsuitable if it cannot access the necessary sources or handle your data appropriately.
+A product includes its interface, models, file handling, tools, storage, permissions and price. A strong model with an awkward export format can still be a poor fit for a document job. A convenient assistant is no use if it can't reach the sources you need or handles your data in a way that doesn't suit you.
 
-Define success before opening the app: “I need a one-page comparison, with page references, that I can edit and share.” This is much more useful than “I need the smartest AI.”
+Before opening an app, write down what success looks like: "I need a one-page comparison I can edit and share, with page references for every point." That's far more useful than "I need the smartest AI."
 
-## 2. Roughly where the mainstream products sit (only the stable ownership; check the official docs for abilities)
+## 2. The main products at a glance (as of October 2026)
 
-| Examples | What to recognize | What to check for your task |
+| Product | Made by | What it is |
 | --- | --- | --- |
-| ChatGPT — OpenAI; Claude — Anthropic; Gemini — Google | General assistant products; Claude and Gemini are also model-family names | Available modes, files, tools, limits and account settings |
-| Codex, Claude Code, Gemini CLI / Antigravity CLI | Examples of coding tools that can work with project files and tools | Supported environment, permissions, authentication and billing |
-| Dedicated image, video, voice and document tools | Products focused on particular inputs or deliverables | Editing control, export format, quality and usage terms |
-| Assistants embedded in office or business software | AI accessible inside a workflow you already use | Which files or records it can read, and which actions it can perform |
+| ChatGPT | OpenAI | General assistant |
+| Claude | Anthropic | General assistant; Claude is also a model-family name |
+| Gemini | Google | General assistant; Gemini is also a model-family name |
+| DeepSeek, Qwen, Kimi, Doubao | DeepSeek, Alibaba, Moonshot AI, ByteDance | General assistants widely used by Chinese speakers |
+| Codex, Claude Code, Antigravity CLI | OpenAI, Anthropic, Google | Coding agents that work with project files and commands (Part 4) |
+| Dedicated image, video, voice and document tools | Various | Focused on particular inputs or deliverables |
+| Assistants built into office or business software | Various | AI inside a workflow you already use |
 
-**A concrete dated change:** the Gemini CLI repository states that unpaid-tier and Google One users were moved to Antigravity CLI on June 18, 2026. As of October 2026, it also says Gemini CLI is not optimized for the latest Gemini models and recommends Antigravity CLI for coding with them. This is the scope stated in that repository, not a claim that every Gemini CLI user was migrated. Check your account’s supported route before following an older Gemini CLI tutorial.
+On price: ChatGPT, Claude and Gemini all have free versions. At US prices in October 2026, each company's main paid personal plan (ChatGPT Plus, Claude Pro, Google AI Pro) costs around $20 a month, and plans for heavy users start at around $100 a month; Appendix E lists the exact prices for each plan. Prices and taxes differ in other regions.
 
-A category is not a capability promise. A command-line coding tool is also different from the same provider's chat app. A capability documented in a developer SDK is not proof that every consumer account has it.
+As of October 2026, here's how the coding agents relate to the plans:
+
+- Codex is included in every ChatGPT plan from Free to Enterprise; if you sign in with an API key instead, it's billed at API prices (Chapter 17).
+- Claude Code needs a Pro, Max, Team or Enterprise plan or a developer platform (Console) account; the free plan doesn't include it.
+- The official Gemini CLI repository says free users and Google AI Pro/Ultra users moved to Antigravity CLI on June 18, 2026. It also says Gemini CLI isn't tuned for the Gemini 4 series and recommends Antigravity CLI for coding with those models. Before following an older Gemini CLI tutorial, check which route your account uses.
+
+Which models each company currently promotes, how long their context windows are and what the API costs change fastest, so they're collected in Appendix E (Numbers at a glance).
+
+The categories in the table describe what a product is for, not what it promises to do. A company's command-line coding tool and its chat app are different products, and a capability in developer documentation doesn't mean every consumer account has it.
 
 ## 3. How to choose by "task": ask yourself three questions
 
-**First, what goes in and what must come out?** “Multimodal” means working with more than one type of information, but support is specific to each direction.
+First, what goes in and what must come out? "Multimodal" means working with more than one type of information, but support has to be checked separately for each direction.
 
 | Your task | A useful trial |
 | --- | --- |
@@ -34,17 +45,17 @@ A category is not a capability promise. A command-line coding tool is also diffe
 | Work with a spreadsheet | Check formulas, units and the exported file; a nice-looking chat table is not an editable workbook |
 | Complete a task across applications | Check the connected tools, action permissions, progress evidence and stop controls |
 
-Reading video, producing video and transcribing audio are separate capabilities. Test the exact operation you need.
+Reading video, producing video and transcribing audio are three separate capabilities. Test the exact operation you need.
 
-**Second, where is your work already stored?** A useful integration may save repeated copying. Check whether it can access the relevant folder and whether access is read-only or allows changes. Computer use, where an assistant looks at a screen and clicks, is a different mechanism from a direct integration with a service.
+Second, where does your work already live? A good integration saves a lot of copying and pasting. Check whether it can reach the relevant folder and whether it can only read or can also make changes. Computer use, where an assistant looks at the screen and clicks, is a different mechanism from a direct integration with a service (Chapter 19).
 
-**Third, what constraints matter?** Include budget, time, accessibility, language, data location and whether you need occasional help or repeated automation. Check quotas and billing for the route you will actually use.
+Third, which constraints matter most? Budget, time, accessibility, language, where your data is stored, and whether you need occasional help or repeated automation. Check the limits and billing on the route you'll actually use (Chapter 38).
 
 ## 4. The most important lesson: how to check for yourself "what it can do right now"
 
-Use official help, release notes and plan descriptions to find the documented scope. Then check your own account: a feature may depend on region, rollout, organization policy or a particular mode.
+Start with official help pages, release notes and plan descriptions to see the documented scope. Then try it in your own account: a feature may depend on region, a staged rollout, organization policy or a particular mode.
 
-Record a small evidence card:
+Keep a small evidence card while you test:
 
 ```text
 Task and success condition:
@@ -55,17 +66,17 @@ What failed or remained unverified:
 Time, cost and corrections needed:
 ```
 
-> **Key point:** Official documentation describes intended availability; a hands-on test establishes what worked in your setup. Neither a launch announcement nor one successful demo proves reliable performance on every task.
+> **Key point:** Official documentation describes what's meant to be available; a hands-on test shows what works in your setup. Neither a launch announcement nor one successful demo proves reliable performance on every task.
 
 ## 5. Don't judge a product by a "single experience"
 
-Give two candidates the same source material and requirements. Include a routine case, a difficult case and a case with missing information. Compare factual accuracy, useful output, source quality and the work needed to fix mistakes. Repeat important cases to see whether success is consistent.
+Give two candidates the same material and requirements: a routine case, a harder case and a case with missing information. Compare factual accuracy, whether the output is usable as is, source quality and how much work it takes to fix mistakes. Repeat the important cases to see whether success is consistent.
 
-A failure may come from retrieval, a file parser, permissions, a service problem or the model. You do not need to blame yourself or keep rewriting prompts indefinitely. If a product repeatedly fails a task you need, that is a reason to choose another.
+A failure may come from retrieval, file parsing, permissions, a service outage or the model itself. You don't need to blame yourself or keep rewriting prompts forever. If a product keeps failing a task you need, that's a reason to pick another.
 
 ## 6. So should you ignore "model strength" entirely?
 
-No. Difficult reasoning, specialist vocabulary and precise image understanding can expose meaningful differences. Use tests that resemble your work and have an answer you can check. A benchmark measures selected tasks under selected conditions; it does not include all your usability, price or integration requirements.
+No. Hard reasoning, specialist vocabulary and fine-grained image understanding can show real differences. Test with tasks close to your own work whose results you can check. A benchmark measures a set of tasks under particular conditions; it says nothing about your usability, price or integration needs.
 
 For small everyday tasks, the differences between mainstream products are sometimes hard to notice. Whether one is good enough depends on your task and on what a mistake would cost: a quick personal draft and a contract comparison for a client call for very different standards.
 
@@ -80,13 +91,18 @@ For small everyday tasks, the differences between mainstream products are someti
 
 ## Summary
 
-Choose with a small real task: specify the input, output and acceptance criteria; check documented availability; test your account; compare the result and the effort needed to use it. Next, we look at what changes when an assistant starts taking actions.
+Choose with a small real task: write down the input, output and acceptance criteria, check the documented scope, test in your own account, and compare the result and the effort needed to use it. The main paid personal plans mostly cost around $20 a month, and each coding agent comes with different plans; for model and price figures, see Appendix E. Next, we look at what changes when an assistant starts taking actions.
 
----
+## Sources and version notes
 
-**Verification scope — October 22, 2026 (Gemini CLI notes rechecked October 27, 2026):** checked the following official repository snapshots for the mechanisms and product examples in this chapter. This is a documentation-check date, not a model release date or a guarantee of access in your account.
+Checked October 29, 2026. Prices are US prices.
 
-[Codex](https://github.com/openai/codex/blob/86e17e98c7f901277aeeb4649cf1b01462b082f2/README.md) · [Claude Code](https://github.com/anthropics/claude-code/blob/5ed799e5cc56bea9efff57398ca43e31d82784ff/README.md) · [Gemini CLI](https://github.com/google-gemini/gemini-cli/blob/09d81bf116b6f0ef084731dc996aa9d56438bb70/README.md)
+- [Codex pricing](https://learn.chatgpt.com/docs/pricing): ChatGPT plan prices, which plans include Codex, and API-key billing.
+- [Claude pricing](https://claude.com/pricing): prices for Free, Pro, Max and other plans.
+- [Google AI subscriptions](https://gemini.google/subscriptions/): prices for Google AI Pro and other plans.
+- [Claude Code setup and account requirements](https://code.claude.com/docs/en/setup): requires a Pro, Max, Team, Enterprise or Console account; the free plan doesn't include it.
+- [Gemini CLI repository notes](https://github.com/google-gemini/gemini-cli/blob/b8fa817155731c783d47dc6eaeee63163c0ec723/README.md): the June 18, 2026 move to Antigravity CLI and the lack of tuning for the Gemini 4 series.
+- [Codex](https://github.com/openai/codex/blob/86e17e98c7f901277aeeb4649cf1b01462b082f2/README.md) · [Claude Code](https://github.com/anthropics/claude-code/blob/5ed799e5cc56bea9efff57398ca43e31d82784ff/README.md): official repositories of the two coding agents (snapshots from October 22, 2026).
 
 ---
 
@@ -106,12 +122,12 @@ Choose with a small real task: specify the input, output and acceptance criteria
    - D. It accepts image input; output and editing need checks
    > **Answer: D.** “Multimodal” does not promise every combination of input and output. Reading images, editing them, generating them and reading video are separate capabilities (A, B) to test individually, and reading can still go wrong (C).
 
-3. **[Basic · Misconception]** An official announcement describes a new capability. What should you do before relying on it? <!-- quiz: q03 revision: 2 -->
+3. **[Basic · Misconception]** An official announcement describes a new capability. What should you do before relying on it? <!-- quiz: q03 revision: 3 -->
    - A. Read the stated conditions and test it in your own account
-   - B. Assume every account has it, since the announcement is official
-   - C. Assume paid plans have it and just follow the tutorial
-   - D. Assume it is reliable because the demo video worked
-   > **Answer: A.** Features can roll out gradually or depend on region, plan and organization settings, so availability and real performance must be checked separately. B and C read the announcement as a promise to every account; one demo (D) does not prove reliability.
+   - B. Upgrade to the top plan first so the feature is sure to be on
+   - C. Ask the assistant itself whether it supports the new feature
+   - D. Wait a month and start relying on it once it has settled down
+   > **Answer: A.** Features can roll out gradually or depend on region, plan and organization settings, so availability and real performance must be checked in your own account. B costs money without guaranteeing access, since region and organization settings can still block it; C relies on the assistant's self-report, and it may not know what the product has enabled for your account; D only waits, and no amount of waiting replaces an actual test.
 
 4. **[Intermediate · Scenario]** How should you compare two research assistants? <!-- quiz: q04 revision: 2 -->
    - A. Count the links and trust the one that gives more

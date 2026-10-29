@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 425" role="img" font-family="'Hiragino Sans','Yu Gothic','Meiryo','Noto Sans CJK JP','IPAGothic',sans-serif">
+  <title>次のトークンの確率リスト（数値は説明用の架空の例）</title>
+  <rect x="1" y="1" width="718" height="423" rx="12" fill="#faf9f5" stroke="#e5e1d8"/>
+  <text x="28" y="34" font-size="18" font-weight="600" fill="#191919">次のトークンの確率リスト（数値は説明用の架空の例）</text>
+  <text x="28" y="60" font-size="15" fill="#56544b">前文：「日本の首都は」→ 次のトークンは？</text>
+  <text x="196" y="96" text-anchor="end" font-size="15" fill="#191919">東京</text>
+  <rect x="208" y="81" width="340.4" height="20" rx="3" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="556.4" y="96" font-size="15" font-weight="600" fill="#191919">92%</text>
+  <text x="196" y="125" text-anchor="end" font-size="15" fill="#191919">日本</text>
+  <rect x="208" y="110" width="7.4" height="20" rx="3" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="223.4" y="125" font-size="15" font-weight="600" fill="#191919">2%</text>
+  <text x="196" y="154" text-anchor="end" font-size="15" fill="#191919">大阪</text>
+  <rect x="208" y="139" width="5.5" height="20" rx="3" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="221.6" y="154" font-size="15" font-weight="600" fill="#191919">1.5%</text>
+  <text x="196" y="183" text-anchor="end" font-size="15" fill="#191919">江戸</text>
+  <rect x="208" y="168" width="3.0" height="20" rx="3" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="219.0" y="183" font-size="15" font-weight="600" fill="#191919">0.8%</text>
+  <text x="196" y="212" text-anchor="end" font-size="15" fill="#191919">その他の候補の合計</text>
+  <rect x="208" y="197" width="13.7" height="20" rx="3" fill="#ffffff" stroke="#56544b" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="229.7" y="212" font-size="15" font-weight="600" fill="#191919">3.7%</text>
+  <line x1="208" y1="76" x2="208" y2="225" stroke="#56544b" stroke-width="1.5"/>
+  <line x1="28" y1="239" x2="692" y2="239" stroke="#e5e1d8" stroke-width="1.5"/>
+  <text x="28" y="269" font-size="16" font-weight="600" fill="#191919">同じリストから、温度を変えて選ぶと（第8章）</text>
+  <text x="196" y="306" text-anchor="end" font-size="15" fill="#191919">温度0.5</text>
+  <rect x="208" y="289" width="369.6" height="24" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <rect x="577.6" y="289" width="0.4" height="24" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="218" y="306" font-size="15" fill="#191919">東京 99.9%</text>
+  <text x="588" y="306" font-size="15" fill="#56544b">その他 0.1%</text>
+  <text x="196" y="340" text-anchor="end" font-size="15" fill="#191919">温度1（そのまま）</text>
+  <rect x="208" y="323" width="340.4" height="24" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <rect x="548.4" y="323" width="29.6" height="24" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="218" y="340" font-size="15" fill="#191919">東京 92%</text>
+  <text x="588" y="340" font-size="15" fill="#56544b">その他 8%</text>
+  <text x="196" y="374" text-anchor="end" font-size="15" fill="#191919">温度1.5</text>
+  <rect x="208" y="357" width="236.8" height="24" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <rect x="444.8" y="357" width="133.2" height="24" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="218" y="374" font-size="15" fill="#191919">東京 約64%</text>
+  <text x="588" y="374" font-size="15" fill="#56544b">その他 約36%</text>
+  <text x="28" y="407" font-size="14" fill="#56544b">温度が変えるのは各候補が選ばれる確率だけ。候補そのものも、答えの正しさも変わらない。</text>
+</svg>

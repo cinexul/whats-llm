@@ -1,120 +1,87 @@
-> 〔Wherever this chapter touches a specific product's installation, commands, interface, or capabilities, those change with each version, so always **refer to the provider's official documentation**. This chapter only covers the mental model and workflow that are **shared and stable** across these two kinds of tools, and that part won't go out of date. For word-for-word installation and commands, see Chapters 28 and 29 and Appendix C.〕
+Chapter 23 covered what a coding agent is: an Agent that reads your project, edits files, and runs commands on its own. This chapter is about how to work with one. Whether you use Claude Code or Codex, tasks that go well almost always follow the same loop: investigate → plan → act → sign off. Once you know this order, you know when to let it run and when to stop and look.
 
-In Chapter 19 we met the Agent: an AI that "takes action on its own." The stars of this chapter, **Claude Code** and **Codex**, are Agents that specialize in "programming." You describe something in plain words, and it will **go and read files in the project, edit code, and run commands on its own**, instead of just handing you text to copy and paste.
+You don't need to write code for this chapter either. Installation and specific commands come in Chapters 28 and 29.
 
-Don't get nervous about the word "programming." **This chapter does not require you to write code.** What we're learning is "how to work alongside a helper like this that takes action": what work to assign, how to tell whether it did it right, and how to recover when things go sideways. Anyone who knows their way around a computer can learn this workflow, and once you have it, you'll feel a whole new kind of control over "letting AI do things for you."
+## 1. A quick recap: how it differs from web chat
 
-## 1. What are they, exactly
-
-Claude Code and Codex aren't some fixed button on a web page. They're a kind of **coding agent that takes action on your project**. You'll usually run into them in a **terminal (command line), a code editor (IDE), a web task, or a cloud environment**; **some run on your own machine, some run in the cloud — the exact form varies and keeps changing, so go by the provider's official documentation for the current form**. What they have in common is:
-
-- **They can see your project:** they browse folders and read code on their own to understand the current state, instead of only knowing the few lines you pasted in.
-- **They can take action:** edit files directly, run commands (like running tests), and go online to look things up when needed.
-- **They can run several steps in a row:** toward the goal you gave, they run the "look, edit, try, edit again" loop on their own.
-
-> **Key point:** Claude Code comes from Anthropic and its core is Claude; Codex comes from OpenAI. These two "who makes it / what's inside it" facts are stable. But **their specific form (CLI / IDE plugin / web / cloud), how they install, their commands, and their capabilities all differ, and all of it is updating fast**, so this chapter doesn't write "press this key, type that command, run it here" (those are volatile, a matter for Chapters 28 and 29, Appendix C, and the official documentation). This chapter covers **the shared way they get work done**: learn it once, and it carries across both tools without dating easily.
-
-## 2. The fundamental difference from "web chat"
-
-| | Web/app chat (product layer) | Coding agent (Agent layer) |
+| | Web/app chat | Coding agent |
 | --- | --- | --- |
-| How it treats code | Hands you text you go use yourself | **Edits the files in your project directly** |
-| How much it knows | Only what you pasted in | **Explores the whole project** on its own to understand the state |
-| How it moves forward | You ask, it answers | **Takes several steps toward the goal on its own** |
-| Consequence of a mistake | At worst a wrong answer you don't use | It actually touched your files, **so you need to be able to roll back** |
+| How it treats code | Gives you text that you copy and use | Edits the files in your project directly |
+| How much it knows | Only what you pasted in | Explores the whole project to see how things stand |
+| How it moves | You ask, it answers | Takes several steps toward the goal on its own |
+| Cost of a mistake | A wrong answer you can ignore | Your files really change, so you need to be able to roll back |
 
-That last row is the key one: because it **really will touch your stuff**, "using it in an environment you can undo" isn't a nicety — it's a precondition (more in section five below).
+The last row is the key one. Because it really changes your things, using it in an environment you can undo is a precondition, not a nicety.
 
-## 3. The mental model: treat it like "a capable new coworker who just started"
+Chapter 23's comparison is most useful here: it's like a very capable, very fast coworker on day one. Hand over the grunt work and it gets done quickly and in volume, but it doesn't know your rules or which places are off-limits (Chapter 28 shows how to write them down), and it can be confidently wrong (Chapter 9's hallucination). So you're the one leading: assigning work and signing off are your job, and yours is the name on the result.
 
-The whole book keeps using this comparison, and it fits best here: **Claude Code / Codex is like a coworker who is very capable and very fast but started on day one.**
+## 2. The core workflow: investigate → plan → act → sign off
 
-- They're **quick on their feet:** the grunt work you hand over gets done fast and in volume.
-- They **don't know your project's habits:** they don't know your rules, your naming, your minefields, so you have to tell them (the "project onboarding notes" in Chapter 28 are for exactly this).
-- They **will be confidently wrong:** they might use a way of writing code that doesn't exist at all (that's the "hallucination" of Chapter 9, and it happens when writing code too).
-- So **you're the one showing them the ropes.** The work can go to them, but **assigning it and signing off are your job, and in the end yours is the name on it.**
+The figure below shows the loop. Of the four steps, investigating and acting are mostly done by the agent. Planning and signing off are the two gates you guard: it acts only after you approve the plan, and a change is merged only after it passes your sign-off. If the sign-off fails, you go back to investigate or plan instead of patching things where they stand.
 
-> **Key point:** Remember this sentence for life: **"Don't let through what you don't understand and haven't verified."** Them finishing isn't the same as them getting it right. You don't have to write every line, but you do have to be able to judge "did this thing work or not," and the workflow in section four of this chapter is what turns that judgment into something concrete.
+Why insist on these two gates? Because a coding agent makes mistakes and can also act. As long as both are true, reviewing the plan before it acts and signing off after it acts can't be skipped. Hold those two gates, and you can hand over the rest of the grunt work with confidence.
 
-## 4. The core workflow: investigate -> plan -> act -> sign off
+![The work loop: investigate, plan, act, and sign off arranged in a cycle, each with a line saying what the human does at that step; plan and sign off are the gates a human guards; if sign-off fails, an arrow leads back to investigate or plan, and if it passes, you commit and start the next small step](/figures/en/work-loop.svg)
 
-Almost every task that goes smoothly follows the same four-step loop. **The two "gates" in the middle are guarded by a human**, the rest goes to the AI:
+### 1. Investigate: it reads the project, you take a look
 
-```text
-   you give the goal
-      │
-      ▼
- 1.investigate ──→ 2.plan ──→ 【human approves】──→ 3.act ──→ 4.sign off ──→ 【human lets through】
-(it reads project) (it drafts plan)  ↑gate 1     (it edits files) (read diff/run tests) ↑gate 2
-```
+Don't rush it into editing. First have it find the relevant code and explain how things work now, and check that it's looking in the right place. You might say:
 
-**1. Investigate (it does it, you take a look)**
-Don't rush it into "start editing." Have it **investigate first**: "To do this, which files is the relevant code in? How is it implemented now?" It'll go through the project and give you a written rundown with locations. You skim it and confirm it didn't find the wrong place.
-> Example one-line instruction: *"Don't act yet, just investigate: to add a search box to the page, which files are involved and how is it done now?"*
+> "Don't change anything yet, just investigate: to add a search box to the page, which files are involved, and how is it done now?"
 
-**2. Plan (it does it, you approve) - gate 1**
-Have it **write down a plan** for "how it intends to change things": which files it'll touch, whether it'll add anything new, how many steps. **It only starts acting once you've read the plan and approved.** This step takes half a minute and blocks most of the "went off track for half an hour" rework. Many tools have a built-in "plan first, approve, then act" mode (Chapter 27 covers it in detail; **the exact name and toggle are a matter for the official documentation**).
+### 2. Plan: it proposes, you approve
 
-**3. Act (it does it, you can stop it anytime)**
-After approval it starts editing. Whether file edits and commands need individual confirmation depends on the tool, sandbox, and permission settings; **actions already authorized may run automatically**. Check the allowed scope before starting, and use the agreed approval rules for deletion, publication, and external sends (Chapter 26). If you feel it's going crooked, **interrupt anytime**, say it clearly, and let it continue.
+Have it write down how it intends to make the change: which files it will touch, what it will add, how many steps. It starts only after you've read and approved the plan. This takes half a minute and prevents most of the "it went the wrong way for thirty minutes" rework. As of October 2026, both Claude Code and Codex have a plan mode you enter by typing `/plan`. With tools that don't, you can simply say "don't act yet, just give me a plan" (Chapter 27 goes into detail).
 
-**4. Sign off (you do it) - gate 2**
-This is **your most important step**, and it's just three moves (Chapter 25 explains them in detail):
-- **Read the diff:** a diff is "the before-and-after comparison of the change," and it clearly marks "which lines were added, which were removed." You see **what it actually changed** and whether it touched anything it shouldn't have.
-- **Run tests:** have it run the tests to confirm it **didn't break a feature that was working fine.**
-- **Can you explain it:** try to say in one sentence "what this bit does." If you can't, go back and ask it "what does this bit do." **Don't merge what you can't follow.**
+### 3. Act: it edits files, you can stop it at any time
 
-> **Why must there be these two gates?** Because of the two traits of a coding agent stacked together: **it will make mistakes + it can take action.** As long as both of those are true, "see the plan before acting, sign off after acting" isn't optional. Hold these two gates, and you can hand off the rest of the grunt work without worry.
+Once you approve, it starts editing. Which actions need confirmation each time and which run automatically within the permissions you've granted depends on the tool and its settings (Chapter 26); no prompt doesn't mean no risk. Deleting, publishing, and sending things out should follow rules you agreed beforehand. If it seems to be drifting, interrupt it, say clearly what you want, and let it continue.
 
-## 5. The first time you run it, what to expect
+### 4. Sign off: you check, and merge only if it passes
 
-Let's lower expectations a bit, so you're not scared or disappointed by the "ideal AI" in your head:
+This is your most important step, and Chapter 25 covers it in full. In short, it's three questions: What did it change (read the diff and have it explain in plain words)? Did it actually do the job without breaking anything else (follow the acceptance steps you wrote down beforehand, plus the relevant tests)? If something is wrong, how costly is it, and can you undo it? You don't need to read every line of code, but if you can't answer these three, don't merge.
 
-1. **Set up an environment you can undo first.** **When it's acting on your local project**, be sure it's a project managed with **version control (Git)**, and **cut a new branch** before letting it act (if you've never used Git, read "Git: the bare minimum to get started" in Chapter 26 first). **Save existing work and commit or back up the files you need before starting. A branch is not a backup**: Git can restore saved versions, but cannot recover files it never tracked or undo emails, deployments, or changes to external data. (If you're using a web/cloud form, the platform usually has its own isolation and rollback; refer to its official documentation.)
-2. **It'll "read for a while" first.** It needs time to browse the project; don't assume it's stuck.
-3. **Read the permission settings and confirmation requests.** Some actions require confirmation; others run within the scope already authorized. No prompt does not mean no risk.
-4. **It might make mistakes and go off track.** Normal. When this happens, **don't fix it inside the mess.** The cleanest way to cut losses: **roll back to a clean state, open a new conversation, and re-explain things with "the pothole you just hit" as a premise** (Chapters 13, 30). Chasing it line by line inside a scrambled context usually makes things worse.
-5. **Without going online it doesn't know the latest things.** For very new tech, remember to **state the version clearly** in what you say, or paste the material to it (the knowledge cutoff from Chapter 9).
+## 3. What to expect the first time
 
-> **What it's actually like:** The most common way beginners go off the rails is "having it do a whole big feature in one go." With a big change, you simply can't sign off line by line, and when something goes wrong it's hard to roll back. **The right move is to break the task small**: do one little piece, sign off on one little piece, commit once, then do the next (Chapter 27). Small steps at a slow jog turn out to be the fastest road.
+1. Prepare an environment you can undo. When it works on a project on your computer, keep the project in Git, commit a starting point, and create a new branch before letting it act (if you've never used Git, read "Git: the bare minimum to get started" in Chapter 26 first). A branch on its own isn't a backup: Git restores only what was committed, and can't undo emails, deployments, or changes to outside data. Web and cloud entry points have their own isolation and recovery, which you need to check separately (Chapter 26).
+2. It will "read" for a while first. Browsing the project takes time; it isn't stuck.
+3. Read what each confirmation is asking. Some actions ask for your OK; others run automatically within what you've already allowed.
+4. It will make mistakes and drift. That's normal. When it happens, don't try to fix things inside the mess. The simplest fix is to roll back to a clean state, open a new conversation, and restate the task, including the problem you just ran into (Chapters 13 and 30).
+5. For very new technology, state the version clearly or paste in current material (Chapter 9's knowledge cutoff).
+6. Never paste keys, passwords, or real personal information into the conversation or into code (Chapter 37). On cost: a subscription allowance and metered API billing are two different things; Chapter 38 covers them.
 
-## 6. Safety and cost, on your mind from day one
+The most common beginner mistake is asking it to build a whole big feature in one go. A big change is hard work to sign off, and when something breaks it's hard to roll back. Breaking it up is faster: build a small piece, sign it off, commit, then move on (Chapter 27).
 
-- **Don't paste keys/passwords/real personal information** into the conversation or write them into code; they'll get sent out (Chapter 37).
-- **Distinguish subscription usage allowances from metered API billing.** Some interfaces use a subscription allowance; others bill through an API or cloud platform. Check the account, interface, and official terms. Longer context can increase usage, but every chat does not turn into the same token bill; focused tasks still reduce unnecessary processing (Chapters 3, 38).
-- The code it generates **counts as your responsibility**: review it before merging and stand behind it (Chapter 39).
+## 4. Claude Code and Codex: what's the same, what differs
 
-## 7. Claude Code and Codex: where they're alike, where they differ
-
-| | Same (this chapter's focus, stable) | Different (**see the official documentation**, will change) |
+| | Same (stable) | Different (changes; see Chapters 28 and 29) |
 | --- | --- | --- |
-| Positioning | Both are coding agents that "take action on your project" | Maker, core model, and **run form (local / cloud / web)** differ |
-| Workflow | Both fit the "investigate -> plan -> act -> sign off" loop | Specific commands, shortcuts, and interfaces vary |
-| Safety | Both should be set up with a permission mechanism + an undo-friendly environment | Default behavior and permission granularity differ |
-| Getting started | Both: try small steps in a Git branch first | Installation and login differ |
+| What it is | Both are coding agents that act on your project | Maker, underlying models, available entry points |
+| Workflow | Both fit "investigate → plan → act → sign off" | Specific commands, shortcuts, and interfaces |
+| Safety | Both need permission settings and an environment you can roll back | Default permissions and how to set them |
+| Getting started | Both: try small steps on a Git branch first | Installation and sign-in |
 
-> **Key point:** The workflow you learn in this chapter **works whichever tool you switch to**, because it comes from the unchanging truth of "how to mentor an Agent that makes mistakes," not from some product's buttons. For the specifics of "how to install, what to type," see Chapters 28 and 29 and Appendix C, and **treat the official documentation as the latest source.**
+This workflow works whichever tool you switch to, because it comes from how to lead a helper that makes mistakes and can act, not from any product's buttons.
 
-## 8. Common misconceptions, cleared up together
+## 5. Common misconceptions
 
 | Misconception | Reality |
 | --- | --- |
-| It's AI, the code it writes should be right, merge it directly | It will confidently get it wrong; read the diff, run tests, don't merge what you can't follow |
-| Having it do a whole big feature in one go is easiest | Big changes are hard to sign off on and hard to roll back; break it small and sign off in small steps to go fastest |
-| It remembers my whole project and yesterday's conversation | The model itself works on "reading the project each time + this conversation's context," with no cross-conversation memory by default; but many tools provide "project memory" at the **product layer** (like CLAUDE.md / a project context file) so it remembers your project's rules across sessions. That's a product feature, not the model itself remembering (Chapters 9, 28) |
-| I can't program, so I can't use it | You don't have to write every line, but you do need "assigning work + the three sign-off questions"; the bar is judgment, not typing code |
-| When it goes off track, keep chasing it with fixes | Roll back + open a new conversation and start over; grinding away inside a scrambled context usually makes it worse |
+| It's AI, so its code should be right; merge it | It can be confidently wrong; sign off as in Chapter 25, and don't merge if you can't answer the three questions |
+| Having it build a whole big feature at once is easiest | Big changes are hard to sign off and hard to roll back; small steps signed off one by one are faster |
+| It remembers my whole project and yesterday's conversation | The model itself has no memory across conversations; "project memory" such as CLAUDE.md is the product putting saved text back into the context each time (Chapters 9 and 28) |
+| I can't program, so I can't use it | You don't need to write every line; you need to assign work and sign off with concrete checks |
+| When it drifts, keep chasing it with corrections | Roll back and start a new conversation; fixing things inside a muddled context usually makes them worse |
 
 ## Summary
 
-- Claude Code / Codex are a kind of coding agent that **takes action in your project**; whether you use it in a terminal, an editor, the web, or the cloud depends on the product. **The exact form varies and keeps changing, so refer to the official documentation.**
-- The fundamental difference from web chat: it **edits files directly, explores the project on its own, and takes several steps in a row**, so it has to be used in an environment you can **roll back**.
-- Mental model: **a capable new coworker who just started**; the work can go to them, but **assigning it and signing off are your job.**
-- The core workflow is **investigate -> plan -> 【human approves】-> act -> sign off -> 【human lets through】**, with the human guarding two gates: approving the plan and signing off on the change (read the diff, run tests, explain it clearly).
-- First time using it: save your work and create a Git branch first (Git basics are in Chapter 26), break the task small, roll back and start over if it goes off track, never paste keys.
-- This workflow **doesn't depend on the specific tool**, because it comes from "how to mentor an Agent that makes mistakes." Learn it once, it works everywhere.
+- Claude Code and Codex are coding agents that act inside your project; whether you use them in a terminal, an editor, a desktop app, or the web depends on the product.
+- The fundamental difference from web chat: it edits files directly, explores the project, and takes several steps, so use it where you can roll back.
+- The core workflow is investigate → plan → act → sign off. You guard two gates: approving the plan and signing off on the change. If sign-off fails, go back to investigate or plan.
+- The first time: commit a starting point and create a Git branch, keep tasks small, roll back and start over when it drifts, and never paste keys.
+- The workflow doesn't depend on a particular tool. Learn it once and it carries over.
 
-The next chapter (Chapter 25) covers the step in this workflow most worth practicing: reading the diff, running tests, rolling back, and signing off. Installation and your first hands-on session come in Chapters 28 and 29.
+The next chapter (Chapter 25) goes into the step most worth practicing: reading diffs, running tests, rolling back, and signing off.
 
 ---
 
@@ -136,12 +103,12 @@ The next chapter (Chapter 25) covers the step in this workflow most worth practi
    - D. Writing a clear goal is enough; the remaining steps can all be left to it
    > **Answer: C.** Letting the AI do the work, the human guards two gates: **approve the plan before acting, sign off on the change after acting.** Grunt work like investigating and editing goes to it (A, B); you just skim and stay ready to stop it. D gives up both gates.
 
-3. **[Basic · Misconception]** "It's AI, the code it writes should be correct, just merge it." What's wrong? <!-- quiz: q03 revision: 2 -->
-   - A. It can be confidently wrong; don't merge what you can't follow or verify
+3. **[Basic · Misconception]** "It's AI, the code it writes should be correct, just merge it." What's wrong? <!-- quiz: q03 revision: 3 -->
+   - A. It can be confidently wrong; don't merge changes you haven't signed off
    - B. Nothing; as long as the code runs, that alone shows it must be correct
    - C. The mistake is not asking it to confirm that there's really no problem
    - D. The mistake is not rewriting it all; its code always needs a human to redo it
-   > **Answer: A.** Hallucination (Chapter 9) happens when writing code too: inventing functions that don't exist, using the syntax of the wrong version. Running isn't the same as correct (B); having it vouch for itself isn't verification (C); rewriting everything goes to the other extreme (D). Read the diff, run tests, and ask for clarity on what you can't follow.
+   > **Answer: A.** Hallucination (Chapter 9) happens when writing code too: inventing functions that don't exist, using the syntax of the wrong version. Running isn't the same as correct (B); having it vouch for itself isn't verification (C); rewriting everything goes to the other extreme (D). Read the diff, run the checks, and have it explain anything that's unclear.
 
 4. **[Advanced · Misconception]** "Having it do a whole big feature in one go is easiest." Why is it often more work? <!-- quiz: q04 revision: 2 -->
    - A. It isn't; stating a big task once actually saves back-and-forth messages
@@ -157,5 +124,5 @@ The next chapter (Chapter 25) covers the step in this workflow most worth practi
    - D. Delete the whole project and have it generate everything again from scratch
    > **Answer: B.** Grinding away inside a scrambled context (A, C) usually just makes things worse. **Rolling back + reopening a clean conversation that carries the lesson** is almost always faster (Chapters 13, 30). Committing or backing up existing work first gives you a recovery point (Git basics are in Chapter 26). Roll back only this task's changes; deleting the project (D) throws away the good parts too. Git cannot undo external actions.
 
-6. **[Advanced · Hands-on / Observation]** No need to actually install a tool: find a code change you can follow (or the diff example in Chapter 25) and practice answering just three questions: **what did it change? could it break anything else? can I say in one sentence what this bit does?** If you can't answer the third, go back and ask "what does this bit do." <!-- quiz: q06 revision: 2 -->
-   > **What you should notice:** "Signing off" isn't mysterious — it's these three questions. Building the muscle memory of "don't let it through if you can't follow it" matters more than knowing any command. The installation and commands of specific tools: **refer to the official documentation** (see Chapters 28 and 29 and Appendix C).
+6. **[Advanced · Hands-on / Observation]** No need to actually install a tool: find a code change (or the diff example in Chapter 25) and run it through Chapter 25's three sign-off questions: What did it change? Did it actually do the job without breaking anything else? If something is wrong, how costly is it, and can you undo it? If you can't answer the first, go back and have it explain in plain words. <!-- quiz: q06 revision: 3 -->
+   > **What you should notice:** Signing off isn't mysterious; it's these three questions, and none of them requires reading every line of code. The first is answered by its plain-language explanation checked against the diff, the second by the acceptance steps you wrote beforehand plus tests, the third by looking at risks and the way back. The habit of "no merge until I can answer all three" matters more than knowing any command. Installation and specific commands are in Chapters 28 and 29 and Appendix C.

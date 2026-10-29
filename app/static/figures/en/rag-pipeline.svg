@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img">
+<title>The RAG pipeline: documents are split into chunks and indexed ahead of time; at question time the most relevant chunks are retrieved and put into the context with the question, and the model answers with citations while its parameters stay unchanged</title>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#56544b"/></marker>
+<marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b08a2e"/></marker>
+<marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3d6a8a"/></marker>
+</defs>
+<rect x="0.75" y="0.75" width="718.5" height="418.5" rx="12" fill="#faf9f5" stroke="#e5e1d8" stroke-width="1.5"/>
+<g font-family="system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif">
+<rect x="16" y="16" width="688" height="146" rx="12" fill="#f6efd9"/>
+<text x="32" y="40" font-size="14" fill="#8a6a1e" font-weight="600">Done once, ahead of time: build the index</text>
+<rect x="40" y="56" width="180" height="84" rx="10" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="130.0" y="92.0" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">Documents</text>
+<text x="130.0" y="117.0" font-size="14" fill="#56544b" text-anchor="middle">policies, manuals, notes</text>
+
+<rect x="270" y="56" width="180" height="84" rx="10" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="360.0" y="92.0" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">Split into chunks</text>
+<text x="360.0" y="117.0" font-size="14" fill="#56544b" text-anchor="middle">a few hundred words</text>
+
+<rect x="500" y="56" width="180" height="84" rx="10" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="590.0" y="92.0" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">Build an index</text>
+<text x="590.0" y="117.0" font-size="14" fill="#56544b" text-anchor="middle">keywords + vectors</text>
+
+<line x1="220" y1="98" x2="268" y2="98" stroke="#b08a2e" stroke-width="2" marker-end="url(#o)"/>
+<line x1="450" y1="98" x2="498" y2="98" stroke="#b08a2e" stroke-width="2" marker-end="url(#o)"/>
+<rect x="16" y="212" width="688" height="192" rx="12" fill="#e6eef4"/>
+<text x="32" y="236" font-size="14" fill="#3d6a8a" font-weight="600">Every time you ask</text>
+<rect x="32" y="252" width="136" height="84" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="100.0" y="288.0" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">Your question</text>
+<text x="100.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">Late taxi OK?</text>
+
+<rect x="196" y="252" width="150" height="84" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="271.0" y="288.0" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">Retrieve</text>
+<text x="271.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">best matches</text>
+
+<rect x="374" y="252" width="150" height="84" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="449.0" y="288.0" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">Add to context</text>
+<text x="449.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">question + excerpts</text>
+
+<rect x="552" y="252" width="136" height="84" rx="10" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+<text x="620.0" y="288.0" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">Model answers</text>
+<text x="620.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">with citations</text>
+
+<line x1="168" y1="294" x2="194" y2="294" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<line x1="346" y1="294" x2="372" y2="294" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<line x1="524" y1="294" x2="550" y2="294" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<path d="M590 140 V188 H271 V250" fill="none" stroke="#b08a2e" stroke-width="2" marker-end="url(#o)"/>
+<text x="430" y="182" font-size="14" fill="#8a6a1e" text-anchor="middle">search the index</text>
+<text x="506" y="373" font-size="14" fill="#56544b" text-anchor="end">used for this answer only</text>
+<rect x="520" y="352" width="180" height="32" rx="16" fill="#ffffff" stroke="#aa563d" stroke-width="1.5"/>
+<text x="610" y="373" font-size="14" fill="#aa563d" text-anchor="middle" font-weight="600">Parameters unchanged</text>
+</g>
+</svg>

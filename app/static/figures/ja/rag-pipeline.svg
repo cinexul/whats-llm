@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img">
+<title>RAGの流れ：文書を前もって分割して索引を作り、質問のたびに関連の高い断片を検索して質問と一緒に文脈に入れ、モデルが出典付きで答える。モデルのパラメータは変わらない</title>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#56544b"/></marker>
+<marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#b08a2e"/></marker>
+<marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3d6a8a"/></marker>
+</defs>
+<rect x="0.75" y="0.75" width="718.5" height="418.5" rx="12" fill="#faf9f5" stroke="#e5e1d8" stroke-width="1.5"/>
+<g font-family="'Hiragino Sans','Yu Gothic','Meiryo','Noto Sans CJK JP','IPAGothic',sans-serif">
+<rect x="16" y="16" width="688" height="146" rx="12" fill="#f6efd9"/>
+<text x="32" y="40" font-size="14" fill="#8a6a1e" font-weight="600">前もって一度だけ：索引を作る</text>
+<rect x="40" y="56" width="180" height="84" rx="10" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="130.0" y="92.0" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">文書</text>
+<text x="130.0" y="117.0" font-size="14" fill="#56544b" text-anchor="middle">規程・手引き・メモ</text>
+
+<rect x="270" y="56" width="180" height="84" rx="10" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="360.0" y="92.0" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">小さく分割</text>
+<text x="360.0" y="117.0" font-size="14" fill="#56544b" text-anchor="middle">一つ数百字ほど</text>
+
+<rect x="500" y="56" width="180" height="84" rx="10" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="590.0" y="92.0" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">索引を作る</text>
+<text x="590.0" y="117.0" font-size="14" fill="#56544b" text-anchor="middle">キーワード＋ベクトル</text>
+
+<line x1="220" y1="98" x2="268" y2="98" stroke="#b08a2e" stroke-width="2" marker-end="url(#o)"/>
+<line x1="450" y1="98" x2="498" y2="98" stroke="#b08a2e" stroke-width="2" marker-end="url(#o)"/>
+<rect x="16" y="212" width="688" height="192" rx="12" fill="#e6eef4"/>
+<text x="32" y="236" font-size="14" fill="#3d6a8a" font-weight="600">質問のたびに</text>
+<rect x="32" y="252" width="136" height="84" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="100.0" y="288.0" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">あなたの質問</text>
+<text x="100.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">タクシー代は出る？</text>
+
+<rect x="196" y="252" width="150" height="84" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="271.0" y="288.0" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">検索</text>
+<text x="271.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">関連の高い数片</text>
+
+<rect x="374" y="252" width="150" height="84" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="449.0" y="288.0" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">文脈に入れる</text>
+<text x="449.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">質問＋原文の断片</text>
+
+<rect x="552" y="252" width="136" height="84" rx="10" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+<text x="620.0" y="288.0" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">モデルが回答</text>
+<text x="620.0" y="313.0" font-size="14" fill="#56544b" text-anchor="middle">出典付き</text>
+
+<line x1="168" y1="294" x2="194" y2="294" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<line x1="346" y1="294" x2="372" y2="294" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<line x1="524" y1="294" x2="550" y2="294" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<path d="M590 140 V188 H271 V250" fill="none" stroke="#b08a2e" stroke-width="2" marker-end="url(#o)"/>
+<text x="430" y="182" font-size="14" fill="#8a6a1e" text-anchor="middle">索引から探す</text>
+<text x="506" y="373" font-size="14" fill="#56544b" text-anchor="end">今回の回答だけに使う</text>
+<rect x="520" y="352" width="180" height="32" rx="16" fill="#ffffff" stroke="#aa563d" stroke-width="1.5"/>
+<text x="610" y="373" font-size="14" fill="#aa563d" text-anchor="middle" font-weight="600">パラメータは不変</text>
+</g>
+</svg>

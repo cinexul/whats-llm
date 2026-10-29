@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 391" role="img" font-family="'Hiragino Sans','Yu Gothic','Meiryo','Noto Sans CJK JP','IPAGothic',sans-serif">
+  <title>コンテキストウィンドウ：1回のリクエストで共有するトークン予算</title>
+  <rect x="1" y="1" width="718" height="389" rx="12" fill="#faf9f5" stroke="#e5e1d8"/>
+  <text x="28" y="34" font-size="18" font-weight="600" fill="#191919">コンテキストウィンドウ：1回のリクエストで共有するトークン予算</text>
+  <text x="28" y="58" font-size="14" fill="#56544b">どの欄も予算を使い、合計は上限を超えられない</text>
+  <text x="692" y="88" text-anchor="end" font-size="14" fill="#aa563d">ウィンドウの上限</text>
+  <line x1="692" y1="94" x2="692" y2="214" stroke="#aa563d" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="28" y="127" font-size="15" fill="#191919">会話の始め</text>
+  <rect x="164" y="100" width="96" height="42" rx="6" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="212.0" y="126" text-anchor="middle" font-size="14" fill="#191919">システム指示</text>
+  <rect x="260" y="100" width="92" height="42" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="306.0" y="126" text-anchor="middle" font-size="14" fill="#191919">会話の履歴</text>
+  <rect x="352" y="100" width="130" height="42" rx="6" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+  <text x="417.0" y="126" text-anchor="middle" font-size="14" fill="#191919">添付資料</text>
+  <rect x="482" y="100" width="100" height="42" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="532.0" y="126" text-anchor="middle" font-size="14" fill="#191919">回答の枠</text>
+  <rect x="582" y="100" width="110" height="42" rx="6" fill="none" stroke="#56544b" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="637.0" y="126" text-anchor="middle" font-size="14" fill="#56544b">空き</text>
+  <text x="28" y="187" font-size="15" fill="#191919">長く話したあと</text>
+  <rect x="164" y="160" width="96" height="42" rx="6" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="212.0" y="186" text-anchor="middle" font-size="14" fill="#191919">システム指示</text>
+  <rect x="260" y="160" width="222" height="42" rx="6" fill="#e6eef4" stroke="#3d6a8a" stroke-width="1.5"/>
+  <text x="371.0" y="186" text-anchor="middle" font-size="14" fill="#191919">会話の履歴</text>
+  <rect x="482" y="160" width="130" height="42" rx="6" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+  <text x="547.0" y="186" text-anchor="middle" font-size="14" fill="#191919">添付資料</text>
+  <rect x="612" y="160" width="80" height="42" rx="6" fill="#faece7" stroke="#aa563d" stroke-width="1.5"/>
+  <text x="652.0" y="186" text-anchor="middle" font-size="14" fill="#191919">回答の枠</text>
+  <line x1="410" y1="210" x2="410" y2="232" stroke="#56544b" stroke-width="1.5"/>
+  <path d="M 405 227 L 410 235 L 415 227" fill="none" stroke="#56544b" stroke-width="1.5"/>
+  <text x="28" y="258" font-size="15" fill="#191919">上限が近づくと、製品は次のどれかを行うことがある：</text>
+  <rect x="28.0" y="270" width="158.5" height="54" rx="8" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="107.2" y="293" text-anchor="middle" font-size="14" fill="#191919">古い会話を</text>
+  <text x="107.2" y="312" text-anchor="middle" font-size="14" fill="#191919">要約する</text>
+  <rect x="196.5" y="270" width="158.5" height="54" rx="8" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="275.8" y="293" text-anchor="middle" font-size="14" fill="#191919">古い内容の</text>
+  <text x="275.8" y="312" text-anchor="middle" font-size="14" fill="#191919">一部を削る</text>
+  <rect x="365.0" y="270" width="158.5" height="54" rx="8" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="444.2" y="293" text-anchor="middle" font-size="14" fill="#191919">関連する部分</text>
+  <text x="444.2" y="312" text-anchor="middle" font-size="14" fill="#191919">だけ取り出す</text>
+  <rect x="533.5" y="270" width="158.5" height="54" rx="8" fill="#ffffff" stroke="#b08a2e" stroke-width="1.5"/>
+  <text x="612.8" y="293" text-anchor="middle" font-size="14" fill="#191919">長すぎる依頼を</text>
+  <text x="612.8" y="312" text-anchor="middle" font-size="14" fill="#191919">断る</text>
+  <text x="28" y="352" font-size="14" fill="#56544b">どれを使うかは製品しだい。細部が失われることはあるが、最も古い内容から消えるとは限らない。</text>
+  <text x="28" y="373" font-size="14" fill="#56544b">ツールの定義や結果、推論モデルの思考トークン（第8章）もこの予算を使う。</text>
+</svg>

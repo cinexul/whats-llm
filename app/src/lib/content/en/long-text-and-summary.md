@@ -1,56 +1,50 @@
-In the last chapter you learned to "state your requirements clearly." This chapter applies that craft to a high-frequency scenario almost everyone needs: **give it a big pile of material and have it read it and summarize it for you.**
+The last chapter was about stating clearly what you want. This one puts that skill to work in a situation almost everyone runs into: handing it a pile of material and having it read and summarize for you.
 
-A contract, a paper, meeting notes, dozens of emails, a manual: feeding it to AI and having it "read it all and report the key points" is one of the biggest time-savers it offers. Before you paste anything, ask whether you're allowed to: does your company's policy permit it, and does the material contain other people's personal information or sensitive contract terms? Remove those parts or replace them with placeholders first (Chapter 37 goes into detail).
+Contracts, papers, meeting notes, dozens of emails, a manual: having AI read them and tell you the key points is one of the biggest time-savers it offers. Before you paste anything in, though, think about whether you're allowed to. Does your company permit it? Is there anyone else's personal information, or sensitive contract terms, in there? Delete those parts or swap in placeholder names first (Chapter 37 goes into this).
 
-Beyond that, there are two traps beginners almost always hit. One, **the material is too long and it says "won't fit"** (or barely fits but reads it in a muddle); two, it will **"invent" things not in the material into the summary** (that old problem from Chapter 9 again).
+Beginners usually hit two problems here. One: the material is too long, and it says it can't fit, or it fits but gets read carelessly. Two: things that aren't in the material end up in the summary (the hallucination from Chapter 9). This chapter is about avoiding both.
 
-This chapter teaches the right way to feed material in: how to feed a long document, how to get it to answer honestly **from the material you gave alone**, and what the routines are for summarizing, comparing, and extracting. Master it and you turn AI into a reliable "material assistant."
+## 1. Why long material causes trouble: back to the desk
 
-## 1. First understand why long material causes trouble, back to that desk
+Chapter 3 compared the context window to a desk: the material you paste, the conversation so far, and the answer it's about to write all take up space on it. When the material is long, one of two things tends to happen:
 
-To feed it well, first understand why it gets "stuffed." This picks up from Chapter 3.
+- It goes over the limit, and the product says it's too long, or only handles part of it.
+- It fits, but most of what's on the desk has nothing to do with your question, so the few passages that matter get overlooked and the summary has gaps.
 
-The amount of text the model can "spread out and look at" at once has a ceiling. That's the **context window**, which Chapter 3 compared to a desk. The material you paste in, your earlier conversation, and the answer it's about to write all take up desk space. When the material gets long, two things can happen:
+A fuller desk isn't automatically worse; useful material makes answers more accurate. What gets in the way is material that's irrelevant or contradicts itself. So the goal isn't "as little material as possible," it's making sure what's on the desk is what this task actually needs.
 
-- It goes over the limit, and the product says "too long" or only processes part of it.
-- It fits, but most of what's on the desk has nothing to do with your question, so the few passages that really matter are easy to overlook and the summary drops things.
+Be careful with uploads too. Uploading a PDF doesn't mean every page ends up in the context. Some products only pull out a few passages based on your question, and scans, tables, and images may not be read correctly (Chapters 3 and 20). For the parts that matter, paste the text directly, or first ask it what it was able to read.
 
-Chapter 3 also pointed out that a fuller desk isn't necessarily worse: useful material can make answers more accurate. The trouble comes from **irrelevant or conflicting content**, which can distract the model. So the goal isn't "as little as possible," but a desk holding mostly what this task actually needs.
+How long counts as "long" is measured in tokens. How many tokens a given amount of text turns into depends on the model's tokenizer, and Chapter 3 has measured numbers; for exact figures, use that product's token counter. For now, just remember: the longer the material, the more you should watch out for it not fitting or not being read carefully.
 
-Uploaded files deserve a bit of caution too. Uploading a PDF doesn't mean every page went into the context in full. Some products only retrieve the passages that seem relevant to your question, and scans, tables, and images may not be read correctly (Chapters 3 and 20). For the parts that matter, paste the text directly, or first ask it to tell you what it was able to read.
+## 2. First trick: split long material and handle it in pieces
 
-So "how long is long"? This is where the ruler of **token** comes in, but remember the caveat from Chapter 3.
+The desk is limited, so the most practical approach is not to pour everything in at once, but to split it up and handle each piece separately.
 
-> **Rough rule of thumb, not a law:** A page of English is usually several hundred tokens; a common rule of thumb is that a token is about three-quarters of an English word. But this **is only a rough rule of thumb, not a fixed ratio**: the actual token count depends on **which model's tokenizer** is used, and is also affected by punctuation, numbers, and any mixed-in code, differing by twenty or thirty percent between models. So this book **does not hard-code numbers like "how many words will overflow"**, each product's window size differs and keeps changing. For precision, use the official token-counting tool for the product (**and defer to the provider's official documentation**). All you need is one intuition: **the longer the material, the more careful you should be that it "won't fit" or "won't read it carefully."**
-
-## 2. Core move one: feed long material in chunks
-
-Since the desk is limited, the most practical move is this: **don't dump it all in at once; split it up and handle the parts separately.**
-
-One detail is easy to miss. If you just paste one part after another into the **same conversation**, everything you pasted earlier stays in the context (Chapter 13 comes back to this). The desk isn't any clearer, and you won't necessarily save money either. To really split the work, give each part **its own separate step**:
+One detail is easy to miss: if you paste one section after another into the same conversation, the earlier sections stay in the context (Chapter 13). The desk doesn't get any clearer, and it doesn't necessarily cost less. To really split things up, each piece needs its own separate step:
 
 | Way to split | How | Suits |
 | --- | --- | --- |
-| **Summarize sections, then combine** | Cut the long text into a few sections. Summarize each one in **a fresh conversation** and save the summaries. Finally, open **another fresh conversation**, paste in only those summaries, and have it synthesize an overview | A very long article, report, or book chapter |
-| **Process one at a time** | The material is already in separate pieces (multiple emails, multiple files), so process each piece or batch separately, note the results, and combine only those results in a fresh conversation | A pile of scattered material |
+| Summarize sections, then combine | Cut the long text into a few sections. Summarize each one in a fresh conversation and save the summaries. Finally, open another fresh conversation, paste in only those summaries, and have it put together an overview | A very long article, report, or book chapter |
+| One piece at a time | The material already comes in separate pieces (multiple emails, multiple files), so handle each piece or batch on its own, note the results, and combine only those results in a fresh conversation | A pile of scattered material |
 
 ```text
-The idea of feeding a long text in chunks:
+Handling a long text in pieces:
 
   Whole thing too long -> cut into [section 1][section 2][section 3]...
                             ↓ summarize each in its own fresh conversation
                           [summary 1][summary 2][summary 3]...
                             ↓ open another fresh conversation, paste only the summaries
-                          have it synthesize an "overview"
+                          have it put together an "overview"
 ```
 
-> **Key point:** Split this way, the desk holds just one section at a time, so it can read carefully, and when you combine, the desk holds only the condensed summaries. Cut at natural paragraphs and section breaks where you can; cutting mid-sentence makes it easy to misread the context. Know the trade-off too: summaries lose detail, so if you need to check a specific number after combining, go back to that part of the original. On cost, processing less at a time is often cheaper, but the actual bill depends on the product's caching and plan rules (Chapters 3 and 38).
+When you cut, cut at paragraph or chapter breaks, not in the middle of a sentence, or it may misread what comes before and after. This approach has a cost too: summaries drop details, so when you need to check a specific number after combining, you still have to go back to that section of the original. On cost, handling less at a time usually saves money, but how it actually adds up depends on the product's caching and plan rules (Chapters 3 and 38).
 
-## 3. Core move two: put a "leash" on it, answer from the material only
+## 3. Second trick: have it answer only from the material
 
-This is the most important move in the chapter, please make it a habit. Chapter 9 explained that when it isn't sure, it will **string together a plausible fake answer along the inertia of language**. When you feed material for it to summarize, the thing you fear most is it folding content **that isn't in the material at all** into the "summary."
+This is the most important trick in the chapter. As Chapter 9 explained, when it isn't sure it may just keep going and come up with a plausible-looking answer. When you ask it to summarize material, the worst case is that things that aren't in the material at all get "summarized" in.
 
-The fix is to draw an explicit boundary in the prompt:
+The fix is to draw a clear boundary in the prompt:
 
 ```text
 "Please answer only from the material I provide below.
@@ -61,61 +55,61 @@ The fix is to draw an explicit boundary in the prompt:
  Material: ... (pasted)"
 ```
 
-These few sentences do three things: (1) lock its answer **within the range of the material you gave**; (2) give it a way out of "if you don't know, just say so" (so it doesn't have to force a fabrication); (3) make it **give sources** so you can spot-check.
+Those few lines do three things: they keep the answer inside the material you gave; they give it a way out, "if you don't know, say so," so it doesn't have to make something up; and they have it show where each point comes from, so you can spot-check.
 
-> **Key point:** Why does this work? Because it turns the task from "**answer on your own ability**" (prone to hallucination) into "**find the answer in this material in front of me**" (Chapter 4 explained that with a basis to "continue" it's far more reliable). But **even with the leash, don't skip inspection entirely** — it can still misread or mix things up. So build the habit: have it **mark sources**, and you **spot-check a few key ones** against the original. This is the plain-language version of the whole **RAG** technique in Chapter 20 (giving AI an external knowledge base), where the core idea is the same: "**rather than bet it remembers right, feed the right material in front of it**" (Chapter 9).
+> **Key point:** This turns the job from "answer from what it remembers" into "find the answer in the material in front of it," and with something to go on it's much more reliable (Chapter 4). But drawing a boundary doesn't mean you can skip checking: it can still misread, or attribute something from one place to another. So have it show where things come from, and check a few key ones against the original yourself. RAG in Chapter 20 rests on the same idea: rather than betting on its memory, put the right material in front of it.
 
-## 4. The three most common routines: summarize, compare, extract
+## 4. The three most common jobs: summarize, compare, extract
 
-Most material work falls into these three kinds. Each has its own phrasing, so memorize the routine and you can put it to use right away.
+Most of what you'll do with material falls into these three jobs, and each has its own way of asking:
 
-| Routine | What you want | How to phrase the prompt |
+| Job | What you want | How to write the prompt |
 | --- | --- | --- |
-| **Summarize** | Make the long short, grab the key points | "Summarize this material into 5 key points, each no more than one sentence, for someone who hasn't read the original" |
-| **Compare** | See the similarities and differences across two or more pieces | "Compare these two plans on 'price, timeline, risk,' as a two-column table" |
-| **Extract** | Pull specific information out of the material | "Extract all the 'deadlines' and their matching 'owners' from these emails, as a list" |
+| Summarize | Make the long short and pick out the key points | "Summarize this material into 5 key points, each no more than one sentence, for someone who hasn't read the original" |
+| Compare | See how two or more pieces differ and overlap | "Compare these two plans on 'price, timeline, risk,' as a two-column table" |
+| Extract | Pull specific information out of the material | "Extract all the 'deadlines' and their matching 'owners' from these emails, as a list" |
 
-Notice every example uses the craft from Chapter 11: **spell out length, format, angle, audience.** "Summarize into 5 points, each one sentence, for someone who hasn't read it" — that's a good phrasing; just "summarize this" and it has to guess again.
+Each example uses the skill from Chapter 11: spell out length, format, angle, and audience. "Summarize into 5 points, one sentence each, for someone who hasn't read it" is a good request; just saying "summarize this" leaves it guessing again.
 
-> **How you'll actually run into this:** Of these three, **extract** is the most impressive and the one most needing the rules nailed down. For example, asking it to "extract all dates," you'd best add "**use YYYY-MM-DD format, sort chronologically, leave blank if not in the material**," otherwise it may convert on its own, drop some, or invent one for you. Spell out the rules + have it mark sources + you spot-check, run all three together and extraction is reliable.
+Of the three, extraction is where it shines most, and where you most need to pin down the rules. If you ask it to "pull out all the dates," add something like "use YYYY-MM-DD, sort them in order, and leave it blank if the material doesn't say," or it may convert things on its own, miss some, or even make one up. Clear rules, sources marked, and your own spot-check: with all three, extraction results are reliable.
 
-## 5. The key boundary: have it "read the material" or "answer on its own ability"
+## 5. Know the difference: reading your material, or answering from memory
 
-This chapter is really hammering one boundary that runs through the whole book, so let me make it explicit. When it answers you, there are two very different sources:
+This whole chapter has really been about one distinction that runs through the book. There are two ways a model can answer you, and where the answer comes from is completely different:
 
 | | Answer from its own knowledge | Answer only from the material you gave |
 | --- | --- | --- |
-| Where the answer comes from | The "knowledge" welded into its parameters during training (Chapter 9) | The material you spread on the desk this time |
-| Reliable or not | Easily outdated, possible hallucination, hard facts need re-checking | Relatively reliable (with a basis to "continue"), but still spot-check that it didn't misread |
-| Is there a "cutoff date" problem | **Yes**: it inherently doesn't know recent events (Chapter 9) | **No**: however new the material is, that's how new its answer is |
-| Suits what | General knowledge, explaining concepts, finding ideas | Handling the specific material in your hands, cases requiring "faithful to the original" |
+| Where the answer comes from | Knowledge learned into its parameters during training (Chapter 9) | The material you spread on the desk this time |
+| How reliable | May be out of date or hallucinated; check hard facts | It has something to go on, so it's fairly reliable, but still spot-check for misreadings |
+| Cutoff date problem? | Yes: it doesn't know about recent events (Chapter 9) | No: however new the material is, it can answer that new |
+| Good for | General knowledge, explaining concepts, finding ideas | Handling the specific material in your hands, when you need it faithful to the original |
 
-> **Key point:** When doing material work, you almost always want **the right-hand column**: have it "read the material I gave," not "guess on its own ability." That's why the "**answer from the material only**" leash is so critical. It also sidesteps the "knowledge cutoff" trap: even if the material came out today and it never saw it in training, as long as you paste it in, it can still answer from the material. Hold this firmly and Chapter 20's **RAG** will make immediate sense: that's just making "feeding material" **automatic and at scale**: you ask a question, and the system automatically pulls relevant pieces from a big knowledge base and feeds them, along with your question, to the model.
+When you're working with material, the right-hand column is almost always what you want. It also gets you around the knowledge cutoff: even material that came out today, which it never saw in training, it can answer from as long as you paste it in. RAG in Chapter 20 is this same "hand it the material" step, done automatically: you ask a question, and the system finds the relevant passages in a large collection of documents and hands them to the model along with your question.
 
-## 6. Common misconceptions, corrected
+## 6. Common misconceptions, corrected all at once
 
-| Common misconception | Reality |
+| Misconception | Reality |
 | --- | --- |
-| However long the material, just paste it all in at once | The desk (context window) is limited; too long won't fit, and lots of irrelevant content can distract it; **feed it in chunks** (Chapter 3) |
-| Pasting one part at a time into the same conversation counts as chunking | Earlier parts stay in the context; summarize each part in a fresh conversation, then combine only the summaries in another fresh one |
-| If I upload a file, it has definitely read the whole thing | Some products retrieve only parts, and scans or tables may be misread; paste the key text directly, or ask what it was able to read |
-| "Summarize this" will give me the summary I want | You have to spell out **length, format, angle, audience**, otherwise it can only guess (Chapter 11) |
-| Have it summarize material and it's bound to be faithful to the original | It may invent what isn't in the material; put on the "**answer from the material only, say so if not there**" leash and spot-check |
-| Just memorize a fixed number for how many words overflow the window | Tokens vary by model, it's a **rough rule of thumb** not a fixed value, and window sizes keep changing, defer to the official counting tool / docs |
-| Once material is given, no checking needed at all | The leash greatly suppresses fabrication, but it can still misread or mix things up; have it mark sources and spot-check the key items |
-| You can't use AI on the latest material (it doesn't know new things) | Only "answering from knowledge" is limited by the knowledge cutoff; **paste the new material in and have it answer from the material** and you're unaffected |
+| However long the material, just paste it all in at once | The desk (context window) is limited; too long won't fit, and lots of irrelevant content gets in the way; split it up (Chapter 3) |
+| Pasting one part at a time into the same conversation counts as splitting | Earlier parts stay in the context; summarize each part in a fresh conversation, then combine only the summaries in another fresh one |
+| If I upload a file, it has definitely read the whole thing | Some products only pull out parts, and scans or tables may be misread; paste the key text directly, or ask what it was able to read |
+| "Summarize this" will give me the summary I want | You have to spell out length, format, angle, and audience, or it can only guess (Chapter 11) |
+| Have it summarize material and it's bound to be faithful to the original | It may write in things that aren't in the material; tell it to "answer only from the material, and say so if it isn't there," then spot-check |
+| Memorize a fixed ratio and you can work out how many words overflow the window | Token counts vary by model, and window sizes keep changing; for exact numbers use a token counter (Chapter 3) |
+| Once you've given it material, no checking is needed | A clear boundary cuts down a lot on made-up content, but it can still misread or mix things up; have it mark sources and spot-check the key items |
+| You can't use AI on the latest material (it doesn't know new things) | Only answering from its own knowledge is limited by the cutoff; paste the new material in and have it answer from that, and you're fine |
 
 ## Summary
 
-- Before pasting, check that you're allowed to; remove other people's personal information and sensitive contract terms, or replace them with placeholders (Chapter 37).
-- Two traps in feeding material: **the material is too long to fit / not read carefully**, and it **invents what isn't in the material into the summary** (the hallucination from Chapter 9). Uploaded files may not be read in full either (Chapters 3 and 20).
-- Feed long material **in chunks**: summarize each part in its own fresh conversation, then open another fresh conversation and combine only the summaries; pasting on in the same conversation doesn't take earlier parts off the desk. Cut at natural paragraphs where possible.
-- "How long is long" is measured in tokens, but that's a **rough rule of thumb**, varies by model, and the window keeps changing; for precision, use the official counting tool and defer to the provider's documentation.
-- The most critical move: put on the leash, "**answer only from the material I gave, say so if it's not there, don't make things up**," have it **mark sources**, and you **spot-check**.
-- The three routines: **summarize, compare, extract**, each spelled out with the Chapter 11 craft for length / format / angle; extraction especially needs the rules nailed down.
-- Remember the boundary: material work wants "**read the material I gave**" rather than "answer on its own ability," which is both more reliable and sidesteps the knowledge cutoff; it's the core idea of Chapter 20's **RAG**.
+- Before pasting material, make sure you're allowed to; delete or replace other people's personal information and sensitive contract terms first (Chapter 37).
+- Two common problems: material too long to fit or to be read carefully, and things that aren't in the material showing up in the summary (Chapter 9). Uploaded files aren't necessarily read in full either (Chapters 3 and 20).
+- Split long material: summarize each section in its own fresh conversation, then combine only the summaries in another fresh one; pasting more into the same conversation doesn't take the earlier parts off the desk. Cut at paragraph breaks where you can.
+- How long counts as "long" is measured in tokens, and the numbers vary by model; for exact figures, use a token counter (Chapter 3).
+- The most important trick: tell it to "answer only from the material I gave you; if it isn't there, say so, and don't make anything up," have it mark where things come from, and spot-check.
+- The three most common jobs are summarize, compare, and extract; spell out length, format, and angle as in Chapter 11, and pin down the rules especially carefully for extraction.
+- With material, what you want is "read what I gave you," not "answer from what you remember": it's more reliable and gets around the knowledge cutoff, and it's also the basic idea behind RAG in Chapter 20.
 
-In the next chapter we switch angles and look at how to manage the "conversation" itself: one topic per conversation, when to open a new one, how to get it to "remember" your long-term preferences, which is **multi-turn conversation and context management**.
+The next chapter looks at the conversation itself: one topic per conversation, when to start a new one, and how to get it to remember your long-term preferences. In other words, multi-turn chats and context management.
 
 ---
 

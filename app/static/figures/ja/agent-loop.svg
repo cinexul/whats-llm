@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img">
+<title>エージェントのループ：モデルが申請書を書き、周りのソフトが権限を確かめて実行し、結果を文脈に戻す。完了まで繰り返す</title>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#56544b"/></marker>
+<marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#aa563d"/></marker>
+<marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3d6a8a"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5f7f3a"/></marker>
+</defs>
+<rect x="0.75" y="0.75" width="718.5" height="418.5" rx="12" fill="#faf9f5" stroke="#e5e1d8" stroke-width="1.5"/>
+<g font-family="'Hiragino Sans','Yu Gothic','Meiryo','Noto Sans CJK JP','IPAGothic',sans-serif">
+<rect x="178" y="30" width="526" height="148" rx="12" fill="#faece7"/>
+<text x="194" y="54" font-size="14" fill="#aa563d" font-weight="600">モデル：文字を書くだけ</text>
+<rect x="178" y="242" width="526" height="148" rx="12" fill="#e6eef4"/>
+<text x="194" y="380" font-size="14" fill="#3d6a8a" font-weight="600">周りのソフト：実際に実行する</text>
+<rect x="12" y="72" width="142" height="80" rx="10" fill="#f6efd9" stroke="#b08a2e" stroke-width="1.5"/>
+<text x="83.0" y="106" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">あなたの目標</text>
+<text x="83.0" y="132" font-size="14" fill="#56544b" text-anchor="middle">会場を三つ比較</text>
+
+<rect x="12" y="270" width="142" height="80" rx="10" fill="#edf2e4" stroke="#5f7f3a" stroke-width="1.5"/>
+<text x="83.0" y="304" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">成果を渡す</text>
+<text x="83.0" y="330" font-size="14" fill="#56544b" text-anchor="middle">出典と証拠付き</text>
+
+<rect x="198" y="72" width="190" height="80" rx="10" fill="#ffffff" stroke="#aa563d" stroke-width="1.5"/>
+<text x="293.0" y="106" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">① 文脈を読み</text>
+<text x="293.0" y="132" font-size="14" fill="#56544b" text-anchor="middle">次の一手を決める</text>
+
+<rect x="494" y="72" width="190" height="80" rx="10" fill="#ffffff" stroke="#aa563d" stroke-width="1.5"/>
+<text x="589.0" y="106" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">② 申請書を書く</text>
+<text x="589.0" y="132" font-size="14" fill="#56544b" text-anchor="middle">ツール名＋引数</text>
+
+<rect x="494" y="270" width="190" height="80" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="589.0" y="304" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">③ 窓口が実行</text>
+<text x="589.0" y="330" font-size="14" fill="#56544b" text-anchor="middle">権限を確認、範囲外は質問</text>
+
+<rect x="198" y="270" width="190" height="80" rx="10" fill="#ffffff" stroke="#3d6a8a" stroke-width="1.5"/>
+<text x="293.0" y="304" font-size="16" fill="#191919" text-anchor="middle" font-weight="600">④ 控えを文脈へ</text>
+<text x="293.0" y="330" font-size="14" fill="#56544b" text-anchor="middle">結果もエラーも戻す</text>
+
+<line x1="154" y1="100" x2="196" y2="100" stroke="#56544b" stroke-width="2" marker-end="url(#a)"/>
+<line x1="388" y1="112" x2="492" y2="112" stroke="#aa563d" stroke-width="2" marker-end="url(#r)"/>
+<line x1="589" y1="152" x2="589" y2="268" stroke="#aa563d" stroke-width="2" marker-end="url(#r)"/>
+<line x1="494" y1="310" x2="390" y2="310" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<line x1="293" y1="270" x2="293" y2="154" stroke="#3d6a8a" stroke-width="2" marker-end="url(#b)"/>
+<path d="M198 130 H168 V330 H156" fill="none" stroke="#5f7f3a" stroke-width="2" marker-end="url(#g)"/>
+<text x="441" y="216" font-size="15" fill="#191919" text-anchor="middle" font-weight="600">一手やる → 結果を見る → 次を決める</text>
+<text x="601" y="216" font-size="14" fill="#aa563d">申請書を渡す</text>
+<text x="281" y="216" font-size="14" fill="#3d6a8a" text-anchor="end">控えを読む</text>
+<text x="160" y="216" font-size="14" fill="#5f7f3a" text-anchor="end">完了したら</text>
+</g>
+</svg>
