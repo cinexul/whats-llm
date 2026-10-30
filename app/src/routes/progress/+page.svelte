@@ -4,6 +4,7 @@
 	import { lang } from '$lib/lang';
 	import { ui, countText } from '$lib/ui';
 	import { quizCopy } from '$lib/quiz-copy';
+	import { chapterPractice } from '$lib/chapter-practice';
 	import {
 		cardsStore,
 		readStore,
@@ -204,12 +205,15 @@
 			<ul class="ch-list">
 				{#each part.chapters as ch (ch.slug)}
 					{@const sum = chapterSummary(cards, ch.slug, now)}
+					{@const practice = chapterPractice($lang, ch)}
 					<li class:draft={ch.draft}>
-						<a href="{base}/chapter/{ch.slug}/{ch.draft ? '' : '#quiz'}">
+						<a href="{base}/chapter/{ch.slug}/{practice.anchor}">
 							<span class="row-title">{titleOf.get(ch.slug) ?? ch.title}</span>
 							<span class="row-meta">
 								{#if read.has(ch.slug)}<span class="chk" title={t.readMark}>✓</span>{/if}
-								{#if sum.due > 0}
+								{#if !practice.hasQuiz && !ch.draft}
+									<span class="badge m-none">{practice.readingOnly}</span>
+								{:else if sum.due > 0}
 									<span class="badge due">{t.reviewDue} {sum.due}</span>
 								{:else if sum.mastery}
 									<span class="badge m-{sum.mastery}">{masteryLabel(sum.mastery)}</span>

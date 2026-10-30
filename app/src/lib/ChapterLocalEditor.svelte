@@ -16,6 +16,8 @@
 	const active = $derived(record != null && record.markdown !== null);
 	const originalUpdated = $derived(active && record?.original !== originalBody);
 	let dialog: HTMLDialogElement;
+	let editButton: HTMLButtonElement;
+	let returnFocus: HTMLElement | null = null;
 	let opened = $state(false);
 	let opening = $state(false);
 	let disposed = false;
@@ -37,6 +39,7 @@
 
 	async function openEditor(nextTab: typeof tab) {
 		if (saving || opening || opened) return;
+		returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 		opening = true;
 		try {
 			// 每次打开编辑器时获取一次最新修订号，绝不覆盖已打开的草稿。
@@ -56,11 +59,18 @@
 		finally { opening = false; }
 	}
 
+	async function restoreFocus() {
+		await tick();
+		const target = returnFocus?.isConnected && returnFocus !== document.body ? returnFocus : editButton;
+		target?.focus();
+	}
+
 	function closeEditor() {
 		if (saving) return;
 		if (dirty && !window.confirm(t.discard)) return;
 		opened = false;
 		dialog.close();
+		void restoreFocus();
 	}
 
 	async function save() {
@@ -78,7 +88,7 @@
 		initialDraft = draft;
 		opened = false;
 		dialog.close();
-		try { await invalidate('app:chapter-edits'); } finally { saving = false; }
+		try { await invalidate('app:chapter-edits'); } finally { saving = false; void restoreFocus(); }
 	}
 
 	async function restore() {
@@ -157,13 +167,15 @@
 	});
 </script>
 
-<section class="edit-panel" class:modified={active} data-testid="local-edit-panel" aria-label={t.editor}>
+<section id="chapter-tools" tabindex="-1" class="edit-panel" class:modified={active} data-testid="local-edit-panel" aria-label={t.tools}>
+	<h2 class="workspace-title">{t.tools}</h2>
+	<p class="scope">{t.correction}</p>
 	<div class="panel-row">
 		{#if active && record}
 			<div class="saved"><strong data-testid="local-edited-badge">✎ {t.badge}</strong><span>{t.saved} {editDate(lang, record.updatedAt)}</span></div>
 		{/if}
 		<div class="actions">
-			<button data-testid="edit-chapter" disabled={saving || opening} onclick={() => openEditor('edit')}>{t.edit}</button>
+			<button bind:this={editButton} data-testid="edit-chapter" disabled={saving || opening} onclick={() => openEditor('edit')}>{t.edit}</button>
 			{#if active}
 				<button data-testid="view-local-diff" disabled={saving || opening} onclick={() => openEditor('diff')}>{t.diff}</button>
 				<button class="subtle" data-testid="restore-original" disabled={saving} onclick={restore}>{t.restore}</button>
@@ -206,7 +218,8 @@
 </dialog>
 
 <style>
-	.edit-panel { margin: -.2rem 0 1.8rem; padding: .6rem 0; border-bottom: 1px solid var(--border); font-size: calc(.8rem * var(--scale-nav)); }
+	.edit-panel { margin: 1.5rem 0; padding: 1rem 0; scroll-margin-top: 1rem; border-top: 1px solid var(--border); font-size: calc(.8rem * var(--scale-nav)); }
+	.workspace-title { font-size: 1rem; margin: 0; color: var(--text-muted); }
 	.edit-panel.modified { border-left: 3px solid var(--accent); padding: 1rem; background: var(--bg-sidebar); border-radius: 0 10px 10px 0; }
 	.panel-row, .actions { display: flex; align-items: center; flex-wrap: wrap; gap: .45rem .75rem; }
 	.panel-row { justify-content: space-between; }

@@ -5,7 +5,7 @@ This appendix gathers in one place the concrete numbers the chapters refer to: t
 Each of the five groups below says the same thing in Chinese, Japanese, and English (the code group changes only the comment). We counted tokens with two public tokenizers (a tokenizer is the program that splits text into tokens):
 
 - o200k_base: a tokenizer published by OpenAI. According to the model table in OpenAI's tiktoken repository, it is used by GPT-4o, GPT-4.1, the GPT-5 series, o1, o3, o4-mini, and others. The table does not list the 2026 GPT-6 series, so you cannot conclude from it that the newest models use it too.
-- Qwen3: the tokenizer of Alibaba's Qwen3 series (released April 2025), with a vocabulary (the number of distinct tokens it knows) of 151,936. The newer Qwen3.8 enlarged its vocabulary to 248,320, so its counts for the same sentence may differ again.
+- Qwen3.8: this book pins the official tokenizer of Qwen/Qwen3.8-27B. Its file contains 248,044 base tokens and 33 added tokens, 248,077 in total. The model configuration's 248,320 is the embedding/output capacity, not this tokenizer's actual vocabulary size.
 
 1. Everyday request
    - Chinese: 请帮我写一封邮件，告诉同事明天的会议改到下午三点。
@@ -28,23 +28,25 @@ Each of the five groups below says the same thing in Chinese, Japanese, and Engl
    - Japanese: モデル自体は前回の会話を覚えていません。製品の「メモリ」は、保存しておいた文章を今回のコンテキストに入れ直す仕組みです。その文章がなければ、新しい会話では以前の発言を知りません。
    - English: The model itself does not remember your last conversation. A product's "memory" puts saved text back into the current context. Without that text, a new conversation knows nothing of what you said before.
 
-How to read this: each cell is the token count as "o200k_base / Qwen3" for the sentence alone; when you send it through an API, the message format adds a few more tokens.
+How to read this: each cell is the token count as "o200k_base / Qwen3.8" for the sentence alone; when you send it through an API, the message format adds a few more tokens.
 
 | Example | Chinese | Japanese | English |
 | --- | --- | --- | --- |
-| Everyday request | 21 / 16 | 25 / 23 | 21 / 21 |
-| With English technical terms | 11 / 10 | 13 / 14 | 12 / 12 |
-| With numbers | 19 / 27 | 28 / 31 | 25 / 32 |
-| One line of code | 10 / 10 | 13 / 13 | 10 / 10 |
-| Short paragraph | 48 / 40 | 65 / 61 | 40 / 40 |
+| Everyday request | 21 / 15 | 25 / 18 | 21 / 21 |
+| With English technical terms | 11 / 10 | 13 / 11 | 12 / 12 |
+| With numbers | 19 / 27 | 28 / 30 | 25 / 32 |
+| One line of code | 10 / 9 | 13 / 11 | 10 / 10 |
+| Short paragraph | 48 / 35 | 65 / 43 | 40 / 40 |
 
-A few details: Qwen3 splits numbers one digit at a time, so "2026" costs 4 tokens, while o200k_base groups up to three digits into one token; that is why the sentences with numbers cost clearly more in Qwen3. Japanese is the highest in all five groups. For the short paragraph, English is the cheapest in o200k_base, while Chinese and English tie in Qwen3.
+A few details: Qwen3.8 still splits digits individually, so "2026" costs 4 tokens, while o200k_base groups up to three digits. Japanese is no longer highest in all five groups: with Qwen3.8, English is highest for the everyday request and the numbers example. The short paragraph is cheapest in English with o200k_base, but in Chinese with Qwen3.8 (35, versus 40 in English).
 
-Takeaway: how much the languages differ depends on the tokenizer, and English is not always cheaper. The same Chinese request takes only 16 tokens in Qwen3, fewer than the 21 of the English version.
+Takeaway: how much the languages differ depends on the tokenizer, and English is not always cheaper. The same Chinese request takes only 15 tokens in Qwen3.8, fewer than the 21 of the English version.
 
-To count your own text, open the book's Interactive labs page, which will add a tokenizer lab.
+To count your own text, open the [tokenizer lab](/labs/#tokens). These five groups share the same sample data as the lab presets.
 
-Where the numbers come from: counted locally on 28 October 2026 with o200k_base (js-tiktoken) and Qwen3's tokenizer file. Which models use o200k_base follows the tiktoken repository's model table; the vocabulary sizes come from the configuration files of the two Qwen models. Tokenizers change with model generations, so count again when the model changes.
+Source: recomputed on 30 October 2026 with the official Python tiktoken and tokenizers libraries, checking JavaScript token IDs one by one. Samples are centralized in token-samples.json. Qwen3.8 applies the official NFC normalization and recognizes added special markers, but does not add message wrappers automatically. o200k_base treats literal special-marker strings as ordinary text. These are text counts, not chat API usage.
+
+The lab also offers a separately labeled [ctok community estimate](https://github.com/sanderland/ctok), limited to the v4.8 method for the Claude Opus 4.8 family. It is not an official Anthropic tokenizer: it estimates counts only, without token IDs or actual splits. The display separates a “content estimate” (the single-user-message estimate minus a fixed overhead of 6) from the total including that overhead. Content-boundary rules remain, so this is not a guaranteed raw-text token count and is not folded into the official tokenizer comparison above. Opus 5/5.5 differences are not modeled; do not generalize this estimate to every Claude model.
 
 ## 2. Context windows and maximum output
 
@@ -174,7 +176,7 @@ The numbers in this appendix were checked on 28 October 2026. Next time, look th
 
 Checked 2026-10-28. The token counts in section 1 were measured locally; all other numbers come from the official pages below.
 
-- Tokenizers: [tiktoken model table](https://github.com/openai/tiktoken/blob/main/tiktoken/model.py), [Qwen3-8B configuration](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json), [Qwen3.8-27B configuration](https://huggingface.co/Qwen/Qwen3.8-27B/blob/main/config.json).
+- Tokenizers: [tiktoken model table](https://github.com/openai/tiktoken/blob/main/tiktoken/model.py), [pinned Qwen3.8-27B tokenizer](https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/tokenizer.json). KV-cache example: [Qwen3-8B configuration](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json).
 - Context and API prices: Anthropic's [models overview](https://platform.claude.com/docs/en/about-claude/models/overview) and [pricing](https://platform.claude.com/docs/en/about-claude/pricing); OpenAI's [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra), [GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol), [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna), and [pricing](https://developers.openai.com/api/docs/pricing); Google's [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon), [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash), and [pricing](https://ai.google.dev/gemini-api/docs/pricing); DeepSeek's [models and pricing (USD)](https://api-docs.deepseek.com/quick_start/pricing) and [Chinese version (CNY)](https://api-docs.deepseek.com/zh-cn/quick_start/pricing); Alibaba Cloud Model Studio's [qwen3.8-max](https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max) and [qwen3.8-flash](https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash); Kimi's [K3.1 Pro guide](https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart), [inference pricing](https://platform.kimi.ai/docs/pricing/chat), and [batch pricing](https://platform.kimi.ai/docs/pricing/batch).
 - Open models: Hugging Face model cards for [Kimi K3](https://huggingface.co/moonshotai/Kimi-K3), [Qwen3.8-2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B), [DeepSeek-V4-Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro), [gpt-oss-120b](https://huggingface.co/openai/gpt-oss-120b), [Gemma 4 31B](https://huggingface.co/google/gemma-4-31B-it), [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B), [Gemma 4 26B A4B](https://huggingface.co/google/gemma-4-26B-A4B-it), and [gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b).
 - Running locally: [llama.cpp quantization guide](https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md), Ollama's [context length](https://docs.ollama.com/context-length) and [FAQ](https://docs.ollama.com/faq).

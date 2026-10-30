@@ -4,22 +4,30 @@ They share one cause: AI sees text differently from how we do. It doesn't read l
 
 ## 1. Token: the "grains" AI cuts text into
 
-We read "Please help me write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m." as 17 words, or 95 characters counting spaces and punctuation. The model receives a sequence of **tokens**: a tokenizer first cuts the text into pieces, then hands them to the model. The figure below shows how two real tokenizers split this sentence: o200k_base, used by GPT-4o, and the tokenizer of Alibaba's Qwen3.
+We read "Please help me write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m." as 17 words, or 95 characters counting spaces and punctuation. The model receives a sequence of **tokens**: a tokenizer first cuts the text into pieces, then hands them to the model. The figure below shows how two real tokenizers split this sentence: o200k_base, used by GPT-4o, and the tokenizer of Alibaba's Qwen3.8.
 
-![The same English sentence split into 21 tokens by both o200k_base and Qwen3, with a table comparing token counts for the Chinese, Japanese, and English versions of the sentence](/figures/en/tokens.svg)
+![The same English sentence split into 21 tokens by both o200k_base and Qwen3.8, with a table comparing token counts for the Chinese, Japanese, and English versions of the sentence](/figures/en/tokens.svg)
 
-Here both tokenizers produce the same 21 tokens. Most words are one token each, including the space in front of them; "tomorrow's" becomes "tomorrow" plus "'s", and "3 p.m." takes five tokens.
+Here both tokenizers produce 21 tokens. The boxes show the actual pieces, including spaces; a ×2 marker means two tokens are needed to reconstruct one character. Equal counts do not generally guarantee identical splitting rules.
 
 A token is the unit a model works with, not necessarily a character or a word:
 
-- It may be a word, part of a word, a single character, or even part of a character's encoding. Take the Chinese word 骆驼 ("camel"): o200k_base splits it into 4 tokens (each character in two halves), Qwen3 into 2, while the English "camel" is a single token in both. Punctuation, spaces, and line breaks count too, sometimes merged with neighboring text.
+- It may be a word, part of a word, a single character, or even part of a character's encoding. Take the Chinese word 骆驼 ("camel"): o200k_base splits it into 4 tokens (each character in two halves), Qwen3.8 into 1, while the English "camel" is a single token in both. Punctuation, spaces, and line breaks count too, sometimes merged with neighboring text.
 - A tokenizer is a fixed vocabulary and set of splitting rules set up for a model ahead of time; it doesn't make up new rules each time you chat. Different models often use different tokenizers, so the same sentence can come out at different token counts.
 
 Why cut text this way? Splitting into single letters or characters makes sequences long and fragmented; splitting into whole words means far too many words, with new words and typos appearing all the time. Tokens are the compromise: common combinations become one piece and rare ones are split smaller, so text is never too fragmented, yet any string can be spelled out.
 
+### Why did Chinese and Japanese used to need more tokens?
+
+Tokenizers evolve too. Some earlier vocabularies covered common English fragments better than common Chinese or Japanese character and word combinations, splitting the latter more finely—even into several tokens per character. That does not make these languages inherently more expensive. Later tokenizers with improved multilingual coverage can represent the same text with fewer tokens. OpenAI's [GPT-4o announcement](https://openai.com/index/hello-gpt-4o/) illustrates the new tokenizer's compression across several languages.
+
+Two reproducible examples, in the order r50k_base → cl100k_base → o200k_base: this chapter's Chinese request, “请帮我写一封邮件，告诉同事明天的会议改到下午三点。”, takes **50 → 28 → 21** tokens; Japanese “お誕生日おめでとう” (happy birthday) takes **14 → 9 → 8**. We recomputed these with js-tiktoken; see [OpenAI's counting tutorial](https://developers.openai.com/cookbook/examples/how_to_count_tokens_with_tiktoken) for the method. These counts cover only these two exact texts, not message formatting. They do not imply the same reduction for every language, text, or newer model. Fewer tokens let a fixed token budget hold more of this kind of text, but do not by themselves prove greater model intelligence; actual cost also depends on model prices and request usage.
+
 > **Quick math: roughly how many tokens is a passage?**
-> Measured on this book's text with these two tokenizers, English comes to about 1.3 tokens per word (one token per 4 to 5 characters on average). Chinese and Japanese come to about 0.65 to 0.77 tokens per character. So a 1,000-word English article is about 1,300 tokens, and a 1,000-character Chinese article about 700. An older tokenizer such as cl100k_base, used by GPT-4, needed about one token per Chinese character.
-> These are rough rules of thumb: counts depend on the tokenizer and are affected by punctuation, digits, and code. The example sentence takes 21 tokens in both Chinese and English with o200k_base, and with Qwen3 the Chinese version needs fewer, so "English uses fewer tokens than Chinese" is not a law. For precise counts, use the counter for the model in question or check the usage the API reports. Appendix E compares more sentences.
+> Do not equate characters or words with tokens, or reuse a ratio measured with an older tokenizer. Count a representative passage with the actual model's tokenizer, then estimate similar material from that sample. Digits, code, and language can change the ratio.
+> These are rough rules of thumb: counts depend on the tokenizer and are affected by punctuation, digits, and code. The example sentence takes 21 tokens in both Chinese and English with o200k_base, and with Qwen3.8 the Chinese version needs fewer, so "English uses fewer tokens than Chinese" is not a law. For precise counts, use the counter for the model in question or check the usage the API reports. Appendix E compares more sentences.
+
+The lab also offers a separately labeled [ctok community estimate](https://github.com/sanderland/ctok), limited to the v4.8 method for the Claude Opus 4.8 family. It is not an official Anthropic tokenizer: it estimates counts only, without token IDs or actual splits. The display separates a “content estimate” (the single-user-message estimate minus a fixed overhead of 6) from the total including that overhead. Content-boundary rules remain, so this is not a guaranteed raw-text token count and is not folded into the official tokenizer comparison above. Opus 5/5.5 differences are not modeled; do not generalize this estimate to every Claude model.
 
 ## 2. The context window: the model's "workbench"
 
@@ -81,14 +89,14 @@ So even when you feel you "just asked a small question," pasting a lot of materi
 | Misconception | Reality |
 | --- | --- |
 | A token is one character | A token is a tokenizer's unit; it can be a word, part of a word, a character, or even part of a character |
-| English always uses fewer tokens | It depends on the tokenizer: this chapter's example is 21 tokens in Chinese and English with o200k_base, and only 16 in Chinese with Qwen3 |
+| English always uses fewer tokens | It depends on the tokenizer: this chapter's example is 21 tokens in Chinese and English with o200k_base, and only 15 in Chinese with Qwen3.8 |
 | It must remember every earlier chat | The product decides what history or memory to bring in; chats aren't written into the parameters |
 | The bigger the context window, the more carefree | It holds more, but costs more and runs slower, and irrelevant content still gets in the way |
 | Forgetting always means a malfunction | The information may not have been brought in, or was summarized or trimmed; a model can also overlook information that is still there |
 
 ## Summary
 
-- A token is the unit of text a tokenizer produces. The same English sentence is 21 tokens with both o200k_base and Qwen3, while its Chinese version is 21 and 16; use the model's own counter for precise numbers.
+- A token is the unit of text a tokenizer produces. The same English sentence is 21 tokens with both o200k_base and Qwen3.8, while its Chinese version is 21 and 15; use the model's own counter for precise numbers.
 - The context window is one request's token budget, shared by system instructions, history, material, and the answer. As of October 2026, Claude's API window is 1 million tokens.
 - The product manages the conversation: full history, summaries, and selected passages are all ways of supplying context, and none of them retrains the model.
 - In a long conversation, key points can get buried, content can contradict itself, and summaries can drop details, so it loses track; but useful context also makes answers better.
@@ -105,7 +113,7 @@ In the next chapter we'll look at how the model, after cutting text into tokens 
 The sources above were checked 2026-10-22.
 
 - [Anthropic models overview](https://platform.claude.com/docs/en/about-claude/models/overview): current Claude models have a 1M-token context window and 128K-token maximum output, with 1M tokens roughly 555K English words; Claude Opus 5.5 costs $4 per million input tokens and $20 per million output tokens. Checked 2026-10-28.
-- Token counts in this chapter were measured with js-tiktoken's o200k_base encoding and the [Qwen3-0.6B tokenizer file](https://huggingface.co/Qwen/Qwen3-0.6B) on 2026-10-28.
+- Token counts in this chapter were measured with js-tiktoken's o200k_base encoding and the [Qwen3.8-27B tokenizer file](https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/tokenizer.json) on 2026-10-30.
 
 ---
 

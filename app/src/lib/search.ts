@@ -19,8 +19,12 @@ interface IndexEntry {
 
 // Markdownの記号を落として読みやすいプレーンテキストにする
 function toPlain(md: string): string {
+	// Keep visible examples searchable, without interpreting their literal HTML or
+	// punctuation as Markdown. Only comments outside code are hidden metadata.
+	const code: string[] = [];
 	return md
-		.replace(/```[\s\S]*?```/g, ' ') // コードブロック
+		.replace(/^ {0,3}(`{3,}|~{3,})[^\n]*\n([\s\S]*?)^ {0,3}\1[ \t]*$/gm, (_, _fence, body: string) => `\u0000CODE${code.push(body) - 1}\u0000`)
+		.replace(/<!--[\s\S]*?-->/g, ' ')
 		.replace(/`([^`]+)`/g, '$1')
 		.replace(/<\/?aside\b[^>]*>/g, ' ') // おまけ囲みのタグ
 		.replace(/^>\s?/gm, '')
@@ -32,6 +36,7 @@ function toPlain(md: string): string {
 		.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1') // リンク
 		.replace(/[ \t]+/g, ' ')
 		.replace(/\n{2,}/g, '\n')
+		.replace(/\u0000CODE(\d+)\u0000/g, (_, index: string) => code[Number(index)])
 		.trim();
 }
 

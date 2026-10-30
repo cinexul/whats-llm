@@ -6,6 +6,9 @@ Get-ChildItem -LiteralPath $portable -Filter '*.dll' -File | ForEach-Object {
   $resources[$_.FullName] = $_.Name
 }
 if ($resources.Count -eq 0) { throw 'No runtime DLLs are available for the installer.' }
+Get-ChildItem -LiteralPath (Join-Path $portable 'licenses') -File | ForEach-Object {
+  $resources[$_.FullName] = "licenses/$($_.Name)"
+}
 
 # Reuse the tested runtime DLLs, without the portable data/ marker.
 $override = Join-Path $env:RUNNER_TEMP 'installer-config.json'

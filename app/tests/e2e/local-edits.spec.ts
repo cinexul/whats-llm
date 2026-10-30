@@ -181,3 +181,22 @@ for (const language of ['zh', 'ja', 'en']) {
 		await expect(page.getByTestId('local-edited-badge')).toBeVisible();
 	});
 }
+
+test('secondary chapter tools remain keyboard discoverable and return focus after closing', async ({ page }) => {
+	await page.goto(chapter);
+	await page.locator('aside.toc a[href="#chapter-tools"]').focus();
+	await page.keyboard.press('Enter');
+	await expect(page.locator('#chapter-tools')).toBeFocused();
+	await page.getByTestId('edit-chapter').focus();
+	await page.keyboard.press('Enter');
+	await expect(editor(page)).toBeVisible();
+	await page.keyboard.press('Escape');
+	await expect(editor(page)).not.toBeVisible();
+	await expect(page.getByTestId('edit-chapter')).toBeFocused();
+	await page.setViewportSize({ width: 700, height: 760 });
+	await page.goto(chapter);
+	await page.locator('details.mobile-toc summary').click();
+	await page.locator('details.mobile-toc a[href="#chapter-tools"]').click();
+	await expect(page.locator('details.mobile-toc')).not.toHaveAttribute('open');
+	await expect(page.locator('#chapter-tools')).toBeFocused();
+});

@@ -8,6 +8,7 @@
 	import ChapterPractice from '$lib/ChapterPractice.svelte';
 	import ChapterMetadata from '$lib/ChapterMetadata.svelte';
 	import ChapterLocalEditor from '$lib/ChapterLocalEditor.svelte';
+	import { localEditsCopy, localEditErrorText } from '$lib/local-edits-copy';
 	import type { Lang } from '$lib/manifest';
 	import {
 		annotations,
@@ -356,18 +357,18 @@
 	<article bind:this={article}>
 		<p class="breadcrumb">{data.partTitle}</p>
 		<h1>{data.title.replace(/^(第\d+章|付録\s*[A-D]?|附录\s*[A-D]|Appendix\s+[A-D]|\d+)[\s　.:：、]*/, '')}</h1>
-		{#if !data.draft}
-			{#key `${data.lang}:${data.slug}`}
-				<ChapterLocalEditor lang={data.lang} slug={data.slug} originalBody={data.originalBody} record={data.localEdit} errorCode={data.localEditError} />
-			{/key}
+		{#if data.localEdit?.markdown != null}
+			<p class="local-edit-status" data-testid="local-edit-status"><a href="#chapter-tools">✎ {localEditsCopy[data.lang as Lang].badge}</a></p>
 		{/if}
-		{#if data.toc.length > 0}
+		{#if data.localEditError}<p class="local-edit-status" role="alert">{localEditErrorText(data.lang as Lang, data.localEditError)}</p>{/if}
+		{#if data.toc.length > 0 || !data.draft}
 			<details class="mobile-toc" bind:open={mobileTocOpen}>
 				<summary><Icon name="book" size={19} /><span>{t.chapterSections}</span><span class="toc-chevron"><Icon name="chevron" size={18} /></span></summary>
 				<nav aria-label={t.chapterSections}>
 					{#each data.toc as item (item.id)}
 						<a href="#{item.id}" onclick={() => { mobileTocOpen = false; }}>{item.text}</a>
 					{/each}
+					{#if !data.draft}<a href="#chapter-tools" onclick={() => { mobileTocOpen = false; }}>{localEditsCopy[data.lang as Lang].tools}</a>{/if}
 				</nav>
 			</details>
 		{/if}
@@ -386,6 +387,11 @@
 		{/if}
 
 		<ChapterMetadata slug={data.slug} lang={data.lang as Lang} />
+		{#if !data.draft}
+			{#key `${data.lang}:${data.slug}`}
+				<ChapterLocalEditor lang={data.lang} slug={data.slug} originalBody={data.originalBody} record={data.localEdit} errorCode={data.localEditError} />
+			{/key}
+		{/if}
 		<nav class="pager">
 			{#if data.prev}
 				<a class="pager-link prev" href="{base}/chapter/{data.prev.slug}/">
@@ -403,7 +409,7 @@
 		<div class="end-sentinel" bind:this={endSentinel} aria-hidden="true"></div>
 	</article>
 
-	{#if data.toc.length > 0}
+	{#if data.toc.length > 0 || !data.draft}
 		<aside class="toc">
 			<p class="toc-title">{t.thisPage}</p>
 			<ul>
@@ -411,6 +417,7 @@
 					<li><a href="#{item.id}">{item.text}</a></li>
 				{/each}
 			</ul>
+			{#if !data.draft}<p class="tools-link"><a href="#chapter-tools">{localEditsCopy[data.lang as Lang].tools}</a></p>{/if}
 		</aside>
 	{/if}
 </div>
@@ -458,6 +465,9 @@
 {/if}
 
 <style>
+	.local-edit-status { font-size: .8rem; color: var(--text-muted); margin: -.3rem 0 1rem; }
+	.tools-link { border-top: 1px solid var(--border); padding-top: .7rem; margin-top: 1rem; }
+	.tools-link a { display: flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; }
 	.chapter {
 		display: flex;
 		gap: 2rem;

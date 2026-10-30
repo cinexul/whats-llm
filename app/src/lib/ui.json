@@ -101,7 +101,7 @@
     "startReading": "开始阅读",
     "continueReading": "继续阅读",
     "bookOverview": "全书概览",
-    "bookFacts": "45章 · 中 / 日 / 英",
+    "bookFacts": "{n}章 · 中 / 日 / 英",
     "readingHint": "每天一小节，慢慢读懂AI。",
     "chapterSections": "章节导航",
     "readingProgress": "本章阅读进度"
@@ -208,7 +208,7 @@
     "startReading": "読み始める",
     "continueReading": "続きを読む",
     "bookOverview": "本の構成",
-    "bookFacts": "全45章 · 中 / 日 / 英",
+    "bookFacts": "全{n}章 · 中 / 日 / 英",
     "readingHint": "一日ひと節、AIを少しずつ。",
     "chapterSections": "この章の目次",
     "readingProgress": "この章の読書位置"
@@ -315,7 +315,7 @@
     "startReading": "Start reading",
     "continueReading": "Continue reading",
     "bookOverview": "Inside the book",
-    "bookFacts": "45 chapters · 3 languages",
+    "bookFacts": "{n} chapters · 3 languages",
     "readingHint": "A little reading. A clearer view of AI.",
     "chapterSections": "In this chapter",
     "readingProgress": "Chapter reading progress"

@@ -5,7 +5,7 @@
 下面五组句子，每组用中文、日文、英文说同一件事（代码那组只换了注释）。我们用两个公开的分词器（tokenizer，把文字切成token的程序）分别数了token：
 
 - o200k_base：OpenAI公开的分词器。按OpenAI的tiktoken仓库里的模型对照表，GPT-4o、GPT-4.1、GPT-5系列和o1、o3、o4-mini等都用它；这张表没有列出2026年的GPT-6系列，所以不能据此断定最新模型也用它。
-- Qwen3：阿里巴巴Qwen3系列（2025年4月发布）的分词器，词表（它认识的token种类数）为151,936。较新的Qwen3.8把词表扩大到248,320，同一句话的计数可能又不一样。
+- Qwen3.8：本书固定使用Qwen/Qwen3.8-27B的官方分词器。分词器文件含248,044个基础token和33个追加token，共248,077个；模型配置里的248,320是模型词嵌入/输出容量，不是这个分词器的实际token种类数。
 
 1. 日常请求
    - 中文：请帮我写一封邮件，告诉同事明天的会议改到下午三点。
@@ -28,23 +28,25 @@
    - 日文：モデル自体は前回の会話を覚えていません。製品の「メモリ」は、保存しておいた文章を今回のコンテキストに入れ直す仕組みです。その文章がなければ、新しい会話では以前の発言を知りません。
    - 英文：The model itself does not remember your last conversation. A product's "memory" puts saved text back into the current context. Without that text, a new conversation knows nothing of what you said before.
 
-怎么读：每格是“o200k_base／Qwen3”的token数，只数句子本身；通过API发送时，消息格式还会多占几个token。
+怎么读：每格是“o200k_base／Qwen3.8”的token数，只数句子本身；通过API发送时，消息格式还会多占几个token。
 
 | 例句 | 中文 | 日文 | 英文 |
 | --- | --- | --- | --- |
-| 日常请求 | 21／16 | 25／23 | 21／21 |
-| 夹英文术语 | 11／10 | 13／14 | 12／12 |
-| 带数字 | 19／27 | 28／31 | 25／32 |
-| 一行代码 | 10／10 | 13／13 | 10／10 |
-| 短段落 | 48／40 | 65／61 | 40／40 |
+| 日常请求 | 21／15 | 25／18 | 21／21 |
+| 夹英文术语 | 11／10 | 13／11 | 12／12 |
+| 带数字 | 19／27 | 28／30 | 25／32 |
+| 一行代码 | 10／9 | 13／11 | 10／10 |
+| 短段落 | 48／35 | 65／43 | 40／40 |
 
-细看几处：Qwen3把数字一位一位地切，“2026”算4个token，o200k_base则把最多三位数字合成一个token，所以带数字的句子在Qwen3里明显更多；日文在五组里都是最多的；短段落在o200k_base里英文最省，在Qwen3里中英文一样多。
+细看几处：Qwen3.8仍把数字一位一位地切，“2026”算4个token，o200k_base则把最多三位数字合成一个token。日文不再在五组里都是最多的：Qwen3.8的日常请求和带数字例句都是英文最多。短段落在o200k_base里英文最省，在Qwen3.8里则是中文最省（35个，英文40个）。
 
-结论：语言之间差多少取决于分词器，英文并不总是更省。同一句中文请求，在Qwen3里只要16个token，比英文版的21个还少。
+结论：语言之间差多少取决于分词器，英文并不总是更省。同一句中文请求，在Qwen3.8里只要15个token，比英文版的21个还少。
 
-想数自己的文字，可以打开本书的“交互实验”页面，那里将加入分词器实验。
+想数自己的文字，可以打开本书的[分词器实验](/labs/#tokens)。这里的五组例句与实验预设共用同一份样本数据。
 
-出处：2026年10月28日在本地用o200k_base（js-tiktoken）和Qwen3的分词器文件计数；哪些模型用o200k_base，以tiktoken仓库的对照表为准；词表大小取自两个Qwen模型的配置文件。分词器会随模型换代，换了模型就要重新数。
+出处：2026年10月30日以官方Python库tiktoken和tokenizers复算，并逐个token ID核对JavaScript结果。样本统一保存在token-samples.json。Qwen3.8按官方文件先做NFC规范化，识别文件中的追加特殊标记，但不自动添加消息包装；o200k_base把输入中的特殊标记字面串当普通文本。这里只统计文本，不是聊天API用量。
+
+实验里还单独提供了[ctok社区估算](https://github.com/sanderland/ctok)，用于Claude Opus 4.8系列的v4.8方法。它不是Anthropic官方分词器，只估算数量，不提供token ID或真实切分。界面把单条用户消息估算总量减去固定6个开销后的“内容估算”与包含这6个开销的总量分开显示；内容边界规则仍然保留，所以不能把它当成保证准确的纯文本token数，也不并入上面的官方分词器对照。Opus 5/5.5的差异未建模，不能推广到所有Claude模型。
 
 ## 二、上下文窗口与最大输出
 
@@ -174,7 +176,7 @@ DeepSeek的高峰时段是北京时间周一至周五（法定节假日除外）
 
 核查日期：2026-10-28。第一节的token数在本地测量，其余数字都来自下列官方页面。
 
-- 分词器：[tiktoken模型对照表](https://github.com/openai/tiktoken/blob/main/tiktoken/model.py)、[Qwen3-8B配置](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json)、[Qwen3.8-27B配置](https://huggingface.co/Qwen/Qwen3.8-27B/blob/main/config.json)。
+- 分词器：[tiktoken模型对照表](https://github.com/openai/tiktoken/blob/main/tiktoken/model.py)、[固定版本的Qwen3.8-27B分词器](https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/tokenizer.json)。KV缓存示例：[Qwen3-8B配置](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json)。
 - 上下文与API价格：Anthropic的[模型总览](https://platform.claude.com/docs/en/about-claude/models/overview)和[价格](https://platform.claude.com/docs/en/about-claude/pricing)；OpenAI的[GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra)、[GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol)、[GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna)和[价格](https://developers.openai.com/api/docs/pricing)；Google的[Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon)、[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash)和[价格](https://ai.google.dev/gemini-api/docs/pricing)；DeepSeek的[模型与价格（美元）](https://api-docs.deepseek.com/quick_start/pricing)和[中文版（人民币）](https://api-docs.deepseek.com/zh-cn/quick_start/pricing)；阿里云Model Studio的[qwen3.8-max](https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max)、[qwen3.8-flash](https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash)；Kimi的[K3.1 Pro说明](https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart)、[推理价格](https://platform.kimi.ai/docs/pricing/chat)和[批量价格](https://platform.kimi.ai/docs/pricing/batch)。
 - 开放模型：Hugging Face模型卡[Kimi K3](https://huggingface.co/moonshotai/Kimi-K3)、[Qwen3.8-2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B)、[DeepSeek-V4-Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro)、[gpt-oss-120b](https://huggingface.co/openai/gpt-oss-120b)、[Gemma 4 31B](https://huggingface.co/google/gemma-4-31B-it)、[Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B)、[Gemma 4 26B A4B](https://huggingface.co/google/gemma-4-26B-A4B-it)、[gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b)。
 - 本地运行：[llama.cpp量化说明](https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md)、Ollama的[上下文长度](https://docs.ollama.com/context-length)和[常见问题](https://docs.ollama.com/faq)。

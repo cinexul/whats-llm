@@ -5,7 +5,7 @@
 次の五組の文は、それぞれ中国語・日本語・英語で同じ内容を表しています（コードの組はコメントだけを変えています）。公開されている二つのトークナイザー（文章をトークンに区切るプログラム）で、トークン数を数えました。
 
 - o200k_base：OpenAIが公開しているトークナイザーです。OpenAIのtiktokenリポジトリにあるモデル対応表では、GPT-4o、GPT-4.1、GPT-5シリーズ、o1、o3、o4-miniなどがこれを使います。この表には2026年のGPT-6シリーズが載っていないため、最新モデルも同じだとは言えません。
-- Qwen3：AlibabaのQwen3シリーズ（2025年4月公開）のトークナイザーで、語彙（区別できるトークンの種類の数）は151,936です。新しいQwen3.8は語彙を248,320に広げたので、同じ文でも数が変わる可能性があります。
+- Qwen3.8：本書ではQwen/Qwen3.8-27Bの公式トークナイザを固定して使います。ファイルには基本トークン248,044個と追加トークン33個、合計248,077個があります。モデル設定の248,320は埋め込み・出力の容量で、このトークナイザの実際の語彙数ではありません。
 
 1. 日常の依頼
    - 中国語：请帮我写一封邮件，告诉同事明天的会议改到下午三点。
@@ -28,23 +28,25 @@
    - 日本語：モデル自体は前回の会話を覚えていません。製品の「メモリ」は、保存しておいた文章を今回のコンテキストに入れ直す仕組みです。その文章がなければ、新しい会話では以前の発言を知りません。
    - 英語：The model itself does not remember your last conversation. A product's "memory" puts saved text back into the current context. Without that text, a new conversation knows nothing of what you said before.
 
-読み方：各マスは「o200k_base／Qwen3」のトークン数で、文そのものだけを数えています。APIで送るときは、メッセージの形式のために数トークン増えます。
+読み方：各マスは「o200k_base／Qwen3.8」のトークン数で、文そのものだけを数えています。APIで送るときは、メッセージの形式のために数トークン増えます。
 
 | 例文 | 中国語 | 日本語 | 英語 |
 | --- | --- | --- | --- |
-| 日常の依頼 | 21／16 | 25／23 | 21／21 |
-| 英語の専門用語まじり | 11／10 | 13／14 | 12／12 |
-| 数字入り | 19／27 | 28／31 | 25／32 |
-| コード1行 | 10／10 | 13／13 | 10／10 |
-| 短い段落 | 48／40 | 65／61 | 40／40 |
+| 日常の依頼 | 21／15 | 25／18 | 21／21 |
+| 英語の専門用語まじり | 11／10 | 13／11 | 12／12 |
+| 数字入り | 19／27 | 28／30 | 25／32 |
+| コード1行 | 10／9 | 13／11 | 10／10 |
+| 短い段落 | 48／35 | 65／43 | 40／40 |
 
-細かく見ると、Qwen3は数字を1桁ずつ区切るので「2026」が4トークンになり、o200k_baseは最大3桁を1トークンにまとめます。そのため数字入りの文はQwen3のほうがはっきり多くなります。日本語は五組すべてで最も多く、短い段落はo200k_baseでは英語が最も少なく、Qwen3では中国語と英語が同じ数でした。
+細かく見ると、Qwen3.8も数字を1桁ずつ区切るので「2026」は4トークン、o200k_baseは最大3桁をまとめます。日本語が五組すべてで最も多いわけではなくなりました。Qwen3.8では日常の依頼と数字入りの例は英語が最多です。短い段落はo200k_baseでは英語、Qwen3.8では中国語が最少です（中国語35、英語40）。
 
-まとめ：言語ごとの差はトークナイザーによって変わり、英語がいつも少ないわけではありません。同じ中国語の依頼文は、Qwen3では16トークンで、英語版の21より少なくなります。
+まとめ：言語ごとの差はトークナイザーによって変わり、英語がいつも少ないわけではありません。同じ中国語の依頼文は、Qwen3.8では15トークンで、英語版の21より少なくなります。
 
-自分の文章で数えてみたいときは、本書の「体験ラボ」ページを開いてください。トークナイザーの実験が追加される予定です。
+自分の文章を数えるには、本書の[トークナイザ実験](/labs/#tokens)を開いてください。この五組の例文は実験のプリセットと同じサンプルデータを使います。
 
-出典：2026年10月28日に、o200k_base（js-tiktoken）とQwen3のトークナイザーファイルを使って手元で数えました。どのモデルがo200k_baseを使うかはtiktokenリポジトリの対応表、語彙の数は二つのQwenモデルの設定ファイルによります。トークナイザーはモデルの世代交代で変わるので、モデルが変わったら数え直してください。
+出典：2026年10月30日に公式Pythonライブラリtiktokenとtokenizersで再計算し、JavaScriptのトークンIDを一つずつ照合しました。サンプルはtoken-samples.jsonで一元管理します。Qwen3.8は公式ファイルのNFC正規化と追加特殊マーカーの認識を使いますが、メッセージ包装は自動追加しません。o200k_baseは入力中の特殊マーカー文字列を普通の文字として数えます。これはテキストの数であり、チャットAPIの使用量ではありません。
+
+実験には別枠で[ctokのコミュニティ推定](https://github.com/sanderland/ctok)もあります。対象はClaude Opus 4.8系列のv4.8方式だけです。Anthropic公式のトークナイザではなく、個数の推定のみで、token IDや実際の分割結果は提供しません。単一ユーザーメッセージの推定合計から固定の6を引いた「内容の推定」と、その6を含む合計を分けて表示します。ただし内容境界の規則は残るため、正確な生テキストのトークン数とは保証できず、上の公式トークナイザ比較にも混ぜません。Opus 5/5.5の違いはモデル化しておらず、すべてのClaudeに一般化できません。
 
 ## 二、コンテキストウィンドウと最大出力
 
@@ -174,7 +176,7 @@ llama.cppのドキュメントにある実測値と比べると、Llama 3.1 8B�
 
 確認日：2026-10-28。第一節のトークン数は手元で測り、それ以外の数字はすべて次の公式ページによります。
 
-- トークナイザー：[tiktokenのモデル対応表](https://github.com/openai/tiktoken/blob/main/tiktoken/model.py)、[Qwen3-8Bの設定](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json)、[Qwen3.8-27Bの設定](https://huggingface.co/Qwen/Qwen3.8-27B/blob/main/config.json)。
+- トークナイザ：[tiktokenモデル対応表](https://github.com/openai/tiktoken/blob/main/tiktoken/model.py)、[固定版Qwen3.8-27Bトークナイザ](https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/tokenizer.json)。KVキャッシュの例：[Qwen3-8B設定](https://huggingface.co/Qwen/Qwen3-8B/blob/main/config.json)。
 - コンテキストとAPIの料金：Anthropicの[モデル一覧](https://platform.claude.com/docs/en/about-claude/models/overview)と[料金](https://platform.claude.com/docs/en/about-claude/pricing)、OpenAIの[GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra)、[GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol)、[GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna)と[料金](https://developers.openai.com/api/docs/pricing)、Googleの[Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon)、[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash)と[料金](https://ai.google.dev/gemini-api/docs/pricing)、DeepSeekの[モデルと料金（米ドル）](https://api-docs.deepseek.com/quick_start/pricing)と[中国語版（人民元）](https://api-docs.deepseek.com/zh-cn/quick_start/pricing)、Alibaba Cloud Model Studioの[qwen3.8-max](https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max)と[qwen3.8-flash](https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash)、Kimiの[K3.1 Proの説明](https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart)、[推論料金](https://platform.kimi.ai/docs/pricing/chat)と[バッチ料金](https://platform.kimi.ai/docs/pricing/batch)。
 - オープンモデル：Hugging Faceのモデルカード[Kimi K3](https://huggingface.co/moonshotai/Kimi-K3)、[Qwen3.8-2.4T-A95B](https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B)、[DeepSeek-V4-Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro)、[gpt-oss-120b](https://huggingface.co/openai/gpt-oss-120b)、[Gemma 4 31B](https://huggingface.co/google/gemma-4-31B-it)、[Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B)、[Gemma 4 26B A4B](https://huggingface.co/google/gemma-4-26B-A4B-it)、[gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b)。
 - 手元での実行：[llama.cppの量子化の説明](https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md)、Ollamaの[コンテキスト長](https://docs.ollama.com/context-length)と[FAQ](https://docs.ollama.com/faq)。

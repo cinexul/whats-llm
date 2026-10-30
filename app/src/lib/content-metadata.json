@@ -1831,11 +1831,11 @@
       "kind": "concept",
       "editions": {
         "zh": {
-          "revision": 3,
-          "contentHash": "a5345ef244e5e9e3be072198bfa86e9567137de18c9463efb7e6c757ac6477ca",
-          "reviewedAt": "2026-10-29",
+          "revision": 7,
+          "contentHash": "d5c36ef08ad9389389204560e64a70e25a5d78f842e565cd2368782e522fe758",
+          "reviewedAt": "2026-10-30",
           "reviewScope": "chapter",
-          "reviewEvidence": "docs/content-review-2026-10-29.md",
+          "reviewEvidence": "docs/labs.md",
           "sources": [
             "source-c3dcc5ea3957",
             "source-fe55e323ea27",
@@ -1859,15 +1859,35 @@
               "revision": 3,
               "date": "2026-10-29",
               "summary": "把虚构的“一词一token”例子换成真实切分：同一句话o200k_base切21个、Qwen3切16个，并配上tokens.svg和context-window.svg两张图；速算栏改用本书实测的比例，给出截至2026年10月Claude API的100万token窗口，新增“为什么上下文越长越贵也越慢”一节，粗体从45处减到4处，“要点”框从3个减到1个。2026-10-29再改一轮口气：分词器、上下文窗口、会话上下文、长对话几段把层层叠加的保留说法改成白话，去掉一处北方口语；“项目和记忆功能”小节和第9章重复，缩成一段指向第9、13章，随之删掉只为这一小节引用的Claude帮助中心来源。"
+            },
+            {
+              "revision": 4,
+              "date": "2026-10-30",
+              "summary": "Qwen3.8 tokenizer examples recomputed; localized counts, diagrams and conclusions reviewed."
+            },
+            {
+              "revision": 5,
+              "date": "2026-10-30",
+              "summary": "Tokenizer examples, translated conclusions and diagrams reviewed; unrelated source dates unchanged."
+            },
+            {
+              "revision": 6,
+              "date": "2026-10-30",
+              "summary": "Added scoped multilingual tokenizer history with reproducible Chinese/Japanese examples and official sources."
+            },
+            {
+              "revision": 7,
+              "date": "2026-10-30",
+              "summary": "Added separate ctok community count-only scope disclosure; official tables and historical examples unchanged."
             }
           ]
         },
         "ja": {
-          "revision": 3,
-          "contentHash": "5d3e74fb5c29a37dae46de7cf194901980b307e6801167fba1c149d9b1d82111",
-          "reviewedAt": "2026-10-29",
+          "revision": 7,
+          "contentHash": "6521b39d21ce57b26df67f4c5af5d637d9fa29dc2a4d3bb0fff495d97d40cb48",
+          "reviewedAt": "2026-10-30",
           "reviewScope": "chapter",
-          "reviewEvidence": "docs/content-review-2026-10-29.md",
+          "reviewEvidence": "docs/labs.md",
           "sources": [
             "source-c3dcc5ea3957",
             "source-fe55e323ea27",
@@ -1891,21 +1911,41 @@
               "revision": 3,
               "date": "2026-10-29",
               "summary": "架空の分割例を実際の分割に置き換え（日本語の例文はo200k_baseで25、Qwen3で23トークン、付録Eと同じ文）、tokens.svgとcontext-window.svgの2枚の図を加えました。目安の比率は本書の本文で実測した値にし、2026年10月時点のClaude APIの100万トークンを示し、「長いほど高く遅い理由」の節を新設しました。太字は45か所から4か所に減らしました。2026-10-29にもう一度、トークナイザ・コンテキストウィンドウ・会話の中身・長い会話の段落で、重ねがけの留保を話し言葉に直しました。「プロジェクトとメモリ」の小節は第9章と重なるため一段落にまとめて第9章・第13章を指すようにし、そこでだけ使っていたClaudeヘルプセンターの出典を外しました。"
+            },
+            {
+              "revision": 4,
+              "date": "2026-10-30",
+              "summary": "Qwen3.8 tokenizer examples recomputed; localized counts, diagrams and conclusions reviewed."
+            },
+            {
+              "revision": 5,
+              "date": "2026-10-30",
+              "summary": "Tokenizer examples, translated conclusions and diagrams reviewed; unrelated source dates unchanged."
+            },
+            {
+              "revision": 6,
+              "date": "2026-10-30",
+              "summary": "Added scoped multilingual tokenizer history with reproducible Chinese/Japanese examples and official sources."
+            },
+            {
+              "revision": 7,
+              "date": "2026-10-30",
+              "summary": "Added separate ctok community count-only scope disclosure; official tables and historical examples unchanged."
             }
           ],
           "translatedFrom": {
             "lang": "zh",
-            "revision": 3,
-            "contentHash": "a5345ef244e5e9e3be072198bfa86e9567137de18c9463efb7e6c757ac6477ca",
-            "alignedAt": "2026-10-29"
+            "revision": 7,
+            "contentHash": "d5c36ef08ad9389389204560e64a70e25a5d78f842e565cd2368782e522fe758",
+            "alignedAt": "2026-10-30"
           }
         },
         "en": {
-          "revision": 3,
-          "contentHash": "832bcb385851119e75329dca86494039687f48eb44b5a64c900ae9f667591148",
-          "reviewedAt": "2026-10-29",
+          "revision": 7,
+          "contentHash": "fee31dc0a7d4d301ba23e2820f51af01a63a31137268028569b1feb4eeb255d0",
+          "reviewedAt": "2026-10-30",
           "reviewScope": "chapter",
-          "reviewEvidence": "docs/content-review-2026-10-29.md",
+          "reviewEvidence": "docs/labs.md",
           "sources": [
             "source-c3dcc5ea3957",
             "source-fe55e323ea27",
@@ -1929,13 +1969,33 @@
               "revision": 3,
               "date": "2026-10-29",
               "summary": "Replaced the made-up one-word-per-token example with real splits (the English sentence is 21 tokens in both tokenizers; the figure's table shows zh 21/16, ja 25/23, en 21/21, matching Appendix E), added tokens.svg and context-window.svg, replaced 'no numbers' with Claude's 1M-token API window as of October 2026, rewrote section 5 into why long context costs more and runs slower (quadratic comparison, per-token billing, pointer to ch. 38), and cut bold 44 to 4. Each edition explains its own language's split; structure and claims match zh. Second pass on 2026-10-29: reworded the tokenizer, context window, conversation context and long-conversation paragraphs to drop the stacked hedges; the 'projects and memory' subsection duplicated chapter 9, so it is now one paragraph pointing to chapters 9 and 13, and the Claude Help Center source used only there was removed."
+            },
+            {
+              "revision": 4,
+              "date": "2026-10-30",
+              "summary": "Qwen3.8 tokenizer examples recomputed; localized counts, diagrams and conclusions reviewed."
+            },
+            {
+              "revision": 5,
+              "date": "2026-10-30",
+              "summary": "Tokenizer examples, translated conclusions and diagrams reviewed; unrelated source dates unchanged."
+            },
+            {
+              "revision": 6,
+              "date": "2026-10-30",
+              "summary": "Added scoped multilingual tokenizer history with reproducible Chinese/Japanese examples and official sources."
+            },
+            {
+              "revision": 7,
+              "date": "2026-10-30",
+              "summary": "Added separate ctok community count-only scope disclosure; official tables and historical examples unchanged."
             }
           ],
           "translatedFrom": {
             "lang": "zh",
-            "revision": 3,
-            "contentHash": "a5345ef244e5e9e3be072198bfa86e9567137de18c9463efb7e6c757ac6477ca",
-            "alignedAt": "2026-10-29"
+            "revision": 7,
+            "contentHash": "d5c36ef08ad9389389204560e64a70e25a5d78f842e565cd2368782e522fe758",
+            "alignedAt": "2026-10-30"
           }
         }
       }
@@ -6339,11 +6399,11 @@
       "kind": "product-guide",
       "editions": {
         "zh": {
-          "revision": 1,
-          "contentHash": "e70ca80fdd4cb8acab421bf3b03798ff8456c965aeb802041ef73abe29c67edb",
-          "reviewedAt": "2026-10-28",
+          "revision": 3,
+          "contentHash": "6ecc25c15b9f740933d811604b1a0a152b7f1db4a6355d24322e99e6a0ce62e8",
+          "reviewedAt": "2026-10-30",
           "reviewScope": "chapter",
-          "reviewEvidence": "docs/content-review-2026-10-29.md",
+          "reviewEvidence": "docs/labs.md",
           "sources": [
             "source-e92080a0db11",
             "source-edc2001f678b",
@@ -6388,15 +6448,25 @@
               "revision": 1,
               "date": "2026-10-28",
               "summary": "新增附录E：用两个真实分词器实测中日英token数，并列出截至2026年10月主流模型的上下文窗口、API价格、开放模型参数量、本地运行内存和订阅价格，每项注明官方出处。"
+            },
+            {
+              "revision": 2,
+              "date": "2026-10-30",
+              "summary": "Qwen3.8 tokenizer examples recomputed; localized counts, diagrams and conclusions reviewed."
+            },
+            {
+              "revision": 3,
+              "date": "2026-10-30",
+              "summary": "Added separate ctok community count-only scope disclosure; official tables and historical examples unchanged."
             }
           ]
         },
         "ja": {
-          "revision": 1,
-          "contentHash": "37efcc501ce36baa2b8a3f58adb1e48ae27ed682fb2005b27bc5d58f8814bed2",
-          "reviewedAt": "2026-10-28",
+          "revision": 3,
+          "contentHash": "94ad03a1b345b07a210fffb3e4dc109e376b9a469837d166e051c5afe83a3653",
+          "reviewedAt": "2026-10-30",
           "reviewScope": "chapter",
-          "reviewEvidence": "docs/content-review-2026-10-29.md",
+          "reviewEvidence": "docs/labs.md",
           "sources": [
             "source-e92080a0db11",
             "source-edc2001f678b",
@@ -6441,21 +6511,31 @@
               "revision": 1,
               "date": "2026-10-28",
               "summary": "付録Eを新設。本物のトークナイザー2つで中日英のトークン数を実測し、2026年10月時点の主要モデルのコンテキスト長、API料金、公開モデルのパラメータ数、ローカル実行のメモリ、サブスクリプション料金を公式の出典付きでまとめました。"
+            },
+            {
+              "revision": 2,
+              "date": "2026-10-30",
+              "summary": "Qwen3.8 tokenizer examples recomputed; localized counts, diagrams and conclusions reviewed."
+            },
+            {
+              "revision": 3,
+              "date": "2026-10-30",
+              "summary": "Added separate ctok community count-only scope disclosure; official tables and historical examples unchanged."
             }
           ],
           "translatedFrom": {
             "lang": "zh",
-            "revision": 1,
-            "contentHash": "e70ca80fdd4cb8acab421bf3b03798ff8456c965aeb802041ef73abe29c67edb",
-            "alignedAt": "2026-10-28"
+            "revision": 3,
+            "contentHash": "6ecc25c15b9f740933d811604b1a0a152b7f1db4a6355d24322e99e6a0ce62e8",
+            "alignedAt": "2026-10-30"
           }
         },
         "en": {
-          "revision": 1,
-          "contentHash": "340656a5e3472933b78efe17f506d9735d9f843e609056befb4af9e8c542177e",
-          "reviewedAt": "2026-10-28",
+          "revision": 3,
+          "contentHash": "9accd73c8db3bebd6668dbafc114bb03d3384be0c979d27f96568efc539c4e48",
+          "reviewedAt": "2026-10-30",
           "reviewScope": "chapter",
-          "reviewEvidence": "docs/content-review-2026-10-29.md",
+          "reviewEvidence": "docs/labs.md",
           "sources": [
             "source-e92080a0db11",
             "source-edc2001f678b",
@@ -6500,13 +6580,23 @@
               "revision": 1,
               "date": "2026-10-28",
               "summary": "New Appendix E: token counts for Chinese, Japanese and English measured with two real tokenizers, plus context windows, API prices, open-model parameter counts, local memory needs and subscription prices as of October 2026, each with its official source."
+            },
+            {
+              "revision": 2,
+              "date": "2026-10-30",
+              "summary": "Qwen3.8 tokenizer examples recomputed; localized counts, diagrams and conclusions reviewed."
+            },
+            {
+              "revision": 3,
+              "date": "2026-10-30",
+              "summary": "Added separate ctok community count-only scope disclosure; official tables and historical examples unchanged."
             }
           ],
           "translatedFrom": {
             "lang": "zh",
-            "revision": 1,
-            "contentHash": "e70ca80fdd4cb8acab421bf3b03798ff8456c965aeb802041ef73abe29c67edb",
-            "alignedAt": "2026-10-28"
+            "revision": 3,
+            "contentHash": "6ecc25c15b9f740933d811604b1a0a152b7f1db4a6355d24322e99e6a0ce62e8",
+            "alignedAt": "2026-10-30"
           }
         }
       }

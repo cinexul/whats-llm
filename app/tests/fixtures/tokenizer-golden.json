@@ -1,0 +1,9571 @@
+{
+  "reference": {
+    "tokenizers": "0.23.3",
+    "tiktoken": "0.14.0"
+  },
+  "js": {
+    "@huggingface/tokenizers": "0.2.0",
+    "js-tiktoken": "1.0.21"
+  },
+  "case_count": 56,
+  "mismatches": [],
+  "rows": [
+    {
+      "key": "everyday.zh",
+      "text": "请帮我写一封邮件，告诉同事明天的会议改到下午三点。",
+      "qwen38": {
+        "ids": [
+          96220,
+          112523,
+          96674,
+          128347,
+          100853,
+          3709,
+          98295,
+          101846,
+          124327,
+          97127,
+          96332,
+          95839,
+          99937,
+          115103,
+          1710
+        ],
+        "count": 15,
+        "pieces": [
+          {
+            "text": "请",
+            "tokens": 1
+          },
+          {
+            "text": "帮我",
+            "tokens": 1
+          },
+          {
+            "text": "写",
+            "tokens": 1
+          },
+          {
+            "text": "一封",
+            "tokens": 1
+          },
+          {
+            "text": "邮件",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "告诉",
+            "tokens": 1
+          },
+          {
+            "text": "同事",
+            "tokens": 1
+          },
+          {
+            "text": "明天的",
+            "tokens": 1
+          },
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "改",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "下午",
+            "tokens": 1
+          },
+          {
+            "text": "三点",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          10394,
+          58626,
+          7522,
+          32444,
+          2432,
+          48813,
+          151733,
+          979,
+          114082,
+          9553,
+          8669,
+          11071,
+          867,
+          1616,
+          67790,
+          15346,
+          6946,
+          50007,
+          3236,
+          8300,
+          788
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "请",
+            "tokens": 1
+          },
+          {
+            "text": "帮",
+            "tokens": 1
+          },
+          {
+            "text": "我",
+            "tokens": 1
+          },
+          {
+            "text": "写",
+            "tokens": 1
+          },
+          {
+            "text": "一",
+            "tokens": 1
+          },
+          {
+            "text": "封",
+            "tokens": 1
+          },
+          {
+            "text": "邮件",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "告诉",
+            "tokens": 1
+          },
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "事",
+            "tokens": 1
+          },
+          {
+            "text": "明",
+            "tokens": 1
+          },
+          {
+            "text": "天",
+            "tokens": 1
+          },
+          {
+            "text": "的",
+            "tokens": 1
+          },
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "改",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "下午",
+            "tokens": 1
+          },
+          {
+            "text": "三",
+            "tokens": 1
+          },
+          {
+            "text": "点",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "everyday.ja",
+      "text": "同僚に、明日の会議が午後3時に変わったと伝えるメールを書いてください。",
+      "qwen38": {
+        "ids": [
+          95944,
+          103473,
+          19054,
+          5205,
+          112632,
+          15303,
+          247304,
+          27279,
+          247373,
+          18,
+          171585,
+          245806,
+          18602,
+          202877,
+          159662,
+          248017,
+          68798,
+          1710
+        ],
+        "count": 18,
+        "pieces": [
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "僚",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "明日",
+            "tokens": 1
+          },
+          {
+            "text": "の",
+            "tokens": 1
+          },
+          {
+            "text": "会議",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "午後",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "時に",
+            "tokens": 1
+          },
+          {
+            "text": "変わった",
+            "tokens": 1
+          },
+          {
+            "text": "と",
+            "tokens": 1
+          },
+          {
+            "text": "伝える",
+            "tokens": 1
+          },
+          {
+            "text": "メール",
+            "tokens": 1
+          },
+          {
+            "text": "を書いて",
+            "tokens": 1
+          },
+          {
+            "text": "ください",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          9553,
+          19169,
+          248,
+          5280,
+          1395,
+          11071,
+          167309,
+          6016,
+          100258,
+          6632,
+          184177,
+          18,
+          12131,
+          5280,
+          60722,
+          20473,
+          42917,
+          5330,
+          117934,
+          133169,
+          134549,
+          158209,
+          64655,
+          44900,
+          788
+        ],
+        "count": 25,
+        "pieces": [
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "僚",
+            "tokens": 2
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "明",
+            "tokens": 1
+          },
+          {
+            "text": "日の",
+            "tokens": 1
+          },
+          {
+            "text": "会",
+            "tokens": 1
+          },
+          {
+            "text": "議",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "午後",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "時",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "変",
+            "tokens": 1
+          },
+          {
+            "text": "わ",
+            "tokens": 1
+          },
+          {
+            "text": "った",
+            "tokens": 1
+          },
+          {
+            "text": "と",
+            "tokens": 1
+          },
+          {
+            "text": "伝",
+            "tokens": 1
+          },
+          {
+            "text": "える",
+            "tokens": 1
+          },
+          {
+            "text": "メール",
+            "tokens": 1
+          },
+          {
+            "text": "を書",
+            "tokens": 1
+          },
+          {
+            "text": "いて",
+            "tokens": 1
+          },
+          {
+            "text": "ください",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "everyday.en",
+      "text": "Please help me write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m.",
+      "qwen38": {
+        "ids": [
+          5328,
+          1438,
+          728,
+          3165,
+          449,
+          2469,
+          11294,
+          821,
+          17113,
+          421,
+          16089,
+          579,
+          6236,
+          682,
+          7481,
+          310,
+          220,
+          18,
+          280,
+          721,
+          13
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "Please",
+            "tokens": 1
+          },
+          {
+            "text": " help",
+            "tokens": 1
+          },
+          {
+            "text": " me",
+            "tokens": 1
+          },
+          {
+            "text": " write",
+            "tokens": 1
+          },
+          {
+            "text": " an",
+            "tokens": 1
+          },
+          {
+            "text": " email",
+            "tokens": 1
+          },
+          {
+            "text": " telling",
+            "tokens": 1
+          },
+          {
+            "text": " my",
+            "tokens": 1
+          },
+          {
+            "text": " colleagues",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " tomorrow",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " has",
+            "tokens": 1
+          },
+          {
+            "text": " moved",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": " p",
+            "tokens": 1
+          },
+          {
+            "text": ".m",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          8256,
+          1652,
+          668,
+          5067,
+          448,
+          3719,
+          20186,
+          922,
+          29431,
+          484,
+          22021,
+          885,
+          9176,
+          853,
+          12183,
+          316,
+          220,
+          18,
+          275,
+          1021,
+          13
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "Please",
+            "tokens": 1
+          },
+          {
+            "text": " help",
+            "tokens": 1
+          },
+          {
+            "text": " me",
+            "tokens": 1
+          },
+          {
+            "text": " write",
+            "tokens": 1
+          },
+          {
+            "text": " an",
+            "tokens": 1
+          },
+          {
+            "text": " email",
+            "tokens": 1
+          },
+          {
+            "text": " telling",
+            "tokens": 1
+          },
+          {
+            "text": " my",
+            "tokens": 1
+          },
+          {
+            "text": " colleagues",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " tomorrow",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " has",
+            "tokens": 1
+          },
+          {
+            "text": " moved",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": " p",
+            "tokens": 1
+          },
+          {
+            "text": ".m",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "api.zh",
+      "text": "这个API返回的JSON里缺少timestamp字段。",
+      "qwen38": {
+        "ids": [
+          96488,
+          6862,
+          99488,
+          95726,
+          5202,
+          96067,
+          104405,
+          12662,
+          114165,
+          1710
+        ],
+        "count": 10,
+        "pieces": [
+          {
+            "text": "这个",
+            "tokens": 1
+          },
+          {
+            "text": "API",
+            "tokens": 1
+          },
+          {
+            "text": "返回",
+            "tokens": 1
+          },
+          {
+            "text": "的",
+            "tokens": 1
+          },
+          {
+            "text": "JSON",
+            "tokens": 1
+          },
+          {
+            "text": "里",
+            "tokens": 1
+          },
+          {
+            "text": "缺少",
+            "tokens": 1
+          },
+          {
+            "text": "timestamp",
+            "tokens": 1
+          },
+          {
+            "text": "字段",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          41713,
+          8180,
+          33705,
+          1616,
+          8259,
+          8756,
+          84406,
+          11389,
+          35585,
+          86659,
+          788
+        ],
+        "count": 11,
+        "pieces": [
+          {
+            "text": "这个",
+            "tokens": 1
+          },
+          {
+            "text": "API",
+            "tokens": 1
+          },
+          {
+            "text": "返回",
+            "tokens": 1
+          },
+          {
+            "text": "的",
+            "tokens": 1
+          },
+          {
+            "text": "JSON",
+            "tokens": 1
+          },
+          {
+            "text": "里",
+            "tokens": 1
+          },
+          {
+            "text": "缺",
+            "tokens": 1
+          },
+          {
+            "text": "少",
+            "tokens": 1
+          },
+          {
+            "text": "timestamp",
+            "tokens": 1
+          },
+          {
+            "text": "字段",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "api.ja",
+      "text": "このAPIが返すJSONにはtimestampフィールドがありません。",
+      "qwen38": {
+        "ids": [
+          48543,
+          6862,
+          27279,
+          97650,
+          16711,
+          5202,
+          149494,
+          12662,
+          226769,
+          207876,
+          1710
+        ],
+        "count": 11,
+        "pieces": [
+          {
+            "text": "この",
+            "tokens": 1
+          },
+          {
+            "text": "API",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "返",
+            "tokens": 1
+          },
+          {
+            "text": "す",
+            "tokens": 1
+          },
+          {
+            "text": "JSON",
+            "tokens": 1
+          },
+          {
+            "text": "には",
+            "tokens": 1
+          },
+          {
+            "text": "timestamp",
+            "tokens": 1
+          },
+          {
+            "text": "フィールド",
+            "tokens": 1
+          },
+          {
+            "text": "がありません",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          31859,
+          8180,
+          6632,
+          16181,
+          4868,
+          8259,
+          68857,
+          35585,
+          65629,
+          150692,
+          6632,
+          144531,
+          788
+        ],
+        "count": 13,
+        "pieces": [
+          {
+            "text": "この",
+            "tokens": 1
+          },
+          {
+            "text": "API",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "返",
+            "tokens": 1
+          },
+          {
+            "text": "す",
+            "tokens": 1
+          },
+          {
+            "text": "JSON",
+            "tokens": 1
+          },
+          {
+            "text": "には",
+            "tokens": 1
+          },
+          {
+            "text": "timestamp",
+            "tokens": 1
+          },
+          {
+            "text": "フィ",
+            "tokens": 1
+          },
+          {
+            "text": "ールド",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "ありません",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "api.en",
+      "text": "The JSON returned by this API is missing the timestamp field.",
+      "qwen38": {
+        "ids": [
+          760,
+          4566,
+          5743,
+          539,
+          411,
+          5165,
+          369,
+          7167,
+          279,
+          11112,
+          2002,
+          13
+        ],
+        "count": 12,
+        "pieces": [
+          {
+            "text": "The",
+            "tokens": 1
+          },
+          {
+            "text": " JSON",
+            "tokens": 1
+          },
+          {
+            "text": " returned",
+            "tokens": 1
+          },
+          {
+            "text": " by",
+            "tokens": 1
+          },
+          {
+            "text": " this",
+            "tokens": 1
+          },
+          {
+            "text": " API",
+            "tokens": 1
+          },
+          {
+            "text": " is",
+            "tokens": 1
+          },
+          {
+            "text": " missing",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " timestamp",
+            "tokens": 1
+          },
+          {
+            "text": " field",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          976,
+          8205,
+          10508,
+          656,
+          495,
+          10328,
+          382,
+          12486,
+          290,
+          24753,
+          3259,
+          13
+        ],
+        "count": 12,
+        "pieces": [
+          {
+            "text": "The",
+            "tokens": 1
+          },
+          {
+            "text": " JSON",
+            "tokens": 1
+          },
+          {
+            "text": " returned",
+            "tokens": 1
+          },
+          {
+            "text": " by",
+            "tokens": 1
+          },
+          {
+            "text": " this",
+            "tokens": 1
+          },
+          {
+            "text": " API",
+            "tokens": 1
+          },
+          {
+            "text": " is",
+            "tokens": 1
+          },
+          {
+            "text": " missing",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " timestamp",
+            "tokens": 1
+          },
+          {
+            "text": " field",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "meeting.zh",
+      "text": "会议定在2026年10月28日14:30，已有128人报名。",
+      "qwen38": {
+        "ids": [
+          97127,
+          95916,
+          95772,
+          17,
+          15,
+          17,
+          21,
+          95859,
+          16,
+          15,
+          96212,
+          17,
+          23,
+          95971,
+          16,
+          19,
+          25,
+          18,
+          15,
+          3709,
+          103879,
+          16,
+          17,
+          23,
+          95765,
+          98150,
+          1710
+        ],
+        "count": 27,
+        "pieces": [
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "定",
+            "tokens": 1
+          },
+          {
+            "text": "在",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": ":",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "已有",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": "人",
+            "tokens": 1
+          },
+          {
+            "text": "报名",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          67790,
+          8745,
+          2178,
+          1323,
+          21,
+          2810,
+          702,
+          3181,
+          2029,
+          2292,
+          1265,
+          25,
+          1130,
+          979,
+          160534,
+          8076,
+          1995,
+          143056,
+          788
+        ],
+        "count": 19,
+        "pieces": [
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "定",
+            "tokens": 1
+          },
+          {
+            "text": "在",
+            "tokens": 1
+          },
+          {
+            "text": "202",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "10",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "28",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "14",
+            "tokens": 1
+          },
+          {
+            "text": ":",
+            "tokens": 1
+          },
+          {
+            "text": "30",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "已有",
+            "tokens": 1
+          },
+          {
+            "text": "128",
+            "tokens": 1
+          },
+          {
+            "text": "人",
+            "tokens": 1
+          },
+          {
+            "text": "报名",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "meeting.ja",
+      "text": "会議は2026年10月28日14:30からで、すでに128人が申し込んでいます。",
+      "qwen38": {
+        "ids": [
+          247304,
+          14876,
+          17,
+          15,
+          17,
+          21,
+          95859,
+          16,
+          15,
+          96212,
+          17,
+          23,
+          95971,
+          16,
+          19,
+          25,
+          18,
+          15,
+          52122,
+          15685,
+          5205,
+          188431,
+          16,
+          17,
+          23,
+          155244,
+          152629,
+          183307,
+          58547,
+          1710
+        ],
+        "count": 30,
+        "pieces": [
+          {
+            "text": "会議",
+            "tokens": 1
+          },
+          {
+            "text": "は",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": ":",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "から",
+            "tokens": 1
+          },
+          {
+            "text": "で",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "すでに",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": "人が",
+            "tokens": 1
+          },
+          {
+            "text": "申し",
+            "tokens": 1
+          },
+          {
+            "text": "込んで",
+            "tokens": 1
+          },
+          {
+            "text": "います",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          6016,
+          100258,
+          5205,
+          1323,
+          21,
+          2810,
+          702,
+          3181,
+          2029,
+          2292,
+          1265,
+          25,
+          1130,
+          27500,
+          4344,
+          1395,
+          4868,
+          4344,
+          5280,
+          8076,
+          1995,
+          6632,
+          185573,
+          39751,
+          6676,
+          4344,
+          31901,
+          788
+        ],
+        "count": 28,
+        "pieces": [
+          {
+            "text": "会",
+            "tokens": 1
+          },
+          {
+            "text": "議",
+            "tokens": 1
+          },
+          {
+            "text": "は",
+            "tokens": 1
+          },
+          {
+            "text": "202",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "10",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "28",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "14",
+            "tokens": 1
+          },
+          {
+            "text": ":",
+            "tokens": 1
+          },
+          {
+            "text": "30",
+            "tokens": 1
+          },
+          {
+            "text": "から",
+            "tokens": 1
+          },
+          {
+            "text": "で",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "す",
+            "tokens": 1
+          },
+          {
+            "text": "で",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "128",
+            "tokens": 1
+          },
+          {
+            "text": "人",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "申し",
+            "tokens": 1
+          },
+          {
+            "text": "込",
+            "tokens": 1
+          },
+          {
+            "text": "ん",
+            "tokens": 1
+          },
+          {
+            "text": "で",
+            "tokens": 1
+          },
+          {
+            "text": "います",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "meeting.en",
+      "text": "The meeting is at 14:30 on October 28, 2026, and 128 people have signed up.",
+      "qwen38": {
+        "ids": [
+          760,
+          6236,
+          369,
+          506,
+          220,
+          16,
+          19,
+          25,
+          18,
+          15,
+          383,
+          6324,
+          220,
+          17,
+          23,
+          11,
+          220,
+          17,
+          15,
+          17,
+          21,
+          11,
+          321,
+          220,
+          16,
+          17,
+          23,
+          1208,
+          599,
+          8239,
+          685,
+          13
+        ],
+        "count": 32,
+        "pieces": [
+          {
+            "text": "The",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " is",
+            "tokens": 1
+          },
+          {
+            "text": " at",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": ":",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": " on",
+            "tokens": 1
+          },
+          {
+            "text": " October",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " and",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": " people",
+            "tokens": 1
+          },
+          {
+            "text": " have",
+            "tokens": 1
+          },
+          {
+            "text": " signed",
+            "tokens": 1
+          },
+          {
+            "text": " up",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          976,
+          9176,
+          382,
+          540,
+          220,
+          1265,
+          25,
+          1130,
+          402,
+          8750,
+          220,
+          2029,
+          11,
+          220,
+          1323,
+          21,
+          11,
+          326,
+          220,
+          8076,
+          1665,
+          679,
+          14759,
+          869,
+          13
+        ],
+        "count": 25,
+        "pieces": [
+          {
+            "text": "The",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " is",
+            "tokens": 1
+          },
+          {
+            "text": " at",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "14",
+            "tokens": 1
+          },
+          {
+            "text": ":",
+            "tokens": 1
+          },
+          {
+            "text": "30",
+            "tokens": 1
+          },
+          {
+            "text": " on",
+            "tokens": 1
+          },
+          {
+            "text": " October",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "28",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "202",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " and",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "128",
+            "tokens": 1
+          },
+          {
+            "text": " people",
+            "tokens": 1
+          },
+          {
+            "text": " have",
+            "tokens": 1
+          },
+          {
+            "text": " signed",
+            "tokens": 1
+          },
+          {
+            "text": " up",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "python.zh",
+      "text": "total = price * quantity # 计算总价",
+      "qwen38": {
+        "ids": [
+          4873,
+          283,
+          3240,
+          348,
+          11846,
+          653,
+          220,
+          97792,
+          114611
+        ],
+        "count": 9,
+        "pieces": [
+          {
+            "text": "total",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          },
+          {
+            "text": " *",
+            "tokens": 1
+          },
+          {
+            "text": " quantity",
+            "tokens": 1
+          },
+          {
+            "text": " #",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "计算",
+            "tokens": 1
+          },
+          {
+            "text": "总价",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          9577,
+          314,
+          3911,
+          425,
+          17245,
+          1069,
+          220,
+          48479,
+          10204,
+          17091
+        ],
+        "count": 10,
+        "pieces": [
+          {
+            "text": "total",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          },
+          {
+            "text": " *",
+            "tokens": 1
+          },
+          {
+            "text": " quantity",
+            "tokens": 1
+          },
+          {
+            "text": " #",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "计算",
+            "tokens": 1
+          },
+          {
+            "text": "总",
+            "tokens": 1
+          },
+          {
+            "text": "价",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "python.ja",
+      "text": "total = price * quantity # 合計金額を計算",
+      "qwen38": {
+        "ids": [
+          4873,
+          283,
+          3240,
+          348,
+          11846,
+          653,
+          220,
+          247497,
+          116356,
+          28452,
+          113550
+        ],
+        "count": 11,
+        "pieces": [
+          {
+            "text": "total",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          },
+          {
+            "text": " *",
+            "tokens": 1
+          },
+          {
+            "text": " quantity",
+            "tokens": 1
+          },
+          {
+            "text": " #",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "合計",
+            "tokens": 1
+          },
+          {
+            "text": "金額",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "計算",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          9577,
+          314,
+          3911,
+          425,
+          17245,
+          1069,
+          53411,
+          37662,
+          5314,
+          86542,
+          7277,
+          37662,
+          16727
+        ],
+        "count": 13,
+        "pieces": [
+          {
+            "text": "total",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          },
+          {
+            "text": " *",
+            "tokens": 1
+          },
+          {
+            "text": " quantity",
+            "tokens": 1
+          },
+          {
+            "text": " #",
+            "tokens": 1
+          },
+          {
+            "text": " 合",
+            "tokens": 1
+          },
+          {
+            "text": "計",
+            "tokens": 1
+          },
+          {
+            "text": "金",
+            "tokens": 1
+          },
+          {
+            "text": "額",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "計",
+            "tokens": 1
+          },
+          {
+            "text": "算",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "python.en",
+      "text": "total = price * quantity # compute the total price",
+      "qwen38": {
+        "ids": [
+          4873,
+          283,
+          3240,
+          348,
+          11846,
+          653,
+          12204,
+          279,
+          2702,
+          3240
+        ],
+        "count": 10,
+        "pieces": [
+          {
+            "text": "total",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          },
+          {
+            "text": " *",
+            "tokens": 1
+          },
+          {
+            "text": " quantity",
+            "tokens": 1
+          },
+          {
+            "text": " #",
+            "tokens": 1
+          },
+          {
+            "text": " compute",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " total",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          9577,
+          314,
+          3911,
+          425,
+          17245,
+          1069,
+          23864,
+          290,
+          3609,
+          3911
+        ],
+        "count": 10,
+        "pieces": [
+          {
+            "text": "total",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          },
+          {
+            "text": " *",
+            "tokens": 1
+          },
+          {
+            "text": " quantity",
+            "tokens": 1
+          },
+          {
+            "text": " #",
+            "tokens": 1
+          },
+          {
+            "text": " compute",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " total",
+            "tokens": 1
+          },
+          {
+            "text": " price",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "paragraph.zh",
+      "text": "模型本身不会记住上一次对话。产品里的“记忆”，是把保存下来的文字重新放进这次的上下文。没有这些文字，新对话里它并不知道你以前说过什么。",
+      "qwen38": {
+        "ids": [
+          103725,
+          100601,
+          97073,
+          104265,
+          125004,
+          104062,
+          1710,
+          96538,
+          99451,
+          2005,
+          99211,
+          32478,
+          118104,
+          101754,
+          100983,
+          99943,
+          100544,
+          116317,
+          115914,
+          129933,
+          1710,
+          96487,
+          97032,
+          99943,
+          3709,
+          95882,
+          104062,
+          96067,
+          96540,
+          126661,
+          95933,
+          101608,
+          101022,
+          96407,
+          1710
+        ],
+        "count": 35,
+        "pieces": [
+          {
+            "text": "模型",
+            "tokens": 1
+          },
+          {
+            "text": "本身",
+            "tokens": 1
+          },
+          {
+            "text": "不会",
+            "tokens": 1
+          },
+          {
+            "text": "记住",
+            "tokens": 1
+          },
+          {
+            "text": "上一次",
+            "tokens": 1
+          },
+          {
+            "text": "对话",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          },
+          {
+            "text": "产品",
+            "tokens": 1
+          },
+          {
+            "text": "里的",
+            "tokens": 1
+          },
+          {
+            "text": "“",
+            "tokens": 1
+          },
+          {
+            "text": "记忆",
+            "tokens": 1
+          },
+          {
+            "text": "”，",
+            "tokens": 1
+          },
+          {
+            "text": "是把",
+            "tokens": 1
+          },
+          {
+            "text": "保存",
+            "tokens": 1
+          },
+          {
+            "text": "下来的",
+            "tokens": 1
+          },
+          {
+            "text": "文字",
+            "tokens": 1
+          },
+          {
+            "text": "重新",
+            "tokens": 1
+          },
+          {
+            "text": "放进",
+            "tokens": 1
+          },
+          {
+            "text": "这次的",
+            "tokens": 1
+          },
+          {
+            "text": "上下文",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          },
+          {
+            "text": "没有",
+            "tokens": 1
+          },
+          {
+            "text": "这些",
+            "tokens": 1
+          },
+          {
+            "text": "文字",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "新",
+            "tokens": 1
+          },
+          {
+            "text": "对话",
+            "tokens": 1
+          },
+          {
+            "text": "里",
+            "tokens": 1
+          },
+          {
+            "text": "它",
+            "tokens": 1
+          },
+          {
+            "text": "并不知道",
+            "tokens": 1
+          },
+          {
+            "text": "你",
+            "tokens": 1
+          },
+          {
+            "text": "以前",
+            "tokens": 1
+          },
+          {
+            "text": "说过",
+            "tokens": 1
+          },
+          {
+            "text": "什么",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          184232,
+          4087,
+          18621,
+          88354,
+          11325,
+          25503,
+          4286,
+          70810,
+          9353,
+          13920,
+          788,
+          28217,
+          100714,
+          1100,
+          11325,
+          153632,
+          14534,
+          3221,
+          32180,
+          66421,
+          3771,
+          102135,
+          79831,
+          102388,
+          9938,
+          10946,
+          8327,
+          11445,
+          1616,
+          176919,
+          4883,
+          788,
+          23714,
+          86283,
+          79831,
+          139329,
+          9353,
+          13920,
+          8756,
+          46569,
+          21008,
+          191235,
+          12370,
+          133900,
+          9631,
+          10779,
+          10555,
+          788
+        ],
+        "count": 48,
+        "pieces": [
+          {
+            "text": "模型",
+            "tokens": 1
+          },
+          {
+            "text": "本",
+            "tokens": 1
+          },
+          {
+            "text": "身",
+            "tokens": 1
+          },
+          {
+            "text": "不会",
+            "tokens": 1
+          },
+          {
+            "text": "记",
+            "tokens": 1
+          },
+          {
+            "text": "住",
+            "tokens": 1
+          },
+          {
+            "text": "上",
+            "tokens": 1
+          },
+          {
+            "text": "一次",
+            "tokens": 1
+          },
+          {
+            "text": "对",
+            "tokens": 1
+          },
+          {
+            "text": "话",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          },
+          {
+            "text": "产品",
+            "tokens": 1
+          },
+          {
+            "text": "里的",
+            "tokens": 1
+          },
+          {
+            "text": "“",
+            "tokens": 1
+          },
+          {
+            "text": "记",
+            "tokens": 1
+          },
+          {
+            "text": "忆",
+            "tokens": 1
+          },
+          {
+            "text": "”，",
+            "tokens": 1
+          },
+          {
+            "text": "是",
+            "tokens": 1
+          },
+          {
+            "text": "把",
+            "tokens": 1
+          },
+          {
+            "text": "保存",
+            "tokens": 1
+          },
+          {
+            "text": "下",
+            "tokens": 1
+          },
+          {
+            "text": "来的",
+            "tokens": 1
+          },
+          {
+            "text": "文字",
+            "tokens": 1
+          },
+          {
+            "text": "重新",
+            "tokens": 1
+          },
+          {
+            "text": "放",
+            "tokens": 1
+          },
+          {
+            "text": "进",
+            "tokens": 1
+          },
+          {
+            "text": "这",
+            "tokens": 1
+          },
+          {
+            "text": "次",
+            "tokens": 1
+          },
+          {
+            "text": "的",
+            "tokens": 1
+          },
+          {
+            "text": "上下",
+            "tokens": 1
+          },
+          {
+            "text": "文",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          },
+          {
+            "text": "没有",
+            "tokens": 1
+          },
+          {
+            "text": "这些",
+            "tokens": 1
+          },
+          {
+            "text": "文字",
+            "tokens": 1
+          },
+          {
+            "text": "，新",
+            "tokens": 1
+          },
+          {
+            "text": "对",
+            "tokens": 1
+          },
+          {
+            "text": "话",
+            "tokens": 1
+          },
+          {
+            "text": "里",
+            "tokens": 1
+          },
+          {
+            "text": "它",
+            "tokens": 1
+          },
+          {
+            "text": "并",
+            "tokens": 1
+          },
+          {
+            "text": "不知道",
+            "tokens": 1
+          },
+          {
+            "text": "你",
+            "tokens": 1
+          },
+          {
+            "text": "以前",
+            "tokens": 1
+          },
+          {
+            "text": "说",
+            "tokens": 1
+          },
+          {
+            "text": "过",
+            "tokens": 1
+          },
+          {
+            "text": "什么",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "paragraph.ja",
+      "text": "モデル自体は前回の会話を覚えていません。製品の「メモリ」は、保存しておいた文章を今回のコンテキストに入れ直す仕組みです。その文章がなければ、新しい会話では以前の発言を知りません。",
+      "qwen38": {
+        "ids": [
+          174635,
+          129408,
+          14876,
+          95990,
+          187283,
+          95825,
+          177551,
+          215165,
+          156105,
+          1710,
+          235299,
+          12512,
+          241456,
+          10119,
+          14876,
+          5205,
+          101754,
+          159197,
+          148850,
+          97551,
+          28452,
+          164091,
+          149029,
+          210342,
+          228894,
+          240050,
+          195946,
+          36298,
+          1710,
+          55407,
+          97551,
+          27279,
+          153823,
+          5205,
+          160306,
+          247395,
+          73478,
+          222067,
+          247534,
+          161860,
+          29342,
+          148734,
+          1710
+        ],
+        "count": 43,
+        "pieces": [
+          {
+            "text": "モデル",
+            "tokens": 1
+          },
+          {
+            "text": "自体",
+            "tokens": 1
+          },
+          {
+            "text": "は",
+            "tokens": 1
+          },
+          {
+            "text": "前",
+            "tokens": 1
+          },
+          {
+            "text": "回の",
+            "tokens": 1
+          },
+          {
+            "text": "会",
+            "tokens": 1
+          },
+          {
+            "text": "話を",
+            "tokens": 1
+          },
+          {
+            "text": "覚えて",
+            "tokens": 1
+          },
+          {
+            "text": "いません",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          },
+          {
+            "text": "製品の",
+            "tokens": 1
+          },
+          {
+            "text": "「",
+            "tokens": 1
+          },
+          {
+            "text": "メモリ",
+            "tokens": 1
+          },
+          {
+            "text": "」",
+            "tokens": 1
+          },
+          {
+            "text": "は",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "保存",
+            "tokens": 1
+          },
+          {
+            "text": "してお",
+            "tokens": 1
+          },
+          {
+            "text": "いた",
+            "tokens": 1
+          },
+          {
+            "text": "文章",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "今回の",
+            "tokens": 1
+          },
+          {
+            "text": "コン",
+            "tokens": 1
+          },
+          {
+            "text": "テキスト",
+            "tokens": 1
+          },
+          {
+            "text": "に入れ",
+            "tokens": 1
+          },
+          {
+            "text": "直す",
+            "tokens": 1
+          },
+          {
+            "text": "仕組み",
+            "tokens": 1
+          },
+          {
+            "text": "です",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          },
+          {
+            "text": "その",
+            "tokens": 1
+          },
+          {
+            "text": "文章",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "なければ",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "新しい",
+            "tokens": 1
+          },
+          {
+            "text": "会話",
+            "tokens": 1
+          },
+          {
+            "text": "では",
+            "tokens": 1
+          },
+          {
+            "text": "以前の",
+            "tokens": 1
+          },
+          {
+            "text": "発言",
+            "tokens": 1
+          },
+          {
+            "text": "を知",
+            "tokens": 1
+          },
+          {
+            "text": "り",
+            "tokens": 1
+          },
+          {
+            "text": "ません",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          187451,
+          6912,
+          7074,
+          5205,
+          7660,
+          10154,
+          3385,
+          6016,
+          31160,
+          7277,
+          194896,
+          170450,
+          3826,
+          63366,
+          788,
+          57719,
+          4328,
+          3385,
+          6055,
+          14141,
+          37938,
+          9007,
+          110160,
+          1395,
+          66421,
+          22440,
+          8930,
+          98451,
+          26474,
+          7277,
+          96573,
+          3385,
+          83001,
+          16056,
+          18368,
+          38236,
+          5280,
+          8130,
+          9472,
+          9455,
+          4868,
+          51216,
+          62886,
+          17897,
+          15121,
+          123406,
+          26474,
+          6632,
+          5784,
+          15707,
+          139693,
+          92063,
+          63386,
+          6016,
+          31160,
+          43147,
+          133900,
+          3385,
+          33962,
+          17765,
+          7277,
+          14276,
+          7297,
+          63366,
+          788
+        ],
+        "count": 65,
+        "pieces": [
+          {
+            "text": "モデル",
+            "tokens": 1
+          },
+          {
+            "text": "自",
+            "tokens": 1
+          },
+          {
+            "text": "体",
+            "tokens": 1
+          },
+          {
+            "text": "は",
+            "tokens": 1
+          },
+          {
+            "text": "前",
+            "tokens": 1
+          },
+          {
+            "text": "回",
+            "tokens": 1
+          },
+          {
+            "text": "の",
+            "tokens": 1
+          },
+          {
+            "text": "会",
+            "tokens": 1
+          },
+          {
+            "text": "話",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "覚",
+            "tokens": 1
+          },
+          {
+            "text": "えて",
+            "tokens": 1
+          },
+          {
+            "text": "い",
+            "tokens": 1
+          },
+          {
+            "text": "ません",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          },
+          {
+            "text": "製",
+            "tokens": 1
+          },
+          {
+            "text": "品",
+            "tokens": 1
+          },
+          {
+            "text": "の",
+            "tokens": 1
+          },
+          {
+            "text": "「",
+            "tokens": 1
+          },
+          {
+            "text": "メ",
+            "tokens": 1
+          },
+          {
+            "text": "モ",
+            "tokens": 1
+          },
+          {
+            "text": "リ",
+            "tokens": 1
+          },
+          {
+            "text": "」は",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "保存",
+            "tokens": 1
+          },
+          {
+            "text": "して",
+            "tokens": 1
+          },
+          {
+            "text": "お",
+            "tokens": 1
+          },
+          {
+            "text": "いた",
+            "tokens": 1
+          },
+          {
+            "text": "文章",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "今回",
+            "tokens": 1
+          },
+          {
+            "text": "の",
+            "tokens": 1
+          },
+          {
+            "text": "コン",
+            "tokens": 1
+          },
+          {
+            "text": "テ",
+            "tokens": 1
+          },
+          {
+            "text": "キ",
+            "tokens": 1
+          },
+          {
+            "text": "スト",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "入",
+            "tokens": 1
+          },
+          {
+            "text": "れ",
+            "tokens": 1
+          },
+          {
+            "text": "直",
+            "tokens": 1
+          },
+          {
+            "text": "す",
+            "tokens": 1
+          },
+          {
+            "text": "仕",
+            "tokens": 1
+          },
+          {
+            "text": "組",
+            "tokens": 1
+          },
+          {
+            "text": "み",
+            "tokens": 1
+          },
+          {
+            "text": "です",
+            "tokens": 1
+          },
+          {
+            "text": "。その",
+            "tokens": 1
+          },
+          {
+            "text": "文章",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "な",
+            "tokens": 1
+          },
+          {
+            "text": "け",
+            "tokens": 1
+          },
+          {
+            "text": "れば",
+            "tokens": 1
+          },
+          {
+            "text": "、新",
+            "tokens": 1
+          },
+          {
+            "text": "しい",
+            "tokens": 1
+          },
+          {
+            "text": "会",
+            "tokens": 1
+          },
+          {
+            "text": "話",
+            "tokens": 1
+          },
+          {
+            "text": "では",
+            "tokens": 1
+          },
+          {
+            "text": "以前",
+            "tokens": 1
+          },
+          {
+            "text": "の",
+            "tokens": 1
+          },
+          {
+            "text": "発",
+            "tokens": 1
+          },
+          {
+            "text": "言",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "知",
+            "tokens": 1
+          },
+          {
+            "text": "り",
+            "tokens": 1
+          },
+          {
+            "text": "ません",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "paragraph.en",
+      "text": "The model itself does not remember your last conversation. A product's \"memory\" puts saved text back into the current context. Without that text, a new conversation knows nothing of what you said before.",
+      "qwen38": {
+        "ids": [
+          760,
+          1558,
+          4924,
+          1503,
+          524,
+          5909,
+          678,
+          1483,
+          10125,
+          13,
+          357,
+          1918,
+          579,
+          328,
+          16759,
+          1,
+          9240,
+          6568,
+          1414,
+          1142,
+          1083,
+          279,
+          1428,
+          2193,
+          13,
+          16643,
+          421,
+          1414,
+          11,
+          264,
+          491,
+          10125,
+          8523,
+          4161,
+          314,
+          1092,
+          488,
+          1018,
+          1518,
+          13
+        ],
+        "count": 40,
+        "pieces": [
+          {
+            "text": "The",
+            "tokens": 1
+          },
+          {
+            "text": " model",
+            "tokens": 1
+          },
+          {
+            "text": " itself",
+            "tokens": 1
+          },
+          {
+            "text": " does",
+            "tokens": 1
+          },
+          {
+            "text": " not",
+            "tokens": 1
+          },
+          {
+            "text": " remember",
+            "tokens": 1
+          },
+          {
+            "text": " your",
+            "tokens": 1
+          },
+          {
+            "text": " last",
+            "tokens": 1
+          },
+          {
+            "text": " conversation",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": " A",
+            "tokens": 1
+          },
+          {
+            "text": " product",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " \"",
+            "tokens": 1
+          },
+          {
+            "text": "memory",
+            "tokens": 1
+          },
+          {
+            "text": "\"",
+            "tokens": 1
+          },
+          {
+            "text": " puts",
+            "tokens": 1
+          },
+          {
+            "text": " saved",
+            "tokens": 1
+          },
+          {
+            "text": " text",
+            "tokens": 1
+          },
+          {
+            "text": " back",
+            "tokens": 1
+          },
+          {
+            "text": " into",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " current",
+            "tokens": 1
+          },
+          {
+            "text": " context",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": " Without",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " text",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " a",
+            "tokens": 1
+          },
+          {
+            "text": " new",
+            "tokens": 1
+          },
+          {
+            "text": " conversation",
+            "tokens": 1
+          },
+          {
+            "text": " knows",
+            "tokens": 1
+          },
+          {
+            "text": " nothing",
+            "tokens": 1
+          },
+          {
+            "text": " of",
+            "tokens": 1
+          },
+          {
+            "text": " what",
+            "tokens": 1
+          },
+          {
+            "text": " you",
+            "tokens": 1
+          },
+          {
+            "text": " said",
+            "tokens": 1
+          },
+          {
+            "text": " before",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          976,
+          2359,
+          8807,
+          2226,
+          625,
+          8203,
+          634,
+          2174,
+          15681,
+          13,
+          355,
+          1888,
+          885,
+          392,
+          37835,
+          1,
+          19237,
+          10576,
+          2201,
+          1602,
+          1511,
+          290,
+          2208,
+          3814,
+          13,
+          25767,
+          484,
+          2201,
+          11,
+          261,
+          620,
+          15681,
+          13484,
+          6939,
+          328,
+          1412,
+          481,
+          2059,
+          2254,
+          13
+        ],
+        "count": 40,
+        "pieces": [
+          {
+            "text": "The",
+            "tokens": 1
+          },
+          {
+            "text": " model",
+            "tokens": 1
+          },
+          {
+            "text": " itself",
+            "tokens": 1
+          },
+          {
+            "text": " does",
+            "tokens": 1
+          },
+          {
+            "text": " not",
+            "tokens": 1
+          },
+          {
+            "text": " remember",
+            "tokens": 1
+          },
+          {
+            "text": " your",
+            "tokens": 1
+          },
+          {
+            "text": " last",
+            "tokens": 1
+          },
+          {
+            "text": " conversation",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": " A",
+            "tokens": 1
+          },
+          {
+            "text": " product",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " \"",
+            "tokens": 1
+          },
+          {
+            "text": "memory",
+            "tokens": 1
+          },
+          {
+            "text": "\"",
+            "tokens": 1
+          },
+          {
+            "text": " puts",
+            "tokens": 1
+          },
+          {
+            "text": " saved",
+            "tokens": 1
+          },
+          {
+            "text": " text",
+            "tokens": 1
+          },
+          {
+            "text": " back",
+            "tokens": 1
+          },
+          {
+            "text": " into",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " current",
+            "tokens": 1
+          },
+          {
+            "text": " context",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": " Without",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " text",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " a",
+            "tokens": 1
+          },
+          {
+            "text": " new",
+            "tokens": 1
+          },
+          {
+            "text": " conversation",
+            "tokens": 1
+          },
+          {
+            "text": " knows",
+            "tokens": 1
+          },
+          {
+            "text": " nothing",
+            "tokens": 1
+          },
+          {
+            "text": " of",
+            "tokens": 1
+          },
+          {
+            "text": " what",
+            "tokens": 1
+          },
+          {
+            "text": " you",
+            "tokens": 1
+          },
+          {
+            "text": " said",
+            "tokens": 1
+          },
+          {
+            "text": " before",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "everydayOriginal.zh",
+      "text": "请帮我写一封邮件，告诉同事明天的会议改到下午三点。",
+      "qwen38": {
+        "ids": [
+          96220,
+          112523,
+          96674,
+          128347,
+          100853,
+          3709,
+          98295,
+          101846,
+          124327,
+          97127,
+          96332,
+          95839,
+          99937,
+          115103,
+          1710
+        ],
+        "count": 15,
+        "pieces": [
+          {
+            "text": "请",
+            "tokens": 1
+          },
+          {
+            "text": "帮我",
+            "tokens": 1
+          },
+          {
+            "text": "写",
+            "tokens": 1
+          },
+          {
+            "text": "一封",
+            "tokens": 1
+          },
+          {
+            "text": "邮件",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "告诉",
+            "tokens": 1
+          },
+          {
+            "text": "同事",
+            "tokens": 1
+          },
+          {
+            "text": "明天的",
+            "tokens": 1
+          },
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "改",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "下午",
+            "tokens": 1
+          },
+          {
+            "text": "三点",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          10394,
+          58626,
+          7522,
+          32444,
+          2432,
+          48813,
+          151733,
+          979,
+          114082,
+          9553,
+          8669,
+          11071,
+          867,
+          1616,
+          67790,
+          15346,
+          6946,
+          50007,
+          3236,
+          8300,
+          788
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "请",
+            "tokens": 1
+          },
+          {
+            "text": "帮",
+            "tokens": 1
+          },
+          {
+            "text": "我",
+            "tokens": 1
+          },
+          {
+            "text": "写",
+            "tokens": 1
+          },
+          {
+            "text": "一",
+            "tokens": 1
+          },
+          {
+            "text": "封",
+            "tokens": 1
+          },
+          {
+            "text": "邮件",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "告诉",
+            "tokens": 1
+          },
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "事",
+            "tokens": 1
+          },
+          {
+            "text": "明",
+            "tokens": 1
+          },
+          {
+            "text": "天",
+            "tokens": 1
+          },
+          {
+            "text": "的",
+            "tokens": 1
+          },
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "改",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "下午",
+            "tokens": 1
+          },
+          {
+            "text": "三",
+            "tokens": 1
+          },
+          {
+            "text": "点",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "everydayOriginal.ja",
+      "text": "明日の会議が午後3時に変更になったことを、同僚に伝えるメールを書いてください。",
+      "qwen38": {
+        "ids": [
+          112632,
+          15303,
+          247304,
+          27279,
+          247373,
+          18,
+          96688,
+          232482,
+          155362,
+          155108,
+          5205,
+          95944,
+          103473,
+          19054,
+          202877,
+          159662,
+          248017,
+          68798,
+          1710
+        ],
+        "count": 19,
+        "pieces": [
+          {
+            "text": "明日",
+            "tokens": 1
+          },
+          {
+            "text": "の",
+            "tokens": 1
+          },
+          {
+            "text": "会議",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "午後",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "時",
+            "tokens": 1
+          },
+          {
+            "text": "に変更",
+            "tokens": 1
+          },
+          {
+            "text": "になった",
+            "tokens": 1
+          },
+          {
+            "text": "ことを",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "僚",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "伝える",
+            "tokens": 1
+          },
+          {
+            "text": "メール",
+            "tokens": 1
+          },
+          {
+            "text": "を書いて",
+            "tokens": 1
+          },
+          {
+            "text": "ください",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          11071,
+          167309,
+          6016,
+          100258,
+          6632,
+          184177,
+          18,
+          12131,
+          5280,
+          178677,
+          66082,
+          42917,
+          53217,
+          7277,
+          1395,
+          9553,
+          19169,
+          248,
+          5280,
+          117934,
+          133169,
+          134549,
+          158209,
+          64655,
+          44900,
+          788
+        ],
+        "count": 26,
+        "pieces": [
+          {
+            "text": "明",
+            "tokens": 1
+          },
+          {
+            "text": "日の",
+            "tokens": 1
+          },
+          {
+            "text": "会",
+            "tokens": 1
+          },
+          {
+            "text": "議",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "午後",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "時",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "変更",
+            "tokens": 1
+          },
+          {
+            "text": "にな",
+            "tokens": 1
+          },
+          {
+            "text": "った",
+            "tokens": 1
+          },
+          {
+            "text": "こと",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "僚",
+            "tokens": 2
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "伝",
+            "tokens": 1
+          },
+          {
+            "text": "える",
+            "tokens": 1
+          },
+          {
+            "text": "メール",
+            "tokens": 1
+          },
+          {
+            "text": "を書",
+            "tokens": 1
+          },
+          {
+            "text": "いて",
+            "tokens": 1
+          },
+          {
+            "text": "ください",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "everydayOriginal.en",
+      "text": "Please write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m.",
+      "qwen38": {
+        "ids": [
+          5328,
+          3165,
+          449,
+          2469,
+          11294,
+          821,
+          17113,
+          421,
+          16089,
+          579,
+          6236,
+          682,
+          7481,
+          310,
+          220,
+          18,
+          280,
+          721,
+          13
+        ],
+        "count": 19,
+        "pieces": [
+          {
+            "text": "Please",
+            "tokens": 1
+          },
+          {
+            "text": " write",
+            "tokens": 1
+          },
+          {
+            "text": " an",
+            "tokens": 1
+          },
+          {
+            "text": " email",
+            "tokens": 1
+          },
+          {
+            "text": " telling",
+            "tokens": 1
+          },
+          {
+            "text": " my",
+            "tokens": 1
+          },
+          {
+            "text": " colleagues",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " tomorrow",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " has",
+            "tokens": 1
+          },
+          {
+            "text": " moved",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": " p",
+            "tokens": 1
+          },
+          {
+            "text": ".m",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          8256,
+          5067,
+          448,
+          3719,
+          20186,
+          922,
+          29431,
+          484,
+          22021,
+          885,
+          9176,
+          853,
+          12183,
+          316,
+          220,
+          18,
+          275,
+          1021,
+          13
+        ],
+        "count": 19,
+        "pieces": [
+          {
+            "text": "Please",
+            "tokens": 1
+          },
+          {
+            "text": " write",
+            "tokens": 1
+          },
+          {
+            "text": " an",
+            "tokens": 1
+          },
+          {
+            "text": " email",
+            "tokens": 1
+          },
+          {
+            "text": " telling",
+            "tokens": 1
+          },
+          {
+            "text": " my",
+            "tokens": 1
+          },
+          {
+            "text": " colleagues",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " tomorrow",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " has",
+            "tokens": 1
+          },
+          {
+            "text": " moved",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": " p",
+            "tokens": 1
+          },
+          {
+            "text": ".m",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "technical.zh",
+      "text": "大语言模型使用Transformer架构，一次预测一个token。",
+      "qwen38": {
+        "ids": [
+          95779,
+          98277,
+          103725,
+          96402,
+          44812,
+          100900,
+          3709,
+          97550,
+          103784,
+          96125,
+          5658,
+          1710
+        ],
+        "count": 12,
+        "pieces": [
+          {
+            "text": "大",
+            "tokens": 1
+          },
+          {
+            "text": "语言",
+            "tokens": 1
+          },
+          {
+            "text": "模型",
+            "tokens": 1
+          },
+          {
+            "text": "使用",
+            "tokens": 1
+          },
+          {
+            "text": "Transformer",
+            "tokens": 1
+          },
+          {
+            "text": "架构",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "一次",
+            "tokens": 1
+          },
+          {
+            "text": "预测",
+            "tokens": 1
+          },
+          {
+            "text": "一个",
+            "tokens": 1
+          },
+          {
+            "text": "token",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1640,
+          108329,
+          184232,
+          26019,
+          48916,
+          58783,
+          32860,
+          36812,
+          11445,
+          24265,
+          22912,
+          10346,
+          788
+        ],
+        "count": 13,
+        "pieces": [
+          {
+            "text": "大",
+            "tokens": 1
+          },
+          {
+            "text": "语言",
+            "tokens": 1
+          },
+          {
+            "text": "模型",
+            "tokens": 1
+          },
+          {
+            "text": "使用",
+            "tokens": 1
+          },
+          {
+            "text": "Transformer",
+            "tokens": 1
+          },
+          {
+            "text": "架",
+            "tokens": 1
+          },
+          {
+            "text": "构",
+            "tokens": 1
+          },
+          {
+            "text": "，一",
+            "tokens": 1
+          },
+          {
+            "text": "次",
+            "tokens": 1
+          },
+          {
+            "text": "预测",
+            "tokens": 1
+          },
+          {
+            "text": "一个",
+            "tokens": 1
+          },
+          {
+            "text": "token",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "technical.ja",
+      "text": "大規模言語モデルはTransformerアーキテクチャを使い、一度に1トークンずつ予測します。",
+      "qwen38": {
+        "ids": [
+          95779,
+          113652,
+          247443,
+          174635,
+          14876,
+          44812,
+          155796,
+          59719,
+          154538,
+          155167,
+          212628,
+          5205,
+          109816,
+          19054,
+          16,
+          217486,
+          15237,
+          163271,
+          247726,
+          74688,
+          1710
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "大",
+            "tokens": 1
+          },
+          {
+            "text": "規模",
+            "tokens": 1
+          },
+          {
+            "text": "言語",
+            "tokens": 1
+          },
+          {
+            "text": "モデル",
+            "tokens": 1
+          },
+          {
+            "text": "は",
+            "tokens": 1
+          },
+          {
+            "text": "Transformer",
+            "tokens": 1
+          },
+          {
+            "text": "アー",
+            "tokens": 1
+          },
+          {
+            "text": "キ",
+            "tokens": 1
+          },
+          {
+            "text": "テク",
+            "tokens": 1
+          },
+          {
+            "text": "チャ",
+            "tokens": 1
+          },
+          {
+            "text": "を使い",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "一度",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "トーク",
+            "tokens": 1
+          },
+          {
+            "text": "ン",
+            "tokens": 1
+          },
+          {
+            "text": "ずつ",
+            "tokens": 1
+          },
+          {
+            "text": "予測",
+            "tokens": 1
+          },
+          {
+            "text": "します",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1640,
+          73407,
+          22801,
+          17765,
+          40909,
+          187451,
+          5205,
+          48916,
+          10398,
+          3022,
+          18368,
+          16056,
+          7787,
+          170597,
+          7277,
+          15159,
+          3826,
+          137307,
+          8913,
+          5280,
+          16,
+          5662,
+          77764,
+          4025,
+          36743,
+          18290,
+          35940,
+          134925,
+          38720,
+          788
+        ],
+        "count": 30,
+        "pieces": [
+          {
+            "text": "大",
+            "tokens": 1
+          },
+          {
+            "text": "規",
+            "tokens": 1
+          },
+          {
+            "text": "模",
+            "tokens": 1
+          },
+          {
+            "text": "言",
+            "tokens": 1
+          },
+          {
+            "text": "語",
+            "tokens": 1
+          },
+          {
+            "text": "モデル",
+            "tokens": 1
+          },
+          {
+            "text": "は",
+            "tokens": 1
+          },
+          {
+            "text": "Transformer",
+            "tokens": 1
+          },
+          {
+            "text": "ア",
+            "tokens": 1
+          },
+          {
+            "text": "ー",
+            "tokens": 1
+          },
+          {
+            "text": "キ",
+            "tokens": 1
+          },
+          {
+            "text": "テ",
+            "tokens": 1
+          },
+          {
+            "text": "ク",
+            "tokens": 1
+          },
+          {
+            "text": "チャ",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "使",
+            "tokens": 1
+          },
+          {
+            "text": "い",
+            "tokens": 1
+          },
+          {
+            "text": "、一",
+            "tokens": 1
+          },
+          {
+            "text": "度",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "ト",
+            "tokens": 1
+          },
+          {
+            "text": "ーク",
+            "tokens": 1
+          },
+          {
+            "text": "ン",
+            "tokens": 1
+          },
+          {
+            "text": "ず",
+            "tokens": 1
+          },
+          {
+            "text": "つ",
+            "tokens": 1
+          },
+          {
+            "text": "予",
+            "tokens": 1
+          },
+          {
+            "text": "測",
+            "tokens": 1
+          },
+          {
+            "text": "します",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "technical.en",
+      "text": "Large language models use the Transformer architecture and predict one token at a time.",
+      "qwen38": {
+        "ids": [
+          33119,
+          3992,
+          3983,
+          958,
+          279,
+          60277,
+          17120,
+          321,
+          6805,
+          799,
+          3817,
+          506,
+          264,
+          854,
+          13
+        ],
+        "count": 15,
+        "pieces": [
+          {
+            "text": "Large",
+            "tokens": 1
+          },
+          {
+            "text": " language",
+            "tokens": 1
+          },
+          {
+            "text": " models",
+            "tokens": 1
+          },
+          {
+            "text": " use",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " Transformer",
+            "tokens": 1
+          },
+          {
+            "text": " architecture",
+            "tokens": 1
+          },
+          {
+            "text": " and",
+            "tokens": 1
+          },
+          {
+            "text": " predict",
+            "tokens": 1
+          },
+          {
+            "text": " one",
+            "tokens": 1
+          },
+          {
+            "text": " token",
+            "tokens": 1
+          },
+          {
+            "text": " at",
+            "tokens": 1
+          },
+          {
+            "text": " a",
+            "tokens": 1
+          },
+          {
+            "text": " time",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          42565,
+          6439,
+          7015,
+          1199,
+          290,
+          113133,
+          24022,
+          326,
+          17946,
+          1001,
+          6602,
+          540,
+          261,
+          1058,
+          13
+        ],
+        "count": 15,
+        "pieces": [
+          {
+            "text": "Large",
+            "tokens": 1
+          },
+          {
+            "text": " language",
+            "tokens": 1
+          },
+          {
+            "text": " models",
+            "tokens": 1
+          },
+          {
+            "text": " use",
+            "tokens": 1
+          },
+          {
+            "text": " the",
+            "tokens": 1
+          },
+          {
+            "text": " Transformer",
+            "tokens": 1
+          },
+          {
+            "text": " architecture",
+            "tokens": 1
+          },
+          {
+            "text": " and",
+            "tokens": 1
+          },
+          {
+            "text": " predict",
+            "tokens": 1
+          },
+          {
+            "text": " one",
+            "tokens": 1
+          },
+          {
+            "text": " token",
+            "tokens": 1
+          },
+          {
+            "text": " at",
+            "tokens": 1
+          },
+          {
+            "text": " a",
+            "tokens": 1
+          },
+          {
+            "text": " time",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "numbers.zh",
+      "text": "2026年10月28日，订单号A-10293，金额3,450.75美元。",
+      "qwen38": {
+        "ids": [
+          17,
+          15,
+          17,
+          21,
+          95859,
+          16,
+          15,
+          96212,
+          17,
+          23,
+          95971,
+          3709,
+          108673,
+          96389,
+          32,
+          12,
+          16,
+          15,
+          17,
+          24,
+          18,
+          3709,
+          100004,
+          18,
+          11,
+          19,
+          20,
+          15,
+          13,
+          22,
+          20,
+          98652,
+          1710
+        ],
+        "count": 33,
+        "pieces": [
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "订单",
+            "tokens": 1
+          },
+          {
+            "text": "号",
+            "tokens": 1
+          },
+          {
+            "text": "A",
+            "tokens": 1
+          },
+          {
+            "text": "-",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "金额",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "7",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": "美元",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1323,
+          21,
+          2810,
+          702,
+          3181,
+          2029,
+          2292,
+          979,
+          66051,
+          4785,
+          32,
+          12,
+          7672,
+          10573,
+          979,
+          69989,
+          18,
+          11,
+          14869,
+          13,
+          3384,
+          42433,
+          788
+        ],
+        "count": 23,
+        "pieces": [
+          {
+            "text": "202",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "10",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "28",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "订单",
+            "tokens": 1
+          },
+          {
+            "text": "号",
+            "tokens": 1
+          },
+          {
+            "text": "A",
+            "tokens": 1
+          },
+          {
+            "text": "-",
+            "tokens": 1
+          },
+          {
+            "text": "102",
+            "tokens": 1
+          },
+          {
+            "text": "93",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "金额",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": "450",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "75",
+            "tokens": 1
+          },
+          {
+            "text": "美元",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "numbers.ja",
+      "text": "2026年10月28日、注文番号A-10293、金額3,450.75ドル。",
+      "qwen38": {
+        "ids": [
+          17,
+          15,
+          17,
+          21,
+          95859,
+          16,
+          15,
+          96212,
+          17,
+          23,
+          95971,
+          5205,
+          247218,
+          246892,
+          32,
+          12,
+          16,
+          15,
+          17,
+          24,
+          18,
+          5205,
+          116356,
+          18,
+          11,
+          19,
+          20,
+          15,
+          13,
+          22,
+          20,
+          161034,
+          1710
+        ],
+        "count": 33,
+        "pieces": [
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "注文",
+            "tokens": 1
+          },
+          {
+            "text": "番号",
+            "tokens": 1
+          },
+          {
+            "text": "A",
+            "tokens": 1
+          },
+          {
+            "text": "-",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "金額",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "7",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": "ドル",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1323,
+          21,
+          2810,
+          702,
+          3181,
+          2029,
+          2292,
+          1395,
+          150718,
+          86656,
+          32,
+          12,
+          7672,
+          10573,
+          1395,
+          5314,
+          86542,
+          18,
+          11,
+          14869,
+          13,
+          3384,
+          181062,
+          788
+        ],
+        "count": 24,
+        "pieces": [
+          {
+            "text": "202",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "年",
+            "tokens": 1
+          },
+          {
+            "text": "10",
+            "tokens": 1
+          },
+          {
+            "text": "月",
+            "tokens": 1
+          },
+          {
+            "text": "28",
+            "tokens": 1
+          },
+          {
+            "text": "日",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "注文",
+            "tokens": 1
+          },
+          {
+            "text": "番号",
+            "tokens": 1
+          },
+          {
+            "text": "A",
+            "tokens": 1
+          },
+          {
+            "text": "-",
+            "tokens": 1
+          },
+          {
+            "text": "102",
+            "tokens": 1
+          },
+          {
+            "text": "93",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "金",
+            "tokens": 1
+          },
+          {
+            "text": "額",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": "450",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "75",
+            "tokens": 1
+          },
+          {
+            "text": "ドル",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "numbers.en",
+      "text": "On October 28, 2026, order A-10293 came to $3,450.75.",
+      "qwen38": {
+        "ids": [
+          1860,
+          6324,
+          220,
+          17,
+          23,
+          11,
+          220,
+          17,
+          15,
+          17,
+          21,
+          11,
+          1906,
+          357,
+          12,
+          16,
+          15,
+          17,
+          24,
+          18,
+          3571,
+          310,
+          393,
+          18,
+          11,
+          19,
+          20,
+          15,
+          13,
+          22,
+          20,
+          13
+        ],
+        "count": 32,
+        "pieces": [
+          {
+            "text": "On",
+            "tokens": 1
+          },
+          {
+            "text": " October",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " order",
+            "tokens": 1
+          },
+          {
+            "text": " A",
+            "tokens": 1
+          },
+          {
+            "text": "-",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": " came",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " $",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "7",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          2219,
+          8750,
+          220,
+          2029,
+          11,
+          220,
+          1323,
+          21,
+          11,
+          2569,
+          355,
+          12,
+          7672,
+          10573,
+          5831,
+          316,
+          548,
+          18,
+          11,
+          14869,
+          13,
+          3384,
+          13
+        ],
+        "count": 23,
+        "pieces": [
+          {
+            "text": "On",
+            "tokens": 1
+          },
+          {
+            "text": " October",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "28",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "202",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " order",
+            "tokens": 1
+          },
+          {
+            "text": " A",
+            "tokens": 1
+          },
+          {
+            "text": "-",
+            "tokens": 1
+          },
+          {
+            "text": "102",
+            "tokens": 1
+          },
+          {
+            "text": "93",
+            "tokens": 1
+          },
+          {
+            "text": " came",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " $",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": "450",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "75",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "code.zh",
+      "text": "for (let i = 0; i < 10; i++) console.log(i); // 打印0到9",
+      "qwen38": {
+        "ids": [
+          1891,
+          318,
+          1112,
+          585,
+          283,
+          220,
+          15,
+          26,
+          585,
+          361,
+          220,
+          16,
+          15,
+          26,
+          585,
+          2377,
+          2263,
+          1607,
+          1889,
+          1174,
+          434,
+          220,
+          101679,
+          15,
+          95839,
+          24
+        ],
+        "count": 26,
+        "pieces": [
+          {
+            "text": "for",
+            "tokens": 1
+          },
+          {
+            "text": " (",
+            "tokens": 1
+          },
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " <",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": "++)",
+            "tokens": 1
+          },
+          {
+            "text": " console",
+            "tokens": 1
+          },
+          {
+            "text": ".log",
+            "tokens": 1
+          },
+          {
+            "text": "(i",
+            "tokens": 1
+          },
+          {
+            "text": ");",
+            "tokens": 1
+          },
+          {
+            "text": " //",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "打印",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1938,
+          350,
+          1347,
+          575,
+          314,
+          220,
+          15,
+          26,
+          575,
+          464,
+          220,
+          702,
+          26,
+          575,
+          4352,
+          3887,
+          2659,
+          3649,
+          2245,
+          602,
+          96207,
+          34713,
+          15,
+          6946,
+          24
+        ],
+        "count": 25,
+        "pieces": [
+          {
+            "text": "for",
+            "tokens": 1
+          },
+          {
+            "text": " (",
+            "tokens": 1
+          },
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " <",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "10",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": "++)",
+            "tokens": 1
+          },
+          {
+            "text": " console",
+            "tokens": 1
+          },
+          {
+            "text": ".log",
+            "tokens": 1
+          },
+          {
+            "text": "(i",
+            "tokens": 1
+          },
+          {
+            "text": ");",
+            "tokens": 1
+          },
+          {
+            "text": " //",
+            "tokens": 1
+          },
+          {
+            "text": " 打",
+            "tokens": 1
+          },
+          {
+            "text": "印",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "code.ja",
+      "text": "for (let i = 0; i < 10; i++) console.log(i); // 0から9を表示",
+      "qwen38": {
+        "ids": [
+          1891,
+          318,
+          1112,
+          585,
+          283,
+          220,
+          15,
+          26,
+          585,
+          361,
+          220,
+          16,
+          15,
+          26,
+          585,
+          2377,
+          2263,
+          1607,
+          1889,
+          1174,
+          434,
+          220,
+          15,
+          52122,
+          24,
+          189662
+        ],
+        "count": 26,
+        "pieces": [
+          {
+            "text": "for",
+            "tokens": 1
+          },
+          {
+            "text": " (",
+            "tokens": 1
+          },
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " <",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": "++)",
+            "tokens": 1
+          },
+          {
+            "text": " console",
+            "tokens": 1
+          },
+          {
+            "text": ".log",
+            "tokens": 1
+          },
+          {
+            "text": "(i",
+            "tokens": 1
+          },
+          {
+            "text": ");",
+            "tokens": 1
+          },
+          {
+            "text": " //",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "から",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": "を表示",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1938,
+          350,
+          1347,
+          575,
+          314,
+          220,
+          15,
+          26,
+          575,
+          464,
+          220,
+          702,
+          26,
+          575,
+          4352,
+          3887,
+          2659,
+          3649,
+          2245,
+          602,
+          220,
+          15,
+          27500,
+          24,
+          7277,
+          27978
+        ],
+        "count": 26,
+        "pieces": [
+          {
+            "text": "for",
+            "tokens": 1
+          },
+          {
+            "text": " (",
+            "tokens": 1
+          },
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " <",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "10",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": "++)",
+            "tokens": 1
+          },
+          {
+            "text": " console",
+            "tokens": 1
+          },
+          {
+            "text": ".log",
+            "tokens": 1
+          },
+          {
+            "text": "(i",
+            "tokens": 1
+          },
+          {
+            "text": ");",
+            "tokens": 1
+          },
+          {
+            "text": " //",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "から",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": "を",
+            "tokens": 1
+          },
+          {
+            "text": "表示",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "code.en",
+      "text": "for (let i = 0; i < 10; i++) console.log(i); // print 0 to 9",
+      "qwen38": {
+        "ids": [
+          1891,
+          318,
+          1112,
+          585,
+          283,
+          220,
+          15,
+          26,
+          585,
+          361,
+          220,
+          16,
+          15,
+          26,
+          585,
+          2377,
+          2263,
+          1607,
+          1889,
+          1174,
+          434,
+          1133,
+          220,
+          15,
+          310,
+          220,
+          24
+        ],
+        "count": 27,
+        "pieces": [
+          {
+            "text": "for",
+            "tokens": 1
+          },
+          {
+            "text": " (",
+            "tokens": 1
+          },
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " <",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": "++)",
+            "tokens": 1
+          },
+          {
+            "text": " console",
+            "tokens": 1
+          },
+          {
+            "text": ".log",
+            "tokens": 1
+          },
+          {
+            "text": "(i",
+            "tokens": 1
+          },
+          {
+            "text": ");",
+            "tokens": 1
+          },
+          {
+            "text": " //",
+            "tokens": 1
+          },
+          {
+            "text": " print",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1938,
+          350,
+          1347,
+          575,
+          314,
+          220,
+          15,
+          26,
+          575,
+          464,
+          220,
+          702,
+          26,
+          575,
+          4352,
+          3887,
+          2659,
+          3649,
+          2245,
+          602,
+          2123,
+          220,
+          15,
+          316,
+          220,
+          24
+        ],
+        "count": 26,
+        "pieces": [
+          {
+            "text": "for",
+            "tokens": 1
+          },
+          {
+            "text": " (",
+            "tokens": 1
+          },
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": " <",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "10",
+            "tokens": 1
+          },
+          {
+            "text": ";",
+            "tokens": 1
+          },
+          {
+            "text": " i",
+            "tokens": 1
+          },
+          {
+            "text": "++)",
+            "tokens": 1
+          },
+          {
+            "text": " console",
+            "tokens": 1
+          },
+          {
+            "text": ".log",
+            "tokens": 1
+          },
+          {
+            "text": "(i",
+            "tokens": 1
+          },
+          {
+            "text": ");",
+            "tokens": 1
+          },
+          {
+            "text": " //",
+            "tokens": 1
+          },
+          {
+            "text": " print",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.0",
+      "text": "",
+      "qwen38": {
+        "ids": [],
+        "count": 0,
+        "pieces": []
+      },
+      "o200k": {
+        "ids": [],
+        "count": 0,
+        "pieces": []
+      }
+    },
+    {
+      "key": "edge.1",
+      "text": "Hello, world!",
+      "qwen38": {
+        "ids": [
+          9419,
+          11,
+          1814,
+          0
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "Hello",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " world",
+            "tokens": 1
+          },
+          {
+            "text": "!",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          13225,
+          11,
+          2375,
+          0
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "Hello",
+            "tokens": 1
+          },
+          {
+            "text": ",",
+            "tokens": 1
+          },
+          {
+            "text": " world",
+            "tokens": 1
+          },
+          {
+            "text": "!",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.2",
+      "text": "東京",
+      "qwen38": {
+        "ids": [
+          115197
+        ],
+        "count": 1,
+        "pieces": [
+          {
+            "text": "東京",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          108713
+        ],
+        "count": 1,
+        "pieces": [
+          {
+            "text": "東京",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.3",
+      "text": "東京都に住んでいます。",
+      "qwen38": {
+        "ids": [
+          247389,
+          212107,
+          200597,
+          1710
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "東京都",
+            "tokens": 1
+          },
+          {
+            "text": "に住",
+            "tokens": 1
+          },
+          {
+            "text": "んでいます",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          123558,
+          5280,
+          25503,
+          6676,
+          4344,
+          31901,
+          788
+        ],
+        "count": 7,
+        "pieces": [
+          {
+            "text": "東京都",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "住",
+            "tokens": 1
+          },
+          {
+            "text": "ん",
+            "tokens": 1
+          },
+          {
+            "text": "で",
+            "tokens": 1
+          },
+          {
+            "text": "います",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.4",
+      "text": "请帮我写一封邮件，告诉同事明天的会议改到下午三点。",
+      "qwen38": {
+        "ids": [
+          96220,
+          112523,
+          96674,
+          128347,
+          100853,
+          3709,
+          98295,
+          101846,
+          124327,
+          97127,
+          96332,
+          95839,
+          99937,
+          115103,
+          1710
+        ],
+        "count": 15,
+        "pieces": [
+          {
+            "text": "请",
+            "tokens": 1
+          },
+          {
+            "text": "帮我",
+            "tokens": 1
+          },
+          {
+            "text": "写",
+            "tokens": 1
+          },
+          {
+            "text": "一封",
+            "tokens": 1
+          },
+          {
+            "text": "邮件",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "告诉",
+            "tokens": 1
+          },
+          {
+            "text": "同事",
+            "tokens": 1
+          },
+          {
+            "text": "明天的",
+            "tokens": 1
+          },
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "改",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "下午",
+            "tokens": 1
+          },
+          {
+            "text": "三点",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          10394,
+          58626,
+          7522,
+          32444,
+          2432,
+          48813,
+          151733,
+          979,
+          114082,
+          9553,
+          8669,
+          11071,
+          867,
+          1616,
+          67790,
+          15346,
+          6946,
+          50007,
+          3236,
+          8300,
+          788
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "请",
+            "tokens": 1
+          },
+          {
+            "text": "帮",
+            "tokens": 1
+          },
+          {
+            "text": "我",
+            "tokens": 1
+          },
+          {
+            "text": "写",
+            "tokens": 1
+          },
+          {
+            "text": "一",
+            "tokens": 1
+          },
+          {
+            "text": "封",
+            "tokens": 1
+          },
+          {
+            "text": "邮件",
+            "tokens": 1
+          },
+          {
+            "text": "，",
+            "tokens": 1
+          },
+          {
+            "text": "告诉",
+            "tokens": 1
+          },
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "事",
+            "tokens": 1
+          },
+          {
+            "text": "明",
+            "tokens": 1
+          },
+          {
+            "text": "天",
+            "tokens": 1
+          },
+          {
+            "text": "的",
+            "tokens": 1
+          },
+          {
+            "text": "会议",
+            "tokens": 1
+          },
+          {
+            "text": "改",
+            "tokens": 1
+          },
+          {
+            "text": "到",
+            "tokens": 1
+          },
+          {
+            "text": "下午",
+            "tokens": 1
+          },
+          {
+            "text": "三",
+            "tokens": 1
+          },
+          {
+            "text": "点",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.5",
+      "text": "同僚に、明日の会議が午後3時に変わったと伝えるメールを書いてください。",
+      "qwen38": {
+        "ids": [
+          95944,
+          103473,
+          19054,
+          5205,
+          112632,
+          15303,
+          247304,
+          27279,
+          247373,
+          18,
+          171585,
+          245806,
+          18602,
+          202877,
+          159662,
+          248017,
+          68798,
+          1710
+        ],
+        "count": 18,
+        "pieces": [
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "僚",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "明日",
+            "tokens": 1
+          },
+          {
+            "text": "の",
+            "tokens": 1
+          },
+          {
+            "text": "会議",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "午後",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "時に",
+            "tokens": 1
+          },
+          {
+            "text": "変わった",
+            "tokens": 1
+          },
+          {
+            "text": "と",
+            "tokens": 1
+          },
+          {
+            "text": "伝える",
+            "tokens": 1
+          },
+          {
+            "text": "メール",
+            "tokens": 1
+          },
+          {
+            "text": "を書いて",
+            "tokens": 1
+          },
+          {
+            "text": "ください",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          9553,
+          19169,
+          248,
+          5280,
+          1395,
+          11071,
+          167309,
+          6016,
+          100258,
+          6632,
+          184177,
+          18,
+          12131,
+          5280,
+          60722,
+          20473,
+          42917,
+          5330,
+          117934,
+          133169,
+          134549,
+          158209,
+          64655,
+          44900,
+          788
+        ],
+        "count": 25,
+        "pieces": [
+          {
+            "text": "同",
+            "tokens": 1
+          },
+          {
+            "text": "僚",
+            "tokens": 2
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "、",
+            "tokens": 1
+          },
+          {
+            "text": "明",
+            "tokens": 1
+          },
+          {
+            "text": "日の",
+            "tokens": 1
+          },
+          {
+            "text": "会",
+            "tokens": 1
+          },
+          {
+            "text": "議",
+            "tokens": 1
+          },
+          {
+            "text": "が",
+            "tokens": 1
+          },
+          {
+            "text": "午後",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "時",
+            "tokens": 1
+          },
+          {
+            "text": "に",
+            "tokens": 1
+          },
+          {
+            "text": "変",
+            "tokens": 1
+          },
+          {
+            "text": "わ",
+            "tokens": 1
+          },
+          {
+            "text": "った",
+            "tokens": 1
+          },
+          {
+            "text": "と",
+            "tokens": 1
+          },
+          {
+            "text": "伝",
+            "tokens": 1
+          },
+          {
+            "text": "える",
+            "tokens": 1
+          },
+          {
+            "text": "メール",
+            "tokens": 1
+          },
+          {
+            "text": "を書",
+            "tokens": 1
+          },
+          {
+            "text": "いて",
+            "tokens": 1
+          },
+          {
+            "text": "ください",
+            "tokens": 1
+          },
+          {
+            "text": "。",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.6",
+      "text": "Please help me write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m.",
+      "qwen38": {
+        "ids": [
+          5328,
+          1438,
+          728,
+          3165,
+          449,
+          2469,
+          11294,
+          821,
+          17113,
+          421,
+          16089,
+          579,
+          6236,
+          682,
+          7481,
+          310,
+          220,
+          18,
+          280,
+          721,
+          13
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "Please",
+            "tokens": 1
+          },
+          {
+            "text": " help",
+            "tokens": 1
+          },
+          {
+            "text": " me",
+            "tokens": 1
+          },
+          {
+            "text": " write",
+            "tokens": 1
+          },
+          {
+            "text": " an",
+            "tokens": 1
+          },
+          {
+            "text": " email",
+            "tokens": 1
+          },
+          {
+            "text": " telling",
+            "tokens": 1
+          },
+          {
+            "text": " my",
+            "tokens": 1
+          },
+          {
+            "text": " colleagues",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " tomorrow",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " has",
+            "tokens": 1
+          },
+          {
+            "text": " moved",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": " p",
+            "tokens": 1
+          },
+          {
+            "text": ".m",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          8256,
+          1652,
+          668,
+          5067,
+          448,
+          3719,
+          20186,
+          922,
+          29431,
+          484,
+          22021,
+          885,
+          9176,
+          853,
+          12183,
+          316,
+          220,
+          18,
+          275,
+          1021,
+          13
+        ],
+        "count": 21,
+        "pieces": [
+          {
+            "text": "Please",
+            "tokens": 1
+          },
+          {
+            "text": " help",
+            "tokens": 1
+          },
+          {
+            "text": " me",
+            "tokens": 1
+          },
+          {
+            "text": " write",
+            "tokens": 1
+          },
+          {
+            "text": " an",
+            "tokens": 1
+          },
+          {
+            "text": " email",
+            "tokens": 1
+          },
+          {
+            "text": " telling",
+            "tokens": 1
+          },
+          {
+            "text": " my",
+            "tokens": 1
+          },
+          {
+            "text": " colleagues",
+            "tokens": 1
+          },
+          {
+            "text": " that",
+            "tokens": 1
+          },
+          {
+            "text": " tomorrow",
+            "tokens": 1
+          },
+          {
+            "text": "'s",
+            "tokens": 1
+          },
+          {
+            "text": " meeting",
+            "tokens": 1
+          },
+          {
+            "text": " has",
+            "tokens": 1
+          },
+          {
+            "text": " moved",
+            "tokens": 1
+          },
+          {
+            "text": " to",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": " p",
+            "tokens": 1
+          },
+          {
+            "text": ".m",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.7",
+      "text": "2026",
+      "qwen38": {
+        "ids": [
+          17,
+          15,
+          17,
+          21
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1323,
+          21
+        ],
+        "count": 2,
+        "pieces": [
+          {
+            "text": "202",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.8",
+      "text": "0123456789 3.14159 ３４５６ ١٢٣",
+      "qwen38": {
+        "ids": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          220,
+          18,
+          13,
+          16,
+          19,
+          16,
+          20,
+          24,
+          220,
+          32405,
+          44085,
+          42059,
+          57486,
+          220,
+          149,
+          94,
+          149,
+          95,
+          149,
+          96
+        ],
+        "count": 30,
+        "pieces": [
+          {
+            "text": "0",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "2",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": "6",
+            "tokens": 1
+          },
+          {
+            "text": "7",
+            "tokens": 1
+          },
+          {
+            "text": "8",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "4",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "5",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "３",
+            "tokens": 1
+          },
+          {
+            "text": "４",
+            "tokens": 1
+          },
+          {
+            "text": "５",
+            "tokens": 1
+          },
+          {
+            "text": "６",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "١",
+            "tokens": 2
+          },
+          {
+            "text": "٢",
+            "tokens": 2
+          },
+          {
+            "text": "٣",
+            "tokens": 2
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          19267,
+          22901,
+          30833,
+          24,
+          220,
+          18,
+          13,
+          16926,
+          4621,
+          220,
+          18980,
+          26248,
+          25096,
+          33965,
+          220,
+          46600,
+          53184,
+          81473
+        ],
+        "count": 18,
+        "pieces": [
+          {
+            "text": "012",
+            "tokens": 1
+          },
+          {
+            "text": "345",
+            "tokens": 1
+          },
+          {
+            "text": "678",
+            "tokens": 1
+          },
+          {
+            "text": "9",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "3",
+            "tokens": 1
+          },
+          {
+            "text": ".",
+            "tokens": 1
+          },
+          {
+            "text": "141",
+            "tokens": 1
+          },
+          {
+            "text": "59",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "３",
+            "tokens": 1
+          },
+          {
+            "text": "４",
+            "tokens": 1
+          },
+          {
+            "text": "５",
+            "tokens": 1
+          },
+          {
+            "text": "６",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "١",
+            "tokens": 1
+          },
+          {
+            "text": "٢",
+            "tokens": 1
+          },
+          {
+            "text": "٣",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.9",
+      "text": "é é Å Å",
+      "qwen38": {
+        "ids": [
+          933,
+          3825,
+          76533,
+          76533
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "é",
+            "tokens": 1
+          },
+          {
+            "text": " é",
+            "tokens": 1
+          },
+          {
+            "text": " Å",
+            "tokens": 1
+          },
+          {
+            "text": " Å",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          68,
+          13430,
+          1212,
+          49805,
+          355,
+          110718
+        ],
+        "count": 6,
+        "pieces": [
+          {
+            "text": "e",
+            "tokens": 1
+          },
+          {
+            "text": "́",
+            "tokens": 1
+          },
+          {
+            "text": " é",
+            "tokens": 1
+          },
+          {
+            "text": " Å",
+            "tokens": 1
+          },
+          {
+            "text": " A",
+            "tokens": 1
+          },
+          {
+            "text": "̊",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.10",
+      "text": "👩🏽‍💻🇨🇳👨‍👩‍👧‍👦🙂",
+      "qwen38": {
+        "ids": [
+          9008,
+          239,
+          102,
+          9008,
+          237,
+          121,
+          373,
+          235,
+          88995,
+          119,
+          9008,
+          229,
+          101,
+          9008,
+          229,
+          111,
+          9008,
+          239,
+          101,
+          373,
+          235,
+          9008,
+          239,
+          102,
+          373,
+          235,
+          9008,
+          239,
+          100,
+          373,
+          235,
+          9008,
+          239,
+          99,
+          169171
+        ],
+        "count": 35,
+        "pieces": [
+          {
+            "text": "👩",
+            "tokens": 3
+          },
+          {
+            "text": "🏽",
+            "tokens": 3
+          },
+          {
+            "text": "‍",
+            "tokens": 2
+          },
+          {
+            "text": "💻",
+            "tokens": 2
+          },
+          {
+            "text": "🇨",
+            "tokens": 3
+          },
+          {
+            "text": "🇳",
+            "tokens": 3
+          },
+          {
+            "text": "👨",
+            "tokens": 3
+          },
+          {
+            "text": "‍",
+            "tokens": 2
+          },
+          {
+            "text": "👩",
+            "tokens": 3
+          },
+          {
+            "text": "‍",
+            "tokens": 2
+          },
+          {
+            "text": "👧",
+            "tokens": 3
+          },
+          {
+            "text": "‍",
+            "tokens": 2
+          },
+          {
+            "text": "👦",
+            "tokens": 3
+          },
+          {
+            "text": "🙂",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          28823,
+          102,
+          52622,
+          121,
+          2524,
+          31446,
+          119,
+          55506,
+          101,
+          55506,
+          111,
+          28823,
+          101,
+          2524,
+          28823,
+          102,
+          2524,
+          28823,
+          100,
+          2524,
+          28823,
+          99,
+          37459
+        ],
+        "count": 23,
+        "pieces": [
+          {
+            "text": "👩",
+            "tokens": 2
+          },
+          {
+            "text": "🏽",
+            "tokens": 2
+          },
+          {
+            "text": "‍",
+            "tokens": 1
+          },
+          {
+            "text": "💻",
+            "tokens": 2
+          },
+          {
+            "text": "🇨",
+            "tokens": 2
+          },
+          {
+            "text": "🇳",
+            "tokens": 2
+          },
+          {
+            "text": "👨",
+            "tokens": 2
+          },
+          {
+            "text": "‍",
+            "tokens": 1
+          },
+          {
+            "text": "👩",
+            "tokens": 2
+          },
+          {
+            "text": "‍",
+            "tokens": 1
+          },
+          {
+            "text": "👧",
+            "tokens": 2
+          },
+          {
+            "text": "‍",
+            "tokens": 1
+          },
+          {
+            "text": "👦",
+            "tokens": 2
+          },
+          {
+            "text": "🙂",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.11",
+      "text": "a\t b\n\r\n  c d　e",
+      "qwen38": {
+        "ids": [
+          64,
+          197,
+          292,
+          198,
+          317,
+          220,
+          272,
+          3966,
+          67,
+          21742,
+          68
+        ],
+        "count": 11,
+        "pieces": [
+          {
+            "text": "a",
+            "tokens": 1
+          },
+          {
+            "text": "\t",
+            "tokens": 1
+          },
+          {
+            "text": " b",
+            "tokens": 1
+          },
+          {
+            "text": "\n",
+            "tokens": 1
+          },
+          {
+            "text": "\r\n",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": " c",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "d",
+            "tokens": 1
+          },
+          {
+            "text": "　",
+            "tokens": 1
+          },
+          {
+            "text": "e",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          64,
+          197,
+          287,
+          191171,
+          220,
+          274,
+          5310,
+          67,
+          1397,
+          68
+        ],
+        "count": 10,
+        "pieces": [
+          {
+            "text": "a",
+            "tokens": 1
+          },
+          {
+            "text": "\t",
+            "tokens": 1
+          },
+          {
+            "text": " b",
+            "tokens": 1
+          },
+          {
+            "text": "\n\r\n",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": " c",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "d",
+            "tokens": 1
+          },
+          {
+            "text": "　",
+            "tokens": 1
+          },
+          {
+            "text": "e",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.12",
+      "text": "汉字 かな カナ 한글 العربية",
+      "qwen38": {
+        "ids": [
+          112254,
+          220,
+          149667,
+          152412,
+          92059,
+          209758,
+          171405
+        ],
+        "count": 7,
+        "pieces": [
+          {
+            "text": "汉字",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "かな",
+            "tokens": 1
+          },
+          {
+            "text": " カ",
+            "tokens": 1
+          },
+          {
+            "text": "ナ",
+            "tokens": 1
+          },
+          {
+            "text": " 한글",
+            "tokens": 1
+          },
+          {
+            "text": " العربية",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          47799,
+          8134,
+          220,
+          165732,
+          52753,
+          27354,
+          14680,
+          20442,
+          33968
+        ],
+        "count": 9,
+        "pieces": [
+          {
+            "text": "汉",
+            "tokens": 1
+          },
+          {
+            "text": "字",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "かな",
+            "tokens": 1
+          },
+          {
+            "text": " カ",
+            "tokens": 1
+          },
+          {
+            "text": "ナ",
+            "tokens": 1
+          },
+          {
+            "text": " 한",
+            "tokens": 1
+          },
+          {
+            "text": "글",
+            "tokens": 1
+          },
+          {
+            "text": " العربية",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.13",
+      "text": "\u0000\u0001",
+      "qwen38": {
+        "ids": [
+          188,
+          189,
+          221
+        ],
+        "count": 3,
+        "pieces": [
+          {
+            "text": "\u0000",
+            "tokens": 1
+          },
+          {
+            "text": "\u0001",
+            "tokens": 1
+          },
+          {
+            "text": "",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          188,
+          189,
+          221
+        ],
+        "count": 3,
+        "pieces": [
+          {
+            "text": "\u0000",
+            "tokens": 1
+          },
+          {
+            "text": "\u0001",
+            "tokens": 1
+          },
+          {
+            "text": "",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.14",
+      "text": "𝔘𝔫𝔦𝔠𝔬𝔡𝔢 𠮷野家",
+      "qwen38": {
+        "ids": [
+          54362,
+          242,
+          246,
+          54362,
+          242,
+          104,
+          54362,
+          242,
+          99,
+          54362,
+          242,
+          254,
+          54362,
+          242,
+          105,
+          54362,
+          242,
+          94,
+          54362,
+          242,
+          95,
+          220,
+          172,
+          254,
+          106,
+          115,
+          97262,
+          95855
+        ],
+        "count": 28,
+        "pieces": [
+          {
+            "text": "𝔘",
+            "tokens": 3
+          },
+          {
+            "text": "𝔫",
+            "tokens": 3
+          },
+          {
+            "text": "𝔦",
+            "tokens": 3
+          },
+          {
+            "text": "𝔠",
+            "tokens": 3
+          },
+          {
+            "text": "𝔬",
+            "tokens": 3
+          },
+          {
+            "text": "𝔡",
+            "tokens": 3
+          },
+          {
+            "text": "𝔢",
+            "tokens": 3
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "𠮷",
+            "tokens": 4
+          },
+          {
+            "text": "野",
+            "tokens": 1
+          },
+          {
+            "text": "家",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          43120,
+          242,
+          246,
+          43120,
+          242,
+          104,
+          43120,
+          242,
+          99,
+          43120,
+          242,
+          254,
+          43120,
+          242,
+          105,
+          43120,
+          242,
+          94,
+          43120,
+          242,
+          95,
+          220,
+          172,
+          254,
+          106,
+          115,
+          28848,
+          6150
+        ],
+        "count": 28,
+        "pieces": [
+          {
+            "text": "𝔘",
+            "tokens": 3
+          },
+          {
+            "text": "𝔫",
+            "tokens": 3
+          },
+          {
+            "text": "𝔦",
+            "tokens": 3
+          },
+          {
+            "text": "𝔠",
+            "tokens": 3
+          },
+          {
+            "text": "𝔬",
+            "tokens": 3
+          },
+          {
+            "text": "𝔡",
+            "tokens": 3
+          },
+          {
+            "text": "𝔢",
+            "tokens": 3
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "𠮷",
+            "tokens": 4
+          },
+          {
+            "text": "野",
+            "tokens": 1
+          },
+          {
+            "text": "家",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.15",
+      "text": "<|endoftext|>",
+      "qwen38": {
+        "ids": [
+          248044
+        ],
+        "count": 1,
+        "pieces": [
+          {
+            "text": "<|endoftext|>",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          27,
+          91,
+          419,
+          1440,
+          919,
+          91,
+          29
+        ],
+        "count": 7,
+        "pieces": [
+          {
+            "text": "<",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": "end",
+            "tokens": 1
+          },
+          {
+            "text": "of",
+            "tokens": 1
+          },
+          {
+            "text": "text",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.16",
+      "text": "<|im_start|>user\n你好<|im_end|>",
+      "qwen38": {
+        "ids": [
+          248045,
+          846,
+          198,
+          109266,
+          248046
+        ],
+        "count": 5,
+        "pieces": [
+          {
+            "text": "<|im_start|>",
+            "tokens": 1
+          },
+          {
+            "text": "user",
+            "tokens": 1
+          },
+          {
+            "text": "\n",
+            "tokens": 1
+          },
+          {
+            "text": "你好",
+            "tokens": 1
+          },
+          {
+            "text": "<|im_end|>",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          27,
+          91,
+          321,
+          10949,
+          91,
+          29,
+          1428,
+          198,
+          177519,
+          27,
+          91,
+          321,
+          13707,
+          91,
+          29
+        ],
+        "count": 15,
+        "pieces": [
+          {
+            "text": "<",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": "im",
+            "tokens": 1
+          },
+          {
+            "text": "_start",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          },
+          {
+            "text": "user",
+            "tokens": 1
+          },
+          {
+            "text": "\n",
+            "tokens": 1
+          },
+          {
+            "text": "你好",
+            "tokens": 1
+          },
+          {
+            "text": "<",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": "im",
+            "tokens": 1
+          },
+          {
+            "text": "_end",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.17",
+      "text": "<think>thinking</think>",
+      "qwen38": {
+        "ids": [
+          248068,
+          79420,
+          248069
+        ],
+        "count": 3,
+        "pieces": [
+          {
+            "text": "<think>",
+            "tokens": 1
+          },
+          {
+            "text": "thinking",
+            "tokens": 1
+          },
+          {
+            "text": "</think>",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          33313,
+          881,
+          29,
+          149404,
+          808,
+          49631,
+          29
+        ],
+        "count": 7,
+        "pieces": [
+          {
+            "text": "<th",
+            "tokens": 1
+          },
+          {
+            "text": "ink",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          },
+          {
+            "text": "thinking",
+            "tokens": 1
+          },
+          {
+            "text": "</",
+            "tokens": 1
+          },
+          {
+            "text": "think",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.18",
+      "text": "<tool_call>{\"x\":1}</tool_call>",
+      "qwen38": {
+        "ids": [
+          248058,
+          4754,
+          87,
+          763,
+          16,
+          92,
+          248059
+        ],
+        "count": 7,
+        "pieces": [
+          {
+            "text": "<tool_call>",
+            "tokens": 1
+          },
+          {
+            "text": "{\"",
+            "tokens": 1
+          },
+          {
+            "text": "x",
+            "tokens": 1
+          },
+          {
+            "text": "\":",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "}",
+            "tokens": 1
+          },
+          {
+            "text": "</tool_call>",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          27,
+          17952,
+          25158,
+          163633,
+          87,
+          1243,
+          16,
+          7391,
+          17952,
+          25158,
+          29
+        ],
+        "count": 11,
+        "pieces": [
+          {
+            "text": "<",
+            "tokens": 1
+          },
+          {
+            "text": "tool",
+            "tokens": 1
+          },
+          {
+            "text": "_call",
+            "tokens": 1
+          },
+          {
+            "text": ">{\"",
+            "tokens": 1
+          },
+          {
+            "text": "x",
+            "tokens": 1
+          },
+          {
+            "text": "\":",
+            "tokens": 1
+          },
+          {
+            "text": "1",
+            "tokens": 1
+          },
+          {
+            "text": "}</",
+            "tokens": 1
+          },
+          {
+            "text": "tool",
+            "tokens": 1
+          },
+          {
+            "text": "_call",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.19",
+      "text": "<|endofprompt|>",
+      "qwen38": {
+        "ids": [
+          27,
+          91,
+          400,
+          1020,
+          39242,
+          91,
+          29
+        ],
+        "count": 7,
+        "pieces": [
+          {
+            "text": "<",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": "end",
+            "tokens": 1
+          },
+          {
+            "text": "of",
+            "tokens": 1
+          },
+          {
+            "text": "prompt",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          27,
+          91,
+          419,
+          1440,
+          82467,
+          91,
+          29
+        ],
+        "count": 7,
+        "pieces": [
+          {
+            "text": "<",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": "end",
+            "tokens": 1
+          },
+          {
+            "text": "of",
+            "tokens": 1
+          },
+          {
+            "text": "prompt",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.20",
+      "text": "literal <|im_start|> text",
+      "qwen38": {
+        "ids": [
+          34600,
+          220,
+          248045,
+          1414
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "literal",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "<|im_start|>",
+            "tokens": 1
+          },
+          {
+            "text": " text",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          70989,
+          464,
+          91,
+          321,
+          10949,
+          91,
+          29,
+          2201
+        ],
+        "count": 8,
+        "pieces": [
+          {
+            "text": "literal",
+            "tokens": 1
+          },
+          {
+            "text": " <",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": "im",
+            "tokens": 1
+          },
+          {
+            "text": "_start",
+            "tokens": 1
+          },
+          {
+            "text": "|",
+            "tokens": 1
+          },
+          {
+            "text": ">",
+            "tokens": 1
+          },
+          {
+            "text": " text",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.21",
+      "text": "let x = 'a';\n// 你好\nprint(x)",
+      "qwen38": {
+        "ids": [
+          1112,
+          830,
+          283,
+          359,
+          64,
+          6750,
+          198,
+          320,
+          220,
+          109266,
+          198,
+          1302,
+          2007,
+          8
+        ],
+        "count": 14,
+        "pieces": [
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " x",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " '",
+            "tokens": 1
+          },
+          {
+            "text": "a",
+            "tokens": 1
+          },
+          {
+            "text": "';",
+            "tokens": 1
+          },
+          {
+            "text": "\n",
+            "tokens": 1
+          },
+          {
+            "text": "//",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "你好",
+            "tokens": 1
+          },
+          {
+            "text": "\n",
+            "tokens": 1
+          },
+          {
+            "text": "print",
+            "tokens": 1
+          },
+          {
+            "text": "(x",
+            "tokens": 1
+          },
+          {
+            "text": ")",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          1347,
+          1215,
+          314,
+          461,
+          64,
+          47837,
+          220,
+          177519,
+          198,
+          1598,
+          4061,
+          8
+        ],
+        "count": 12,
+        "pieces": [
+          {
+            "text": "let",
+            "tokens": 1
+          },
+          {
+            "text": " x",
+            "tokens": 1
+          },
+          {
+            "text": " =",
+            "tokens": 1
+          },
+          {
+            "text": " '",
+            "tokens": 1
+          },
+          {
+            "text": "a",
+            "tokens": 1
+          },
+          {
+            "text": "';\n//",
+            "tokens": 1
+          },
+          {
+            "text": " ",
+            "tokens": 1
+          },
+          {
+            "text": "你好",
+            "tokens": 1
+          },
+          {
+            "text": "\n",
+            "tokens": 1
+          },
+          {
+            "text": "print",
+            "tokens": 1
+          },
+          {
+            "text": "(x",
+            "tokens": 1
+          },
+          {
+            "text": ")",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.22",
+      "text": " a . b ? c ! d , e : f ;",
+      "qwen38": {
+        "ids": [
+          264,
+          641,
+          292,
+          907,
+          272,
+          729,
+          293,
+          1116,
+          378,
+          535,
+          281,
+          2502
+        ],
+        "count": 12,
+        "pieces": [
+          {
+            "text": " a",
+            "tokens": 1
+          },
+          {
+            "text": " .",
+            "tokens": 1
+          },
+          {
+            "text": " b",
+            "tokens": 1
+          },
+          {
+            "text": " ?",
+            "tokens": 1
+          },
+          {
+            "text": " c",
+            "tokens": 1
+          },
+          {
+            "text": " !",
+            "tokens": 1
+          },
+          {
+            "text": " d",
+            "tokens": 1
+          },
+          {
+            "text": " ,",
+            "tokens": 1
+          },
+          {
+            "text": " e",
+            "tokens": 1
+          },
+          {
+            "text": " :",
+            "tokens": 1
+          },
+          {
+            "text": " f",
+            "tokens": 1
+          },
+          {
+            "text": " ;",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          261,
+          887,
+          287,
+          1423,
+          274,
+          1073,
+          272,
+          1366,
+          319,
+          712,
+          285,
+          4605
+        ],
+        "count": 12,
+        "pieces": [
+          {
+            "text": " a",
+            "tokens": 1
+          },
+          {
+            "text": " .",
+            "tokens": 1
+          },
+          {
+            "text": " b",
+            "tokens": 1
+          },
+          {
+            "text": " ?",
+            "tokens": 1
+          },
+          {
+            "text": " c",
+            "tokens": 1
+          },
+          {
+            "text": " !",
+            "tokens": 1
+          },
+          {
+            "text": " d",
+            "tokens": 1
+          },
+          {
+            "text": " ,",
+            "tokens": 1
+          },
+          {
+            "text": " e",
+            "tokens": 1
+          },
+          {
+            "text": " :",
+            "tokens": 1
+          },
+          {
+            "text": " f",
+            "tokens": 1
+          },
+          {
+            "text": " ;",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.23",
+      "text": "I ' m sure we ' re testing .",
+      "qwen38": {
+        "ids": [
+          40,
+          359,
+          295,
+          2617,
+          567,
+          359,
+          311,
+          7262,
+          641
+        ],
+        "count": 9,
+        "pieces": [
+          {
+            "text": "I",
+            "tokens": 1
+          },
+          {
+            "text": " '",
+            "tokens": 1
+          },
+          {
+            "text": " m",
+            "tokens": 1
+          },
+          {
+            "text": " sure",
+            "tokens": 1
+          },
+          {
+            "text": " we",
+            "tokens": 1
+          },
+          {
+            "text": " '",
+            "tokens": 1
+          },
+          {
+            "text": " re",
+            "tokens": 1
+          },
+          {
+            "text": " testing",
+            "tokens": 1
+          },
+          {
+            "text": " .",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          40,
+          461,
+          284,
+          3239,
+          581,
+          461,
+          322,
+          11493,
+          887
+        ],
+        "count": 9,
+        "pieces": [
+          {
+            "text": "I",
+            "tokens": 1
+          },
+          {
+            "text": " '",
+            "tokens": 1
+          },
+          {
+            "text": " m",
+            "tokens": 1
+          },
+          {
+            "text": " sure",
+            "tokens": 1
+          },
+          {
+            "text": " we",
+            "tokens": 1
+          },
+          {
+            "text": " '",
+            "tokens": 1
+          },
+          {
+            "text": " re",
+            "tokens": 1
+          },
+          {
+            "text": " testing",
+            "tokens": 1
+          },
+          {
+            "text": " .",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.24",
+      "text": "\n\n\n\t  ",
+      "qwen38": {
+        "ids": [
+          1358,
+          8424
+        ],
+        "count": 2,
+        "pieces": [
+          {
+            "text": "\n\n\n",
+            "tokens": 1
+          },
+          {
+            "text": "\t  ",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          2499,
+          18242
+        ],
+        "count": 2,
+        "pieces": [
+          {
+            "text": "\n\n\n",
+            "tokens": 1
+          },
+          {
+            "text": "\t  ",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.25",
+      "text": "​‍﻿",
+      "qwen38": {
+        "ids": [
+          15231,
+          373,
+          235,
+          3121
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "​",
+            "tokens": 1
+          },
+          {
+            "text": "‍",
+            "tokens": 2
+          },
+          {
+            "text": "﻿",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          3310,
+          2524,
+          5574
+        ],
+        "count": 3,
+        "pieces": [
+          {
+            "text": "​",
+            "tokens": 1
+          },
+          {
+            "text": "‍",
+            "tokens": 1
+          },
+          {
+            "text": "﻿",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.26",
+      "text": "camel",
+      "qwen38": {
+        "ids": [
+          90106
+        ],
+        "count": 1,
+        "pieces": [
+          {
+            "text": "camel",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          178067
+        ],
+        "count": 1,
+        "pieces": [
+          {
+            "text": "camel",
+            "tokens": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.27",
+      "text": "骆驼",
+      "qwen38": {
+        "ids": [
+          121272
+        ],
+        "count": 1,
+        "pieces": [
+          {
+            "text": "骆驼",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          10151,
+          228,
+          9722,
+          120
+        ],
+        "count": 4,
+        "pieces": [
+          {
+            "text": "骆",
+            "tokens": 2
+          },
+          {
+            "text": "驼",
+            "tokens": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "edge.28",
+      "text": "ラクダ",
+      "qwen38": {
+        "ids": [
+          215012,
+          95440
+        ],
+        "count": 2,
+        "pieces": [
+          {
+            "text": "ラク",
+            "tokens": 1
+          },
+          {
+            "text": "ダ",
+            "tokens": 1
+          }
+        ]
+      },
+      "o200k": {
+        "ids": [
+          171566,
+          27903
+        ],
+        "count": 2,
+        "pieces": [
+          {
+            "text": "ラク",
+            "tokens": 1
+          },
+          {
+            "text": "ダ",
+            "tokens": 1
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import CommunityTokenCounts from './CommunityTokenCounts.svelte';
 	import { lang } from '$lib/lang';
 	import type { Lang } from '$lib/manifest';
 	import { labsCopy } from './copy';
-	import { loadTokenizers, TOKEN_SAMPLES, TOKENIZERS, type Tokenized, type TokenizerId, type TokenPreset } from './tokenizers';
+	import { loadTokenizers, tryTokenize, TOKEN_SAMPLES, TOKENIZERS, type TokenizerId, type TokenPreset } from './tokenizers';
 	const t = $derived(labsCopy[$lang]);
 	const LANGS: Lang[] = ['zh', 'ja', 'en'];
 	const PRESETS = Object.keys(TOKEN_SAMPLES) as TokenPreset[];
@@ -13,9 +14,8 @@
 	let encoders = $state.raw<Awaited<ReturnType<typeof loadTokenizers>> | null>(null);
 	let failed = $state(false);
 	onMount(() => { loadTokenizers().then((loaded) => (encoders = loaded), () => (failed = true)); });
-	const results = $derived(encoders
-		? Object.fromEntries(LANGS.map((l) => [l, Object.fromEntries(TOKENIZERS.map((id) => [id, encoders![id](texts[l])]))])) as Record<Lang, Record<TokenizerId, Tokenized>>
-		: null);
+	const attempt = $derived(encoders ? tryTokenize(encoders, texts) : { results: null, failed: false });
+	const results = $derived(attempt.results);
 	const fewest = (id: TokenizerId) => results ? Math.min(...LANGS.map((l) => results[l][id].count)) : 0;
 	const shown = (text: string) => text.replaceAll('\n', '↵');
 	function choose(next: TokenPreset) { preset = next; texts = { ...TOKEN_SAMPLES[next] }; }
@@ -29,6 +29,8 @@
 </div>
 {#if failed}
 	<p class="lab-result" role="alert">{t.tokenFailed}</p>
+{:else if attempt.failed}
+	<p class="lab-result" role="alert">{t.tokenInputFailed}</p>
 {:else if !results}
 	<p class="lab-note" role="status">{t.tokenLoading}</p>
 {:else}
@@ -62,5 +64,7 @@
 </div>
 <p class="lab-note">{t.pieceHint}</p>
 <p class="lab-note">{t.tokenNote}</p>
+<p class="lab-note">{t.tokenPolicy}</p>
+<CommunityTokenCounts {texts} />
 <p class="lab-takeaway"><strong>{t.takeaway}</strong> {t.tokenTakeaway}</p>
 <button class="lab-button" onclick={reset}>{t.reset}</button>

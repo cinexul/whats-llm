@@ -24,7 +24,7 @@
 	<p class="cover-label">{t.coverLabel}</p>
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	<h1>{@html t.coverTitleHtml}</h1>
-	<p class="book-facts">{t.bookFacts}</p>
+	<p class="book-facts">{countText(t.bookFacts, chapters.length, $lang)}</p>
 	<p class="lead">{t.coverLead}</p>
 
 	<a class="reading-start" href="{base}/chapter/{destination.slug}/">

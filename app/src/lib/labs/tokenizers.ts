@@ -1,13 +1,14 @@
 // 分词实验用的两个真实分词器，进入实验页时才加载。
-// o200k_base来自js-tiktoken，Qwen3来自static/tokenizers/qwen3.json.gz（Apache-2.0，见同目录NOTICE.txt）。
+// o200k_base来自js-tiktoken，Qwen3.8来自static/tokenizers/qwen38.json.gz（Apache-2.0，见同目录NOTICE.txt）。
 // 两者的切分结果都和官方Python库（tiktoken、tokenizers）逐个token对照过。
+import type { Lang } from '$lib/manifest';
 import { base } from '$app/paths';
 import { TOKEN_SAMPLES, type TokenPreset } from './token-samples';
 
 export { TOKEN_SAMPLES, type TokenPreset };
 
-export type TokenizerId = 'o200k' | 'qwen3';
-export const TOKENIZERS: TokenizerId[] = ['o200k', 'qwen3'];
+export type TokenizerId = 'o200k' | 'qwen38';
+export const TOKENIZERS: TokenizerId[] = ['o200k', 'qwen38'];
 
 /** 一个显示单位：通常是一个token；一个字被拆成几个token时合在一起，tokens记个数。 */
 export interface Piece { text: string; tokens: number }
@@ -33,14 +34,16 @@ export function groupPieces(ids: number[], decode: (ids: number[]) => string): P
 async function loadO200k(): Promise<Encoder> {
 	const [{ Tiktoken }, { default: ranks }] = await Promise.all([import('js-tiktoken/lite'), import('js-tiktoken/ranks/o200k_base')]);
 	const tokenizer = new Tiktoken(ranks);
+	// js-tiktoken strips a leading BOM during decode. An ASCII prefix preserves literal U+FEFF.
+	const prefix = tokenizer.encode("a", [], []);
 	return (text) => {
-		const ids = tokenizer.encode(text);
-		return { count: ids.length, pieces: groupPieces(ids, (part) => tokenizer.decode(part)) };
+		const ids = tokenizer.encode(text, [], []);
+		return { count: ids.length, pieces: groupPieces(ids, (part) => tokenizer.decode([...prefix, ...part]).slice(1)) };
 	};
 }
 
-async function loadQwen3(): Promise<Encoder> {
-	const [{ Tokenizer }, response] = await Promise.all([import('@huggingface/tokenizers'), fetch(`${base}/tokenizers/qwen3.json.gz`)]);
+async function loadQwen38(): Promise<Encoder> {
+	const [{ Tokenizer }, response] = await Promise.all([import('@huggingface/tokenizers'), fetch(`${base}/tokenizers/qwen38.json.gz`)]);
 	if (!response.ok) throw new Error(`HTTP ${response.status}`);
 	const bytes = new Uint8Array(await response.arrayBuffer());
 	// 有的服务器会替浏览器先解压，所以看文件头再决定要不要自己解压
@@ -51,15 +54,23 @@ async function loadQwen3(): Promise<Encoder> {
 	const tokenizer = new Tokenizer(json, {});
 	return (text) => {
 		const ids = tokenizer.encode(text, { add_special_tokens: false }).ids;
-		return { count: ids.length, pieces: groupPieces(ids, (part) => tokenizer.decode(part, { skip_special_tokens: false })) };
+		return { count: ids.length, pieces: groupPieces(ids, (part) => tokenizer.decode(part, { skip_special_tokens: false, clean_up_tokenization_spaces: false })) };
 	};
 }
 
 let loading: Promise<Record<TokenizerId, Encoder>> | null = null;
 
 export function loadTokenizers(): Promise<Record<TokenizerId, Encoder>> {
-	loading ??= Promise.all([loadO200k(), loadQwen3()])
-		.then(([o200k, qwen3]) => ({ o200k, qwen3 }))
+	loading ??= Promise.all([loadO200k(), loadQwen38()])
+		.then(([o200k, qwen38]) => ({ o200k, qwen38 }))
 		.catch((error) => { loading = null; throw error; });
 	return loading;
+}
+
+/** A failed edit must clear every previous count and piece, never leave stale output. */
+export function tryTokenize(encoders: Record<TokenizerId, Encoder>, texts: Record<Lang, string>): { results: Record<Lang, Record<TokenizerId, Tokenized>> | null; failed: boolean } {
+ try {
+  const results = Object.fromEntries((['zh', 'ja', 'en'] as Lang[]).map((lang) => [lang, Object.fromEntries(TOKENIZERS.map((id) => [id, encoders[id](texts[lang])]))])) as Record<Lang, Record<TokenizerId, Tokenized>>;
+  return { results, failed: false };
+ } catch { return { results: null, failed: true }; }
 }

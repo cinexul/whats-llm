@@ -97,8 +97,8 @@ for (const language of ['zh', 'ja', 'en']) {
 
 test('the token lab shows the same counts as the reference tokenizers and updates while typing', async ({ page }) => {
 	const gpt = new Tiktoken(o200k);
-	const qwen = new Tokenizer(JSON.parse(gunzipSync(readFileSync('static/tokenizers/qwen3.json.gz')).toString('utf8')), {});
-	const counts = (text: string) => ({ o200k: gpt.encode(text).length, qwen3: qwen.encode(text, { add_special_tokens: false }).ids.length });
+	const qwen = new Tokenizer(JSON.parse(gunzipSync(readFileSync('static/tokenizers/qwen38.json.gz')).toString('utf8')), {});
+	const counts = (text: string) => ({ o200k: gpt.encode(text, [], []).length, qwen38: qwen.encode(text, { add_special_tokens: false }).ids.length });
 	await page.goto('/labs/#tokens');
 	const lab = page.locator('#tokens');
 	await expect(lab.getByTestId('token-table')).toBeVisible({ timeout: 30_000 });
@@ -107,10 +107,28 @@ test('the token lab shows the same counts as the reference tokenizers and update
 		for (const lang of ['zh', 'ja', 'en'] as const) {
 			const expected = counts(TOKEN_SAMPLES[preset][lang]);
 			await expect(lab.getByTestId(`count-o200k-${lang}`)).toHaveText(String(expected.o200k));
-			await expect(lab.getByTestId(`count-qwen3-${lang}`)).toHaveText(String(expected.qwen3));
+			await expect(lab.getByTestId(`count-qwen38-${lang}`)).toHaveText(String(expected.qwen38));
 		}
 	}
+	await lab.getByLabel(/^English/).fill('<|endoftext|>');
+	await expect(lab.getByTestId('count-o200k-en')).toHaveText(String(counts('<|endoftext|>').o200k));
+	await expect(lab.getByTestId('count-qwen38-en')).toHaveText('1');
 	await lab.getByLabel(/^English/).fill('Hello world');
 	await expect(lab.getByTestId('count-o200k-en')).toHaveText('2');
 	await expect(lab.getByRole('button', { name: 'A line of code', exact: true })).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('community Claude estimates are separate, sourced, scoped and update after edits', async ({ page }) => {
+ await page.goto('/labs/#tokens');
+ const community=page.getByTestId('community-counter');
+ await expect(community).toContainText('Community estimate, not an official');
+ await expect(community).toContainText('Opus 4.8');
+ await expect(community.getByRole('link')).toHaveAttribute('href','https://github.com/sanderland/ctok');
+ await expect(page.getByTestId('count-community-zh')).toHaveText('≈ 28');
+ await page.locator('#token-text-zh').fill('');
+ await expect(page.getByTestId('count-community-zh')).toHaveText('≈ 0');
+ await expect(community).toContainText('≈ 6');
+ await page.locator('#token-text-zh').fill('你好');
+ await expect(page.getByTestId('count-community-zh')).toHaveText('≈ 2');
+ await expect(community.locator('.token-piece')).toHaveCount(0);
 });

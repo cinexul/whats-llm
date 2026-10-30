@@ -1,0 +1,47 @@
+{
+  "everyday": {
+    "zh": "请帮我写一封邮件，告诉同事明天的会议改到下午三点。",
+    "ja": "同僚に、明日の会議が午後3時に変わったと伝えるメールを書いてください。",
+    "en": "Please help me write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m."
+  },
+  "api": {
+    "zh": "这个API返回的JSON里缺少timestamp字段。",
+    "ja": "このAPIが返すJSONにはtimestampフィールドがありません。",
+    "en": "The JSON returned by this API is missing the timestamp field."
+  },
+  "meeting": {
+    "zh": "会议定在2026年10月28日14:30，已有128人报名。",
+    "ja": "会議は2026年10月28日14:30からで、すでに128人が申し込んでいます。",
+    "en": "The meeting is at 14:30 on October 28, 2026, and 128 people have signed up."
+  },
+  "python": {
+    "zh": "total = price * quantity # 计算总价",
+    "ja": "total = price * quantity # 合計金額を計算",
+    "en": "total = price * quantity # compute the total price"
+  },
+  "paragraph": {
+    "zh": "模型本身不会记住上一次对话。产品里的“记忆”，是把保存下来的文字重新放进这次的上下文。没有这些文字，新对话里它并不知道你以前说过什么。",
+    "ja": "モデル自体は前回の会話を覚えていません。製品の「メモリ」は、保存しておいた文章を今回のコンテキストに入れ直す仕組みです。その文章がなければ、新しい会話では以前の発言を知りません。",
+    "en": "The model itself does not remember your last conversation. A product's \"memory\" puts saved text back into the current context. Without that text, a new conversation knows nothing of what you said before."
+  },
+  "everydayOriginal": {
+    "zh": "请帮我写一封邮件，告诉同事明天的会议改到下午三点。",
+    "ja": "明日の会議が午後3時に変更になったことを、同僚に伝えるメールを書いてください。",
+    "en": "Please write an email telling my colleagues that tomorrow's meeting has moved to 3 p.m."
+  },
+  "technical": {
+    "zh": "大语言模型使用Transformer架构，一次预测一个token。",
+    "ja": "大規模言語モデルはTransformerアーキテクチャを使い、一度に1トークンずつ予測します。",
+    "en": "Large language models use the Transformer architecture and predict one token at a time."
+  },
+  "numbers": {
+    "zh": "2026年10月28日，订单号A-10293，金额3,450.75美元。",
+    "ja": "2026年10月28日、注文番号A-10293、金額3,450.75ドル。",
+    "en": "On October 28, 2026, order A-10293 came to $3,450.75."
+  },
+  "code": {
+    "zh": "for (let i = 0; i < 10; i++) console.log(i); // 打印0到9",
+    "ja": "for (let i = 0; i < 10; i++) console.log(i); // 0から9を表示",
+    "en": "for (let i = 0; i < 10; i++) console.log(i); // print 0 to 9"
+  }
+}

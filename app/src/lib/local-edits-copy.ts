@@ -2,9 +2,10 @@ import type { Lang } from './manifest';
 
 export const localEditsCopy = {
 	zh: {
+		tools: '本章工具', correction: '发现笔误或想补充自己的理解？在这里修改本地副本，不会改变原书。',
 		badge: '本地修改', edit: '编辑本章', diff: '查看改动', restore: '恢复原文', saved: '保存于',
 		library: '我的修改', libraryIntro: '三种语言中改过的章节都在这里。修改仅保存在当前浏览器或桌面应用中；请在下方导出备份。',
-		empty: '还没有本地修改。在任一章节标题下选择“编辑本章”即可开始。', all: '查看全部修改',
+		empty: '还没有本地修改。从章节目录进入“本章工具”，选择“编辑本章”即可开始。', all: '查看全部修改',
 		scope: '仅修改本章正文；章节标题、原书测验和全书搜索保持原书内容。修改不会上传。',
 		metadata: '本地文字未经原书复核；章末修订日期和来源说明对应原书。',
 		updated: '原书已更新。你的修改仍保留，并以首次编辑时的原文作对比；可切换对比当前原文。',
@@ -24,9 +25,10 @@ export const localEditsCopy = {
 		}
 	},
 	en: {
+		tools: 'Chapter tools', correction: 'Correct a typo or add your own explanation in a local copy. The original book stays unchanged.',
 		badge: 'Locally edited', edit: 'Edit chapter', diff: 'View changes', restore: 'Restore original', saved: 'Saved',
 		library: 'My chapter edits', libraryIntro: 'Find edits across all three languages here. They stay in this browser or desktop app; export a backup below to keep a copy.',
-		empty: 'No local edits yet. Choose “Edit chapter” below a chapter title to begin.', all: 'All chapter edits',
+		empty: 'No local edits yet. Open “Chapter tools” from the chapter contents, then choose “Edit chapter”.', all: 'All chapter edits',
 		scope: 'Edit this chapter’s body only. Chapter titles, official quizzes, and book search use the original book. Edits are not uploaded.',
 		metadata: 'Local text has not been reviewed by the book’s editors. Revision dates and sources below refer to the original book.',
 		updated: 'The original book has changed. Your edits are preserved and compared with the original from your first edit. You can also compare with the current original.',
@@ -46,9 +48,10 @@ export const localEditsCopy = {
 		}
 	},
 	ja: {
+		tools: '章のツール', correction: '誤字の修正や自分なりの説明の追加は、ローカルのコピーで行えます。原書は変わりません。',
 		badge: 'ローカル編集あり', edit: '本文を編集', diff: '変更を確認', restore: '原文に戻す', saved: '保存日時',
 		library: '編集した章', libraryIntro: '3言語の編集済みの章をまとめて確認できます。変更はこのブラウザーまたはデスクトップアプリに保存されます。下のバックアップ機能で書き出しておきましょう。',
-		empty: 'まだ編集した章はありません。章タイトルの下にある「本文を編集」から始められます。', all: '編集した章の一覧',
+		empty: 'まだ編集した章はありません。章の目次から「章のツール」へ進み、「本文を編集」を選んでください。', all: '編集した章の一覧',
 		scope: '編集できるのはこの章の本文だけです。章タイトル・原書の小テスト・全文検索は原書の内容を使用します。変更はアップロードされません。',
 		metadata: 'ローカルの文章は原書の編集者による確認を受けていません。章末の改訂日や出典は原書に関する情報です。',
 		updated: '原書が更新されています。編集内容は保持され、初回編集時の原文との差分を表示します。現在の原文との比較にも切り替えられます。',

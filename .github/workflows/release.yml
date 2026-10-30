@@ -111,6 +111,10 @@ jobs:
           Get-ChildItem -LiteralPath $runtime.DirectoryName -Filter '*.dll' -File |
             Copy-Item -Destination $folder
           Copy-Item -LiteralPath docs/windows-portable.md -Destination "$folder/README.md"
+          New-Item -ItemType Directory -Path "$folder/licenses" -Force | Out-Null
+          Copy-Item -LiteralPath LICENSE, LICENSE-CONTENT -Destination "$folder/licenses"
+          Copy-Item -LiteralPath app/static/tokenizers/NOTICE.txt -Destination "$folder/licenses/Qwen-tokenizer-NOTICE.txt"
+          Copy-Item -LiteralPath app/static/tokenizers/ctok-NOTICE.txt -Destination "$folder/licenses/ctok-NOTICE.txt"
           'Keep this folder next to whats-llm.exe. The learning database is saved here.' |
             Set-Content -LiteralPath "$folder/data/README.txt" -Encoding utf8
 
@@ -210,6 +214,13 @@ jobs:
           $zip = Split-Path -Leaf $env:PORTABLE_ZIP
           $notes = Join-Path $env:RUNNER_TEMP 'release-notes.md'
           @"
+          ## 本次更新
+
+          - 改进分词器：更新Qwen3.8，加入注明来源的Claude社区计数参考，并同步多语言示例。
+          - 修复搜索、进度链接、特殊文本计数等一些小bug，调整本章编辑入口。
+
+          ## 下载与升级
+
           Windows x64桌面版，两种任选一种：
 
           - **安装版**``$setup``：双击安装，不需要管理员权限。缺少WebView2时安装程序会自动下载。学习记录和笔记存在系统的用户数据目录。

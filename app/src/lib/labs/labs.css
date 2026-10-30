@@ -112,3 +112,7 @@
 .labs .token-piece sub { font-size: .7em; margin-left: .15em; color: var(--accent-text); }
 :root[data-theme='dark'] .labs .token-piece { background: #22323f; color: #cfe1ee; border-color: #31485a; }
 :root[data-theme='dark'] .labs .token-piece.alt { background: #3a3220; color: #f0e2b8; border-color: #57492a; }
+
+.labs .community-counter { margin: 1.2em 0; border-style: dashed; }
+.labs .community-counter h3 { margin: 0 0 .4em; font-size: 1em; }
+.labs .community-warning { font-size: .85em; color: var(--accent-text); }
