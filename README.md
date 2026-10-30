@@ -41,7 +41,11 @@
 
 要先装Node.js 24（24.15.0或更新）和npm，然后：
 
+实验分词核心已改为共享 Rust：网页版用 WASM，桌面版直接调用原生 Rust；Svelte 负责界面。源码开发也需要 Rust stable，并先执行下列准备。详见 [test 分支重构说明](docs/rust-core.md)。
+
 ```bash
+rustup target add wasm32-unknown-unknown
+cargo install wasm-bindgen-cli --version 0.2.108 --locked
 cd app
 npm ci
 npm run dev        # 然后打开 http://localhost:1420

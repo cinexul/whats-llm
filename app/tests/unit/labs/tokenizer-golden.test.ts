@@ -1,3 +1,4 @@
+vi.mock('$lib/labs/rust-core',async()=>{const m=await import('$lib/generated/core/whats_llm_core');let loading:Promise<unknown>|undefined;return {...m,loadRustCore:()=>{loading??=m.default({module_or_path:readFileSync('src/lib/generated/core/whats_llm_core_bg.wasm')});return loading.then(()=>undefined);}};});
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
@@ -23,7 +24,7 @@ describe('pinned official Python reference golden', () => {
   expect(o200k.encode(row.text, [], [])).toEqual(row.o200k.ids);
   const encoders = await loadTokenizers();
   for (const id of ['qwen38','o200k'] as const) {
-   const actual = encoders[id](row.text);
+   const actual = await encoders[id](row.text);
    expect(actual).toEqual({count:row[id].count,pieces:row[id].pieces});
    expect(actual.pieces.map(p=>p.text).join('')).toBe(id==='qwen38' ? row.text.normalize('NFC') : row.text);
   }

@@ -37,12 +37,15 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: x86_64-pc-windows-msvc
+          targets: x86_64-pc-windows-msvc, wasm32-unknown-unknown
 
       - name: Cache Rust build
         uses: Swatinem/rust-cache@v2
         with:
           workspaces: app/src-tauri -> target
+
+      - name: Install pinned WASM bindings generator
+        run: cargo install wasm-bindgen-cli --version 0.2.108 --locked
 
       - name: Install frontend deps
         working-directory: app
@@ -115,6 +118,7 @@ jobs:
           Copy-Item -LiteralPath LICENSE, LICENSE-CONTENT -Destination "$folder/licenses"
           Copy-Item -LiteralPath app/static/tokenizers/NOTICE.txt -Destination "$folder/licenses/Qwen-tokenizer-NOTICE.txt"
           Copy-Item -LiteralPath app/static/tokenizers/ctok-NOTICE.txt -Destination "$folder/licenses/ctok-NOTICE.txt"
+          Copy-Item -LiteralPath app/core/NOTICE.md -Destination "$folder/licenses/Rust-text-core-NOTICE.md"
           'Keep this folder next to whats-llm.exe. The learning database is saved here.' |
             Set-Content -LiteralPath "$folder/data/README.txt" -Encoding utf8
 

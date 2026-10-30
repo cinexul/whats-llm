@@ -2,7 +2,7 @@ name: checks
 
 on:
   push:
-    branches: [main]
+    branches: [main, test]
   pull_request:
 
 permissions:
@@ -21,6 +21,11 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: app/package-lock.json
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Install pinned WASM bindings generator
+        run: cargo install wasm-bindgen-cli --version 0.2.108 --locked
       - run: npm ci
       - run: npm run check
       - run: npm test
@@ -54,6 +59,9 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: app/src-tauri
+      - run: cargo fmt --manifest-path ../core/Cargo.toml -- --check
+      - run: cargo clippy --manifest-path ../core/Cargo.toml --locked --all-targets -- -D warnings
+      - run: cargo test --manifest-path ../core/Cargo.toml --locked
       - run: cargo fmt --all -- --check
       - run: cargo clippy --locked -p study-core --all-targets -- -D warnings
       - run: cargo test --locked -p study-core

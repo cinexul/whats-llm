@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { latestResult } from './latest-result.svelte';
 	import { onMount } from 'svelte';
 	import CommunityTokenCounts from './CommunityTokenCounts.svelte';
 	import { lang } from '$lib/lang';
@@ -14,8 +15,9 @@
 	let encoders = $state.raw<Awaited<ReturnType<typeof loadTokenizers>> | null>(null);
 	let failed = $state(false);
 	onMount(() => { loadTokenizers().then((loaded) => (encoders = loaded), () => (failed = true)); });
-	const attempt = $derived(encoders ? tryTokenize(encoders, texts) : { results: null, failed: false });
-	const results = $derived(attempt.results);
+	const task=latestResult<Awaited<ReturnType<typeof tryTokenize>>>();
+ $effect(()=>{const active=encoders;const input={...texts};if(active)void task.run(()=>tryTokenize(active,input));return ()=>task.invalidate();});
+ const results=$derived(task.value?.results??null);
 	const fewest = (id: TokenizerId) => results ? Math.min(...LANGS.map((l) => results[l][id].count)) : 0;
 	const shown = (text: string) => text.replaceAll('\n', '↵');
 	function choose(next: TokenPreset) { preset = next; texts = { ...TOKEN_SAMPLES[next] }; }
@@ -29,7 +31,7 @@
 </div>
 {#if failed}
 	<p class="lab-result" role="alert">{t.tokenFailed}</p>
-{:else if attempt.failed}
+{:else if task.failed || task.value?.failed}
 	<p class="lab-result" role="alert">{t.tokenInputFailed}</p>
 {:else if !results}
 	<p class="lab-note" role="status">{t.tokenLoading}</p>

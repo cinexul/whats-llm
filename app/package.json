@@ -18,7 +18,13 @@
 		"test:e2e:pwa": "playwright test --config=playwright.pwa.config.ts",
 		"content:check": "node scripts/content-maintenance.mjs check",
 		"check:content": "npm run content:check",
-		"check:quiz": "node scripts/check-quiz-registry.mjs"
+		"check:quiz": "node scripts/check-quiz-registry.mjs",
+		"core:build": "node scripts/build-core.mjs",
+		"core:test": "cargo test --manifest-path core/Cargo.toml --locked",
+		"prebuild": "npm run core:build",
+		"precheck": "npm run core:build",
+		"pretest": "npm run core:build",
+		"predev": "npm run core:build"
 	},
 	"devDependencies": {
 		"@fontsource/jetbrains-mono": "^5.2.8",
@@ -41,14 +47,14 @@
 		"svelte-check": "^4.6.0",
 		"typescript": "^6.0.3",
 		"vite": "^8.0.16",
-		"vitest": "^5.0.5"
+		"vitest": "^5.0.5",
+		"js-tiktoken": "^1.0.21",
+		"@huggingface/tokenizers": "^0.2.0"
 	},
 	"dependencies": {
-		"@huggingface/tokenizers": "^0.2.0",
 		"@tauri-apps/api": "^2.11.0",
 		"diff": "^9.0.0",
-		"dompurify": "^3.4.17",
-		"js-tiktoken": "^1.0.21"
+		"dompurify": "^3.4.17"
 	},
 	"engines": {
 		"node": "^22.22.2 || ^24.15.0 || >=26.0.0"

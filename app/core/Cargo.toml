@@ -1,0 +1,29 @@
+[package]
+name = "whats-llm-core"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Shared native and WebAssembly text algorithms for whats-llm"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+unicode-normalization = "=0.1.24"
+wasm-bindgen = "=0.2.108"
+tokenizers = { version = "=0.22.2", default-features = false, features = ["unstable_wasm"] }
+tiktoken-rs = "=0.12.1"
+
+[dev-dependencies]
+flate2 = "1"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+flate2 = "1"
+
+[profile.release]
+lto = true
+opt-level = "s"
+codegen-units = 1
+strip = true

@@ -41,7 +41,11 @@
 
 Node.js 24（24.15.0以降）とnpmを入れてから、次を実行します。
 
+分詞実験は共通のRustコアを使います。Web版はWASM、デスクトップ版はネイティブRustで計算し、画面はSvelteが担当します。ソースからの実行にもRust stableと次の準備が必要です。[testブランチの設計](docs/rust-core.md)を参照してください。
+
 ```bash
+rustup target add wasm32-unknown-unknown
+cargo install wasm-bindgen-cli --version 0.2.108 --locked
 cd app
 npm ci
 npm run dev        # http://localhost:1420 を開く

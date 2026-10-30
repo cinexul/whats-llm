@@ -41,7 +41,11 @@ This section and the next are for people who want to change things themselves, o
 
 Install Node.js 24 (24.15.0 or later) and npm, then:
 
+The text laboratory now shares a Rust core: WASM for the web, native Rust commands on desktop, with Svelte for the UI. Source development also needs Rust stable and the setup below. See [the test-branch architecture](docs/rust-core.md).
+
 ```bash
+rustup target add wasm32-unknown-unknown
+cargo install wasm-bindgen-cli --version 0.2.108 --locked
 cd app
 npm ci
 npm run dev        # then open http://localhost:1420

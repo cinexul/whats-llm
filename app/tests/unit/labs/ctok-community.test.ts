@@ -1,20 +1,18 @@
-import { readFileSync } from 'node:fs';
-import { gunzipSync } from 'node:zlib';
-import { describe,it,expect,vi,beforeAll } from 'vitest';
-const golden: {sourceRevision:string;cases:{key:string;text:string;count:number;messageCount:number}[]} = JSON.parse(readFileSync('tests/fixtures/ctok-community-golden.json','utf8'));
-import { TOKEN_SAMPLES } from '$lib/labs/token-samples';
-import { createCtokCounter } from '$lib/labs/ctok-engine';
+import {readFileSync} from 'node:fs';
+import {gunzipSync} from 'node:zlib';
+import {describe,it,expect,beforeAll,vi} from 'vitest';
+import init,{CommunityCounter} from '$lib/generated/core/whats_llm_core';
+vi.mock('$lib/labs/rust-core',async()=>{const m=await import('$lib/generated/core/whats_llm_core');let loading:Promise<unknown>|undefined;return {...m,loadRustCore:()=>{loading??=m.default({module_or_path:readFileSync('src/lib/generated/core/whats_llm_core_bg.wasm')});return loading.then(()=>undefined);}};});
 vi.mock('$app/paths',()=>({base:''}));
-import { loadCtokCounter, CTOK_REVISION } from '$lib/labs/ctok';
-const asset=JSON.parse(gunzipSync(readFileSync('static/tokenizers/ctok-v48.json.gz')).toString());
-const count=createCtokCounter(asset);
-beforeAll(()=>vi.stubGlobal('fetch',async(url:string)=>new Response(readFileSync(`static${url}`))));
-describe('pinned community ctok Python parity (not Anthropic API accuracy)',()=>{
- it('pins the tested source and covers all canonical examples',()=>{
-  expect(CTOK_REVISION).toBe(golden.sourceRevision);
-  for(const [key,langs] of Object.entries(TOKEN_SAMPLES))for(const [lang,text] of Object.entries(langs))expect(golden.cases.find(c=>c.key===`${key}.${lang}`)?.text).toBe(text);
+import {loadCtokCounter,CTOK_REVISION} from '$lib/labs/ctok';
+const golden=JSON.parse(readFileSync('tests/fixtures/ctok-community-golden.json','utf8'));
+const asset=gunzipSync(readFileSync('static/tokenizers/ctok-v48.json.gz')).toString();
+beforeAll(async()=>{await init({module_or_path:readFileSync('src/lib/generated/core/whats_llm_core_bg.wasm')});vi.stubGlobal('fetch',async(url:string)=>new Response(readFileSync(`static${url}`)));});
+describe('Rust WASM community reference parity (not official Anthropic accuracy)',()=>{
+ it('pins the source and loads offline',async()=>{expect(CTOK_REVISION).toBe(golden.sourceRevision);expect((await(await loadCtokCounter())('')).messageCount).toBe(6);});
+ it('rejects unsupported configuration',()=>expect(()=>new CommunityCounter(JSON.stringify({...JSON.parse(asset),messageOverhead:7}))).toThrow());
+ it('matches every pinned Python case through the actual WASM transport',()=>{
+  const counter=new CommunityCounter(asset);
+  try{for(const c of golden.cases)expect(JSON.parse(counter.estimateJson(c.text)),c.key).toEqual({count:c.count,messageCount:c.messageCount,messageOverhead:6,family:'v4.8'});}finally{counter.free();}
  });
- it('loads entirely from the bundled asset',async()=>expect((await loadCtokCounter())('').messageCount).toBe(6));
- it('rejects an unsupported configuration instead of silently estimating another model',()=>expect(()=>createCtokCounter({...asset,messageOverhead:7})).toThrow());
- for(const c of golden.cases)it(c.key,()=>expect(count(c.text)).toEqual({count:c.count,messageCount:c.messageCount,messageOverhead:6,family:'v4.8'}));
 });

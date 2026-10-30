@@ -186,10 +186,25 @@ fn study_import_snapshot(
     with_store(&state, |s| s.import_snapshot(&snapshot))
 }
 
+// Computation only: no filesystem paths or external API calls accepted from the UI.
+#[tauri::command]
+fn lab_tokenize(
+    kind: String,
+    text: String,
+) -> Result<whats_llm_core::tokenizers::Tokenized, String> {
+    whats_llm_core::native::tokenize(&kind, &text)
+}
+#[tauri::command]
+fn lab_community_count(text: String) -> Result<whats_llm_core::Count, String> {
+    whats_llm_core::native::community(&text)
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
+            lab_tokenize,
+            lab_community_count,
             load_annotations,
             save_annotations,
             open_external,

@@ -30,3 +30,7 @@ vite.config.ts.timestamp-*
 
 # Claude Code本地配置
 .claude/
+
+# Reproducible Rust/WASM build artifacts (source stays in core/)
+/core/target/
+/src/lib/generated/core/
