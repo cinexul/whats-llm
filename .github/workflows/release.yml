@@ -220,9 +220,7 @@ jobs:
           @"
           ## 本次更新
 
-          ### TypeScript，请稍微让一让
-
-          打开语言统计，发现TypeScript坐了大半张沙发。功能可以实用，源码也想清爽一点。这次撤下公开仓库里的测试工程，让Svelte和Rust多露露脸。
+          ### 修复了 TS占比过多的漏洞 （不是
 
           - 分词与社区计数共用Rust核心：网页走WASM，桌面原生调用。
           - 移除测试文件、样例和专用依赖，简化维护配置。这是源码整理，不代表运行速度提升。
@@ -238,7 +236,7 @@ jobs:
 
           需要Windows 10或11（64位）。界面设置、阅读位置和本地正文修改存在WebView里，换电脑或换版本前请在“我的书包”导出学习备份，再到新版本里导入。每个文件都附有SHA-256校验文件。
           "@ | Set-Content -LiteralPath $notes -Encoding utf8
-          $title = "LLM Learning Book $env:RELEASE_TAG (Windows)"
+          $title = "$env:RELEASE_TAG   修复了 TS占比过多的漏洞 （不是"
           $draft = gh release view $env:RELEASE_TAG --json isDraft --jq '.isDraft' 2>$null
           if ($LASTEXITCODE -eq 0) {
             if ($draft -ne 'true') {
