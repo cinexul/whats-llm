@@ -67,16 +67,12 @@ When you're done, run these from `app/`:
 
 ```bash
 npm run check          # type checks
-npm test               # unit tests
 npm run content:check  # do the three editions and their sources line up
 npm run check:quiz     # quiz registration
 npm run build
-npx playwright install chromium   # once, before your first browser test run
-npm run test:e2e       # browser tests
-npm run test:e2e:pwa   # offline tests
 ```
 
-For the Rust part, run `cargo test --locked -p study-core` in `app/src-tauri/`.
+For Rust, run `cargo clippy --locked -p study-core -- -D warnings` in `app/src-tauri/`.
 
 You don't have to remember to run them every time: GitHub runs all of them whenever something is pushed to `main` or a pull request is opened. Every Monday it also lists chapters due for review and checks that source links still work. It only reminds; it never edits the book. Pushing a `v*` tag builds the Windows version, actually installs and starts it on Windows, and puts it in a release draft that a person checks before publishing.
 

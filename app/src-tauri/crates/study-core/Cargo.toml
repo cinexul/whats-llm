@@ -17,7 +17,3 @@ rusqlite = { version = "0.32", features = ["bundled"] }
 fsrs = "6"
 # Tauri境界(JSへJSONで返す)用にCard/Reviewを直接シリアライズできるようにする。
 serde = { version = "1", features = ["derive"] }
-
-[dev-dependencies]
-# 生成并读取网页版和桌面版共用的FSRS对照数据(app/tests/fixtures/fsrs-schedule.json)
-serde_json = "1"

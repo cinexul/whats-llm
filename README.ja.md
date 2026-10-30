@@ -67,16 +67,12 @@ npm run dev        # http://localhost:1420 を開く
 
 ```bash
 npm run check          # 型チェック
-npm test               # 単体テスト
 npm run content:check  # 3言語の章と出典が合っているか
 npm run check:quiz     # 小テストの登録
 npm run build
-npx playwright install chromium   # 初めてブラウザテストを動かす前に一度だけ
-npm run test:e2e       # ブラウザテスト
-npm run test:e2e:pwa   # オフライン機能のテスト
 ```
 
-Rustの部分は`app/src-tauri/`で`cargo test --locked -p study-core`を実行します。
+Rustの部分は`app/src-tauri/`で`cargo clippy --locked -p study-core -- -D warnings`を実行します。
 
 毎回手で実行しなくても大丈夫です。`main`にプッシュしたときやPull Requestを出したときに、GitHubが全部自動で実行します。毎週月曜には、見直しの時期が来た章を一覧にして、出典のリンクが切れていないかも自動で確かめます。知らせるだけで、本文を勝手に変えることはありません。`v*`タグを付けると、Windows版を自動で作り、Windows上で実際にインストールと起動を確かめてからReleaseの下書きに置きます。公開するのは人が確認してからです。
 

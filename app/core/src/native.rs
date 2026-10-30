@@ -45,14 +45,3 @@ pub fn community(text: &str) -> Result<Count, String> {
     .map_err(Clone::clone)?
     .estimate(text))
 }
-#[cfg(test)]
-mod tests {
-    use super::*;
-    #[test]
-    fn shared_native() {
-        assert_eq!(tokenize("o200k", "你好").unwrap().count, 1);
-        assert_eq!(community("").unwrap().message_count, 6);
-        assert!(tokenize("unknown", "").is_err());
-        assert!(community(&"x".repeat(100001)).is_err());
-    }
-}

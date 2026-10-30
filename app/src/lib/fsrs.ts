@@ -1,6 +1,5 @@
 // FSRS-6记忆模型，逐行对应桌面版用的Rust库fsrs 6.6.1（src/model.rs、src/inference.rs）
 // 和study-core的Scheduler::apply。网页版和桌面版因此按同一套规则安排复习；
-// tests/fixtures/fsrs-schedule.json由Rust生成，两边的单元测试都拿它对照。
 import type { StudyCard } from './study';
 
 export const DAY = 86_400_000;

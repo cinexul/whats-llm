@@ -31,7 +31,7 @@ Prefix internal links with SvelteKit's `base`. Every section has a heading and f
 - `ContextLab.svelte`, `EvidenceLab.svelte`, `PermissionLab.svelte`: interactions.
 - `src/lib/labs/labs.css`: styles scoped under `.labs`, including dark theme variables, visible keyboard focus, touch targets, narrow layouts, and scalable text.
 
-Run `npm run check`, `npm run build` and `npm run test:e2e -- tests/e2e/labs.spec.ts`, then inspect `/labs/` using `npm run preview`. Verify overflow/compaction, missing or conflicting evidence, permission grants/revocation, undo, and reset. Check keyboard operation, citation links, and all three languages at 320px with 150% text. No model or external API is needed.
+Run `npm run check`, `npm run build`, then inspect `/labs/` using `npm run preview`. Verify overflow/compaction, missing or conflicting evidence, permission grants/revocation, undo, and reset. Check keyboard operation, citation links, and all three languages at 320px with 150% text. No model or external API is needed.
 
 ## Tokenizer revision review — 2026-10-30
 

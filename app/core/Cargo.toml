@@ -16,9 +16,6 @@ wasm-bindgen = "=0.2.108"
 tokenizers = { version = "=0.22.2", default-features = false, features = ["unstable_wasm"] }
 tiktoken-rs = "=0.12.1"
 
-[dev-dependencies]
-flate2 = "1"
-
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 flate2 = "1"
 

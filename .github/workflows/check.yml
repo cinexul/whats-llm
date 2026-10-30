@@ -28,23 +28,9 @@ jobs:
         run: cargo install wasm-bindgen-cli --version 0.2.108 --locked
       - run: npm ci
       - run: npm run check
-      - run: npm test
       - run: npm run content:check
       - run: npm run check:quiz
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
-      - name: Browser tests on the production build
-        run: npm run test:e2e
-      - name: Offline (PWA) tests
-        run: npm run test:e2e:pwa
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: browser-test-results
-          path: |
-            app/test-results/
-            app/node_modules/.cache/playwright-pwa-results/
-          if-no-files-found: ignore
 
   rust-core:
     runs-on: ubuntu-latest
@@ -61,7 +47,5 @@ jobs:
           workspaces: app/src-tauri
       - run: cargo fmt --manifest-path ../core/Cargo.toml -- --check
       - run: cargo clippy --manifest-path ../core/Cargo.toml --locked --all-targets -- -D warnings
-      - run: cargo test --manifest-path ../core/Cargo.toml --locked
       - run: cargo fmt --all -- --check
       - run: cargo clippy --locked -p study-core --all-targets -- -D warnings
-      - run: cargo test --locked -p study-core

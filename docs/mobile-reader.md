@@ -46,10 +46,4 @@ npm run build
 npm run preview -- --host 127.0.0.1 --port 4173
 ```
 
-重新构建后需重启预览服务器，以加载新的资源文件。另开终端，在`app/`执行：
-
-```bash
-PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173 npm run test:e2e
-```
-
-若环境已提供Chromium，可同时设置`PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`。未设置`PLAYWRIGHT_BASE_URL`时，测试会自动启动或复用开发服务器。
+重新构建后需重启预览服务器，以加载新的资源文件。历史自动测试不再随公开源码分发。

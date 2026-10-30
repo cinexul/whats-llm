@@ -1,7 +1,6 @@
-# Shared Rust text core (test branch)
+# Shared Rust text core
 
-This is an implementation refactor, not a language-statistics override. Version
-1.1.0 and `main` are not changed by work on this branch. No storage schema changes.
+This is an implementation refactor, not a language-statistics override. The native and web builds share the same core. No storage schema changes.
 
 ## Responsibilities
 
@@ -32,13 +31,11 @@ rustup target add wasm32-unknown-unknown
 cargo install wasm-bindgen-cli --version 0.2.108 --locked
 cd app
 npm ci
-npm run core:test
 npm run check
-npm test
 npm run build
 ```
 
-`predev`, `precheck`, `pretest`, and `prebuild` build the bindings, using the locked
+`predev`, `precheck`, and `prebuild` build the bindings, using the locked
 core Cargo dependency graph. `src/lib/generated/core` and `core/target` are build
 artifacts, not committed source. CI and Windows packaging install the same pinned
 bindings generator. The desktop dependency has its own updated Tauri Cargo lock.
@@ -48,19 +45,13 @@ Do not change the bindings generator without matching the wasm-bindgen crate.
 
 - ctok remains **community Opus 4.8 count reconstruction**, not official Anthropic
   token IDs, segmentation, or billing. Original revision and notices unchanged.
-- Rust native and real WASM are compared with the pinned Python golden corpus.
-  A separate 38,174-case synthetic community sweep was checked, with zero mismatches.
-- Both official-vocabulary encoders are compared against the existing 56-case
-  golden corpus, including token IDs and displayed pieces. The JS engines remain
-  dev-only independent oracles; they are not runtime fallbacks.
+- During the Rust migration, native and WASM results were checked against fixed
+  reference cases, including a 38,174-case community sweep with zero mismatches.
+  These are historical results; the public source no longer includes the suites
+  or independent JS reference engines.
 - Lone UTF-16 surrogates become U+FFFD at the UTF-8 boundary, matching the prior
-  ctok normalization. `core/data/ctok-golden.json` preserves these sanitized inputs;
-  the WASM tests additionally use the original JS strings without preprocessing.
-- Native host routing has a test that rejects accidental vocabulary/WASM fetches.
-  Rust tests cover native adapter, malformed assets and size limits.
+  ctok normalization.
 
 Performance is not asserted from the language change: WASM has a first-load cost
 (roughly 6 MB before transport compression in this build), and native IPC is async.
 The frontend resource loaders cache successful initialization and retry failures.
-All 569 community cases are now looped in a Rust/WASM corpus test rather than 569
-separately named Vitest cases; a lower displayed test total does not drop coverage.

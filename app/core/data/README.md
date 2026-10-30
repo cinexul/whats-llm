@@ -6,8 +6,7 @@
 The data is data, not hand-written Rust. No language-statistics overrides are used.
 The ctok and Unicode attribution is retained in `static/tokenizers/ctok-NOTICE.txt`.
 
-To reproduce these files without executing the old implementation, run
+To reproduce this file without executing the old implementation, run
 `node scripts/generate-core-reference-data.mjs` from app/. It reads the fixed
-v1.1.0 commit via `git show`, parses only its JSON table literals, and sanitizes
-the original fixture's lone surrogates for Rust's UTF-8 strings. It does not use
+v1.1.0 commit via `git show`, parses only its JSON table literals. It does not use
 whatever Unicode version happens to be installed on the developer's machine.

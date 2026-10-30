@@ -55,24 +55,7 @@ PWA需要HTTPS或localhost；开发服务器与Tauri中不注册服务工作线�
 
 独立复查发现并修复了跨版本离线缓存混用、并发下载缓存清理、失败导入后的恢复文件、未保存笔记导出、未知阅读记录校验及测验措辞更新回归等问题。生产预览现在直接提供静态构建文件，可以在本地验证离线下载和重载。
 
-以下命令与自动测试说明对应记录时版本；当前可用的验证命令见[项目README](../README.md)。
-
-```bash
-npm run check
-npm run content:check
-npm run check:quiz
-npm test
-npm run build
-npm run test:e2e
-npm run test:e2e:pwa
-```
-
-PWA测试启动独立静态服务器，使用真实构建资源验证完整下载、未访问章节、三语切换、断网重载和版本更新。普通浏览器测试覆盖续读、手机布局、导入恢复、交互实验、学习路线、测验与原阅读器功能。
-
-```bash
-cd src-tauri
-cargo test --locked -p search-core -p study-core
-```
+历史自动测试不再随公开源码分发。当前构建与验证命令见[项目README](../README.md)。
 
 Chromium手机视口验证不能替代真实Safari/iOS/Android的安装菜单、键盘、选择手柄和系统存储回收测试；桌面安装包也需要对应平台的原生验收。
 
